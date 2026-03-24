@@ -844,6 +844,58 @@ footer {
 footer span { color: var(--accent2); font-weight: 600; }
 
 /* ═══════════════════════════════════════════════
+   KPI ROW — top-of-tab summary
+══════════════════════════════════════════════ */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 0;
+}
+@media (max-width: 900px) {
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .kpi-row { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════
+   ALERT IMPROVEMENTS
+══════════════════════════════════════════════ */
+.alert {
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+}
+.alert.success { border-left-color: #16a34a !important; }
+.alert.warning { border-left-color: #d97706 !important; }
+.alert.danger  { border-left-color: #dc2626 !important; }
+.alert.info    { border-left-color: #3b82f6 !important; }
+.alert-icon {
+  font-size: 1rem;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-weight: 800;
+}
+.alert.success .alert-icon { background: #dcfce7; color: #15803d; }
+.alert.warning .alert-icon { background: #fef3c7; color: #92400e; }
+.alert.danger  .alert-icon { background: #fee2e2; color: #dc2626; }
+.alert.info    .alert-icon { background: #dbeafe; color: #1d4ed8; }
+
+/* P&L table rows */
+.pnl-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 9px 0; border-bottom: 1px solid var(--border);
+  font-size: .84rem;
+}
+.pnl-row:last-child { border-bottom: none; }
+.pnl-row.total {
+  font-weight: 800; font-size: .95rem;
+  padding-top: 12px; border-top: 2px solid var(--dark);
+  border-bottom: none;
+}
+
+/* ═══════════════════════════════════════════════
    MOBILE
 ══════════════════════════════════════════════ */
 @media (max-width: 720px) {
@@ -910,6 +962,7 @@ footer span { color: var(--accent2); font-weight: 600; }
   <button data-tab="tomate">Tomate</button>
   <button data-tab="limon">Limón</button>
   <button data-tab="chile">Chile</button>
+  <button data-tab="granos">Granos</button>
 
   <button data-tab="auditorias">Auditorías</button>
   <button data-tab="estrategia">Estrategia</button>
@@ -921,14 +974,17 @@ footer span { color: var(--accent2); font-weight: 600; }
   <!-- ══════════ HOY ══════════ -->
   <div class="tab-panel active" id="tab-hoy">
 
-    <div class="section-title">Indicadores Clave</div>
-    <div class="grid-4" id="kpiVitals"></div>
+    <div class="section-title">Resumen Ejecutivo · Temporada 2025–2026</div>
+    <div class="kpi-row" id="kpiTopRow"></div>
+
+    <div class="section-title">Señales del Día</div>
+    <div id="alertasContainer"></div>
 
     <div class="section-title">EBITDA vs Presupuesto</div>
     <div class="grid-2" id="ebitdaDonuts"></div>
 
-    <div class="section-title">Señales del Día</div>
-    <div id="alertasContainer"></div>
+    <div class="section-title">Indicadores Operativos</div>
+    <div class="grid-4" id="kpiVitals"></div>
 
     <div class="section-title">Correos Operativos</div>
     <div class="card-table">
@@ -1102,10 +1158,12 @@ footer span { color: var(--accent2); font-weight: 600; }
 
   <!-- ══════════ LIMÓN ══════════ -->
   <div class="tab-panel" id="tab-limon">
-    <div class="section-title">KPIs · Limón Persa</div>
-    <div class="grid-3" id="limonKpis"></div>
+    <div class="section-title">KPIs · Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
+    <div class="grid-4" id="limonKpis"></div>
     <div class="section-title">Precio FOB California <span class="src-tag">USDA Market News · FOB Shipping Point</span></div>
     <div id="limonUsdaPrice"></div>
+    <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
+    <div class="card" id="limonPnl" style="padding:24px"></div>
     <div class="section-title">Precios de Mercado · Referencia</div>
     <div class="price-compare-grid" id="limonPrecios"></div>
     <div class="section-title">Embarques · Limón</div>
@@ -1128,6 +1186,16 @@ footer span { color: var(--accent2); font-weight: 600; }
     </table></div></div>
   </div>
 
+
+  <!-- ══════════ GRANOS ══════════ -->
+  <div class="tab-panel" id="tab-granos">
+    <div class="section-title">KPIs · Granos · Temporada <span class="src-tag">jacruz@agbelher.com · P&amp;L Granos Jul–Feb 2026</span></div>
+    <div class="grid-4" id="granosKpis"></div>
+    <div class="section-title">P&amp;L Temporada · Jul 2025 – Feb 2026</div>
+    <div class="card" id="granosPnl" style="padding:24px"></div>
+    <div class="section-title">Notas Operativas</div>
+    <div class="card" id="granosNotas" style="padding:20px"></div>
+  </div>
 
   <!-- ══════════ AUDITORÍAS ══════════ -->
   <div class="tab-panel" id="tab-auditorias">
@@ -1233,6 +1301,25 @@ footer span { color: var(--accent2); font-weight: 600; }
     var cargas = D.operaciones.embarques.reduce(function (s, e) { return s + (e.cargas || 1); }, 0);
     var semCount = 0;
     D.calavo.pagos.forEach(function (p) { if (p.pago) semCount++; });
+
+    /* ── Top KPI Row: Revenue / EBITDA / Cajas / Calavo Net ── */
+    var cajasYtd = 0;
+    D.calavo.pagos.forEach(function (p) { if (p.cajas) cajasYtd += p.cajas; });
+    var ebitdaMesOK  = ebtd.mes.actual >= ebtd.mes.budget;
+    var ebitdaMesVar = ebtd.mes.actual - ebtd.mes.budget;
+    document.getElementById('kpiTopRow').innerHTML =
+      kpiCard('Revenue YTD · Tomate', fmt(D.revenue.total), 'FOB ' + fmt(D.revenue.fob) + ' · Nac ' + fmt(D.revenue.nacional),
+        'pos', 'accent-pos', pill('up', 'YTD Dic–Feb')) +
+      kpiCard('EBITDA · ' + ebtd.mes.nombre, fmt(ebtd.mes.actual),
+        'Budget ' + fmt(ebtd.mes.budget),
+        ebitdaMesOK ? 'pos' : 'neg',
+        ebitdaMesOK ? 'accent-pos' : 'accent-neg',
+        pill(ebitdaMesOK ? 'up' : 'down',
+          (ebitdaMesOK ? '▲ +' : '▼ ') + fmt(Math.abs(ebitdaMesVar)) + ' vs budget')) +
+      kpiCard('Cajas P&amp;P · YTD', fmtN(cajasYtd), 'WK01–WK' + semCount + ' · Calavo',
+        'dark', 'accent-blue', pill('up', semCount + ' semanas')) +
+      kpiCard('Calavo · Neto YTD', fmt(cv.neto), 'Total liquidado · GC 2025–26',
+        'pos', 'accent-pos', pill('up', 'P&amp;P $' + fmt(cv.pickPack)));
 
     /* KPI cards */
     document.getElementById('kpiVitals').innerHTML =
@@ -2238,6 +2325,24 @@ footer span { color: var(--accent2); font-weight: 600; }
       : '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Sin embarques registrados</td></tr>';
   }
   function renderLimon() {
+    var lt = D.limon && D.limon.temporada;
+
+    /* ── KPI row with real financial data ── */
+    var kpisEl = document.getElementById('limonKpis');
+    if (lt) {
+      var fobPorCaja = lt.fob_caja_feb;
+      var mocPct     = lt.first_moc_pct;
+      kpisEl.innerHTML =
+        kpiCard('Revenue Febrero 2026', fmt(lt.revenue_feb), lt.cajas_feb.toLocaleString('en-US') + ' cajas · ' + lt.libras_feb.toLocaleString('en-US') + ' lb',
+          'pos', 'accent-pos', pill('up', 'Maui Fresh · $' + fobPorCaja.toFixed(2) + '/caja FOB')) +
+        kpiCard('Costos Manufactura Feb', fmt(lt.costo_manuf_feb), lt.hectareas + ' ha · Temporada en curso',
+          'neg', 'accent-neg', null) +
+        kpiCard('Liquidación Neta Feb', fmt(lt.liquidacion_feb), 'Comisión ' + fmt(lt.comision_feb) + ' · Fletes ' + fmt(lt.flete_mx_feb + lt.flete_eu_feb),
+          'pos', 'accent-pos', pill('up', 'MOC ' + mocPct.toFixed(1) + '%')) +
+        kpiCard('Costos Producción Acum', fmt(lt.costo_prod_acum), 'Jul–Feb 2026 · Orchard + Prod',
+          'acc', 'accent-warn', pill('neu', 'WIP activo'));
+    }
+
     /* ── USDA FOB California price ── */
     var lu = D.limon && D.limon.usda;
     var usdaEl = document.getElementById('limonUsdaPrice');
@@ -2250,7 +2355,7 @@ footer span { color: var(--accent2); font-weight: 600; }
           '<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' +
             '<div>' +
               '<div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px">' + lu.variedad + ' · ' + lu.mercado + '</div>' +
-              '<div style="font-size:1.8rem;font-weight:900;letter-spacing:-.5px">' + fmt(lu.precio_min,2) + '&nbsp;–&nbsp;' + fmt(lu.precio_max,2) + '<span style="font-size:.9rem;font-weight:500;opacity:.6"> /' + lu.unidad + '</span></div>' +
+              '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px">' + fmt(lu.precio_min,2) + '&nbsp;–&nbsp;' + fmt(lu.precio_max,2) + '<span style="font-size:.9rem;font-weight:500;opacity:.6"> /' + lu.unidad + '</span></div>' +
               (chgStr ? '<div class="pc-chg ' + chgCls + '" style="margin-top:4px">' + chgStr + '</div>' : '') +
             '</div>' +
             '<div style="margin-left:auto;text-align:right;font-size:.75rem;color:var(--muted)">' +
@@ -2266,10 +2371,191 @@ footer span { color: var(--accent2); font-weight: 600; }
           '<a href="https://www.ams.usda.gov/market-news/fruits-vegetables" target="_blank" style="color:var(--accent)">USDA Market News</a>' +
         '</div>';
     }
-    renderProductTab({ tipo:'Limón', tabId:'limon', kpisId:'limonKpis', preciosId:'limonPrecios', tblId:'limonEmbarquesTbl', badgeCls:'prod-badge-limon' });
+
+    /* ── P&L Limón Febrero ── */
+    if (lt) {
+      var pnlEl = document.getElementById('limonPnl');
+      var rows = [
+        { label:'Revenue FOB Export', val: lt.revenue_feb, color:'var(--green2)' },
+        { label:'Comisión (15%)',      val:-lt.comision_feb, color:'var(--red)' },
+        { label:'Flete MX + EU',       val:-(lt.flete_mx_feb + lt.flete_eu_feb), color:'var(--red)' },
+        { label:'Liquidación Neta',    val: lt.liquidacion_feb, color:'var(--green2)', bold:true },
+        { label:'—', val:null },
+        { label:'Costo Manufactura',   val:-lt.costo_manuf_feb, color:'var(--red)' },
+        { label:'Costo Distribución',  val:-lt.costo_dist_feb,  color:'var(--red)' },
+        { label:'First MOC',           val: lt.first_moc_feb, color: lt.first_moc_feb >= 0 ? 'var(--green2)' : 'var(--red)', bold:true, pct: lt.first_moc_pct }
+      ];
+      pnlEl.innerHTML =
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">' +
+          '<div>' +
+            '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Detalle · Febrero 2026 · Maui Fresh</div>' +
+            rows.map(function(r) {
+              if (!r.label || r.label === '—') return '<div style="height:10px"></div>';
+              return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">' +
+                '<span style="font-size:.84rem' + (r.bold ? ';font-weight:700' : '') + '">' + r.label + '</span>' +
+                '<span style="font-weight:' + (r.bold ? '800' : '600') + ';color:' + (r.color || 'var(--text)') + '">' +
+                  fmt(Math.abs(r.val),0) + (r.val < 0 ? ' <span style="opacity:.5;font-size:.75rem">(gasto)</span>' : '') +
+                  (r.pct != null ? ' <span style="font-size:.75rem;color:var(--muted)">(' + r.pct.toFixed(1) + '%)</span>' : '') +
+                '</span>' +
+              '</div>';
+            }).join('') +
+          '</div>' +
+          '<div>' +
+            '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Resumen Operativo</div>' +
+            '<div style="background:var(--bg);border-radius:10px;padding:18px;margin-bottom:12px">' +
+              '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Cajas exportadas (40 lb)</div>' +
+              '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px">' + lt.cajas_feb.toLocaleString('en-US') + '</div>' +
+              '<div style="font-size:.8rem;color:var(--muted)">' + lt.libras_feb.toLocaleString('en-US') + ' libras · ' + lt.hectareas + ' ha</div>' +
+            '</div>' +
+            '<div style="background:var(--bg);border-radius:10px;padding:18px;margin-bottom:12px">' +
+              '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">FOB / Caja (40 lb)</div>' +
+              '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:var(--green2)">' + fmt(lt.fob_caja_feb,2) + '</div>' +
+              '<div style="font-size:.8rem;color:var(--muted)">Neto liquidado: ' + fmt(lt.liquidacion_feb / lt.cajas_feb, 2) + '/caja</div>' +
+            '</div>' +
+            '<div style="background:var(--bg);border-radius:10px;padding:18px">' +
+              '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">First MOC</div>' +
+              '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:' + (lt.first_moc_feb >= 0 ? 'var(--green2)' : 'var(--red)') + '">' + lt.first_moc_pct.toFixed(1) + '%</div>' +
+              '<div style="font-size:.8rem;color:var(--muted)">' + fmt(lt.first_moc_feb) + ' · Margen de contribución</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    /* Prices and shipments */
+    var limonKeys = ['lim','lime'];
+    var limonPrecios = (D.mercado.precios || []).filter(function (p) {
+      var n = p.producto.toLowerCase();
+      return limonKeys.some(function (k) { return n.indexOf(k) !== -1; });
+    });
+    var preciosEl = document.getElementById('limonPrecios');
+    if (limonPrecios.length) {
+      var scaleMax = Math.max.apply(null, limonPrecios.map(function (p) { return p.max; })) * 1.15;
+      preciosEl.innerHTML = limonPrecios.map(function (p) {
+        var mid = (p.min + p.max) / 2;
+        var chgPct2 = p.anterior != null ? ((mid - p.anterior) / p.anterior * 100) : null;
+        var chgStr2 = chgPct2 != null ? (chgPct2 >= .5 ? '▲ +' : chgPct2 <= -.5 ? '▼ ' : '→ ') + Math.abs(chgPct2).toFixed(1) + '% vs semana anterior' : 'Sin comparativo';
+        var chgCls2 = chgPct2 == null ? 'neu' : chgPct2 > .5 ? 'up' : chgPct2 < -.5 ? 'dn' : 'neu';
+        var minPct = (p.min / scaleMax * 100).toFixed(1);
+        var widPct = ((p.max - p.min) / scaleMax * 100).toFixed(1);
+        var antPct = p.anterior != null ? (p.anterior / scaleMax * 100).toFixed(1) : null;
+        return '<div class="pc-card">' +
+          '<div class="pc-header"><div class="pc-name">' + p.producto + '</div><span class="badge badge-blue">' + p.via + '</span></div>' +
+          '<div class="pc-range">' + fmt(p.min,2) + '&nbsp;–&nbsp;' + fmt(p.max,2) + '</div>' +
+          '<div class="pc-chg ' + chgCls2 + '">' + chgStr2 + '</div>' +
+          '<div class="pc-bar-wrap"><div class="pc-bar-fill" style="left:' + minPct + '%;width:' + widPct + '%;background:rgba(22,163,74,.7)"></div>' +
+          (antPct != null ? '<div class="pc-bar-tick" style="left:' + antPct + '%"></div>' : '') + '</div>' +
+          '<div class="pc-footer"><span>' + (p.anterior != null ? 'Ant: ' + fmt(p.anterior,2) : '—') + '</span><span>Mid: ' + fmt(mid,2) + '</span></div>' +
+        '</div>';
+      }).join('');
+    } else {
+      preciosEl.innerHTML = '<div class="card" style="padding:16px;color:var(--muted);font-size:.84rem">Sin precios de Limón en el último reporte de mercado.</div>';
+    }
+
+    var limonEmb = (D.operaciones.embarques || []).filter(function (e) { return e.tipo === 'Limón'; });
+    var clasificarUnidad = function (u) {
+      u = (u||'').toUpperCase().trim();
+      if (/^ST[\-\s]?\d/i.test(u)) return 'Transfrios (ST)';
+      if (/^JL[\-\s]?\d/i.test(u)) return 'Elogística (JL)';
+      if (/^CGG[\-\s]?\d/i.test(u)) return 'CGG (CGG)';
+      return 'Otros';
+    };
+    var limonTbody = document.querySelector('#limonEmbarquesTbl tbody');
+    limonTbody.innerHTML = limonEmb.length
+      ? limonEmb.map(function(e){
+          return '<tr><td>'+e.fecha+'</td><td class="td-num">'+e.cargas+'</td><td>'+e.unidad+'</td><td>'+clasificarUnidad(e.unidad)+'</td><td><span class="badge badge-blue">'+e.destino+'</span></td><td>'+e.estado+'</td></tr>';
+        }).join('')
+      : '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Sin embarques registrados para Limón</td></tr>';
   }
   function renderChile()   {
     renderProductTab({ tipo:'Chile',  tabId:'chile',  kpisId:'chileKpis',  preciosId:'chilePrecios',  tblId:'chileEmbarquesTbl',  badgeCls:'prod-badge-chile'  });
+  }
+
+  /* ════════════════ GRANOS ════════════════ */
+  function renderGranos() {
+    var G = D.granos && D.granos.temporada;
+    if (!G) return;
+
+    var haVar    = G.hectareas - G.hectareas_yago;
+    var haVarCls = haVar >= 0 ? 'pos' : 'neg';
+    var haVarStr = (haVar >= 0 ? '▲ +' : '▼ ') + Math.abs(haVar) + ' ha vs Y/A';
+    var ebitVar  = G.ebitda_var_yago;
+    var ebitVarStr = (ebitVar >= 0 ? '▲ +' : '▼ ') + fmt(Math.abs(ebitVar)) + ' vs Y/A';
+
+    document.getElementById('granosKpis').innerHTML =
+      kpiCard('Hectáreas en Producción', fmtN(G.hectareas) + ' ha', 'Budget ' + G.hectareas_budget + ' ha',
+        haVar >= 0 ? 'pos' : 'neg', haVar >= 0 ? 'accent-pos' : 'accent-warn',
+        pill(haVar >= 0 ? 'up' : 'neu', haVarStr)) +
+      kpiCard('Costos WIP Acumulado', fmt(G.wip_ytd), G.periodo,
+        'neg', 'accent-neg', pill('neu', 'Producción en proceso')) +
+      kpiCard('Gastos Administrativos', fmt(G.gastos_admin_ytd), G.periodo,
+        'acc', 'accent-warn', null) +
+      kpiCard('EBITDA Temporada', fmt(G.ebitda_ytd), 'Y/A ' + fmt(G.ebitda_yago),
+        'neg', 'accent-neg',
+        pill('up', ebitVarStr));
+
+    var costoProd   = G.wip_ytd;
+    var costoAdmin  = G.gastos_admin_ytd;
+    var totalCostos = G.costos_total_ytd;
+    var revText     = G.revenue_ytd > 0 ? fmt(G.revenue_ytd) : 'Sin ventas registradas';
+
+    document.getElementById('granosPnl').innerHTML =
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex-wrap:wrap">' +
+        '<div>' +
+          '<div style="font-size:.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">INGRESOS</div>' +
+          '<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">' +
+            '<span style="font-size:.85rem">Ventas Nacionales YTD</span>' +
+            '<span style="font-weight:700;color:var(--muted)">' + revText + '</span>' +
+          '</div>' +
+          '<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:2px solid var(--dark);margin-top:4px">' +
+            '<span style="font-size:.85rem;font-weight:700">Revenue Total YTD</span>' +
+            '<span style="font-weight:800;font-size:1.1rem;color:var(--muted)">' + revText + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<div style="font-size:.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">COSTOS</div>' +
+          '<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">' +
+            '<span style="font-size:.85rem">WIP · Producción en proceso</span>' +
+            '<span style="font-weight:700;color:var(--red)">' + fmt(costoProd) + '</span>' +
+          '</div>' +
+          '<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">' +
+            '<span style="font-size:.85rem">Gastos Administrativos</span>' +
+            '<span style="font-weight:700;color:var(--red)">' + fmt(costoAdmin) + '</span>' +
+          '</div>' +
+          '<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:2px solid var(--dark);margin-top:4px">' +
+            '<span style="font-size:.85rem;font-weight:700">Total Costos YTD</span>' +
+            '<span style="font-weight:800;font-size:1.1rem;color:var(--red)">' + fmt(totalCostos) + '</span>' +
+          '</div>' +
+          '<div style="display:flex;justify-content:space-between;padding:14px 0 0">' +
+            '<span style="font-size:.95rem;font-weight:800">EBITDA YTD</span>' +
+            '<div style="text-align:right">' +
+              '<div style="font-weight:900;font-size:1.35rem;color:var(--red)">' + fmt(G.ebitda_ytd) + '</div>' +
+              '<div style="font-size:.74rem;color:var(--green2);font-weight:600;margin-top:2px">' +
+                '▲ ' + fmt(G.ebitda_var_yago) + ' mejor que Y/A (' + fmt(G.ebitda_yago) + ')' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    document.getElementById('granosNotas').innerHTML =
+      '<div style="display:flex;align-items:flex-start;gap:10px">' +
+        '<div style="flex-shrink:0;width:3px;height:100%;background:var(--accent2);border-radius:2px;align-self:stretch"></div>' +
+        '<p style="font-size:.84rem;line-height:1.75;color:var(--text2)">' + G.nota + '</p>' +
+      '</div>' +
+      '<div style="margin-top:14px;display:flex;gap:20px;flex-wrap:wrap">' +
+        '<div style="background:var(--bg);border-radius:8px;padding:10px 16px;font-size:.78rem">' +
+          '<span style="color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-size:.62rem;font-weight:700">Hectáreas</span><br>' +
+          '<strong style="font-size:1.1rem">' + G.hectareas + ' ha</strong> actuales · ' + G.hectareas_yago + ' ha Y/A · ' + G.hectareas_budget + ' ha budget' +
+        '</div>' +
+        '<div style="background:var(--bg);border-radius:8px;padding:10px 16px;font-size:.78rem">' +
+          '<span style="color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-size:.62rem;font-weight:700">Período</span><br>' +
+          '<strong>' + G.periodo + '</strong>' +
+        '</div>' +
+        '<div style="background:var(--bg);border-radius:8px;padding:10px 16px;font-size:.78rem">' +
+          '<span style="color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-size:.62rem;font-weight:700">Vs Año Anterior</span><br>' +
+          '<strong style="color:var(--green2)">▲ +' + fmt(G.ebitda_var_yago) + '</strong> mejor EBITDA' +
+        '</div>' +
+      '</div>';
   }
 
   /* ════════════════ AUDITORÍAS ════════════════ */
@@ -2359,6 +2645,7 @@ footer span { color: var(--accent2); font-weight: 600; }
   renderTomate();
   renderLimon();
   renderChile();
+  renderGranos();
   renderEstrategia();
   renderIndustria();
   renderAuditorias();

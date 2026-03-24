@@ -14,8 +14,8 @@ window.BELHER = {
   ],
 
   ebitda: {
-    mes:  { nombre: "Febrero 2026", actual: 2686859, budget: 2305940, yago: 488398 },
-    ytd:  { nombre: "Jul–Feb 2026", actual: -4082002, budget: -4124108, yago: -7496875 }
+    mes:  { nombre: "Febrero 2026", actual: 2891480, budget: 2305940, yago: 488398 },
+    ytd:  { nombre: "Jul–Feb 2026", actual: -3761987, budget: -4124108, yago: -7496875 }
   },
 
   revenue: {
@@ -99,6 +99,43 @@ window.BELHER = {
       mercado:    "FOB Nogales, AZ",
       anterior:   19.50,
       fuente:     "USDA Market News FOB Shipping Point"
+    },
+    temporada: {
+      hectareas:        70,
+      comprador:        "Maui Fresh International LLC",
+      cajas_feb:        3057,
+      libras_feb:       122280,
+      revenue_feb:      90089,
+      fob_caja_feb:     29.47,
+      comision_feb:     13513,
+      flete_mx_feb:     5665,
+      flete_eu_feb:     5400,
+      liquidacion_feb:  65511,
+      costo_manuf_feb:  56461,
+      costo_dist_feb:   24930,
+      first_moc_feb:    33628,
+      first_moc_pct:    37.3,
+      costo_prod_acum:  73640,
+      costo_wip_acum:   2533,
+      revenue_acum:     90089,
+      ebitda_acum:      -385851
+    }
+  },
+
+  granos: {
+    temporada: {
+      hectareas:         388,
+      hectareas_yago:    323,
+      hectareas_budget:  393,
+      wip_ytd:           375731,
+      gastos_admin_ytd:  10119,
+      costos_total_ytd:  385851,
+      revenue_ytd:       0,
+      ebitda_ytd:        -385851,
+      ebitda_yago:       -513373,
+      ebitda_var_yago:   127522,
+      periodo:           "Jul 2025 – Feb 2026",
+      nota:              "Temporada de granos en curso. Sin ventas registradas a febrero — producción en proceso de cosecha. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo."
     }
   },
 
