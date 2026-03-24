@@ -2038,27 +2038,33 @@ footer span { color: var(--accent2); font-weight: 600; }
     var tv = (D.tomate && D.tomate.ventas) || { exportacion:[], nacional:[] };
     var ub = D.calidad.ultimoOutbound;
 
-    /* ── Ventas Exportación ── */
-    var expTotal = tv.exportacion.reduce(function (s,e) { return s + (e.revenue||0); }, 0);
-    document.getElementById('tomateExpTotal').textContent = fmt(expTotal);
-    document.getElementById('tomateExpVentas').innerHTML = tv.exportacion.filter(function(e){ return e.revenue; }).map(function (e) {
+    /* ── helper: render a ventas card with Roma/Bola breakdown ── */
+    var ventasCardHtml = function (e, colorCls) {
+      var romaStr = e.cajasRoma != null ? fmtN(e.cajasRoma) + ' Roma' : null;
+      var bolaStr = e.cajasBola != null ? fmtN(e.cajasBola) + ' Bola' : null;
+      var cajasDetalle = [romaStr, bolaStr].filter(Boolean).join(' · ');
       return '<div class="etiq-card">' +
-        '<div class="etiq-name">Etiqueta · ' + e.etiqueta + '</div>' +
-        '<div class="etiq-revenue" style="color:var(--green2)">' + fmt(e.revenue) + '</div>' +
-        '<div class="etiq-cajas">' + (e.cajas ? fmtN(e.cajas) + ' cajas' : 'Cajas: pendiente') + '</div>' +
+        '<div class="etiq-name">' + (e.etiqueta === 'Nacional' ? 'Nacional (todas)' : 'Calavo · Exportación') + '</div>' +
+        '<div class="etiq-revenue" style="color:' + colorCls + '">' + fmt(e.revenue) + '</div>' +
+        '<div class="etiq-cajas">' + fmtN(e.cajas) + ' cajas · ' + tv.periodo.label + '</div>' +
+        (cajasDetalle ? '<div class="etiq-cajas" style="color:var(--muted);font-size:.74rem">' + cajasDetalle + '</div>' : '') +
       '</div>';
-    }).join('') || '<div class="etiq-card" style="color:var(--muted);font-size:.84rem">Sin datos de exportación</div>';
+    };
+
+    /* ── Totales ── */
+    var tot = tv.total || {};
+    document.getElementById('tomateExpTotal').textContent = fmt((tv.exportacion[0]||{}).revenue||0);
+    document.getElementById('tomateNacTotal').textContent = fmt((tv.nacional[0]||{}).revenue||0);
+
+    /* ── Ventas Exportación ── */
+    document.getElementById('tomateExpVentas').innerHTML = tv.exportacion.map(function(e){
+      return ventasCardHtml(e, 'var(--green2)');
+    }).join('') || '<div class="etiq-card" style="color:var(--muted);font-size:.84rem">Sin datos</div>';
 
     /* ── Ventas Nacional ── */
-    var nacTotal = tv.nacional.reduce(function (s,e) { return s + (e.revenue||0); }, 0);
-    document.getElementById('tomateNacTotal').textContent = fmt(nacTotal);
-    document.getElementById('tomateNacVentas').innerHTML = tv.nacional.filter(function(e){ return e.revenue; }).map(function (e) {
-      return '<div class="etiq-card">' +
-        '<div class="etiq-name">Etiqueta · ' + e.etiqueta + '</div>' +
-        '<div class="etiq-revenue" style="color:#1d4ed8">' + fmt(e.revenue) + '</div>' +
-        '<div class="etiq-cajas">' + (e.cajas ? fmtN(e.cajas) + ' cajas' : 'Cajas: pendiente') + '</div>' +
-      '</div>';
-    }).join('') || '<div class="etiq-card" style="color:var(--muted);font-size:.84rem">Sin datos nacionales</div>';
+    document.getElementById('tomateNacVentas').innerHTML = tv.nacional.map(function(e){
+      return ventasCardHtml(e, '#60a5fa');
+    }).join('') || '<div class="etiq-card" style="color:var(--muted);font-size:.84rem">Sin datos</div>';
 
     /* ── Precios mercado ── */
     var tomKeys = ['tomate','vine','grape','roma','saladet'];
@@ -2113,10 +2119,10 @@ footer span { color: var(--accent2); font-weight: 600; }
     var qualMapAyer   = buildQualMap(ub.variedades);
     var qualMapSemana = buildQualMap((D.calidad.semana || {}).variedades);
 
-    /* cajas lookup */
+    /* cajas lookup — Calavo uses real YTD total; nacional no per-etiqueta breakdown */
     var cajasExp = {}, cajasNac = {};
     (tv.exportacion || []).forEach(function (e) { cajasExp[e.etiqueta] = e.cajas; });
-    (tv.nacional    || []).forEach(function (e) { cajasNac[e.etiqueta] = e.cajas; });
+    /* Nacional is one aggregate entry — individual etiqueta cajas not available */
 
     /* render one etiqueta mini-card */
     var renderEtqCard = function (etq, vari, isNac, qMap, opts) {

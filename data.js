@@ -78,15 +78,13 @@ window.BELHER = {
 
   tomate: {
     ventas: {
+      periodo: { desde:"01/12/2025", hasta:"28/02/2026", label:"YTD Dic–Feb" },
+      total:   { cajas:927355, cajasRoma:533667, cajasBola:393688, revenue:11518601 },
       exportacion: [
-        { etiqueta:"Calavo", cajas:421000, revenue:7662531 }
+        { etiqueta:"Calavo", cajas:481239, cajasRoma:221750, cajasBola:259489, revenue:7662531 }
       ],
       nacional: [
-        { etiqueta:"Yameto",     cajas:null, revenue:3856070 },
-        { etiqueta:"Tolin",      cajas:null, revenue:null },
-        { etiqueta:"Urson",      cajas:null, revenue:null },
-        { etiqueta:"Millennium", cajas:null, revenue:null },
-        { etiqueta:"Zazu",       cajas:null, revenue:null }
+        { etiqueta:"Nacional", cajas:446116, cajasRoma:311917, cajasBola:134199, revenue:3856070 }
       ]
     }
   },
