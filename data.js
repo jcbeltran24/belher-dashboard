@@ -58,9 +58,20 @@ window.BELHER = {
     ultimoOutbound: {
       fecha: "21/03/2026",
       variedades: [
-        { nombre:"Bola Calavo",  primera:87.20, segunda:4.00, tercera:4.00, merma:4.80, peso:21.65, alerta:true  },
-        { nombre:"Bola Yameto",  primera:87.15, segunda:3.78, tercera:4.93, merma:4.13, peso:32.01, alerta:true  },
-        { nombre:"Roma Calavo",  primera:88.80, segunda:6.13, tercera:3.73, merma:1.33, peso:25.20, alerta:false }
+        { nombre:"Bola Calavo",  etiqueta:"Calavo",  canal:"exportacion", primera:87.20, segunda:4.00, tercera:4.00, merma:4.80, peso:21.65, alerta:true  },
+        { nombre:"Bola Yameto",  etiqueta:"Yameto",  canal:"exportacion", primera:87.15, segunda:3.78, tercera:4.93, merma:4.13, peso:32.01, alerta:true  },
+        { nombre:"Roma Calavo",  etiqueta:"Calavo",  canal:"exportacion", primera:88.80, segunda:6.13, tercera:3.73, merma:1.33, peso:25.20, alerta:false }
+      ]
+    }
+  },
+
+  tomate: {
+    ventas: {
+      exportacion: [
+        { etiqueta:"Calavo", cajas:421000, revenue:7662531 }
+      ],
+      nacional: [
+        { etiqueta:"Nacional", cajas:null, revenue:3856070 }
       ]
     }
   },

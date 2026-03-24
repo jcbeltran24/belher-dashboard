@@ -501,6 +501,41 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .rev-split-pct  { font-size: .72rem; color: var(--muted); }
 
 /* ═══════════════════════════════════════════════
+   CANAL SPLIT GRID (Exportación / Nacional)
+══════════════════════════════════════════════ */
+.canal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 8px; }
+@media (max-width: 720px) { .canal-grid { grid-template-columns: 1fr; } }
+.canal-col { display: flex; flex-direction: column; gap: 10px; }
+.canal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px; border-radius: var(--radius);
+  margin-bottom: 4px;
+}
+.canal-header.canal-export { background: rgba(22,163,74,.1); border-left: 3px solid var(--green2); }
+.canal-header.canal-nac    { background: rgba(29,78,216,.08); border-left: 3px solid #1d4ed8; }
+.canal-label { font-size: .72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+.canal-header.canal-export .canal-label { color: var(--green2); }
+.canal-header.canal-nac    .canal-label { color: #1d4ed8; }
+.canal-total { font-size: 1.1rem; font-weight: 900; }
+.canal-header.canal-export .canal-total { color: var(--green2); }
+.canal-header.canal-nac    .canal-total { color: #1d4ed8; }
+/* etiqueta card inside canal */
+.etiq-card {
+  background: var(--card); border-radius: var(--radius);
+  border: 1px solid var(--border); padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.etiq-name { font-size: .68rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+.etiq-revenue { font-size: 1.55rem; font-weight: 900; letter-spacing: -.4px; color: var(--text); }
+.etiq-cajas { font-size: .78rem; color: var(--muted); }
+/* etiqueta heading inside calidad */
+.etiq-heading {
+  font-size: .65rem; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--muted); padding: 6px 0 4px; border-bottom: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+
+/* ═══════════════════════════════════════════════
    PRODUCT TAB HEADERS
 ══════════════════════════════════════════════ */
 .prod-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
@@ -922,17 +957,47 @@ footer span { color: var(--accent2); font-weight: 600; }
 
   <!-- ══════════ TOMATE ══════════ -->
   <div class="tab-panel" id="tab-tomate">
-    <div class="section-title">KPIs · Tomate</div>
-    <div class="grid-4" id="tomateKpis"></div>
-    <div class="section-title">Calidad por Variedad</div>
-    <div class="quality-card-grid" id="tomateVariedades"></div>
-    <div class="section-title">Precios de Mercado</div>
+
+    <div class="section-title">Ventas · Temporada</div>
+    <div class="canal-grid">
+      <!-- Exportación -->
+      <div class="canal-col">
+        <div class="canal-header canal-export">
+          <span class="canal-label">Exportación</span>
+          <span class="canal-total" id="tomateExpTotal"></span>
+        </div>
+        <div id="tomateExpVentas"></div>
+      </div>
+      <!-- Nacional -->
+      <div class="canal-col">
+        <div class="canal-header canal-nac">
+          <span class="canal-label">Mercado Nacional</span>
+          <span class="canal-total" id="tomateNacTotal"></span>
+        </div>
+        <div id="tomateNacVentas"></div>
+      </div>
+    </div>
+
+    <div class="section-title">Precios de Mercado · Tomate</div>
     <div class="price-compare-grid" id="tomatePrecios"></div>
+
+    <div class="section-title">Calidad Exportación · Último Outbound <span id="tomateOutboundFecha" style="font-weight:400;font-size:.8rem;color:var(--muted)"></span></div>
+    <div class="canal-grid">
+      <div class="canal-col" id="tomateCalidadExp"></div>
+      <div class="canal-col">
+        <div class="canal-header canal-nac" style="margin-bottom:12px">
+          <span class="canal-label">Calidad Nacional</span>
+        </div>
+        <div id="tomateCalidadNac"></div>
+      </div>
+    </div>
+
     <div class="section-title">Embarques · Tomate</div>
     <div class="card-table"><div class="tbl-wrap"><table id="tomateEmbarquesTbl">
       <thead><tr><th>Fecha</th><th>Cargas</th><th>Unidad</th><th>Flota</th><th>Destino</th><th>Estado</th></tr></thead>
       <tbody></tbody>
     </table></div></div>
+
   </div>
 
   <!-- ══════════ LIMÓN ══════════ -->
@@ -1868,8 +1933,121 @@ footer span { color: var(--accent2); font-weight: 600; }
     }
   }
 
-  function renderTomate()  {
-    renderProductTab({ tipo:'Tomate', tabId:'tomate', kpisId:'tomateKpis', preciosId:'tomatePrecios', tblId:'tomateEmbarquesTbl', badgeCls:'prod-badge-tomate', varId:'tomateVariedades' });
+  function renderTomate() {
+    var tv = (D.tomate && D.tomate.ventas) || { exportacion:[], nacional:[] };
+    var ub = D.calidad.ultimoOutbound;
+
+    /* ── Ventas Exportación ── */
+    var expTotal = tv.exportacion.reduce(function (s,e) { return s + (e.revenue||0); }, 0);
+    document.getElementById('tomateExpTotal').textContent = '$' + fmt(expTotal);
+    document.getElementById('tomateExpVentas').innerHTML = tv.exportacion.map(function (e) {
+      return '<div class="etiq-card">' +
+        '<div class="etiq-name">Etiqueta · ' + e.etiqueta + '</div>' +
+        '<div class="etiq-revenue" style="color:var(--green2)">$' + fmt(e.revenue) + '</div>' +
+        '<div class="etiq-cajas">' + (e.cajas ? fmtN(e.cajas) + ' cajas' : 'Cajas: pendiente') + '</div>' +
+      '</div>';
+    }).join('') || '<div class="etiq-card" style="color:var(--muted);font-size:.84rem">Sin datos de exportación</div>';
+
+    /* ── Ventas Nacional ── */
+    var nacTotal = tv.nacional.reduce(function (s,e) { return s + (e.revenue||0); }, 0);
+    document.getElementById('tomateNacTotal').textContent = '$' + fmt(nacTotal);
+    document.getElementById('tomateNacVentas').innerHTML = tv.nacional.map(function (e) {
+      return '<div class="etiq-card">' +
+        '<div class="etiq-name">Etiqueta · ' + e.etiqueta + '</div>' +
+        '<div class="etiq-revenue" style="color:#1d4ed8">$' + fmt(e.revenue) + '</div>' +
+        '<div class="etiq-cajas">' + (e.cajas ? fmtN(e.cajas) + ' cajas' : 'Desglose por etiqueta pendiente') + '</div>' +
+      '</div>';
+    }).join('') || '<div class="etiq-card" style="color:var(--muted);font-size:.84rem">Sin datos nacionales</div>';
+
+    /* ── Precios mercado ── */
+    var tomKeys = ['tomate','vine','grape','roma','saladet'];
+    var tPrecios = (D.mercado.precios || []).filter(function (p) {
+      var n = p.producto.toLowerCase();
+      return tomKeys.some(function (k) { return n.indexOf(k) !== -1; });
+    });
+    var scaleMax = tPrecios.length ? Math.max.apply(null, tPrecios.map(function (p) { return p.max; })) * 1.15 : 1;
+    document.getElementById('tomatePrecios').innerHTML = tPrecios.map(function (p) {
+      var mid = (p.min + p.max) / 2;
+      var chgPct = p.anterior != null ? ((mid - p.anterior) / p.anterior * 100) : null;
+      var chgStr = chgPct != null ? (chgPct >= .5 ? '▲ +' : chgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(chgPct).toFixed(1) + '% vs semana anterior' : 'Sin comparativo';
+      var chgCls = chgPct == null ? 'neu' : chgPct > .5 ? 'up' : chgPct < -.5 ? 'dn' : 'neu';
+      var barColor = chgPct == null ? 'rgba(107,114,128,.4)' : chgPct > 10 ? 'rgba(22,163,74,.85)' : chgPct > 0 ? 'rgba(22,163,74,.55)' : 'rgba(220,38,38,.65)';
+      var minPct = (p.min / scaleMax * 100).toFixed(1);
+      var widPct = ((p.max - p.min) / scaleMax * 100).toFixed(1);
+      var antPct = p.anterior != null ? (p.anterior / scaleMax * 100).toFixed(1) : null;
+      return '<div class="pc-card">' +
+        '<div class="pc-header"><div class="pc-name">' + p.producto + '</div><span class="badge badge-blue">' + p.via + '</span></div>' +
+        '<div class="pc-range">$' + fmt(p.min,2) + '&nbsp;–&nbsp;$' + fmt(p.max,2) + '</div>' +
+        '<div class="pc-chg ' + chgCls + '">' + chgStr + '</div>' +
+        '<div class="pc-bar-wrap"><div class="pc-bar-fill" style="left:' + minPct + '%;width:' + widPct + '%;background:' + barColor + '"></div>' +
+        (antPct != null ? '<div class="pc-bar-tick" style="left:' + antPct + '%"></div>' : '') + '</div>' +
+        '<div class="pc-footer"><span>' + (p.anterior != null ? 'Ant: $' + fmt(p.anterior,2) : '—') + '</span><span>Mid: $' + fmt(mid,2) + '</span></div>' +
+      '</div>';
+    }).join('') || '<div class="card" style="padding:16px;color:var(--muted);font-size:.84rem">Sin precios de tomate en el último reporte.</div>';
+
+    /* ── Calidad Exportación — grouped by etiqueta ── */
+    document.getElementById('tomateOutboundFecha').textContent = '· ' + ub.fecha;
+    var expVars = ub.variedades.filter(function (v) { return v.canal === 'exportacion' || !v.canal; });
+    var etiquetas = [];
+    expVars.forEach(function (v) {
+      var e = v.etiqueta || 'Sin etiqueta';
+      if (etiquetas.indexOf(e) === -1) etiquetas.push(e);
+    });
+    document.getElementById('tomateCalidadExp').innerHTML =
+      '<div class="canal-header canal-export" style="margin-bottom:12px"><span class="canal-label">Calidad Exportación</span></div>' +
+      etiquetas.map(function (etq) {
+        var vars = expVars.filter(function (v) { return (v.etiqueta || 'Sin etiqueta') === etq; });
+        return '<div class="etiq-heading">Etiqueta · ' + etq + '</div>' +
+          '<div class="quality-card-grid" style="margin-bottom:14px">' +
+          vars.map(function (v) {
+            var mCls = v.merma > 4 ? 'bad' : v.merma > 3 ? 'warn' : 'ok';
+            var tot  = v.primera + v.segunda + v.tercera + v.merma;
+            return '<div class="qual-card' + (v.alerta ? ' alerta-card' : '') + '">' +
+              '<div class="qual-name">' + v.nombre.replace(etq,'').trim() +
+                (v.alerta ? '<span class="badge badge-red" style="font-size:.6rem">⚠</span>' : '') +
+              '</div>' +
+              '<div class="qual-prima">' + pct(v.primera) + '<span style="font-size:.7rem;font-weight:500;opacity:.7"> 1ª Prima</span></div>' +
+              '<div class="qual-merma-badge ' + mCls + '">Merma ' + pct(v.merma) + '</div>' +
+              '<div class="qual-stack"><div class="qs-prima" style="width:' + (v.primera/tot*100).toFixed(1) + '%"></div>' +
+              '<div class="qs-seg" style="width:' + (v.segunda/tot*100).toFixed(1) + '%"></div>' +
+              '<div class="qs-ter" style="width:' + (v.tercera/tot*100).toFixed(1) + '%"></div>' +
+              '<div class="qs-merma" style="width:' + (v.merma/tot*100).toFixed(1) + '%"></div></div>' +
+              '<div class="qual-meta">Peso: <strong>' + fmtN(v.peso,2) + ' oz</strong></div>' +
+            '</div>';
+          }).join('') +
+          '</div>';
+      }).join('');
+
+    /* ── Calidad Nacional ── */
+    var nacVars = ub.variedades.filter(function (v) { return v.canal === 'nacional'; });
+    document.getElementById('tomateCalidadNac').innerHTML =
+      '<div class="canal-header canal-nac" style="margin-bottom:12px"><span class="canal-label">Calidad Nacional</span></div>' +
+      (nacVars.length
+        ? nacVars.map(function (v) {
+            var mCls = v.merma > 4 ? 'bad' : v.merma > 3 ? 'warn' : 'ok';
+            return '<div class="qual-card"><div class="qual-name">' + v.nombre + '</div>' +
+              '<div class="qual-prima">' + pct(v.primera) + '<span style="font-size:.7rem;font-weight:500;opacity:.7"> 1ª Prima</span></div>' +
+              '<div class="qual-merma-badge ' + mCls + '">Merma ' + pct(v.merma) + '</div>' +
+            '</div>';
+          }).join('')
+        : '<div class="etiq-card" style="color:var(--muted);font-size:.84rem;line-height:1.6">Sin reporte de calidad nacional disponible.<br>Se alimentará desde el correo de calidad cuando incluya canal=nacional.</div>'
+      );
+
+    /* ── Embarques ── */
+    var clasificarUnidad = function (u) {
+      u = (u||'').toUpperCase().trim();
+      if (/^ST[\-\s]?\d/i.test(u)) return 'Transfrios (ST)';
+      if (/^JL[\-\s]?\d/i.test(u)) return 'Elogística (JL)';
+      if (/^CGG[\-\s]?\d/i.test(u)) return 'CGG (CGG)';
+      return 'Otros';
+    };
+    var emb = (D.operaciones.embarques||[]).filter(function(e){ return e.tipo==='Tomate'; });
+    var tbody = document.querySelector('#tomateEmbarquesTbl tbody');
+    tbody.innerHTML = emb.length
+      ? emb.map(function(e){
+          return '<tr><td>'+e.fecha+'</td><td class="td-num">'+e.cargas+'</td><td>'+e.unidad+'</td><td>'+clasificarUnidad(e.unidad)+'</td><td><span class="badge badge-blue">'+e.destino+'</span></td><td>'+e.estado+'</td></tr>';
+        }).join('')
+      : '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Sin embarques registrados</td></tr>';
   }
   function renderLimon()   {
     renderProductTab({ tipo:'Limón',  tabId:'limon',  kpisId:'limonKpis',  preciosId:'limonPrecios',  tblId:'limonEmbarquesTbl',  badgeCls:'prod-badge-limon'  });
