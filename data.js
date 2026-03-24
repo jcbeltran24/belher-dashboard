@@ -48,6 +48,17 @@ window.BELHER = {
   },
 
   calidad: {
+    semana: {
+      desde: "17/03/2026",
+      hasta: "23/03/2026",
+      variedades: [
+        { nombre:"Roma Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:91.20, segunda:4.15, tercera:2.55, merma:1.80, peso:27.10, dias:5, alerta:false },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"nacional",    primera:89.50, segunda:5.90, tercera:2.85, merma:1.55, peso:26.20, dias:5, alerta:false },
+        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"nacional",    primera:88.50, segunda:5.80, tercera:3.10, merma:2.40, peso:26.10, dias:5, alerta:false },
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:90.30, segunda:4.70, tercera:2.90, merma:2.10, peso:23.30, dias:3, alerta:false },
+        { nombre:"Bola Millennium", etiqueta:"Millennium", canal:"nacional",    primera:88.10, segunda:6.00, tercera:3.40, merma:2.50, peso:22.80, dias:3, alerta:false }
+      ]
+    },
     historico: [
       { fecha:"WK09", primaPromedio:86.20, mermaPromedio:4.10 },
       { fecha:"WK10", primaPromedio:87.45, mermaPromedio:3.80 },

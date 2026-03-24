@@ -678,6 +678,21 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .ecm-grades .g-lbl { opacity: .55; margin-top: 1px; }
 .ecm-nodata { font-size: .72rem; color: var(--muted); font-style: italic; margin-top: 4px; }
 
+/* ── Day / Week view toggle ─────────────── */
+.view-toggle { display:flex; gap:4px; margin-bottom:14px; }
+.vt-btn {
+  padding:5px 16px; border-radius:20px; border:1px solid var(--border);
+  background:transparent; cursor:pointer; font-size:.76rem; font-weight:600;
+  color:var(--muted); transition:all .15s;
+}
+.vt-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+.view-panel { display:none; }
+.view-panel.active { display:block; }
+.dias-badge {
+  font-size:.62rem; font-weight:700; background:var(--border); color:var(--muted);
+  border-radius:10px; padding:1px 6px; margin-left:6px; vertical-align:middle;
+}
+
 /* ── Nacional dropdown group ────────────── */
 .nac-group { border: 1px solid var(--border); border-radius: var(--r); background: var(--card); }
 .nac-group-summary {
@@ -930,8 +945,17 @@ footer span { color: var(--accent2); font-weight: 600; }
 
     <!-- Outbound: summary + compact rows -->
     <div class="section-title" id="outboundTitle">Calidad Exportación <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
-    <div id="calidadSummary"></div>
-    <div class="card" style="padding:0" id="qualidadRows"></div>
+    <div class="view-toggle" data-group="calidad-out">
+      <button class="vt-btn active" data-view="ayer">Día Anterior</button>
+      <button class="vt-btn" data-view="semana">Últimos 7 días</button>
+    </div>
+    <div class="view-panel active" data-group="calidad-out" data-view="ayer">
+      <div id="calidadSummary"></div>
+      <div class="card" style="padding:0" id="qualidadRows"></div>
+    </div>
+    <div class="view-panel" data-group="calidad-out" data-view="semana">
+      <div id="calidadSemana"></div>
+    </div>
 
     <!-- Trend chart -->
     <div class="section-title">Tendencia Semanal · 1ª Primera &amp; Merma <span class="src-tag">calidad@agbelher.com · promedio por semana</span></div>
@@ -1031,7 +1055,12 @@ footer span { color: var(--accent2); font-weight: 600; }
     <div class="price-compare-grid" id="tomatePrecios"></div>
 
     <div class="section-title">Calidad & Cajas · por Variedad <span id="tomateOutboundFecha" style="font-weight:400;font-size:.8rem;color:var(--muted)"></span> <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
-    <div id="tomateVariedades"></div>
+    <div class="view-toggle" data-group="tomate-cal">
+      <button class="vt-btn active" data-view="ayer">Día Anterior</button>
+      <button class="vt-btn" data-view="semana">Últimos 7 días</button>
+    </div>
+    <div class="view-panel active" data-group="tomate-cal" data-view="ayer" id="tomateVariedadesAyer"></div>
+    <div class="view-panel" data-group="tomate-cal" data-view="semana" id="tomateVariedadesSemana"></div>
 
     <div class="section-title">Embarques · Tomate</div>
     <div class="card-table"><div class="tbl-wrap"><table id="tomateEmbarquesTbl">
@@ -1442,16 +1471,16 @@ footer span { color: var(--accent2); font-weight: 600; }
         '<span class="cal-sum-item" style="font-size:.72rem;color:var(--muted)">' + ub.variedades.length + ' variedades · ' + ub.fecha + '</span>' +
       '</div>';
 
-    /* ── Compact variety rows ── */
-    document.getElementById('qualidadRows').innerHTML = ub.variedades.map(function (v) {
+    /* ── Compact variety rows (shared renderer) ── */
+    var renderQualRow = function (v, extraBadge) {
       var tot    = v.primera + v.segunda + v.tercera + v.merma;
-      var pCls   = v.primera >= 90 ? 'ok' : v.primera >= 87 ? 'ok' : 'warn';
+      var pCls   = v.primera >= 90 ? 'ok' : 'warn';
       var mCls   = v.merma > 4 ? 'bad' : v.merma > 3 ? 'warn' : 'ok';
       var mBadge = '<span class="qual-merma-badge ' + mCls + '">Merma ' + pct(v.merma) + '</span>';
       return '<div class="qual-row">' +
         '<div class="qr-name">' +
           '<div class="qr-label">' + v.nombre.replace(v.etiqueta || '', '').trim() + '</div>' +
-          '<div class="qr-tag">' + (v.etiqueta || '') + (v.alerta ? ' &nbsp;⚠' : '') + '</div>' +
+          '<div class="qr-tag">' + (v.etiqueta || '') + (v.alerta ? ' &nbsp;⚠' : '') + (extraBadge || '') + '</div>' +
         '</div>' +
         '<div class="qr-bar">' +
           '<div class="qrb-1" style="width:' + (v.primera/tot*100).toFixed(1) + '%"></div>' +
@@ -1461,9 +1490,38 @@ footer span { color: var(--accent2); font-weight: 600; }
         '</div>' +
         '<div class="qr-primera ' + pCls + '">' + pct(v.primera) + '</div>' +
         '<div class="qr-merma">' + mBadge + '</div>' +
-        '<div class="qr-peso">' + fmtN(v.peso,2) + ' oz</div>' +
+        '<div class="qr-peso">' + fmtN(v.peso,2) + ' lb</div>' +
       '</div>';
+    };
+
+    /* Día anterior */
+    document.getElementById('qualidadRows').innerHTML = ub.variedades.map(function (v) {
+      return renderQualRow(v, '');
     }).join('');
+
+    /* Últimos 7 días */
+    var sw = D.calidad.semana;
+    if (sw && sw.variedades && sw.variedades.length) {
+      var avgP7 = sw.variedades.reduce(function(s,v){return s+v.primera;},0)/sw.variedades.length;
+      var avgM7 = sw.variedades.reduce(function(s,v){return s+v.merma;},0)/sw.variedades.length;
+      document.getElementById('calidadSemana').innerHTML =
+        '<div class="cal-summary">' +
+          '<span class="cal-sum-item good">1ª Primera prom: <strong>' + pct(avgP7) + '</strong></span>' +
+          '<span class="cal-sum-sep">·</span>' +
+          '<span class="cal-sum-item ' + (avgM7 > 4 ? 'bad' : avgM7 > 3 ? 'warn' : 'good') + '">Merma prom: <strong>' + pct(avgM7) + '</strong></span>' +
+          '<span class="cal-sum-sep">·</span>' +
+          '<span class="cal-sum-item" style="font-size:.72rem;color:var(--muted)">' + sw.variedades.length + ' variedades · ' + sw.desde + ' – ' + sw.hasta + '</span>' +
+        '</div>' +
+        '<div class="card" style="padding:0">' +
+          sw.variedades.map(function (v) {
+            var diasBadge = v.dias != null ? '<span class="dias-badge">' + v.dias + '/7 días</span>' : '';
+            return renderQualRow(v, diasBadge);
+          }).join('') +
+        '</div>';
+    } else {
+      document.getElementById('calidadSemana').innerHTML =
+        '<div class="card" style="padding:16px;color:var(--muted);font-size:.84rem">Sin datos de la semana disponibles.</div>';
+    }
   }
 
   /* ════════════════ MERCADO ════════════════ */
@@ -2005,109 +2063,121 @@ footer span { color: var(--accent2); font-weight: 600; }
       if (/^roma/i.test(nombre || '')) return 'Roma';
       return nombre;
     };
-    var NAMED_ETQ = ['Calavo','Yameto','Tolin']; /* show actual cajas; others → JZ */
+    var NAMED_ETQ = ['Calavo','Yameto','Tolin'];
 
-    /* build quality lookup: variedad|etiqueta → data */
-    var qualMap = {};
-    ub.variedades.forEach(function (v) {
-      var vari = extractVariedad(v.nombre);
-      var key  = vari + '|' + (v.etiqueta || '');
-      qualMap[key] = v;
-    });
+    /* build quality lookups */
+    var buildQualMap = function (variedades) {
+      var m = {};
+      (variedades || []).forEach(function (v) {
+        var vari = extractVariedad(v.nombre);
+        m[vari + '|' + (v.etiqueta || '')] = v;
+      });
+      return m;
+    };
+    var qualMapAyer   = buildQualMap(ub.variedades);
+    var qualMapSemana = buildQualMap((D.calidad.semana || {}).variedades);
 
-    /* build cajas lookup by etiqueta (from ventas) */
+    /* cajas lookup */
     var cajasExp = {}, cajasNac = {};
     (tv.exportacion || []).forEach(function (e) { cajasExp[e.etiqueta] = e.cajas; });
     (tv.nacional    || []).forEach(function (e) { cajasNac[e.etiqueta] = e.cajas; });
 
-    /* render one mini card */
-    var renderEtqCard = function (etq, vari, isNac) {
-      var key   = vari + '|' + etq;
-      var v     = qualMap[key];
-      var cajas = isNac ? cajasNac[etq] : cajasExp[etq];
-      var lbl   = etqLabel(etq);
+    /* render one etiqueta mini-card */
+    var renderEtqCard = function (etq, vari, isNac, qMap, opts) {
+      opts = opts || {};
+      var key       = vari + '|' + etq;
+      var v         = qMap[key];
+      var cajas     = isNac ? cajasNac[etq] : cajasExp[etq];
+      var lbl       = etqLabel(etq);
       var nacSuffix = etq === 'Yameto' ? ' · 1ª Nac' : etq === 'Tolin' ? ' · 2ª Nac' : '';
       var cajasText = NAMED_ETQ.indexOf(etq) !== -1
         ? (cajas ? fmtN(cajas) + ' cajas' : 'Cajas: pendiente')
         : 'JZ';
+      var diasHtml = (opts.showDias && v && v.dias != null)
+        ? ' <span class="dias-badge">' + v.dias + '/7 días</span>' : '';
 
       var top = '<div class="etq-card-mini' + (!v ? ' no-data' : '') + '">' +
         '<div class="ecm-top">' +
-          '<span class="ecm-label">' + lbl + nacSuffix + '</span>' +
+          '<span class="ecm-label">' + lbl + nacSuffix + diasHtml + '</span>' +
           '<span class="ecm-cajas">' + cajasText + '</span>' +
         '</div>';
 
       if (!v) {
-        return top + '<div class="ecm-nodata">Sin reporte de calidad</div></div>';
+        var noMsg = opts.isAyer
+          ? 'No se empacó el ' + ub.fecha
+          : 'Sin datos en los últimos 7 días';
+        return top + '<div class="ecm-nodata">' + noMsg + '</div></div>';
       }
 
-      var tot  = (v.primera||0) + (v.segunda||0) + (v.tercera||0) + (v.merma||0);
+      var tot  = (v.primera||0)+(v.segunda||0)+(v.tercera||0)+(v.merma||0);
       var mCls = (v.merma||0) > 4 ? 'bad' : (v.merma||0) > 3 ? 'warn' : 'ok';
       return top +
         '<div class="qual-stack" style="margin:6px 0 5px">' +
-          '<div class="qs-prima" style="width:' + (tot ? (v.primera/tot*100).toFixed(1) : 0) + '%"></div>' +
-          '<div class="qs-seg"   style="width:' + (tot ? (v.segunda/tot*100).toFixed(1) : 0) + '%"></div>' +
-          '<div class="qs-ter"   style="width:' + (tot ? (v.tercera/tot*100).toFixed(1) : 0) + '%"></div>' +
-          '<div class="qs-merma" style="width:' + (tot ? (v.merma/tot*100).toFixed(1)   : 0) + '%"></div>' +
+          '<div class="qs-prima" style="width:' + (tot?(v.primera/tot*100).toFixed(1):0)+'%"></div>' +
+          '<div class="qs-seg"   style="width:' + (tot?(v.segunda/tot*100).toFixed(1):0)+'%"></div>' +
+          '<div class="qs-ter"   style="width:' + (tot?(v.tercera/tot*100).toFixed(1):0)+'%"></div>' +
+          '<div class="qs-merma" style="width:' + (tot?(v.merma/tot*100).toFixed(1):0)+'%"></div>' +
         '</div>' +
         '<div class="ecm-grades">' +
-          '<div><div class="g-val" style="color:var(--green2)">' + pct(v.primera) + '</div><div class="g-lbl">1ª</div></div>' +
-          '<div><div class="g-val" style="color:#fbbf24">'       + pct(v.segunda) + '</div><div class="g-lbl">2ª</div></div>' +
-          '<div><div class="g-val" style="color:#6366f1">'       + pct(v.tercera) + '</div><div class="g-lbl">3ª</div></div>' +
-          '<div><div class="qual-merma-badge ' + mCls + '" style="font-size:.7rem;padding:1px 5px;display:inline-block">' + pct(v.merma) + '</div><div class="g-lbl">Merma</div></div>' +
+          '<div><div class="g-val" style="color:var(--green2)">' + pct(v.primera)+'</div><div class="g-lbl">1ª</div></div>' +
+          '<div><div class="g-val" style="color:#fbbf24">'        + pct(v.segunda)+'</div><div class="g-lbl">2ª</div></div>' +
+          '<div><div class="g-val" style="color:#6366f1">'        + pct(v.tercera)+'</div><div class="g-lbl">3ª</div></div>' +
+          '<div><div class="qual-merma-badge '+mCls+'" style="font-size:.7rem;padding:1px 5px;display:inline-block">'+pct(v.merma)+'</div><div class="g-lbl">Merma</div></div>' +
         '</div>' +
-        '<div style="font-size:.64rem;color:var(--muted);margin-top:5px">Peso: ' + fmtN(v.peso,2) + ' oz' +
-          (v.alerta ? '&nbsp;<span class="badge badge-red" style="font-size:.55rem">⚠ Merma alta</span>' : '') +
+        '<div style="font-size:.64rem;color:var(--muted);margin-top:5px">Peso: ' + fmtN(v.peso,2) + ' lb' +
+          (v.alerta ? '&nbsp;<span class="badge badge-red" style="font-size:.55rem">⚠</span>' : '') +
         '</div></div>';
     };
 
     var variedades = ['Roma','Bola'];
-    var expEtqs = ['Calavo'];
-    var nacEtqs = ['Yameto','Tolin','Urson','Millennium','Zazu'];
+    var expEtqs    = ['Calavo'];
+    var nacEtqs    = ['Yameto','Tolin','Urson','Millennium','Zazu'];
 
-    /* nacional summary stats for a given variedad */
-    var nacSummary = function (vari) {
-      var entries = nacEtqs.map(function (etq) { return qualMap[vari + '|' + etq]; }).filter(Boolean);
-      if (!entries.length) return null;
-      var avgPrima = entries.reduce(function(s,v){return s+(v.primera||0);},0)/entries.length;
-      var avgMerma = entries.reduce(function(s,v){return s+(v.merma||0);},0)/entries.length;
-      return { count: entries.length, avgPrima: avgPrima, avgMerma: avgMerma };
+    /* build variedad HTML for a given quality map */
+    var buildVariedadHtml = function (qMap, opts) {
+      return variedades.map(function (vari) {
+        var nacEntries = nacEtqs.map(function(etq){ return qMap[vari+'|'+etq]; }).filter(Boolean);
+        var nacStats = nacEntries.length
+          ? { avgPrima: nacEntries.reduce(function(s,v){return s+v.primera;},0)/nacEntries.length,
+              avgMerma: nacEntries.reduce(function(s,v){return s+v.merma;},0)/nacEntries.length,
+              count: nacEntries.length }
+          : null;
+        var nacSummaryHtml = nacStats
+          ? '<div style="display:flex;gap:18px;font-size:.78rem;padding:8px 0 2px">' +
+              '<span>Prom 1ª: <strong style="color:var(--green2)">' + pct(nacStats.avgPrima) + '</strong></span>' +
+              '<span>Prom Merma: <strong>' + pct(nacStats.avgMerma) + '</strong></span>' +
+              '<span style="color:var(--muted)">' + nacStats.count + ' etiqueta(s)</span></div>'
+          : '<div style="font-size:.75rem;color:var(--muted);padding:6px 0">' +
+              (opts.isAyer ? 'No se empacó el ' + ub.fecha : 'Sin datos en los últimos 7 días') + '</div>';
+
+        return '<div class="variedad-section">' +
+          '<div class="variedad-title">Variedad · ' + vari + '</div>' +
+          '<div class="canal-grid">' +
+            '<div class="canal-col">' +
+              '<div class="canal-header canal-export" style="margin-bottom:10px"><span class="canal-label">Exportación</span></div>' +
+              expEtqs.map(function(etq){ return renderEtqCard(etq,vari,false,qMap,opts); }).join('') +
+            '</div>' +
+            '<div class="canal-col">' +
+              '<div class="canal-header canal-nac" style="margin-bottom:10px"><span class="canal-label">Nacional</span></div>' +
+              '<details class="nac-group">' +
+                '<summary class="nac-group-summary">' +
+                  '<span class="nac-group-label">Yameto · Tolin · U · M · Z</span>' +
+                  nacSummaryHtml +
+                '</summary>' +
+                '<div class="nac-group-body">' +
+                  nacEtqs.map(function(etq){ return renderEtqCard(etq,vari,true,qMap,opts); }).join('') +
+                '</div>' +
+              '</details>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
     };
 
-    document.getElementById('tomateVariedades').innerHTML = variedades.map(function (vari) {
-      var nacStats = nacSummary(vari);
-      var nacSummaryHtml = nacStats
-        ? '<div style="display:flex;gap:18px;font-size:.78rem;padding:8px 0 2px">' +
-            '<span>Prom 1ª: <strong style="color:var(--green2)">' + pct(nacStats.avgPrima) + '</strong></span>' +
-            '<span>Prom Merma: <strong>' + pct(nacStats.avgMerma) + '</strong></span>' +
-            '<span style="color:var(--muted)">' + nacStats.count + ' etiqueta(s) con reporte</span>' +
-          '</div>'
-        : '<div style="font-size:.75rem;color:var(--muted);padding:6px 0">Sin reportes de calidad nacional</div>';
-
-      return '<div class="variedad-section">' +
-        '<div class="variedad-title">Variedad · ' + vari + '</div>' +
-        '<div class="canal-grid">' +
-          /* Exportación */
-          '<div class="canal-col">' +
-            '<div class="canal-header canal-export" style="margin-bottom:10px"><span class="canal-label">Exportación</span></div>' +
-            expEtqs.map(function (etq) { return renderEtqCard(etq, vari, false); }).join('') +
-          '</div>' +
-          /* Nacional — grouped with dropdown */
-          '<div class="canal-col">' +
-            '<div class="canal-header canal-nac" style="margin-bottom:10px"><span class="canal-label">Nacional</span></div>' +
-            '<details class="nac-group">' +
-              '<summary class="nac-group-summary">' +
-                '<span class="nac-group-label">Yameto · Tolin · U · M · Z</span>' +
-                nacSummaryHtml +
-              '</summary>' +
-              '<div class="nac-group-body">' +
-                nacEtqs.map(function (etq) { return renderEtqCard(etq, vari, true); }).join('') +
-              '</div>' +
-            '</details>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    }).join('');
+    document.getElementById('tomateVariedadesAyer').innerHTML =
+      buildVariedadHtml(qualMapAyer, { isAyer: true, showDias: false });
+    document.getElementById('tomateVariedadesSemana').innerHTML =
+      buildVariedadHtml(qualMapSemana, { isAyer: false, showDias: true });
 
     /* ── Embarques ── */
     var clasificarUnidad = function (u) {
@@ -2159,6 +2229,20 @@ footer span { color: var(--accent2); font-weight: 600; }
   function renderChile()   {
     renderProductTab({ tipo:'Chile',  tabId:'chile',  kpisId:'chileKpis',  preciosId:'chilePrecios',  tblId:'chileEmbarquesTbl',  badgeCls:'prod-badge-chile'  });
   }
+
+  /* ── View toggle (Día Anterior / Últimos 7 días) ── */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.vt-btn');
+    if (!btn) return;
+    var toggle = btn.closest('.view-toggle');
+    var group  = toggle.dataset.group;
+    var view   = btn.dataset.view;
+    toggle.querySelectorAll('.vt-btn').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.view-panel[data-group="' + group + '"]').forEach(function (p) {
+      p.classList.toggle('active', p.dataset.view === view);
+    });
+  });
 
   /* ── INIT ── */
   renderTicker();
