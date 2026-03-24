@@ -677,6 +677,19 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .ecm-grades .g-val { font-size: .9rem; font-weight: 800; }
 .ecm-grades .g-lbl { opacity: .55; margin-top: 1px; }
 .ecm-nodata { font-size: .72rem; color: var(--muted); font-style: italic; margin-top: 4px; }
+
+/* ── Nacional dropdown group ────────────── */
+.nac-group { border: 1px solid var(--border); border-radius: var(--r); background: var(--card); }
+.nac-group-summary {
+  list-style: none; cursor: pointer; padding: 12px 16px;
+  display: flex; flex-direction: column; gap: 2px;
+  user-select: none;
+}
+.nac-group-summary::-webkit-details-marker { display: none; }
+.nac-group-summary::before { content: '▶ '; font-size: .65rem; color: var(--muted); }
+details[open] .nac-group-summary::before { content: '▼ '; }
+.nac-group-label { font-size: .8rem; font-weight: 700; color: var(--text); }
+.nac-group-body { padding: 0 12px 12px; border-top: 1px solid var(--border); margin-top: 2px; padding-top: 10px; }
 .ql-dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 3px; vertical-align: middle; }
 .qual-meta { font-size: .71rem; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
 
@@ -915,12 +928,6 @@ footer span { color: var(--accent2); font-weight: 600; }
   <!-- ══════════ CALIDAD ══════════ -->
   <div class="tab-panel" id="tab-calidad">
 
-    <!-- 0. BÁSCULA -->
-    <div class="section-title">Báscula · Actividad de Pesaje <span class="src-tag">basculabelher@gmail.com</span></div>
-    <div class="card">
-      <div class="bascula-grid" id="bascWidget"></div>
-    </div>
-
     <!-- Outbound: summary + compact rows -->
     <div class="section-title" id="outboundTitle">Calidad Exportación <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
     <div id="calidadSummary"></div>
@@ -930,6 +937,12 @@ footer span { color: var(--accent2); font-weight: 600; }
     <div class="section-title">Tendencia · 1ª Primera <span class="src-tag">calidad@agbelher.com · histórico</span></div>
     <div class="card">
       <div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div>
+    </div>
+
+    <!-- Báscula (menor prioridad) -->
+    <div class="section-title">Báscula · Actividad de Pesaje <span class="src-tag">basculabelher@gmail.com</span></div>
+    <div class="card">
+      <div class="bascula-grid" id="bascWidget"></div>
     </div>
 
   </div>
@@ -1032,7 +1045,9 @@ footer span { color: var(--accent2); font-weight: 600; }
   <div class="tab-panel" id="tab-limon">
     <div class="section-title">KPIs · Limón Persa</div>
     <div class="grid-3" id="limonKpis"></div>
-    <div class="section-title">Precios de Mercado</div>
+    <div class="section-title">Precio FOB California <span class="src-tag">USDA Market News · FOB Shipping Point</span></div>
+    <div id="limonUsdaPrice"></div>
+    <div class="section-title">Precios de Mercado · Referencia</div>
     <div class="price-compare-grid" id="limonPrecios"></div>
     <div class="section-title">Embarques · Limón</div>
     <div class="card-table"><div class="tbl-wrap"><table id="limonEmbarquesTbl">
@@ -2002,7 +2017,7 @@ footer span { color: var(--accent2); font-weight: 600; }
       if (/^roma/i.test(nombre || '')) return 'Roma';
       return nombre;
     };
-    var NAMED_ETQ = ['Calavo','Yameto','Tolin']; /* show cajas for these; others → JZ */
+    var NAMED_ETQ = ['Calavo','Yameto','Tolin']; /* show actual cajas; others → JZ */
 
     /* build quality lookup: variedad|etiqueta → data */
     var qualMap = {};
@@ -2059,20 +2074,48 @@ footer span { color: var(--accent2); font-weight: 600; }
     };
 
     var variedades = ['Roma','Bola'];
-    var expEtqs = ['Calavo','Urson','Millennium','Zazu'];
-    var nacEtqs = ['Yameto','Tolin'];
+    var expEtqs = ['Calavo'];
+    var nacEtqs = ['Yameto','Tolin','Urson','Millennium','Zazu'];
+
+    /* nacional summary stats for a given variedad */
+    var nacSummary = function (vari) {
+      var entries = nacEtqs.map(function (etq) { return qualMap[vari + '|' + etq]; }).filter(Boolean);
+      if (!entries.length) return null;
+      var avgPrima = entries.reduce(function(s,v){return s+(v.primera||0);},0)/entries.length;
+      var avgMerma = entries.reduce(function(s,v){return s+(v.merma||0);},0)/entries.length;
+      return { count: entries.length, avgPrima: avgPrima, avgMerma: avgMerma };
+    };
 
     document.getElementById('tomateVariedades').innerHTML = variedades.map(function (vari) {
+      var nacStats = nacSummary(vari);
+      var nacSummaryHtml = nacStats
+        ? '<div style="display:flex;gap:18px;font-size:.78rem;padding:8px 0 2px">' +
+            '<span>Prom 1ª: <strong style="color:var(--green2)">' + pct(nacStats.avgPrima) + '</strong></span>' +
+            '<span>Prom Merma: <strong>' + pct(nacStats.avgMerma) + '</strong></span>' +
+            '<span style="color:var(--muted)">' + nacStats.count + ' etiqueta(s) con reporte</span>' +
+          '</div>'
+        : '<div style="font-size:.75rem;color:var(--muted);padding:6px 0">Sin reportes de calidad nacional</div>';
+
       return '<div class="variedad-section">' +
         '<div class="variedad-title">Variedad · ' + vari + '</div>' +
         '<div class="canal-grid">' +
+          /* Exportación */
           '<div class="canal-col">' +
             '<div class="canal-header canal-export" style="margin-bottom:10px"><span class="canal-label">Exportación</span></div>' +
             expEtqs.map(function (etq) { return renderEtqCard(etq, vari, false); }).join('') +
           '</div>' +
+          /* Nacional — grouped with dropdown */
           '<div class="canal-col">' +
             '<div class="canal-header canal-nac" style="margin-bottom:10px"><span class="canal-label">Nacional</span></div>' +
-            nacEtqs.map(function (etq) { return renderEtqCard(etq, vari, true); }).join('') +
+            '<details class="nac-group">' +
+              '<summary class="nac-group-summary">' +
+                '<span class="nac-group-label">Yameto · Tolin · U · M · Z</span>' +
+                nacSummaryHtml +
+              '</summary>' +
+              '<div class="nac-group-body">' +
+                nacEtqs.map(function (etq) { return renderEtqCard(etq, vari, true); }).join('') +
+              '</div>' +
+            '</details>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -2094,8 +2137,36 @@ footer span { color: var(--accent2); font-weight: 600; }
         }).join('')
       : '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Sin embarques registrados</td></tr>';
   }
-  function renderLimon()   {
-    renderProductTab({ tipo:'Limón',  tabId:'limon',  kpisId:'limonKpis',  preciosId:'limonPrecios',  tblId:'limonEmbarquesTbl',  badgeCls:'prod-badge-limon'  });
+  function renderLimon() {
+    /* ── USDA FOB California price ── */
+    var lu = D.limon && D.limon.usda;
+    var usdaEl = document.getElementById('limonUsdaPrice');
+    if (lu && lu.precio_min != null) {
+      var chgPct = lu.anterior != null ? ((((lu.precio_min+lu.precio_max)/2) - lu.anterior) / lu.anterior * 100) : null;
+      var chgStr = chgPct != null ? (chgPct >= .5 ? '▲ +' : chgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(chgPct).toFixed(1) + '% vs semana anterior' : '';
+      var chgCls = chgPct == null ? '' : chgPct > .5 ? 'up' : chgPct < -.5 ? 'dn' : 'neu';
+      usdaEl.innerHTML =
+        '<div class="card" style="padding:20px 24px">' +
+          '<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' +
+            '<div>' +
+              '<div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px">' + lu.variedad + ' · ' + lu.mercado + '</div>' +
+              '<div style="font-size:1.8rem;font-weight:900;letter-spacing:-.5px">' + fmt(lu.precio_min,2) + '&nbsp;–&nbsp;' + fmt(lu.precio_max,2) + '<span style="font-size:.9rem;font-weight:500;opacity:.6"> /' + lu.unidad + '</span></div>' +
+              (chgStr ? '<div class="pc-chg ' + chgCls + '" style="margin-top:4px">' + chgStr + '</div>' : '') +
+            '</div>' +
+            '<div style="margin-left:auto;text-align:right;font-size:.75rem;color:var(--muted)">' +
+              (lu.anterior != null ? 'Semana anterior: ' + fmt(lu.anterior,2) + '<br>' : '') +
+              'Actualizado: ' + (lu.fecha || '—') +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    } else {
+      usdaEl.innerHTML =
+        '<div class="card" style="padding:18px 24px;color:var(--muted);font-size:.84rem">' +
+          'Precio USDA FOB California pendiente · Se actualiza automáticamente desde ' +
+          '<a href="https://www.ams.usda.gov/market-news/fruits-vegetables" target="_blank" style="color:var(--accent)">USDA Market News</a>' +
+        '</div>';
+    }
+    renderProductTab({ tipo:'Limón', tabId:'limon', kpisId:'limonKpis', preciosId:'limonPrecios', tblId:'limonEmbarquesTbl', badgeCls:'prod-badge-limon' });
   }
   function renderChile()   {
     renderProductTab({ tipo:'Chile',  tabId:'chile',  kpisId:'chileKpis',  preciosId:'chilePrecios',  tblId:'chileEmbarquesTbl',  badgeCls:'prod-badge-chile'  });

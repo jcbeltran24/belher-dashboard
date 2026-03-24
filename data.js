@@ -59,8 +59,8 @@ window.BELHER = {
       fecha: "23/03/2026",
       variedades: [
         { nombre:"Roma Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:92.90, segunda:3.77, tercera:2.34, merma:0.99, peso:27.13, alerta:false },
-        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:90.70, segunda:6.00, tercera:2.40, merma:0.90, peso:26.28, alerta:false },
-        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:89.48, segunda:5.70, tercera:3.04, merma:1.78, peso:26.17, alerta:false }
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"nacional",    primera:90.70, segunda:6.00, tercera:2.40, merma:0.90, peso:26.28, alerta:false },
+        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"nacional",    primera:89.48, segunda:5.70, tercera:3.04, merma:1.78, peso:26.17, alerta:false }
       ]
     }
   },
@@ -68,15 +68,28 @@ window.BELHER = {
   tomate: {
     ventas: {
       exportacion: [
-        { etiqueta:"Calavo",     cajas:421000, revenue:7662531 },
-        { etiqueta:"Urson",      cajas:null,   revenue:null },
-        { etiqueta:"Millennium", cajas:null,   revenue:null },
-        { etiqueta:"Zazu",       cajas:null,   revenue:null }
+        { etiqueta:"Calavo", cajas:421000, revenue:7662531 }
       ],
       nacional: [
-        { etiqueta:"Yameto", cajas:null, revenue:3856070 },
-        { etiqueta:"Tolin",  cajas:null, revenue:null }
+        { etiqueta:"Yameto",     cajas:null, revenue:3856070 },
+        { etiqueta:"Tolin",      cajas:null, revenue:null },
+        { etiqueta:"Urson",      cajas:null, revenue:null },
+        { etiqueta:"Millennium", cajas:null, revenue:null },
+        { etiqueta:"Zazu",       cajas:null, revenue:null }
       ]
+    }
+  },
+
+  limon: {
+    usda: {
+      fecha:      null,
+      precio_min: null,
+      precio_max: null,
+      unidad:     "carton",
+      variedad:   "Limón Persa",
+      mercado:    "FOB California",
+      anterior:   null,
+      fuente:     "USDA Market News FOB Shipping Point"
     }
   },
 
