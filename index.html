@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Agricola Belher Dashboard</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      :root {
+        --green: #1a7a4a; --green2: #27ae60; --dark: #0f2d1f; --accent: #f0a500;
+        --red: #c0392b; --blue: #2471a3; --light: #f4f6f3; --card: #ffffff;
+        --text: #1a2e22; --sub: #5a7a65; --border: #d5e8d9;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: -apple-system, sans-serif; background: var(--light); color: var(--text); }
+
+      /* HEADER */
+      header { background: linear-gradient(135deg, var(--dark) 0%, var(--green) 100%); color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; }
+      header .title { font-size: 1rem; font-weight: 700; }
+      header .title small { font-size: 0.7rem; font-weight: 400; opacity: .8; display: block; }
+      header .meta { text-align: right; font-size: 0.68rem; opacity: .85; }
+
+      /* TABS */
+      .tabs { background: var(--dark); display: flex; overflow-x: auto; padding: 0 8px; position: sticky; top: 0; z-index: 10; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .tabs::-webkit-scrollbar { display: none; }
+      .tab { padding: 11px 14px; cursor: pointer; color: rgba(255,255,255,0.5); font-size: 0.75rem; white-space: nowrap; border-bottom: 3px solid transparent; transition: all .2s; }
+      .tab.active { color: #fff; border-bottom-color: var(--accent); }
+
+      /* PAGES */
+      .page { display: none; padding: 12px; }
+      .page.active { display: block; }
+
+      /* KPI STRIP */
+      .kpi-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 14px; }
+      .kpi { background: var(--card); padding: 12px 14px; border-radius: 10px; border-left: 4px solid var(--green2); box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+      .kpi.warn  { border-left-color: var(--accent); }
+      .kpi.danger{ border-left-color: var(--red); }
+      .kpi.blue  { border-left-color: var(--blue); }
+      .kpi label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: .04em; color: var(--sub); font-weight: 600; }
+      .kpi .val  { font-size: 1.3rem; font-weight: 700; margin: 4px 0 2px; }
+      .kpi .sub  { font-size: 0.62rem; color: var(--sub); }
+
+      /* CARDS */
+      .card { background: var(--card); padding: 14px; border-radius: 12px; box-shadow: 0 1px 5px rgba(0,0,0,.06); margin-bottom: 12px; }
+      .card h3 { font-size: 0.72rem; color: var(--sub); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .04em; }
+      .chart-container { position: relative; height: 220px; width: 100%; }
+
+      /* TABLES */
+      .scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      table { width: 100%; border-collapse: collapse; font-size: 0.72rem; min-width: 420px; }
+      th { background: var(--light); color: var(--sub); text-align: left; padding: 7px 8px; font-weight: 600; font-size: 0.65rem; text-transform: uppercase; letter-spacing: .03em; }
+      td { padding: 7px 8px; border-bottom: 1px solid var(--border); }
+      tr:last-child td { border-bottom: none; }
+      .total-row { background: #f0faf3; font-weight: 700; }
+
+      /* BADGES */
+      .badge { display: inline-block; padding: 2px 7px; border-radius: 20px; font-size: 0.62rem; font-weight: 600; }
+      .badge-green  { background: #d5f0de; color: var(--green); }
+      .badge-orange { background: #fef3d0; color: #8a6000; }
+      .badge-red    { background: #fde8e8; color: var(--red); }
+      .badge-blue   { background: #dceaf7; color: var(--blue); }
+
+      /* PROGRESS */
+      .progress-wrap { margin-bottom: 9px; }
+      .progress-label { display: flex; justify-content: space-between; font-size: 0.67rem; margin-bottom: 4px; color: var(--sub); }
+      .progress-bar { height: 7px; background: #e8f0ea; border-radius: 4px; overflow: hidden; }
+      .progress-bar .fill { height: 100%; border-radius: 4px; }
+      .fill-green  { background: var(--green2); }
+      .fill-orange { background: var(--accent); }
+      .fill-red    { background: var(--red); }
+      .fill-blue   { background: var(--blue); }
+
+      /* ALERTS */
+      .alert { border-radius: 8px; padding: 9px 12px; margin-bottom: 8px; font-size: 0.72rem; display: flex; gap: 7px; align-items: flex-start; line-height: 1.4; }
+      .alert-orange { background: #fff8e6; border-left: 3px solid var(--accent); }
+      .alert-green  { background: #eafaf1; border-left: 3px solid var(--green2); }
+      .alert-blue   { background: #eaf3fb; border-left: 3px solid var(--blue); }
+      .alert-red    { background: #fdf0f0; border-left: 3px solid var(--red); }
+
+      /* TIMELINE */
+      .timeline { list-style: none; }
+      .timeline li { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+      .timeline .dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+      .dot-green  { background: var(--green2); }
+      .dot-orange { background: var(--accent); }
+      .dot-red    { background: var(--red); }
+      .dot-blue   { background: var(--blue); }
+      .timeline .info .title { font-size: 0.75rem; font-weight: 600; }
+      .timeline .info .date  { font-size: 0.65rem; color: var(--sub); }
+
+      /* QUAL GRID */
+      .qual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .qual-card { background: var(--light); border-radius: 8px; padding: 10px 12px; }
+      .qual-card h4 { font-size: 0.7rem; color: var(--dark); font-weight: 700; margin-bottom: 7px; }
+      .qual-row { display: flex; justify-content: space-between; font-size: 0.68rem; margin-bottom: 3px; }
+      .qual-row .pct { font-weight: 600; }
+      .pct-green  { color: var(--green2); }
+      .pct-orange { color: var(--accent); }
+      .pct-red    { color: var(--red); }
+
+      /* PRICE GRID */
+      .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-bottom: 10px; }
+      .price-item { background: var(--light); border-radius: 8px; padding: 8px 10px; text-align: center; }
+      .price-item .crop  { font-size: 0.6rem; color: var(--sub); text-transform: uppercase; margin-bottom: 3px; }
+      .price-item .price { font-size: 0.95rem; font-weight: 700; color: var(--dark); }
+      .price-item .unit  { font-size: 0.58rem; color: var(--sub); }
+
+      footer { text-align: center; padding: 12px; font-size: 0.62rem; color: var(--sub); border-top: 1px solid var(--border); margin-top: 6px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="title">Agricola Belher
+        <small>Dashboard Ejecutivo · GC 2025-2026</small>
+    </div>
+    <div class="meta">WK 12 · 18 Mar 2026<br>Semana activa</div>
+</header>
+
+<nav class="tabs">
+    <div class="tab active" onclick="showPage('resumen', this)">Resumen</div>
+    <div class="tab" onclick="showPage('settlement', this)">Settlement</div>
+    <div class="tab" onclick="showPage('calidad', this)">Calidad</div>
+    <div class="tab" onclick="showPage('mercado', this)">Mercado</div>
+    <div class="tab" onclick="showPage('finanzas', this)">Financiero</div>
+</nav>
+
+<!-- ================================================
+     PAGE 1 · RESUMEN EJECUTIVO
+     ================================================ -->
+<div id="resumen" class="page active">
+
+    <div class="kpi-strip">
+        <div class="kpi"><label>Revenue Acumulado</label><div class="val">$9.77M</div><div class="sub">WK01–WK12 · GC 2025-26</div></div>
+        <div class="kpi"><label>POs Liquidados</label><div class="val">383</div><div class="sub">Dic 2025 – Mar 2026</div></div>
+        <div class="kpi"><label>Cajas Enviadas</label><div class="val">655,641</div><div class="sub">Unidades a Calavo</div></div>
+        <div class="kpi warn"><label>Pick & Pack</label><div class="val">$3.28M</div><div class="sub">@$5.00/caja · WK01-12</div></div>
+        <div class="kpi blue"><label>Semana Actual</label><div class="val">WK 12</div><div class="sub">$240K · 48,000 cajas</div></div>
+        <div class="kpi danger"><label>Comisión Calavo</label><div class="val">$2.15M</div><div class="sub">~22% del Revenue</div></div>
+    </div>
+
+    <div class="card">
+        <h3>Pagos Pick & Pack por Semana</h3>
+        <div class="chart-container"><canvas id="chart1"></canvas></div>
+    </div>
+
+    <div class="card">
+        <h3>Distribución de Costos · Temporada</h3>
+        <div class="chart-container"><canvas id="chart2"></canvas></div>
+    </div>
+
+    <div class="card">
+        <h3>Alertas Ejecutivas del Día</h3>
+        <div class="alert alert-green">
+            <span>✅</span>
+            <span><strong>Settlement WK12 recibido</strong> — $240,000 (48,000 cajas · 29 contenedores). Acumulado WK01–WK12: $3.28M en Pick & Pack.</span>
+        </div>
+        <div class="alert alert-orange">
+            <span>📋</span>
+            <span><strong>Liquidación Calavo cierre febrero</strong> enviada por Leima el 12-Mar. Pendiente revisión del archivo <em>Summary ventas Calavo GC 2025-2026.xlsx</em>.</span>
+        </div>
+        <div class="alert alert-blue">
+            <span>📂</span>
+            <span><strong>Cuentas por Pagar al 12-Mar</strong> compartidas por Leima. Archivo <em>CXP AL 12 DE MARZO.xls</em> pendiente de revisión.</span>
+        </div>
+        <div class="alert alert-orange">
+            <span>⚠️</span>
+            <span><strong>Bola Yameto</strong> muestra merma de 4.4% (umbral operativo). Monitorear tendencia en próximos reportes de outbound.</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Correos Sin Leer · Hoy</h3>
+        <ul class="timeline">
+            <li><span class="dot dot-blue"></span><div class="info"><div class="title">Báscula: Tomate 18/03 (Chile + Limón Persa)</div><div class="date">basculabelher@gmail.com · 15:41–15:46</div></div></li>
+            <li><span class="dot dot-green"></span><div class="info"><div class="title">Settlement WK12 — $240K · 48,000 cajas</div><div class="date">Leima Leyva · 18 Mar 5:42 PM</div></div></li>
+            <li><span class="dot dot-orange"></span><div class="info"><div class="title">Corbel Seeds Daily Report #0010</div><div class="date">ray@agbelher.com · 16:24 UTC</div></div></li>
+            <li><span class="dot dot-red"></span><div class="info"><div class="title">Outbound Tomate 17-Mar (pendiente leer)</div><div class="date">calidad@agbelher.com · 11:07</div></div></li>
+        </ul>
+        <div class="alert alert-blue" style="margin-top:8px">
+            <span>📅</span>
+            <span>Reunión CF ABSA: <strong>25 Mar · 2pm</strong>. Reunión BPSI F/S Febrero: <strong>24 Mar · 10am</strong>.</span>
+        </div>
+    </div>
+
+</div>
+
+<!-- ================================================
+     PAGE 2 · SETTLEMENT CALAVO
+     ================================================ -->
+<div id="settlement" class="page">
+
+    <div class="kpi-strip">
+        <div class="kpi"><label>Revenue Total GC</label><div class="val">$9.77M</div><div class="sub">383 POs · Dic 2025–Mar 2026</div></div>
+        <div class="kpi warn"><label>Comisión Calavo</label><div class="val">$2.15M</div><div class="sub">22.0% del Revenue</div></div>
+        <div class="kpi warn"><label>Pick & Pack Total</label><div class="val">$3.28M</div><div class="sub">655,641 cajas × $5.00</div></div>
+        <div class="kpi danger"><label>Z-Code Expenses</label><div class="val">$1.05M</div><div class="sub">Gastos poscosecha</div></div>
+        <div class="kpi blue"><label>Balance Temp. 2025</label><div class="val">$931,527</div><div class="sub">Carryover a GC 2025-26</div></div>
+        <div class="kpi"><label>Neto Disponible</label><div class="val">$3.29M</div><div class="sub">Aprox. WK01-12</div></div>
+    </div>
+
+    <div class="card">
+        <h3>Avance Semanal — Pagos & Unidades</h3>
+        <div class="chart-container"><canvas id="chart3"></canvas></div>
+    </div>
+
+    <div class="card">
+        <h3>Unidades Acumuladas por Semana</h3>
+        <div class="chart-container"><canvas id="chart4"></canvas></div>
+    </div>
+
+    <div class="card">
+        <h3>Estructura de Revenue · GC 2025–2026</h3>
+        <div class="progress-wrap">
+            <div class="progress-label"><span>Total Revenue</span><span>$9,770,259 (100%)</span></div>
+            <div class="progress-bar"><div class="fill fill-green" style="width:100%"></div></div>
+        </div>
+        <div class="progress-wrap">
+            <div class="progress-label"><span>Pick & Pack Pagado</span><span>$3,278,205 (33.6%)</span></div>
+            <div class="progress-bar"><div class="fill fill-green" style="width:33.6%"></div></div>
+        </div>
+        <div class="progress-wrap">
+            <div class="progress-label"><span>Comisión Calavo</span><span>$2,149,457 (22.0%)</span></div>
+            <div class="progress-bar"><div class="fill fill-orange" style="width:22%"></div></div>
+        </div>
+        <div class="progress-wrap">
+            <div class="progress-label"><span>Z-Code / Gastos poscosecha</span><span>$1,052,986 (10.8%)</span></div>
+            <div class="progress-bar"><div class="fill fill-red" style="width:10.8%"></div></div>
+        </div>
+        <div class="progress-wrap">
+            <div class="progress-label"><span>Neto Disponible (aprox.)</span><span>$3,289,611 (33.7%)</span></div>
+            <div class="progress-bar"><div class="fill fill-blue" style="width:33.7%"></div></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Detalle de Pagos Semanales — Pick & Pack @ $5.00/caja</h3>
+        <div class="scroll-x">
+        <table>
+            <thead>
+                <tr>
+                    <th>Sem.</th>
+                    <th>Wire</th>
+                    <th>Pago</th>
+                    <th>Cajas</th>
+                    <th>Cont.</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>WK 01</strong></td><td>02-Ene</td><td>$54,120</td><td>10,824</td><td>6</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr><td><strong>WK 02</strong></td><td>02-Ene</td><td>$121,400</td><td>24,280</td><td>14</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr><td><strong>WK 03</strong></td><td>14-Ene</td><td>$221,925</td><td>44,385</td><td>26</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr><td><strong>WK 04</strong></td><td>21-Ene</td><td>$243,040</td><td>48,608</td><td>29</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr><td><strong>WK 05</strong></td><td>28-Ene</td><td>$306,600</td><td>61,320</td><td>36</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr><td><strong>WK 06</strong></td><td>04-Feb</td><td>$432,880</td><td>86,576</td><td>51</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr><td><strong>WK 07</strong></td><td>11-Feb</td><td>$446,320</td><td>89,264</td><td>52</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr><td><strong>WK 08</strong></td><td>18-Feb</td><td>$297,720</td><td>59,544</td><td>35</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr><td><strong>WK 09</strong></td><td>25-Feb</td><td>$215,600</td><td>43,120</td><td>26</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr><td><strong>WK 10</strong></td><td>04-Mar</td><td>$349,600</td><td>69,920</td><td>40</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr><td><strong>WK 11</strong></td><td>08-Mar</td><td>$349,000</td><td>69,800</td><td>39</td><td><span class="badge badge-green">Pagado</span></td></tr>
+                <tr style="background:#f6fdf9"><td><strong>WK 12</strong></td><td>15-Mar</td><td><strong>$240,000</strong></td><td>48,000</td><td>29</td><td><span class="badge badge-blue">Actual</span></td></tr>
+                <tr style="color:#bbb"><td>WK 13–23</td><td>—</td><td>—</td><td>—</td><td>—</td><td><span class="badge badge-orange">Pendiente</span></td></tr>
+                <tr class="total-row"><td>TOTAL WK01-12</td><td></td><td>$3,278,205</td><td>655,641</td><td>383</td><td></td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Resumen Financiero Settlement</h3>
+        <div class="scroll-x">
+        <table>
+            <tbody>
+                <tr><td>Balance Temporada 2025</td><td style="text-align:right; font-weight:600; color:var(--green)">$931,527</td></tr>
+                <tr><td>Interés Préstamo 2021 (3 años)</td><td style="text-align:right; color:var(--red)">$24,262</td></tr>
+                <tr><td><strong>Total Advances</strong></td><td style="text-align:right; font-weight:700">$955,789</td></tr>
+                <tr style="background:#f6faf7"><td><strong>Revenue Acumulado GC 2025-26</strong></td><td style="text-align:right; font-weight:700; color:var(--green)">$9,770,259</td></tr>
+                <tr><td>− Comisión Calavo (22%)</td><td style="text-align:right; color:var(--red)">-$2,149,457</td></tr>
+                <tr><td>− Pick & Pack (@$5/caja)</td><td style="text-align:right; color:var(--red)">-$3,278,205</td></tr>
+                <tr><td>− Z-Code Expenses</td><td style="text-align:right; color:var(--red)">-$1,052,986</td></tr>
+                <tr style="background:#eafaf1; font-weight:700"><td>Neto Disponible (aprox.)</td><td style="text-align:right; color:var(--green)">$3,289,611</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="alert alert-orange" style="margin-top:10px">
+            <span>📋</span><span>Liquidación cierre febrero disponible · archivo <em>Summary ventas Calavo.xlsx</em> enviado por Leima el 12-Mar.</span>
+        </div>
+    </div>
+
+</div>
+
+<!-- ================================================
+     PAGE 3 · CALIDAD & OPERACIONES
+     ================================================ -->
+<div id="calidad" class="page">
+
+    <div class="kpi-strip">
+        <div class="kpi"><label>Reporte Báscula Hoy</label><div class="val">× 2</div><div class="sub">Chile + Limón Persa · 18-Mar</div></div>
+        <div class="kpi"><label>1ª Calidad Prom.</label><div class="val">89.5%</div><div class="sub">Promedio 4 variedades</div></div>
+        <div class="kpi danger"><label>Merma Mayor</label><div class="val">4.4%</div><div class="sub">Bola Yameto · alerta</div></div>
+        <div class="kpi warn"><label>Último Embarque</label><div class="val">11-Mar</div><div class="sub">Empaque Chile</div></div>
+    </div>
+
+    <div class="card">
+        <h3>Calidad Outbound Tomate — 17 Marzo 2026</h3>
+        <div class="chart-container"><canvas id="chart5"></canvas></div>
+    </div>
+
+    <div class="card">
+        <h3>Detalle por Variedad</h3>
+        <div class="qual-grid">
+            <div class="qual-card">
+                <h4>🍅 Bola Calavo</h4>
+                <div class="qual-row"><span>1ª</span><span class="pct pct-green">88.5%</span></div>
+                <div class="qual-row"><span>2ª</span><span class="pct pct-orange">3.1%</span></div>
+                <div class="qual-row"><span>3ª</span><span class="pct pct-orange">5.0%</span></div>
+                <div class="qual-row"><span>Merma</span><span class="pct pct-orange">3.4%</span></div>
+                <div class="qual-row"><span>Peso</span><span class="pct">24.19</span></div>
+            </div>
+            <div class="qual-card">
+                <h4>🍅 Roma Calavo</h4>
+                <div class="qual-row"><span>1ª</span><span class="pct pct-green">92.4%</span></div>
+                <div class="qual-row"><span>2ª</span><span class="pct pct-orange">2.1%</span></div>
+                <div class="qual-row"><span>3ª</span><span class="pct pct-orange">3.3%</span></div>
+                <div class="qual-row"><span>Merma</span><span class="pct pct-green">2.2%</span></div>
+                <div class="qual-row"><span>Peso</span><span class="pct">25.33</span></div>
+            </div>
+            <div class="qual-card">
+                <h4>🍅 Bola Yameto</h4>
+                <div class="qual-row"><span>1ª</span><span class="pct pct-green">87.2%</span></div>
+                <div class="qual-row"><span>2ª</span><span class="pct pct-orange">3.4%</span></div>
+                <div class="qual-row"><span>3ª</span><span class="pct pct-orange">5.0%</span></div>
+                <div class="qual-row"><span>Merma</span><span class="pct pct-red">4.4%</span></div>
+                <div class="qual-row"><span>Peso</span><span class="pct">31.10</span></div>
+            </div>
+            <div class="qual-card">
+                <h4>🍅 Roma Urson</h4>
+                <div class="qual-row"><span>1ª</span><span class="pct pct-green">89.9%</span></div>
+                <div class="qual-row"><span>2ª</span><span class="pct pct-orange">4.9%</span></div>
+                <div class="qual-row"><span>3ª</span><span class="pct pct-orange">3.2%</span></div>
+                <div class="qual-row"><span>Merma</span><span class="pct pct-green">1.9%</span></div>
+                <div class="qual-row"><span>Peso</span><span class="pct">26.36</span></div>
+            </div>
+        </div>
+        <div class="alert alert-orange" style="margin-top:10px">
+            <span>⚠️</span><span><strong>Bola Yameto</strong> presenta la merma más alta (4.4%). Revisar proceso de empaque y cosecha.</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Outbound Tomate — Últimos 7 días</h3>
+        <div class="scroll-x">
+        <table>
+            <thead><tr><th>Fecha</th><th>1ª prom.</th><th>Merma prom.</th></tr></thead>
+            <tbody>
+                <tr><td>17-Mar</td><td style="color:var(--green2)">89.5%</td><td>3.0%</td></tr>
+                <tr><td>16-Mar</td><td style="color:var(--green2)">86.1%</td><td>4.9%</td></tr>
+                <tr><td>14-Mar</td><td style="color:var(--green2)">87.3%</td><td>5.0%</td></tr>
+                <tr><td>13-Mar</td><td style="color:var(--green2)">91.0%</td><td>4.2%</td></tr>
+                <tr><td>12-Mar</td><td style="color:var(--green2)">88.1%</td><td>3.9%</td></tr>
+                <tr><td>11-Mar</td><td style="color:var(--green2)">88.0%</td><td>3.7%</td></tr>
+                <tr><td>10-Mar</td><td style="color:var(--green2)">89.0%</td><td>4.3%</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Últimos Reportes de Báscula</h3>
+        <ul class="timeline">
+            <li><span class="dot dot-blue"></span><div class="info"><div class="title">Chile · 18/03/2026</div><div class="date">basculabelher@gmail.com</div></div></li>
+            <li><span class="dot dot-blue"></span><div class="info"><div class="title">Limón Persa · 18/03/2026</div><div class="date">basculabelher@gmail.com</div></div></li>
+            <li><span class="dot dot-green"></span><div class="info"><div class="title">Tomate + Rezaga · 17/03/2026</div><div class="date">basculabelher@gmail.com</div></div></li>
+            <li><span class="dot dot-green"></span><div class="info"><div class="title">Tomate · 16/03/2026</div><div class="date">basculabelher@gmail.com</div></div></li>
+            <li><span class="dot dot-green"></span><div class="info"><div class="title">Tomate + Rezaga · 14/03/2026</div><div class="date">basculabelher@gmail.com</div></div></li>
+            <li><span class="dot dot-green"></span><div class="info"><div class="title">Limón Persa · 12/03/2026</div><div class="date">basculabelher@gmail.com</div></div></li>
+        </ul>
+    </div>
+
+</div>
+
+<!-- ================================================
+     PAGE 4 · MERCADO
+     ================================================ -->
+<div id="mercado" class="page">
+
+    <div class="kpi-strip">
+        <div class="kpi warn"><label>Tomate Roma (Nogales)</label><div class="val">$24.45</div><div class="sub">caja 25lb · Rango $23.95–$24.95</div></div>
+        <div class="kpi"><label>Vine Ripe 4×4</label><div class="val">$29.95</div><div class="sub">Rango $28.95–$30.95</div></div>
+        <div class="kpi"><label>Jalapeño</label><div class="val">$43.50</div><div class="sub">Firme · $42–$45</div></div>
+        <div class="kpi warn"><label>Chile Bell Rojo</label><div class="val">$17.50</div><div class="sub">caja 11lb · $17–$18</div></div>
+        <div class="kpi blue"><label>Pepino 1⅑ bu</label><div class="val">$41.95</div><div class="sub">Firme · $40.95–$42.95</div></div>
+        <div class="kpi"><label>Reporte</label><div class="val">#0010</div><div class="sub">Corbel Seeds · 18-Mar-26</div></div>
+    </div>
+
+    <div class="card">
+        <h3>Precios en Frontera — Nogales, AZ · 18-Mar-2026</h3>
+        <div class="chart-container"><canvas id="chart6"></canvas></div>
+    </div>
+
+    <div class="card">
+        <h3>Precios de Referencia</h3>
+        <div class="price-grid">
+            <div class="price-item"><div class="crop">Tomate Roma</div><div class="price">$24.45</div><div class="unit">25lb XL</div></div>
+            <div class="price-item"><div class="crop">Vine Ripe</div><div class="price">$29.95</div><div class="unit">estándar</div></div>
+            <div class="price-item"><div class="crop">Jalapeño</div><div class="price">$43.50</div><div class="unit">mostly</div></div>
+            <div class="price-item"><div class="crop">Bell Rojo</div><div class="price">$17.50</div><div class="unit">caja 11lb</div></div>
+            <div class="price-item"><div class="crop">Pepino</div><div class="price">$41.95</div><div class="unit">1⅑ bu</div></div>
+            <div class="price-item"><div class="crop">Grape 12-pt</div><div class="price">$11.45</div><div class="unit">12-pint</div></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Señales Clave del Mercado</h3>
+        <div class="alert alert-orange">
+            <span>⚠️</span><span><strong>Marruecos</strong> activa subsidio de $75/ton para tomate export fuera de UE/UK — competencia aumenta en mercados alternativos.</span>
+        </div>
+        <div class="alert alert-red">
+            <span>🚫</span><span><strong>Jordania</strong> suspendió exportaciones de tomate y pepino por 10 días para proteger oferta doméstica.</span>
+        </div>
+        <div class="alert alert-blue">
+            <span>🚢</span><span><strong>Arabia Saudí</strong> emerge como corredor logístico del Golfo. Conflicto en Medio Oriente sigue alterando rutas de perecederos globales.</span>
+        </div>
+        <div class="alert alert-green">
+            <span>📈</span><span><strong>Pepino y chile bell</strong> muestran fortaleza en mercado EE.UU. Ventana de oportunidad de margen activa.</span>
+        </div>
+        <div class="alert alert-orange">
+            <span>🧬</span><span><strong>ToBRFV-HR</strong>: 18 variedades resistentes desarrolladas en 7 años. Genética de resistencia se vuelve diferenciador comercial clave.</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Top Noticias Hortícolas · Corbel Seeds Daily #0010</h3>
+        <div class="scroll-x">
+        <table>
+            <thead><tr><th>#</th><th>Noticia</th><th>Impacto</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Pepino y chile bell suben; tomate baja en EE.UU.</td><td><span class="badge badge-orange">Moderado</span></td></tr>
+                <tr><td>2</td><td>Marruecos activa subsidio $75/ton a tomate export</td><td><span class="badge badge-red">Alto</span></td></tr>
+                <tr><td>3</td><td>Jordania detiene exports tomate/pepino 10 días</td><td><span class="badge badge-orange">Moderado</span></td></tr>
+                <tr><td>4</td><td>AMHPAC-México impulsa capacitación técnica</td><td><span class="badge badge-green">Positivo</span></td></tr>
+                <tr><td>5</td><td>Temporada de espárrago inicia en Caborca, Sonora</td><td><span class="badge badge-blue">Info</span></td></tr>
+                <tr><td>6</td><td>18 variedades tomate ToBRFV-HR en 7 años</td><td><span class="badge badge-green">Estratégico</span></td></tr>
+                <tr><td>7</td><td>Conflicto Medio Oriente: disrupción en perecederos</td><td><span class="badge badge-red">Alto</span></td></tr>
+                <tr><td>8</td><td>Kenia obtiene acceso libre de aranceles a China</td><td><span class="badge badge-blue">Info</span></td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- ================================================
+     PAGE 5 · FINANCIERO
+     ================================================ -->
+<div id="finanzas" class="page">
+
+    <div class="kpi-strip">
+        <div class="kpi warn"><label>Reunión CF ABSA</label><div class="val">25-Mar</div><div class="sub">2pm · Zoom con Leima</div></div>
+        <div class="kpi blue"><label>Reunión BPSI F/S</label><div class="val">24-Mar</div><div class="sub">10am · Feb 2026 + Q1</div></div>
+        <div class="kpi danger"><label>CxP al 12-Mar</label><div class="val">Pendiente</div><div class="sub">Archivo recibido · sin revisar</div></div>
+        <div class="kpi"><label>Liquidación Feb '26</label><div class="val">Recibida</div><div class="sub">12-Mar · Calavo cierre feb</div></div>
+    </div>
+
+    <div class="card">
+        <h3>Calendario Reuniones Financieras</h3>
+        <ul class="timeline">
+            <li>
+                <span class="dot dot-blue"></span>
+                <div class="info">
+                    <div class="title">BPSI F/S Febrero 2026 + Forecast Q1</div>
+                    <div class="date">Martes 24-Mar · 10am – 11am GMT-7</div>
+                </div>
+            </li>
+            <li>
+                <span class="dot dot-green"></span>
+                <div class="info">
+                    <div class="title">CF ABSA Actualizado + Proyección ciclo</div>
+                    <div class="date">Miércoles 25-Mar · 2pm – 3pm GMT-7</div>
+                </div>
+            </li>
+            <li>
+                <span class="dot dot-orange"></span>
+                <div class="info">
+                    <div class="title">Settlement WK13 (estimado)</div>
+                    <div class="date">~22-Mar · Pendiente de Calavo</div>
+                </div>
+            </li>
+        </ul>
+        <div class="alert alert-blue" style="margin-top:10px">
+            <span>👥</span><span>Participantes: Juan Carlos, Antonio, Armando Llanes, Hildelisa, Leima.</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Presupuesto vs Pagado — al 31-Ene</h3>
+        <div class="scroll-x">
+        <table>
+            <thead><tr><th>Concepto</th><th>Presup.</th><th>Pagado</th><th>Var.</th></tr></thead>
+            <tbody>
+                <tr><td>Nómina Administrativa</td><td>$47,391</td><td>$45,510</td><td style="color:var(--green2)">+$1,881</td></tr>
+                <tr><td>Nómina Agrícola</td><td>$144,928</td><td>$178,093</td><td style="color:var(--red)">-$33,165 ⚠️</td></tr>
+                <tr><td>Material de Empaque</td><td>$147,956</td><td>$143,659</td><td style="color:var(--green2)">+$4,297</td></tr>
+                <tr><td>Fertilizantes</td><td>$50,000</td><td>$75,279</td><td style="color:var(--red)">-$25,279 ⚠️</td></tr>
+                <tr><td>Agroquímicos</td><td>$30,000</td><td>~$30,000</td><td style="color:var(--sub)">Aprox. OK</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="alert alert-red" style="margin-top:10px">
+            <span>⚠️</span><span>Nómina agrícola y fertilizantes exceden presupuesto. Revisar en reunión CF del 25-Mar.</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Documentos Financieros Recibidos</h3>
+        <div class="scroll-x">
+        <table>
+            <thead><tr><th>Fecha</th><th>Documento</th><th>Estado</th></tr></thead>
+            <tbody>
+                <tr><td>18-Mar</td><td>Settlement WK12 · $240,000</td><td><span class="badge badge-green">Nuevo</span></td></tr>
+                <tr><td>12-Mar</td><td>Liquidación Calavo cierre Feb '26</td><td><span class="badge badge-orange">Revisar</span></td></tr>
+                <tr><td>12-Mar</td><td>Cuentas por Pagar al 12-Mar</td><td><span class="badge badge-orange">Revisar</span></td></tr>
+                <tr><td>06-Mar</td><td>Kardex LOF Agro + Favela Fumigaciones</td><td><span class="badge badge-orange">Revisar</span></td></tr>
+                <tr><td>12-Feb</td><td>Reporte Ventas Calavo cierre Ene '26</td><td><span class="badge badge-blue">Archivado</span></td></tr>
+                <tr><td>16-Feb</td><td>CF BELHER (update 08-Feb)</td><td><span class="badge badge-blue">Archivado</span></td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Entidades del Grupo</h3>
+        <div class="scroll-x">
+        <table>
+            <thead><tr><th>Entidad</th><th>Sigla</th><th>Último F/S</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td>Agrícola Belher</td><td>ABSA</td><td>CF al 22-Mar '26</td><td><span class="badge badge-green">Activo</span></td></tr>
+                <tr><td>Blondie Producciones y Servicios</td><td>BPSI</td><td>Feb 2026</td><td><span class="badge badge-green">Activo</span></td></tr>
+                <tr><td>Corbel Seeds</td><td>CB</td><td>—</td><td><span class="badge badge-blue">Inversión</span></td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="alert alert-orange" style="margin-top:10px">
+            <span>📊</span><span>BPSI reportó <strong>sin ingresos en Enero 2026</strong>. Gastos promedio ~MXP $95K/mes. Pendiente resolución de cancelación de cliente.</span>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    Agrícola Belher · Dashboard Ejecutivo GC 2025-2026 · 18 de Marzo 2026 ·
+    Fuentes: Gmail · Settlement Calavo WK12 · Báscula Belher · Calidad Belher · Corbel Seeds Daily · Leima Leyva
+</footer>
+
+<script>
+function showPage(id, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+    setTimeout(initCharts, 50);
+}
+
+const weeks    = ['WK01','WK02','WK03','WK04','WK05','WK06','WK07','WK08','WK09','WK10','WK11','WK12'];
+const payments = [54120,121400,221925,243040,306600,432880,446320,297720,215600,349600,349000,240000];
+const units    = [10824,24280,44385,48608,61320,86576,89264,59544,43120,69920,69800,48000];
+
+const defaults = { responsive: true, maintainAspectRatio: false };
+const chartsCreated = {};
+
+function initCharts() {
+    // chart1 — Weekly payments bar
+    if (!chartsCreated.chart1 && document.getElementById('chart1')) {
+        chartsCreated.chart1 = new Chart(document.getElementById('chart1'), {
+            type: 'bar',
+            data: {
+                labels: weeks,
+                datasets: [{ label: 'Pago ($)', data: payments,
+                    backgroundColor: payments.map((_,i) => i===11 ? '#2471a3' : '#27ae60'),
+                    borderRadius: 4, maxBarThickness: 28 }]
+            },
+            options: { ...defaults,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { ticks: { font: { size: 9 } } },
+                    y: { ticks: { callback: v => '$'+(v/1000).toFixed(0)+'K', font: { size: 9 } } }
+                }
+            }
+        });
+    }
+
+    // chart2 — Cost doughnut
+    if (!chartsCreated.chart2 && document.getElementById('chart2')) {
+        chartsCreated.chart2 = new Chart(document.getElementById('chart2'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Pick & Pack ($3.28M)', 'Comisión Calavo ($2.15M)', 'Z-Code ($1.05M)', 'Neto (~$3.29M)'],
+                datasets: [{ data: [3278205, 2149457, 1052986, 3289611],
+                    backgroundColor: ['#27ae60','#f0a500','#c0392b','#2471a3'],
+                    borderWidth: 2, borderColor: '#fff' }]
+            },
+            options: { ...defaults, cutout: '58%',
+                plugins: { legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 10, padding: 8 } } }
+            }
+        });
+    }
+
+    // chart3 — Weekly bar+line (settlement)
+    if (!chartsCreated.chart3 && document.getElementById('chart3')) {
+        chartsCreated.chart3 = new Chart(document.getElementById('chart3'), {
+            type: 'bar',
+            data: {
+                labels: weeks,
+                datasets: [
+                    { label: 'Pago ($)', data: payments, backgroundColor: '#27ae60', yAxisID: 'y', borderRadius: 4, maxBarThickness: 24 },
+                    { label: 'Unidades', data: units, type: 'line', borderColor: '#2471a3', pointBackgroundColor: '#2471a3', borderWidth: 2, yAxisID: 'y1', tension: 0.3, pointRadius: 3 }
+                ]
+            },
+            options: { ...defaults,
+                plugins: { legend: { labels: { font: { size: 9 }, boxWidth: 10 } } },
+                scales: {
+                    x:  { ticks: { font: { size: 9 } } },
+                    y:  { position: 'left',  ticks: { callback: v => '$'+(v/1000).toFixed(0)+'K', font: { size: 9 } } },
+                    y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => (v/1000).toFixed(0)+'K', font: { size: 9 } } }
+                }
+            }
+        });
+    }
+
+    // chart4 — Cumulative line (settlement)
+    if (!chartsCreated.chart4 && document.getElementById('chart4')) {
+        const cumUnits = units.reduce((acc, v, i) => { acc.push((acc[i-1]||0)+v); return acc; }, []);
+        chartsCreated.chart4 = new Chart(document.getElementById('chart4'), {
+            type: 'line',
+            data: {
+                labels: weeks,
+                datasets: [{ label: 'Unidades Acumuladas', data: cumUnits,
+                    borderColor: '#1a7a4a', backgroundColor: 'rgba(26,122,74,.12)',
+                    fill: true, tension: 0.3, pointBackgroundColor: '#1a7a4a', borderWidth: 2, pointRadius: 3 }]
+            },
+            options: { ...defaults,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { ticks: { font: { size: 9 } } },
+                    y: { ticks: { callback: v => (v/1000).toFixed(0)+'K', font: { size: 9 } } }
+                }
+            }
+        });
+    }
+
+    // chart5 — Quality horizontal bar (calidad)
+    if (!chartsCreated.chart5 && document.getElementById('chart5')) {
+        chartsCreated.chart5 = new Chart(document.getElementById('chart5'), {
+            type: 'bar',
+            data: {
+                labels: ['Bola Calavo', 'Bola Yameto', 'Roma Calavo', 'Roma Urson'],
+                datasets: [
+                    { label: '1ª %',    data: [88.5, 87.2, 92.4, 89.9], backgroundColor: '#27ae60', maxBarThickness: 18 },
+                    { label: '2ª %',    data: [3.1,  3.4,  2.1,  4.9],  backgroundColor: '#f0a500', maxBarThickness: 18 },
+                    { label: '3ª %',    data: [5.0,  5.0,  3.3,  3.2],  backgroundColor: '#e67e22', maxBarThickness: 18 },
+                    { label: 'Merma %', data: [3.4,  4.4,  2.2,  1.9],  backgroundColor: '#c0392b', maxBarThickness: 18 },
+                ]
+            },
+            options: { ...defaults, indexAxis: 'y',
+                plugins: { legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 10, padding: 6 } } },
+                scales: {
+                    x: { max: 100, ticks: { callback: v => v+'%', font: { size: 9 } } },
+                    y: { ticks: { font: { size: 9 } } }
+                }
+            }
+        });
+    }
+
+    // chart6 — Market prices horizontal bar (mercado)
+    if (!chartsCreated.chart6 && document.getElementById('chart6')) {
+        chartsCreated.chart6 = new Chart(document.getElementById('chart6'), {
+            type: 'bar',
+            data: {
+                labels: ['Tomate Roma 25lb', 'Vine Ripe 4×4', 'Grape 12-pt', 'Chile Bell 11lb', 'Jalapeño', 'Pepino 1⅑bu'],
+                datasets: [
+                    { label: 'Min ($)', data: [23.95, 28.95, 10.95, 17.00, 42.00, 40.95], backgroundColor: 'rgba(39,174,96,.8)', maxBarThickness: 18 },
+                    { label: 'Max ($)', data: [24.95, 30.95, 11.95, 18.00, 45.00, 42.95], backgroundColor: 'rgba(240,165,0,.8)',  maxBarThickness: 18 },
+                ]
+            },
+            options: { ...defaults, indexAxis: 'y',
+                plugins: { legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 10 } } },
+                scales: {
+                    x: { ticks: { callback: v => '$'+v, font: { size: 9 } } },
+                    y: { ticks: { font: { size: 9 } } }
+                }
+            }
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initCharts);
+</script>
+</body>
+</html>

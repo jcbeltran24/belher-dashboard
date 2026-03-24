@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Ejecutivo · Agrícola Belher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="data.js"></script>
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════════ */
+:root {
+  --dark:       #0c2117;
+  --dark2:      #162d1f;
+  --green:      #15803d;
+  --green2:     #16a34a;
+  --green3:     #22c55e;
+  --green-glow: rgba(34,197,94,.18);
+  --accent:     #d97706;
+  --accent2:    #fbbf24;
+  --red:        #dc2626;
+  --red2:       #ef4444;
+  --blue:       #1d4ed8;
+  --purple:     #7c3aed;
+  --bg:         #edf2ed;
+  --border:     #cfe2d6;
+  --text:       #0f1f14;
+  --text2:      #374151;
+  --muted:      #6b7280;
+  --card:       #ffffff;
+
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow:    0 4px 16px rgba(12,33,23,.09), 0 1px 4px rgba(0,0,0,.05);
+  --shadow-md: 0 8px 28px rgba(12,33,23,.12), 0 3px 8px rgba(0,0,0,.06);
+  --shadow-lg: 0 20px 40px rgba(12,33,23,.14), 0 6px 12px rgba(0,0,0,.06);
+
+  --r-sm: 8px;
+  --r:    12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+}
+
+/* ═══════════════════════════════════════════════
+   BASE
+══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════════ */
+header {
+  background: var(--dark);
+  color: #fff;
+  padding: 0 28px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+  flex-shrink: 0;
+}
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent2) 0%, var(--green3) 40%, rgba(34,197,94,0) 100%);
+}
+
+.header-left  { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.header-logo  {
+  width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
+  background: linear-gradient(140deg, var(--green2) 0%, var(--green3) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px; color: #fff; letter-spacing: -0.5px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 3px 10px rgba(22,163,74,.4);
+}
+.header-text h1 { font-size: .98rem; font-weight: 700; color: #fff; white-space: nowrap; }
+.header-text p  { font-size: .67rem; color: rgba(255,255,255,.38); letter-spacing: .3px; }
+
+.header-pills { display: flex; align-items: center; gap: 10px; }
+.h-pill {
+  border-radius: var(--r-sm);
+  padding: 6px 14px; text-align: center;
+  background: rgba(255,255,255,.055);
+  border: 1px solid rgba(255,255,255,.09);
+  transition: background .15s;
+}
+.h-pill:hover { background: rgba(255,255,255,.09); }
+.h-pill .hv { display: block; font-size: .88rem; font-weight: 700; color: var(--accent2); line-height: 1.1; }
+.h-pill .hl { display: block; font-size: .59rem; color: rgba(255,255,255,.38); letter-spacing: .7px; text-transform: uppercase; margin-top: 1px; }
+
+.live-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.22);
+  color: #4ade80; font-size: .62rem; font-weight: 700; letter-spacing: 1.4px;
+  padding: 5px 11px; border-radius: 20px; white-space: nowrap;
+}
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+  animation: live-pulse 2s infinite;
+}
+@keyframes live-pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.3; transform:scale(.85); }
+}
+
+/* ═══════════════════════════════════════════════
+   TICKER
+══════════════════════════════════════════════ */
+.ticker-wrap {
+  background: #060e09;
+  border-bottom: 1px solid rgba(34,197,94,.08);
+  overflow: hidden; white-space: nowrap; padding: 7px 0;
+  position: relative; flex-shrink: 0;
+}
+.ticker-wrap::before, .ticker-wrap::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
+}
+.ticker-wrap::before { left:  0; background: linear-gradient(90deg,  #060e09 40%, transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, #060e09 40%, transparent); }
+.ticker-label {
+  position: absolute; left: 0; top: 0; bottom: 0; z-index: 3;
+  background: var(--accent); color: var(--dark);
+  font-size: .57rem; font-weight: 900; letter-spacing: 1.8px;
+  padding: 0 12px; display: flex; align-items: center;
+}
+.ticker-track {
+  display: inline-flex; align-items: center; padding-left: 85px;
+  animation: ticker-scroll 60s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item  { display: inline-flex; align-items: center; gap: 6px; margin-right: 32px; }
+.t-name  { color: #5a9e75; font-size: .61rem; font-weight: 800; letter-spacing: .9px; font-family: 'SF Mono','Fira Code',monospace; }
+.t-val   { color: #ddeee3; font-size: .68rem; font-weight: 600; font-family: 'SF Mono','Fira Code',monospace; }
+.t-chg   { font-size: .61rem; font-weight: 700; font-family: 'SF Mono','Fira Code',monospace; }
+.t-up    { color: #4ade80; }
+.t-down  { color: #f87171; }
+.t-neut  { color: var(--accent2); }
+.t-sep   { color: rgba(34,197,94,.2); margin-right: 32px; font-size: .7rem; }
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ═══════════════════════════════════════════════
+   TABS
+══════════════════════════════════════════════ */
+nav.tabs {
+  background: var(--dark2);
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  flex-shrink: 0;
+}
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,.42);
+  padding: 0 22px; height: 44px;
+  font-family: 'Inter', sans-serif;
+  font-size: .82rem; font-weight: 600; letter-spacing: .2px;
+  white-space: nowrap;
+  position: relative;
+  transition: color .2s;
+}
+nav.tabs button::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent2);
+  transform: scaleX(0);
+  transition: transform .2s;
+  border-radius: 2px 2px 0 0;
+}
+nav.tabs button:hover  { color: rgba(255,255,255,.8); }
+nav.tabs button.active { color: var(--accent2); }
+nav.tabs button.active::after { transform: scaleX(1); }
+
+/* ═══════════════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════════════ */
+main {
+  flex: 1;
+  padding: 24px 28px 36px;
+  max-width: 1360px; width: 100%; margin: 0 auto;
+}
+.tab-panel          { display: none; }
+.tab-panel.active   { display: block; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr;            gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr;        gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr);      gap: 14px; }
+
+/* ═══════════════════════════════════════════════
+   SECTION TITLE
+══════════════════════════════════════════════ */
+.section-title {
+  display: flex; align-items: center; gap: 10px;
+  font-size: .66rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted);
+  margin: 28px 0 14px;
+}
+.section-title:first-child { margin-top: 2px; }
+.section-title::before {
+  content: '';
+  display: block; width: 3px; height: 14px;
+  background: linear-gradient(to bottom, var(--accent2), var(--green3));
+  border-radius: 2px; flex-shrink: 0;
+}
+.section-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+
+/* ═══════════════════════════════════════════════
+   CARDS
+══════════════════════════════════════════════ */
+.card {
+  background: var(--card);
+  border-radius: var(--r);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+/* ═══════════════════════════════════════════════
+   KPI CARDS
+══════════════════════════════════════════════ */
+.kpi-card {
+  background: var(--card);
+  border-radius: var(--r-lg);
+  padding: 20px 22px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  transition: box-shadow .18s, transform .18s;
+}
+.kpi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.kpi-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--kpi-accent, var(--green2));
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+}
+.kpi-card.accent-pos  { --kpi-accent: var(--green2); }
+.kpi-card.accent-neg  { --kpi-accent: var(--red2); }
+.kpi-card.accent-warn { --kpi-accent: var(--accent); }
+.kpi-card.accent-blue { --kpi-accent: var(--blue); }
+
+.kpi-label { font-size: .63rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.kpi-value {
+  font-size: 2rem; font-weight: 800; line-height: 1;
+  color: var(--text); letter-spacing: -.5px;
+  margin-bottom: 5px;
+}
+.kpi-value.pos  { color: var(--green); }
+.kpi-value.neg  { color: var(--red); }
+.kpi-value.acc  { color: var(--accent); }
+.kpi-value.dark { color: var(--text); }
+.kpi-sub { font-size: .76rem; color: var(--muted); }
+.kpi-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: .72rem; font-weight: 600; padding: 3px 9px;
+  border-radius: 20px; margin-top: 8px;
+}
+.kpi-pill.up   { background: #dcfce7; color: #15803d; }
+.kpi-pill.down { background: #fee2e2; color: #dc2626; }
+.kpi-pill.neu  { background: #fef3c7; color: #92400e; }
+
+/* ═══════════════════════════════════════════════
+   EBITDA DONUT CARDS
+══════════════════════════════════════════════ */
+.donut-card {
+  background: var(--card);
+  border-radius: var(--r-lg);
+  padding: 24px 22px 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  text-align: center;
+  transition: box-shadow .18s;
+}
+.donut-card:hover { box-shadow: var(--shadow-md); }
+.donut-card-title { font-size: .62rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+.donut-canvas-wrap {
+  position: relative; width: 154px; height: 154px;
+}
+.donut-canvas-wrap canvas { width: 154px !important; height: 154px !important; }
+.donut-center {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none; text-align: center;
+}
+.dc-pct { font-size: 1.5rem; font-weight: 900; line-height: 1; letter-spacing: -.5px; }
+.dc-lbl { font-size: .58rem; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+.donut-amount { font-size: 1.25rem; font-weight: 800; color: var(--text); letter-spacing: -.3px; }
+.donut-sub    { font-size: .76rem; color: var(--muted); line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════
+   ALERTS
+══════════════════════════════════════════════ */
+.alert {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 11px 15px; border-radius: var(--r-sm);
+  font-size: .84rem; line-height: 1.5; font-weight: 500;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+}
+.alert-icon { flex-shrink: 0; font-size: .95rem; margin-top: 1px; }
+.alert.success { background: #f0fdf4; color: #14532d; border-color: #bbf7d0; }
+.alert.warning { background: #fffbeb; color: #78350f; border-color: #fde68a; }
+.alert.danger  { background: #fef2f2; color: #7f1d1d; border-color: #fecaca; }
+.alert.info    { background: #eff6ff; color: #1e3a5f; border-color: #bfdbfe; }
+
+/* ═══════════════════════════════════════════════
+   CORREOS
+══════════════════════════════════════════════ */
+.correo-list { overflow: hidden; }
+.correo-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 10px 18px; border-bottom: 1px solid var(--border);
+  transition: background .13s;
+}
+.correo-item:last-child { border-bottom: none; }
+.correo-item:hover { background: #f8faf8; }
+.correo-dot  { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+.correo-dot.leido { background: #d1d5db; }
+.correo-asunto { flex: 1; font-weight: 600; font-size: .83rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.correo-de   { font-size: .72rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+.correo-hora { font-size: .72rem; color: var(--muted); white-space: nowrap; padding-left: 10px; flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════════
+   TABLES
+══════════════════════════════════════════════ */
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+thead { background: var(--dark); color: #fff; }
+thead th {
+  padding: 10px 15px; text-align: left;
+  font-size: .64rem; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; white-space: nowrap;
+}
+tbody tr { border-bottom: 1px solid #f0f4f0; transition: background .12s; }
+tbody tr:nth-child(even) { background: #fafcfa; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: #f0fdf4; }
+tbody td { padding: 10px 15px; vertical-align: middle; }
+tfoot td  { padding: 10px 15px; }
+.td-num    { text-align: right; font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+.td-center { text-align: center; }
+tr.row-alerta td { background: #fff5f5 !important; }
+tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
+
+/* ═══════════════════════════════════════════════
+   BADGES
+══════════════════════════════════════════════ */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 9px; border-radius: 20px;
+  font-size: .67rem; font-weight: 700; letter-spacing: .2px; white-space: nowrap;
+}
+.badge-green  { background: #dcfce7; color: #15803d; }
+.badge-yellow { background: #fef3c7; color: #92400e; }
+.badge-red    { background: #fee2e2; color: #dc2626; }
+.badge-blue   { background: #dbeafe; color: #1d4ed8; }
+.badge-gray   { background: #f3f4f6; color: #6b7280; }
+.badge-orange { background: #fff7ed; color: #c2410c; }
+
+/* price change */
+.chg { font-weight: 700; font-size: .79rem; }
+.chg.up  { color: var(--green2); }
+.chg.dn  { color: var(--red); }
+.chg.neu { color: var(--muted); }
+.chg.na  { color: var(--muted); font-weight: 400; }
+
+/* ═══════════════════════════════════════════════
+   CHART CONTAINERS
+══════════════════════════════════════════════ */
+.chart-box canvas      { max-height: 260px; }
+.chart-box-tall canvas { max-height: 320px; }
+
+/* ═══════════════════════════════════════════════
+   BÁSCULA WIDGET
+══════════════════════════════════════════════ */
+.bascula-grid { display: flex; flex-direction: column; gap: 6px; }
+.basc-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 9px 14px;
+  background: #f8faf8;
+  border: 1px solid var(--border); border-radius: var(--r-sm);
+  transition: background .12s;
+}
+.basc-row:hover { background: #f0fdf4; }
+.basc-date { font-size: .74rem; font-weight: 700; color: var(--muted); width: 36px; flex-shrink: 0; }
+.basc-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip {
+  display: inline-block; padding: 2px 10px; border-radius: 20px;
+  font-size: .69rem; font-weight: 600;
+  background: #dcfce7; color: #15803d;
+}
+.chip.rezaga { background: #fef3c7; color: #92400e; }
+.chip.limon  { background: #dbeafe; color: #1d4ed8; }
+.chip.chile  { background: #fee2e2; color: #dc2626; }
+
+/* ═══════════════════════════════════════════════
+   EMBARQUES — PRODUCT PILLS
+══════════════════════════════════════════════ */
+.tipo-pill {
+  display: inline-block; padding: 2px 10px; border-radius: 20px;
+  font-size: .69rem; font-weight: 700;
+}
+.tipo-tomate { background: #fee2e2; color: #9f1239; }
+.tipo-limon  { background: #dbeafe; color: #1e40af; }
+.tipo-chile  { background: #fff7ed; color: #c2410c; }
+
+/* ═══════════════════════════════════════════════
+   MERCADO HERO PRICE CARDS
+══════════════════════════════════════════════ */
+.price-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
+}
+.price-hero {
+  border-radius: var(--r-lg);
+  padding: 18px 20px 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid transparent;
+  position: relative; overflow: hidden;
+  transition: box-shadow .18s, transform .18s;
+}
+.price-hero:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+.price-hero.hero-tomate {
+  background: linear-gradient(140deg, #0c2117 0%, #1a4a2e 100%);
+  border-color: rgba(34,197,94,.15);
+}
+.price-hero.hero-jalap {
+  background: linear-gradient(140deg, #1c0a00 0%, #6a2800 100%);
+  border-color: rgba(251,191,36,.15);
+}
+.price-hero.hero-other {
+  background: var(--card);
+  border-color: var(--border);
+}
+.price-hero.hero-other:hover { border-color: var(--green2); }
+
+.ph-label { font-size: .62rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.price-hero.hero-tomate .ph-label { color: rgba(255,255,255,.5); }
+.price-hero.hero-jalap  .ph-label { color: rgba(255,255,255,.5); }
+.price-hero.hero-other  .ph-label { color: var(--muted); }
+
+.ph-price { font-size: 1.55rem; font-weight: 900; line-height: 1.1; letter-spacing: -.5px; }
+.price-hero.hero-tomate .ph-price { color: #fff; }
+.price-hero.hero-jalap  .ph-price { color: #fde68a; }
+.price-hero.hero-other  .ph-price { color: var(--text); font-size: 1.25rem; }
+
+.ph-change { font-size: .78rem; font-weight: 700; margin-top: 6px; }
+.price-hero.hero-tomate .ph-change.up { color: #86efac; }
+.price-hero.hero-tomate .ph-change.dn { color: #fca5a5; }
+.price-hero.hero-jalap  .ph-change.up { color: #fde68a; }
+.price-hero.hero-jalap  .ph-change.dn { color: #fca5a5; }
+.price-hero.hero-other  .ph-change.up { color: var(--green2); }
+.price-hero.hero-other  .ph-change.dn { color: var(--red); }
+.price-hero .ph-change.na { opacity: .5; }
+
+.ph-sub { font-size: .68rem; margin-top: 4px; }
+.price-hero.hero-tomate .ph-sub { color: rgba(255,255,255,.35); }
+.price-hero.hero-jalap  .ph-sub { color: rgba(255,255,255,.35); }
+.price-hero.hero-other  .ph-sub { color: var(--muted); }
+
+/* ═══════════════════════════════════════════════
+   PRICE COMPARE CARDS (vs semana anterior)
+══════════════════════════════════════════════ */
+.price-compare-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+.pc-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px 22px 16px;
+  border: 1px solid var(--border);
+  transition: box-shadow .18s, transform .18s;
+}
+.pc-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.pc-card.pc-alert { border-left: 3px solid var(--red2); }
+.pc-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+.pc-name { font-size: .82rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+.pc-range { font-size: 1.65rem; font-weight: 900; letter-spacing: -.5px; color: var(--text); line-height: 1.1; margin-bottom: 4px; }
+.pc-chg { font-size: .78rem; font-weight: 700; margin-bottom: 14px; }
+.pc-chg.up  { color: var(--green2); }
+.pc-chg.dn  { color: var(--red2); }
+.pc-chg.neu { color: var(--muted); }
+.pc-bar-wrap {
+  position: relative; height: 8px;
+  background: var(--border); border-radius: 4px;
+  margin-bottom: 8px;
+}
+.pc-bar-fill { position: absolute; height: 100%; border-radius: 4px; }
+.pc-bar-tick {
+  position: absolute; width: 2px; height: 16px;
+  top: -4px; border-radius: 2px;
+  background: var(--muted); opacity: .7;
+}
+.pc-bar-tick::after {
+  content: 'ant.';
+  position: absolute; top: 18px; left: 50%;
+  transform: translateX(-50%);
+  font-size: .58rem; color: var(--muted); white-space: nowrap;
+}
+.pc-footer { display: flex; justify-content: space-between; font-size: .7rem; color: var(--muted); }
+
+/* ═══════════════════════════════════════════════
+   QUALITY BREAKDOWN CARDS
+══════════════════════════════════════════════ */
+.quality-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.qual-card {
+  background: var(--card); border-radius: var(--r-lg);
+  padding: 18px 20px; box-shadow: var(--shadow); border: 1px solid var(--border);
+  transition: box-shadow .18s;
+}
+.qual-card:hover { box-shadow: var(--shadow-md); }
+.qual-card.alerta-card { border-left: 4px solid var(--red2); }
+.qual-name   { font-size: .84rem; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+.qual-prima  { font-size: 2.4rem; font-weight: 900; line-height: 1; letter-spacing: -.5px; color: var(--green2); margin-bottom: 6px; }
+.qual-merma-badge { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-bottom: 4px; }
+.qual-merma-badge.ok   { background: rgba(22,163,74,.15);  color: var(--green2); }
+.qual-merma-badge.warn { background: rgba(217,119,6,.15);  color: var(--accent); }
+.qual-merma-badge.bad  { background: rgba(220,38,38,.15);  color: var(--red2); }
+/* legacy kept for backward compat */
+.qual-merma  { font-size: 1.65rem; font-weight: 900; line-height: 1; letter-spacing: -.5px; }
+.qual-merma.ok   { color: var(--green2); }
+.qual-merma.warn { color: var(--accent); }
+.qual-merma.bad  { color: var(--red2); }
+
+.qual-stack  { display: flex; border-radius: 6px; overflow: hidden; height: 10px; margin: 10px 0 8px; }
+.qs-prima { background: var(--green2); }
+.qs-seg   { background: #fbbf24; opacity: .9; }
+.qs-ter   { background: var(--blue); opacity: .7; }
+.qs-merma { background: var(--red2); opacity: .85; }
+
+.qual-legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: .67rem; color: var(--muted); margin-top: 6px; }
+.ql-dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 3px; vertical-align: middle; }
+.qual-meta { font-size: .71rem; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+
+/* ═══════════════════════════════════════════════
+   FINANZAS
+══════════════════════════════════════════════ */
+.fin-kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+.rev-legend  { width: 100%; margin-top: 6px; }
+.rev-leg-row {
+  display: flex; align-items: center;
+  padding: 6px 0; border-bottom: 1px solid #f3f4f6; font-size: .77rem;
+}
+.rev-leg-row:last-child { border-bottom: none; }
+.rev-dot  { width: 9px; height: 9px; border-radius: 3px; margin-right: 8px; flex-shrink: 0; }
+.rev-name { flex: 1; color: var(--text2); }
+.rev-val  { font-weight: 700; font-variant-numeric: tabular-nums; }
+.rev-pct  { color: var(--muted); font-size: .7rem; margin-left: 7px; }
+
+/* ═══════════════════════════════════════════════
+   STRATEGY CARDS
+══════════════════════════════════════════════ */
+.strat-card {
+  background: var(--card); border-radius: var(--r);
+  padding: 16px 20px; margin-bottom: 10px;
+  border-left: 4px solid var(--border); box-shadow: var(--shadow-sm);
+  transition: box-shadow .15s;
+}
+.strat-card:hover  { box-shadow: var(--shadow); }
+.strat-success     { border-left-color: var(--green2); }
+.strat-info        { border-left-color: var(--blue); }
+.strat-warning     { border-left-color: var(--accent); }
+.strat-danger      { border-left-color: var(--red2); }
+.strat-op          { border-left-color: #f59e0b; }
+.strat-header      { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.strat-title       { font-weight: 700; font-size: .88rem; color: var(--text); line-height: 1.35; }
+.strat-desc        { font-size: .81rem; color: var(--muted); line-height: 1.6; margin-bottom: 9px; }
+.strat-action      { font-size: .77rem; color: var(--green); font-weight: 600; border-top: 1px dashed var(--border); padding-top: 8px; }
+
+.badge-success  { background: #dcfce7; color: #15803d; }
+.badge-info     { background: #dbeafe; color: #1d4ed8; }
+.badge-warning  { background: #fef3c7; color: #92400e; }
+.badge-danger   { background: #fee2e2; color: #dc2626; }
+.badge-alta     { background: #fee2e2; color: #dc2626; }
+.badge-media    { background: #fff7ed; color: #c2410c; }
+
+.agenda-tbl      { width: 100%; border-collapse: collapse; font-size: .83rem; }
+.agenda-tbl th   { text-align: left; padding: 9px 14px; border-bottom: 2px solid var(--border); color: var(--muted); font-size: .64rem; text-transform: uppercase; letter-spacing: .9px; }
+.agenda-tbl td   { padding: 11px 14px; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+.agenda-tbl tr:last-child td { border-bottom: none; }
+.agenda-fecha    { font-weight: 700; color: var(--accent); white-space: nowrap; font-size: .81rem; }
+.agenda-tipo     { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: .6rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
+.tipo-reunion    { background: #dbeafe; color: #1d4ed8; }
+.tipo-pago       { background: #dcfce7; color: #15803d; }
+.tipo-operacion  { background: #fef3c7; color: #92400e; }
+
+/* ═══════════════════════════════════════════════
+   INDUSTRIA
+══════════════════════════════════════════════ */
+.filters-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 18px; }
+.filter-btn {
+  background: var(--card); border: 1.5px solid var(--border);
+  color: var(--muted); padding: 5px 14px; border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: .71rem; font-weight: 600; cursor: pointer;
+  transition: all .15s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--green); color: #fff; border-color: var(--green);
+}
+.news-card {
+  background: var(--card); border-radius: var(--r);
+  padding: 16px 20px; margin-bottom: 10px;
+  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  transition: box-shadow .15s, border-color .15s;
+}
+.news-card:hover { box-shadow: var(--shadow); border-color: #b5d5c0; }
+.news-head   { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; flex-wrap: wrap; }
+.news-cat    { font-size: .59rem; font-weight: 800; letter-spacing: .9px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; background: #f0f9f2; color: var(--green); }
+.news-impact { font-size: .59rem; font-weight: 800; letter-spacing: .3px; padding: 2px 8px; border-radius: 4px; }
+.imp-Alto         { background: #fee2e2; color: #dc2626; }
+.imp-Estratégico  { background: #dbeafe; color: #1d4ed8; }
+.imp-Moderado     { background: #fef3c7; color: #92400e; }
+.imp-Bajo         { background: #dcfce7; color: #15803d; }
+.news-title  { font-weight: 700; font-size: .87rem; color: var(--text); margin-bottom: 5px; line-height: 1.45; }
+.news-res    { font-size: .79rem; color: var(--muted); line-height: 1.6; margin-bottom: 6px; }
+.news-fte    { font-size: .68rem; color: #9ca3af; font-style: italic; }
+
+/* ═══════════════════════════════════════════════
+   DIVIDER CARD (full-bleed table wrapper)
+══════════════════════════════════════════════ */
+.card-table {
+  background: var(--card);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+footer {
+  background: var(--dark); color: rgba(255,255,255,.35);
+  font-size: .71rem; text-align: center;
+  padding: 13px 28px; line-height: 1.7; flex-shrink: 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+footer span { color: var(--accent2); font-weight: 600; }
+
+/* ═══════════════════════════════════════════════
+   MOBILE
+══════════════════════════════════════════════ */
+@media (max-width: 720px) {
+  header { height: auto; padding: 13px 16px; flex-wrap: wrap; }
+  .header-pills { flex-wrap: wrap; }
+  main { padding: 16px 14px 28px; }
+  .grid-2, .grid-3, .grid-4, .fin-kpi-row { grid-template-columns: 1fr; }
+  .price-hero-grid { grid-template-columns: 1fr 1fr; }
+  .quality-card-grid { grid-template-columns: 1fr; }
+  nav.tabs button { padding: 0 15px; font-size: .78rem; }
+  .kpi-value { font-size: 1.65rem; }
+  .section-title { margin: 20px 0 12px; }
+}
+@media (max-width: 440px) {
+  .price-hero-grid { grid-template-columns: 1fr; }
+  .h-pill { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════ -->
+<header>
+  <div class="header-left">
+    <img src="logo.svg" alt="Agrícola Belher" style="height:36px;width:auto;flex-shrink:0;filter:brightness(0) invert(1);">
+    <div class="header-text" style="border-left:1px solid rgba(255,255,255,.12);padding-left:14px;margin-left:4px">
+      <h1>Dashboard Ejecutivo</h1>
+      <p>GC Temporada 2025–2026 · Datos en tiempo operativo</p>
+    </div>
+  </div>
+
+  <div class="header-pills">
+    <div class="h-pill" id="hPillFecha">
+      <span class="hv" id="hPillFechaVal">—</span>
+      <span class="hl">Semana</span>
+    </div>
+    <div class="h-pill" id="hPillEbitda">
+      <span class="hv" id="hPillEbitdaVal">—</span>
+      <span class="hl">EBITDA Mes</span>
+    </div>
+    <div class="h-pill" id="hPillPagado">
+      <span class="hv" id="hPillPagadoVal">—</span>
+      <span class="hl">Total Pagado</span>
+    </div>
+    <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+  </div>
+</header>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker-wrap">
+  <span class="ticker-label">LIVE</span>
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ══ TABS ══ -->
+<nav class="tabs" id="tabNav">
+  <button class="active" data-tab="hoy">Hoy</button>
+  <button data-tab="operaciones">Operaciones</button>
+  <button data-tab="calidad">Calidad</button>
+  <button data-tab="mercado">Mercado</button>
+  <button data-tab="finanzas">Finanzas</button>
+  <button data-tab="estrategia">Estrategia</button>
+  <button data-tab="industria">Industria</button>
+</nav>
+
+<main>
+
+  <!-- ══════════ HOY ══════════ -->
+  <div class="tab-panel active" id="tab-hoy">
+
+    <div class="section-title">Indicadores Clave</div>
+    <div class="grid-4" id="kpiVitals"></div>
+
+    <div class="section-title">EBITDA vs Presupuesto</div>
+    <div class="grid-2" id="ebitdaDonuts"></div>
+
+    <div class="section-title">Señales del Día</div>
+    <div id="alertasContainer"></div>
+
+    <div class="section-title">Correos Operativos</div>
+    <div class="card-table">
+      <div class="correo-list" id="correosContainer"></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ OPERACIONES ══════════ -->
+  <div class="tab-panel" id="tab-operaciones">
+
+    <div class="section-title">Embarques · TX / AZ · Cargas por Día</div>
+    <div class="card-table">
+      <div class="tbl-wrap">
+        <table id="embTbl">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th class="td-center">Cargas</th>
+              <th>Producto</th>
+              <th>Destino</th>
+              <th>Unidad</th>
+              <th>Flota</th>
+              <th class="td-center">Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-title">Flota · Resumen Últimos 7 Días</div>
+    <div class="card-table" id="flotaResumen"></div>
+
+    <div class="section-title">Volumen Diario de Embarques</div>
+    <div class="card">
+      <div class="chart-box"><canvas id="chartEmbarques"></canvas></div>
+    </div>
+
+    <div class="section-title">Báscula · Actividad de Pesaje</div>
+    <div class="card">
+      <div class="bascula-grid" id="bascWidget"></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ CALIDAD ══════════ -->
+  <div class="tab-panel" id="tab-calidad">
+
+    <!-- 1. HERO: export quality KPIs -->
+    <div class="section-title" id="outboundTitle">Calidad Exportación</div>
+    <div class="grid-3" id="calidadHeroKpis"></div>
+
+    <!-- 2. Trend chart — 1ª Prima is the main line -->
+    <div class="section-title">Tendencia · 1ª Prima Exportación</div>
+    <div class="card">
+      <div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div>
+    </div>
+
+    <!-- 3. Per-variety breakdown — 1ª as the big number -->
+    <div class="section-title">Desglose por Variedad</div>
+    <div class="quality-card-grid" id="qualityCards"></div>
+
+    <!-- 4. Full detail table — secondary reference -->
+    <div class="section-title">Detalle Completo · Último Reporte</div>
+    <div class="card-table">
+      <div class="tbl-wrap">
+        <table id="outboundTbl">
+          <thead>
+            <tr>
+              <th>Variedad</th>
+              <th class="td-num">1ª Exportación %</th>
+              <th class="td-num">2ª %</th>
+              <th class="td-num">3ª %</th>
+              <th class="td-num">Merma %</th>
+              <th class="td-num">Peso oz</th>
+              <th class="td-center">Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ MERCADO ══════════ -->
+  <div class="tab-panel" id="tab-mercado">
+
+    <div class="section-title" id="mercadoReporteTitle">Precios de Mercado</div>
+    <div class="price-hero-grid" id="priceHeroCards"></div>
+
+    <div class="section-title">Comparativo vs Semana Anterior</div>
+    <div class="price-compare-grid" id="priceCompareGrid"></div>
+
+    <div class="section-title">Resumen Ejecutivo</div>
+    <div class="card" id="mercadoResumenBox"></div>
+
+    <div class="section-title">Señales de Mercado</div>
+    <div class="card" id="noticiasList"></div>
+
+  </div>
+
+  <!-- ══════════ FINANZAS ══════════ -->
+  <div class="tab-panel" id="tab-finanzas">
+
+    <div class="section-title">Resumen Financiero · Temporada</div>
+    <div class="fin-kpi-row" id="finKpis"></div>
+
+    <div class="section-title">Revenue Calavo &amp; EBITDA</div>
+    <div class="grid-2">
+      <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px">
+        <div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);align-self:flex-start">Estructura de Revenue · Temporada</div>
+        <canvas id="chartRevDonut" style="max-width:200px;max-height:200px"></canvas>
+        <div class="rev-legend" id="revLegend"></div>
+      </div>
+      <div class="card" style="padding:22px">
+        <div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">EBITDA: Actual vs Budget vs Y/A</div>
+        <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section-title">Pagos Semanales Calavo</div>
+    <div class="card">
+      <div class="chart-box"><canvas id="chartPagos"></canvas></div>
+    </div>
+
+    <div class="section-title">Liquidaciones Detalladas</div>
+    <div class="card-table">
+      <div class="tbl-wrap">
+        <table id="liquidTbl">
+          <thead>
+            <tr>
+              <th>Semana</th><th>Wire</th>
+              <th class="td-num">Pago USD</th>
+              <th class="td-num">Cajas</th>
+              <th class="td-num">Contenedores</th>
+              <th class="td-center">Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot id="liquidFoot"></tfoot>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ ESTRATEGIA ══════════ -->
+  <div class="tab-panel" id="tab-estrategia">
+    <div class="section-title">Contratos &amp; Comercial</div>
+    <div id="contratosContainer"></div>
+    <div class="section-title">Oportunidades Activas</div>
+    <div id="opContainer"></div>
+    <div class="section-title">Watchlist · Riesgos &amp; Seguimiento</div>
+    <div id="watchContainer"></div>
+    <div class="section-title">Agenda Próxima</div>
+    <div class="card-table">
+      <table class="agenda-tbl" id="agendaTbl">
+        <thead><tr><th>Fecha</th><th>Evento</th><th>Tipo</th><th>Participantes</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════ INDUSTRIA ══════════ -->
+  <div class="tab-panel" id="tab-industria">
+    <div class="section-title" id="industriaTitle">Noticias de Industria</div>
+    <div class="filters-row" id="catFilters"></div>
+    <div id="newsGrid"></div>
+  </div>
+
+</main>
+
+<footer id="footerEl"></footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var D = window.BELHER;
+  var chartsInit = {};
+
+  /* ── Chart.js global defaults ── */
+  Chart.defaults.font.family = "'Inter', -apple-system, sans-serif";
+  Chart.defaults.font.size   = 12;
+  Chart.defaults.color       = '#6b7280';
+  Chart.defaults.plugins.legend.labels.boxWidth   = 10;
+  Chart.defaults.plugins.legend.labels.boxHeight  = 10;
+  Chart.defaults.plugins.legend.labels.padding    = 14;
+  Chart.defaults.plugins.legend.labels.usePointStyle = true;
+  Chart.defaults.plugins.legend.labels.pointStyle = 'circle';
+
+  /* ── Utils ── */
+  var fmt = function (n, dec) {
+    if (n == null) return '—';
+    dec = dec != null ? dec : 0;
+    return '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+  };
+  var fmtN = function (n, dec) {
+    if (n == null) return '—';
+    dec = dec != null ? dec : 0;
+    return Number(n).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+  };
+  var pct = function (n, dec) {
+    if (n == null) return '—';
+    return Number(n).toFixed(dec != null ? dec : 1) + '%';
+  };
+
+  /* ── Header pills ── */
+  var paidTotal = 0;
+  D.calavo.pagos.forEach(function (p) { if (p.pago) paidTotal += p.pago; });
+  document.getElementById('hPillFechaVal').textContent  = D.meta.semana;
+  document.getElementById('hPillEbitdaVal').textContent = fmt(D.ebitda.mes.actual);
+  document.getElementById('hPillPagadoVal').textContent = fmt(paidTotal);
+
+  /* ── Footer ── */
+  document.getElementById('footerEl').innerHTML =
+    '<span>Agrícola Belher</span> · Dashboard Ejecutivo GC 2025–2026 · ' +
+    D.meta.fecha + ' · Act: ' + D.meta.actualizado +
+    ' · Fuentes: Gmail · Calavo · Báscula · Calidad · Corbel Seeds';
+
+  /* ── Tabs ── */
+  var tabBtns   = document.querySelectorAll('#tabNav button');
+  var tabPanels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      tabBtns.forEach(function (b) { b.classList.remove('active'); });
+      tabPanels.forEach(function (p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      initChartsForTab(btn.dataset.tab);
+    });
+  });
+
+  /* ════════════════ HOY ════════════════ */
+  function renderHoy() {
+    var ebtd = D.ebitda;
+    var cv   = D.calavo;
+    var avgMerma = D.calidad.historico.length
+      ? D.calidad.historico[D.calidad.historico.length - 1].mermaPromedio : 0;
+    var avgPrima = D.calidad.historico.length
+      ? D.calidad.historico[D.calidad.historico.length - 1].primaPromedio : 0;
+    var cargas = D.operaciones.embarques.reduce(function (s, e) { return s + (e.cargas || 1); }, 0);
+    var semCount = 0;
+    D.calavo.pagos.forEach(function (p) { if (p.pago) semCount++; });
+
+    /* KPI cards */
+    document.getElementById('kpiVitals').innerHTML =
+      kpiCard('Total Liquidado · Calavo', fmt(paidTotal), 'Acumulado WK01–WK' + semCount, 'pos', 'accent-pos', pill('up', '✓ ' + semCount + ' semanas pagadas')) +
+      kpiCard('EBITDA · ' + ebtd.mes.nombre, fmt(ebtd.mes.actual),
+        'Budget ' + fmt(ebtd.mes.budget),
+        ebtd.mes.actual >= ebtd.mes.budget ? 'pos' : 'neg',
+        ebtd.mes.actual >= ebtd.mes.budget ? 'accent-pos' : 'accent-neg',
+        pill(ebtd.mes.actual >= ebtd.mes.budget ? 'up' : 'down',
+          (ebtd.mes.actual >= ebtd.mes.budget ? '▲ +' : '▼ ') +
+          fmt(Math.abs(ebtd.mes.actual - ebtd.mes.budget)) + ' vs budget')) +
+      kpiCard('1ª Prima · Últ. Reporte', pct(avgPrima), 'Merma promedio ' + pct(avgMerma),
+        avgMerma > 4 ? 'neg' : 'pos',
+        avgMerma > 4 ? 'accent-neg' : 'accent-pos',
+        pill(avgMerma > 4 ? 'down' : 'up', avgMerma > 4 ? '⚠ Merma sobre umbral' : '✓ Calidad OK')) +
+      kpiCard('Cargas Registradas', fmtN(cargas), D.operaciones.embarques.length + ' registros · ' + D.meta.semana,
+        'acc', 'accent-blue', null);
+
+    /* EBITDA donuts */
+    var mesOK    = ebtd.mes.actual >= ebtd.mes.budget;
+    var mesPct   = (ebtd.mes.actual / ebtd.mes.budget * 100).toFixed(1);
+    var mesVar   = ebtd.mes.actual - ebtd.mes.budget;
+
+    /* YTD: both values are negative — "better" means LESS negative (actual > budget) */
+    var ytdVar     = ebtd.ytd.actual - ebtd.ytd.budget; /* positive = less loss = good */
+    var ytdBetter  = ytdVar >= 0;
+    /* Show variance as % of budget magnitude so the ring is intuitive */
+    var ytdVarPct  = (Math.abs(ytdVar) / Math.abs(ebtd.ytd.budget) * 100).toFixed(1);
+    var ytdLabel   = ytdBetter ? '+' + ytdVarPct + '%' : '-' + ytdVarPct + '%';
+    var ytdSublbl  = ytdBetter ? 'mejor que budget' : 'peor que budget';
+
+    document.getElementById('ebitdaDonuts').innerHTML =
+      /* MES donut — positive EBITDA, plain % makes sense */
+      '<div class="donut-card">' +
+        '<div class="donut-card-title">Mes · ' + ebtd.mes.nombre + '</div>' +
+        '<div class="donut-canvas-wrap"><canvas id="chartDonutMes"></canvas>' +
+          '<div class="donut-center">' +
+            '<div class="dc-pct" style="color:' + (mesOK ? 'var(--green2)' : 'var(--red2)') + '">' + mesPct + '%</div>' +
+            '<div class="dc-lbl">vs budget</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="donut-amount">' + fmt(ebtd.mes.actual) + '</div>' +
+        '<div class="donut-sub">' +
+          '<span style="color:' + (mesOK ? 'var(--green2)' : 'var(--red2)') + ';font-weight:700">' +
+            (mesOK ? '▲ +' : '▼ ') + fmt(Math.abs(mesVar)) + ' vs budget</span><br>' +
+          'Budget <strong>' + fmt(ebtd.mes.budget) + '</strong> &nbsp;·&nbsp; Y/A <strong>' + fmt(ebtd.mes.yago) + '</strong>' +
+        '</div>' +
+      '</div>' +
+      /* YTD donut — both values negative; ring shows how close actual is to budget in loss terms */
+      '<div class="donut-card">' +
+        '<div class="donut-card-title">Acumulado · ' + ebtd.ytd.nombre + '</div>' +
+        '<div class="donut-canvas-wrap"><canvas id="chartDonutYtd"></canvas>' +
+          '<div class="donut-center">' +
+            '<div class="dc-pct" style="color:' + (ytdBetter ? 'var(--green2)' : 'var(--red2)') + '">' +
+              (ytdBetter ? '▲' : '▼') +
+            '</div>' +
+            '<div class="dc-lbl">' + ytdSublbl + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="donut-amount">' + fmt(ebtd.ytd.actual) + '</div>' +
+        '<div class="donut-sub">' +
+          '<span style="color:' + (ytdBetter ? 'var(--green2)' : 'var(--red2)') + ';font-weight:700">' +
+            (ytdBetter ? '▲ +' : '▼ ') + fmt(Math.abs(ytdVar)) + ' vs budget</span><br>' +
+          'Budget <strong>' + fmt(ebtd.ytd.budget) + '</strong> &nbsp;·&nbsp; Y/A <strong>' + fmt(ebtd.ytd.yago) + '</strong>' +
+        '</div>' +
+      '</div>';
+
+    renderDonut('chartDonutMes', ebtd.mes.actual, ebtd.mes.budget, mesOK);
+    /* YTD ring: fill = how far actual deviates from budget as a proportion; green if better */
+    renderDonut('chartDonutYtd', Math.abs(ytdVar), Math.abs(ebtd.ytd.budget) * 0.2, ytdBetter);
+
+    /* Alerts */
+    var iconMap = { success: '✓', warning: '!', danger: '✕', info: 'i' };
+    document.getElementById('alertasContainer').innerHTML =
+      D.alertas.map(function (a) {
+        return '<div class="alert ' + a.nivel + '">' +
+          '<span class="alert-icon">' + (iconMap[a.nivel] || 'i') + '</span>' +
+          '<span>' + a.texto + '</span></div>';
+      }).join('');
+
+    /* Correos */
+    document.getElementById('correosContainer').innerHTML =
+      D.correos.map(function (c) {
+        return '<div class="correo-item">' +
+          '<div class="correo-dot' + (c.leido ? ' leido' : '') + '"></div>' +
+          '<div class="correo-asunto">' + c.asunto + '</div>' +
+          '<span class="correo-de">' + c.de + '</span>' +
+          '<span class="correo-hora">' + c.hora + '</span>' +
+        '</div>';
+      }).join('');
+  }
+
+  function kpiCard(label, value, sub, valCls, cardCls, pillHtml) {
+    return '<div class="kpi-card ' + (cardCls || '') + '">' +
+      '<div class="kpi-label">' + label + '</div>' +
+      '<div class="kpi-value ' + (valCls || '') + '">' + value + '</div>' +
+      '<div class="kpi-sub">' + sub + '</div>' +
+      (pillHtml || '') +
+    '</div>';
+  }
+  function pill(dir, txt) {
+    return '<span class="kpi-pill ' + dir + '">' + txt + '</span>';
+  }
+
+  function renderDonut(id, actual, budget, isGood) {
+    var fill  = Math.min(actual / budget, 1.2);
+    var rest  = Math.max(0, 1.2 - fill);
+    var color = isGood ? '#16a34a' : '#d97706';
+    var el = document.getElementById(id);
+    if (!el) return;
+    new Chart(el.getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [fill * 100, rest * 100],
+          backgroundColor: [color, 'rgba(0,0,0,.06)'],
+          borderWidth: 0,
+          circumference: 270,
+          rotation: -135
+        }]
+      },
+      options: {
+        cutout: '80%',
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        animation: { duration: 900, easing: 'easeInOutQuart' }
+      }
+    });
+  }
+
+  /* ════════════════ OPERACIONES ════════════════ */
+  function renderOperaciones() {
+    /* Must be defined first — used in both table render and flota summary */
+    var clasificarUnidad = function (unidad) {
+      var u = (unidad || '').toUpperCase().trim();
+      if (/^ST[\-\s]?\d/i.test(u))  return 'Transfrios (ST)';
+      if (/^JL[\-\s]?\d/i.test(u))  return 'Elogística (JL)';
+      if (/^CGG[\-\s]?\d/i.test(u)) return 'CGG (CGG)';
+      return 'Otros';
+    };
+
+    var emb = D.operaciones.embarques;
+    /* Only TX / AZ shipments, sorted newest first, capped at 12 */
+    var txAz = emb.filter(function (e) {
+      var d = (e.destino || '').toLowerCase();
+      return d.indexOf('texas') !== -1 || d.indexOf('arizona') !== -1 || d.indexOf('az') !== -1 || d.indexOf('tx') !== -1;
+    }).sort(function (a, b) {
+      /* parse DD/MM/YYYY for comparison */
+      var parse = function (f) { var p = f.split('/'); return new Date(+p[2], +p[1]-1, +p[0]); };
+      return parse(b.fecha) - parse(a.fecha);
+    }).slice(0, 12);
+    document.querySelector('#embTbl tbody').innerHTML = txAz.map(function (e) {
+      var tipoCls = e.tipo.toLowerCase().indexOf('tomate') !== -1 ? 'tipo-tomate'
+                  : e.tipo.toLowerCase().indexOf('lim') !== -1    ? 'tipo-limon'
+                  : 'tipo-chile';
+      var destBadge = (e.destino || '').toLowerCase().indexOf('texas') !== -1
+        ? '<span class="badge badge-orange">Texas</span>'
+        : '<span class="badge badge-blue">Arizona</span>';
+      return '<tr>' +
+        '<td><strong>' + e.fecha + '</strong></td>' +
+        '<td class="td-center" style="font-weight:700;font-size:.9rem">' + (e.cargas || 1) + '</td>' +
+        '<td><span class="tipo-pill ' + tipoCls + '">' + e.tipo + '</span></td>' +
+        '<td>' + destBadge + '</td>' +
+        '<td style="font-family:\'SF Mono\',monospace;font-size:.79rem;font-weight:600">' + (e.unidad || '—') + '</td>' +
+        '<td style="font-size:.79rem;color:var(--muted)">' + clasificarUnidad(e.unidad) + '</td>' +
+        '<td class="td-center"><span class="badge badge-green">' + e.estado + '</span></td>' +
+      '</tr>';
+    }).join('');
+
+    /* Carrier summary — last 7 days from most recent shipment */
+    var parseDate = function (f) { var p = f.split('/'); return new Date(+p[2], +p[1]-1, +p[0]); };
+    var allTxAz = emb; /* already filtered + sorted newest-first */
+    var refDate = allTxAz.length ? parseDate(allTxAz[0].fecha) : new Date();
+    var cutoff  = new Date(refDate); cutoff.setDate(cutoff.getDate() - 7);
+    var week = allTxAz.filter(function (e) { return parseDate(e.fecha) >= cutoff; });
+    var FLOTA_PRINCIPAL = ['Transfrios (ST)', 'Elogística (JL)', 'CGG (CGG)'];
+    var flotaMap = { 'Otros': { viajes: 0, cargas: 0, unidades: [] } };
+    week.forEach(function (e) {
+      var carrier = clasificarUnidad(e.unidad);
+      if (carrier !== 'Otros') {
+        if (!flotaMap[carrier]) flotaMap[carrier] = { viajes: 0, cargas: 0 };
+        flotaMap[carrier].viajes++;
+        flotaMap[carrier].cargas += (e.cargas || 1);
+      } else {
+        flotaMap['Otros'].viajes++;
+        flotaMap['Otros'].cargas += (e.cargas || 1);
+        var u = e.unidad || '?';
+        if (flotaMap['Otros'].unidades.indexOf(u) === -1) flotaMap['Otros'].unidades.push(u);
+      }
+    });
+    var flotaRows = FLOTA_PRINCIPAL.filter(function (f) { return flotaMap[f] && flotaMap[f].cargas > 0; })
+      .sort(function (a, b) { return flotaMap[b].cargas - flotaMap[a].cargas; })
+      .concat(['Otros']);
+    var totalViajes = week.length;
+    var totalCargas = week.reduce(function (s, e) { return s + (e.cargas || 1); }, 0);
+    document.getElementById('flotaResumen').innerHTML =
+      '<table style="width:100%;border-collapse:collapse;font-size:.81rem">' +
+        '<thead style="background:var(--dark);color:#fff">' +
+          '<tr>' +
+            '<th style="padding:8px 14px;text-align:left;font-size:.63rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">Flota</th>' +
+            '<th style="padding:8px 14px;text-align:center;font-size:.63rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">Viajes</th>' +
+            '<th style="padding:8px 14px;text-align:center;font-size:.63rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">Cargas</th>' +
+            '<th style="padding:8px 14px;text-align:right;font-size:.63rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">% del Total</th>' +
+          '</tr>' +
+        '</thead>' +
+        '<tbody>' +
+        flotaRows.map(function (f) {
+          var row = flotaMap[f];
+          if (!row || (f === 'Otros' && row.cargas === 0)) return '';
+          var pctVal = totalCargas ? (row.cargas / totalCargas * 100).toFixed(0) : 0;
+          var nameCell = f === 'Otros' && row.unidades && row.unidades.length
+            ? f + ' <span style="font-size:.69rem;font-weight:400;color:var(--muted)">· unidades: ' + row.unidades.join(', ') + '</span>'
+            : f;
+          return '<tr style="border-bottom:1px solid var(--border)">' +
+            '<td style="padding:9px 14px;font-weight:600">' + nameCell + '</td>' +
+            '<td style="padding:9px 14px;text-align:center">' + row.viajes + '</td>' +
+            '<td style="padding:9px 14px;text-align:center;font-weight:700">' + row.cargas + '</td>' +
+            '<td style="padding:9px 14px;text-align:right">' +
+              '<div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">' +
+                '<div style="width:80px;height:6px;background:#e5e7eb;border-radius:4px;overflow:hidden">' +
+                  '<div style="width:' + pctVal + '%;height:100%;background:var(--green2);border-radius:4px"></div>' +
+                '</div>' +
+                '<span style="font-weight:700;min-width:32px">' + pctVal + '%</span>' +
+              '</div>' +
+            '</td>' +
+          '</tr>';
+        }).join('') +
+        '<tr style="background:#f8faf8;font-weight:700">' +
+          '<td style="padding:9px 14px;color:var(--muted);font-size:.75rem;letter-spacing:.5px;text-transform:uppercase">Total</td>' +
+          '<td style="padding:9px 14px;text-align:center">' + totalViajes + '</td>' +
+          '<td style="padding:9px 14px;text-align:center">' + totalCargas + '</td>' +
+          '<td style="padding:9px 14px;text-align:right">100%</td>' +
+        '</tr>' +
+        '</tbody>' +
+      '</table>';
+
+    document.getElementById('bascWidget').innerHTML =
+      D.operaciones.bascula.map(function (b) {
+        var chips = b.productos.map(function (p) {
+          var pl = p.toLowerCase();
+          var c = pl.indexOf('rezaga') !== -1 ? ' rezaga' : pl.indexOf('lim') !== -1 ? ' limon' : pl.indexOf('chile') !== -1 ? ' chile' : '';
+          return '<span class="chip' + c + '">' + p + '</span>';
+        }).join('');
+        return '<div class="basc-row"><span class="basc-date">' + b.fecha + '</span><div class="basc-chips">' + chips + '</div></div>';
+      }).join('');
+  }
+
+  /* ════════════════ CALIDAD ════════════════ */
+  function renderCalidad() {
+    var ub = D.calidad.ultimoOutbound;
+    document.getElementById('outboundTitle').textContent = 'Calidad Exportación · Reporte: ' + ub.fecha;
+
+    /* ── HERO KPIs: weighted averages across varieties ── */
+    var totalPeso = ub.variedades.reduce(function (s, v) { return s + v.peso; }, 0);
+    var avgPrima  = ub.variedades.reduce(function (s, v) { return s + v.primera; }, 0) / ub.variedades.length;
+    var avgMerma  = ub.variedades.reduce(function (s, v) { return s + v.merma;   }, 0) / ub.variedades.length;
+    var alertas   = ub.variedades.filter(function (v) { return v.alerta; }).length;
+    var mermaOK   = avgMerma <= 4;
+    var primaOK   = avgPrima >= 87;
+    var hist      = D.calidad.historico;
+    var prevPrima = hist.length >= 2 ? hist[hist.length - 2].primaPromedio : null;
+    var primaDir  = prevPrima != null ? (avgPrima >= prevPrima ? 'up' : 'down') : 'neu';
+    var primaDiff = prevPrima != null ? (avgPrima - prevPrima).toFixed(1) : null;
+
+    document.getElementById('calidadHeroKpis').innerHTML =
+      /* BIG hero: 1ª Prima */
+      '<div class="kpi-card ' + (primaOK ? 'accent-pos' : 'accent-warn') + '" style="grid-column:span 1">' +
+        '<div class="kpi-label">1ª Prima · Calidad Exportación</div>' +
+        '<div class="kpi-value ' + (primaOK ? 'pos' : 'acc') + '" style="font-size:2.6rem">' + pct(avgPrima) + '</div>' +
+        '<div class="kpi-sub">Promedio · ' + ub.variedades.length + ' variedades · ' + ub.fecha + '</div>' +
+        (primaDiff != null
+          ? pill(primaDir, (primaDir === 'up' ? '▲ +' : '▼ ') + primaDiff + 'pp vs reporte anterior')
+          : '') +
+      '</div>' +
+      /* Merma */
+      '<div class="kpi-card ' + (mermaOK ? 'accent-pos' : 'accent-neg') + '">' +
+        '<div class="kpi-label">Merma Promedio · Umbral &lt;4%</div>' +
+        '<div class="kpi-value ' + (mermaOK ? 'pos' : 'neg') + '" style="font-size:2.6rem">' + pct(avgMerma) + '</div>' +
+        '<div class="kpi-sub">Umbral operativo: 4.0%</div>' +
+        pill(mermaOK ? 'up' : 'down', mermaOK ? '✓ Dentro del rango' : '⚠ Sobre umbral — revisar') +
+      '</div>' +
+      /* Alertas */
+      '<div class="kpi-card ' + (alertas === 0 ? 'accent-pos' : 'accent-neg') + '">' +
+        '<div class="kpi-label">Variedades en Alerta</div>' +
+        '<div class="kpi-value ' + (alertas === 0 ? 'pos' : 'neg') + '" style="font-size:2.6rem">' + alertas + ' / ' + ub.variedades.length + '</div>' +
+        '<div class="kpi-sub">Merma &gt; 4% = alerta</div>' +
+        pill(alertas === 0 ? 'up' : 'down', alertas === 0 ? '✓ Sin alertas activas' : alertas + ' variedad' + (alertas > 1 ? 'es' : '') + ' sobre umbral') +
+      '</div>';
+
+    document.getElementById('qualityCards').innerHTML = ub.variedades.map(function (v) {
+      var mCls = v.merma > 4 ? 'bad' : v.merma > 3 ? 'warn' : 'ok';
+      var tot  = v.primera + v.segunda + v.tercera + v.merma;
+      return '<div class="qual-card' + (v.alerta ? ' alerta-card' : '') + '">' +
+        '<div class="qual-name">' +
+          v.nombre +
+          (v.alerta ? '<span class="badge badge-red" style="font-size:.6rem">⚠ Alerta</span>' : '') +
+        '</div>' +
+        '<div class="qual-prima">' + pct(v.primera) + '<span style="font-size:.7rem;font-weight:500;opacity:.7"> 1ª Prima</span></div>' +
+        '<div class="qual-merma-badge ' + mCls + '">Merma ' + pct(v.merma) + '</div>' +
+        '<div class="qual-stack">' +
+          '<div class="qs-prima" style="width:' + (v.primera/tot*100).toFixed(1) + '%"></div>' +
+          '<div class="qs-seg"   style="width:' + (v.segunda/tot*100).toFixed(1) + '%"></div>' +
+          '<div class="qs-ter"   style="width:' + (v.tercera/tot*100).toFixed(1) + '%"></div>' +
+          '<div class="qs-merma" style="width:' + (v.merma/tot*100).toFixed(1) + '%"></div>' +
+        '</div>' +
+        '<div class="qual-legend">' +
+          '<span><span class="ql-dot" style="background:#16a34a"></span>1ª ' + pct(v.primera) + '</span>' +
+          '<span><span class="ql-dot" style="background:#fbbf24"></span>2ª ' + pct(v.segunda) + '</span>' +
+          '<span><span class="ql-dot" style="background:#1d4ed8"></span>3ª ' + pct(v.tercera) + '</span>' +
+          '<span><span class="ql-dot" style="background:#ef4444"></span>Merma ' + pct(v.merma) + '</span>' +
+        '</div>' +
+        '<div class="qual-meta">Peso promedio: <strong>' + fmtN(v.peso, 2) + ' oz</strong></div>' +
+      '</div>';
+    }).join('');
+
+    document.querySelector('#outboundTbl tbody').innerHTML = ub.variedades.map(function (v) {
+      var badge = v.merma > 4
+        ? '<span class="badge badge-red">⚠ &gt;4%</span>'
+        : v.merma > 3 ? '<span class="badge badge-yellow">Monitor</span>'
+        : '<span class="badge badge-green">OK</span>';
+      return '<tr' + (v.alerta ? ' class="row-alerta"' : '') + '>' +
+        '<td><strong>' + v.nombre + '</strong></td>' +
+        '<td class="td-num">' + pct(v.primera) + '</td>' +
+        '<td class="td-num">' + pct(v.segunda) + '</td>' +
+        '<td class="td-num">' + pct(v.tercera) + '</td>' +
+        '<td class="td-num"><strong>' + pct(v.merma) + '</strong></td>' +
+        '<td class="td-num">' + fmtN(v.peso, 2) + '</td>' +
+        '<td class="td-center">' + badge + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  /* ════════════════ MERCADO ════════════════ */
+  function renderMercado() {
+    document.getElementById('mercadoReporteTitle').textContent =
+      'Precios · ' + D.mercado.reporte + ' · ' + D.mercado.fecha;
+
+    /* Hero cards */
+    document.getElementById('priceHeroCards').innerHTML = D.mercado.precios.map(function (p) {
+      var mid    = (p.min + p.max) / 2;
+      var chgPct = p.anterior ? ((mid - p.anterior) / p.anterior * 100) : null;
+      var chgStr = chgPct != null
+        ? (chgPct >= 0 ? '▲ +' : '▼ ') + chgPct.toFixed(1) + '% vs ant.'
+        : 'Sin dato anterior';
+      var chgDir = chgPct == null ? 'na' : chgPct >= 0 ? 'up' : 'dn';
+      var n   = p.producto.toLowerCase();
+      var cls = (n.indexOf('tomate') !== -1 || n.indexOf('vine') !== -1 || n.indexOf('grape') !== -1)
+              ? 'hero-tomate'
+              : (n.indexOf('jalape') !== -1 || n.indexOf('serrano') !== -1)
+              ? 'hero-jalap'
+              : 'hero-other';
+      return '<div class="price-hero ' + cls + '">' +
+        '<div class="ph-label">' + p.producto + '</div>' +
+        '<div class="ph-price">$' + p.min + (p.max !== p.min ? '–' + p.max : '') + '</div>' +
+        '<div class="ph-change ' + chgDir + '">' + chgStr + '</div>' +
+        '<div class="ph-sub">' + p.via + '</div>' +
+      '</div>';
+    }).join('');
+
+    /* Price compare cards — sorted Tomate → Limón → Pepino → otros */
+    var sorted = D.mercado.precios.slice().sort(function (a, b) {
+      var rank = function (p) {
+        var n = p.producto.toLowerCase();
+        return n.indexOf('tomate') !== -1 || n.indexOf('vine') !== -1 || n.indexOf('grape') !== -1 ? 0
+             : n.indexOf('lim') !== -1 ? 1 : n.indexOf('pepino') !== -1 ? 2 : 3;
+      };
+      return rank(a) - rank(b);
+    });
+    var scaleMax = Math.max.apply(null, sorted.map(function (p) { return p.max; })) * 1.15;
+    document.getElementById('priceCompareGrid').innerHTML = sorted.map(function (p) {
+      var mid    = (p.min + p.max) / 2;
+      var chgPct = p.anterior != null ? ((mid - p.anterior) / p.anterior * 100) : null;
+      var chgStr = chgPct != null
+        ? (chgPct >= .5 ? '▲ +' : chgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(chgPct).toFixed(1) + '% vs semana anterior'
+        : 'Sin comparativo anterior';
+      var chgCls = chgPct == null ? 'neu' : chgPct > .5 ? 'up' : chgPct < -.5 ? 'dn' : 'neu';
+      var barColor = chgPct == null
+        ? 'rgba(107,114,128,.4)'
+        : chgPct > 10  ? 'rgba(22,163,74,.85)'
+        : chgPct > 0   ? 'rgba(22,163,74,.55)'
+        : chgPct > -10 ? 'rgba(220,38,38,.55)'
+        :                'rgba(220,38,38,.85)';
+      var minPct  = (p.min / scaleMax * 100).toFixed(1);
+      var widPct  = ((p.max - p.min) / scaleMax * 100).toFixed(1);
+      var antPct  = p.anterior != null ? (p.anterior / scaleMax * 100).toFixed(1) : null;
+      return '<div class="pc-card' + (p.alerta ? ' pc-alert' : '') + '">' +
+        '<div class="pc-header">' +
+          '<div class="pc-name">' + p.producto + '</div>' +
+          '<span class="badge badge-blue">' + p.via + '</span>' +
+        '</div>' +
+        '<div class="pc-range">$' + fmt(p.min,2) + '&nbsp;–&nbsp;$' + fmt(p.max,2) + '</div>' +
+        '<div class="pc-chg ' + chgCls + '">' + chgStr + '</div>' +
+        '<div class="pc-bar-wrap">' +
+          '<div class="pc-bar-fill" style="left:' + minPct + '%;width:' + widPct + '%;background:' + barColor + '"></div>' +
+          (antPct != null ? '<div class="pc-bar-tick" style="left:' + antPct + '%"></div>' : '') +
+        '</div>' +
+        '<div class="pc-footer">' +
+          '<span>' + (p.anterior != null ? 'Anterior: $' + fmt(p.anterior,2) : 'Sin dato ant.') + '</span>' +
+          '<span>Mid: $' + fmt(mid,2) + '</span>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    /* Executive summary */
+    document.getElementById('mercadoResumenBox').innerHTML =
+      '<p style="font-size:.86rem;line-height:1.7;color:var(--text2)">' + D.mercado.resumen + '</p>';
+
+    /* News list */
+    document.getElementById('noticiasList').innerHTML = D.mercado.noticias.map(function (n) {
+      var bc = n.impacto === 'Alto' ? 'badge-red' : n.impacto === 'Moderado' ? 'badge-yellow' : 'badge-gray';
+      return '<div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">' +
+        '<span class="badge ' + bc + '" style="flex-shrink:0;margin-top:1px">' + n.impacto + '</span>' +
+        '<div><div style="font-size:.84rem;font-weight:600;color:var(--text)">' + n.titulo + '</div>' +
+        '<div style="font-size:.71rem;color:var(--muted);margin-top:2px">Fuente: ' + n.fuente + '</div></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  /* ════════════════ FINANZAS ════════════════ */
+  function renderFinanzas() {
+    var cv = D.calavo;
+    var pagos = cv.pagos;
+    var totalPago = 0, totalCajas = 0, totalCont = 0, semCount = 0;
+    pagos.forEach(function (p) {
+      if (p.pago)  { totalPago += p.pago; semCount++; }
+      if (p.cajas) totalCajas += p.cajas;
+      if (p.cont)  totalCont  += p.cont;
+    });
+    var pendingWeeks = pagos.filter(function (p) { return p.estado === 'Pendiente'; }).length;
+
+    document.getElementById('finKpis').innerHTML =
+      kpiCard('Total Liquidado', fmt(totalPago), 'WK01–WK' + semCount + ' confirmado', 'pos', 'accent-pos',
+        pill('up', '✓ ' + semCount + ' semanas pagadas')) +
+      kpiCard('Total Cajas', fmtN(totalCajas), 'Temporada acumulado', 'dark', 'accent-blue', null) +
+      kpiCard('Contenedores', fmtN(totalCont), 'Embarques procesados', 'dark', 'accent-blue', null) +
+      kpiCard('Promedio / Semana', fmt(Math.round(totalPago / semCount)), semCount + ' semanas base',
+        'acc', 'accent-warn',
+        pendingWeeks ? pill('neu', pendingWeeks + ' sem. pendientes') : pill('up', '✓ Al corriente'));
+
+    /* Settlement table */
+    document.querySelector('#liquidTbl tbody').innerHTML = pagos.map(function (p) {
+      var bmap = { Pagado: 'badge-green', Actual: 'badge-yellow', Pendiente: 'badge-gray' };
+      var isPend = p.estado === 'Pendiente';
+      return '<tr' + (isPend ? ' style="opacity:.45;font-style:italic"' : '') + '>' +
+        '<td><strong>' + p.sem + '</strong></td>' +
+        '<td>' + p.wire + '</td>' +
+        '<td class="td-num">' + (p.pago  != null ? fmt(p.pago)   : '—') + '</td>' +
+        '<td class="td-num">' + (p.cajas != null ? fmtN(p.cajas) : '—') + '</td>' +
+        '<td class="td-num">' + (p.cont  != null ? p.cont        : '—') + '</td>' +
+        '<td class="td-center"><span class="badge ' + (bmap[p.estado] || 'badge-gray') + '">' + p.estado + '</span></td>' +
+      '</tr>';
+    }).join('');
+
+    document.getElementById('liquidFoot').innerHTML =
+      '<tr style="background:var(--dark);color:#fff;font-weight:700">' +
+        '<td colspan="2" style="padding:11px 15px;font-size:.75rem;letter-spacing:.8px">TOTAL CONFIRMADO</td>' +
+        '<td class="td-num" style="padding:11px 15px">' + fmt(totalPago) + '</td>' +
+        '<td class="td-num" style="padding:11px 15px">' + fmtN(totalCajas) + '</td>' +
+        '<td class="td-num" style="padding:11px 15px">' + totalCont + '</td>' +
+        '<td></td>' +
+      '</tr>';
+  }
+
+  /* ════════════════ CHARTS ════════════════ */
+  function initChartsForTab(tab) {
+
+    if (tab === 'operaciones' && !chartsInit.embarques) {
+      chartsInit.embarques = true;
+      var emb = D.operaciones.embarques.filter(function (e) {
+        var d = (e.destino || '').toLowerCase();
+        return d.indexOf('texas') !== -1 || d.indexOf('arizona') !== -1 || d.indexOf('az') !== -1 || d.indexOf('tx') !== -1;
+      }).sort(function (a, b) {
+        var parse = function (f) { var p = f.split('/'); return new Date(+p[2], +p[1]-1, +p[0]); };
+        return parse(a.fecha) - parse(b.fecha); /* oldest→newest for chart axis */
+      }).slice(-12);
+      var dateMap = {};
+      emb.forEach(function (e) { dateMap[e.fecha] = (dateMap[e.fecha] || 0) + (e.cargas || 1); });
+      var dates  = Object.keys(dateMap).sort();
+      var counts = dates.map(function (d) { return dateMap[d]; });
+      new Chart(document.getElementById('chartEmbarques').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: dates,
+          datasets: [{
+            label: 'Cargas',
+            data: counts,
+            backgroundColor: 'rgba(22,163,74,.75)',
+            borderRadius: 8, borderSkipped: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { return ' ' + c.parsed.y + ' cargas'; } } } },
+          scales: {
+            y: { beginAtZero: true, ticks: { stepSize: 1 }, grid: { color: 'rgba(0,0,0,.05)' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    if (tab === 'calidad' && !chartsInit.calidad) {
+      chartsInit.calidad = true;
+      var hist = D.calidad.historico;
+      new Chart(document.getElementById('chartCalidad').getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: hist.map(function (h) { return h.fecha; }),
+          datasets: [
+            {
+              label: '1ª Prima %',
+              data: hist.map(function (h) { return h.primaPromedio; }),
+              borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,.08)',
+              tension: .4, pointRadius: 5, pointBackgroundColor: '#fff',
+              pointBorderColor: '#16a34a', pointBorderWidth: 2,
+              fill: true, yAxisID: 'yP', borderWidth: 2
+            },
+            {
+              label: 'Merma %',
+              data: hist.map(function (h) { return h.mermaPromedio; }),
+              borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,.06)',
+              tension: .4, pointRadius: 5, pointBackgroundColor: '#fff',
+              pointBorderColor: '#dc2626', pointBorderWidth: 2,
+              fill: true, yAxisID: 'yM', borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true, interaction: { mode: 'index', intersect: false },
+          plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: function (c) { return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(2) + '%'; } } } },
+          scales: {
+            yP: { type: 'linear', position: 'left',  min: 82, max: 94, title: { display: true, text: '1ª Prima %' }, grid: { color: 'rgba(0,0,0,.05)' } },
+            yM: { type: 'linear', position: 'right', min: 0,  max: 8,  title: { display: true, text: 'Merma %' },    grid: { drawOnChartArea: false }, ticks: { callback: function (v) { return v + '%'; } } }
+          }
+        }
+      });
+    }
+
+    if (tab === 'finanzas' && !chartsInit.finanzas) {
+      chartsInit.finanzas = true;
+      var cv  = D.calavo;
+      var ebd = D.ebitda;
+
+      new Chart(document.getElementById('chartRevDonut').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Comisión', 'Pick & Pack', 'Z-Code', 'Neto Belher'],
+          datasets: [{
+            data: [cv.comision, cv.pickPack, cv.zCode, cv.neto],
+            backgroundColor: ['#dc2626','#d97706','#1d4ed8','#16a34a'],
+            borderWidth: 3, borderColor: '#fff',
+            hoverOffset: 6
+          }]
+        },
+        options: {
+          cutout: '62%', responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: function (c) { return ' $' + Number(c.parsed).toLocaleString('en-US'); } } }
+          },
+          animation: { duration: 800, easing: 'easeInOutQuart' }
+        }
+      });
+
+      document.getElementById('revLegend').innerHTML =
+        [{ label:'Revenue Total', val:cv.revenueTotal, color:'#0c2117' },
+         { label:'Comisión Calavo', val:cv.comision,  color:'#dc2626' },
+         { label:'Pick & Pack',    val:cv.pickPack,   color:'#d97706' },
+         { label:'Z-Code/Gastos',  val:cv.zCode,      color:'#1d4ed8' },
+         { label:'Neto Belher',    val:cv.neto,        color:'#16a34a' }]
+        .map(function (r) {
+          return '<div class="rev-leg-row">' +
+            '<span class="rev-dot" style="background:' + r.color + '"></span>' +
+            '<span class="rev-name">' + r.label + '</span>' +
+            '<span class="rev-val">' + fmt(r.val) + '</span>' +
+            '<span class="rev-pct">(' + (r.val/cv.revenueTotal*100).toFixed(1) + '%)</span>' +
+          '</div>';
+        }).join('');
+
+      new Chart(document.getElementById('chartEbitda').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: [ebd.mes.nombre, ebd.ytd.nombre],
+          datasets: [
+            { label:'Actual',       data:[ebd.mes.actual,  ebd.ytd.actual],  backgroundColor:'rgba(22,163,74,.85)',  borderRadius:6 },
+            { label:'Budget',       data:[ebd.mes.budget,  ebd.ytd.budget],  backgroundColor:'rgba(217,119,6,.75)',  borderRadius:6 },
+            { label:'Año Anterior', data:[ebd.mes.yago,    ebd.ytd.yago],    backgroundColor:'rgba(29,78,216,.55)',  borderRadius:6 }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: function (c) { return ' ' + c.dataset.label + ': $' + Number(c.parsed.y).toLocaleString('en-US'); } } } },
+          scales: { y: { ticks: { callback: function (v) { return '$' + (v/1e6).toFixed(1) + 'M'; } }, grid: { color:'rgba(0,0,0,.05)' } } }
+        }
+      });
+
+      var pagosConf = cv.pagos.filter(function (p) { return p.pago != null; });
+      new Chart(document.getElementById('chartPagos').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: pagosConf.map(function (p) { return p.sem; }),
+          datasets: [{
+            label: 'Pago USD',
+            data: pagosConf.map(function (p) { return p.pago; }),
+            backgroundColor: pagosConf.map(function (p) {
+              return p.estado === 'Actual' ? 'rgba(217,119,6,.9)' : 'rgba(21,128,61,.7)';
+            }),
+            borderRadius: 5, borderSkipped: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { return ' $' + Number(c.parsed.y).toLocaleString('en-US'); } } } },
+          scales: {
+            y: { ticks: { callback: function (v) { return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: 'rgba(0,0,0,.05)' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+    }
+  }
+
+  /* ── TICKER ── */
+  function renderTicker() {
+    var items = D.ticker.concat(D.ticker);
+    document.getElementById('tickerTrack').innerHTML = items.map(function (t) {
+      var arrow = t.dir === 'up' ? '▲' : t.dir === 'down' ? '▼' : '●';
+      var cls   = t.dir === 'up' ? 't-up' : t.dir === 'down' ? 't-down' : 't-neut';
+      return '<span class="ticker-item">' +
+        '<span class="t-name">' + t.label + '</span>' +
+        '<span class="t-val">'  + t.valor  + '</span>' +
+        '<span class="t-chg '  + cls + '">' + arrow + ' ' + t.cambio + '</span>' +
+      '</span><span class="t-sep">|</span>';
+    }).join('');
+  }
+
+  /* ── ESTRATEGIA ── */
+  function renderEstrategia() {
+    var E = D.estrategia;
+    function stratCard(item, lbl, bc, xc) {
+      return '<div class="strat-card strat-' + (xc || item.nivel) + '">' +
+        '<div class="strat-header"><span class="strat-title">' + item.titulo + '</span>' +
+          '<span class="badge badge-' + bc + '">' + lbl + '</span></div>' +
+        '<p class="strat-desc">' + item.descripcion + '</p>' +
+        '<div class="strat-action">→ ' + item.accion + '</div>' +
+      '</div>';
+    }
+    document.getElementById('contratosContainer').innerHTML =
+      E.contratos.map(function (c) { return stratCard(c, c.estado, c.nivel); }).join('');
+    document.getElementById('opContainer').innerHTML =
+      E.oportunidades.map(function (o) { return stratCard(o, o.prioridad, o.prioridad === 'Alta' ? 'alta' : 'media', 'op'); }).join('');
+    document.getElementById('watchContainer').innerHTML =
+      E.watchlist.map(function (w) { return stratCard(w, 'Watchlist', w.nivel); }).join('');
+    document.querySelector('#agendaTbl tbody').innerHTML =
+      E.proximos.map(function (p) {
+        return '<tr><td><span class="agenda-fecha">' + p.fecha + '</span></td>' +
+          '<td>' + p.evento + '</td>' +
+          '<td><span class="agenda-tipo tipo-' + p.tipo + '">' + p.tipo + '</span></td>' +
+          '<td style="color:var(--muted);font-size:.76rem">' + p.participantes + '</td></tr>';
+      }).join('');
+  }
+
+  /* ── INDUSTRIA ── */
+  function renderIndustria() {
+    document.getElementById('industriaTitle').textContent =
+      'Noticias de Industria · Corbel Seeds Intel · ' + D.mercado.fecha;
+    var noticias = D.industria;
+    var cats = ['Todas'].concat(noticias.map(function (n) { return n.cat; })
+      .filter(function (v, i, a) { return a.indexOf(v) === i; }));
+    var active = 'Todas';
+    var filterDiv = document.getElementById('catFilters');
+    var newsGrid  = document.getElementById('newsGrid');
+
+    function buildCards() {
+      var list = active === 'Todas' ? noticias : noticias.filter(function (n) { return n.cat === active; });
+      newsGrid.innerHTML = list.map(function (n) {
+        return '<div class="news-card">' +
+          '<div class="news-head"><span class="news-cat">' + n.cat + '</span>' +
+            '<span class="news-impact imp-' + n.impacto + '">' + n.impacto + '</span>' +
+            '<span class="news-fte">' + n.fuente + '</span></div>' +
+          '<p class="news-title">' + n.titulo + '</p>' +
+          '<p class="news-res">'   + n.resumen + '</p>' +
+        '</div>';
+      }).join('');
+      filterDiv.querySelectorAll('.filter-btn').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.cat === active);
+      });
+    }
+    filterDiv.innerHTML = cats.map(function (c) {
+      return '<button class="filter-btn" data-cat="' + c + '">' + c + '</button>';
+    }).join('');
+    filterDiv.addEventListener('click', function (e) {
+      if (e.target.classList.contains('filter-btn')) { active = e.target.dataset.cat; buildCards(); }
+    });
+    buildCards();
+  }
+
+  /* ── INIT ── */
+  renderTicker();
+  renderHoy();
+  renderOperaciones();
+  renderCalidad();
+  renderMercado();
+  renderFinanzas();
+  renderEstrategia();
+  renderIndustria();
+
+})();
+</script>
+</body>
+</html>
