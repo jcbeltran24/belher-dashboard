@@ -866,7 +866,7 @@ footer span { color: var(--accent2); font-weight: 600; }
   <button data-tab="tomate">Tomate</button>
   <button data-tab="limon">Limón</button>
   <button data-tab="chile">Chile</button>
-  <button data-tab="granos">Granos</button>
+
   <button data-tab="estrategia">Estrategia</button>
   <button data-tab="industria">Industria</button>
 </nav>
@@ -1069,18 +1069,6 @@ footer span { color: var(--accent2); font-weight: 600; }
     </table></div></div>
   </div>
 
-  <!-- ══════════ GRANOS ══════════ -->
-  <div class="tab-panel" id="tab-granos">
-    <div class="section-title">KPIs · Granos</div>
-    <div class="grid-3" id="granosKpis"></div>
-    <div class="section-title">Precios de Mercado</div>
-    <div class="price-compare-grid" id="granosPrecios"></div>
-    <div class="section-title">Embarques · Granos</div>
-    <div class="card-table"><div class="tbl-wrap"><table id="granosEmbarquesTbl">
-      <thead><tr><th>Fecha</th><th>Cargas</th><th>Unidad</th><th>Flota</th><th>Destino</th><th>Estado</th></tr></thead>
-      <tbody></tbody>
-    </table></div></div>
-  </div>
 
   <!-- ══════════ ESTRATEGIA ══════════ -->
   <div class="tab-panel" id="tab-estrategia">
@@ -2171,9 +2159,6 @@ footer span { color: var(--accent2); font-weight: 600; }
   function renderChile()   {
     renderProductTab({ tipo:'Chile',  tabId:'chile',  kpisId:'chileKpis',  preciosId:'chilePrecios',  tblId:'chileEmbarquesTbl',  badgeCls:'prod-badge-chile'  });
   }
-  function renderGranos()  {
-    renderProductTab({ tipo:'Granos', tabId:'granos', kpisId:'granosKpis', preciosId:'granosPrecios', tblId:'granosEmbarquesTbl', badgeCls:'prod-badge-granos' });
-  }
 
   /* ── INIT ── */
   renderTicker();
@@ -2185,7 +2170,6 @@ footer span { color: var(--accent2); font-weight: 600; }
   renderTomate();
   renderLimon();
   renderChile();
-  renderGranos();
   renderEstrategia();
   renderIndustria();
 
