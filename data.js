@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Martes 24 Mar 2026",
     semana: "WK 13",
-    actualizado: "24/03/2026 · 12:47"
+    actualizado: "24/03/2026 · 15:30"
   },
 
   alertas: [
@@ -176,6 +176,10 @@ window.BELHER = {
       { fecha:"17/03", productos:["Tomate","Rezaga Tomate"] }
     ],
     embarques: [
+      { fecha:"23/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-110",   destino:"Arizona", estado:"OK" },
+      { fecha:"23/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-109",   destino:"Arizona", estado:"OK" },
+      { fecha:"23/03/2026", tipo:"Tomate", cargas:1, unidad:"CGG-114",  destino:"Arizona", estado:"OK" },
+      { fecha:"23/03/2026", tipo:"Tomate", cargas:1, unidad:"CGG-100",  destino:"Arizona", estado:"OK" },
       { fecha:"20/03/2026", tipo:"Tomate", cargas:2, unidad:"ST-2341",  destino:"Arizona", estado:"OK" },
       { fecha:"19/03/2026", tipo:"Chile",  cargas:1, unidad:"CGG-14",   destino:"Arizona", estado:"OK" },
       { fecha:"19/03/2026", tipo:"Limón",  cargas:3, unidad:"JL-089",   destino:"Arizona", estado:"OK" },
@@ -183,17 +187,13 @@ window.BELHER = {
       { fecha:"18/03/2026", tipo:"Chile",  cargas:1, unidad:"48291",    destino:"Arizona", estado:"OK" },
       { fecha:"17/03/2026", tipo:"Limón",  cargas:2, unidad:"JL-102",   destino:"Arizona", estado:"OK" },
       { fecha:"17/03/2026", tipo:"Tomate", cargas:3, unidad:"ST-2341",  destino:"Arizona", estado:"OK" },
-      { fecha:"15/03/2026", tipo:"Tomate", cargas:2, unidad:"CGG-09",   destino:"Texas",   estado:"OK" },
-      { fecha:"14/03/2026", tipo:"Limón",  cargas:2, unidad:"JL-089",   destino:"Arizona", estado:"OK" },
-      { fecha:"13/03/2026", tipo:"Chile",  cargas:1, unidad:"73041",    destino:"Arizona", estado:"OK" },
-      { fecha:"13/03/2026", tipo:"Tomate", cargas:2, unidad:"ST-2198",  destino:"Texas",   estado:"OK" },
-      { fecha:"12/03/2026", tipo:"Limón",  cargas:3, unidad:"JL-102",   destino:"Arizona", estado:"OK" }
+      { fecha:"15/03/2026", tipo:"Tomate", cargas:2, unidad:"CGG-09",   destino:"Texas",   estado:"OK" }
     ]
   },
 
   correos: [
     { hora:"12:44", asunto:"REPORTE DE OUTBOUND TOMATE 23/03/2026",            de:"Calidad Belher",   leido:false },
-    { hora:"21:04", asunto:"23-03-2026 REPORTES GENERALES",                    de:"Embarques Belher", leido:false },
+    { hora:"21:04", asunto:"23-03-2026 REPORTES GENERALES",                    de:"Embarques Belher", leido:true  },
     { hora:"17:11", asunto:"REPORTE DE BASCULA 23/03/2026 (REZAGA DE TOMATE)", de:"Báscula Belher",   leido:false },
     { hora:"17:07", asunto:"REPORTE DE BASCULA 23/03/2026 (TOMATE)",           de:"Báscula Belher",   leido:false },
     { hora:"18:01", asunto:"Corbel Seeds Daily News Summary #0015",             de:"Raymundo Elizalde",leido:false }
