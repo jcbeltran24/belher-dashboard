@@ -954,16 +954,15 @@ footer span { color: var(--accent2); font-weight: 600; }
 
 <!-- ══ TABS ══ -->
 <nav class="tabs" id="tabNav">
-  <button class="active" data-tab="hoy">Hoy</button>
-  <button data-tab="operaciones">Fletes</button>
-  <button data-tab="calidad">Calidad</button>
-  <button data-tab="mercado">Mercado</button>
-  <button data-tab="finanzas">Finanzas</button>
+  <button class="active" data-tab="hoy">Resumen</button>
   <button data-tab="tomate">Tomate</button>
+  <button data-tab="calidad">Calidad</button>
   <button data-tab="limon">Limón</button>
   <button data-tab="chile">Chile</button>
   <button data-tab="granos">Granos</button>
-
+  <button data-tab="finanzas">Finanzas</button>
+  <button data-tab="operaciones">Embarques</button>
+  <button data-tab="mercado">Mercado</button>
   <button data-tab="auditorias">Auditorías</button>
   <button data-tab="estrategia">Estrategia</button>
   <button data-tab="industria">Industria</button>
@@ -974,7 +973,7 @@ footer span { color: var(--accent2); font-weight: 600; }
   <!-- ══════════ HOY ══════════ -->
   <div class="tab-panel active" id="tab-hoy">
 
-    <div class="section-title">Resumen Ejecutivo · Temporada 2025–2026</div>
+    <div class="section-title">Temporada 2025–2026 · Al <span id="resumenFecha"></span></div>
     <div class="kpi-row" id="kpiTopRow"></div>
 
     <div class="section-title">Señales del Día</div>
@@ -982,9 +981,6 @@ footer span { color: var(--accent2); font-weight: 600; }
 
     <div class="section-title">EBITDA vs Presupuesto</div>
     <div class="grid-2" id="ebitdaDonuts"></div>
-
-    <div class="section-title">Indicadores Operativos</div>
-    <div class="grid-4" id="kpiVitals"></div>
 
     <div class="section-title">Correos Operativos</div>
     <div class="card-table">
@@ -1321,22 +1317,9 @@ footer span { color: var(--accent2); font-weight: 600; }
       kpiCard('Calavo · Neto YTD', fmt(cv.neto), 'Total liquidado · GC 2025–26',
         'pos', 'accent-pos', pill('up', 'P&amp;P $' + fmt(cv.pickPack)));
 
-    /* KPI cards */
-    document.getElementById('kpiVitals').innerHTML =
-      kpiCard('Adelanto Pick &amp; Pack · Acumulado', fmt(paidTotal), 'WK01–WK' + semCount, 'pos', 'accent-pos', pill('up', '✓ ' + semCount + ' semanas pagadas')) +
-      kpiCard('EBITDA · ' + ebtd.mes.nombre, fmt(ebtd.mes.actual),
-        'Budget ' + fmt(ebtd.mes.budget),
-        ebtd.mes.actual >= ebtd.mes.budget ? 'pos' : 'neg',
-        ebtd.mes.actual >= ebtd.mes.budget ? 'accent-pos' : 'accent-neg',
-        pill(ebtd.mes.actual >= ebtd.mes.budget ? 'up' : 'down',
-          (ebtd.mes.actual >= ebtd.mes.budget ? '▲ +' : '▼ ') +
-          fmt(Math.abs(ebtd.mes.actual - ebtd.mes.budget)) + ' vs budget')) +
-      kpiCard('1ª Prima · Últ. Reporte', pct(avgPrima), 'Merma promedio ' + pct(avgMerma),
-        avgMerma > 4 ? 'neg' : 'pos',
-        avgMerma > 4 ? 'accent-neg' : 'accent-pos',
-        pill(avgMerma > 4 ? 'down' : 'up', avgMerma > 4 ? '⚠ Merma sobre umbral' : '✓ Calidad OK')) +
-      kpiCard('Cargas Registradas', fmtN(cargas), D.operaciones.embarques.length + ' registros · ' + D.meta.semana,
-        'acc', 'accent-blue', null);
+    /* Fecha resumen */
+    var fechaEl = document.getElementById('resumenFecha');
+    if (fechaEl) fechaEl.textContent = D.meta.fecha;
 
     /* EBITDA donuts */
     var mesOK    = ebtd.mes.actual >= ebtd.mes.budget;
