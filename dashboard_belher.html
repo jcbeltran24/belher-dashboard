@@ -217,6 +217,11 @@ main {
   margin: 28px 0 14px;
 }
 .section-title:first-child { margin-top: 2px; }
+.src-tag {
+  font-size: .58rem; font-weight: 600; letter-spacing: .5px; text-transform: none;
+  color: var(--muted); background: var(--bg2); border: 1px solid var(--border);
+  padding: 2px 7px; border-radius: 10px; white-space: nowrap; opacity: .8;
+}
 .section-title::before {
   content: '';
   display: block; width: 3px; height: 14px;
@@ -823,7 +828,7 @@ footer span { color: var(--accent2); font-weight: 600; }
   <!-- ══════════ OPERACIONES ══════════ -->
   <div class="tab-panel" id="tab-operaciones">
 
-    <div class="section-title">Embarques · TX / AZ · Cargas por Día</div>
+    <div class="section-title">Embarques · TX / AZ · Cargas por Día <span class="src-tag">embarquesbelher@agbelher.com</span></div>
     <div class="card-table">
       <div class="tbl-wrap">
         <table id="embTbl">
@@ -857,17 +862,17 @@ footer span { color: var(--accent2); font-weight: 600; }
   <div class="tab-panel" id="tab-calidad">
 
     <!-- 0. BÁSCULA -->
-    <div class="section-title">Báscula · Actividad de Pesaje</div>
+    <div class="section-title">Báscula · Actividad de Pesaje <span class="src-tag">basculabelher@gmail.com</span></div>
     <div class="card">
       <div class="bascula-grid" id="bascWidget"></div>
     </div>
 
     <!-- 1. HERO: export quality KPIs -->
-    <div class="section-title" id="outboundTitle">Calidad Exportación</div>
+    <div class="section-title" id="outboundTitle">Calidad Exportación <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
     <div class="grid-3" id="calidadHeroKpis"></div>
 
     <!-- 2. Trend chart — 1ª Prima is the main line -->
-    <div class="section-title">Tendencia · 1ª Prima Exportación</div>
+    <div class="section-title">Tendencia · 1ª Primera Exportación <span class="src-tag">calidad@agbelher.com · histórico</span></div>
     <div class="card">
       <div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div>
     </div>
@@ -902,10 +907,10 @@ footer span { color: var(--accent2); font-weight: 600; }
   <!-- ══════════ MERCADO ══════════ -->
   <div class="tab-panel" id="tab-mercado">
 
-    <div class="section-title" id="mercadoReporteTitle">Precios de Mercado</div>
+    <div class="section-title" id="mercadoReporteTitle">Precios de Mercado <span class="src-tag">ray@agbelher.com · Corbel Seeds Daily</span></div>
     <div class="price-hero-grid" id="priceHeroCards"></div>
 
-    <div class="section-title">Comparativo vs Semana Anterior</div>
+    <div class="section-title">Comparativo vs Semana Anterior <span class="src-tag">Corbel Seeds Daily · USDA AMS</span></div>
     <div class="price-compare-grid" id="priceCompareGrid"></div>
 
     <div class="section-title">Resumen Ejecutivo</div>
@@ -922,15 +927,15 @@ footer span { color: var(--accent2); font-weight: 600; }
     <div class="section-title">Resumen Financiero · Temporada</div>
     <div class="fin-kpi-row" id="finKpis"></div>
 
-    <div class="section-title">Revenue Total · Febrero 2026</div>
+    <div class="section-title">Revenue Total · Febrero 2026 <span class="src-tag">jacruz@agbelher.com · Estado Financiero</span></div>
     <div class="card" id="revSplitCard" style="padding:24px"></div>
 
-    <div class="section-title">EBITDA: Actual vs Budget vs Y/A</div>
+    <div class="section-title">EBITDA: Actual vs Budget vs Y/A <span class="src-tag">jacruz@agbelher.com · Estado Financiero Feb 2026</span></div>
     <div class="card" style="padding:22px">
       <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
     </div>
 
-    <div class="section-title">Pagos Semanales Calavo</div>
+    <div class="section-title">Pagos Semanales Calavo <span class="src-tag">leima@agbelher.com · Settlement Calavo</span></div>
     <div class="card">
       <div class="chart-box"><canvas id="chartPagos"></canvas></div>
     </div>
@@ -1406,7 +1411,7 @@ footer span { color: var(--accent2); font-weight: 600; }
     document.getElementById('calidadHeroKpis').innerHTML =
       /* BIG hero: 1ª Prima */
       '<div class="kpi-card ' + (primaOK ? 'accent-pos' : 'accent-warn') + '" style="grid-column:span 1">' +
-        '<div class="kpi-label">1ª Prima · Calidad Exportación</div>' +
+        '<div class="kpi-label">1ª Primera · Calidad Exportación</div>' +
         '<div class="kpi-value ' + (primaOK ? 'pos' : 'acc') + '" style="font-size:2.6rem">' + pct(avgPrima) + '</div>' +
         '<div class="kpi-sub">Promedio · ' + ub.variedades.length + ' variedades · ' + ub.fecha + '</div>' +
         (primaDiff != null
@@ -1529,15 +1534,15 @@ footer span { color: var(--accent2); font-weight: 600; }
           '<div class="pc-name">' + p.producto + '</div>' +
           '<span class="badge badge-blue">' + p.via + '</span>' +
         '</div>' +
-        '<div class="pc-range">$' + fmt(p.min,2) + '&nbsp;–&nbsp;$' + fmt(p.max,2) + '</div>' +
+        '<div class="pc-range">' + fmt(p.min,2) + '&nbsp;–&nbsp;' + fmt(p.max,2) + '</div>' +
         '<div class="pc-chg ' + chgCls + '">' + chgStr + '</div>' +
         '<div class="pc-bar-wrap">' +
           '<div class="pc-bar-fill" style="left:' + minPct + '%;width:' + widPct + '%;background:' + barColor + '"></div>' +
           (antPct != null ? '<div class="pc-bar-tick" style="left:' + antPct + '%"></div>' : '') +
         '</div>' +
         '<div class="pc-footer">' +
-          '<span>' + (p.anterior != null ? 'Anterior: $' + fmt(p.anterior,2) : 'Sin dato ant.') + '</span>' +
-          '<span>Mid: $' + fmt(mid,2) + '</span>' +
+          '<span>' + (p.anterior != null ? 'Anterior: ' + fmt(p.anterior,2) : 'Sin dato ant.') + '</span>' +
+          '<span>Mid: ' + fmt(mid,2) + '</span>' +
         '</div>' +
       '</div>';
     }).join('');
@@ -1644,34 +1649,43 @@ footer span { color: var(--accent2); font-weight: 600; }
       chartsInit.calidad = true;
       var hist = D.calidad.historico;
       new Chart(document.getElementById('chartCalidad').getContext('2d'), {
-        type: 'line',
+        type: 'bar',
         data: {
           labels: hist.map(function (h) { return h.fecha; }),
           datasets: [
             {
-              label: '1ª Prima %',
+              type: 'line',
+              label: '1ª Primera %',
               data: hist.map(function (h) { return h.primaPromedio; }),
-              borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,.08)',
-              tension: .4, pointRadius: 5, pointBackgroundColor: '#fff',
-              pointBorderColor: '#16a34a', pointBorderWidth: 2,
-              fill: true, yAxisID: 'yP', borderWidth: 2
+              borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,.10)',
+              tension: .35, pointRadius: 6, pointBackgroundColor: '#fff',
+              pointBorderColor: '#16a34a', pointBorderWidth: 2.5,
+              fill: true, yAxisID: 'yP', borderWidth: 2.5, order: 1
             },
             {
+              type: 'bar',
               label: 'Merma %',
               data: hist.map(function (h) { return h.mermaPromedio; }),
-              borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,.06)',
-              tension: .4, pointRadius: 5, pointBackgroundColor: '#fff',
-              pointBorderColor: '#dc2626', pointBorderWidth: 2,
-              fill: true, yAxisID: 'yM', borderWidth: 2
+              backgroundColor: hist.map(function (h) { return h.mermaPromedio > 4 ? 'rgba(220,38,38,.75)' : h.mermaPromedio > 3 ? 'rgba(217,119,6,.65)' : 'rgba(220,38,38,.35)'; }),
+              borderRadius: 4, yAxisID: 'yM', order: 2, barPercentage: 0.5
             }
           ]
         },
         options: {
           responsive: true, interaction: { mode: 'index', intersect: false },
-          plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: function (c) { return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(2) + '%'; } } } },
+          plugins: {
+            legend: { position: 'top' },
+            tooltip: { callbacks: { label: function (c) { return ' ' + c.dataset.label + ': ' + Number(c.parsed.y).toFixed(2) + '%'; } } }
+          },
           scales: {
-            yP: { type: 'linear', position: 'left',  min: 82, max: 94, title: { display: true, text: '1ª Prima %' }, grid: { color: 'rgba(0,0,0,.05)' } },
-            yM: { type: 'linear', position: 'right', min: 0,  max: 8,  title: { display: true, text: 'Merma %' },    grid: { drawOnChartArea: false }, ticks: { callback: function (v) { return v + '%'; } } }
+            yP: { type: 'linear', position: 'left',  min: 82, max: 98,
+                  title: { display: true, text: '1ª Primera %' },
+                  grid: { color: 'rgba(0,0,0,.05)' },
+                  ticks: { callback: function (v) { return v + '%'; } } },
+            yM: { type: 'linear', position: 'right', min: 0, max: 8,
+                  title: { display: true, text: 'Merma %' },
+                  grid: { drawOnChartArea: false },
+                  ticks: { callback: function (v) { return v + '%'; } } }
           }
         }
       });
@@ -1688,7 +1702,7 @@ footer span { color: var(--accent2); font-weight: 600; }
       var nacPct = (rv.nacional / rv.total * 100).toFixed(1);
       document.getElementById('revSplitCard').innerHTML =
         '<div class="rev-total-label">Revenue Total · Temporada</div>' +
-        '<div class="rev-total-hero">$' + fmt(rv.total) + '</div>' +
+        '<div class="rev-total-hero">' + fmt(rv.total) + '</div>' +
         '<div class="rev-split-bar">' +
           '<div class="rev-bar-fob" style="width:' + fobPct + '%"></div>' +
           '<div class="rev-bar-nac" style="width:' + nacPct + '%"></div>' +
@@ -1700,12 +1714,12 @@ footer span { color: var(--accent2); font-weight: 600; }
         '<div class="rev-split-row">' +
           '<div class="rev-split-item">' +
             '<span class="rev-split-name"><span class="rev-split-dot" style="background:var(--green2)"></span>FOB Exportación</span>' +
-            '<span class="rev-split-val" style="color:var(--green2)">$' + fmt(rv.fob) + '</span>' +
+            '<span class="rev-split-val" style="color:var(--green2)">' + fmt(rv.fob) + '</span>' +
             '<span class="rev-split-pct">' + fobPct + '% del total</span>' +
           '</div>' +
           '<div class="rev-split-item">' +
             '<span class="rev-split-name"><span class="rev-split-dot" style="background:#1d4ed8"></span>Mercado Nacional</span>' +
-            '<span class="rev-split-val" style="color:#1d4ed8">$' + fmt(rv.nacional) + '</span>' +
+            '<span class="rev-split-val" style="color:#1d4ed8">' + fmt(rv.nacional) + '</span>' +
             '<span class="rev-split-pct">' + nacPct + '% del total</span>' +
           '</div>' +
         '</div>';
@@ -1869,7 +1883,7 @@ footer span { color: var(--accent2); font-weight: 600; }
       kpiCard('Cargas Exportadas', totalCargas, 'Temporada · TX &amp; AZ', 'dark', 'accent-blue', null) +
       kpiCard('Último Embarque', lastDate, tipo + ' · exportación', 'dark', 'accent-blue', null) +
       (destStr ? kpiCard('Distribución Destinos', destStr || '—', 'Cargas por mercado', 'dark', 'accent-blue', null) : '') +
-      (precios.length ? kpiCard('Precio Rango (Hoy)', precios.length ? '$' + fmt(precios[0].min,2) + '–$' + fmt(precios[0].max,2) : '—', precios.length ? precios[0].via : '', 'pos', 'accent-pos', null) : '');
+      (precios.length ? kpiCard('Precio Rango (Hoy)', precios.length ? fmt(precios[0].min,2) + '–' + fmt(precios[0].max,2) : '—', precios.length ? precios[0].via : '', 'pos', 'accent-pos', null) : '');
 
     /* Varieties (Tomate only) */
     if (varId && D.calidad && D.calidad.ultimoOutbound) {
@@ -1907,11 +1921,11 @@ footer span { color: var(--accent2); font-weight: 600; }
         var antPct = p.anterior != null ? (p.anterior / scaleMax * 100).toFixed(1) : null;
         return '<div class="pc-card' + (p.alerta ? ' pc-alert' : '') + '">' +
           '<div class="pc-header"><div class="pc-name">' + p.producto + '</div><span class="badge badge-blue">' + p.via + '</span></div>' +
-          '<div class="pc-range">$' + fmt(p.min,2) + '&nbsp;–&nbsp;$' + fmt(p.max,2) + '</div>' +
+          '<div class="pc-range">' + fmt(p.min,2) + '&nbsp;–&nbsp;' + fmt(p.max,2) + '</div>' +
           '<div class="pc-chg ' + chgCls + '">' + chgStr + '</div>' +
           '<div class="pc-bar-wrap"><div class="pc-bar-fill" style="left:' + minPct + '%;width:' + widPct + '%;background:' + barColor + '"></div>' +
           (antPct != null ? '<div class="pc-bar-tick" style="left:' + antPct + '%"></div>' : '') + '</div>' +
-          '<div class="pc-footer"><span>' + (p.anterior != null ? 'Anterior: $' + fmt(p.anterior,2) : 'Sin dato ant.') + '</span><span>Mid: $' + fmt(mid,2) + '</span></div>' +
+          '<div class="pc-footer"><span>' + (p.anterior != null ? 'Anterior: ' + fmt(p.anterior,2) : 'Sin dato ant.') + '</span><span>Mid: $' + fmt(mid,2) + '</span></div>' +
         '</div>';
       }).join('');
     } else {
@@ -1942,22 +1956,22 @@ footer span { color: var(--accent2); font-weight: 600; }
 
     /* ── Ventas Exportación ── */
     var expTotal = tv.exportacion.reduce(function (s,e) { return s + (e.revenue||0); }, 0);
-    document.getElementById('tomateExpTotal').textContent = '$' + fmt(expTotal);
+    document.getElementById('tomateExpTotal').textContent = fmt(expTotal);
     document.getElementById('tomateExpVentas').innerHTML = tv.exportacion.map(function (e) {
       return '<div class="etiq-card">' +
         '<div class="etiq-name">Etiqueta · ' + e.etiqueta + '</div>' +
-        '<div class="etiq-revenue" style="color:var(--green2)">$' + fmt(e.revenue) + '</div>' +
+        '<div class="etiq-revenue" style="color:var(--green2)">' + fmt(e.revenue) + '</div>' +
         '<div class="etiq-cajas">' + (e.cajas ? fmtN(e.cajas) + ' cajas' : 'Cajas: pendiente') + '</div>' +
       '</div>';
     }).join('') || '<div class="etiq-card" style="color:var(--muted);font-size:.84rem">Sin datos de exportación</div>';
 
     /* ── Ventas Nacional ── */
     var nacTotal = tv.nacional.reduce(function (s,e) { return s + (e.revenue||0); }, 0);
-    document.getElementById('tomateNacTotal').textContent = '$' + fmt(nacTotal);
+    document.getElementById('tomateNacTotal').textContent = fmt(nacTotal);
     document.getElementById('tomateNacVentas').innerHTML = tv.nacional.map(function (e) {
       return '<div class="etiq-card">' +
         '<div class="etiq-name">Etiqueta · ' + e.etiqueta + '</div>' +
-        '<div class="etiq-revenue" style="color:#1d4ed8">$' + fmt(e.revenue) + '</div>' +
+        '<div class="etiq-revenue" style="color:#1d4ed8">' + fmt(e.revenue) + '</div>' +
         '<div class="etiq-cajas">' + (e.cajas ? fmtN(e.cajas) + ' cajas' : 'Desglose por etiqueta pendiente') + '</div>' +
       '</div>';
     }).join('') || '<div class="etiq-card" style="color:var(--muted);font-size:.84rem">Sin datos nacionales</div>';
@@ -1980,11 +1994,11 @@ footer span { color: var(--accent2); font-weight: 600; }
       var antPct = p.anterior != null ? (p.anterior / scaleMax * 100).toFixed(1) : null;
       return '<div class="pc-card">' +
         '<div class="pc-header"><div class="pc-name">' + p.producto + '</div><span class="badge badge-blue">' + p.via + '</span></div>' +
-        '<div class="pc-range">$' + fmt(p.min,2) + '&nbsp;–&nbsp;$' + fmt(p.max,2) + '</div>' +
+        '<div class="pc-range">' + fmt(p.min,2) + '&nbsp;–&nbsp;' + fmt(p.max,2) + '</div>' +
         '<div class="pc-chg ' + chgCls + '">' + chgStr + '</div>' +
         '<div class="pc-bar-wrap"><div class="pc-bar-fill" style="left:' + minPct + '%;width:' + widPct + '%;background:' + barColor + '"></div>' +
         (antPct != null ? '<div class="pc-bar-tick" style="left:' + antPct + '%"></div>' : '') + '</div>' +
-        '<div class="pc-footer"><span>' + (p.anterior != null ? 'Ant: $' + fmt(p.anterior,2) : '—') + '</span><span>Mid: $' + fmt(mid,2) + '</span></div>' +
+        '<div class="pc-footer"><span>' + (p.anterior != null ? 'Ant: ' + fmt(p.anterior,2) : '—') + '</span><span>Mid: ' + fmt(mid,2) + '</span></div>' +
       '</div>';
     }).join('') || '<div class="card" style="padding:16px;color:var(--muted);font-size:.84rem">Sin precios de tomate en el último reporte.</div>';
 

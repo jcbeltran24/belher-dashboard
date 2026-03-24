@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 23 Mar 2026",
+    fecha: "Martes 24 Mar 2026",
     semana: "WK 13",
-    actualizado: "23/03/2026 · 18:01"
+    actualizado: "24/03/2026 · 12:47"
   },
 
   alertas: [
+    { nivel: "success", texto: "Calidad exportación 23-Mar: merma promedio 1.22% — muy por debajo del umbral 4%" },
     { nivel: "success", texto: "Jalapeño Texas: $58–64/bu (+38% vs WK12) — oportunidad de margen activa" },
-    { nivel: "warning", texto: "Bola Calavo merma 4.80% (21-Mar) — sobre umbral operativo >4%" },
-    { nivel: "warning", texto: "Bola Yameto merma 4.13% (21-Mar) — monitorear tendencia" },
     { nivel: "danger",  texto: "Fertilizantes Feb: +$110k vs presupuesto (plaga Tizón)" },
-    { nivel: "info",    texto: "Reunión CF ABSA: Mié 25-Mar · 2pm | BPSI F/S: Mar 24-Mar · 10am" }
+    { nivel: "info",    texto: "Reunión CF ABSA: Mié 25-Mar · 2pm | BPSI F/S: Hoy 24-Mar · 10am" },
+    { nivel: "info",    texto: "Outbound 23-Mar: Roma Calavo 92.90% · Roma Millennium 90.70% · Roma Urson 89.48%" }
   ],
 
   ebitda: {
@@ -49,18 +49,18 @@ window.BELHER = {
 
   calidad: {
     historico: [
-      { fecha:"16/03", primaPromedio:85.92, mermaPromedio:5.03 },
       { fecha:"17/03", primaPromedio:89.50, mermaPromedio:3.00 },
       { fecha:"19/03", primaPromedio:87.69, mermaPromedio:3.62 },
       { fecha:"20/03", primaPromedio:88.50, mermaPromedio:3.50 },
-      { fecha:"21/03", primaPromedio:87.72, mermaPromedio:3.42 }
+      { fecha:"21/03", primaPromedio:87.72, mermaPromedio:3.42 },
+      { fecha:"23/03", primaPromedio:91.03, mermaPromedio:1.22 }
     ],
     ultimoOutbound: {
-      fecha: "21/03/2026",
+      fecha: "23/03/2026",
       variedades: [
-        { nombre:"Bola Calavo",  etiqueta:"Calavo",  canal:"exportacion", primera:87.20, segunda:4.00, tercera:4.00, merma:4.80, peso:21.65, alerta:true  },
-        { nombre:"Bola Yameto",  etiqueta:"Yameto",  canal:"exportacion", primera:87.15, segunda:3.78, tercera:4.93, merma:4.13, peso:32.01, alerta:true  },
-        { nombre:"Roma Calavo",  etiqueta:"Calavo",  canal:"exportacion", primera:88.80, segunda:6.13, tercera:3.73, merma:1.33, peso:25.20, alerta:false }
+        { nombre:"Roma Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:92.90, segunda:3.77, tercera:2.34, merma:0.99, peso:27.13, alerta:false },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:90.70, segunda:6.00, tercera:2.40, merma:0.90, peso:26.28, alerta:false },
+        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:89.48, segunda:5.70, tercera:3.04, merma:1.78, peso:26.17, alerta:false }
       ]
     }
   },
@@ -129,11 +129,11 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"12:44", asunto:"REPORTE DE OUTBOUND TOMATE 23/03/2026",            de:"Calidad Belher",   leido:false },
+    { hora:"21:04", asunto:"23-03-2026 REPORTES GENERALES",                    de:"Embarques Belher", leido:false },
     { hora:"17:11", asunto:"REPORTE DE BASCULA 23/03/2026 (REZAGA DE TOMATE)", de:"Báscula Belher",   leido:false },
     { hora:"17:07", asunto:"REPORTE DE BASCULA 23/03/2026 (TOMATE)",           de:"Báscula Belher",   leido:false },
-    { hora:"18:23", asunto:"Situación Actual de Corbel Seeds",                  de:"Raymundo Elizalde",leido:false },
-    { hora:"18:01", asunto:"Corbel Seeds Daily News Summary #0015",             de:"Raymundo Elizalde",leido:false },
-    { hora:"11:18", asunto:"REPORTE DE OUTBOUND TOMATE 21/03/2026",            de:"Calidad Belher",   leido:false }
+    { hora:"18:01", asunto:"Corbel Seeds Daily News Summary #0015",             de:"Raymundo Elizalde",leido:false }
   ],
 
   ticker: [
@@ -145,8 +145,8 @@ window.BELHER = {
     { label:"SERRANO TX",    valor:"$58–62/bu",    cambio:"nuevo",   dir:"up"      },
     { label:"EBITDA FEB",    valor:"$2.69M",       cambio:"vs BUD $2.31M ✓", dir:"up" },
     { label:"WK12 P&P",      valor:"$240K",        cambio:"48K cajas", dir:"neutral"},
-    { label:"1ª CALIDAD",    valor:"87.72%",       cambio:"21-Mar",  dir:"neutral" },
-    { label:"MERMA PROM",    valor:"3.42%",        cambio:"21-Mar",  dir:"neutral" },
+    { label:"1ª PRIMERA",    valor:"91.03%",       cambio:"23-Mar ▲",  dir:"up"     },
+    { label:"MERMA PROM",    valor:"1.22%",        cambio:"23-Mar ▼",  dir:"up"     },
     { label:"FERTILIZ.",     valor:"+$110K",       cambio:"sobre presupuesto", dir:"down" }
   ],
 
