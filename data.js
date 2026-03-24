@@ -60,10 +60,7 @@ window.BELHER = {
       variedades: [
         { nombre:"Roma Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:92.90, segunda:3.77, tercera:2.34, merma:0.99, peso:27.13, alerta:false },
         { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"nacional",    primera:90.70, segunda:6.00, tercera:2.40, merma:0.90, peso:26.28, alerta:false },
-        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"nacional",    primera:89.48, segunda:5.70, tercera:3.04, merma:1.78, peso:26.17, alerta:false },
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:91.20, segunda:4.30, tercera:2.80, merma:1.70, peso:23.45, alerta:false },
-        { nombre:"Bola Millennium", etiqueta:"Millennium", canal:"nacional",    primera:88.60, segunda:6.10, tercera:3.20, merma:2.10, peso:22.80, alerta:false },
-        { nombre:"Bola Urson",      etiqueta:"Urson",      canal:"nacional",    primera:87.90, segunda:6.50, tercera:3.30, merma:2.30, peso:22.60, alerta:false }
+        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"nacional",    primera:89.48, segunda:5.70, tercera:3.04, merma:1.78, peso:26.17, alerta:false }
       ]
     }
   },
