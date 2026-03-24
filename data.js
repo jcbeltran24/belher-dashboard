@@ -18,6 +18,12 @@ window.BELHER = {
     ytd:  { nombre: "Jul–Feb 2026", actual: -4082002, budget: -4124108, yago: -7496875 }
   },
 
+  revenue: {
+    total:    11532088,
+    fob:       7662531,
+    nacional:  3856070
+  },
+
   calavo: {
     revenueTotal: 9770259,
     comision:     2149457,

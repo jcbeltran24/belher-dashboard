@@ -486,6 +486,31 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .price-hero.hero-other  .ph-sub { color: var(--muted); }
 
 /* ═══════════════════════════════════════════════
+   REVENUE SPLIT (FOB / Nacional)
+══════════════════════════════════════════════ */
+.rev-total-hero { font-size: 2.2rem; font-weight: 900; letter-spacing: -.5px; color: var(--text); margin-bottom: 4px; }
+.rev-total-label { font-size: .65rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+.rev-split-bar { display: flex; height: 14px; border-radius: 8px; overflow: hidden; margin: 10px 0 6px; }
+.rev-bar-fob { background: var(--green2); }
+.rev-bar-nac { background: #1d4ed8; }
+.rev-split-row { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 16px; }
+.rev-split-item { display: flex; flex-direction: column; gap: 3px; }
+.rev-split-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+.rev-split-name { font-size: .72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; }
+.rev-split-val  { font-size: 1.35rem; font-weight: 800; letter-spacing: -.3px; }
+.rev-split-pct  { font-size: .72rem; color: var(--muted); }
+
+/* ═══════════════════════════════════════════════
+   PRODUCT TAB HEADERS
+══════════════════════════════════════════════ */
+.prod-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.prod-badge { padding: 4px 14px; border-radius: 20px; font-size: .72rem; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
+.prod-badge-tomate { background: rgba(220,38,38,.12); color: #dc2626; }
+.prod-badge-limon  { background: rgba(101,163,13,.15); color: #65a30d; }
+.prod-badge-chile  { background: rgba(234,88,12,.13);  color: #ea580c; }
+.prod-badge-granos { background: rgba(217,119,6,.13);  color: #d97706; }
+
+/* ═══════════════════════════════════════════════
    PRICE COMPARE CARDS (vs semana anterior)
 ══════════════════════════════════════════════ */
 .price-compare-grid {
@@ -731,6 +756,10 @@ footer span { color: var(--accent2); font-weight: 600; }
   <button data-tab="calidad">Calidad</button>
   <button data-tab="mercado">Mercado</button>
   <button data-tab="finanzas">Finanzas</button>
+  <button data-tab="tomate">Tomate</button>
+  <button data-tab="limon">Limón</button>
+  <button data-tab="chile">Chile</button>
+  <button data-tab="granos">Granos</button>
   <button data-tab="estrategia">Estrategia</button>
   <button data-tab="industria">Industria</button>
 </nav>
@@ -857,17 +886,12 @@ footer span { color: var(--accent2); font-weight: 600; }
     <div class="section-title">Resumen Financiero · Temporada</div>
     <div class="fin-kpi-row" id="finKpis"></div>
 
-    <div class="section-title">Revenue Calavo &amp; EBITDA</div>
-    <div class="grid-2">
-      <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px">
-        <div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);align-self:flex-start">Estructura de Revenue · Temporada</div>
-        <canvas id="chartRevDonut" style="max-width:200px;max-height:200px"></canvas>
-        <div class="rev-legend" id="revLegend"></div>
-      </div>
-      <div class="card" style="padding:22px">
-        <div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">EBITDA: Actual vs Budget vs Y/A</div>
-        <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
-      </div>
+    <div class="section-title">Revenue Total · Febrero 2026</div>
+    <div class="card" id="revSplitCard" style="padding:24px"></div>
+
+    <div class="section-title">EBITDA: Actual vs Budget vs Y/A</div>
+    <div class="card" style="padding:22px">
+      <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
     </div>
 
     <div class="section-title">Pagos Semanales Calavo</div>
@@ -894,6 +918,60 @@ footer span { color: var(--accent2); font-weight: 600; }
       </div>
     </div>
 
+  </div>
+
+  <!-- ══════════ TOMATE ══════════ -->
+  <div class="tab-panel" id="tab-tomate">
+    <div class="section-title">KPIs · Tomate</div>
+    <div class="grid-4" id="tomateKpis"></div>
+    <div class="section-title">Calidad por Variedad</div>
+    <div class="quality-card-grid" id="tomateVariedades"></div>
+    <div class="section-title">Precios de Mercado</div>
+    <div class="price-compare-grid" id="tomatePrecios"></div>
+    <div class="section-title">Embarques · Tomate</div>
+    <div class="card-table"><div class="tbl-wrap"><table id="tomateEmbarquesTbl">
+      <thead><tr><th>Fecha</th><th>Cargas</th><th>Unidad</th><th>Flota</th><th>Destino</th><th>Estado</th></tr></thead>
+      <tbody></tbody>
+    </table></div></div>
+  </div>
+
+  <!-- ══════════ LIMÓN ══════════ -->
+  <div class="tab-panel" id="tab-limon">
+    <div class="section-title">KPIs · Limón Persa</div>
+    <div class="grid-3" id="limonKpis"></div>
+    <div class="section-title">Precios de Mercado</div>
+    <div class="price-compare-grid" id="limonPrecios"></div>
+    <div class="section-title">Embarques · Limón</div>
+    <div class="card-table"><div class="tbl-wrap"><table id="limonEmbarquesTbl">
+      <thead><tr><th>Fecha</th><th>Cargas</th><th>Unidad</th><th>Flota</th><th>Destino</th><th>Estado</th></tr></thead>
+      <tbody></tbody>
+    </table></div></div>
+  </div>
+
+  <!-- ══════════ CHILE ══════════ -->
+  <div class="tab-panel" id="tab-chile">
+    <div class="section-title">KPIs · Chile</div>
+    <div class="grid-3" id="chileKpis"></div>
+    <div class="section-title">Precios de Mercado</div>
+    <div class="price-compare-grid" id="chilePrecios"></div>
+    <div class="section-title">Embarques · Chile</div>
+    <div class="card-table"><div class="tbl-wrap"><table id="chileEmbarquesTbl">
+      <thead><tr><th>Fecha</th><th>Cargas</th><th>Unidad</th><th>Flota</th><th>Destino</th><th>Estado</th></tr></thead>
+      <tbody></tbody>
+    </table></div></div>
+  </div>
+
+  <!-- ══════════ GRANOS ══════════ -->
+  <div class="tab-panel" id="tab-granos">
+    <div class="section-title">KPIs · Granos</div>
+    <div class="grid-3" id="granosKpis"></div>
+    <div class="section-title">Precios de Mercado</div>
+    <div class="price-compare-grid" id="granosPrecios"></div>
+    <div class="section-title">Embarques · Granos</div>
+    <div class="card-table"><div class="tbl-wrap"><table id="granosEmbarquesTbl">
+      <thead><tr><th>Fecha</th><th>Cargas</th><th>Unidad</th><th>Flota</th><th>Destino</th><th>Estado</th></tr></thead>
+      <tbody></tbody>
+    </table></div></div>
   </div>
 
   <!-- ══════════ ESTRATEGIA ══════════ -->
@@ -1535,42 +1613,34 @@ footer span { color: var(--accent2); font-weight: 600; }
       chartsInit.finanzas = true;
       var cv  = D.calavo;
       var ebd = D.ebitda;
+      var rv  = D.revenue;
 
-      new Chart(document.getElementById('chartRevDonut').getContext('2d'), {
-        type: 'doughnut',
-        data: {
-          labels: ['Comisión', 'Pick & Pack', 'Z-Code', 'Neto Belher'],
-          datasets: [{
-            data: [cv.comision, cv.pickPack, cv.zCode, cv.neto],
-            backgroundColor: ['#dc2626','#d97706','#1d4ed8','#16a34a'],
-            borderWidth: 3, borderColor: '#fff',
-            hoverOffset: 6
-          }]
-        },
-        options: {
-          cutout: '62%', responsive: true,
-          plugins: {
-            legend: { display: false },
-            tooltip: { callbacks: { label: function (c) { return ' $' + Number(c.parsed).toLocaleString('en-US'); } } }
-          },
-          animation: { duration: 800, easing: 'easeInOutQuart' }
-        }
-      });
-
-      document.getElementById('revLegend').innerHTML =
-        [{ label:'Revenue Total', val:cv.revenueTotal, color:'#0c2117' },
-         { label:'Comisión Calavo', val:cv.comision,  color:'#dc2626' },
-         { label:'Pick & Pack',    val:cv.pickPack,   color:'#d97706' },
-         { label:'Z-Code/Gastos',  val:cv.zCode,      color:'#1d4ed8' },
-         { label:'Neto Belher',    val:cv.neto,        color:'#16a34a' }]
-        .map(function (r) {
-          return '<div class="rev-leg-row">' +
-            '<span class="rev-dot" style="background:' + r.color + '"></span>' +
-            '<span class="rev-name">' + r.label + '</span>' +
-            '<span class="rev-val">' + fmt(r.val) + '</span>' +
-            '<span class="rev-pct">(' + (r.val/cv.revenueTotal*100).toFixed(1) + '%)</span>' +
-          '</div>';
-        }).join('');
+      /* Revenue split card */
+      var fobPct = (rv.fob / rv.total * 100).toFixed(1);
+      var nacPct = (rv.nacional / rv.total * 100).toFixed(1);
+      document.getElementById('revSplitCard').innerHTML =
+        '<div class="rev-total-label">Revenue Total · Temporada</div>' +
+        '<div class="rev-total-hero">$' + fmt(rv.total) + '</div>' +
+        '<div class="rev-split-bar">' +
+          '<div class="rev-bar-fob" style="width:' + fobPct + '%"></div>' +
+          '<div class="rev-bar-nac" style="width:' + nacPct + '%"></div>' +
+        '</div>' +
+        '<div style="display:flex;gap:6px;font-size:.65rem;color:var(--muted);margin-bottom:18px">' +
+          '<span style="color:var(--green2);font-weight:700">█</span> FOB Export ' + fobPct + '% &nbsp;' +
+          '<span style="color:#1d4ed8;font-weight:700">█</span> Nacional ' + nacPct + '%' +
+        '</div>' +
+        '<div class="rev-split-row">' +
+          '<div class="rev-split-item">' +
+            '<span class="rev-split-name"><span class="rev-split-dot" style="background:var(--green2)"></span>FOB Exportación</span>' +
+            '<span class="rev-split-val" style="color:var(--green2)">$' + fmt(rv.fob) + '</span>' +
+            '<span class="rev-split-pct">' + fobPct + '% del total</span>' +
+          '</div>' +
+          '<div class="rev-split-item">' +
+            '<span class="rev-split-name"><span class="rev-split-dot" style="background:#1d4ed8"></span>Mercado Nacional</span>' +
+            '<span class="rev-split-val" style="color:#1d4ed8">$' + fmt(rv.nacional) + '</span>' +
+            '<span class="rev-split-pct">' + nacPct + '% del total</span>' +
+          '</div>' +
+        '</div>';
 
       new Chart(document.getElementById('chartEbitda').getContext('2d'), {
         type: 'bar',
@@ -1690,6 +1760,127 @@ footer span { color: var(--accent2); font-weight: 600; }
     buildCards();
   }
 
+  /* ════════════════ PRODUCT TABS (shared helper) ════════════════ */
+  function renderProductTab(cfg) {
+    var tipo       = cfg.tipo;       // e.g. "Tomate"
+    var tabId      = cfg.tabId;      // e.g. "tomate"
+    var kpisId     = cfg.kpisId;
+    var preciosId  = cfg.preciosId;
+    var tblId      = cfg.tblId;
+    var badgeCls   = cfg.badgeCls;
+    var varId      = cfg.varId || null; // optional varieties grid
+
+    var clasificarUnidad = function (u) {
+      u = (u || '').toUpperCase().trim();
+      if (/^ST[\-\s]?\d/i.test(u))  return 'Transfrios (ST)';
+      if (/^JL[\-\s]?\d/i.test(u))  return 'Elogística (JL)';
+      if (/^CGG[\-\s]?\d/i.test(u)) return 'CGG (CGG)';
+      return 'Otros';
+    };
+
+    /* Embarques for this product */
+    var emb = (D.operaciones.embarques || []).filter(function (e) {
+      return e.tipo === tipo;
+    });
+    var totalCargas = emb.reduce(function (s, e) { return s + (e.cargas || 0); }, 0);
+    var lastDate    = emb.length ? emb[0].fecha : '—';
+    var destinations = {};
+    emb.forEach(function (e) { destinations[e.destino] = (destinations[e.destino] || 0) + e.cargas; });
+    var destStr = Object.keys(destinations).map(function (k) { return destinations[k] + ' ' + k; }).join(' · ');
+
+    /* Prices for this product */
+    var keyMap = { 'Tomate': ['tomate','vine','grape','roma','saladet'], 'Limón': ['lim','lime'], 'Chile': ['jal','ser','chile','pepper','bell'], 'Granos': ['grano','maiz','trigo','frijol','soya','bean'] };
+    var keys   = keyMap[tipo] || [tipo.toLowerCase()];
+    var precios = (D.mercado.precios || []).filter(function (p) {
+      var n = p.producto.toLowerCase();
+      return keys.some(function (k) { return n.indexOf(k) !== -1; });
+    });
+
+    /* KPI cards */
+    document.getElementById(kpisId).innerHTML =
+      kpiCard('Cargas Exportadas', totalCargas, 'Temporada · TX &amp; AZ', 'dark', 'accent-blue', null) +
+      kpiCard('Último Embarque', lastDate, tipo + ' · exportación', 'dark', 'accent-blue', null) +
+      (destStr ? kpiCard('Distribución Destinos', destStr || '—', 'Cargas por mercado', 'dark', 'accent-blue', null) : '') +
+      (precios.length ? kpiCard('Precio Rango (Hoy)', precios.length ? '$' + fmt(precios[0].min,2) + '–$' + fmt(precios[0].max,2) : '—', precios.length ? precios[0].via : '', 'pos', 'accent-pos', null) : '');
+
+    /* Varieties (Tomate only) */
+    if (varId && D.calidad && D.calidad.ultimoOutbound) {
+      var ub  = D.calidad.ultimoOutbound;
+      document.getElementById(varId).innerHTML = ub.variedades.map(function (v) {
+        var mCls = v.merma > 4 ? 'bad' : v.merma > 3 ? 'warn' : 'ok';
+        var tot  = v.primera + v.segunda + v.tercera + v.merma;
+        var pBar = function (val, color) { return '<div style="height:100%;width:' + (val/tot*100).toFixed(1) + '%;background:' + color + ';border-radius:2px"></div>'; };
+        return '<div class="qual-card">' +
+          '<div class="qual-name">' + v.nombre + '</div>' +
+          '<div class="qual-prima">' + pct(v.primera) + '<span style="font-size:.7rem;font-weight:500;opacity:.7"> 1ª Prima</span></div>' +
+          '<div class="qual-merma-badge ' + mCls + '">Merma ' + pct(v.merma) + '</div>' +
+          '<div class="qual-stack" style="display:flex;height:8px;gap:2px;margin:10px 0 6px;border-radius:4px;overflow:hidden">' +
+            pBar(v.primera,'var(--green2)') + pBar(v.segunda,'var(--accent2)') + pBar(v.tercera,'#6366f1') + pBar(v.merma, v.merma>4?'var(--red2)':'rgba(220,38,38,.4)') +
+          '</div>' +
+          '<div style="display:flex;gap:10px;font-size:.68rem;color:var(--muted)">' +
+            '<span>1ª&nbsp;' + pct(v.primera) + '</span><span>2ª&nbsp;' + pct(v.segunda) + '</span>' +
+            '<span>3ª&nbsp;' + pct(v.tercera) + '</span><span>Merma&nbsp;' + pct(v.merma) + '</span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    /* Prices grid */
+    if (precios.length) {
+      var scaleMax = Math.max.apply(null, precios.map(function (p) { return p.max; })) * 1.15;
+      document.getElementById(preciosId).innerHTML = precios.map(function (p) {
+        var mid = (p.min + p.max) / 2;
+        var chgPct = p.anterior != null ? ((mid - p.anterior) / p.anterior * 100) : null;
+        var chgStr = chgPct != null ? (chgPct >= .5 ? '▲ +' : chgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(chgPct).toFixed(1) + '% vs semana anterior' : 'Sin comparativo anterior';
+        var chgCls = chgPct == null ? 'neu' : chgPct > .5 ? 'up' : chgPct < -.5 ? 'dn' : 'neu';
+        var barColor = chgPct == null ? 'rgba(107,114,128,.4)' : chgPct > 10 ? 'rgba(22,163,74,.85)' : chgPct > 0 ? 'rgba(22,163,74,.55)' : chgPct > -10 ? 'rgba(220,38,38,.55)' : 'rgba(220,38,38,.85)';
+        var minPct = (p.min / scaleMax * 100).toFixed(1);
+        var widPct = ((p.max - p.min) / scaleMax * 100).toFixed(1);
+        var antPct = p.anterior != null ? (p.anterior / scaleMax * 100).toFixed(1) : null;
+        return '<div class="pc-card' + (p.alerta ? ' pc-alert' : '') + '">' +
+          '<div class="pc-header"><div class="pc-name">' + p.producto + '</div><span class="badge badge-blue">' + p.via + '</span></div>' +
+          '<div class="pc-range">$' + fmt(p.min,2) + '&nbsp;–&nbsp;$' + fmt(p.max,2) + '</div>' +
+          '<div class="pc-chg ' + chgCls + '">' + chgStr + '</div>' +
+          '<div class="pc-bar-wrap"><div class="pc-bar-fill" style="left:' + minPct + '%;width:' + widPct + '%;background:' + barColor + '"></div>' +
+          (antPct != null ? '<div class="pc-bar-tick" style="left:' + antPct + '%"></div>' : '') + '</div>' +
+          '<div class="pc-footer"><span>' + (p.anterior != null ? 'Anterior: $' + fmt(p.anterior,2) : 'Sin dato ant.') + '</span><span>Mid: $' + fmt(mid,2) + '</span></div>' +
+        '</div>';
+      }).join('');
+    } else {
+      document.getElementById(preciosId).innerHTML = '<div class="card" style="padding:20px;color:var(--muted);font-size:.85rem">Sin precios de mercado disponibles para ' + tipo + ' en el último reporte.</div>';
+    }
+
+    /* Shipments table */
+    var tbody = document.querySelector('#' + tblId + ' tbody');
+    if (tbody) {
+      if (emb.length) {
+        tbody.innerHTML = emb.map(function (e) {
+          var flota = clasificarUnidad(e.unidad);
+          var estadoCls = e.estado !== 'OK' ? 'style="color:var(--red2);font-weight:700"' : '';
+          return '<tr><td>' + e.fecha + '</td><td class="td-num">' + e.cargas + '</td>' +
+            '<td>' + e.unidad + '</td><td>' + flota + '</td>' +
+            '<td><span class="badge badge-blue">' + e.destino + '</span></td>' +
+            '<td ' + estadoCls + '>' + e.estado + '</td></tr>';
+        }).join('');
+      } else {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Sin embarques registrados para ' + tipo + '</td></tr>';
+      }
+    }
+  }
+
+  function renderTomate()  {
+    renderProductTab({ tipo:'Tomate', tabId:'tomate', kpisId:'tomateKpis', preciosId:'tomatePrecios', tblId:'tomateEmbarquesTbl', badgeCls:'prod-badge-tomate', varId:'tomateVariedades' });
+  }
+  function renderLimon()   {
+    renderProductTab({ tipo:'Limón',  tabId:'limon',  kpisId:'limonKpis',  preciosId:'limonPrecios',  tblId:'limonEmbarquesTbl',  badgeCls:'prod-badge-limon'  });
+  }
+  function renderChile()   {
+    renderProductTab({ tipo:'Chile',  tabId:'chile',  kpisId:'chileKpis',  preciosId:'chilePrecios',  tblId:'chileEmbarquesTbl',  badgeCls:'prod-badge-chile'  });
+  }
+  function renderGranos()  {
+    renderProductTab({ tipo:'Granos', tabId:'granos', kpisId:'granosKpis', preciosId:'granosPrecios', tblId:'granosEmbarquesTbl', badgeCls:'prod-badge-granos' });
+  }
+
   /* ── INIT ── */
   renderTicker();
   renderHoy();
@@ -1697,6 +1888,10 @@ footer span { color: var(--accent2); font-weight: 600; }
   renderCalidad();
   renderMercado();
   renderFinanzas();
+  renderTomate();
+  renderLimon();
+  renderChile();
+  renderGranos();
   renderEstrategia();
   renderIndustria();
 
