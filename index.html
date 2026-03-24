@@ -997,7 +997,7 @@ footer span { color: var(--accent2); font-weight: 600; }
 
     /* KPI cards */
     document.getElementById('kpiVitals').innerHTML =
-      kpiCard('Total Liquidado · Calavo', fmt(paidTotal), 'Acumulado WK01–WK' + semCount, 'pos', 'accent-pos', pill('up', '✓ ' + semCount + ' semanas pagadas')) +
+      kpiCard('Adelanto Pick &amp; Pack · Acumulado', fmt(paidTotal), 'WK01–WK' + semCount, 'pos', 'accent-pos', pill('up', '✓ ' + semCount + ' semanas pagadas')) +
       kpiCard('EBITDA · ' + ebtd.mes.nombre, fmt(ebtd.mes.actual),
         'Budget ' + fmt(ebtd.mes.budget),
         ebtd.mes.actual >= ebtd.mes.budget ? 'pos' : 'neg',
@@ -1424,11 +1424,11 @@ footer span { color: var(--accent2); font-weight: 600; }
     var pendingWeeks = pagos.filter(function (p) { return p.estado === 'Pendiente'; }).length;
 
     document.getElementById('finKpis').innerHTML =
-      kpiCard('Total Liquidado', fmt(totalPago), 'WK01–WK' + semCount + ' confirmado', 'pos', 'accent-pos',
+      kpiCard('Adelanto Pick &amp; Pack · Acumulado', fmt(totalPago), 'WK01–WK' + semCount + ' confirmado', 'pos', 'accent-pos',
         pill('up', '✓ ' + semCount + ' semanas pagadas')) +
       kpiCard('Total Cajas', fmtN(totalCajas), 'Temporada acumulado', 'dark', 'accent-blue', null) +
       kpiCard('Contenedores', fmtN(totalCont), 'Embarques procesados', 'dark', 'accent-blue', null) +
-      kpiCard('Promedio / Semana', fmt(Math.round(totalPago / semCount)), semCount + ' semanas base',
+      kpiCard('Pick &amp; Pack Promedio / Semana', fmt(Math.round(totalPago / semCount)), semCount + ' semanas base',
         'acc', 'accent-warn',
         pendingWeeks ? pill('neu', pendingWeeks + ' sem. pendientes') : pill('up', '✓ Al corriente'));
 
