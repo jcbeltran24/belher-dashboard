@@ -68,10 +68,14 @@ window.BELHER = {
   tomate: {
     ventas: {
       exportacion: [
-        { etiqueta:"Calavo", cajas:421000, revenue:7662531 }
+        { etiqueta:"Calavo",     cajas:421000, revenue:7662531 },
+        { etiqueta:"Urson",      cajas:null,   revenue:null },
+        { etiqueta:"Millennium", cajas:null,   revenue:null },
+        { etiqueta:"Zazu",       cajas:null,   revenue:null }
       ],
       nacional: [
-        { etiqueta:"Nacional", cajas:null, revenue:3856070 }
+        { etiqueta:"Yameto", cajas:null, revenue:3856070 },
+        { etiqueta:"Tolin",  cajas:null, revenue:null }
       ]
     }
   },

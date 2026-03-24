@@ -658,6 +658,25 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .qs-merma { background: var(--red2); opacity: .85; }
 
 .qual-legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: .67rem; color: var(--muted); margin-top: 6px; }
+
+/* ── Variedad sections (Tomate tab) ─────────── */
+.variedad-section { margin-bottom: 20px; }
+.variedad-title {
+  font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted); padding: 6px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 12px;
+}
+.etq-card-mini {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r);
+  padding: 10px 14px; margin-bottom: 8px;
+}
+.etq-card-mini.no-data { opacity: .6; }
+.ecm-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.ecm-label { font-size: .82rem; font-weight: 800; color: var(--text); }
+.ecm-cajas { font-size: .72rem; color: var(--muted); }
+.ecm-grades { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; font-size: .68rem; text-align: center; margin-top: 6px; }
+.ecm-grades .g-val { font-size: .9rem; font-weight: 800; }
+.ecm-grades .g-lbl { opacity: .55; margin-top: 1px; }
+.ecm-nodata { font-size: .72rem; color: var(--muted); font-style: italic; margin-top: 4px; }
 .ql-dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 3px; vertical-align: middle; }
 .qual-meta { font-size: .71rem; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
 
@@ -998,16 +1017,8 @@ footer span { color: var(--accent2); font-weight: 600; }
     <div class="section-title">Precios de Mercado · Tomate</div>
     <div class="price-compare-grid" id="tomatePrecios"></div>
 
-    <div class="section-title">Calidad Exportación · Último Outbound <span id="tomateOutboundFecha" style="font-weight:400;font-size:.8rem;color:var(--muted)"></span></div>
-    <div class="canal-grid">
-      <div class="canal-col" id="tomateCalidadExp"></div>
-      <div class="canal-col">
-        <div class="canal-header canal-nac" style="margin-bottom:12px">
-          <span class="canal-label">Calidad Nacional</span>
-        </div>
-        <div id="tomateCalidadNac"></div>
-      </div>
-    </div>
+    <div class="section-title">Calidad & Cajas · por Variedad <span id="tomateOutboundFecha" style="font-weight:400;font-size:.8rem;color:var(--muted)"></span> <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
+    <div id="tomateVariedades"></div>
 
     <div class="section-title">Embarques · Tomate</div>
     <div class="card-table"><div class="tbl-wrap"><table id="tomateEmbarquesTbl">
@@ -1933,22 +1944,22 @@ footer span { color: var(--accent2); font-weight: 600; }
     /* ── Ventas Exportación ── */
     var expTotal = tv.exportacion.reduce(function (s,e) { return s + (e.revenue||0); }, 0);
     document.getElementById('tomateExpTotal').textContent = fmt(expTotal);
-    document.getElementById('tomateExpVentas').innerHTML = tv.exportacion.map(function (e) {
+    document.getElementById('tomateExpVentas').innerHTML = tv.exportacion.filter(function(e){ return e.revenue; }).map(function (e) {
       return '<div class="etiq-card">' +
         '<div class="etiq-name">Etiqueta · ' + e.etiqueta + '</div>' +
         '<div class="etiq-revenue" style="color:var(--green2)">' + fmt(e.revenue) + '</div>' +
-        '<div class="etiq-cajas">' + (e.etiqueta === 'Calavo' || e.etiqueta === 'Yameto' ? (e.cajas ? fmtN(e.cajas) + ' cajas' : 'Cajas: pendiente') : 'JZ') + '</div>' +
+        '<div class="etiq-cajas">' + (e.cajas ? fmtN(e.cajas) + ' cajas' : 'Cajas: pendiente') + '</div>' +
       '</div>';
     }).join('') || '<div class="etiq-card" style="color:var(--muted);font-size:.84rem">Sin datos de exportación</div>';
 
     /* ── Ventas Nacional ── */
     var nacTotal = tv.nacional.reduce(function (s,e) { return s + (e.revenue||0); }, 0);
     document.getElementById('tomateNacTotal').textContent = fmt(nacTotal);
-    document.getElementById('tomateNacVentas').innerHTML = tv.nacional.map(function (e) {
+    document.getElementById('tomateNacVentas').innerHTML = tv.nacional.filter(function(e){ return e.revenue; }).map(function (e) {
       return '<div class="etiq-card">' +
         '<div class="etiq-name">Etiqueta · ' + e.etiqueta + '</div>' +
         '<div class="etiq-revenue" style="color:#1d4ed8">' + fmt(e.revenue) + '</div>' +
-        '<div class="etiq-cajas">' + (e.cajas ? fmtN(e.cajas) + ' cajas' : 'Desglose por etiqueta pendiente') + '</div>' +
+        '<div class="etiq-cajas">' + (e.cajas ? fmtN(e.cajas) + ' cajas' : 'Cajas: pendiente') + '</div>' +
       '</div>';
     }).join('') || '<div class="etiq-card" style="color:var(--muted);font-size:.84rem">Sin datos nacionales</div>';
 
@@ -1978,60 +1989,94 @@ footer span { color: var(--accent2); font-weight: 600; }
       '</div>';
     }).join('') || '<div class="card" style="padding:16px;color:var(--muted);font-size:.84rem">Sin precios de tomate en el último reporte.</div>';
 
-    /* ── Calidad Exportación — grouped by etiqueta ── */
+    /* ── Calidad & Cajas por Variedad ── */
     document.getElementById('tomateOutboundFecha').textContent = '· ' + ub.fecha;
-    var expVars = ub.variedades.filter(function (v) { return v.canal === 'exportacion' || !v.canal; });
-    var etiquetas = [];
-    expVars.forEach(function (v) {
-      var e = v.etiqueta || 'Sin etiqueta';
-      if (etiquetas.indexOf(e) === -1) etiquetas.push(e);
-    });
-    document.getElementById('tomateCalidadExp').innerHTML =
-      '<div class="canal-header canal-export" style="margin-bottom:12px"><span class="canal-label">Calidad Exportación</span></div>' +
-      etiquetas.map(function (etq) {
-        var vars = expVars.filter(function (v) { return (v.etiqueta || 'Sin etiqueta') === etq; });
-        return '<div class="etiq-heading">Etiqueta · ' + etq + '</div>' +
-          '<div class="quality-card-grid" style="margin-bottom:14px">' +
-          vars.map(function (v) {
-            var mCls = v.merma > 4 ? 'bad' : v.merma > 3 ? 'warn' : 'ok';
-            var tot  = v.primera + v.segunda + v.tercera + v.merma;
-            var varName = v.nombre.replace(new RegExp(etq,'i'),'').trim() || v.nombre;
-            return '<div class="qual-card' + (v.alerta ? ' alerta-card' : '') + '">' +
-              '<div class="qual-name">' + varName +
-                (v.alerta ? '&nbsp;<span class="badge badge-red" style="font-size:.6rem">⚠</span>' : '') +
-              '</div>' +
-              '<div class="qual-stack" style="margin:6px 0 8px">' +
-                '<div class="qs-prima" style="width:' + (v.primera/tot*100).toFixed(1) + '%"></div>' +
-                '<div class="qs-seg" style="width:' + (v.segunda/tot*100).toFixed(1) + '%"></div>' +
-                '<div class="qs-ter" style="width:' + (v.tercera/tot*100).toFixed(1) + '%"></div>' +
-                '<div class="qs-merma" style="width:' + (v.merma/tot*100).toFixed(1) + '%"></div>' +
-              '</div>' +
-              '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-size:.72rem;text-align:center">' +
-                '<div><div style="font-size:1rem;font-weight:800;color:var(--green2)">' + pct(v.primera) + '</div><div style="opacity:.6">1ª</div></div>' +
-                '<div><div style="font-size:1rem;font-weight:700;color:#fbbf24">' + pct(v.segunda) + '</div><div style="opacity:.6">2ª</div></div>' +
-                '<div><div style="font-size:1rem;font-weight:700;color:#6366f1">' + pct(v.tercera) + '</div><div style="opacity:.6">3ª</div></div>' +
-                '<div><div class="qual-merma-badge ' + mCls + '" style="font-size:.82rem;display:inline-block">' + pct(v.merma) + '</div><div style="opacity:.6">Merma</div></div>' +
-              '</div>' +
-              '<div class="qual-meta" style="margin-top:6px">Peso: <strong>' + fmtN(v.peso,2) + ' oz</strong></div>' +
-            '</div>';
-          }).join('') +
-          '</div>';
-      }).join('');
 
-    /* ── Calidad Nacional ── */
-    var nacVars = ub.variedades.filter(function (v) { return v.canal === 'nacional'; });
-    document.getElementById('tomateCalidadNac').innerHTML =
-      '<div class="canal-header canal-nac" style="margin-bottom:12px"><span class="canal-label">Calidad Nacional</span></div>' +
-      (nacVars.length
-        ? nacVars.map(function (v) {
-            var mCls = v.merma > 4 ? 'bad' : v.merma > 3 ? 'warn' : 'ok';
-            return '<div class="qual-card"><div class="qual-name">' + v.nombre + '</div>' +
-              '<div class="qual-prima">' + pct(v.primera) + '<span style="font-size:.7rem;font-weight:500;opacity:.7"> 1ª Primera</span></div>' +
-              '<div class="qual-merma-badge ' + mCls + '">Merma ' + pct(v.merma) + '</div>' +
-            '</div>';
-          }).join('')
-        : '<div class="etiq-card" style="color:var(--muted);font-size:.84rem;line-height:1.6">Sin reporte de calidad nacional disponible.<br>Se alimentará desde el correo de calidad cuando incluya canal=nacional.</div>'
-      );
+    /* helpers */
+    var etqLabel = function (etq) {
+      var map = { Urson:'U', Millennium:'M', Zazu:'Z' };
+      return map[etq] || etq;
+    };
+    var extractVariedad = function (nombre) {
+      if (/^bola/i.test(nombre || '')) return 'Bola';
+      if (/^roma/i.test(nombre || '')) return 'Roma';
+      return nombre;
+    };
+    var NAMED_ETQ = ['Calavo','Yameto','Tolin']; /* show cajas for these; others → JZ */
+
+    /* build quality lookup: variedad|etiqueta → data */
+    var qualMap = {};
+    ub.variedades.forEach(function (v) {
+      var vari = extractVariedad(v.nombre);
+      var key  = vari + '|' + (v.etiqueta || '');
+      qualMap[key] = v;
+    });
+
+    /* build cajas lookup by etiqueta (from ventas) */
+    var cajasExp = {}, cajasNac = {};
+    (tv.exportacion || []).forEach(function (e) { cajasExp[e.etiqueta] = e.cajas; });
+    (tv.nacional    || []).forEach(function (e) { cajasNac[e.etiqueta] = e.cajas; });
+
+    /* render one mini card */
+    var renderEtqCard = function (etq, vari, isNac) {
+      var key   = vari + '|' + etq;
+      var v     = qualMap[key];
+      var cajas = isNac ? cajasNac[etq] : cajasExp[etq];
+      var lbl   = etqLabel(etq);
+      var nacSuffix = etq === 'Yameto' ? ' · 1ª Nac' : etq === 'Tolin' ? ' · 2ª Nac' : '';
+      var cajasText = NAMED_ETQ.indexOf(etq) !== -1
+        ? (cajas ? fmtN(cajas) + ' cajas' : 'Cajas: pendiente')
+        : 'JZ';
+
+      var top = '<div class="etq-card-mini' + (!v ? ' no-data' : '') + '">' +
+        '<div class="ecm-top">' +
+          '<span class="ecm-label">' + lbl + nacSuffix + '</span>' +
+          '<span class="ecm-cajas">' + cajasText + '</span>' +
+        '</div>';
+
+      if (!v) {
+        return top + '<div class="ecm-nodata">Sin reporte de calidad</div></div>';
+      }
+
+      var tot  = (v.primera||0) + (v.segunda||0) + (v.tercera||0) + (v.merma||0);
+      var mCls = (v.merma||0) > 4 ? 'bad' : (v.merma||0) > 3 ? 'warn' : 'ok';
+      return top +
+        '<div class="qual-stack" style="margin:6px 0 5px">' +
+          '<div class="qs-prima" style="width:' + (tot ? (v.primera/tot*100).toFixed(1) : 0) + '%"></div>' +
+          '<div class="qs-seg"   style="width:' + (tot ? (v.segunda/tot*100).toFixed(1) : 0) + '%"></div>' +
+          '<div class="qs-ter"   style="width:' + (tot ? (v.tercera/tot*100).toFixed(1) : 0) + '%"></div>' +
+          '<div class="qs-merma" style="width:' + (tot ? (v.merma/tot*100).toFixed(1)   : 0) + '%"></div>' +
+        '</div>' +
+        '<div class="ecm-grades">' +
+          '<div><div class="g-val" style="color:var(--green2)">' + pct(v.primera) + '</div><div class="g-lbl">1ª</div></div>' +
+          '<div><div class="g-val" style="color:#fbbf24">'       + pct(v.segunda) + '</div><div class="g-lbl">2ª</div></div>' +
+          '<div><div class="g-val" style="color:#6366f1">'       + pct(v.tercera) + '</div><div class="g-lbl">3ª</div></div>' +
+          '<div><div class="qual-merma-badge ' + mCls + '" style="font-size:.7rem;padding:1px 5px;display:inline-block">' + pct(v.merma) + '</div><div class="g-lbl">Merma</div></div>' +
+        '</div>' +
+        '<div style="font-size:.64rem;color:var(--muted);margin-top:5px">Peso: ' + fmtN(v.peso,2) + ' oz' +
+          (v.alerta ? '&nbsp;<span class="badge badge-red" style="font-size:.55rem">⚠ Merma alta</span>' : '') +
+        '</div></div>';
+    };
+
+    var variedades = ['Roma','Bola'];
+    var expEtqs = ['Calavo','Urson','Millennium','Zazu'];
+    var nacEtqs = ['Yameto','Tolin'];
+
+    document.getElementById('tomateVariedades').innerHTML = variedades.map(function (vari) {
+      return '<div class="variedad-section">' +
+        '<div class="variedad-title">Variedad · ' + vari + '</div>' +
+        '<div class="canal-grid">' +
+          '<div class="canal-col">' +
+            '<div class="canal-header canal-export" style="margin-bottom:10px"><span class="canal-label">Exportación</span></div>' +
+            expEtqs.map(function (etq) { return renderEtqCard(etq, vari, false); }).join('') +
+          '</div>' +
+          '<div class="canal-col">' +
+            '<div class="canal-header canal-nac" style="margin-bottom:10px"><span class="canal-label">Nacional</span></div>' +
+            nacEtqs.map(function (etq) { return renderEtqCard(etq, vari, true); }).join('') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
 
     /* ── Embarques ── */
     var clasificarUnidad = function (u) {
