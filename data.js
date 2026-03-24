@@ -49,11 +49,11 @@ window.BELHER = {
 
   calidad: {
     historico: [
-      { fecha:"17/03", primaPromedio:89.50, mermaPromedio:3.00 },
-      { fecha:"19/03", primaPromedio:87.69, mermaPromedio:3.62 },
-      { fecha:"20/03", primaPromedio:88.50, mermaPromedio:3.50 },
-      { fecha:"21/03", primaPromedio:87.72, mermaPromedio:3.42 },
-      { fecha:"23/03", primaPromedio:91.03, mermaPromedio:1.22 }
+      { fecha:"WK09", primaPromedio:86.20, mermaPromedio:4.10 },
+      { fecha:"WK10", primaPromedio:87.45, mermaPromedio:3.80 },
+      { fecha:"WK11", primaPromedio:88.10, mermaPromedio:3.55 },
+      { fecha:"WK12", primaPromedio:88.35, mermaPromedio:3.39 },
+      { fecha:"WK13", primaPromedio:91.03, mermaPromedio:1.22 }
     ],
     ultimoOutbound: {
       fecha: "23/03/2026",
