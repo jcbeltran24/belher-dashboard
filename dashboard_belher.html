@@ -787,7 +787,7 @@ footer span { color: var(--accent2); font-weight: 600; }
 <!-- ══ TABS ══ -->
 <nav class="tabs" id="tabNav">
   <button class="active" data-tab="hoy">Hoy</button>
-  <button data-tab="operaciones">Operaciones</button>
+  <button data-tab="operaciones">Fletes</button>
   <button data-tab="calidad">Calidad</button>
   <button data-tab="mercado">Mercado</button>
   <button data-tab="finanzas">Finanzas</button>
@@ -851,15 +851,16 @@ footer span { color: var(--accent2); font-weight: 600; }
       <div class="chart-box"><canvas id="chartEmbarques"></canvas></div>
     </div>
 
-    <div class="section-title">Báscula · Actividad de Pesaje</div>
-    <div class="card">
-      <div class="bascula-grid" id="bascWidget"></div>
-    </div>
-
   </div>
 
   <!-- ══════════ CALIDAD ══════════ -->
   <div class="tab-panel" id="tab-calidad">
+
+    <!-- 0. BÁSCULA -->
+    <div class="section-title">Báscula · Actividad de Pesaje</div>
+    <div class="card">
+      <div class="bascula-grid" id="bascWidget"></div>
+    </div>
 
     <!-- 1. HERO: export quality KPIs -->
     <div class="section-title" id="outboundTitle">Calidad Exportación</div>
@@ -1372,6 +1373,13 @@ footer span { color: var(--accent2); font-weight: 600; }
         '</tbody>' +
       '</table>';
 
+  }
+
+  /* ════════════════ CALIDAD ════════════════ */
+  function renderCalidad() {
+    var ub = D.calidad.ultimoOutbound;
+
+    /* ── Báscula ── */
     document.getElementById('bascWidget').innerHTML =
       D.operaciones.bascula.map(function (b) {
         var chips = b.productos.map(function (p) {
@@ -1381,11 +1389,6 @@ footer span { color: var(--accent2); font-weight: 600; }
         }).join('');
         return '<div class="basc-row"><span class="basc-date">' + b.fecha + '</span><div class="basc-chips">' + chips + '</div></div>';
       }).join('');
-  }
-
-  /* ════════════════ CALIDAD ════════════════ */
-  function renderCalidad() {
-    var ub = D.calidad.ultimoOutbound;
     document.getElementById('outboundTitle').textContent = 'Calidad Exportación · Reporte: ' + ub.fecha;
 
     /* ── HERO KPIs: weighted averages across varieties ── */
