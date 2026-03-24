@@ -86,8 +86,8 @@ window.BELHER = {
       precio_min: null,
       precio_max: null,
       unidad:     "carton",
-      variedad:   "Limón Persa",
-      mercado:    "FOB California",
+      variedad:   "Limón Persa (Persian Lime)",
+      mercado:    "FOB Nogales / California",
       anterior:   null,
       fuente:     "USDA Market News FOB Shipping Point"
     }
