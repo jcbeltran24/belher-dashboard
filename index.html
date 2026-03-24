@@ -594,7 +594,42 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .pc-footer { display: flex; justify-content: space-between; font-size: .7rem; color: var(--muted); }
 
 /* ═══════════════════════════════════════════════
-   QUALITY BREAKDOWN CARDS
+   CALIDAD SUMMARY + COMPACT ROWS
+══════════════════════════════════════════════ */
+.cal-summary {
+  display: flex; flex-wrap: wrap; gap: 10px 24px;
+  padding: 4px 0 18px; align-items: center;
+}
+.cal-sum-item { font-size: .8rem; color: var(--text2); }
+.cal-sum-item strong { color: var(--text); font-weight: 800; }
+.cal-sum-item.good strong { color: var(--green2); }
+.cal-sum-item.warn strong { color: var(--accent); }
+.cal-sum-item.bad  strong { color: var(--red2); }
+.cal-sum-sep { color: var(--border); font-size: 1rem; }
+
+.qual-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.qual-row:last-child { border-bottom: none; }
+.qr-name  { min-width: 140px; }
+.qr-label { font-size: .84rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+.qr-tag   { font-size: .6rem; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); }
+.qr-bar   { flex: 1; display: flex; height: 8px; border-radius: 4px; overflow: hidden; min-width: 80px; }
+.qrb-1    { background: var(--green2); }
+.qrb-2    { background: #fbbf24; }
+.qrb-3    { background: #6366f1; }
+.qrb-m    { background: var(--red2); opacity: .75; }
+.qr-primera { font-size: 1.25rem; font-weight: 900; letter-spacing: -.3px; min-width: 60px; text-align: right; }
+.qr-primera.ok   { color: var(--green2); }
+.qr-primera.warn { color: var(--accent); }
+.qr-primera.bad  { color: var(--red2); }
+.qr-merma { min-width: 72px; display: flex; justify-content: flex-end; }
+.qr-peso  { font-size: .72rem; color: var(--muted); min-width: 52px; text-align: right; }
+
+/* ═══════════════════════════════════════════════
+   QUALITY BREAKDOWN CARDS (legacy, used in Tomate tab)
 ══════════════════════════════════════════════ */
 .quality-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
 .qual-card {
@@ -867,39 +902,15 @@ footer span { color: var(--accent2); font-weight: 600; }
       <div class="bascula-grid" id="bascWidget"></div>
     </div>
 
-    <!-- 1. HERO: export quality KPIs -->
+    <!-- Outbound: summary + compact rows -->
     <div class="section-title" id="outboundTitle">Calidad Exportación <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
-    <div class="grid-3" id="calidadHeroKpis"></div>
+    <div id="calidadSummary"></div>
+    <div class="card" style="padding:0" id="qualidadRows"></div>
 
-    <!-- 2. Trend chart — 1ª Prima is the main line -->
-    <div class="section-title">Tendencia · 1ª Primera Exportación <span class="src-tag">calidad@agbelher.com · histórico</span></div>
+    <!-- Trend chart -->
+    <div class="section-title">Tendencia · 1ª Primera <span class="src-tag">calidad@agbelher.com · histórico</span></div>
     <div class="card">
       <div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div>
-    </div>
-
-    <!-- 3. Per-variety breakdown — 1ª as the big number -->
-    <div class="section-title">Desglose por Variedad</div>
-    <div class="quality-card-grid" id="qualityCards"></div>
-
-    <!-- 4. Full detail table — secondary reference -->
-    <div class="section-title">Detalle Completo · Último Reporte</div>
-    <div class="card-table">
-      <div class="tbl-wrap">
-        <table id="outboundTbl">
-          <thead>
-            <tr>
-              <th>Variedad</th>
-              <th class="td-num">1ª Exportación %</th>
-              <th class="td-num">2ª %</th>
-              <th class="td-num">3ª %</th>
-              <th class="td-num">Merma %</th>
-              <th class="td-num">Peso oz</th>
-              <th class="td-center">Estado</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
     </div>
 
   </div>
@@ -1394,85 +1405,50 @@ footer span { color: var(--accent2); font-weight: 600; }
         }).join('');
         return '<div class="basc-row"><span class="basc-date">' + b.fecha + '</span><div class="basc-chips">' + chips + '</div></div>';
       }).join('');
-    document.getElementById('outboundTitle').textContent = 'Calidad Exportación · Reporte: ' + ub.fecha;
+    document.getElementById('outboundTitle').textContent = 'Calidad Exportación · ' + ub.fecha;
 
-    /* ── HERO KPIs: weighted averages across varieties ── */
-    var totalPeso = ub.variedades.reduce(function (s, v) { return s + v.peso; }, 0);
-    var avgPrima  = ub.variedades.reduce(function (s, v) { return s + v.primera; }, 0) / ub.variedades.length;
-    var avgMerma  = ub.variedades.reduce(function (s, v) { return s + v.merma;   }, 0) / ub.variedades.length;
-    var alertas   = ub.variedades.filter(function (v) { return v.alerta; }).length;
-    var mermaOK   = avgMerma <= 4;
-    var primaOK   = avgPrima >= 87;
-    var hist      = D.calidad.historico;
+    var avgPrima = ub.variedades.reduce(function (s,v) { return s + v.primera; }, 0) / ub.variedades.length;
+    var avgMerma = ub.variedades.reduce(function (s,v) { return s + v.merma;   }, 0) / ub.variedades.length;
+    var alertas  = ub.variedades.filter(function (v) { return v.alerta; }).length;
+    var hist     = D.calidad.historico;
     var prevPrima = hist.length >= 2 ? hist[hist.length - 2].primaPromedio : null;
-    var primaDir  = prevPrima != null ? (avgPrima >= prevPrima ? 'up' : 'down') : 'neu';
     var primaDiff = prevPrima != null ? (avgPrima - prevPrima).toFixed(1) : null;
+    var primaDir  = prevPrima != null && avgPrima >= prevPrima ? '▲' : '▼';
 
-    document.getElementById('calidadHeroKpis').innerHTML =
-      /* BIG hero: 1ª Prima */
-      '<div class="kpi-card ' + (primaOK ? 'accent-pos' : 'accent-warn') + '" style="grid-column:span 1">' +
-        '<div class="kpi-label">1ª Primera · Calidad Exportación</div>' +
-        '<div class="kpi-value ' + (primaOK ? 'pos' : 'acc') + '" style="font-size:2.6rem">' + pct(avgPrima) + '</div>' +
-        '<div class="kpi-sub">Promedio · ' + ub.variedades.length + ' variedades · ' + ub.fecha + '</div>' +
-        (primaDiff != null
-          ? pill(primaDir, (primaDir === 'up' ? '▲ +' : '▼ ') + primaDiff + 'pp vs reporte anterior')
-          : '') +
-      '</div>' +
-      /* Merma */
-      '<div class="kpi-card ' + (mermaOK ? 'accent-pos' : 'accent-neg') + '">' +
-        '<div class="kpi-label">Merma Promedio · Umbral &lt;4%</div>' +
-        '<div class="kpi-value ' + (mermaOK ? 'pos' : 'neg') + '" style="font-size:2.6rem">' + pct(avgMerma) + '</div>' +
-        '<div class="kpi-sub">Umbral operativo: 4.0%</div>' +
-        pill(mermaOK ? 'up' : 'down', mermaOK ? '✓ Dentro del rango' : '⚠ Sobre umbral — revisar') +
-      '</div>' +
-      /* Alertas */
-      '<div class="kpi-card ' + (alertas === 0 ? 'accent-pos' : 'accent-neg') + '">' +
-        '<div class="kpi-label">Variedades en Alerta</div>' +
-        '<div class="kpi-value ' + (alertas === 0 ? 'pos' : 'neg') + '" style="font-size:2.6rem">' + alertas + ' / ' + ub.variedades.length + '</div>' +
-        '<div class="kpi-sub">Merma &gt; 4% = alerta</div>' +
-        pill(alertas === 0 ? 'up' : 'down', alertas === 0 ? '✓ Sin alertas activas' : alertas + ' variedad' + (alertas > 1 ? 'es' : '') + ' sobre umbral') +
+    /* ── Inline summary bar ── */
+    document.getElementById('calidadSummary').innerHTML =
+      '<div class="cal-summary">' +
+        '<span class="cal-sum-item good">1ª Primera prom: <strong>' + pct(avgPrima) + '</strong>' +
+          (primaDiff != null ? ' <span style="font-size:.72rem">' + primaDir + ' ' + (primaDiff > 0 ? '+' : '') + primaDiff + 'pp</span>' : '') + '</span>' +
+        '<span class="cal-sum-sep">·</span>' +
+        '<span class="cal-sum-item ' + (avgMerma > 4 ? 'bad' : avgMerma > 3 ? 'warn' : 'good') + '">Merma prom: <strong>' + pct(avgMerma) + '</strong></span>' +
+        '<span class="cal-sum-sep">·</span>' +
+        '<span class="cal-sum-item ' + (alertas > 0 ? 'bad' : 'good') + '">' + alertas + ' / ' + ub.variedades.length + ' alertas</span>' +
+        '<span class="cal-sum-sep">·</span>' +
+        '<span class="cal-sum-item" style="font-size:.72rem;color:var(--muted)">' + ub.variedades.length + ' variedades · ' + ub.fecha + '</span>' +
       '</div>';
 
-    document.getElementById('qualityCards').innerHTML = ub.variedades.map(function (v) {
-      var mCls = v.merma > 4 ? 'bad' : v.merma > 3 ? 'warn' : 'ok';
-      var tot  = v.primera + v.segunda + v.tercera + v.merma;
-      return '<div class="qual-card' + (v.alerta ? ' alerta-card' : '') + '">' +
-        '<div class="qual-name">' +
-          v.nombre +
-          (v.alerta ? '<span class="badge badge-red" style="font-size:.6rem">⚠ Alerta</span>' : '') +
+    /* ── Compact variety rows ── */
+    document.getElementById('qualidadRows').innerHTML = ub.variedades.map(function (v) {
+      var tot    = v.primera + v.segunda + v.tercera + v.merma;
+      var pCls   = v.primera >= 90 ? 'ok' : v.primera >= 87 ? 'ok' : 'warn';
+      var mCls   = v.merma > 4 ? 'bad' : v.merma > 3 ? 'warn' : 'ok';
+      var mBadge = '<span class="qual-merma-badge ' + mCls + '">Merma ' + pct(v.merma) + '</span>';
+      return '<div class="qual-row">' +
+        '<div class="qr-name">' +
+          '<div class="qr-label">' + v.nombre.replace(v.etiqueta || '', '').trim() + '</div>' +
+          '<div class="qr-tag">' + (v.etiqueta || '') + (v.alerta ? ' &nbsp;⚠' : '') + '</div>' +
         '</div>' +
-        '<div class="qual-prima">' + pct(v.primera) + '<span style="font-size:.7rem;font-weight:500;opacity:.7"> 1ª Prima</span></div>' +
-        '<div class="qual-merma-badge ' + mCls + '">Merma ' + pct(v.merma) + '</div>' +
-        '<div class="qual-stack">' +
-          '<div class="qs-prima" style="width:' + (v.primera/tot*100).toFixed(1) + '%"></div>' +
-          '<div class="qs-seg"   style="width:' + (v.segunda/tot*100).toFixed(1) + '%"></div>' +
-          '<div class="qs-ter"   style="width:' + (v.tercera/tot*100).toFixed(1) + '%"></div>' +
-          '<div class="qs-merma" style="width:' + (v.merma/tot*100).toFixed(1) + '%"></div>' +
+        '<div class="qr-bar">' +
+          '<div class="qrb-1" style="width:' + (v.primera/tot*100).toFixed(1) + '%"></div>' +
+          '<div class="qrb-2" style="width:' + (v.segunda/tot*100).toFixed(1) + '%"></div>' +
+          '<div class="qrb-3" style="width:' + (v.tercera/tot*100).toFixed(1) + '%"></div>' +
+          '<div class="qrb-m" style="width:' + (v.merma/tot*100).toFixed(1) + '%"></div>' +
         '</div>' +
-        '<div class="qual-legend">' +
-          '<span><span class="ql-dot" style="background:#16a34a"></span>1ª ' + pct(v.primera) + '</span>' +
-          '<span><span class="ql-dot" style="background:#fbbf24"></span>2ª ' + pct(v.segunda) + '</span>' +
-          '<span><span class="ql-dot" style="background:#1d4ed8"></span>3ª ' + pct(v.tercera) + '</span>' +
-          '<span><span class="ql-dot" style="background:#ef4444"></span>Merma ' + pct(v.merma) + '</span>' +
-        '</div>' +
-        '<div class="qual-meta">Peso promedio: <strong>' + fmtN(v.peso, 2) + ' oz</strong></div>' +
+        '<div class="qr-primera ' + pCls + '">' + pct(v.primera) + '</div>' +
+        '<div class="qr-merma">' + mBadge + '</div>' +
+        '<div class="qr-peso">' + fmtN(v.peso,2) + ' oz</div>' +
       '</div>';
-    }).join('');
-
-    document.querySelector('#outboundTbl tbody').innerHTML = ub.variedades.map(function (v) {
-      var badge = v.merma > 4
-        ? '<span class="badge badge-red">⚠ &gt;4%</span>'
-        : v.merma > 3 ? '<span class="badge badge-yellow">Monitor</span>'
-        : '<span class="badge badge-green">OK</span>';
-      return '<tr' + (v.alerta ? ' class="row-alerta"' : '') + '>' +
-        '<td><strong>' + v.nombre + '</strong></td>' +
-        '<td class="td-num">' + pct(v.primera) + '</td>' +
-        '<td class="td-num">' + pct(v.segunda) + '</td>' +
-        '<td class="td-num">' + pct(v.tercera) + '</td>' +
-        '<td class="td-num"><strong>' + pct(v.merma) + '</strong></td>' +
-        '<td class="td-num">' + fmtN(v.peso, 2) + '</td>' +
-        '<td class="td-center">' + badge + '</td>' +
-      '</tr>';
     }).join('');
   }
 
