@@ -678,6 +678,35 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .ecm-grades .g-lbl { opacity: .55; margin-top: 1px; }
 .ecm-nodata { font-size: .72rem; color: var(--muted); font-style: italic; margin-top: 4px; }
 
+/* ── Auditorías ─────────────────────────── */
+.audit-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r-lg); padding:20px 24px; margin-bottom:16px; }
+.audit-card.lvl-warning { border-left:4px solid var(--accent2); }
+.audit-card.lvl-success { border-left:4px solid var(--green2); }
+.audit-card.lvl-danger  { border-left:4px solid var(--red2); }
+.audit-card.lvl-info    { border-left:4px solid #3b82f6; }
+.audit-header { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+.audit-title  { font-size:1rem; font-weight:800; color:var(--text); }
+.audit-meta   { font-size:.74rem; color:var(--muted); margin-top:3px; }
+.audit-status-badge { font-size:.72rem; font-weight:700; padding:4px 12px; border-radius:20px; white-space:nowrap; }
+.audit-grid   { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin:14px 0; }
+.audit-stat   { background:var(--bg); border-radius:var(--r); padding:10px 14px; }
+.audit-stat-val { font-size:1.2rem; font-weight:900; }
+.audit-stat-lbl { font-size:.67rem; color:var(--muted); margin-top:2px; }
+.audit-progress-row { display:flex; align-items:center; gap:10px; margin:6px 0; font-size:.8rem; }
+.audit-bar-wrap { flex:1; height:8px; background:var(--border); border-radius:4px; overflow:hidden; }
+.audit-bar-fill { height:100%; border-radius:4px; }
+.audit-timeline { display:flex; gap:0; margin:16px 0 4px; flex-wrap:wrap; }
+.audit-step { display:flex; flex-direction:column; align-items:center; flex:1; min-width:80px; position:relative; }
+.audit-step:not(:last-child)::after { content:''; position:absolute; top:10px; left:50%; width:100%; height:2px; background:var(--border); z-index:0; }
+.audit-step.done::after { background:var(--green2); }
+.audit-dot { width:20px; height:20px; border-radius:50%; border:2px solid var(--border); background:var(--bg); z-index:1; position:relative; }
+.audit-step.done .audit-dot { background:var(--green2); border-color:var(--green2); }
+.audit-step.active .audit-dot { background:var(--accent2); border-color:var(--accent2); }
+.audit-step-lbl { font-size:.62rem; color:var(--muted); margin-top:5px; text-align:center; }
+.audit-step.done .audit-step-lbl { color:var(--green2); font-weight:700; }
+.audit-step.active .audit-step-lbl { color:var(--accent2); font-weight:700; }
+.audit-notas { font-size:.78rem; color:var(--muted); margin-top:12px; padding-top:12px; border-top:1px solid var(--border); line-height:1.6; }
+
 /* ── Day / Week view toggle ─────────────── */
 .view-toggle { display:flex; gap:4px; margin-bottom:14px; }
 .vt-btn {
@@ -882,6 +911,7 @@ footer span { color: var(--accent2); font-weight: 600; }
   <button data-tab="limon">Limón</button>
   <button data-tab="chile">Chile</button>
 
+  <button data-tab="auditorias">Auditorías</button>
   <button data-tab="estrategia">Estrategia</button>
   <button data-tab="industria">Industria</button>
 </nav>
@@ -1098,6 +1128,12 @@ footer span { color: var(--accent2); font-weight: 600; }
     </table></div></div>
   </div>
 
+
+  <!-- ══════════ AUDITORÍAS ══════════ -->
+  <div class="tab-panel" id="tab-auditorias">
+    <div class="section-title">Estado de Certificaciones <span class="src-tag">c.marisol@agbelher.com · Calidad</span></div>
+    <div id="auditoriasContainer"></div>
+  </div>
 
   <!-- ══════════ ESTRATEGIA ══════════ -->
   <div class="tab-panel" id="tab-estrategia">
@@ -2230,6 +2266,69 @@ footer span { color: var(--accent2); font-weight: 600; }
     renderProductTab({ tipo:'Chile',  tabId:'chile',  kpisId:'chileKpis',  preciosId:'chilePrecios',  tblId:'chileEmbarquesTbl',  badgeCls:'prod-badge-chile'  });
   }
 
+  /* ════════════════ AUDITORÍAS ════════════════ */
+  function renderAuditorias() {
+    var audits = D.auditorias || [];
+    var lvlColors = { warning:'var(--accent2)', success:'var(--green2)', danger:'var(--red2)', info:'#3b82f6' };
+    var lvlBg     = { warning:'rgba(251,191,36,.15)', success:'rgba(22,163,74,.12)', danger:'rgba(220,38,38,.12)', info:'rgba(59,130,246,.12)' };
+
+    document.getElementById('auditoriasContainer').innerHTML = audits.length
+      ? audits.map(function (a) {
+          var ac = a.accionesCorrectivas || {};
+          var pct100 = (ac.porcentaje || 0);
+          var barColor = pct100 >= 95 ? 'var(--green2)' : pct100 >= 70 ? 'var(--accent2)' : 'var(--red2)';
+
+          /* Timeline steps */
+          var steps = [
+            { lbl:'Confirmación', fecha:'23-Ene', done:true, active:false },
+            { lbl:'Auditoría',    fecha:'4-5 Feb', done:true, active:false },
+            { lbl:'Acciones',     fecha:'25-Feb', done:pct100>=93, active:pct100<100 && pct100>=21 },
+            { lbl:'Resultado',    fecha:'Pendiente', done:false, active:pct100>=93 }
+          ];
+          var timelineHtml = '<div class="audit-timeline">' +
+            steps.map(function(s,i){
+              var cls = s.done ? 'done' : s.active ? 'active' : '';
+              return '<div class="audit-step '+cls+'">' +
+                '<div class="audit-dot"></div>' +
+                '<div class="audit-step-lbl">' + s.lbl + '<br><span style="font-size:.6rem;opacity:.7">' + s.fecha + '</span></div>' +
+              '</div>';
+            }).join('') +
+          '</div>';
+
+          /* Area progress bars */
+          var areasHtml = (ac.areas || []).map(function (ar) {
+            var c = ar.porcentaje >= 100 ? 'var(--green2)' : ar.porcentaje >= 70 ? 'var(--accent2)' : 'var(--red2)';
+            return '<div class="audit-progress-row">' +
+              '<span style="min-width:90px">' + ar.area + '</span>' +
+              '<div class="audit-bar-wrap"><div class="audit-bar-fill" style="width:' + ar.porcentaje + '%;background:' + c + '"></div></div>' +
+              '<span style="min-width:36px;text-align:right;font-weight:700">' + ar.porcentaje + '%</span>' +
+              '<span style="color:var(--muted);font-size:.7rem">' + ar.completadas + '/' + ar.total + '</span>' +
+            '</div>';
+          }).join('');
+
+          return '<div class="audit-card lvl-' + a.nivel + '">' +
+            '<div class="audit-header">' +
+              '<div>' +
+                '<div class="audit-title">' + a.nombre + '</div>' +
+                '<div class="audit-meta">' + a.tipo + ' · ' + a.organismo + ' · Auditor: ' + a.auditor + '</div>' +
+                '<div class="audit-meta">Alcance: ' + a.alcance + '</div>' +
+              '</div>' +
+              '<span class="audit-status-badge" style="background:' + lvlBg[a.nivel] + ';color:' + lvlColors[a.nivel] + '">' + a.estado + '</span>' +
+            '</div>' +
+            timelineHtml +
+            '<div class="audit-grid">' +
+              '<div class="audit-stat"><div class="audit-stat-val">' + (a.fechaAuditoria||'—') + '</div><div class="audit-stat-lbl">Fecha Auditoría</div></div>' +
+              '<div class="audit-stat"><div class="audit-stat-val" style="color:var(--red2)">' + (a.ncMayor||0) + '</div><div class="audit-stat-lbl">NCs Mayor</div></div>' +
+              '<div class="audit-stat"><div class="audit-stat-val" style="color:var(--accent2)">' + (a.ncMenor||0) + '</div><div class="audit-stat-lbl">NCs Menor</div></div>' +
+              '<div class="audit-stat"><div class="audit-stat-val" style="color:' + barColor + '">' + pct100 + '%</div><div class="audit-stat-lbl">Acciones Correctivas</div></div>' +
+            '</div>' +
+            (areasHtml ? '<div style="font-size:.74rem;font-weight:700;margin-bottom:6px;color:var(--muted)">PROGRESO POR ÁREA · Actualizado ' + (ac.ultimoUpdate||'') + '</div>' + areasHtml : '') +
+            '<div class="audit-notas">📋 ' + a.notas + '<br><span class="src-tag" style="margin-top:4px;display:inline-block">' + a.fuente + '</span></div>' +
+          '</div>';
+        }).join('')
+      : '<div class="card" style="padding:20px;color:var(--muted)">Sin auditorías registradas.</div>';
+  }
+
   /* ── View toggle (Día Anterior / Últimos 7 días) ── */
   document.addEventListener('click', function (e) {
     var btn = e.target.closest('.vt-btn');
@@ -2256,6 +2355,7 @@ footer span { color: var(--accent2); font-weight: 600; }
   renderChile();
   renderEstrategia();
   renderIndustria();
+  renderAuditorias();
 
 })();
 </script>

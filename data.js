@@ -178,6 +178,35 @@ window.BELHER = {
     { label:"FERTILIZ.",     valor:"+$110K",       cambio:"sobre presupuesto", dir:"down" }
   ],
 
+  auditorias: [
+    {
+      nombre:    "GlobalGAP + HACCP + FSMA",
+      tipo:      "Certificación Externa",
+      organismo: "SCS — Scientific Certification Systems",
+      auditor:   "Ramón Gómez",
+      alcance:   "Todas las unidades de producción, empaque y CDCs",
+      fechaAuditoria: "04/02/2026",
+      estado:    "Acciones correctivas enviadas · Resultado pendiente",
+      nivel:     "warning",
+      ncTotal:   7,
+      ncMayor:   7,
+      ncMenor:   0,
+      accionesCorrectivas: {
+        porcentaje:   93,
+        deadline:     "25/02/2026",
+        ultimoUpdate: "20/02/2026",
+        areas: [
+          { area:"IMC",        porcentaje:90,  total:5, completadas:4.5 },
+          { area:"Producción", porcentaje:100, total:1, completadas:1   },
+          { area:"Finanzas",   porcentaje:100, total:1, completadas:1   }
+        ]
+      },
+      responsable: "Chrysthian Marisol Castro Sandoval · Gerente Innovación y Mejora Continua",
+      notas: "Auditoría realizada 4-5 Feb 2026. 7 NCs Mayor identificadas. Acciones correctivas al 93% el 20-Feb; deadline 25-Feb para envío al auditor. Sin confirmación de resultado a la fecha.",
+      fuente: "c.marisol@agbelher.com"
+    }
+  ],
+
   estrategia: {
     contratos: [
       {
