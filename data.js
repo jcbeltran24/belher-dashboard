@@ -156,7 +156,9 @@ window.BELHER = {
       { producto:"Grape tomato flat",     min:18.95, max:20.95, anterior:16.95, via:"SoCal/AZ",  alerta:false },
       { producto:"Chile Bell GH (XL)",   min:42.95, max:44.95, anterior:41.95, via:"SoCal/AZ",  alerta:false },
       { producto:"Jalapeño",             min:48.00, max:50.00, anterior:61.00, via:"SoCal/AZ",  alerta:true  },
-      { producto:"Anaheim",              min:34.00, max:36.00, anterior:null,   via:"SoCal/AZ",  alerta:false }
+      { producto:"Anaheim",              min:34.00, max:36.00, anterior:null,   via:"SoCal/AZ",  alerta:false },
+      { producto:"Vine-ripe 4×5 25lb",   min:44.00, max:46.00, anterior:30.00, via:"FOB Nogales, AZ", alerta:true  },
+      { producto:"Limón Persa 40lb",     min:18.00, max:22.00, anterior:19.50, via:"FOB Nogales, AZ", alerta:false }
     ],
     noticias: [
       { titulo:"Vine-ripe tomate escala a $46.95–48.95/carton (+50% vs semana previa)",  impacto:"Alto",       fuente:"Corbel Seeds" },

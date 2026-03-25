@@ -710,6 +710,63 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .audit-step.done .audit-step-lbl { color:var(--green2); font-weight:700; }
 .audit-step.active .audit-step-lbl { color:var(--accent2); font-weight:700; }
 .audit-notas { font-size:.78rem; color:var(--muted); margin-top:12px; padding-top:12px; border-top:1px solid var(--border); line-height:1.6; }
+/* ── Resumen: Watchlist strip ── */
+.hoy-watch-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media(max-width:600px){.hoy-watch-grid{grid-template-columns:1fr;}}
+.hoy-watch-item { padding:14px 16px; border-radius:var(--r); border:1px solid var(--border); background:var(--card); cursor:pointer; }
+.hoy-watch-item.nivel-danger  { border-left:3px solid var(--red2); }
+.hoy-watch-item.nivel-warning { border-left:3px solid var(--accent2); }
+.hoy-watch-nivel { display:inline-block; font-size:.6rem; font-weight:800; padding:2px 8px; border-radius:12px; margin-bottom:6px; letter-spacing:.04em; text-transform:uppercase; }
+.hoy-watch-nivel.d { background:rgba(220,38,38,.12); color:var(--red2); }
+.hoy-watch-nivel.w { background:rgba(251,191,36,.15); color:var(--accent2); }
+.hoy-watch-title  { font-size:.82rem; font-weight:700; color:var(--text); margin-bottom:4px; line-height:1.35; }
+.hoy-watch-action { font-size:.72rem; color:var(--muted); line-height:1.4; margin-top:4px; }
+/* ── Resumen: Cash position strip ── */
+.hoy-cf-strip { display:flex; gap:0; background:var(--card); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; }
+.hoy-cf-item { flex:1; padding:15px 18px; border-right:1px solid var(--border); }
+.hoy-cf-item:last-child { border-right:none; }
+.hoy-cf-lbl { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:5px; }
+.hoy-cf-val { font-size:1.25rem; font-weight:900; letter-spacing:-.5px; }
+.hoy-cf-sub { font-size:.68rem; color:var(--muted); margin-top:3px; }
+/* ── Finanzas: Projection panel ── */
+.fin-proj-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr)); gap:12px; }
+.fin-proj-box { background:var(--bg); border-radius:var(--r); padding:16px 18px; }
+.fin-proj-lbl { font-size:.63rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:8px; }
+.fin-proj-val { font-size:1.5rem; font-weight:900; letter-spacing:-.5px; }
+.fin-proj-sub { font-size:.72rem; color:var(--muted); margin-top:4px; }
+/* ── Chile: Market context cards ── */
+.chile-mkt-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:0; }
+@media(max-width:640px){.chile-mkt-grid{grid-template-columns:1fr;}}
+.chile-mkt-card { padding:20px 22px; border-radius:var(--r-lg); background:var(--card); border:1px solid var(--border); }
+.chile-mkt-hdr { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:10px; }
+.chile-mkt-val { font-size:1.75rem; font-weight:900; letter-spacing:-1px; }
+.chile-mkt-chg { font-size:.78rem; margin-top:3px; font-weight:700; }
+.chile-mkt-sub { font-size:.75rem; color:var(--muted); margin-top:6px; line-height:1.5; }
+.chile-mkt-action { font-size:.74rem; margin-top:12px; padding:8px 12px; border-radius:var(--r); background:var(--bg); color:var(--muted); }
+.chile-opp-card { padding:18px 22px; border-radius:var(--r-lg); background:rgba(22,163,74,.06); border:1.5px solid rgba(22,163,74,.2); margin-bottom:0; }
+.chile-opp-hdr { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.07em; color:var(--green2); margin-bottom:8px; }
+.chile-opp-body { font-size:.82rem; color:var(--text); line-height:1.55; }
+/* ── Limón: Client risk banner ── */
+.limon-risk-banner { margin-bottom:14px; padding:14px 18px; border-radius:var(--r); background:rgba(217,119,6,.07); border:1.5px solid rgba(217,119,6,.25); border-left:4px solid var(--accent2); display:flex; align-items:flex-start; gap:12px; }
+.limon-risk-icon { font-size:1rem; flex-shrink:0; margin-top:2px; }
+.limon-risk-body { flex:1; }
+.limon-risk-title { font-size:.82rem; font-weight:700; color:var(--text); margin-bottom:3px; }
+.limon-risk-txt { font-size:.74rem; color:var(--muted); line-height:1.5; }
+/* ── Tomate: Pace indicator ── */
+.tom-pace-strip { display:flex; gap:0; background:var(--card); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; margin-top:10px; }
+.tom-pace-item { flex:1; padding:13px 16px; border-right:1px solid var(--border); }
+.tom-pace-item:last-child { border-right:none; }
+.tom-pace-lbl { font-size:.61rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:4px; }
+.tom-pace-val { font-size:1.05rem; font-weight:900; }
+.tom-pace-sub { font-size:.67rem; color:var(--muted); margin-top:2px; }
+/* ── Strategy: enhanced footer ── */
+.strat-footer { display:flex; align-items:center; gap:8px; margin-top:10px; padding-top:9px; border-top:1px solid var(--border); flex-wrap:wrap; font-size:.7rem; color:var(--muted); }
+.strat-impact-badge { padding:2px 9px; border-radius:12px; font-weight:700; font-size:.62rem; text-transform:uppercase; letter-spacing:.04em; }
+/* ── Granos: cost metrics ── */
+.granos-cost-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr)); gap:10px; margin:14px 0; }
+.granos-cost-card { padding:14px 16px; border-radius:var(--r); background:var(--bg); border:1px solid var(--border); text-align:center; }
+.granos-cost-val { font-size:1.2rem; font-weight:900; letter-spacing:-.5px; }
+.granos-cost-lbl { font-size:.65rem; color:var(--muted); margin-top:3px; }
 /* NC observations list */
 .nc-section-hdr { display:flex; align-items:center; justify-content:space-between; margin:20px 0 10px; }
 .nc-section-title { font-size:.72rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
@@ -1798,6 +1855,12 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
       <div id="correosContainer"></div>
     </div>
 
+    <div class="section-title" style="margin-top:20px">Riesgos Activos <span class="src-tag">Watchlist Estratégico</span></div>
+    <div id="hoyWatchlist"></div>
+
+    <div class="section-title" style="margin-top:16px">Posición de Caja · Calavo <span class="src-tag">Settlement actualizado</span></div>
+    <div id="hoyCashSummary"></div>
+
   </div>
 
   <!-- ══════════ OPERACIONES ══════════ -->
@@ -1890,6 +1953,9 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     <div class="section-title">Calavo Settlement · Desglose CF GC 2025–2026 <span class="src-tag">leima@agbelher.com · CF actualizado 22 Mar 2026</span></div>
     <div class="card" id="calavoDesglose" style="padding:24px"></div>
 
+    <div class="section-title">Proyección · Temporada Restante <span class="src-tag">estimado basado en ritmo actual</span></div>
+    <div class="card" id="finProyeccion" style="padding:22px"></div>
+
     <div class="section-title">Revenue Total · Temporada <span class="src-tag">leima@agbelher.com · CF ABSA GC 2025–2026</span></div>
     <div class="card" id="revSplitCard" style="padding:24px"></div>
 
@@ -1933,6 +1999,8 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     <!-- Channel Revenue Cards (2-col: Export | Nacional) -->
     <div class="tom-ch-grid" id="tomateChannels"></div>
 
+    <!-- Revenue Pace strip -->
+    <div id="tomatePaceStrip"></div>
     <!-- Calavo Financial Strip -->
     <div id="tomateCalavoStrip"></div>
 
@@ -1984,6 +2052,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   <div class="tab-panel" id="tab-limon">
     <div class="section-title">KPIs · Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
     <div class="grid-4" id="limonKpis"></div>
+    <div id="limonClienteRisk"></div>
     <div class="section-title">Precio FOB California <span class="src-tag">USDA Market News · FOB Shipping Point</span></div>
     <div id="limonUsdaPrice"></div>
     <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
@@ -2001,6 +2070,8 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   <div class="tab-panel" id="tab-chile">
     <div class="section-title">KPIs · Chile</div>
     <div class="grid-3" id="chileKpis"></div>
+    <div class="section-title">Análisis de Mercado · Oportunidad <span class="src-tag">Corbel Seeds Daily · USDA</span></div>
+    <div id="chileContext"></div>
     <div class="section-title">Precios de Mercado</div>
     <div class="price-compare-grid" id="chilePrecios"></div>
     <div class="section-title">Embarques · Chile</div>
@@ -2017,6 +2088,8 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     <div class="grid-4" id="granosKpis"></div>
     <div class="section-title">P&amp;L Temporada · Jul 2025 – Feb 2026</div>
     <div class="card" id="granosPnl" style="padding:24px"></div>
+    <div class="section-title">Métricas por Hectárea <span class="src-tag">cálculo interno</span></div>
+    <div id="granosCostMetrics"></div>
     <div class="section-title">Notas Operativas</div>
     <div class="card" id="granosNotas" style="padding:20px"></div>
   </div>
@@ -2378,6 +2451,50 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
         '</div>';
       }).join('');
 
+    /* ── WATCHLIST RISKS ── */
+    var wl = (D.estrategia && D.estrategia.watchlist) ? D.estrategia.watchlist : [];
+    document.getElementById('hoyWatchlist').innerHTML =
+      '<div class="hoy-watch-grid">' +
+      wl.map(function (w) {
+        var isDanger = w.nivel === 'danger';
+        return '<div class="hoy-watch-item nivel-' + w.nivel + '">' +
+          '<span class="hoy-watch-nivel ' + (isDanger ? 'd' : 'w') + '">' + (isDanger ? 'Riesgo' : 'Atención') + '</span>' +
+          '<div class="hoy-watch-title">' + w.titulo + '</div>' +
+          '<div class="hoy-watch-action">→ ' + w.accion + '</div>' +
+        '</div>';
+      }).join('') +
+      '</div>';
+
+    /* ── CASH POSITION SUMMARY ── */
+    var pagosActual   = (cv.pagos || []).filter(function (p) { return p.estado === 'Actual'; });
+    var pagosPendiente= (cv.pagos || []).filter(function (p) { return p.estado === 'Pendiente'; });
+    var estimPendiente = pagosActual.length && pagosActual[0].pago
+      ? pagosActual[0].pago * pagosPendiente.length : null;
+    var saldoColor = saldoNeg ? 'var(--red2)' : 'var(--green2)';
+    document.getElementById('hoyCashSummary').innerHTML =
+      '<div class="hoy-cf-strip">' +
+        '<div class="hoy-cf-item">' +
+          '<div class="hoy-cf-lbl">Venta Neta · Calavo</div>' +
+          '<div class="hoy-cf-val" style="color:var(--green2)">' + fmt(ventaNeta) + '</div>' +
+          '<div class="hoy-cf-sub">Después de comisión, AD y Z-code</div>' +
+        '</div>' +
+        '<div class="hoy-cf-item">' +
+          '<div class="hoy-cf-lbl">P&amp;P + Préstamos Recibidos</div>' +
+          '<div class="hoy-cf-val" style="color:var(--muted)">' + fmt((cv.pickPack||0) + (cv.prestamo||0) + (cv.capitalTrabajo||0)) + '</div>' +
+          '<div class="hoy-cf-sub">Pick &amp; Pack + Préstamo + Capital</div>' +
+        '</div>' +
+        '<div class="hoy-cf-item">' +
+          '<div class="hoy-cf-lbl">Saldo Due from (to) Beltran</div>' +
+          '<div class="hoy-cf-val" style="color:' + saldoColor + '">' + fmt(cv.saldoActual || 0) + '</div>' +
+          '<div class="hoy-cf-sub">' + (saldoNeg ? 'Calavo ha adelantado más del cosechado' : 'Balance a favor de Belher') + '</div>' +
+        '</div>' +
+        (pagosPendiente.length ? '<div class="hoy-cf-item">' +
+          '<div class="hoy-cf-lbl">Semanas Pendientes</div>' +
+          '<div class="hoy-cf-val" style="color:var(--accent2)">' + pagosPendiente.length + '</div>' +
+          '<div class="hoy-cf-sub">' + pagosPendiente.map(function(p){return p.sem;}).join(', ') + (estimPendiente ? ' · est. ' + fmt(estimPendiente) : '') + '</div>' +
+        '</div>' : '') +
+      '</div>';
+
     /* ── Count-up: hero revenue number ── */
     setTimeout(function () {
       var heroNumEl = document.querySelector('#hoyHero .hoy-hero-num');
@@ -2595,6 +2712,40 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
       return renderQualRow(v, '');
     }).join('');
 
+    /* ── TREND CHART (historico semanal) ── */
+    var hist = D.calidad.historico || [];
+    var ctxCal = document.getElementById('chartCalidad');
+    if (ctxCal) {
+      if (chartsInit['chartCalidad']) { chartsInit['chartCalidad'].destroy(); }
+      chartsInit['chartCalidad'] = new Chart(ctxCal.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: hist.map(function(h){ return h.fecha; }),
+          datasets: [
+            { label:'1ª Primera %', data: hist.map(function(h){ return h.primaPromedio; }),
+              borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.08)', borderWidth:2.5, tension:.4, pointRadius:5, pointHoverRadius:7, fill:true, yAxisID:'yP' },
+            { label:'Merma %',      data: hist.map(function(h){ return h.mermaPromedio; }),
+              borderColor:'#d97706', backgroundColor:'rgba(217,119,6,.06)', borderWidth:2.5, tension:.4, pointRadius:5, pointHoverRadius:7, fill:true, yAxisID:'yM' }
+          ]
+        },
+        options: {
+          responsive:true, maintainAspectRatio:false,
+          interaction:{ mode:'index', intersect:false },
+          plugins:{
+            legend:{ position:'top' },
+            tooltip:{ callbacks:{ label:function(ctx){ return ctx.dataset.label+': '+ctx.parsed.y.toFixed(2)+'%'; } } }
+          },
+          scales:{
+            yP:{ position:'left',  min:80, max:100, ticks:{ callback:function(v){return v+'%';} }, grid:{ color:'rgba(0,0,0,.04)' }, title:{ display:true, text:'Primera %', font:{size:10} } },
+            yM:{ position:'right', min:0,  max:8,   ticks:{ callback:function(v){return v+'%';} }, grid:{ display:false }, title:{ display:true, text:'Merma %', font:{size:10} },
+              /* annotation line at 4% threshold */
+            }
+          },
+          annotation: {}
+        }
+      });
+    }
+
     /* Últimos 7 días */
     var sw = D.calidad.semana;
     if (sw && sw.variedades && sw.variedades.length) {
@@ -2802,6 +2953,43 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
         '<td class="td-num" style="padding:11px 15px">' + totalCont + '</td>' +
         '<td></td>' +
       '</tr>';
+
+    /* ── PROYECCIÓN TEMPORADA RESTANTE ── */
+    var paidWeeks = pagos.filter(function(p){ return p.pago && p.estado !== 'Pendiente'; });
+    var avgPagoSem = paidWeeks.length ? totalPago / paidWeeks.length : 0;
+    var avgCajasSem= paidWeeks.length ? totalCajas / paidWeeks.length : 0;
+    var pendWeeks  = pagos.filter(function(p){ return p.estado === 'Pendiente'; });
+    var actualWeeks= pagos.filter(function(p){ return p.estado === 'Actual'; });
+    var estimPend  = pendWeeks.length * avgPagoSem;
+    var estimActual= actualWeeks.length && actualWeeks[0].pago ? actualWeeks[0].pago : avgPagoSem;
+    var projTotal  = totalPago + estimActual + estimPend;
+    var projCajas  = totalCajas + (avgCajasSem * (pendWeeks.length + (actualWeeks.length && !actualWeeks[0].pago ? 1 : 0)));
+    var finEl = document.getElementById('finProyeccion');
+    if (finEl) {
+      finEl.innerHTML =
+        '<div class="fin-proj-grid">' +
+          '<div class="fin-proj-box">' +
+            '<div class="fin-proj-lbl">P&amp;P Confirmado · WK01–WK' + semCount + '</div>' +
+            '<div class="fin-proj-val" style="color:var(--green2)">' + fmt(totalPago) + '</div>' +
+            '<div class="fin-proj-sub">' + fmtN(totalCajas) + ' cajas · ' + totalCont + ' contenedores · ' + semCount + ' sem. pagadas</div>' +
+          '</div>' +
+          (actualWeeks.length ? '<div class="fin-proj-box">' +
+            '<div class="fin-proj-lbl">Semana Actual · ' + actualWeeks[0].sem + ' (en proceso)</div>' +
+            '<div class="fin-proj-val" style="color:var(--accent2)">' + (actualWeeks[0].pago ? fmt(actualWeeks[0].pago) : 'Wire pendiente') + '</div>' +
+            '<div class="fin-proj-sub">Wire estimado: ' + actualWeeks[0].wire + '</div>' +
+          '</div>' : '') +
+          (pendWeeks.length ? '<div class="fin-proj-box">' +
+            '<div class="fin-proj-lbl">' + pendWeeks.length + ' Semana' + (pendWeeks.length>1?'s':'') + ' Pendiente' + (pendWeeks.length>1?'s':'') + ' · Estimado</div>' +
+            '<div class="fin-proj-val" style="color:var(--muted)">' + fmt(estimPend) + '</div>' +
+            '<div class="fin-proj-sub">Basado en promedio ' + fmt(avgPagoSem) + '/sem · ' + pendWeeks.map(function(p){return p.sem;}).join(', ') + '</div>' +
+          '</div>' : '') +
+          '<div class="fin-proj-box" style="background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.2)">' +
+            '<div class="fin-proj-lbl">Proyección Total Temporada (P&amp;P)</div>' +
+            '<div class="fin-proj-val" style="color:var(--green2)">' + fmt(projTotal) + '</div>' +
+            '<div class="fin-proj-sub">≈ ' + fmtN(Math.round(projCajas)) + ' cajas · promedio ' + fmt(avgPagoSem) + '/sem</div>' +
+          '</div>' +
+        '</div>';
+    }
   }
 
   /* ════════════════ CHARTS ════════════════ */
@@ -3155,12 +3343,26 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   /* ── ESTRATEGIA ── */
   function renderEstrategia() {
     var E = D.estrategia;
+    var impactColors = { Alta:'var(--red2)', Media:'var(--accent2)', Baja:'var(--muted)', danger:'var(--red2)', warning:'var(--accent2)', success:'var(--green2)', info:'#3b82f6' };
     function stratCard(item, lbl, bc, xc) {
+      var impactKey = item.prioridad || item.nivel;
+      var impactColor = impactColors[impactKey] || 'var(--muted)';
+      /* Extract any mention of responsible person from accion text */
+      var respMatch = (item.accion || '').match(/Antonio|Leima|Raymundo|Chrysthian|Irene|Armando|Hildelisa/);
+      var resp = respMatch ? respMatch[0] : null;
+      /* Extract any mention of a date */
+      var dateMatch = (item.accion + ' ' + item.descripcion).match(/\d{1,2}[–-]\w+|\w+ \d{4}|WK\d{2}|\d{2}\/\d{2}/);
+      var deadline = dateMatch ? dateMatch[0] : null;
       return '<div class="strat-card strat-' + (xc || item.nivel) + '">' +
         '<div class="strat-header"><span class="strat-title">' + item.titulo + '</span>' +
           '<span class="badge badge-' + bc + '">' + lbl + '</span></div>' +
         '<p class="strat-desc">' + item.descripcion + '</p>' +
         '<div class="strat-action">→ ' + item.accion + '</div>' +
+        '<div class="strat-footer">' +
+          (resp ? '<span style="color:var(--muted)">Responsable: <strong>' + resp + '</strong></span>' : '') +
+          (deadline ? '<span style="color:var(--muted)">·</span><span style="color:var(--muted)">Ref: <strong>' + deadline + '</strong></span>' : '') +
+          '<span class="strat-impact-badge" style="background:' + impactColor + '22;color:' + impactColor + ';margin-left:auto">' + (item.prioridad || item.nivel || '') + '</span>' +
+        '</div>' +
       '</div>';
     }
     document.getElementById('contratosContainer').innerHTML =
@@ -3464,6 +3666,42 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     var periodo     = (tv.periodo && tv.periodo.label) || '';
     var ventaNeta   = cv.ventaNeta || cv.neto || 0;
     var retPct      = expRev ? (ventaNeta / expRev * 100).toFixed(1) : 0;
+
+    /* ── Revenue Pace ── */
+    var paidWeeks   = (cv.pagos || []).filter(function(p){ return p.pago && p.estado !== 'Pendiente'; }).length || 12;
+    var totalWeeksEst = 20; /* estimated full season weeks */
+    var weeksPct    = Math.min(paidWeeks / totalWeeksEst * 100, 100);
+    var projRevTotal= paidWeeks ? (revReal / paidWeeks * totalWeeksEst) : 0;
+    var projCajasTotal = paidWeeks ? (cajasTotal / paidWeeks * totalWeeksEst) : 0;
+    var remainingRev= projRevTotal - revReal;
+    setTimeout(function(){
+      var paceEl = document.getElementById('tomatePaceStrip');
+      if (paceEl) {
+        paceEl.innerHTML =
+          '<div class="tom-pace-strip">' +
+            '<div class="tom-pace-item">' +
+              '<div class="tom-pace-lbl">Semanas completadas</div>' +
+              '<div class="tom-pace-val">' + paidWeeks + ' / ' + totalWeeksEst + ' est.</div>' +
+              '<div class="tom-pace-sub">' + weeksPct.toFixed(0) + '% de temporada</div>' +
+            '</div>' +
+            '<div class="tom-pace-item">' +
+              '<div class="tom-pace-lbl">Revenue acumulado</div>' +
+              '<div class="tom-pace-val" style="color:var(--green2)">' + fmt(revReal) + '</div>' +
+              '<div class="tom-pace-sub">' + fmtN(cajasTotal) + ' cajas · ' + fmt(revReal/paidWeeks) + '/sem promedio</div>' +
+            '</div>' +
+            '<div class="tom-pace-item">' +
+              '<div class="tom-pace-lbl">Proyección final temporada</div>' +
+              '<div class="tom-pace-val" style="color:var(--accent2)">' + fmt(projRevTotal) + '</div>' +
+              '<div class="tom-pace-sub">≈ ' + fmtN(Math.round(projCajasTotal)) + ' cajas estimadas · ' + totalWeeksEst + ' sem.</div>' +
+            '</div>' +
+            '<div class="tom-pace-item">' +
+              '<div class="tom-pace-lbl">Revenue restante estimado</div>' +
+              '<div class="tom-pace-val" style="color:var(--muted)">' + fmt(remainingRev) + '</div>' +
+              '<div class="tom-pace-sub">En ' + (totalWeeksEst - paidWeeks) + ' semanas restantes est.</div>' +
+            '</div>' +
+          '</div>';
+      }
+    }, 0);
 
     /* ── Hero ── */
     var heroEl = document.getElementById('tomateHero');
@@ -3780,6 +4018,22 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   function renderLimon() {
     var lt = D.limon && D.limon.temporada;
 
+    /* ── Customer concentration risk banner ── */
+    var riskEl = document.getElementById('limonClienteRisk');
+    if (riskEl && lt && lt.comprador) {
+      var fobTotal = lt.revenue_feb || 0;
+      riskEl.innerHTML =
+        '<div class="limon-risk-banner">' +
+          '<div class="limon-risk-icon">⚠</div>' +
+          '<div class="limon-risk-body">' +
+            '<div class="limon-risk-title">Concentración de Cliente · 100% en ' + lt.comprador + '</div>' +
+            '<div class="limon-risk-txt">Todo el revenue de limón persa (' + fmt(fobTotal) + ' en Feb) depende de un solo comprador. ' +
+            'Riesgo: cancelación, renegociación de precio o problemas de capacidad del cliente impactan directamente. ' +
+            '<strong>Acción:</strong> Evaluar acercamiento con compradores alternativos (Suntreat, Pacific Organic, otros) para diversificar antes de la próxima temporada.</div>' +
+          '</div>' +
+        '</div>';
+    }
+
     /* ── KPI row with real financial data ── */
     var kpisEl = document.getElementById('limonKpis');
     if (lt) {
@@ -3919,8 +4173,58 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
         }).join('')
       : '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Sin embarques registrados para Limón</td></tr>';
   }
-  function renderChile()   {
-    renderProductTab({ tipo:'Chile',  tabId:'chile',  kpisId:'chileKpis',  preciosId:'chilePrecios',  tblId:'chileEmbarquesTbl',  badgeCls:'prod-badge-chile'  });
+  function renderChile() {
+    renderProductTab({ tipo:'Chile', tabId:'chile', kpisId:'chileKpis', preciosId:'chilePrecios', tblId:'chileEmbarquesTbl', badgeCls:'prod-badge-chile' });
+
+    /* ── Market analysis & opportunity context ── */
+    var chilePrecios = (D.mercado.precios || []).filter(function(p){
+      var n = p.producto.toLowerCase();
+      return n.indexOf('jalap') !== -1 || n.indexOf('serrano') !== -1 || n.indexOf('anaheim') !== -1 || n.indexOf('chile') !== -1 || n.indexOf('bell') !== -1;
+    });
+    var jalap = chilePrecios.find(function(p){ return p.producto.toLowerCase().indexOf('jalap') !== -1; }) || null;
+    var bell  = chilePrecios.find(function(p){ return p.producto.toLowerCase().indexOf('bell') !== -1 || p.producto.toLowerCase().indexOf('chile b') !== -1; }) || null;
+
+    var ctxEl = document.getElementById('chileContext');
+    if (!ctxEl) return;
+
+    var cards = '';
+    if (jalap) {
+      var jalapMid = (jalap.min + jalap.max) / 2;
+      var jalapChg = jalap.anterior ? ((jalapMid - jalap.anterior) / jalap.anterior * 100) : null;
+      var jalapChgStr = jalapChg != null ? (jalapChg >= 0 ? '▲ +' : '▼ ') + Math.abs(jalapChg).toFixed(0) + '% vs semana anterior' : '';
+      var jalapColor  = jalapChg != null && jalapChg > 0 ? 'var(--green2)' : jalapChg != null && jalapChg < -10 ? 'var(--red2)' : 'var(--accent2)';
+      cards += '<div class="chile-mkt-card">' +
+        '<div class="chile-mkt-hdr">Jalapeño · ' + jalap.via + '</div>' +
+        '<div class="chile-mkt-val" style="color:' + jalapColor + '">$' + jalap.min + '–' + jalap.max + '</div>' +
+        '<div class="chile-mkt-chg" style="color:' + jalapColor + '">' + jalapChgStr + '</div>' +
+        '<div class="chile-mkt-sub">Mid: $' + jalapMid.toFixed(0) + '/bu' + (jalap.anterior ? ' · Anterior: $' + jalap.anterior.toFixed(0) : '') + '</div>' +
+        '<div class="chile-mkt-action">→ Verificar volumen disponible para mercado Texas. Precio históricamente alto pese a corrección.</div>' +
+      '</div>';
+    }
+    if (bell) {
+      var bellMid = (bell.min + bell.max) / 2;
+      var bellChg = bell.anterior ? ((bellMid - bell.anterior) / bell.anterior * 100) : null;
+      var bellChgStr = bellChg != null ? (bellChg >= 0 ? '▲ +' : '▼ ') + Math.abs(bellChg).toFixed(0) + '% vs semana anterior' : '';
+      cards += '<div class="chile-mkt-card">' +
+        '<div class="chile-mkt-hdr">Chile Bell GH · ' + bell.via + '</div>' +
+        '<div class="chile-mkt-val" style="color:var(--green2)">$' + bell.min + '–' + bell.max + '</div>' +
+        '<div class="chile-mkt-chg" style="color:var(--accent2)">' + bellChgStr + '</div>' +
+        '<div class="chile-mkt-sub">Mid: $' + bellMid.toFixed(0) + (bell.anterior ? ' · Anterior: $' + bell.anterior.toFixed(0) : '') + '</div>' +
+        '<div class="chile-mkt-action">→ Mercado de bell pepper en niveles elevados. Evaluar incrementar área para próximo ciclo.</div>' +
+      '</div>';
+    }
+    var oppHtml = (jalap || bell)
+      ? '<div class="chile-opp-card" style="margin-top:10px">' +
+          '<div class="chile-opp-hdr">Señal Estratégica · Temporada 2026–27</div>' +
+          '<div class="chile-opp-body">' +
+            'El mercado de jalapeño estuvo en $58–64/bu (pico histórico) antes de corregir a $48–50. ' +
+            'La brecha productiva en México y Florida persiste — la escasez es estructural, no coyuntural. ' +
+            'Chile bell GH mantiene niveles altos ($42–44). <strong>Recomendación: evaluar incrementar hectáreas dedicadas a jalapeño y chile bell en el plan de siembra 2026–27</strong> y revisar disponibilidad logística con Calavo antes del cierre de temporada.' +
+          '</div>' +
+        '</div>'
+      : '';
+
+    ctxEl.innerHTML = '<div class="chile-mkt-grid">' + cards + '</div>' + oppHtml;
   }
 
   /* ════════════════ GRANOS ════════════════ */
@@ -3989,6 +4293,35 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
           '</div>' +
         '</div>' +
       '</div>';
+
+    /* ── Cost metrics per hectare ── */
+    var costMetEl = document.getElementById('granosCostMetrics');
+    if (costMetEl && G.hectareas) {
+      var costoPorHa = G.costos_total_ytd / G.hectareas;
+      var wipPorHa   = G.wip_ytd / G.hectareas;
+      var brkEven    = G.hectareas > 0 ? (G.costos_total_ytd / G.hectareas) : 0;
+      var vsYagoHa   = G.ebitda_ytd / G.hectareas;
+      costMetEl.innerHTML =
+        '<div class="granos-cost-grid">' +
+          '<div class="granos-cost-card">' +
+            '<div class="granos-cost-val">' + fmt(costoPorHa,0) + '</div>' +
+            '<div class="granos-cost-lbl">Costo total / ha</div>' +
+          '</div>' +
+          '<div class="granos-cost-card">' +
+            '<div class="granos-cost-val">' + fmt(wipPorHa,0) + '</div>' +
+            '<div class="granos-cost-lbl">WIP / ha · Prod. en proceso</div>' +
+          '</div>' +
+          '<div class="granos-cost-card">' +
+            '<div class="granos-cost-val" style="color:var(--red2)">' + fmt(Math.abs(vsYagoHa),0) + '</div>' +
+            '<div class="granos-cost-lbl">EBITDA / ha (pérdida activa)</div>' +
+          '</div>' +
+          '<div class="granos-cost-card">' +
+            '<div class="granos-cost-val" style="color:var(--green2)">▲ ' + fmt(G.ebitda_var_yago / G.hectareas, 0) + '</div>' +
+            '<div class="granos-cost-lbl">Mejora vs Y/A por ha</div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="font-size:.75rem;color:var(--muted);margin-top:6px">Nota: costos WIP se activan como inventario — EBITDA negativo refleja inversión en temporada activa, no pérdida operativa real. El revenue se realizará en cosecha.</div>';
+    }
 
     document.getElementById('granosNotas').innerHTML =
       '<div style="display:flex;align-items:flex-start;gap:10px">' +
