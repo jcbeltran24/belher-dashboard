@@ -1056,6 +1056,86 @@ footer span { color: var(--accent2); font-weight: 600; }
 }
 
 /* ═══════════════════════════════════════════════
+   CDC TAB
+══════════════════════════════════════════════ */
+.cdc-hero {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-bottom: 14px;
+}
+.cdc-hero-card {
+  border-radius: 18px; padding: 26px 28px 22px;
+  color: #fff; position: relative; overflow: hidden;
+  box-shadow: 0 10px 32px rgba(0,0,0,.18);
+}
+.cdc-hero-card.beltran {
+  background: linear-gradient(140deg, #0c1f2c 0%, #0f2e45 50%, #0a2236 100%);
+}
+.cdc-hero-card.dorita {
+  background: linear-gradient(140deg, #1a0c2e 0%, #2d1245 50%, #1c0a36 100%);
+}
+.cdc-hero-card::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+}
+.cdc-hero-card.beltran::before {
+  background: radial-gradient(ellipse at 80% 30%, rgba(56,189,248,.15) 0%, transparent 60%);
+}
+.cdc-hero-card.dorita::before {
+  background: radial-gradient(ellipse at 80% 30%, rgba(167,139,250,.18) 0%, transparent 60%);
+}
+.cdc-hero-name {
+  font-size:.62rem; font-weight:700; letter-spacing:1.2px;
+  text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:6px;
+}
+.cdc-hero-total {
+  font-size:clamp(2rem,3.5vw,3rem); font-weight:900;
+  letter-spacing:-2px; line-height:1; color:#fff; margin-bottom:4px;
+}
+.cdc-hero-sub { font-size:.75rem; color:rgba(255,255,255,.45); margin-bottom:18px; }
+.cdc-pct-row { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.cdc-pct-big {
+  font-size:2rem; font-weight:900; letter-spacing:-.05em;
+  line-height:1;
+}
+.cdc-pct-lbl { font-size:.68rem; color:rgba(255,255,255,.45); line-height:1.4; }
+.cdc-bar-wrap { height:8px; border-radius:4px; background:rgba(255,255,255,.1); overflow:hidden; }
+.cdc-bar-fill { height:100%; border-radius:4px; transition:width .8s cubic-bezier(.4,0,.2,1); }
+.cdc-hero-legs {
+  display:flex; gap:18px; margin-top:12px; flex-wrap:wrap;
+}
+.cdc-leg { font-size:.69rem; color:rgba(255,255,255,.5); }
+.cdc-leg strong { color:#fff; font-weight:700; }
+.cdc-pico {
+  margin-top:12px; padding:8px 12px; border-radius:9px;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+  font-size:.68rem; color:rgba(255,255,255,.5);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.cdc-pico strong { color:#fff; }
+.cdc-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:14px; margin-bottom:14px;
+}
+.cdc-stat-card {
+  background:var(--card); border-radius:14px;
+  border:1px solid var(--border); padding:18px 20px;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+.cdc-stat-title {
+  font-size:.59rem; font-weight:700; letter-spacing:1px;
+  text-transform:uppercase; color:var(--muted); margin-bottom:14px;
+}
+.cdc-stat-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:7px 0; border-bottom:1px solid var(--border); font-size:.82rem;
+}
+.cdc-stat-row:last-child { border-bottom:none; }
+.cdc-stat-row .lbl { color:var(--muted); }
+.cdc-stat-row .val { font-weight:700; color:var(--text); }
+@media (max-width:720px) {
+  .cdc-hero, .cdc-grid { grid-template-columns:1fr; }
+}
+
+/* ═══════════════════════════════════════════════
    MOBILE
 ══════════════════════════════════════════════ */
 @media (max-width: 720px) {
@@ -1126,6 +1206,7 @@ footer span { color: var(--accent2); font-weight: 600; }
   <button data-tab="auditorias">Auditorías</button>
   <button data-tab="estrategia">Estrategia</button>
   <button data-tab="industria">Industria</button>
+  <button data-tab="cdc">CDC</button>
 </nav>
 
 <main>
@@ -1390,6 +1471,16 @@ footer span { color: var(--accent2); font-weight: 600; }
     <div class="section-title" id="industriaTitle">Noticias de Industria</div>
     <div class="filters-row" id="catFilters"></div>
     <div id="newsGrid"></div>
+  </div>
+
+  <!-- ══════════ CDC ══════════ -->
+  <div class="tab-panel" id="tab-cdc">
+    <div id="cdcHero"></div>
+    <div class="cdc-grid" id="cdcCards"></div>
+    <div class="section-title">Tendencia Semanal · Personas Censadas <span class="src-tag">capitalhumano@agbelher.com · Censo 2026</span></div>
+    <div class="card"><div class="chart-box" style="height:260px"><canvas id="chartCdc"></canvas></div></div>
+    <div class="section-title">% Trabajadores por Semana</div>
+    <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartCdcPct"></canvas></div></div>
   </div>
 
 </main>
@@ -2277,6 +2368,126 @@ footer span { color: var(--accent2); font-weight: 600; }
   }
 
   /* ── INDUSTRIA ── */
+  function renderCdc() {
+    if (!D.cdc) return;
+    var cdc = D.cdc;
+    var b = cdc.beltran;
+    var d = cdc.dorita;
+    var bLast = b.historico[b.historico.length - 1];
+    var dLast = d.historico[d.historico.length - 1];
+
+    /* ── HERO CARDS ── */
+    function heroCard(entry, pico, cls, accentColor) {
+      var pctPico = pico.total ? Math.round(entry.total / pico.total * 100) : 0;
+      var trabPct = entry.pct;
+      return '<div class="cdc-hero-card ' + cls + '">' +
+        '<div class="cdc-hero-name">' + (cls === 'beltran' ? 'Lo de Beltrán' : 'Campo Dorita') + ' · ' + entry.sem + '</div>' +
+        '<div class="cdc-hero-total">' + entry.total.toLocaleString() + '</div>' +
+        '<div class="cdc-hero-sub">personas en el CDC · pico temporada ' + pico.total.toLocaleString() + ' (' + pico.sem + ')</div>' +
+        '<div class="cdc-bar-wrap" style="margin-bottom:6px">' +
+          '<div class="cdc-bar-fill" style="width:' + pctPico + '%;background:' + accentColor + '"></div>' +
+        '</div>' +
+        '<div style="font-size:.65rem;color:rgba(255,255,255,.35);margin-bottom:14px">' + pctPico + '% del pico de temporada</div>' +
+        '<div class="cdc-pct-row">' +
+          '<div class="cdc-pct-big" style="color:' + accentColor + '">' + trabPct + '%</div>' +
+          '<div class="cdc-pct-lbl">trabajan<br>de los censados</div>' +
+        '</div>' +
+        '<div class="cdc-bar-wrap">' +
+          '<div class="cdc-bar-fill" style="width:' + trabPct + '%;background:' + accentColor + '"></div>' +
+        '</div>' +
+        '<div class="cdc-hero-legs">' +
+          '<div class="cdc-leg"><strong>' + entry.trabajadores.toLocaleString() + '</strong> trabajadores</div>' +
+          '<div class="cdc-leg"><strong>' + entry.acomp.toLocaleString() + '</strong> acompañantes</div>' +
+        '</div>' +
+        '<div class="cdc-pico">' +
+          '<span>Pico temporada <strong>' + pico.sem + '</strong></span>' +
+          '<span><strong>' + pico.trabajadores.toLocaleString() + '</strong> trabajadores</span>' +
+        '</div>' +
+      '</div>';
+    }
+
+    document.getElementById('cdcHero').innerHTML =
+      '<div class="cdc-hero">' +
+        heroCard(bLast, b.picoTemporada, 'beltran', '#38bdf8') +
+        heroCard(dLast, d.picoTemporada, 'dorita',  '#a78bfa') +
+      '</div>';
+
+    /* ── STAT CARDS ── */
+    var totalActual = bLast.total + dLast.total;
+    var totalTrab   = bLast.trabajadores + dLast.trabajadores;
+    var totalAcomp  = bLast.acomp + dLast.acomp;
+    var pctGlobal   = (totalTrab / totalActual * 100).toFixed(1);
+
+    document.getElementById('cdcCards').innerHTML =
+      '<div class="cdc-stat-card">' +
+        '<div class="cdc-stat-title">Ambos CDC · Resumen ' + cdc.semanaActual + '</div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Total personas censadas</span><span class="val">' + totalActual.toLocaleString() + '</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Trabajadores activos</span><span class="val" style="color:var(--green2)">' + totalTrab.toLocaleString() + '</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Acompañantes (familia)</span><span class="val">' + totalAcomp.toLocaleString() + '</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">% que trabajan (global)</span><span class="val" style="color:var(--green2)">' + pctGlobal + '%</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Fuente</span><span class="val" style="font-size:.7rem;font-weight:400;color:var(--muted)">Censo 2026 · Aldo Ávila</span></div>' +
+      '</div>' +
+      '<div class="cdc-stat-card">' +
+        '<div class="cdc-stat-title">Comparativo vs Pico de Temporada</div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Beltrán · actual / pico</span><span class="val">' + bLast.total.toLocaleString() + ' / ' + b.picoTemporada.total.toLocaleString() + '</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Beltrán · trabajadores / pico</span><span class="val">' + bLast.trabajadores + ' / ' + b.picoTemporada.trabajadores + '</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Dorita · actual / pico</span><span class="val">' + dLast.total + ' / ' + d.picoTemporada.total + '</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Dorita · trabajadores / pico</span><span class="val">' + dLast.trabajadores + ' / ' + d.picoTemporada.trabajadores + '</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Semanas en censo</span><span class="val">' + b.historico.length + ' semanas (WK19–WK39)</span></div>' +
+      '</div>';
+
+    /* ── TREND CHART: total personas ── */
+    var allSems = b.historico.map(function (r) { return r.sem; });
+    var bTotales = b.historico.map(function (r) { return r.total; });
+    var dMap = {};
+    d.historico.forEach(function (r) { dMap[r.sem] = r.total; });
+    var dTotales = allSems.map(function (s) { return dMap[s] || null; });
+
+    var ctxT = document.getElementById('chartCdc');
+    if (!ctxT) return;
+    if (chartsInit['chartCdc']) { chartsInit['chartCdc'].destroy(); }
+    chartsInit['chartCdc'] = new Chart(ctxT, {
+      type: 'line',
+      data: {
+        labels: allSems,
+        datasets: [
+          { label:'Lo de Beltrán · Total', data: bTotales, borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,.08)', borderWidth:2.5, tension:.4, pointRadius:3, fill:true },
+          { label:'Lo de Beltrán · Trabajadores', data: b.historico.map(function(r){return r.trabajadores;}), borderColor:'#0ea5e9', borderWidth:2, borderDash:[4,3], tension:.4, pointRadius:2, fill:false },
+          { label:'Campo Dorita · Total', data: dTotales, borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,.08)', borderWidth:2.5, tension:.4, pointRadius:3, fill:true },
+          { label:'Campo Dorita · Trabajadores', data: allSems.map(function(s){ var r=d.historico.find(function(x){return x.sem===s;}); return r?r.trabajadores:null; }), borderColor:'#7c3aed', borderWidth:2, borderDash:[4,3], tension:.4, pointRadius:2, fill:false }
+        ]
+      },
+      options: { responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:function(ctx){ return ctx.dataset.label+': '+ctx.parsed.y.toLocaleString()+' personas'; }}} },
+        scales:{ y:{ beginAtZero:false, grid:{color:'rgba(0,0,0,.04)'} }, x:{ grid:{display:false} } }
+      }
+    });
+
+    /* ── PCT CHART ── */
+    var bPct = b.historico.map(function (r) { return r.pct; });
+    var dPctMap = {};
+    d.historico.forEach(function (r) { dPctMap[r.sem] = r.pct; });
+    var dPct = allSems.map(function (s) { return dPctMap[s] || null; });
+
+    var ctxP = document.getElementById('chartCdcPct');
+    if (!ctxP) return;
+    if (chartsInit['chartCdcPct']) { chartsInit['chartCdcPct'].destroy(); }
+    chartsInit['chartCdcPct'] = new Chart(ctxP, {
+      type: 'line',
+      data: {
+        labels: allSems,
+        datasets: [
+          { label:'Lo de Beltrán %', data: bPct, borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,.1)', borderWidth:2.5, tension:.4, pointRadius:3, fill:true },
+          { label:'Campo Dorita %', data: dPct, borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,.1)', borderWidth:2.5, tension:.4, pointRadius:3, fill:true }
+        ]
+      },
+      options: { responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:function(ctx){ return ctx.dataset.label+': '+ctx.parsed.y+'%'; }}} },
+        scales:{ y:{ beginAtZero:false, min:30, max:80, ticks:{callback:function(v){return v+'%';}}, grid:{color:'rgba(0,0,0,.04)'} }, x:{ grid:{display:false} } }
+      }
+    });
+  }
+
   function renderIndustria() {
     document.getElementById('industriaTitle').textContent =
       'Noticias de Industria · Corbel Seeds Intel · ' + D.mercado.fecha;
@@ -2951,6 +3162,7 @@ footer span { color: var(--accent2); font-weight: 600; }
   renderEstrategia();
   renderIndustria();
   renderAuditorias();
+  renderCdc();
 
 })();
 </script>

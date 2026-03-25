@@ -347,5 +347,63 @@ window.BELHER = {
     { cat:"Energía",      titulo:"Stack battery system installed for tomato grower",                          impacto:"Bajo",       fuente:"HortiDaily",   resumen:"Almacenamiento en batería a nivel productor de tomate. La resiliencia productiva depende tanto de ingeniería energética como de manejo de cultivo." },
     { cat:"Energía",      titulo:"Yeager Energy to expand geothermal capacity in Oostland, Netherlands",     impacto:"Bajo",       fuente:"HortiDaily",   resumen:"Expansión geotérmica en zona invernadero de Europa muestra que el sector avanza rápido para estabilizar costos de calor." },
     { cat:"Energía",      titulo:"Dutch grower Vereijken Kwekerijen installs solar panels across seven sites",impacto:"Bajo",       fuente:"HortiDaily",   resumen:"Despliegue solar a gran escala en múltiples sitios de invernadero refuerza que la energía distribuida es ya una estrategia mainstream." }
-  ]
+  ],
+
+  cdc: {
+    semanaActual: "WK39",
+    fuente: "Aldo Jesús Ávila · capitalhumano@agbelher.com · 24-Mar-2026",
+    beltran: {
+      nombre: "Lo de Beltrán",
+      picoTemporada: { sem: "WK36", total: 1196, trabajadores: 467 },
+      historico: [
+        { sem:"WK19", total:1052, trabajadores:409, acomp:643, pct:38.9 },
+        { sem:"WK20", total:1057, trabajadores:384, acomp:673, pct:36.3 },
+        { sem:"WK21", total:1117, trabajadores:413, acomp:704, pct:37.0 },
+        { sem:"WK22", total:1140, trabajadores:420, acomp:720, pct:36.8 },
+        { sem:"WK23", total:1127, trabajadores:407, acomp:720, pct:36.1 },
+        { sem:"WK24", total:1120, trabajadores:408, acomp:712, pct:36.4 },
+        { sem:"WK25", total:1107, trabajadores:403, acomp:704, pct:36.4 },
+        { sem:"WK26", total:1137, trabajadores:413, acomp:724, pct:36.3 },
+        { sem:"WK27", total:1111, trabajadores:402, acomp:709, pct:36.2 },
+        { sem:"WK28", total:1095, trabajadores:397, acomp:698, pct:36.3 },
+        { sem:"WK29", total:1139, trabajadores:420, acomp:719, pct:36.9 },
+        { sem:"WK30", total:1120, trabajadores:412, acomp:708, pct:36.8 },
+        { sem:"WK31", total:1181, trabajadores:444, acomp:737, pct:37.6 },
+        { sem:"WK32", total:1169, trabajadores:442, acomp:727, pct:37.8 },
+        { sem:"WK33", total:1170, trabajadores:445, acomp:725, pct:38.0 },
+        { sem:"WK34", total:1168, trabajadores:445, acomp:723, pct:38.1 },
+        { sem:"WK35", total:1176, trabajadores:451, acomp:725, pct:38.4 },
+        { sem:"WK36", total:1196, trabajadores:467, acomp:729, pct:39.0 },
+        { sem:"WK37", total:1166, trabajadores:450, acomp:716, pct:38.6 },
+        { sem:"WK38", total:1181, trabajadores:459, acomp:722, pct:38.9 },
+        { sem:"WK39", total:1156, trabajadores:444, acomp:712, pct:38.4 }
+      ]
+    },
+    dorita: {
+      nombre: "Campo Dorita",
+      picoTemporada: { sem: "WK26", total: 253, trabajadores: 185 },
+      historico: [
+        { sem:"WK20", total:161,  trabajadores:100, acomp:61,  pct:62.1 },
+        { sem:"WK21", total:216,  trabajadores:147, acomp:69,  pct:68.1 },
+        { sem:"WK22", total:212,  trabajadores:145, acomp:67,  pct:68.4 },
+        { sem:"WK23", total:209,  trabajadores:144, acomp:65,  pct:68.9 },
+        { sem:"WK24", total:203,  trabajadores:140, acomp:63,  pct:69.0 },
+        { sem:"WK25", total:204,  trabajadores:141, acomp:63,  pct:69.1 },
+        { sem:"WK26", total:253,  trabajadores:185, acomp:68,  pct:73.1 },
+        { sem:"WK27", total:207,  trabajadores:153, acomp:54,  pct:73.9 },
+        { sem:"WK28", total:208,  trabajadores:154, acomp:54,  pct:74.0 },
+        { sem:"WK29", total:236,  trabajadores:174, acomp:62,  pct:73.7 },
+        { sem:"WK30", total:238,  trabajadores:173, acomp:65,  pct:72.7 },
+        { sem:"WK31", total:218,  trabajadores:155, acomp:63,  pct:71.1 },
+        { sem:"WK32", total:214,  trabajadores:152, acomp:62,  pct:71.0 },
+        { sem:"WK33", total:226,  trabajadores:159, acomp:67,  pct:70.4 },
+        { sem:"WK34", total:227,  trabajadores:152, acomp:75,  pct:67.0 },
+        { sem:"WK35", total:228,  trabajadores:153, acomp:75,  pct:67.1 },
+        { sem:"WK36", total:219,  trabajadores:147, acomp:72,  pct:67.1 },
+        { sem:"WK37", total:214,  trabajadores:144, acomp:70,  pct:67.3 },
+        { sem:"WK38", total:217,  trabajadores:145, acomp:72,  pct:66.8 },
+        { sem:"WK39", total:206,  trabajadores:139, acomp:67,  pct:67.5 }
+      ]
+    }
+  }
 };
