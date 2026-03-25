@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dashboard Ejecutivo · Agrícola Belher</title>
+<title>Centro de Inteligencia Belher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -195,6 +195,14 @@ nav.tabs button::after {
 nav.tabs button:hover  { color: rgba(255,255,255,.8); }
 nav.tabs button.active { color: var(--accent2); }
 nav.tabs button.active::after { transform: scaleX(1); }
+/* Calavo Weekly tab — special highlight */
+nav.tabs button[data-tab="calavoweekly"] {
+  color: #34c759;
+  font-weight: 700;
+}
+nav.tabs button[data-tab="calavoweekly"]::after { background: #34c759; }
+nav.tabs button[data-tab="calavoweekly"]:hover { color: #5dde78; }
+nav.tabs button[data-tab="calavoweekly"].active { color: #34c759; }
 
 /* ═══════════════════════════════════════════════
    LAYOUT
@@ -1820,6 +1828,122 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   main { padding: 10px 16px 16px; }
   .hoy-mid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ── Calavo Weekly Intelligence Center ── */
+.cw-header-bar { display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+.cw-title { font-size:1rem; font-weight:700; color:var(--text); }
+.cw-subtitle { font-size:.75rem; color:var(--muted); }
+.cw-badge-semana { margin-left:auto; font-size:.65rem; font-weight:700; padding:4px 10px; border-radius:20px; background:rgba(0,122,255,.12); color:#007aff; border:1px solid rgba(0,122,255,.2); }
+
+/* Stock bar */
+.cw-stocks-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+@media(max-width:480px){ .cw-stocks-grid { grid-template-columns:1fr; } }
+.cw-stock-card { padding:16px 20px; display:flex; align-items:center; gap:16px; }
+.cw-stock-left { flex:1; }
+.cw-stock-sym { font-size:1.1rem; font-weight:800; letter-spacing:.5px; color:var(--text); }
+.cw-stock-name { font-size:.65rem; color:var(--muted); margin-top:1px; }
+.cw-stock-mkt { font-size:.6rem; font-weight:600; padding:2px 6px; border-radius:6px; background:var(--surface); color:var(--muted); margin-top:4px; display:inline-block; }
+.cw-stock-right { text-align:right; }
+.cw-stock-price { font-size:1.6rem; font-weight:700; color:var(--text); line-height:1; }
+.cw-stock-change { font-size:.75rem; font-weight:600; margin-top:3px; }
+.cw-stock-change.up { color:#34c759; }
+.cw-stock-change.down { color:#ff453a; }
+.cw-stock-change.nd { color:var(--muted); }
+.cw-stock-range { font-size:.6rem; color:var(--muted); margin-top:4px; }
+.cw-stock-range span { color:var(--text); font-weight:600; }
+
+/* Alertas inteligencia */
+.cw-alertas-list { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+.cw-alerta-item { display:flex; align-items:flex-start; gap:10px; padding:12px 16px; border-radius:var(--r); }
+.cw-alerta-item.warning { background:rgba(255,159,10,.08); border-left:3px solid #ff9f0a; }
+.cw-alerta-item.success { background:rgba(52,199,89,.08); border-left:3px solid #34c759; }
+.cw-alerta-item.info    { background:rgba(0,122,255,.06); border-left:3px solid #007aff; }
+.cw-alerta-icon { font-size:.9rem; margin-top:1px; }
+.cw-alerta-text { font-size:.8rem; color:var(--text); line-height:1.45; }
+
+/* Correos Calavo */
+.cw-correos-timeline { display:flex; flex-direction:column; gap:0; margin-bottom:16px; }
+.cw-correo-item { display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--border); }
+.cw-correo-item:last-child { border-bottom:none; }
+.cw-correo-dot-col { display:flex; flex-direction:column; align-items:center; padding-top:2px; }
+.cw-correo-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.cw-correo-dot.reporte  { background:#007aff; }
+.cw-correo-dot.reunion  { background:#5ac8fa; }
+.cw-correo-dot.contrato { background:#ff9f0a; }
+.cw-correo-line { flex:1; width:1px; background:var(--border); margin-top:4px; }
+.cw-correo-body { flex:1; }
+.cw-correo-meta { display:flex; align-items:center; gap:8px; margin-bottom:3px; flex-wrap:wrap; }
+.cw-correo-fecha { font-size:.65rem; color:var(--muted); }
+.cw-correo-de { font-size:.7rem; font-weight:600; color:var(--text); }
+.cw-tipo-pill { font-size:.6rem; font-weight:700; padding:2px 7px; border-radius:10px; text-transform:uppercase; letter-spacing:.5px; }
+.cw-tipo-pill.reporte  { background:rgba(0,122,255,.12); color:#007aff; }
+.cw-tipo-pill.reunion  { background:rgba(90,200,250,.12); color:#5ac8fa; }
+.cw-tipo-pill.contrato { background:rgba(255,159,10,.15); color:#ff9f0a; }
+.cw-correo-asunto { font-size:.78rem; font-weight:600; color:var(--text); margin-bottom:4px; }
+.cw-correo-resumen { font-size:.75rem; color:var(--muted); line-height:1.45; }
+
+/* KPI strip */
+.cw-kpi-strip { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:16px; }
+@media(max-width:600px){ .cw-kpi-strip { grid-template-columns:repeat(2,1fr); } }
+.cw-kpi-box { padding:14px 16px; }
+.cw-kpi-lbl { font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); margin-bottom:5px; }
+.cw-kpi-val { font-size:1.4rem; font-weight:700; color:var(--text); line-height:1; }
+.cw-kpi-chg { font-size:.68rem; margin-top:4px; }
+.cw-kpi-chg.up { color:#34c759; } .cw-kpi-chg.down { color:#ff453a; } .cw-kpi-chg.neutral { color:var(--muted); }
+
+/* Proyecciones grid */
+.cw-proj-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+@media(max-width:500px){ .cw-proj-grid { grid-template-columns:1fr; } }
+.cw-proj-card { padding:18px 20px; }
+.cw-proj-name { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); margin-bottom:10px; }
+.cw-proj-nums { display:flex; align-items:baseline; gap:8px; margin-bottom:6px; }
+.cw-proj-actual { font-size:2rem; font-weight:700; color:var(--text); }
+.cw-proj-unit { font-size:.7rem; color:var(--muted); }
+.cw-diff-badge { padding:3px 10px; border-radius:20px; font-size:.72rem; font-weight:700; }
+.cw-diff-pos { background:rgba(52,199,89,.15); color:#34c759; }
+.cw-diff-neg { background:rgba(255,69,58,.12); color:#ff453a; }
+.cw-proj-bar-wrap { margin:10px 0 8px; position:relative; height:6px; background:var(--border); border-radius:3px; }
+.cw-proj-bar-fill { position:absolute; top:0; left:0; height:6px; border-radius:3px; background:var(--green2); }
+.cw-proj-marker { position:absolute; top:-3px; width:2px; height:12px; border-radius:1px; background:var(--muted); }
+.cw-proj-meta { font-size:.68rem; color:var(--muted); margin-top:2px; }
+
+/* ADM row */
+.cw-adm-row { display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:var(--r); background:var(--surface); margin-bottom:16px; flex-wrap:wrap; }
+.cw-adm-lbl { font-size:.72rem; font-weight:600; color:var(--text); }
+.cw-adm-vals { font-size:.7rem; color:var(--muted); }
+.cw-adm-diff { font-size:.72rem; font-weight:700; color:#ff453a; margin-left:auto; }
+
+/* Ventas grid */
+.cw-ventas-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+@media(max-width:500px){ .cw-ventas-grid { grid-template-columns:1fr; } }
+.cw-venta-card { padding:16px 20px; text-align:center; }
+.cw-venta-name { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); margin-bottom:8px; }
+.cw-venta-price { font-size:2.2rem; font-weight:700; color:var(--green2); }
+.cw-venta-sub { font-size:.65rem; color:var(--muted); margin-top:2px; }
+.cw-venta-pkgs { font-size:.9rem; font-weight:600; color:var(--text); margin-top:10px; }
+.cw-venta-pkgs-lbl { font-size:.65rem; color:var(--muted); font-weight:400; }
+
+/* USDA reference */
+.cw-usda-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+@media(max-width:500px){ .cw-usda-grid { grid-template-columns:1fr; } }
+.cw-usda-zona { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); margin-bottom:10px; }
+.cw-usda-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--border); }
+.cw-usda-row:last-child { border-bottom:none; }
+.cw-usda-prod { font-size:.78rem; color:var(--text); }
+.cw-usda-vals { text-align:right; }
+.cw-usda-range { font-size:.8rem; font-weight:600; color:var(--text); }
+.cw-usda-usual { font-size:.65rem; color:var(--muted); }
+
+/* TOY */
+.cw-toy-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:500px){ .cw-toy-grid { grid-template-columns:1fr; } }
+.cw-toy-title { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); margin-bottom:10px; }
+.cw-toy-tbl { width:100%; border-collapse:collapse; font-size:.78rem; }
+.cw-toy-tbl th { text-align:left; color:var(--muted); font-weight:500; padding-bottom:6px; font-size:.68rem; border-bottom:1px solid var(--border); }
+.cw-toy-tbl td { padding:7px 0; border-bottom:1px solid var(--border); }
+.cw-toy-tbl tr:last-child td { border-bottom:none; }
+.cw-toy-pos { color:#34c759; font-weight:700; }
+.cw-toy-neg { color:#ff453a; font-weight:700; }
 </style>
 </head>
 <body>
@@ -1831,7 +1955,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   <div class="header-left">
     <img src="logo.svg" alt="Agrícola Belher" style="height:36px;width:auto;flex-shrink:0;filter:brightness(0) invert(1);">
     <div class="header-text" style="border-left:1px solid rgba(255,255,255,.12);padding-left:14px;margin-left:4px">
-      <h1>Dashboard Ejecutivo</h1>
+      <h1>Centro de Inteligencia Belher</h1>
       <p>GC Temporada 2025–2026 · Datos en tiempo operativo</p>
     </div>
   </div>
@@ -1866,6 +1990,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   <button data-tab="finanzas">Finanzas</button>
   <button data-tab="calidad">Calidad</button>
   <button data-tab="tomate">Tomate</button>
+  <button data-tab="calavoweekly">Calavo Weekly</button>
   <button data-tab="limon">Limón</button>
   <button data-tab="chile">Chile</button>
   <button data-tab="granos">Granos</button>
@@ -2097,6 +2222,19 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 
   </div>
 
+  <!-- ══════════ CALAVO WEEKLY ══════════ -->
+  <div class="tab-panel" id="tab-calavoweekly">
+    <div id="cw-header"></div>
+    <div id="cw-stocks"></div>
+    <div id="cw-alertas"></div>
+    <div id="cw-correos"></div>
+    <div id="cw-kpis"></div>
+    <div id="cw-proyecciones"></div>
+    <div id="cw-ventas"></div>
+    <div id="cw-usda"></div>
+    <div id="cw-toy"></div>
+  </div>
+
   <!-- ══════════ LIMÓN ══════════ -->
   <div class="tab-panel" id="tab-limon">
     <div class="section-title">KPIs · Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
@@ -2280,7 +2418,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 
   /* ── Footer ── */
   document.getElementById('footerEl').innerHTML =
-    '<span>Agrícola Belher</span> · Dashboard Ejecutivo GC 2025–2026 · ' +
+    '<span>Agrícola Belher</span> · Centro de Inteligencia · GC 2025–2026 · ' +
     D.meta.fecha + ' · Act: ' + D.meta.actualizado +
     ' · Fuentes: Gmail · Calavo · Báscula · Calidad · Corbel Seeds';
 
@@ -3785,6 +3923,209 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     }
   }
 
+  /* ── Calavo Weekly Intelligence Center ── */
+  function renderCalavoWeekly() {
+    var CW = D.calavoWeekly;
+    if (!CW) return;
+
+    /* Helper: dollar format */
+    function cFmt(n) { return n != null ? '$' + n.toFixed(2) : '—'; }
+
+    /* ── Header ── */
+    document.getElementById('cw-header').innerHTML =
+      '<div class="cw-header-bar">' +
+        '<div><div class="cw-title">Calavo Intelligence Center</div>' +
+        '<div class="cw-subtitle">Fuente: ' + CW.fuente + ' · Actualizado ' + CW.actualizado + '</div></div>' +
+        '<span class="cw-badge-semana">' + CW.semana + ' · ' + CW.fechas + '</span>' +
+      '</div>';
+
+    /* ── Stock Monitor ── */
+    var stocksHtml = '<div class="section-title">Acciones en Bolsa <span class="src-tag">Yahoo Finance</span></div>' +
+      '<div class="cw-stocks-grid">';
+    CW.acciones.forEach(function(s) {
+      var hasData = s.precio != null;
+      var dir = hasData ? (s.cambio >= 0 ? 'up' : 'down') : 'nd';
+      var sign = s.cambio >= 0 ? '+' : '';
+      stocksHtml +=
+        '<div class="card cw-stock-card">' +
+          '<div class="cw-stock-left">' +
+            '<div class="cw-stock-sym">' + s.simbolo + '</div>' +
+            '<div class="cw-stock-name">' + s.nombre + '</div>' +
+            '<div class="cw-stock-mkt">' + s.mercado + '</div>' +
+          '</div>' +
+          '<div class="cw-stock-right">' +
+            '<div class="cw-stock-price">' + (hasData ? cFmt(s.precio) : '—') + '</div>' +
+            '<div class="cw-stock-change ' + dir + '">' +
+              (hasData ? sign + cFmt(s.cambio) + ' (' + sign + s.cambioPct.toFixed(2) + '%)' : 'Sin datos') +
+            '</div>' +
+            (hasData ? '<div class="cw-stock-range">52s: <span>' + cFmt(s.l52) + '</span> – <span>' + cFmt(s.h52) + '</span></div>' : '') +
+          '</div>' +
+        '</div>';
+    });
+    stocksHtml += '</div>';
+    document.getElementById('cw-stocks').innerHTML = stocksHtml;
+
+    /* ── Alertas ── */
+    var iconMap = { warning:'⚠', success:'✓', info:'ℹ' };
+    document.getElementById('cw-alertas').innerHTML =
+      '<div class="section-title">Alertas de Inteligencia</div>' +
+      '<div class="cw-alertas-list">' +
+      CW.alertas.map(function(a) {
+        return '<div class="cw-alerta-item ' + a.nivel + '">' +
+          '<span class="cw-alerta-icon">' + (iconMap[a.nivel]||'•') + '</span>' +
+          '<span class="cw-alerta-text">' + a.texto + '</span>' +
+        '</div>';
+      }).join('') + '</div>';
+
+    /* ── Correos @calavo.com ── */
+    document.getElementById('cw-correos').innerHTML =
+      '<div class="section-title">Comunicaciones · @calavo.com <span class="src-tag">Irene Amezaga · VP Sales</span></div>' +
+      '<div class="card" style="padding:16px 20px">' +
+      '<div class="cw-correos-timeline">' +
+      CW.correos.map(function(c, i) {
+        var isLast = i === CW.correos.length - 1;
+        return '<div class="cw-correo-item">' +
+          '<div class="cw-correo-dot-col">' +
+            '<div class="cw-correo-dot ' + c.tipo + '"></div>' +
+            (isLast ? '' : '<div class="cw-correo-line"></div>') +
+          '</div>' +
+          '<div class="cw-correo-body">' +
+            '<div class="cw-correo-meta">' +
+              '<span class="cw-correo-fecha">' + c.fecha + '</span>' +
+              '<span class="cw-correo-de">' + c.de + '</span>' +
+              '<span class="cw-tipo-pill ' + c.tipo + '">' + c.tipo + '</span>' +
+            '</div>' +
+            '<div class="cw-correo-asunto">' + c.asunto + '</div>' +
+            '<div class="cw-correo-resumen">' + c.resumen + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('') +
+      '</div></div>';
+
+    /* ── KPIs ── */
+    var k = CW.kpi;
+    var fobChgAbs = k.fobAnterior ? (k.fobPromedio - k.fobAnterior) : 0;
+    var fobChgPct = k.fobAnterior ? (fobChgAbs / k.fobAnterior * 100) : 0;
+    var fobDir = fobChgAbs > 0 ? 'up' : fobChgAbs < 0 ? 'down' : 'neutral';
+    function cwKpi(lbl, val, chg, chgDir) {
+      return '<div class="card cw-kpi-box">' +
+        '<div class="cw-kpi-lbl">' + lbl + '</div>' +
+        '<div class="cw-kpi-val">' + val + '</div>' +
+        (chg ? '<div class="cw-kpi-chg ' + (chgDir||'neutral') + '">' + chg + '</div>' : '') +
+      '</div>';
+    }
+    document.getElementById('cw-kpis').innerHTML =
+      '<div class="section-title">Desempeño WK12 · Mar 16–22 <span class="src-tag">Belher Sales Summary</span></div>' +
+      '<div class="cw-kpi-strip">' +
+        cwKpi('Pallets', k.pallets.toLocaleString(), '', 'neutral') +
+        cwKpi('Cargas', k.loads.toLocaleString(), '', 'neutral') +
+        cwKpi('Paquetes', k.pkgs.toLocaleString(), '', 'neutral') +
+        cwKpi('FOB Promedio', cFmt(k.fobPromedio), (fobChgAbs >= 0 ? '+' : '') + cFmt(fobChgAbs) + ' (' + (fobChgPct >= 0 ? '+' : '') + fobChgPct.toFixed(1) + '%) vs WK11', fobDir) +
+        cwKpi('WK11 Referencia', cFmt(k.fobAnterior), k.pkgsAnterior.toLocaleString() + ' pkgs', 'neutral') +
+      '</div>';
+
+    /* ── Proyecciones vs Real ── */
+    function cwProjCard(nombre, p) {
+      var cls = p.diffPct > 0 ? 'cw-diff-pos' : p.diffPct < 0 ? 'cw-diff-neg' : '';
+      var maxVal = Math.max(p.proyectado, p.actual) * 1.15;
+      var actualPct = (p.actual / maxVal * 100).toFixed(1);
+      var projPct   = (p.proyectado / maxVal * 100).toFixed(1);
+      return '<div class="card cw-proj-card">' +
+        '<div class="cw-proj-name">' + nombre + '</div>' +
+        '<div class="cw-proj-nums">' +
+          '<span class="cw-proj-actual">' + p.actual + '</span>' +
+          '<span class="cw-proj-unit"> pallets</span>' +
+          '<span class="cw-diff-badge ' + cls + '">' + (p.diffPct >= 0 ? '+' : '') + p.diffPct + '%</span>' +
+        '</div>' +
+        '<div class="cw-proj-bar-wrap">' +
+          '<div class="cw-proj-bar-fill" style="width:' + actualPct + '%"></div>' +
+          '<div class="cw-proj-marker" style="left:' + projPct + '%"></div>' +
+        '</div>' +
+        '<div class="cw-proj-meta">' + p.loads + ' cargas · ' + p.pkgs.toLocaleString() + ' pkgs</div>' +
+        '<div class="cw-proj-meta">Proyectado: ' + p.proyectado + ' pallets</div>' +
+      '</div>';
+    }
+    var adm = CW.adm.rounds;
+    document.getElementById('cw-proyecciones').innerHTML =
+      '<div class="section-title">Proyecciones vs Real <span class="src-tag">ADM + Belher Weekly · WK12</span></div>' +
+      '<div class="cw-proj-grid">' +
+        cwProjCard('Rounds / Vine Ripe', CW.proyecciones.rounds) +
+        cwProjCard('Roma 25lb', CW.proyecciones.roma) +
+      '</div>' +
+      '<div class="cw-adm-row">' +
+        '<span class="cw-adm-lbl">ADM · Rounds WK12</span>' +
+        '<span class="cw-adm-vals">' + adm.actual + ' pallets · ' + adm.loads + ' carga · ' + adm.pkgs.toLocaleString() + ' pkgs</span>' +
+        '<span class="cw-adm-diff">' + adm.diffPct + '% vs proj</span>' +
+      '</div>';
+
+    /* ── Ventas por variedad ── */
+    document.getElementById('cw-ventas').innerHTML =
+      '<div class="section-title">FOB Promedio por Variedad · WK12 <span class="src-tag">Belher Sales Summary</span></div>' +
+      '<div class="cw-ventas-grid">' +
+      CW.ventas.map(function(v) {
+        return '<div class="card cw-venta-card">' +
+          '<div class="cw-venta-name">' + v.variedad + '</div>' +
+          '<div class="cw-venta-price">' + cFmt(v.avg) + '</div>' +
+          '<div class="cw-venta-sub">FOB promedio</div>' +
+          '<div class="cw-venta-pkgs">' + v.recibido.toLocaleString() + ' <span class="cw-venta-pkgs-lbl">pkgs recibidos</span></div>' +
+        '</div>';
+      }).join('') + '</div>';
+
+    /* ── USDA Reference ── */
+    var byZone = {};
+    CW.usdaRef.precios.forEach(function(p) {
+      if (!byZone[p.zona]) byZone[p.zona] = [];
+      byZone[p.zona].push(p);
+    });
+    var usdaHtml = '<div class="section-title">Referencia USDA FOB <span class="src-tag">USDA Tomato Fax Report · ' + CW.usdaRef.fecha + '</span></div>' +
+      '<div class="cw-usda-grid">';
+    Object.keys(byZone).forEach(function(zona) {
+      usdaHtml += '<div class="card" style="padding:16px 20px"><div class="cw-usda-zona">' + zona + '</div>';
+      byZone[zona].forEach(function(p) {
+        usdaHtml += '<div class="cw-usda-row">' +
+          '<span class="cw-usda-prod">' + p.producto + '</span>' +
+          '<div class="cw-usda-vals">' +
+            '<div class="cw-usda-range">' + cFmt(p.min) + ' – ' + cFmt(p.max) + '</div>' +
+            (p.usual ? '<div class="cw-usda-usual">usual ' + cFmt(p.usual) + '</div>' : '') +
+          '</div>' +
+        '</div>';
+      });
+      usdaHtml += '</div>';
+    });
+    usdaHtml += '</div>';
+    document.getElementById('cw-usda').innerHTML = usdaHtml;
+
+    /* ── TOY Comparison ── */
+    document.getElementById('cw-toy').innerHTML =
+      '<div class="section-title">Comparativo Año Anterior <span class="src-tag">Belher Sales Summary</span></div>' +
+      '<div class="cw-toy-grid">' +
+        '<div class="card" style="padding:16px 20px">' +
+          '<div class="cw-toy-title">Cajas Recibidas por Mes</div>' +
+          '<table class="cw-toy-tbl"><thead><tr><th>Mes</th><th>2025</th><th>2026</th><th>Δ</th></tr></thead><tbody>' +
+          CW.toy.recibido.map(function(r) {
+            var diff = (r.y2025 && r.y2026) ? Math.round((r.y2026 - r.y2025) / r.y2025 * 100) : null;
+            var cls = diff != null ? (diff >= 0 ? 'cw-toy-pos' : 'cw-toy-neg') : '';
+            return '<tr><td>' + r.mes + '</td>' +
+              '<td>' + (r.y2025 ? r.y2025.toLocaleString() : '—') + '</td>' +
+              '<td>' + (r.y2026 ? r.y2026.toLocaleString() : '—') + '</td>' +
+              '<td class="' + cls + '">' + (diff != null ? (diff >= 0 ? '+' : '') + diff + '%' : '—') + '</td></tr>';
+          }).join('') +
+          '</tbody></table></div>' +
+        '<div class="card" style="padding:16px 20px">' +
+          '<div class="cw-toy-title">Precio FOB Promedio ($/caja)</div>' +
+          '<table class="cw-toy-tbl"><thead><tr><th>Mes</th><th>Ant.</th><th>2026</th><th>Δ</th></tr></thead><tbody>' +
+          CW.toy.pricing.map(function(p) {
+            var diff = (p.yPrev && p.yCurr) ? Math.round((p.yCurr - p.yPrev) / p.yPrev * 100) : null;
+            var cls = diff != null ? (diff >= 0 ? 'cw-toy-pos' : 'cw-toy-neg') : '';
+            return '<tr><td>' + p.mes + '</td>' +
+              '<td>' + cFmt(p.yPrev) + ' <small style="color:var(--muted)">(' + p.prevLabel + ')</small></td>' +
+              '<td>' + cFmt(p.yCurr) + '</td>' +
+              '<td class="' + cls + '">' + (diff != null ? (diff >= 0 ? '+' : '') + diff + '%' : '—') + '</td></tr>';
+          }).join('') +
+          '</tbody></table></div>' +
+      '</div>';
+  }
+
   function renderTomate() {
     var tv = (D.tomate && D.tomate.ventas) || { exportacion:[], nacional:[] };
     var ub = D.calidad.ultimoOutbound;
@@ -4622,6 +4963,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   renderMercado();
   renderFinanzas();
   renderTomate();
+  renderCalavoWeekly();
   renderLimon();
   renderChile();
   renderGranos();

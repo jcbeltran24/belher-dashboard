@@ -157,6 +157,7 @@ window.BELHER = {
       { producto:"Chile Bell GH (XL)",   min:42.95, max:44.95, anterior:41.95, via:"SoCal/AZ",  alerta:false },
       { producto:"Jalapeño",             min:48.00, max:50.00, anterior:61.00, via:"SoCal/AZ",  alerta:true  },
       { producto:"Anaheim",              min:34.00, max:36.00, anterior:null,   via:"SoCal/AZ",  alerta:false },
+      { producto:"Habanero",             min:null,  max:null,  anterior:null,   via:"SoCal/AZ",  alerta:false, pendiente:true },
       { producto:"Vine-ripe 4×5 25lb",   min:44.00, max:46.00, anterior:30.00, via:"FOB Nogales, AZ", alerta:true  },
       { producto:"Limón Persa 40lb",     min:18.00, max:22.00, anterior:19.50, via:"FOB Nogales, AZ", alerta:false }
     ],
@@ -534,6 +535,107 @@ window.BELHER = {
         { sem:"WK37", total:214,  trabajadores:194, acomp:20,  pct:90.7 },
         { sem:"WK38", total:217,  trabajadores:195, acomp:22,  pct:89.9 },
         { sem:"WK39", total:206,  trabajadores:187, acomp:19,  pct:90.8 }
+      ]
+    }
+  },
+
+  calavoWeekly: {
+    semana:      "WK12",
+    fechas:      "16–22 Mar 2026",
+    fuente:      "Irene Amezaga · Calavo Growers",
+    actualizado: "25/03/2026",
+
+    /* ── Acciones en bolsa ── */
+    acciones: [
+      {
+        simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
+        precio: 25.94, prevClose: 24.57, cambio: 1.37, cambioPct: 5.58,
+        h52: 28.72, l52: 18.40, volumen: 303613,
+        fuente: "Yahoo Finance"
+      },
+      {
+        simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
+        precio: null, prevClose: null, cambio: null, cambioPct: null,
+        h52: null, l52: null, volumen: null,
+        fuente: "N/D"
+      }
+    ],
+
+    /* ── Correos recientes de @calavo.com ── */
+    correos: [
+      {
+        fecha: "25/03/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya",
+        asunto: "Week 12 Tomato Weekly Update 2026",
+        tipo: "reporte", nivel: "info",
+        resumen: "Reporte semanal WK12 adjunto. Belher: 488 pallets · 40 cargas · 67,840 pkgs. Rounds +7% vs proyectado; Roma +20%."
+      },
+      {
+        fecha: "24/03/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya",
+        asunto: "Weekly Tomato Meeting — Teams",
+        tipo: "reunion", nivel: "info",
+        resumen: "Invitación reunión semanal Teams. Asistentes: Antonio, JC, Jonathan Barbarine, Dora Castro, Elizabeth Bravo, John Lindeman, James Snyder."
+      },
+      {
+        fecha: "19/03/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya",
+        asunto: "3 Year Contract Update",
+        tipo: "contrato", nivel: "warning",
+        resumen: "Reunión Teams para actualizar contrato 3 años. Pendiente revisión conjunta con John Lindeman y James Snyder antes de finalizar."
+      },
+      {
+        fecha: "13/03/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya",
+        asunto: "Beltran-Calavo 2026 Contract.docx",
+        tipo: "contrato", nivel: "warning",
+        resumen: "Borrador contrato 2026 enviado con cambios 'highlighted'. Pendiente revisión vs contrato 2023-2026 existente. Irene coordina con John y James para alinear términos antes de firmar."
+      }
+    ],
+
+    /* ── Alertas de inteligencia ── */
+    alertas: [
+      { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
+      { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
+      { nivel: "info",    texto: "CVGW cotiza $25.94 (+5.58%) — cerca de máximo 52 semanas $28.72. Señal positiva para el negocio de aguacate Calavo." }
+    ],
+
+    /* ── KPIs de desempeño WK12 ── */
+    kpi: {
+      pallets: 488, loads: 40, pkgs: 67840,
+      fobPromedio: 20.07, fobAnterior: 18.06, pkgsAnterior: 50053
+    },
+
+    proyecciones: {
+      rounds: { proyectado: 309, actual: 329, loads: 24, pkgs: 42240, diffPct: 7  },
+      roma:   { proyectado: 133, actual: 159, loads: 16, pkgs: 25600, diffPct: 20 },
+      total:  { proyectado: 442, actual: 488, loads: 40, pkgs: 67840 }
+    },
+
+    adm: {
+      rounds: { proyectado: 43, actual: 25, loads: 1, pkgs: 1740, diffPct: -43 }
+    },
+
+    ventas: [
+      { variedad: "Rounds / Vine Ripe", avg: 21.37, recibido: 28606 },
+      { variedad: "Roma 25lb",          avg: 16.41, recibido: 16727 }
+    ],
+
+    usdaRef: {
+      fecha: "23/03/2026",
+      precios: [
+        { producto: "Vine Ripe 25lb", zona: "Nogales AZ", min: 38.95, max: 43.95, usual: 40.95 },
+        { producto: "Vine Ripe 4×5",  zona: "Nogales AZ", min: 36.95, max: 40.95, usual: null  },
+        { producto: "Roma 25lb",      zona: "Nogales AZ", min: 32.95, max: 38.95, usual: 34.95 },
+        { producto: "Vine Ripe 25lb", zona: "Texas",      min: 36.95, max: 42.95, usual: 38.95 },
+        { producto: "Roma 25lb",      zona: "Texas",      min: 34.95, max: 38.95, usual: 35.95 }
+      ]
+    },
+
+    toy: {
+      recibido: [
+        { mes: "Dic", y2025: 337541, y2026: 234353 },
+        { mes: "Ene", y2025: 209098, y2026: 299053 }
+      ],
+      pricing: [
+        { mes: "Dic", yPrev: 19.89, yCurr: 11.06, prevLabel: "2024", currLabel: "2026" },
+        { mes: "Ene", yPrev: 11.19, yCurr: 14.43, prevLabel: "2025", currLabel: "2026" }
       ]
     }
   }
