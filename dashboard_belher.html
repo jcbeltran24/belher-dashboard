@@ -1449,6 +1449,35 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 .tom-embarques-layout { display: flex; gap: 16px; align-items: flex-start; }
 .tom-fleet-card { padding: 18px 16px; flex: 0 0 200px; min-width: 0; }
 
+/* P&L Waterfall */
+.tom-pl-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+}
+.tom-pl-item:last-child { border-bottom: none; background: none; }
+.tom-pl-item.pl-net { padding-top: 14px; margin-top: 4px; border-top: 2px solid var(--border); border-bottom: none; }
+.tom-pl-label { font-size: .82rem; min-width: 200px; flex-shrink: 0; }
+.tom-pl-bar-wrap { flex: 1; height: 6px; background: rgba(0,0,0,.05); border-radius: 3px; overflow: hidden; }
+.tom-pl-bar-fill { height: 100%; border-radius: 3px; transition: width .9s cubic-bezier(.25,.46,.45,.94); }
+.tom-pl-pct { font-size: .69rem; color: var(--muted); min-width: 38px; text-align: right; flex-shrink: 0; }
+.tom-pl-amount { font-size: .92rem; font-weight: 700; min-width: 115px; text-align: right; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+
+/* Finance row: cuenta corriente + season progress */
+.tom-finance-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+.tom-cc-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,.05);
+  font-size: .82rem;
+}
+.tom-cc-row:last-child { border-bottom: none; }
+.tom-cc-lbl { color: var(--text2); }
+.tom-cc-val { font-weight: 700; font-variant-numeric: tabular-nums; }
+
 /* ═══════════════════════════════════════════════
    iPHONE — 480px y menor (todos los modelos)
 ══════════════════════════════════════════════ */
@@ -1547,6 +1576,9 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   /* ── TOMATE TAB ── */
   .tom-kpi-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .tom-kpi-val  { font-size: 1.05rem; }
+  .tom-finance-row { grid-template-columns: 1fr; }
+  .tom-pl-label { min-width: 130px; font-size: .76rem; }
+  .tom-pl-amount { min-width: 90px; font-size: .84rem; }
   .th-revenue   { font-size: 2.1rem; letter-spacing: -1px; }
   .tom-hero     { padding: 20px 20px 18px; }
   .th-metrics   { grid-template-columns: 1fr 1fr; }
@@ -1805,6 +1837,20 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
         <div id="tomateNacVentas"></div>
       </div>
     </div>
+
+    <!-- Calavo P&L Waterfall -->
+    <div class="section-title">Calavo · Desglose Financiero <span id="tomatePL_periodo" style="font-weight:500;text-transform:none;letter-spacing:0;font-size:.76rem;color:var(--muted)"></span> <span class="src-tag">Calavo Settlement</span></div>
+    <div id="tomateCalavoPL"></div>
+
+    <!-- Cuenta Corriente + Season Progress -->
+    <div class="tom-finance-row">
+      <div id="tomateCuentaCorriente"></div>
+      <div id="tomateSeasonProgress"></div>
+    </div>
+
+    <!-- Weekly Volume Chart -->
+    <div class="section-title">Cajas Exportadas · por Semana <span class="src-tag">Calavo Pick &amp; Pack Wires WK01–WK12</span></div>
+    <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartTomateVolumen"></canvas></div></div>
 
     <!-- Quality Trend + Market Prices -->
     <div class="tomate-charts-row">
@@ -2775,6 +2821,58 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
       } else if (ctxFleet) {
         document.getElementById('tomateFleetCard').style.display = 'none';
       }
+
+      /* Weekly volume chart (cajas per week from Calavo pagos) */
+      var pagosVol = D.calavo.pagos.filter(function (p) { return p.cajas != null; });
+      var volLabels = pagosVol.map(function (p) { return p.sem; });
+      var volCajas  = pagosVol.map(function (p) { return p.cajas; });
+      var maxCajas  = Math.max.apply(null, volCajas);
+      var volColors = volCajas.map(function (c, i) {
+        if (c === maxCajas) return 'rgba(22,163,74,.92)';
+        if (i === volCajas.length - 1) return 'rgba(22,163,74,.65)';
+        return 'rgba(22,163,74,.42)';
+      });
+      var ctxVol = document.getElementById('chartTomateVolumen');
+      if (ctxVol) {
+        new Chart(ctxVol.getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: volLabels,
+            datasets: [{
+              label: 'Cajas',
+              data: volCajas,
+              backgroundColor: volColors,
+              borderRadius: 6,
+              borderSkipped: false
+            }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  title: function (ctx) { return ctx[0].label; },
+                  label: function (ctx) {
+                    var p = pagosVol[ctx.dataIndex];
+                    return [
+                      ctx.parsed.y.toLocaleString('en-US') + ' cajas',
+                      'Wire: ' + fmt(p.pago) + ' · ' + p.cont + ' cont.'
+                    ];
+                  }
+                }
+              }
+            },
+            scales: {
+              y: {
+                ticks: { callback: function (v) { return v >= 1000 ? (v/1000).toFixed(0) + 'k' : v; }, font: { size: 10 } },
+                grid: { color: 'rgba(0,0,0,.045)' }
+              },
+              x: { ticks: { font: { size: 10 } }, grid: { display: false } }
+            }
+          }
+        });
+      }
     }
 
     if (tab === 'operaciones' && !chartsInit.embarques) {
@@ -3364,6 +3462,103 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
           '<div class="cce-meta-item"><div class="cce-meta-val">Yameto · Tolin · U/M/Z</div><div class="cce-meta-lbl">Etiquetas</div></div>' +
         '</div>' +
         '<div class="cce-progress"><div class="cce-progress-fill" style="width:' + nacPct.toFixed(1) + '%;background:#1d4ed8"></div></div>' +
+      '</div>';
+
+    /* ── Calavo P&L Waterfall ── */
+    var cv = D.calavo;
+    document.getElementById('tomatePL_periodo').textContent = '· ' + periodo;
+    var plItems = [
+      { label: 'Revenue Bruto FOB',       amt: cv.revenueTotal, color: 'var(--green2)',        deduct: false },
+      { label: '(-) Comisión Calavo 12%', amt: cv.comision,     color: 'rgba(220,38,38,.75)',  deduct: true  },
+      { label: '(-) Z-Code Expenses',     amt: cv.zCode,        color: 'rgba(220,38,38,.6)',   deduct: true  },
+      { label: '(-) Anti-Dumping Duty',   amt: cv.antiDumping,  color: 'rgba(220,38,38,.45)',  deduct: true  },
+      { label: '= Venta Neta Calavo',     amt: cv.ventaNeta,    color: 'var(--green2)',        deduct: false, isNet: true }
+    ];
+    var plMax = cv.revenueTotal;
+    var retPct = (cv.ventaNeta / cv.revenueTotal * 100).toFixed(1);
+    document.getElementById('tomateCalavoPL').innerHTML =
+      '<div class="card" style="padding:20px 24px">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">' +
+          '<div style="font-size:.7rem;color:var(--muted)">Deducibles totales: <strong style="color:var(--red2)">' + fmt(cv.comision + cv.zCode + cv.antiDumping) + '</strong></div>' +
+          '<div style="font-size:.7rem;color:var(--muted)">Retención neta: <strong style="color:var(--green2)">' + retPct + '% del bruto</strong></div>' +
+        '</div>' +
+        plItems.map(function (p) {
+          var barW = (p.amt / plMax * 100).toFixed(1);
+          var pctOfRev = (p.amt / plMax * 100).toFixed(1);
+          return '<div class="tom-pl-item' + (p.isNet ? ' pl-net' : '') + '">' +
+            '<div class="tom-pl-label" style="' + (p.deduct ? 'color:var(--muted)' : 'font-weight:' + (p.isNet ? '800' : '600')) + '">' + p.label + '</div>' +
+            '<div class="tom-pl-bar-wrap"><div class="tom-pl-bar-fill" style="width:' + barW + '%;background:' + p.color + '"></div></div>' +
+            '<div class="tom-pl-pct">' + pctOfRev + '%</div>' +
+            '<div class="tom-pl-amount" style="color:' + p.color + (p.isNet ? ';font-size:1.05rem' : '') + '">' +
+              (p.deduct ? '−' : '') + fmt(p.amt) +
+            '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+
+    /* ── Cuenta Corriente ── */
+    var totalRecibido = (cv.pickPack || 0) + (cv.prestamo || 0) + (cv.capitalTrabajo || 0);
+    var saldoNeg = cv.saldoActual < 0;
+    var saldoColor = saldoNeg ? 'var(--red2)' : 'var(--green2)';
+    document.getElementById('tomateCuentaCorriente').innerHTML =
+      '<div class="card" style="padding:20px 24px">' +
+        '<div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:14px">Cuenta Corriente · Calavo a WK12</div>' +
+        '<div class="tom-cc-row"><span class="tom-cc-lbl">Pick &amp; Pack acumulado WK01–WK12</span><span class="tom-cc-val">' + fmt(cv.pickPack) + '</span></div>' +
+        '<div class="tom-cc-row"><span class="tom-cc-lbl">Préstamo Calavo</span><span class="tom-cc-val">' + fmt(cv.prestamo) + '</span></div>' +
+        '<div class="tom-cc-row"><span class="tom-cc-lbl">Capital de trabajo</span><span class="tom-cc-val">' + fmt(cv.capitalTrabajo) + '</span></div>' +
+        '<div class="tom-cc-row"><span class="tom-cc-lbl">Saldo adeudado temporada 2025</span><span class="tom-cc-val">' + fmt(cv.saldoAnterior) + '</span></div>' +
+        '<div class="tom-cc-row" style="padding-top:12px;margin-top:4px;border-top:2px solid var(--border)">' +
+          '<span class="tom-cc-lbl" style="font-weight:700">Total recibido de Calavo</span>' +
+          '<span class="tom-cc-val" style="font-size:1rem">' + fmt(totalRecibido) + '</span>' +
+        '</div>' +
+        '<div class="tom-cc-row"><span class="tom-cc-lbl">Venta Neta devengada a WK12</span><span class="tom-cc-val" style="color:var(--green2)">' + fmt(cv.ventaNeta) + '</span></div>' +
+        '<div class="tom-cc-row" style="padding:12px 0 4px;margin-top:6px;border-top:2px solid var(--border)">' +
+          '<span class="tom-cc-lbl" style="font-weight:800;font-size:.88rem">Saldo Neto WK12</span>' +
+          '<span class="tom-cc-val" style="color:' + saldoColor + ';font-size:1.1rem">' + fmt(cv.saldoActual) + '</span>' +
+        '</div>' +
+        '<div style="font-size:.68rem;color:var(--muted);margin-top:6px;line-height:1.45">' +
+          (saldoNeg
+            ? 'Calavo ha adelantado más de lo devengado. Diferencia se salda al cierre de temporada.'
+            : 'Balance a favor de Belher · Calavo liquidará al cierre.') +
+        '</div>' +
+      '</div>';
+
+    /* ── Season Progress ── */
+    var pagosCajas = cv.pagos.filter(function (p) { return p.cajas != null; });
+    var cajasLiquidadas = pagosCajas.reduce(function (s, p) { return s + p.cajas; }, 0);
+    var semsLiquidadas  = pagosCajas.length;
+    var avgCajasSem     = semsLiquidadas ? Math.round(cajasLiquidadas / semsLiquidadas) : 0;
+    var wkActual = 12, wkTotal = 17;
+    var sesPct   = Math.round(wkActual / wkTotal * 100);
+    var cajasRestantes = Math.round(avgCajasSem * (wkTotal - wkActual));
+    var cajasProyect   = cajasTotal + cajasRestantes;
+    var revProyect     = cajasTotal ? Math.round(revReal / cajasTotal * cajasProyect) : 0;
+
+    document.getElementById('tomateSeasonProgress').innerHTML =
+      '<div class="card" style="padding:20px 20px">' +
+        '<div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:12px">Progreso · Temporada</div>' +
+        '<div style="font-size:2.1rem;font-weight:900;letter-spacing:-1px">WK12 <span style="font-size:.85rem;font-weight:500;color:var(--muted)">/ WK17</span></div>' +
+        '<div style="font-size:.75rem;color:var(--muted);margin-bottom:12px">' + sesPct + '% completada · ~' + (wkTotal - wkActual) + ' sem restantes</div>' +
+        '<div style="height:7px;background:rgba(0,0,0,.07);border-radius:4px;overflow:hidden;margin-bottom:16px">' +
+          '<div style="height:100%;width:' + sesPct + '%;background:linear-gradient(90deg,var(--green2),var(--green3));border-radius:4px;transition:width 1s cubic-bezier(.25,.46,.45,.94)"></div>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">' +
+          '<div style="background:var(--bg);border-radius:10px;padding:10px 12px">' +
+            '<div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)">Prom/semana</div>' +
+            '<div style="font-size:1.05rem;font-weight:900;margin-top:2px">' + fmtN(avgCajasSem) + '</div>' +
+            '<div style="font-size:.66rem;color:var(--muted)">cajas</div>' +
+          '</div>' +
+          '<div style="background:var(--bg);border-radius:10px;padding:10px 12px">' +
+            '<div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)">Proyección</div>' +
+            '<div style="font-size:1.05rem;font-weight:900;margin-top:2px;color:var(--accent)">' + fmtN(cajasProyect) + '</div>' +
+            '<div style="font-size:.66rem;color:var(--muted)">cajas totales</div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="margin-top:10px;padding:10px 12px;background:rgba(22,163,74,.06);border-radius:10px;border:1px solid rgba(22,163,74,.14)">' +
+          '<div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)">Revenue proyectado</div>' +
+          '<div style="font-size:1.15rem;font-weight:900;color:var(--green2);margin-top:2px">' + fmt(revProyect) + '</div>' +
+          '<div style="font-size:.65rem;color:var(--muted)">si mantiene ritmo actual</div>' +
+        '</div>' +
       '</div>';
 
     /* ── Precios mercado ── */
