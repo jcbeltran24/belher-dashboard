@@ -1829,6 +1829,28 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   .hoy-mid { grid-template-columns: 1fr 1fr; }
 }
 
+/* ── Calavo Weekly — Grower blocks ── */
+.cw-growers-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+@media(max-width:600px){ .cw-growers-grid { grid-template-columns:1fr; } }
+.cw-grower-block { padding:18px 20px; }
+.cw-grower-header { display:flex; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+.cw-grower-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.cw-grower-name { font-size:.88rem; font-weight:800; color:var(--text); }
+.cw-grower-full { font-size:.68rem; font-weight:400; color:var(--muted); }
+.cw-grower-total { font-size:.68rem; color:var(--muted); margin-left:auto; }
+.cw-grow-row { padding:10px 0; border-bottom:1px solid var(--border); }
+.cw-grow-row:last-child { border-bottom:none; }
+.cw-grow-empty { display:flex; align-items:center; justify-content:space-between; padding:10px 0; }
+.cw-grow-label { font-size:.7rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+.cw-grow-bar-wrap { height:5px; background:var(--border); border-radius:3px; position:relative; margin:6px 0; }
+.cw-grow-bar-fill { position:absolute; top:0; left:0; height:5px; border-radius:3px; }
+.cw-grow-bar-proj { position:absolute; top:-4px; width:2px; height:13px; background:rgba(255,255,255,.35); border-radius:1px; }
+.cw-grow-nums { display:flex; align-items:baseline; gap:6px; margin-top:4px; }
+.cw-grow-actual { font-size:1.4rem; font-weight:700; color:var(--text); }
+.cw-grow-proj { font-size:.75rem; color:var(--muted); }
+.cw-grow-meta { font-size:.68rem; color:var(--muted); margin-top:2px; }
+.cw-grower-adm .cw-grow-actual { color:var(--muted); }
+
 /* ── Calavo Weekly Intelligence Center ── */
 .cw-header-bar { display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
 .cw-title { font-size:1rem; font-weight:700; color:var(--text); }
@@ -1985,12 +2007,12 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 
 <!-- ══ TABS ══ -->
 <nav class="tabs" id="tabNav">
-  <button class="active" data-tab="hoy">Resumen</button>
+  <button class="active" data-tab="calavoweekly">Calavo Weekly</button>
+  <button data-tab="hoy">Resumen</button>
   <button data-tab="estrategia">Estrategia</button>
   <button data-tab="finanzas">Finanzas</button>
   <button data-tab="calidad">Calidad</button>
   <button data-tab="tomate">Tomate</button>
-  <button data-tab="calavoweekly">Calavo Weekly</button>
   <button data-tab="limon">Limón</button>
   <button data-tab="chile">Chile</button>
   <button data-tab="granos">Granos</button>
@@ -2004,7 +2026,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 <main>
 
   <!-- ══════════ HOY ══════════ -->
-  <div class="tab-panel active" id="tab-hoy">
+  <div class="tab-panel" id="tab-hoy">
 
     <div id="hoyHero"></div>
     <div class="hoy-kpi-grid" id="hoyKpis"></div>
@@ -2223,7 +2245,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   </div>
 
   <!-- ══════════ CALAVO WEEKLY ══════════ -->
-  <div class="tab-panel" id="tab-calavoweekly">
+  <div class="tab-panel active" id="tab-calavoweekly">
     <div id="cw-header"></div>
     <div id="cw-stocks"></div>
     <div id="cw-alertas"></div>
@@ -4024,38 +4046,54 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
         cwKpi('WK11 Referencia', cFmt(k.fobAnterior), k.pkgsAnterior.toLocaleString() + ' pkgs', 'neutral') +
       '</div>';
 
-    /* ── Proyecciones vs Real ── */
-    function cwProjCard(nombre, p) {
-      var cls = p.diffPct > 0 ? 'cw-diff-pos' : p.diffPct < 0 ? 'cw-diff-neg' : '';
-      var maxVal = Math.max(p.proyectado, p.actual) * 1.15;
-      var actualPct = (p.actual / maxVal * 100).toFixed(1);
-      var projPct   = (p.proyectado / maxVal * 100).toFixed(1);
-      return '<div class="card cw-proj-card">' +
-        '<div class="cw-proj-name">' + nombre + '</div>' +
-        '<div class="cw-proj-nums">' +
-          '<span class="cw-proj-actual">' + p.actual + '</span>' +
-          '<span class="cw-proj-unit"> pallets</span>' +
+    /* ── Proyecciones vs Real — Belher vs ADM ── */
+    function cwProjRow(nombre, p, accent) {
+      var cls = p.diffPct > 0 ? 'cw-diff-pos' : p.diffPct < 0 ? 'cw-diff-neg' : 'cw-diff-neu';
+      var maxVal = Math.max(p.proyectado, p.actual) * 1.15 || 1;
+      var actualPct = Math.min(p.actual / maxVal * 100, 100).toFixed(1);
+      var projPct   = Math.min(p.proyectado / maxVal * 100, 100).toFixed(1);
+      return '<div class="cw-grow-row">' +
+        '<div class="cw-grow-label">' + nombre + '</div>' +
+        '<div class="cw-grow-bar-wrap">' +
+          '<div class="cw-grow-bar-fill" style="width:' + actualPct + '%;background:' + accent + '"></div>' +
+          '<div class="cw-grow-bar-proj" style="left:' + projPct + '%"></div>' +
+        '</div>' +
+        '<div class="cw-grow-nums">' +
+          '<span class="cw-grow-actual">' + p.actual + '</span>' +
+          '<span class="cw-grow-proj"> / ' + p.proyectado + '</span>' +
           '<span class="cw-diff-badge ' + cls + '">' + (p.diffPct >= 0 ? '+' : '') + p.diffPct + '%</span>' +
         '</div>' +
-        '<div class="cw-proj-bar-wrap">' +
-          '<div class="cw-proj-bar-fill" style="width:' + actualPct + '%"></div>' +
-          '<div class="cw-proj-marker" style="left:' + projPct + '%"></div>' +
-        '</div>' +
-        '<div class="cw-proj-meta">' + p.loads + ' cargas · ' + p.pkgs.toLocaleString() + ' pkgs</div>' +
-        '<div class="cw-proj-meta">Proyectado: ' + p.proyectado + ' pallets</div>' +
+        '<div class="cw-grow-meta">' + p.loads + ' cargas · ' + p.pkgs.toLocaleString() + ' pkgs</div>' +
       '</div>';
     }
-    var adm = CW.adm.rounds;
+    var bel = CW.belher || CW.proyecciones;
+    var adm = CW.adm;
     document.getElementById('cw-proyecciones').innerHTML =
-      '<div class="section-title">Proyecciones vs Real <span class="src-tag">ADM + Belher Weekly · WK12</span></div>' +
-      '<div class="cw-proj-grid">' +
-        cwProjCard('Rounds / Vine Ripe', CW.proyecciones.rounds) +
-        cwProjCard('Roma 25lb', CW.proyecciones.roma) +
+      '<div class="section-title">Proyecciones vs Real · WK12 <span class="src-tag">Calavo Weekly Report · Irene Amezaga</span></div>' +
+      '<div class="cw-growers-grid">' +
+
+      /* ── Belher block ── */
+      '<div class="card cw-grower-block cw-grower-belher">' +
+        '<div class="cw-grower-header">' +
+          '<div class="cw-grower-dot" style="background:#34c759"></div>' +
+          '<div class="cw-grower-name">Belher</div>' +
+          '<div class="cw-grower-total">' + (bel.total ? bel.total.actual : '—') + ' pal · ' + (bel.total ? bel.total.loads : '—') + ' car · ' + (bel.total ? bel.total.pkgs.toLocaleString() : '—') + ' pkgs</div>' +
+        '</div>' +
+        cwProjRow('Rounds / Vine Ripe', bel.rounds, '#34c759') +
+        cwProjRow('Roma 25lb',          bel.roma,   '#30d158') +
       '</div>' +
-      '<div class="cw-adm-row">' +
-        '<span class="cw-adm-lbl">ADM · Rounds WK12</span>' +
-        '<span class="cw-adm-vals">' + adm.actual + ' pallets · ' + adm.loads + ' carga · ' + adm.pkgs.toLocaleString() + ' pkgs</span>' +
-        '<span class="cw-adm-diff">' + adm.diffPct + '% vs proj</span>' +
+
+      /* ── ADM block ── */
+      '<div class="card cw-grower-block cw-grower-adm">' +
+        '<div class="cw-grower-header">' +
+          '<div class="cw-grower-dot" style="background:#636366"></div>' +
+          '<div class="cw-grower-name">ADM <span class="cw-grower-full">· ' + (adm.nombre || 'Agrícola Don Memo') + '</span></div>' +
+          '<div class="cw-grower-total">' + (adm.total ? adm.total.actual : '—') + ' pal · ' + (adm.total ? adm.total.loads : '—') + ' car · ' + (adm.total ? adm.total.pkgs.toLocaleString() : '—') + ' pkgs</div>' +
+        '</div>' +
+        cwProjRow('Rounds / Vine Ripe', adm.rounds, '#636366') +
+        (adm.roma && adm.roma.proyectado > 0 ? cwProjRow('Roma 25lb', adm.roma, '#48484a') : '<div class="cw-grow-row cw-grow-empty"><span class="cw-grow-label">Roma 25lb</span><span style="color:var(--muted);font-size:.72rem">Sin programa esta semana</span></div>') +
+      '</div>' +
+
       '</div>';
 
     /* ── Ventas por variedad ── */

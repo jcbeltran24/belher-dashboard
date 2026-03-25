@@ -602,14 +602,17 @@ window.BELHER = {
       fobPromedio: 20.07, fobAnterior: 18.06, pkgsAnterior: 50053
     },
 
-    proyecciones: {
+    belher: {
       rounds: { proyectado: 309, actual: 329, loads: 24, pkgs: 42240, diffPct: 7  },
       roma:   { proyectado: 133, actual: 159, loads: 16, pkgs: 25600, diffPct: 20 },
       total:  { proyectado: 442, actual: 488, loads: 40, pkgs: 67840 }
     },
 
     adm: {
-      rounds: { proyectado: 43, actual: 25, loads: 1, pkgs: 1740, diffPct: -43 }
+      nombre: "Agrícola Don Memo",
+      rounds: { proyectado: 43,  actual: 25,  loads: 1,  pkgs: 1740,  diffPct: -43 },
+      roma:   { proyectado: 0,   actual: 0,   loads: 0,  pkgs: 0,     diffPct: 0   },
+      total:  { proyectado: 43,  actual: 25,  loads: 1,  pkgs: 1740 }
     },
 
     ventas: [
