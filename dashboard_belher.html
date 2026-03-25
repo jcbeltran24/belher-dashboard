@@ -1158,6 +1158,187 @@ footer span { color: var(--accent2); font-weight: 600; }
   .h-pill { display: none; }
 }
 
+/* ╔══════════════════════════════════════════════════════════╗
+   ║   APPLE-LEVEL DESIGN POLISH                            ║
+   ║   Refined system for world-class executive dashboard   ║
+   ╚══════════════════════════════════════════════════════════╝ */
+
+/* ── 1. Refined Design Tokens ── */
+:root {
+  --bg:        #f0f4f0;
+  --border:    rgba(0,0,0,.08);
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.04);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.03);
+  --shadow:    0 4px 20px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.04);
+  --shadow-md: 0 8px 32px rgba(0,0,0,.09), 0 2px 8px rgba(0,0,0,.04);
+  --shadow-lg: 0 24px 64px rgba(0,0,0,.10), 0 6px 16px rgba(0,0,0,.05);
+  --r-sm:  10px;
+  --r:     14px;
+  --r-lg:  18px;
+  --r-xl:  24px;
+  --transition: .22s cubic-bezier(.25,.46,.45,.94);
+}
+
+/* ── 2. Font Rendering ── */
+*, *::before, *::after { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { text-rendering: optimizeLegibility; font-feature-settings: "kern" 1; }
+
+/* ── 3. Tabular nums on all data values ── */
+.kpi-value, .hoy-kpi-val, .hoy-hero-num, .hoy-pulso-val,
+.dc-pct, .donut-amount, .cdc-hero-total, .cdc-pct-big {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 4. Section Titles — clean typographic rule, no box ── */
+.section-title {
+  font-size: .62rem; font-weight: 700; letter-spacing: 1.1px;
+  text-transform: uppercase; color: var(--muted);
+  margin: 28px 0 14px; padding: 0; border: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-title::before {
+  content: ''; display: block;
+  width: 20px; height: 2px; border-radius: 1px; flex-shrink: 0;
+  background: linear-gradient(90deg, var(--green2) 0%, var(--green3) 100%);
+}
+.section-title:first-child { margin-top: 4px; }
+
+/* ── 5. Tab Fade-Slide Animation ── */
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(7px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tab-panel.active { animation: tabFadeIn .24s cubic-bezier(.25,.46,.45,.94); }
+
+/* ── 6. Cards ── */
+.card, .card-table, .kpi-card, .donut-card, .cdc-stat-card {
+  border-color: rgba(0,0,0,.07);
+}
+.card {
+  box-shadow: 0 1px 1px rgba(0,0,0,.02), 0 4px 18px rgba(0,0,0,.06);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.card:hover {
+  box-shadow: 0 2px 2px rgba(0,0,0,.02), 0 12px 36px rgba(0,0,0,.09);
+  transform: translateY(-2px);
+}
+.kpi-card {
+  border-color: rgba(0,0,0,.07);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.kpi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.kpi-value { letter-spacing: -.03em; }
+
+/* ── 7. Apple Segmented Control ── */
+.view-toggle {
+  display: inline-flex; background: rgba(0,0,0,.055);
+  border-radius: 13px; padding: 3px; gap: 2px;
+  margin: 0 0 16px; border: none;
+}
+.vt-btn {
+  border: none; background: transparent; border-radius: 10px;
+  padding: 7px 18px; font-size: .77rem; font-weight: 600;
+  color: var(--muted); cursor: pointer;
+  transition: all .18s cubic-bezier(.4,0,.2,1);
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  white-space: nowrap;
+}
+.vt-btn.active {
+  background: #fff; color: var(--text);
+  box-shadow: 0 1px 4px rgba(0,0,0,.13), 0 1px 2px rgba(0,0,0,.08);
+}
+.vt-btn:not(.active):hover { color: var(--text2); background: rgba(255,255,255,.45); }
+
+/* ── 8. Tables ── */
+thead th {
+  background: rgba(0,0,0,.022); font-size: .62rem;
+  letter-spacing: .8px; color: var(--muted); font-weight: 700;
+  border-bottom: 1px solid rgba(0,0,0,.07); padding: 10px 14px;
+}
+tbody td { border-bottom-color: rgba(0,0,0,.045); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: rgba(22,163,74,.025); }
+
+/* ── 9. Badges ── */
+.badge { font-size: .64rem; letter-spacing: .2px; padding: 3px 10px; border-radius: 20px; font-weight: 700; }
+
+/* ── 10. Source tags ── */
+.src-tag {
+  background: rgba(0,0,0,.04); border: 1px solid rgba(0,0,0,.07);
+  color: var(--muted); font-weight: 600; letter-spacing: .2px;
+  font-size: .6rem; padding: 2px 8px; border-radius: 8px; opacity: 1;
+}
+
+/* ── 11. Hoy Hero ── */
+.hoy-hero {
+  box-shadow: 0 12px 48px rgba(12,33,23,.28), 0 4px 16px rgba(12,33,23,.14);
+}
+.hoy-hero-num { letter-spacing: -.04em; }
+.hoy-kpi:hover { border-color: rgba(22,163,74,.2); }
+
+/* ── 12. CDC ── */
+.cdc-hero-card { box-shadow: 0 12px 40px rgba(0,0,0,.18), 0 4px 12px rgba(0,0,0,.1); }
+
+/* ── 13. Báscula rows ── */
+.basc-row { border-color: rgba(0,0,0,.07); border-radius: var(--r-sm); }
+.basc-row:hover { background: rgba(22,163,74,.04); }
+
+/* ── 14. Price hero cards ── */
+.price-hero { border-color: rgba(0,0,0,.07); }
+
+/* ── 15. Custom scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,.14); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.22); }
+
+/* ── 16. Focus rings — accessibility ── */
+button:focus-visible { outline: 2px solid var(--green2); outline-offset: 2px; border-radius: 4px; }
+
+/* ── 17. Footer ── */
+footer { letter-spacing: .3px; font-size: .67rem; }
+
+/* ── 18. Donut card ── */
+.donut-card { border-color: rgba(0,0,0,.07); }
+
+/* ── 19. Alert badges (hoy) ── */
+.hoy-alert { border-radius: 13px; }
+
+/* ── 20. Header: underline gradient ── */
+header::after {
+  background: linear-gradient(90deg, var(--accent2) 0%, var(--green3) 35%, rgba(34,197,94,0) 100%);
+  height: 2px;
+}
+
+/* ── 21. Ticker ── */
+.ticker-label { letter-spacing: 1px; font-size: .6rem; }
+
+/* ── 22. Active tab indicator bolder ── */
+nav.tabs button.active { color: var(--accent2); font-weight: 700; }
+
+/* ── 23. Letter spacing on KPI labels ── */
+.kpi-label { letter-spacing: .9px; }
+.hoy-kpi-lbl { letter-spacing: .8px; }
+
+/* ── 24. Filters row ── */
+.filters-row { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
+.filter-btn {
+  border: 1px solid var(--border); background: var(--card);
+  border-radius: 20px; padding: 5px 14px; font-size: .74rem;
+  font-weight: 600; color: var(--muted); cursor: pointer;
+  transition: all .16s; touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--green2); color: #fff; border-color: var(--green2);
+}
+
+/* ── 25. Hoy pulso — hover ── */
+.hoy-pulso-item {
+  transition: background var(--transition);
+}
+.hoy-pulso-item:hover { background: rgba(22,163,74,.03); }
+
 /* ═══════════════════════════════════════════════
    iPHONE — 480px y menor (todos los modelos)
 ══════════════════════════════════════════════ */
@@ -1608,13 +1789,51 @@ footer span { color: var(--accent2); font-weight: 600; }
 
   /* ── Chart.js global defaults ── */
   Chart.defaults.font.family = "'Inter', -apple-system, sans-serif";
-  Chart.defaults.font.size   = 12;
-  Chart.defaults.color       = '#6b7280';
-  Chart.defaults.plugins.legend.labels.boxWidth   = 10;
-  Chart.defaults.plugins.legend.labels.boxHeight  = 10;
-  Chart.defaults.plugins.legend.labels.padding    = 14;
-  Chart.defaults.plugins.legend.labels.usePointStyle = true;
-  Chart.defaults.plugins.legend.labels.pointStyle = 'circle';
+  Chart.defaults.font.size   = 11;
+  Chart.defaults.color       = '#9ca3af';
+  Chart.defaults.animation   = { duration: 700, easing: 'easeInOutQuart' };
+
+  Chart.defaults.plugins.legend.labels.boxWidth       = 8;
+  Chart.defaults.plugins.legend.labels.boxHeight      = 8;
+  Chart.defaults.plugins.legend.labels.padding        = 16;
+  Chart.defaults.plugins.legend.labels.usePointStyle  = true;
+  Chart.defaults.plugins.legend.labels.pointStyle     = 'circle';
+  Chart.defaults.plugins.legend.labels.color          = '#6b7280';
+  Chart.defaults.plugins.legend.labels.font           = { size: 11, weight: '600' };
+
+  Chart.defaults.plugins.tooltip.backgroundColor  = 'rgba(12,33,23,.92)';
+  Chart.defaults.plugins.tooltip.titleColor       = 'rgba(255,255,255,.65)';
+  Chart.defaults.plugins.tooltip.bodyColor        = '#fff';
+  Chart.defaults.plugins.tooltip.borderColor      = 'rgba(255,255,255,.1)';
+  Chart.defaults.plugins.tooltip.borderWidth      = 1;
+  Chart.defaults.plugins.tooltip.padding          = { x: 13, y: 10 };
+  Chart.defaults.plugins.tooltip.cornerRadius     = 12;
+  Chart.defaults.plugins.tooltip.titleFont        = { weight: '700', size: 11 };
+  Chart.defaults.plugins.tooltip.bodyFont         = { size: 12, weight: '500' };
+  Chart.defaults.plugins.tooltip.boxPadding       = 5;
+
+  Chart.defaults.scale.grid.color        = 'rgba(0,0,0,.045)';
+  Chart.defaults.scale.grid.drawBorder   = false;
+  Chart.defaults.scale.ticks.padding     = 6;
+  Chart.defaults.scale.ticks.font        = { size: 10.5 };
+
+  /* ── Count-up animation ── */
+  function countUp(el, end, duration, prefix, suffix) {
+    if (!el || isNaN(end)) return;
+    prefix = prefix || ''; suffix = suffix || '';
+    var start = 0, startTime = null;
+    var isNeg = end < 0;
+    var absEnd = Math.abs(end);
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var p = Math.min((ts - startTime) / duration, 1);
+      var ease = 1 - Math.pow(1 - p, 3);
+      var cur = Math.round(absEnd * ease);
+      el.textContent = prefix + (isNeg ? '-' : '') + cur.toLocaleString('en-US') + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
 
   /* ── Utils ── */
   var fmt = function (n, dec) {
@@ -1858,6 +2077,12 @@ footer span { color: var(--accent2); font-weight: 600; }
           '<div class="hoy-correo-hora">' + c.hora + '</div>' +
         '</div>';
       }).join('');
+
+    /* ── Count-up: hero revenue number ── */
+    setTimeout(function () {
+      var heroNumEl = document.querySelector('#hoyHero .hoy-hero-num');
+      if (heroNumEl && revTotal) countUp(heroNumEl, revTotal, 900, '$');
+    }, 80);
   }
 
   function kpiCard(label, value, sub, valCls, cardCls, pillHtml) {
