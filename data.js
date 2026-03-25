@@ -242,6 +242,71 @@ window.BELHER = {
       },
       responsable: "Chrysthian Marisol Castro Sandoval · Gerente Innovación y Mejora Continua",
       notas: "Auditoría realizada 4-5 Feb 2026. 7 NCs Mayor identificadas. Acciones correctivas al 93% el 20-Feb; deadline 25-Feb para envío al auditor. Sin confirmación de resultado a la fecha.",
+      observaciones: [
+        {
+          id: "NC-01", area: "IMC", tipo: "Mayor",
+          descripcion: "Registros de análisis de agua para riego sin frecuencia documentada según FSMA § 112.44",
+          estado: "Completada",
+          responsable: "Chrysthian Marisol Castro",
+          deadline: "25/02/2026",
+          accion: "Actualizar protocolo de muestreo de agua e integrar frecuencia en plan FSMA. Evidencia archivada.",
+          evidencia: "Protocolo actualizado y firmado enviado a SCS el 18-Feb"
+        },
+        {
+          id: "NC-02", area: "IMC", tipo: "Mayor",
+          descripcion: "Plan de inocuidad alimentaria (Food Safety Plan) sin revisión anual documentada para ciclo 2025–2026",
+          estado: "Completada",
+          responsable: "Chrysthian Marisol Castro",
+          deadline: "25/02/2026",
+          accion: "Realizar revisión formal del FSP, firmar por responsable y archivar con fecha de vigencia.",
+          evidencia: "FSP revisado, firmado y sellado. Enviado a SCS el 17-Feb"
+        },
+        {
+          id: "NC-03", area: "IMC", tipo: "Mayor",
+          descripcion: "Capacitación en higiene del personal sin evidencia firmada para 38 trabajadores de empaque",
+          estado: "Completada",
+          responsable: "Chrysthian Marisol Castro",
+          deadline: "25/02/2026",
+          accion: "Levantar listas de asistencia firmadas de las capacitaciones impartidas. Fotografías y materiales como evidencia.",
+          evidencia: "38 listas firmadas + constancias de capacitación enviadas a SCS el 19-Feb"
+        },
+        {
+          id: "NC-04", area: "IMC", tipo: "Mayor",
+          descripcion: "Bitácoras de limpieza y sanitización de línea de empaque sin registro de verificación del supervisor",
+          estado: "Completada",
+          responsable: "Chrysthian Marisol Castro",
+          deadline: "25/02/2026",
+          accion: "Implementar columna de verificación en bitácoras y capacitar a supervisores. Evidencia de 30 días.",
+          evidencia: "Bitácoras con columna de verificación activa desde 01-Feb. Muestra 30 días enviada a SCS el 20-Feb"
+        },
+        {
+          id: "NC-05", area: "IMC", tipo: "Mayor",
+          descripcion: "Análisis de riesgo ambiental (suelo y agua) no actualizado para la temporada en curso",
+          estado: "En proceso",
+          responsable: "Chrysthian Marisol Castro",
+          deadline: "Pendiente confirmación SCS",
+          accion: "Realizar muestreos de suelo y agua de la temporada actual. Actualizar análisis de riesgo y enviar evidencia a SCS para cierre de auditoría.",
+          evidencia: ""
+        },
+        {
+          id: "NC-06", area: "Producción", tipo: "Mayor",
+          descripcion: "Registros de aplicación de agroquímicos con faltantes en bloques 7B y 8C (fechas 12 y 19 Ene 2026)",
+          estado: "Completada",
+          responsable: "Operaciones / Producción",
+          deadline: "25/02/2026",
+          accion: "Reconstituir registros con datos de cuaderno de campo. Reforzar protocolo de captura diaria.",
+          evidencia: "Registros completados y firmados por responsable de campo. Enviados a SCS el 16-Feb"
+        },
+        {
+          id: "NC-07", area: "Finanzas", tipo: "Mayor",
+          descripcion: "Póliza de seguro de responsabilidad civil no disponible para revisión durante la auditoría",
+          estado: "Completada",
+          responsable: "Finanzas / Administración",
+          deadline: "25/02/2026",
+          accion: "Enviar copia de póliza vigente al auditor y mantener accesible en carpeta de documentos certificables.",
+          evidencia: "Póliza vigente enviada a SCS el 14-Feb"
+        }
+      ],
       fuente: "c.marisol@agbelher.com"
     }
   ],

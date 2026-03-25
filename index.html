@@ -710,6 +710,35 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .audit-step.done .audit-step-lbl { color:var(--green2); font-weight:700; }
 .audit-step.active .audit-step-lbl { color:var(--accent2); font-weight:700; }
 .audit-notas { font-size:.78rem; color:var(--muted); margin-top:12px; padding-top:12px; border-top:1px solid var(--border); line-height:1.6; }
+/* NC observations list */
+.nc-section-hdr { display:flex; align-items:center; justify-content:space-between; margin:20px 0 10px; }
+.nc-section-title { font-size:.72rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+.nc-section-count { font-size:.7rem; font-weight:700; padding:3px 10px; border-radius:20px; }
+.nc-list { display:flex; flex-direction:column; gap:7px; }
+.nc-item { display:flex; align-items:flex-start; gap:14px; padding:14px 16px; border-radius:var(--r); border:1px solid var(--border); background:var(--card); transition:opacity .2s; }
+.nc-item.nc-pendiente  { border-left:3px solid var(--red2); }
+.nc-item.nc-en-proceso { border-left:3px solid var(--accent2); background:rgba(251,191,36,.04); }
+.nc-item.nc-completada { border-left:3px solid var(--green2); opacity:.6; }
+.nc-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; margin-top:4px; }
+.nc-item.nc-pendiente  .nc-dot { background:var(--red2); }
+.nc-item.nc-en-proceso .nc-dot { background:var(--accent2); box-shadow:0 0 6px rgba(251,191,36,.6); }
+.nc-item.nc-completada .nc-dot { background:var(--green2); }
+.nc-body { flex:1; min-width:0; }
+.nc-tags { display:flex; align-items:center; gap:6px; margin-bottom:5px; flex-wrap:wrap; }
+.nc-id  { font-size:.68rem; font-weight:800; color:var(--muted); }
+.nc-tipo-badge { font-size:.6rem; font-weight:700; padding:1px 7px; border-radius:20px; background:rgba(220,38,38,.12); color:var(--red2); }
+.nc-area-tag { font-size:.65rem; font-weight:600; padding:2px 8px; border-radius:20px; background:var(--surface); color:var(--muted); }
+.nc-desc { font-size:.83rem; font-weight:600; color:var(--text); line-height:1.4; margin-bottom:5px; }
+.nc-accion-row { display:flex; align-items:flex-start; gap:6px; }
+.nc-accion-lbl { font-size:.67rem; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:.04em; flex-shrink:0; margin-top:1px; }
+.nc-accion-txt { font-size:.75rem; color:var(--muted); line-height:1.45; }
+.nc-evidencia { font-size:.72rem; color:var(--green2); margin-top:4px; font-style:italic; }
+.nc-right { flex-shrink:0; text-align:right; min-width:100px; display:flex; flex-direction:column; align-items:flex-end; gap:5px; }
+.nc-estado-pill { font-size:.65rem; font-weight:700; padding:3px 10px; border-radius:20px; white-space:nowrap; }
+.nc-estado-pill.s-completada  { background:rgba(22,163,74,.12); color:var(--green2); }
+.nc-estado-pill.s-en-proceso  { background:rgba(251,191,36,.18); color:var(--accent2); }
+.nc-estado-pill.s-pendiente   { background:rgba(220,38,38,.12); color:var(--red2); }
+.nc-deadline { font-size:.64rem; color:var(--muted); }
 
 /* ── Day / Week view toggle ─────────────── */
 .view-toggle { display:flex; gap:4px; margin-bottom:14px; }
@@ -4022,6 +4051,56 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
             '</div>';
           }).join('');
 
+          /* NC observations list */
+          var obs = a.observaciones || [];
+          var pendientes   = obs.filter(function(o){ return o.estado === 'Pendiente'; });
+          var enProceso    = obs.filter(function(o){ return o.estado === 'En proceso'; });
+          var completadas  = obs.filter(function(o){ return o.estado === 'Completada'; });
+          var sorted = pendientes.concat(enProceso).concat(completadas);
+
+          var ncCountBg = enProceso.length || pendientes.length
+            ? 'rgba(251,191,36,.15)' : 'rgba(22,163,74,.12)';
+          var ncCountColor = enProceso.length || pendientes.length
+            ? 'var(--accent2)' : 'var(--green2)';
+          var ncOpen = pendientes.length + enProceso.length;
+
+          var ncHtml = sorted.length ? (
+            '<div class="nc-section-hdr">' +
+              '<span class="nc-section-title">Observaciones · Hallazgos</span>' +
+              '<span class="nc-section-count" style="background:' + ncCountBg + ';color:' + ncCountColor + '">' +
+                (ncOpen ? ncOpen + ' activa' + (ncOpen>1?'s':'') : 'Todas completadas') +
+              '</span>' +
+            '</div>' +
+            '<div class="nc-list">' +
+              sorted.map(function(nc){
+                var slug = nc.estado.toLowerCase().replace(' ','-');
+                var pillCls = 's-' + slug;
+                var estadoLbl = nc.estado;
+                return '<div class="nc-item nc-' + slug + '">' +
+                  '<div class="nc-dot"></div>' +
+                  '<div class="nc-body">' +
+                    '<div class="nc-tags">' +
+                      '<span class="nc-id">' + nc.id + '</span>' +
+                      '<span class="nc-tipo-badge">' + nc.tipo + '</span>' +
+                      '<span class="nc-area-tag">' + nc.area + '</span>' +
+                    '</div>' +
+                    '<div class="nc-desc">' + nc.descripcion + '</div>' +
+                    '<div class="nc-accion-row">' +
+                      '<span class="nc-accion-lbl">Acción</span>' +
+                      '<span class="nc-accion-txt">' + nc.accion + '</span>' +
+                    '</div>' +
+                    (nc.evidencia ? '<div class="nc-evidencia">✓ ' + nc.evidencia + '</div>' : '') +
+                  '</div>' +
+                  '<div class="nc-right">' +
+                    '<span class="nc-estado-pill ' + pillCls + '">' + estadoLbl + '</span>' +
+                    '<span class="nc-deadline">' + nc.deadline + '</span>' +
+                    (nc.responsable ? '<span class="nc-deadline" style="font-style:italic">' + nc.responsable.split(' ').slice(0,2).join(' ') + '</span>' : '') +
+                  '</div>' +
+                '</div>';
+              }).join('') +
+            '</div>'
+          ) : '';
+
           return '<div class="audit-card lvl-' + a.nivel + '">' +
             '<div class="audit-header">' +
               '<div>' +
@@ -4039,6 +4118,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
               '<div class="audit-stat"><div class="audit-stat-val" style="color:' + barColor + '">' + pct100 + '%</div><div class="audit-stat-lbl">Acciones Correctivas</div></div>' +
             '</div>' +
             (areasHtml ? '<div style="font-size:.74rem;font-weight:700;margin-bottom:6px;color:var(--muted)">PROGRESO POR ÁREA · Actualizado ' + (ac.ultimoUpdate||'') + '</div>' + areasHtml : '') +
+            ncHtml +
             '<div class="audit-notas">📋 ' + a.notas + '<br><span class="src-tag" style="margin-top:4px;display:inline-block">' + a.fuente + '</span></div>' +
           '</div>';
         }).join('')
