@@ -2430,16 +2430,20 @@ footer span { color: var(--accent2); font-weight: 600; }
       var cajasDetalle = [romaStr, bolaStr].filter(Boolean).join(' · ');
       return '<div class="etiq-card">' +
         '<div class="etiq-name">' + (e.etiqueta === 'Nacional' ? 'Nacional (todas)' : 'Calavo · Exportación') + '</div>' +
-        '<div class="etiq-revenue" style="color:' + colorCls + '">' + fmt(e.revenue) + '</div>' +
-        '<div class="etiq-cajas">' + fmtN(e.cajas) + ' cajas · ' + tv.periodo.label + '</div>' +
         (cajasDetalle ? '<div class="etiq-cajas" style="color:var(--muted);font-size:.74rem">' + cajasDetalle + '</div>' : '') +
       '</div>';
     };
 
-    /* ── Totales ── */
+    /* ── Totales: cajas as primary, revenue as sub-text ── */
     var tot = tv.total || {};
-    document.getElementById('tomateExpTotal').textContent = fmt((tv.exportacion[0]||{}).revenue||0);
-    document.getElementById('tomateNacTotal').textContent = fmt((tv.nacional[0]||{}).revenue||0);
+    var expEntry = tv.exportacion[0] || {};
+    var nacEntry = tv.nacional[0]   || {};
+    document.getElementById('tomateExpTotal').innerHTML =
+      '<span style="font-weight:900">' + fmtN(expEntry.cajas || 0) + ' cajas</span>' +
+      '<span style="font-size:.72rem;font-weight:400;opacity:.72;margin-left:7px">' + fmt(expEntry.revenue || 0) + '</span>';
+    document.getElementById('tomateNacTotal').innerHTML =
+      '<span style="font-weight:900">' + fmtN(nacEntry.cajas || 0) + ' cajas</span>' +
+      '<span style="font-size:.72rem;font-weight:400;opacity:.72;margin-left:7px">' + fmt(nacEntry.revenue || 0) + '</span>';
 
     /* ── Ventas Exportación ── */
     document.getElementById('tomateExpVentas').innerHTML = tv.exportacion.map(function(e){
