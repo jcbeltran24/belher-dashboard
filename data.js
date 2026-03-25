@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 24 Mar 2026",
+    fecha: "Miércoles 25 Mar 2026",
     semana: "WK 13",
-    actualizado: "24/03/2026 · 15:30"
+    actualizado: "25/03/2026 · 12:00"
   },
 
   alertas: [
-    { nivel: "warning", texto: "Saldo Calavo WK12: -$2,873,787 — Calavo ha adelantado más del valor cosechado. Saldo se liquida al cierre de temporada." },
-    { nivel: "success", texto: "Calidad exportación 23-Mar: merma 1.22% — muy por debajo del umbral 4%. Venta neta Calavo: $6,564,451" },
-    { nivel: "success", texto: "Jalapeño Texas: $58–64/bu (+38% vs WK12) — oportunidad de margen activa" },
-    { nivel: "danger",  texto: "Fertilizantes Feb: +$110k vs presupuesto (plaga Tizón)" },
-    { nivel: "info",    texto: "Reunión CF ABSA: Mié 25-Mar · 2pm | BPSI F/S: Hoy 24-Mar · 10am" }
+    { nivel: "warning", texto: "Tomate Vine-ripe sube a $46.95–48.95 (+50% vs WK prev) — mercado en pico histórico según Corbel #0017" },
+    { nivel: "warning", texto: "US aranceles a México: USMCA en pre-revisión · riesgo regulatorio para exportaciones de hortalizas" },
+    { nivel: "warning", texto: "Jalapeño TX cae a $48–50/bu (-20% vs $58–64 WK prev) — corrección después del pico" },
+    { nivel: "success", texto: "Calidad 24-Mar: merma promedio 2.85% · 1ª promedio 91.91% — dentro de parámetros de exportación" },
+    { nivel: "danger",  texto: "Fertilizantes Feb: +$110k vs presupuesto (plaga Tizón)" }
   ],
 
   ebitda: {
@@ -71,14 +71,14 @@ window.BELHER = {
       { fecha:"WK10", primaPromedio:87.45, mermaPromedio:3.80 },
       { fecha:"WK11", primaPromedio:88.10, mermaPromedio:3.55 },
       { fecha:"WK12", primaPromedio:88.35, mermaPromedio:3.39 },
-      { fecha:"WK13", primaPromedio:91.03, mermaPromedio:1.22 }
+      { fecha:"WK13", primaPromedio:91.47, mermaPromedio:2.04 }
     ],
     ultimoOutbound: {
-      fecha: "23/03/2026",
+      fecha: "24/03/2026",
       variedades: [
-        { nombre:"Roma Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:92.90, segunda:3.77, tercera:2.34, merma:0.99, peso:27.13, alerta:false },
-        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"nacional",    primera:90.70, segunda:6.00, tercera:2.40, merma:0.90, peso:26.28, alerta:false },
-        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"nacional",    primera:89.48, segunda:5.70, tercera:3.04, merma:1.78, peso:26.17, alerta:false }
+        { nombre:"Bola Calavo",  etiqueta:"Calavo",  canal:"exportacion", primera:92.42, segunda:1.76, tercera:2.92, merma:2.90, peso:26.66, alerta:false },
+        { nombre:"Bola Yameto", etiqueta:"Yameto",  canal:"exportacion", primera:89.38, segunda:2.72, tercera:4.20, merma:3.69, peso:31.86, alerta:false },
+        { nombre:"Roma Calavo",  etiqueta:"Calavo",  canal:"exportacion", primera:93.92, segunda:1.79, tercera:2.33, merma:1.96, peso:27.86, alerta:false }
       ]
     }
   },
@@ -147,40 +147,35 @@ window.BELHER = {
   },
 
   mercado: {
-    reporte: "Corbel Seeds #0015",
-    fecha: "23/03/2026",
-    resumen: "Mercado extremadamente firme en tomate, pepino y chiles. Jalapeño alcanzó $58–64/bu en Texas (+38% vs WK12), impulsado por brecha productiva en México y Florida. Fertilizantes bajo presión global por conflicto en Medio Oriente.",
+    reporte: "Corbel Seeds #0017",
+    fecha: "25/03/2026",
+    resumen: "Vine-ripe tomate escala a $46.95–48.95 (+50%) — mercado en pico histórico. Roma sube a $38.95–40.95 (+33%). Jalapeño corrige a $48–50/bu (-20%). Amenaza arancelaria de EE.UU. a México y pre-revisión USMCA generan incertidumbre comercial. Red Sea: Maersk reconfigura rutas.",
     precios: [
-      { producto:"Tomate Roma 25lb XL",  min:28.95, max:30.95, anterior:24.45, via:"SoCal/AZ",  alerta:false },
-      { producto:"Vine-ripe 4×4 25lb",   min:30.95, max:32.95, anterior:29.95, via:"SoCal/AZ",  alerta:false },
-      { producto:"Grape tomato 12-pint", min:16.95, max:16.95, anterior:11.45, via:"SoCal/AZ",  alerta:false },
-      { producto:"Pepino 1⅑ bu",         min:42.95, max:44.95, anterior:41.95, via:"SoCal/AZ",  alerta:false },
-      { producto:"Chile Bell GH (XL)",   min:40.95, max:42.95, anterior:17.50, via:"SoCal/AZ",  alerta:true  },
-      { producto:"Tomate Roma XL (TX)",  min:30.95, max:34.95, anterior:24.45, via:"Texas",     alerta:false },
-      { producto:"GH Chile Bell (TX)",   min:17.00, max:18.00, anterior:17.50, via:"Texas",     alerta:false },
-      { producto:"Jalapeño (TX)",        min:58.00, max:64.00, anterior:43.50, via:"Texas",     alerta:true  },
-      { producto:"Serrano (TX)",         min:58.00, max:62.00, anterior:null,  via:"Texas",     alerta:true  }
+      { producto:"Vine-ripe 4×4 25lb",   min:46.95, max:48.95, anterior:31.95, via:"SoCal/AZ",  alerta:true  },
+      { producto:"Tomate Roma 25lb",      min:38.95, max:40.95, anterior:29.95, via:"SoCal/AZ",  alerta:true  },
+      { producto:"Grape tomato flat",     min:18.95, max:20.95, anterior:16.95, via:"SoCal/AZ",  alerta:false },
+      { producto:"Chile Bell GH (XL)",   min:42.95, max:44.95, anterior:41.95, via:"SoCal/AZ",  alerta:false },
+      { producto:"Jalapeño",             min:48.00, max:50.00, anterior:61.00, via:"SoCal/AZ",  alerta:true  },
+      { producto:"Anaheim",              min:34.00, max:36.00, anterior:null,   via:"SoCal/AZ",  alerta:false }
     ],
     noticias: [
-      { titulo:"Jalapeño sube a $58–64/bu en Texas (+38% semana previa)",          impacto:"Alto",      fuente:"USDA AMS" },
-      { titulo:"Weather issues hike prices on peppers, tomatoes, cucumbers",        impacto:"Alto",      fuente:"HortiDaily" },
-      { titulo:"Guerra Irán: shock en fertilizantes amenaza costos de producción",  impacto:"Alto",      fuente:"Reuters" },
-      { titulo:"China restringe exportaciones de fertilizantes",                    impacto:"Alto",      fuente:"Reuters" },
-      { titulo:"Gulf importers race to reroute as Hormuz closure jolts chains",    impacto:"Alto",      fuente:"Reuters" },
-      { titulo:"Cucumber pricing to stay high for the near term",                  impacto:"Moderado",  fuente:"HortiDaily" },
-      { titulo:"Central California growers brace for heat wave (Salinas transition)",impacto:"Moderado", fuente:"Haul Produce" },
-      { titulo:"Brasil alerta por fertilizantes — urea disparada",                 impacto:"Moderado",  fuente:"Reuters" }
+      { titulo:"Vine-ripe tomate escala a $46.95–48.95/carton (+50% vs semana previa)",  impacto:"Alto",       fuente:"Corbel Seeds" },
+      { titulo:"EE.UU. impulsa aranceles a produce mexicano — USMCA en pre-revisión",    impacto:"Alto",       fuente:"Corbel Seeds" },
+      { titulo:"Jalapeño corrige a $48–50/bu después de pico $58–64 — -20%",             impacto:"Moderado",   fuente:"Corbel Seeds" },
+      { titulo:"Tomato prices continue to peak in Europe — presión de oferta global",    impacto:"Moderado",   fuente:"Corbel Seeds" },
+      { titulo:"Red Sea: Maersk reconfigura rutas — impacto en fletes y tiempos",        impacto:"Moderado",   fuente:"Corbel Seeds" },
+      { titulo:"Brazil truckers strike risk — riesgo en cadena de suministro",            impacto:"Moderado",   fuente:"Corbel Seeds" }
     ]
   },
 
   operaciones: {
     bascula: [
+      { fecha:"24/03", productos:["Tomate"] },
       { fecha:"23/03", productos:["Tomate","Rezaga Tomate"] },
       { fecha:"21/03", productos:["Tomate"] },
       { fecha:"20/03", productos:["Tomate","Rezaga Tomate","Limón Persa"] },
       { fecha:"19/03", productos:["Tomate"] },
-      { fecha:"18/03", productos:["Chile","Limón Persa"] },
-      { fecha:"17/03", productos:["Tomate","Rezaga Tomate"] }
+      { fecha:"18/03", productos:["Chile","Limón Persa"] }
     ],
     embarques: [
       { fecha:"23/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-110",   destino:"Arizona", estado:"OK" },
@@ -199,27 +194,27 @@ window.BELHER = {
   },
 
   correos: [
-    { hora:"12:44", asunto:"REPORTE DE OUTBOUND TOMATE 23/03/2026",            de:"Calidad Belher",   leido:false },
-    { hora:"21:04", asunto:"23-03-2026 REPORTES GENERALES",                    de:"Embarques Belher", leido:true  },
-    { hora:"17:11", asunto:"REPORTE DE BASCULA 23/03/2026 (REZAGA DE TOMATE)", de:"Báscula Belher",   leido:false },
-    { hora:"17:07", asunto:"REPORTE DE BASCULA 23/03/2026 (TOMATE)",           de:"Báscula Belher",   leido:false },
-    { hora:"18:01", asunto:"Corbel Seeds Daily News Summary #0015",             de:"Raymundo Elizalde",leido:false }
+    { hora:"07:30", asunto:"Corbel Seeds Daily News Summary #0017",             de:"Raymundo Elizalde",leido:false },
+    { hora:"11:27", asunto:"REPORTE DE OUTBOUND TOMATE 24/03/2026",             de:"Calidad Belher",   leido:false },
+    { hora:"21:04", asunto:"24-03-2026 REPORTES GENERALES",                    de:"Embarques Belher", leido:true  },
+    { hora:"17:11", asunto:"REPORTE DE BASCULA 24/03/2026 (TOMATE)",           de:"Báscula Belher",   leido:false },
+    { hora:"17:07", asunto:"REPORTE DE BASCULA 23/03/2026 (REZAGA DE TOMATE)", de:"Báscula Belher",   leido:true  }
   ],
 
   ticker: [
-    { label:"JALAPEÑO TX",   valor:"$58–64/bu",    cambio:"+38%",    dir:"up"      },
-    { label:"TOMATE ROMA",   valor:"$28.95–30.95", cambio:"+26%",    dir:"up"      },
-    { label:"VINE RIPE 4×4", valor:"$30.95–32.95", cambio:"+3%",     dir:"up"      },
-    { label:"PEPINO",        valor:"$42.95–44.95", cambio:"+2%",     dir:"up"      },
-    { label:"CHILE BELL GH", valor:"$40.95–42.95", cambio:"+134%",   dir:"up"      },
-    { label:"SERRANO TX",    valor:"$58–62/bu",    cambio:"nuevo",   dir:"up"      },
-    { label:"VENTA NETA",    valor:"$6.56M",       cambio:"Calavo WK12",     dir:"up"     },
-    { label:"SALDO CALAVO",  valor:"-$2.87M",      cambio:"Due to Calavo",   dir:"down"   },
-    { label:"EBITDA FEB",    valor:"$2.89M",       cambio:"vs BUD $2.31M ✓", dir:"up"     },
-    { label:"WK12 P&P",      valor:"$240K",        cambio:"48K cajas",       dir:"neutral"},
-    { label:"1ª PRIMERA",    valor:"91.03%",       cambio:"23-Mar ▲",  dir:"up"     },
-    { label:"MERMA PROM",    valor:"1.22%",        cambio:"23-Mar ▼",  dir:"up"     },
-    { label:"FERTILIZ.",     valor:"+$110K",       cambio:"sobre presupuesto", dir:"down" }
+    { label:"VINE RIPE 4×4", valor:"$46.95–48.95", cambio:"+50%",    dir:"up"      },
+    { label:"TOMATE ROMA",   valor:"$38.95–40.95", cambio:"+33%",    dir:"up"      },
+    { label:"JALAPEÑO",      valor:"$48–50",        cambio:"-20%",    dir:"down"    },
+    { label:"CHILE BELL GH", valor:"$42.95–44.95", cambio:"+2%",     dir:"up"      },
+    { label:"GRAPE TOMATO",  valor:"$18.95–20.95", cambio:"+12%",    dir:"up"      },
+    { label:"ANAHEIM",       valor:"$34–36",        cambio:"nuevo",   dir:"up"      },
+    { label:"VENTA NETA",    valor:"$6.56M",        cambio:"Calavo WK12",     dir:"up"     },
+    { label:"SALDO CALAVO",  valor:"-$2.87M",       cambio:"Due to Calavo",   dir:"down"   },
+    { label:"EBITDA FEB",    valor:"$2.89M",        cambio:"vs BUD $2.31M ✓", dir:"up"     },
+    { label:"WK12 P&P",      valor:"$240K",         cambio:"48K cajas",       dir:"neutral"},
+    { label:"1ª PRIMERA",    valor:"91.91%",        cambio:"24-Mar ▲",  dir:"up"     },
+    { label:"MERMA PROM",    valor:"2.85%",         cambio:"24-Mar",    dir:"neutral"},
+    { label:"FERTILIZ.",     valor:"+$110K",        cambio:"sobre presupuesto", dir:"down" }
   ],
 
   auditorias: [
@@ -321,32 +316,25 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"Mar 24-Mar · 10am", evento:"BPSI F/S Febrero 2026 + Forecast Q1",     tipo:"reunion",   participantes:"Juan Carlos, Antonio, Armando Llanes, Hildelisa, Leima" },
-      { fecha:"Mié 25-Mar · 2pm",  evento:"CF ABSA Actualizado + Proyección ciclo",   tipo:"reunion",   participantes:"Juan Carlos, Antonio, Armando Llanes, Hildelisa, Leima" },
-      { fecha:"~22-Mar",           evento:"Settlement WK13 Calavo (estimado ~$240K)", tipo:"pago",      participantes:"Leima Leyva · Calavo" },
-      { fecha:"Mar–Abr 2026",      evento:"Transición: cierre de temporada GC",       tipo:"operacion", participantes:"Equipo operativo" }
+      { fecha:"Hoy Mié 25-Mar · 2pm", evento:"CF ABSA Actualizado + Proyección ciclo", tipo:"reunion",   participantes:"Juan Carlos, Antonio, Armando Llanes, Hildelisa, Leima" },
+      { fecha:"~22-Mar",              evento:"Settlement WK13 Calavo (estimado ~$240K)", tipo:"pago",      participantes:"Leima Leyva · Calavo" },
+      { fecha:"Mar–Abr 2026",         evento:"Transición: cierre de temporada GC",       tipo:"operacion", participantes:"Equipo operativo" }
     ]
   },
 
   industria: [
-    { cat:"Mercado",      titulo:"Weather issues hike prices on peppers, tomatoes and cucumbers",              impacto:"Alto",       fuente:"HortiDaily",   resumen:"Brecha productiva en México y Florida mantiene mercado corto en chiles, pepino y tomate. Condiciones cálidas, presión de enfermedades y efectos de heladas en Florida." },
-    { cat:"Mercado",      titulo:"Cucumber pricing to stay high for the near term",                            impacto:"Moderado",   fuente:"HortiDaily",   resumen:"Costos elevados y débil rentabilidad distorsionan comportamiento normal de oferta-demanda en pepino. Alivio no esperado de inmediato." },
-    { cat:"Mercado",      titulo:"Jalapeño Texas escala a $58–64/bu (+38% vs semana previa)",                  impacto:"Alto",       fuente:"USDA AMS",     resumen:"Precios de jalapeño en Texas alcanzan niveles históricos. Escasez estructural por problemas climáticos y de enfermedad en México y Florida." },
-    { cat:"Mercado",      titulo:"Northwest storage onions wind down as Mexico and Texas ship fresh",           impacto:"Bajo",       fuente:"Haul Produce",  resumen:"Transición estacional del mercado de cebolla. México y Texas Sur inician envíos de producto fresco mientras bajan stocks del Noroeste." },
-    { cat:"Logística",    titulo:"Gulf importers race to reroute as Hormuz closure jolts supply chains",      impacto:"Alto",       fuente:"Reuters",      resumen:"Importadores del Golfo desvían alimentos y perecederos por puertos y rutas aéreas alternas. Fletes más caros y tiempos más largos para todo exportador." },
-    { cat:"Logística",    titulo:"Australian carrot exports disrupted as Middle East shipping halts",          impacto:"Moderado",   fuente:"FreshPlaza",   resumen:"Australia ya es afectada por interrupción de envíos a Medio Oriente. Ejemplo concreto de cómo los shocks logísticos alcanzan el comercio vegetal." },
-    { cat:"Fertilizantes",titulo:"War in Iran threatens fresh food-price shock across developing world",       impacto:"Alto",       fuente:"Reuters",      resumen:"Disrupciones de gas y envíos endurecen suministro global de fertilizantes, especialmente urea. Riesgo inmediato para presupuestos de nutrientes y decisiones de siembra." },
-    { cat:"Fertilizantes",titulo:"China restricts fertiliser exports, further crimping war-tightened supply", impacto:"Alto",       fuente:"Reuters",      resumen:"China endurece exportación de fertilizantes para proteger oferta doméstica, agravando mercado ya tenso por Medio Oriente." },
-    { cat:"Fertilizantes",titulo:"Brazil sounds alarm on fertilizers as price spike spurs cheaper alternatives",impacto:"Moderado",  fuente:"Reuters",      resumen:"Brasil ya busca sustitutos de urea ante disparada de precios. Señal de que el mercado global de nutrientes se endurece para todos." },
-    { cat:"Fertilizantes",titulo:"India in talks with Russia, Belarus, Morocco to boost fertiliser imports",  impacto:"Moderado",   fuente:"Reuters",      resumen:"India se mueve temprano para asegurar fertilizantes antes de su próximo ciclo de siembra. El scramble global por producto es señal de mercado duro." },
-    { cat:"Clima",        titulo:"Central California growers brace for heat wave",                             impacto:"Moderado",   fuente:"Haul Produce",  resumen:"Ola de calor en San Joaquín Valley eleva preocupación sobre ritmo de cosecha y calidad. Puede tensar disponibilidad y complicar timing de transición a Salinas." },
-    { cat:"Clima",        titulo:"Little Gem lettuce transitioning to Salinas due to extreme Yuma heat",      impacto:"Bajo",       fuente:"FreshPlaza",   resumen:"Clima muy cálido en Yuma aceleró maduración. Transición a Salinas es punto de equilibrio clave para lechuga Little Gem." },
-    { cat:"Innovación",   titulo:"18 variedades tomate ToBRFV-HR desarrolladas en 7 años",                   impacto:"Estratégico",fuente:"HortiDaily",   resumen:"Genética de resistencia a ToBRFV se convierte en diferenciador comercial. Directamente relevante para el programa de breeding de Corbel Seeds." },
-    { cat:"Innovación",   titulo:"The market is ready for specialties and innovation — snack vegetables",     impacto:"Estratégico",fuente:"HortiDaily",   resumen:"Empresas de semillas leen mayor demanda de formatos especiales y snack. Capacidad año-redondo es el factor decisivo para penetrar retailer de escala." },
-    { cat:"Innovación",   titulo:"Demand picking up, but increasing costs starting to bite",                  impacto:"Moderado",   fuente:"FreshPlaza",   resumen:"Operación UK vegetal reporta demanda estable pero costos de insumos muy dolorosos, especialmente diesel ligado a geopolítica. Recuperación de márgenes más difícil." },
-    { cat:"Energía",      titulo:"Stack battery system installed for tomato grower",                          impacto:"Bajo",       fuente:"HortiDaily",   resumen:"Almacenamiento en batería a nivel productor de tomate. La resiliencia productiva depende tanto de ingeniería energética como de manejo de cultivo." },
-    { cat:"Energía",      titulo:"Yeager Energy to expand geothermal capacity in Oostland, Netherlands",     impacto:"Bajo",       fuente:"HortiDaily",   resumen:"Expansión geotérmica en zona invernadero de Europa muestra que el sector avanza rápido para estabilizar costos de calor." },
-    { cat:"Energía",      titulo:"Dutch grower Vereijken Kwekerijen installs solar panels across seven sites",impacto:"Bajo",       fuente:"HortiDaily",   resumen:"Despliegue solar a gran escala en múltiples sitios de invernadero refuerza que la energía distribuida es ya una estrategia mainstream." }
+    { cat:"Mercado",      titulo:"Vine-ripe tomate escala a $46.95–48.95/carton — pico histórico de temporada",   impacto:"Alto",       fuente:"Corbel Seeds #0017", resumen:"Mercado de tomate en máximos históricos para esta temporada. Brecha de oferta sostenida impulsa precios al alza en todos los formatos." },
+    { cat:"Mercado",      titulo:"Tomate Roma sube a $38.95–40.95 (+33% vs semana previa)",                       impacto:"Alto",       fuente:"Corbel Seeds #0017", resumen:"Roma 25lb carton rompe niveles altos. Demanda firme de distribuidores y retailers ante escasez en California y Florida." },
+    { cat:"Mercado",      titulo:"Jalapeño corrige a $48–50/bu después del pico $58–64 (-20%)",                   impacto:"Moderado",   fuente:"Corbel Seeds #0017", resumen:"Corrección esperada después del pico extremo de la semana previa. Nivel de $48–50 sigue siendo históricamente alto y rentable." },
+    { cat:"Mercado",      titulo:"Tomato prices continue to peak in Europe — presión de oferta global",           impacto:"Moderado",   fuente:"Corbel Seeds #0017", resumen:"Europa también enfrenta picos en precio de tomate por problemas de producción en España y Países Bajos. Mercado global ajustado." },
+    { cat:"Logística",    titulo:"EE.UU. impulsa aranceles a produce mexicano — USMCA en pre-revisión",           impacto:"Alto",       fuente:"Corbel Seeds #0017", resumen:"Administración Trump acelera revisión del USMCA y presiona con aranceles a hortalizas mexicanas. Riesgo directo para exportaciones de Belher a mercado estadounidense." },
+    { cat:"Logística",    titulo:"Red Sea: Maersk reconfigura rutas — impacto en fletes y tiempos de tránsito",  impacto:"Moderado",   fuente:"Corbel Seeds #0017", resumen:"Maersk ajusta rutas por inseguridad en el Mar Rojo. Afecta principalmente exportaciones de Asia y Europa. Presión indirecta en costos de insumos y empaque." },
+    { cat:"Logística",    titulo:"Brazil truckers strike risk — posible interrupción en cadena de suministro",    impacto:"Moderado",   fuente:"Corbel Seeds #0017", resumen:"Tensiones laborales en Brasil amenazan con paro de camioneros. Impacto potencial en exportaciones brasileñas de fruta y disrupciones en mercados alternativos." },
+    { cat:"Fertilizantes",titulo:"War in Iran threatens fresh food-price shock across developing world",           impacto:"Alto",       fuente:"Reuters",            resumen:"Disrupciones de gas y envíos endurecen suministro global de fertilizantes, especialmente urea. Riesgo inmediato para presupuestos de nutrientes y decisiones de siembra." },
+    { cat:"Fertilizantes",titulo:"China restricts fertiliser exports, further crimping war-tightened supply",     impacto:"Alto",       fuente:"Reuters",            resumen:"China endurece exportación de fertilizantes para proteger oferta doméstica, agravando mercado ya tenso por Medio Oriente." },
+    { cat:"Clima",        titulo:"Central California growers brace for heat wave",                                impacto:"Moderado",   fuente:"Haul Produce",       resumen:"Ola de calor en San Joaquín Valley eleva preocupación sobre ritmo de cosecha y calidad. Puede tensar disponibilidad y complicar timing de transición a Salinas." },
+    { cat:"Innovación",   titulo:"18 variedades tomate ToBRFV-HR desarrolladas en 7 años",                       impacto:"Estratégico",fuente:"HortiDaily",         resumen:"Genética de resistencia a ToBRFV se convierte en diferenciador comercial. Directamente relevante para el programa de breeding de Corbel Seeds." },
+    { cat:"Innovación",   titulo:"The market is ready for specialties and innovation — snack vegetables",         impacto:"Estratégico",fuente:"HortiDaily",         resumen:"Empresas de semillas leen mayor demanda de formatos especiales y snack. Capacidad año-redondo es el factor decisivo para penetrar retailer de escala." }
   ],
 
   cdc: {
