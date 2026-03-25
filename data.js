@@ -6,11 +6,11 @@ window.BELHER = {
   },
 
   alertas: [
-    { nivel: "success", texto: "Calidad exportación 23-Mar: merma promedio 1.22% — muy por debajo del umbral 4%" },
+    { nivel: "warning", texto: "Saldo Calavo WK12: -$2,873,787 — Calavo ha adelantado más del valor cosechado. Saldo se liquida al cierre de temporada." },
+    { nivel: "success", texto: "Calidad exportación 23-Mar: merma 1.22% — muy por debajo del umbral 4%. Venta neta Calavo: $6,564,451" },
     { nivel: "success", texto: "Jalapeño Texas: $58–64/bu (+38% vs WK12) — oportunidad de margen activa" },
     { nivel: "danger",  texto: "Fertilizantes Feb: +$110k vs presupuesto (plaga Tizón)" },
-    { nivel: "info",    texto: "Reunión CF ABSA: Mié 25-Mar · 2pm | BPSI F/S: Hoy 24-Mar · 10am" },
-    { nivel: "info",    texto: "Outbound 23-Mar: Roma Calavo 92.90% · Roma Millennium 90.70% · Roma Urson 89.48%" }
+    { nivel: "info",    texto: "Reunión CF ABSA: Mié 25-Mar · 2pm | BPSI F/S: Hoy 24-Mar · 10am" }
   ],
 
   ebitda: {
@@ -19,17 +19,24 @@ window.BELHER = {
   },
 
   revenue: {
-    total:    11532088,
-    fob:       7662531,
+    total:    13626329,
+    fob:       9770259,
     nacional:  3856070
   },
 
   calavo: {
-    revenueTotal: 9770259,
-    comision:     2149457,
-    pickPack:     3278205,
-    zCode:        1052986,
-    neto:         3289611,
+    revenueTotal:   9770259,   /* Ventas brutas Calavo WK01–WK12           */
+    comision:       1172431,   /* 12% sobre ventas brutas                  */
+    zCode:          1052986,   /* Expenses (Z-code)                        */
+    antiDumping:     980391,   /* Anti Dumping Duty                        */
+    ventaNeta:      6564451,   /* Venta neta (después de todas deducciones)*/
+    pickPack:       3278205,   /* Pick & Pack adelantado recibido          */
+    prestamo:        472037,   /* Préstamo Calavo                          */
+    intereses:        32128,   /* Intereses sobre préstamo                 */
+    capitalTrabajo: 5000000,   /* Capital de trabajo (préstamo temporada)  */
+    saldoAnterior:   655867,   /* Balance adeudado de temporada 2025       */
+    saldoActual:   -2873787,   /* Due from (to) Beltran al WK12            */
+    neto:           6564451,   /* = ventaNeta — usado en KPI Hoy tab       */
     pagos: [
       { sem:"WK01", wire:"02-Ene", pago:54120,  cajas:10824, cont:6,  estado:"Pagado"   },
       { sem:"WK02", wire:"02-Ene", pago:121400, cajas:24280, cont:14, estado:"Pagado"   },
@@ -78,10 +85,10 @@ window.BELHER = {
 
   tomate: {
     ventas: {
-      periodo: { desde:"01/12/2025", hasta:"28/02/2026", label:"YTD Dic–Feb" },
-      total:   { cajas:927355, cajasRoma:533667, cajasBola:393688, revenue:11518601 },
+      periodo: { desde:"01/12/2025", hasta:"22/03/2026", label:"WK01–WK12" },
+      total:   { cajas:1148341, cajasRoma:533667, cajasBola:614674, revenue:13626329 },
       exportacion: [
-        { etiqueta:"Calavo", cajas:481239, cajasRoma:221750, cajasBola:259489, revenue:7662531 }
+        { etiqueta:"Calavo", cajas:702225, cajasRoma:null, cajasBola:null, revenue:9770259 }
       ],
       nacional: [
         { etiqueta:"Nacional", cajas:446116, cajasRoma:311917, cajasBola:134199, revenue:3856070 }
@@ -206,8 +213,10 @@ window.BELHER = {
     { label:"PEPINO",        valor:"$42.95–44.95", cambio:"+2%",     dir:"up"      },
     { label:"CHILE BELL GH", valor:"$40.95–42.95", cambio:"+134%",   dir:"up"      },
     { label:"SERRANO TX",    valor:"$58–62/bu",    cambio:"nuevo",   dir:"up"      },
-    { label:"EBITDA FEB",    valor:"$2.69M",       cambio:"vs BUD $2.31M ✓", dir:"up" },
-    { label:"WK12 P&P",      valor:"$240K",        cambio:"48K cajas", dir:"neutral"},
+    { label:"VENTA NETA",    valor:"$6.56M",       cambio:"Calavo WK12",     dir:"up"     },
+    { label:"SALDO CALAVO",  valor:"-$2.87M",      cambio:"Due to Calavo",   dir:"down"   },
+    { label:"EBITDA FEB",    valor:"$2.89M",       cambio:"vs BUD $2.31M ✓", dir:"up"     },
+    { label:"WK12 P&P",      valor:"$240K",        cambio:"48K cajas",       dir:"neutral"},
     { label:"1ª PRIMERA",    valor:"91.03%",       cambio:"23-Mar ▲",  dir:"up"     },
     { label:"MERMA PROM",    valor:"1.22%",        cambio:"23-Mar ▼",  dir:"up"     },
     { label:"FERTILIZ.",     valor:"+$110K",       cambio:"sobre presupuesto", dir:"down" }

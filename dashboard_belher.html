@@ -1076,7 +1076,10 @@ footer span { color: var(--accent2); font-weight: 600; }
     <div class="section-title">Resumen Financiero · Temporada</div>
     <div class="fin-kpi-row" id="finKpis"></div>
 
-    <div class="section-title">Revenue Total · Febrero 2026 <span class="src-tag">jacruz@agbelher.com · Estado Financiero</span></div>
+    <div class="section-title">Calavo Settlement · Desglose CF GC 2025–2026 <span class="src-tag">leima@agbelher.com · CF actualizado 22 Mar 2026</span></div>
+    <div class="card" id="calavoDesglose" style="padding:24px"></div>
+
+    <div class="section-title">Revenue Total · Temporada <span class="src-tag">leima@agbelher.com · CF ABSA GC 2025–2026</span></div>
     <div class="card" id="revSplitCard" style="padding:24px"></div>
 
     <div class="section-title">EBITDA: Actual vs Budget vs Y/A <span class="src-tag">jacruz@agbelher.com · Estado Financiero Feb 2026</span></div>
@@ -1304,18 +1307,22 @@ footer span { color: var(--accent2); font-weight: 600; }
     var ebitdaMesOK  = ebtd.mes.actual >= ebtd.mes.budget;
     var ebitdaMesVar = ebtd.mes.actual - ebtd.mes.budget;
     document.getElementById('kpiTopRow').innerHTML =
-      kpiCard('Revenue YTD · Tomate', fmt(D.revenue.total), 'FOB ' + fmt(D.revenue.fob) + ' · Nac ' + fmt(D.revenue.nacional),
-        'pos', 'accent-pos', pill('up', 'YTD Dic–Feb')) +
+      kpiCard('Revenue Bruto · WK01–WK12', fmt(D.revenue.total), 'Calavo ' + fmt(D.revenue.fob) + ' · Nac ' + fmt(D.revenue.nacional),
+        'pos', 'accent-pos', pill('up', 'CF Leima 22-Mar')) +
       kpiCard('EBITDA · ' + ebtd.mes.nombre, fmt(ebtd.mes.actual),
         'Budget ' + fmt(ebtd.mes.budget),
         ebitdaMesOK ? 'pos' : 'neg',
         ebitdaMesOK ? 'accent-pos' : 'accent-neg',
         pill(ebitdaMesOK ? 'up' : 'down',
           (ebitdaMesOK ? '▲ +' : '▼ ') + fmt(Math.abs(ebitdaMesVar)) + ' vs budget')) +
-      kpiCard('Cajas P&amp;P · YTD', fmtN(cajasYtd), 'WK01–WK' + semCount + ' · Calavo',
-        'dark', 'accent-blue', pill('up', semCount + ' semanas')) +
-      kpiCard('Calavo · Neto YTD', fmt(cv.neto), 'Total liquidado · GC 2025–26',
-        'pos', 'accent-pos', pill('up', 'P&amp;P $' + fmt(cv.pickPack)));
+      kpiCard('Venta Neta · Calavo WK12', fmt(cv.ventaNeta || cv.neto), 'Después de comisión · exp · AD',
+        'pos', 'accent-pos', pill('up', 'Comisión ' + fmt(cv.comision))) +
+      kpiCard('Saldo Calavo · WK12', fmt(cv.saldoActual != null ? cv.saldoActual : cv.neto),
+        cv.saldoActual < 0 ? 'Calavo ha adelantado más del valor cosechado' : 'Balance a favor de Belher',
+        cv.saldoActual != null && cv.saldoActual < 0 ? 'neg' : 'pos',
+        cv.saldoActual != null && cv.saldoActual < 0 ? 'accent-neg' : 'accent-pos',
+        pill(cv.saldoActual != null && cv.saldoActual < 0 ? 'down' : 'up',
+          cv.saldoActual != null && cv.saldoActual < 0 ? '⚠ Due to Calavo' : '✓ A favor'));
 
     /* Fecha resumen */
     var fechaEl = document.getElementById('resumenFecha');
@@ -1728,14 +1735,67 @@ footer span { color: var(--accent2); font-weight: 600; }
     });
     var pendingWeeks = pagos.filter(function (p) { return p.estado === 'Pendiente'; }).length;
 
+    /* ── CF Calavo summary card ── */
+    var cvsaldo = cv.saldoActual;
+    var saldoOK = cvsaldo != null && cvsaldo >= 0;
     document.getElementById('finKpis').innerHTML =
-      kpiCard('Adelanto Pick &amp; Pack · Acumulado', fmt(totalPago), 'WK01–WK' + semCount + ' confirmado', 'pos', 'accent-pos',
-        pill('up', '✓ ' + semCount + ' semanas pagadas')) +
-      kpiCard('Total Cajas', fmtN(totalCajas), 'Temporada acumulado', 'dark', 'accent-blue', null) +
-      kpiCard('Contenedores', fmtN(totalCont), 'Embarques procesados', 'dark', 'accent-blue', null) +
-      kpiCard('Pick &amp; Pack Promedio / Semana', fmt(Math.round(totalPago / semCount)), semCount + ' semanas base',
-        'acc', 'accent-warn',
-        pendingWeeks ? pill('neu', pendingWeeks + ' sem. pendientes') : pill('up', '✓ Al corriente'));
+      kpiCard('Ventas Brutas · Calavo WK12', fmt(cv.revenueTotal), 'Gross FOB · Calavo GC 2025–26', 'pos', 'accent-pos', pill('up', fmtN(totalCajas) + ' cajas')) +
+      kpiCard('Venta Neta · Calavo WK12', fmt(cv.ventaNeta || cv.neto),
+        'Comisión ' + fmt(cv.comision) + ' · AD ' + fmt(cv.antiDumping),
+        'pos', 'accent-pos', pill('up', '12% comisión')) +
+      kpiCard('Pick &amp; Pack Recibido', fmt(cv.pickPack), 'WK01–WK' + semCount + ' · ' + semCount + ' sem.',
+        'dark', 'accent-blue', pill('up', '✓ ' + semCount + ' semanas pagadas')) +
+      kpiCard('Saldo · Due from (to) Beltran', fmt(cvsaldo != null ? cvsaldo : 0),
+        cvsaldo < 0 ? 'Calavo ha adelantado más del valor cosechado' : 'Balance a favor de Belher',
+        cvsaldo < 0 ? 'neg' : 'pos', cvsaldo < 0 ? 'accent-neg' : 'accent-pos',
+        pill(cvsaldo < 0 ? 'down' : 'up', cvsaldo < 0 ? '⚠ Se liquida al cierre' : '✓ A favor'));
+
+    /* ── CF Calavo desglose ── */
+    var cfRows = [
+      { label:'Ventas brutas (FOB)',   val: cv.revenueTotal,   color:'var(--green2)',  bold:false },
+      { label:'Comisión (12%)',        val:-cv.comision,       color:'var(--red)',     bold:false },
+      { label:'Expenses (Z-code)',     val:-cv.zCode,          color:'var(--red)',     bold:false },
+      { label:'Anti Dumping Duty',     val:-(cv.antiDumping||0),color:'var(--red)',    bold:false },
+      { label:'Venta Neta',            val: cv.ventaNeta||cv.neto, color:'var(--green2)', bold:true, sep:true },
+      { label:'Pick & Pack recibido',  val:-cv.pickPack,       color:'var(--muted)',   bold:false },
+      { label:'Préstamo Calavo',       val:-(cv.prestamo||0),  color:'var(--muted)',   bold:false },
+      { label:'Intereses',             val:-(cv.intereses||0), color:'var(--muted)',   bold:false },
+      { label:'Capital de trabajo',    val:-(cv.capitalTrabajo||0),color:'var(--muted)',bold:false },
+      { label:'Balance temporada 2025',val:-(cv.saldoAnterior||0),color:'var(--muted)',bold:false },
+      { label:'Due from (to) Beltran', val: cv.saldoActual||0, color: (cv.saldoActual||0) >= 0 ? 'var(--green2)' : 'var(--red)', bold:true, sep:true }
+    ];
+    document.getElementById('calavoDesglose').innerHTML =
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">' +
+        '<div>' +
+          '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Settlement Calavo · WK01–WK12 · 15 Mar 2026</div>' +
+          cfRows.map(function(r) {
+            return '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;' +
+              (r.sep ? 'border-top:2px solid var(--dark);margin-top:4px;' : 'border-bottom:1px solid var(--border)') + '">' +
+              '<span style="font-size:.84rem' + (r.bold?';font-weight:700':'') + '">' + r.label + '</span>' +
+              '<span style="font-weight:' + (r.bold?'800':'600') + ';color:' + r.color + '">' + fmt(Math.abs(r.val)) +
+                (r.val < 0 ? ' <span style="opacity:.4;font-size:.72rem">(salida)</span>' : '') +
+              '</span></div>';
+          }).join('') +
+        '</div>' +
+        '<div>' +
+          '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Resumen de Flujo</div>' +
+          '<div style="background:var(--bg);border-radius:10px;padding:18px;margin-bottom:12px">' +
+            '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Ventas Brutas Calavo</div>' +
+            '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:var(--green2)">' + fmt(cv.revenueTotal) + '</div>' +
+            '<div style="font-size:.8rem;color:var(--muted)">Comisión 12%: ' + fmt(cv.comision) + ' · AD: ' + fmt(cv.antiDumping||0) + '</div>' +
+          '</div>' +
+          '<div style="background:var(--bg);border-radius:10px;padding:18px;margin-bottom:12px">' +
+            '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Venta Neta</div>' +
+            '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:var(--green2)">' + fmt(cv.ventaNeta||cv.neto) + '</div>' +
+            '<div style="font-size:.8rem;color:var(--muted)">Después de comisión, expenses y anti-dumping</div>' +
+          '</div>' +
+          '<div style="background:' + ((cv.saldoActual||0)<0?'rgba(220,38,38,.08)':'rgba(22,163,74,.08)') + ';border:1.5px solid ' + ((cv.saldoActual||0)<0?'var(--red2)':'var(--green2)') + ';border-radius:10px;padding:18px">' +
+            '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Due from (to) Beltran</div>' +
+            '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:' + ((cv.saldoActual||0)<0?'var(--red)':'var(--green2)') + '">' + fmt(cv.saldoActual||0) + '</div>' +
+            '<div style="font-size:.8rem;color:var(--muted)">' + ((cv.saldoActual||0)<0?'Calavo ha adelantado más del valor cosechado · Se liquida al cierre de temporada':'Balance a favor de Belher') + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
 
     /* Settlement table */
     document.querySelector('#liquidTbl tbody').innerHTML = pagos.map(function (p) {
