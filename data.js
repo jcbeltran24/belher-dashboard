@@ -611,7 +611,7 @@ window.BELHER = {
     adm: {
       nombre: "Agrícola Don Memo",
       rounds: { proyectado: 43,  actual: 25,  loads: 1,  pkgs: 1740,  diffPct: -43 },
-      roma:   { proyectado: 0,   actual: 0,   loads: 0,  pkgs: 0,     diffPct: 0   },
+      roma:   { proyectado: 0,   actual: 0,   loads: 0,  pkgs: 0,     diffPct: 0,  sinPrograma: true },
       total:  { proyectado: 43,  actual: 25,  loads: 1,  pkgs: 1740 }
     },
 

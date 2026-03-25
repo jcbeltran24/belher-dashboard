@@ -1829,140 +1829,160 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   .hoy-mid { grid-template-columns: 1fr 1fr; }
 }
 
-/* ── Calavo Weekly — Grower blocks ── */
-.cw-growers-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
-@media(max-width:600px){ .cw-growers-grid { grid-template-columns:1fr; } }
-.cw-grower-block { padding:18px 20px; }
-.cw-grower-header { display:flex; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
-.cw-grower-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
-.cw-grower-name { font-size:.88rem; font-weight:800; color:var(--text); }
-.cw-grower-full { font-size:.68rem; font-weight:400; color:var(--muted); }
-.cw-grower-total { font-size:.68rem; color:var(--muted); margin-left:auto; }
-.cw-grow-row { padding:10px 0; border-bottom:1px solid var(--border); }
-.cw-grow-row:last-child { border-bottom:none; }
-.cw-grow-empty { display:flex; align-items:center; justify-content:space-between; padding:10px 0; }
-.cw-grow-label { font-size:.7rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
-.cw-grow-bar-wrap { height:5px; background:var(--border); border-radius:3px; position:relative; margin:6px 0; }
-.cw-grow-bar-fill { position:absolute; top:0; left:0; height:5px; border-radius:3px; }
-.cw-grow-bar-proj { position:absolute; top:-4px; width:2px; height:13px; background:rgba(255,255,255,.35); border-radius:1px; }
-.cw-grow-nums { display:flex; align-items:baseline; gap:6px; margin-top:4px; }
-.cw-grow-actual { font-size:1.4rem; font-weight:700; color:var(--text); }
-.cw-grow-proj { font-size:.75rem; color:var(--muted); }
-.cw-grow-meta { font-size:.68rem; color:var(--muted); margin-top:2px; }
-.cw-grower-adm .cw-grow-actual { color:var(--muted); }
+/* ══════════════════════════════════════════
+   CALAVO INTELLIGENCE CENTER — Design System
+══════════════════════════════════════════ */
 
-/* ── Calavo Weekly Intelligence Center ── */
-.cw-header-bar { display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
-.cw-title { font-size:1rem; font-weight:700; color:var(--text); }
-.cw-subtitle { font-size:.75rem; color:var(--muted); }
-.cw-badge-semana { margin-left:auto; font-size:.65rem; font-weight:700; padding:4px 10px; border-radius:20px; background:rgba(0,122,255,.12); color:#007aff; border:1px solid rgba(0,122,255,.2); }
+/* Tab background tint */
+#tab-calavoweekly { background: radial-gradient(ellipse at top left, rgba(0,50,30,.18) 0%, transparent 60%); }
 
-/* Stock bar */
-.cw-stocks-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+/* Intel section header */
+.cw-sec { display:flex; align-items:center; gap:10px; margin:20px 0 10px; }
+.cw-sec-line { flex:1; height:1px; background:linear-gradient(90deg,rgba(52,199,89,.4),transparent); }
+.cw-sec-lbl { font-size:.58rem; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:#34c759; white-space:nowrap; }
+.cw-sec-src { font-size:.6rem; color:var(--muted); }
+
+/* ── HERO ── */
+@keyframes cw-pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,199,89,.5)} 50%{opacity:.8;box-shadow:0 0 0 6px rgba(52,199,89,0)} }
+.cw-hero { background:linear-gradient(135deg,rgba(0,40,24,.9) 0%,rgba(0,20,14,.95) 100%); border:1px solid rgba(52,199,89,.2); border-radius:var(--r-lg); padding:20px 24px 18px; margin-bottom:16px; position:relative; overflow:hidden; }
+.cw-hero::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(52,199,89,.03) 28px,rgba(52,199,89,.03) 29px); pointer-events:none; }
+.cw-hero-top { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:14px; }
+.cw-hero-title { font-size:1.05rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:#34c759; line-height:1; }
+.cw-hero-sub { font-size:.68rem; color:rgba(52,199,89,.6); margin-top:4px; letter-spacing:.5px; }
+.cw-hero-right { text-align:right; }
+.cw-hero-wk { font-size:1.6rem; font-weight:900; color:#fff; line-height:1; }
+.cw-hero-dates { font-size:.62rem; color:rgba(255,255,255,.4); margin-top:2px; }
+.cw-live-badge { display:inline-flex; align-items:center; gap:5px; font-size:.6rem; font-weight:700; letter-spacing:1px; color:#34c759; background:rgba(52,199,89,.1); border:1px solid rgba(52,199,89,.3); padding:3px 9px; border-radius:20px; }
+.cw-live-dot { width:6px; height:6px; border-radius:50%; background:#34c759; animation:cw-pulse 2s infinite; }
+.cw-hero-kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid rgba(52,199,89,.15); padding-top:14px; }
+.cw-hero-kpi { padding:0 16px; border-right:1px solid rgba(52,199,89,.1); }
+.cw-hero-kpi:first-child { padding-left:0; }
+.cw-hero-kpi:last-child { border-right:none; }
+.cw-hero-kpi-lbl { font-size:.58rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:rgba(52,199,89,.5); margin-bottom:4px; }
+.cw-hero-kpi-val { font-size:1.2rem; font-weight:700; color:#fff; line-height:1; }
+.cw-hero-kpi-chg { font-size:.65rem; margin-top:3px; }
+.cw-hero-kpi-chg.up { color:#34c759; } .cw-hero-kpi-chg.down { color:#ff453a; } .cw-hero-kpi-chg.flat { color:rgba(255,255,255,.4); }
+@media(max-width:480px){ .cw-hero-kpis { grid-template-columns:1fr 1fr; gap:10px; } .cw-hero-kpi { border-right:none; padding:0; } }
+
+/* ── STOCK TERMINAL ── */
+.cw-stocks-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px; }
 @media(max-width:480px){ .cw-stocks-grid { grid-template-columns:1fr; } }
-.cw-stock-card { padding:16px 20px; display:flex; align-items:center; gap:16px; }
-.cw-stock-left { flex:1; }
-.cw-stock-sym { font-size:1.1rem; font-weight:800; letter-spacing:.5px; color:var(--text); }
-.cw-stock-name { font-size:.65rem; color:var(--muted); margin-top:1px; }
-.cw-stock-mkt { font-size:.6rem; font-weight:600; padding:2px 6px; border-radius:6px; background:var(--surface); color:var(--muted); margin-top:4px; display:inline-block; }
-.cw-stock-right { text-align:right; }
-.cw-stock-price { font-size:1.6rem; font-weight:700; color:var(--text); line-height:1; }
-.cw-stock-change { font-size:.75rem; font-weight:600; margin-top:3px; }
-.cw-stock-change.up { color:#34c759; }
-.cw-stock-change.down { color:#ff453a; }
-.cw-stock-change.nd { color:var(--muted); }
-.cw-stock-range { font-size:.6rem; color:var(--muted); margin-top:4px; }
-.cw-stock-range span { color:var(--text); font-weight:600; }
+.cw-stock-card { padding:16px 20px; background:rgba(0,0,0,.3); border:1px solid rgba(255,255,255,.07); position:relative; overflow:hidden; }
+.cw-stock-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.cw-stock-card.up-card::after  { background:linear-gradient(90deg,#34c759,transparent); }
+.cw-stock-card.down-card::after { background:linear-gradient(90deg,#ff453a,transparent); }
+.cw-stock-card.nd-card::after  { background:linear-gradient(90deg,rgba(255,255,255,.2),transparent); }
+.cw-stock-row1 { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
+.cw-stock-sym { font-size:1.3rem; font-weight:900; letter-spacing:.5px; color:var(--text); font-variant-numeric:tabular-nums; }
+.cw-stock-name { font-size:.62rem; color:var(--muted); margin-top:2px; }
+.cw-stock-mkt-badge { font-size:.55rem; font-weight:700; letter-spacing:.8px; padding:2px 7px; border-radius:4px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.3); margin-top:5px; display:inline-block; }
+.cw-stock-price-big { font-size:2rem; font-weight:700; color:var(--text); line-height:1; font-variant-numeric:tabular-nums; }
+.cw-stock-chg-row { display:flex; align-items:center; gap:8px; margin-top:5px; flex-wrap:wrap; }
+.cw-stock-chg { font-size:.78rem; font-weight:700; padding:2px 8px; border-radius:6px; }
+.cw-stock-chg.up   { background:rgba(52,199,89,.12); color:#34c759; }
+.cw-stock-chg.down { background:rgba(255,69,58,.1); color:#ff453a; }
+.cw-stock-chg.nd   { background:rgba(255,255,255,.05); color:var(--muted); }
+.cw-stock-range-bar { margin-top:10px; }
+.cw-stock-range-lbl { display:flex; justify-content:space-between; font-size:.58rem; color:var(--muted); margin-bottom:3px; font-variant-numeric:tabular-nums; }
+.cw-stock-range-track { height:3px; background:rgba(255,255,255,.1); border-radius:2px; position:relative; }
+.cw-stock-range-fill { position:absolute; height:3px; border-radius:2px; }
+.cw-stock-range-dot { position:absolute; top:-3px; width:8px; height:8px; border-radius:50%; margin-left:-4px; border:2px solid var(--bg); }
+.cw-stock-vol { font-size:.6rem; color:var(--muted); margin-top:7px; }
 
-/* Alertas inteligencia */
-.cw-alertas-list { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
-.cw-alerta-item { display:flex; align-items:flex-start; gap:10px; padding:12px 16px; border-radius:var(--r); }
-.cw-alerta-item.warning { background:rgba(255,159,10,.08); border-left:3px solid #ff9f0a; }
-.cw-alerta-item.success { background:rgba(52,199,89,.08); border-left:3px solid #34c759; }
-.cw-alerta-item.info    { background:rgba(0,122,255,.06); border-left:3px solid #007aff; }
-.cw-alerta-icon { font-size:.9rem; margin-top:1px; }
-.cw-alerta-text { font-size:.8rem; color:var(--text); line-height:1.45; }
+/* ── INTEL FEED ── */
+.cw-feed { display:flex; flex-direction:column; gap:6px; margin-bottom:4px; }
+.cw-feed-item { display:flex; align-items:flex-start; gap:12px; padding:11px 14px; border-radius:var(--r); border:1px solid transparent; position:relative; }
+.cw-feed-item.warning { background:rgba(255,159,10,.07); border-color:rgba(255,159,10,.2); }
+.cw-feed-item.success { background:rgba(52,199,89,.07); border-color:rgba(52,199,89,.2); }
+.cw-feed-item.info    { background:rgba(0,122,255,.05); border-color:rgba(0,122,255,.15); }
+.cw-feed-lvl { font-size:.55rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:2px 6px; border-radius:4px; white-space:nowrap; margin-top:1px; flex-shrink:0; }
+.cw-feed-item.warning .cw-feed-lvl { background:rgba(255,159,10,.2); color:#ff9f0a; }
+.cw-feed-item.success .cw-feed-lvl { background:rgba(52,199,89,.15); color:#34c759; }
+.cw-feed-item.info .cw-feed-lvl    { background:rgba(0,122,255,.15); color:#007aff; }
+.cw-feed-txt { font-size:.78rem; color:var(--text); line-height:1.5; }
 
-/* Correos Calavo */
-.cw-correos-timeline { display:flex; flex-direction:column; gap:0; margin-bottom:16px; }
-.cw-correo-item { display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--border); }
-.cw-correo-item:last-child { border-bottom:none; }
-.cw-correo-dot-col { display:flex; flex-direction:column; align-items:center; padding-top:2px; }
-.cw-correo-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
-.cw-correo-dot.reporte  { background:#007aff; }
-.cw-correo-dot.reunion  { background:#5ac8fa; }
-.cw-correo-dot.contrato { background:#ff9f0a; }
-.cw-correo-line { flex:1; width:1px; background:var(--border); margin-top:4px; }
-.cw-correo-body { flex:1; }
-.cw-correo-meta { display:flex; align-items:center; gap:8px; margin-bottom:3px; flex-wrap:wrap; }
-.cw-correo-fecha { font-size:.65rem; color:var(--muted); }
-.cw-correo-de { font-size:.7rem; font-weight:600; color:var(--text); }
-.cw-tipo-pill { font-size:.6rem; font-weight:700; padding:2px 7px; border-radius:10px; text-transform:uppercase; letter-spacing:.5px; }
-.cw-tipo-pill.reporte  { background:rgba(0,122,255,.12); color:#007aff; }
-.cw-tipo-pill.reunion  { background:rgba(90,200,250,.12); color:#5ac8fa; }
-.cw-tipo-pill.contrato { background:rgba(255,159,10,.15); color:#ff9f0a; }
-.cw-correo-asunto { font-size:.78rem; font-weight:600; color:var(--text); margin-bottom:4px; }
-.cw-correo-resumen { font-size:.75rem; color:var(--muted); line-height:1.45; }
+/* ── COMMS TIMELINE ── */
+.cw-timeline { display:flex; flex-direction:column; }
+.cw-tl-item { display:flex; gap:14px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.05); }
+.cw-tl-item:last-child { border-bottom:none; }
+.cw-tl-col { display:flex; flex-direction:column; align-items:center; padding-top:3px; flex-shrink:0; width:14px; }
+.cw-tl-dot { width:10px; height:10px; border-radius:50%; border:2px solid; flex-shrink:0; }
+.cw-tl-dot.reporte  { border-color:#007aff; background:rgba(0,122,255,.3); }
+.cw-tl-dot.reunion  { border-color:#5ac8fa; background:rgba(90,200,250,.2); }
+.cw-tl-dot.contrato { border-color:#ff9f0a; background:rgba(255,159,10,.25); box-shadow:0 0 6px rgba(255,159,10,.4); }
+.cw-tl-line { flex:1; width:1px; background:rgba(255,255,255,.06); margin-top:4px; }
+.cw-tl-body { flex:1; }
+.cw-tl-meta { display:flex; align-items:center; gap:7px; margin-bottom:3px; flex-wrap:wrap; }
+.cw-tl-fecha { font-size:.62rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+.cw-tl-de { font-size:.7rem; font-weight:700; color:var(--text); }
+.cw-tl-pill { font-size:.55rem; font-weight:800; padding:2px 7px; border-radius:8px; letter-spacing:.5px; text-transform:uppercase; }
+.cw-tl-pill.reporte  { background:rgba(0,122,255,.15); color:#007aff; }
+.cw-tl-pill.reunion  { background:rgba(90,200,250,.12); color:#5ac8fa; }
+.cw-tl-pill.contrato { background:rgba(255,159,10,.2); color:#ff9f0a; }
+.cw-tl-asunto { font-size:.78rem; font-weight:600; color:var(--text); margin-bottom:3px; }
+.cw-tl-resumen { font-size:.73rem; color:var(--muted); line-height:1.5; }
 
-/* KPI strip */
-.cw-kpi-strip { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:16px; }
-@media(max-width:600px){ .cw-kpi-strip { grid-template-columns:repeat(2,1fr); } }
-.cw-kpi-box { padding:14px 16px; }
-.cw-kpi-lbl { font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); margin-bottom:5px; }
-.cw-kpi-val { font-size:1.4rem; font-weight:700; color:var(--text); line-height:1; }
-.cw-kpi-chg { font-size:.68rem; margin-top:4px; }
-.cw-kpi-chg.up { color:#34c759; } .cw-kpi-chg.down { color:#ff453a; } .cw-kpi-chg.neutral { color:var(--muted); }
-
-/* Proyecciones grid */
-.cw-proj-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
-@media(max-width:500px){ .cw-proj-grid { grid-template-columns:1fr; } }
-.cw-proj-card { padding:18px 20px; }
-.cw-proj-name { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); margin-bottom:10px; }
-.cw-proj-nums { display:flex; align-items:baseline; gap:8px; margin-bottom:6px; }
-.cw-proj-actual { font-size:2rem; font-weight:700; color:var(--text); }
-.cw-proj-unit { font-size:.7rem; color:var(--muted); }
-.cw-diff-badge { padding:3px 10px; border-radius:20px; font-size:.72rem; font-weight:700; }
+/* ── GROWER MATRIX ── */
+.cw-growers-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px; }
+@media(max-width:600px){ .cw-growers-grid { grid-template-columns:1fr; } }
+.cw-grower-card { padding:0; overflow:hidden; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.07); }
+.cw-grower-hdr { padding:14px 18px 12px; border-bottom:1px solid rgba(255,255,255,.06); }
+.cw-grower-hdr.belher-hdr { border-top:2px solid #34c759; }
+.cw-grower-hdr.adm-hdr    { border-top:2px solid rgba(255,255,255,.25); }
+.cw-grower-id { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+.cw-grower-name { font-size:.88rem; font-weight:800; color:var(--text); }
+.cw-grower-fullname { font-size:.65rem; color:var(--muted); font-weight:400; }
+.cw-grower-totals { display:flex; gap:12px; flex-wrap:wrap; }
+.cw-grower-tot-item { display:flex; flex-direction:column; }
+.cw-grower-tot-val { font-size:.92rem; font-weight:700; color:var(--text); }
+.cw-grower-tot-lbl { font-size:.58rem; color:var(--muted); letter-spacing:.4px; }
+.cw-grow-rows { padding:4px 0; }
+.cw-grow-row { padding:12px 18px; border-bottom:1px solid rgba(255,255,255,.04); }
+.cw-grow-row:last-child { border-bottom:none; }
+.cw-grow-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+.cw-grow-lbl { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); }
+.cw-grow-right { display:flex; align-items:center; gap:8px; }
+.cw-grow-actual { font-size:1.1rem; font-weight:700; color:var(--text); font-variant-numeric:tabular-nums; }
+.cw-grow-slash { font-size:.8rem; color:var(--muted); }
+.cw-grow-proj { font-size:.8rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+.cw-diff-badge { padding:2px 8px; border-radius:12px; font-size:.68rem; font-weight:800; white-space:nowrap; }
 .cw-diff-pos { background:rgba(52,199,89,.15); color:#34c759; }
-.cw-diff-neg { background:rgba(255,69,58,.12); color:#ff453a; }
-.cw-proj-bar-wrap { margin:10px 0 8px; position:relative; height:6px; background:var(--border); border-radius:3px; }
-.cw-proj-bar-fill { position:absolute; top:0; left:0; height:6px; border-radius:3px; background:var(--green2); }
-.cw-proj-marker { position:absolute; top:-3px; width:2px; height:12px; border-radius:1px; background:var(--muted); }
-.cw-proj-meta { font-size:.68rem; color:var(--muted); margin-top:2px; }
+.cw-diff-neg { background:rgba(255,69,58,.1); color:#ff453a; }
+.cw-diff-neu { background:rgba(255,255,255,.06); color:var(--muted); }
+.cw-grow-bar-wrap { height:4px; background:rgba(255,255,255,.07); border-radius:2px; position:relative; margin-bottom:5px; }
+.cw-grow-bar-fill { position:absolute; top:0; left:0; height:4px; border-radius:2px; transition:width .6s; }
+.cw-grow-bar-proj-line { position:absolute; top:-4px; width:1px; height:12px; background:rgba(255,255,255,.3); }
+.cw-grow-meta { font-size:.62rem; color:var(--muted); }
+.cw-grow-no-prog { font-size:.68rem; color:rgba(255,255,255,.2); font-style:italic; padding:8px 18px 12px; }
 
-/* ADM row */
-.cw-adm-row { display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:var(--r); background:var(--surface); margin-bottom:16px; flex-wrap:wrap; }
-.cw-adm-lbl { font-size:.72rem; font-weight:600; color:var(--text); }
-.cw-adm-vals { font-size:.7rem; color:var(--muted); }
-.cw-adm-diff { font-size:.72rem; font-weight:700; color:#ff453a; margin-left:auto; }
-
-/* Ventas grid */
-.cw-ventas-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+/* ── FOB VENTAS ── */
+.cw-ventas-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px; }
 @media(max-width:500px){ .cw-ventas-grid { grid-template-columns:1fr; } }
-.cw-venta-card { padding:16px 20px; text-align:center; }
-.cw-venta-name { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); margin-bottom:8px; }
-.cw-venta-price { font-size:2.2rem; font-weight:700; color:var(--green2); }
-.cw-venta-sub { font-size:.65rem; color:var(--muted); margin-top:2px; }
-.cw-venta-pkgs { font-size:.9rem; font-weight:600; color:var(--text); margin-top:10px; }
-.cw-venta-pkgs-lbl { font-size:.65rem; color:var(--muted); font-weight:400; }
+.cw-venta-card { padding:18px 20px; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.07); }
+.cw-venta-name { font-size:.6rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:8px; }
+.cw-venta-price { font-size:2.4rem; font-weight:700; color:#34c759; line-height:1; font-variant-numeric:tabular-nums; }
+.cw-venta-sub { font-size:.62rem; color:var(--muted); margin-top:4px; }
+.cw-venta-pkgs { font-size:.92rem; font-weight:600; color:var(--text); margin-top:12px; font-variant-numeric:tabular-nums; }
+.cw-venta-pkgs-lbl { font-size:.62rem; color:var(--muted); font-weight:400; }
 
-/* USDA reference */
-.cw-usda-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+/* ── USDA TABLE ── */
+.cw-usda-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px; }
 @media(max-width:500px){ .cw-usda-grid { grid-template-columns:1fr; } }
-.cw-usda-zona { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); margin-bottom:10px; }
-.cw-usda-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--border); }
-.cw-usda-row:last-child { border-bottom:none; }
-.cw-usda-prod { font-size:.78rem; color:var(--text); }
-.cw-usda-vals { text-align:right; }
-.cw-usda-range { font-size:.8rem; font-weight:600; color:var(--text); }
-.cw-usda-usual { font-size:.65rem; color:var(--muted); }
+.cw-usda-zona { font-size:.6rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:10px; }
+.cw-usda-tbl { width:100%; border-collapse:collapse; }
+.cw-usda-tbl td { padding:7px 0; border-bottom:1px solid rgba(255,255,255,.04); font-size:.78rem; vertical-align:middle; }
+.cw-usda-tbl tr:last-child td { border-bottom:none; }
+.cw-usda-prod { color:var(--text); }
+.cw-usda-range { text-align:right; font-weight:700; color:var(--text); font-variant-numeric:tabular-nums; }
+.cw-usda-usual { text-align:right; font-size:.62rem; color:var(--muted); font-variant-numeric:tabular-nums; }
 
-/* TOY */
-.cw-toy-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+/* ── TOY ── */
+.cw-toy-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 @media(max-width:500px){ .cw-toy-grid { grid-template-columns:1fr; } }
-.cw-toy-title { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); margin-bottom:10px; }
-.cw-toy-tbl { width:100%; border-collapse:collapse; font-size:.78rem; }
-.cw-toy-tbl th { text-align:left; color:var(--muted); font-weight:500; padding-bottom:6px; font-size:.68rem; border-bottom:1px solid var(--border); }
-.cw-toy-tbl td { padding:7px 0; border-bottom:1px solid var(--border); }
+.cw-toy-ttl { font-size:.6rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:10px; }
+.cw-toy-tbl { width:100%; border-collapse:collapse; font-size:.78rem; font-variant-numeric:tabular-nums; }
+.cw-toy-tbl th { text-align:left; color:var(--muted); font-weight:600; padding-bottom:7px; font-size:.63rem; border-bottom:1px solid rgba(255,255,255,.07); }
+.cw-toy-tbl td { padding:7px 0; border-bottom:1px solid rgba(255,255,255,.04); }
 .cw-toy-tbl tr:last-child td { border-bottom:none; }
 .cw-toy-pos { color:#34c759; font-weight:700; }
 .cw-toy-neg { color:#ff453a; font-weight:700; }
@@ -2007,8 +2027,8 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 
 <!-- ══ TABS ══ -->
 <nav class="tabs" id="tabNav">
-  <button class="active" data-tab="calavoweekly">Calavo Weekly</button>
-  <button data-tab="hoy">Resumen</button>
+  <button class="active" data-tab="hoy">Resumen</button>
+  <button data-tab="calavoweekly">Calavo Weekly</button>
   <button data-tab="estrategia">Estrategia</button>
   <button data-tab="finanzas">Finanzas</button>
   <button data-tab="calidad">Calidad</button>
@@ -2026,7 +2046,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 <main>
 
   <!-- ══════════ HOY ══════════ -->
-  <div class="tab-panel" id="tab-hoy">
+  <div class="tab-panel active" id="tab-hoy">
 
     <div id="hoyHero"></div>
     <div class="hoy-kpi-grid" id="hoyKpis"></div>
@@ -2245,7 +2265,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   </div>
 
   <!-- ══════════ CALAVO WEEKLY ══════════ -->
-  <div class="tab-panel active" id="tab-calavoweekly">
+  <div class="tab-panel" id="tab-calavoweekly">
     <div id="cw-header"></div>
     <div id="cw-stocks"></div>
     <div id="cw-alertas"></div>
@@ -3945,222 +3965,234 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     }
   }
 
-  /* ── Calavo Weekly Intelligence Center ── */
+  /* ── Calavo Intelligence Center ── */
   function renderCalavoWeekly() {
     var CW = D.calavoWeekly;
     if (!CW) return;
-
-    /* Helper: dollar format */
     function cFmt(n) { return n != null ? '$' + n.toFixed(2) : '—'; }
+    function secHdr(lbl, src) {
+      return '<div class="cw-sec"><span class="cw-sec-lbl">' + lbl + '</span>' +
+        (src ? '<span class="cw-sec-src">· ' + src + '</span>' : '') +
+        '<span class="cw-sec-line"></span></div>';
+    }
 
-    /* ── Header ── */
+    /* ── HERO ── */
+    var k = CW.kpi;
+    var fobChg = k.fobAnterior ? ((k.fobPromedio - k.fobAnterior) / k.fobAnterior * 100) : 0;
+    var fobDir = fobChg > 0 ? 'up' : fobChg < 0 ? 'down' : 'flat';
     document.getElementById('cw-header').innerHTML =
-      '<div class="cw-header-bar">' +
-        '<div><div class="cw-title">Calavo Intelligence Center</div>' +
-        '<div class="cw-subtitle">Fuente: ' + CW.fuente + ' · Actualizado ' + CW.actualizado + '</div></div>' +
-        '<span class="cw-badge-semana">' + CW.semana + ' · ' + CW.fechas + '</span>' +
+      '<div class="cw-hero">' +
+        '<div class="cw-hero-top">' +
+          '<div>' +
+            '<div class="cw-hero-title">Calavo Intelligence</div>' +
+            '<div class="cw-hero-sub">Centro de Monitoreo Comercial · ' + CW.fuente + '</div>' +
+          '</div>' +
+          '<div class="cw-hero-right">' +
+            '<div class="cw-live-badge"><span class="cw-live-dot"></span>LIVE</div>' +
+            '<div class="cw-hero-wk" style="margin-top:6px">' + CW.semana + '</div>' +
+            '<div class="cw-hero-dates">' + CW.fechas + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cw-hero-kpis">' +
+          '<div class="cw-hero-kpi"><div class="cw-hero-kpi-lbl">Pallets</div><div class="cw-hero-kpi-val">' + k.pallets.toLocaleString() + '</div><div class="cw-hero-kpi-chg flat">totales</div></div>' +
+          '<div class="cw-hero-kpi"><div class="cw-hero-kpi-lbl">Cargas</div><div class="cw-hero-kpi-val">' + k.loads + '</div><div class="cw-hero-kpi-chg flat">loads</div></div>' +
+          '<div class="cw-hero-kpi"><div class="cw-hero-kpi-lbl">Paquetes</div><div class="cw-hero-kpi-val">' + Math.round(k.pkgs/1000) + 'K</div><div class="cw-hero-kpi-chg flat">' + k.pkgs.toLocaleString() + '</div></div>' +
+          '<div class="cw-hero-kpi"><div class="cw-hero-kpi-lbl">FOB Prom.</div><div class="cw-hero-kpi-val">' + cFmt(k.fobPromedio) + '</div><div class="cw-hero-kpi-chg ' + fobDir + '">' + (fobChg >= 0 ? '+' : '') + fobChg.toFixed(1) + '% vs WK11</div></div>' +
+        '</div>' +
       '</div>';
 
-    /* ── Stock Monitor ── */
-    var stocksHtml = '<div class="section-title">Acciones en Bolsa <span class="src-tag">Yahoo Finance</span></div>' +
+    /* ── STOCK TERMINAL ── */
+    var stocksHtml = secHdr('Acciones en Bolsa', 'Yahoo Finance') +
       '<div class="cw-stocks-grid">';
     CW.acciones.forEach(function(s) {
-      var hasData = s.precio != null;
-      var dir = hasData ? (s.cambio >= 0 ? 'up' : 'down') : 'nd';
-      var sign = s.cambio >= 0 ? '+' : '';
-      stocksHtml +=
-        '<div class="card cw-stock-card">' +
-          '<div class="cw-stock-left">' +
+      var has = s.precio != null;
+      var dir = has ? (s.cambio >= 0 ? 'up' : 'down') : 'nd';
+      var sign = has && s.cambio >= 0 ? '+' : '';
+      var rangePct = (has && s.h52 && s.l52) ? ((s.precio - s.l52) / (s.h52 - s.l52) * 100).toFixed(1) : 50;
+      var rangeColor = dir === 'up' ? '#34c759' : dir === 'down' ? '#ff453a' : '#636366';
+      stocksHtml += '<div class="card cw-stock-card ' + dir + '-card">' +
+        '<div class="cw-stock-row1">' +
+          '<div>' +
             '<div class="cw-stock-sym">' + s.simbolo + '</div>' +
             '<div class="cw-stock-name">' + s.nombre + '</div>' +
-            '<div class="cw-stock-mkt">' + s.mercado + '</div>' +
+            '<div class="cw-stock-mkt-badge">' + s.mercado + '</div>' +
           '</div>' +
-          '<div class="cw-stock-right">' +
-            '<div class="cw-stock-price">' + (hasData ? cFmt(s.precio) : '—') + '</div>' +
-            '<div class="cw-stock-change ' + dir + '">' +
-              (hasData ? sign + cFmt(s.cambio) + ' (' + sign + s.cambioPct.toFixed(2) + '%)' : 'Sin datos') +
+          '<div style="text-align:right">' +
+            '<div class="cw-stock-price-big">' + (has ? cFmt(s.precio) : '—') + '</div>' +
+            '<div class="cw-stock-chg-row" style="justify-content:flex-end">' +
+              '<span class="cw-stock-chg ' + dir + '">' + (has ? sign + cFmt(s.cambio) + ' / ' + sign + s.cambioPct.toFixed(2) + '%' : 'Sin datos') + '</span>' +
             '</div>' +
-            (hasData ? '<div class="cw-stock-range">52s: <span>' + cFmt(s.l52) + '</span> – <span>' + cFmt(s.h52) + '</span></div>' : '') +
           '</div>' +
-        '</div>';
+        '</div>' +
+        (has ? '<div class="cw-stock-range-bar">' +
+          '<div class="cw-stock-range-lbl"><span>' + cFmt(s.l52) + ' 52s min</span><span>' + cFmt(s.h52) + ' 52s max</span></div>' +
+          '<div class="cw-stock-range-track">' +
+            '<div class="cw-stock-range-fill" style="left:0;width:' + rangePct + '%;background:linear-gradient(90deg,' + rangeColor + '44,' + rangeColor + ')"></div>' +
+            '<div class="cw-stock-range-dot" style="left:' + rangePct + '%;background:' + rangeColor + '"></div>' +
+          '</div>' +
+          '<div class="cw-stock-vol">Vol: ' + (s.volumen ? s.volumen.toLocaleString() : '—') + ' shares</div>' +
+        '</div>' : '') +
+      '</div>';
     });
     stocksHtml += '</div>';
     document.getElementById('cw-stocks').innerHTML = stocksHtml;
 
-    /* ── Alertas ── */
-    var iconMap = { warning:'⚠', success:'✓', info:'ℹ' };
+    /* ── INTEL ALERTS ── */
+    var lvlMap = { warning:'⚠ ALERTA', success:'▲ OPORTUNIDAD', info:'ℹ INTEL' };
     document.getElementById('cw-alertas').innerHTML =
-      '<div class="section-title">Alertas de Inteligencia</div>' +
-      '<div class="cw-alertas-list">' +
+      secHdr('Señales de Inteligencia') +
+      '<div class="cw-feed">' +
       CW.alertas.map(function(a) {
-        return '<div class="cw-alerta-item ' + a.nivel + '">' +
-          '<span class="cw-alerta-icon">' + (iconMap[a.nivel]||'•') + '</span>' +
-          '<span class="cw-alerta-text">' + a.texto + '</span>' +
+        return '<div class="cw-feed-item ' + a.nivel + '">' +
+          '<span class="cw-feed-lvl">' + (lvlMap[a.nivel] || a.nivel.toUpperCase()) + '</span>' +
+          '<span class="cw-feed-txt">' + a.texto + '</span>' +
         '</div>';
       }).join('') + '</div>';
 
-    /* ── Correos @calavo.com ── */
+    /* ── COMMS TIMELINE ── */
     document.getElementById('cw-correos').innerHTML =
-      '<div class="section-title">Comunicaciones · @calavo.com <span class="src-tag">Irene Amezaga · VP Sales</span></div>' +
+      secHdr('Comunicaciones Calavo', '@calavo.com · Irene Amezaga') +
       '<div class="card" style="padding:16px 20px">' +
-      '<div class="cw-correos-timeline">' +
+      '<div class="cw-timeline">' +
       CW.correos.map(function(c, i) {
         var isLast = i === CW.correos.length - 1;
-        return '<div class="cw-correo-item">' +
-          '<div class="cw-correo-dot-col">' +
-            '<div class="cw-correo-dot ' + c.tipo + '"></div>' +
-            (isLast ? '' : '<div class="cw-correo-line"></div>') +
+        return '<div class="cw-tl-item">' +
+          '<div class="cw-tl-col">' +
+            '<div class="cw-tl-dot ' + c.tipo + '"></div>' +
+            (!isLast ? '<div class="cw-tl-line"></div>' : '') +
           '</div>' +
-          '<div class="cw-correo-body">' +
-            '<div class="cw-correo-meta">' +
-              '<span class="cw-correo-fecha">' + c.fecha + '</span>' +
-              '<span class="cw-correo-de">' + c.de + '</span>' +
-              '<span class="cw-tipo-pill ' + c.tipo + '">' + c.tipo + '</span>' +
+          '<div class="cw-tl-body">' +
+            '<div class="cw-tl-meta">' +
+              '<span class="cw-tl-fecha">' + c.fecha + '</span>' +
+              '<span class="cw-tl-de">' + c.de + '</span>' +
+              '<span class="cw-tl-pill ' + c.tipo + '">' + c.tipo + '</span>' +
             '</div>' +
-            '<div class="cw-correo-asunto">' + c.asunto + '</div>' +
-            '<div class="cw-correo-resumen">' + c.resumen + '</div>' +
+            '<div class="cw-tl-asunto">' + c.asunto + '</div>' +
+            '<div class="cw-tl-resumen">' + c.resumen + '</div>' +
           '</div>' +
         '</div>';
       }).join('') +
       '</div></div>';
 
-    /* ── KPIs ── */
-    var k = CW.kpi;
-    var fobChgAbs = k.fobAnterior ? (k.fobPromedio - k.fobAnterior) : 0;
-    var fobChgPct = k.fobAnterior ? (fobChgAbs / k.fobAnterior * 100) : 0;
-    var fobDir = fobChgAbs > 0 ? 'up' : fobChgAbs < 0 ? 'down' : 'neutral';
-    function cwKpi(lbl, val, chg, chgDir) {
-      return '<div class="card cw-kpi-box">' +
-        '<div class="cw-kpi-lbl">' + lbl + '</div>' +
-        '<div class="cw-kpi-val">' + val + '</div>' +
-        (chg ? '<div class="cw-kpi-chg ' + (chgDir||'neutral') + '">' + chg + '</div>' : '') +
+    /* ── KPI PERFORMANCE (already in hero — skip separate section) ── */
+    document.getElementById('cw-kpis').innerHTML = '';
+
+    /* ── GROWER MATRIX: Belher vs ADM ── */
+    function growerBar(p, accent) {
+      var maxVal = Math.max(p.proyectado, p.actual, 1) * 1.15;
+      var aPct = Math.min(p.actual   / maxVal * 100, 100).toFixed(1);
+      var pPct = Math.min(p.proyectado / maxVal * 100, 100).toFixed(1);
+      return '<div class="cw-grow-bar-wrap">' +
+        '<div class="cw-grow-bar-fill" style="width:' + aPct + '%;background:' + accent + ';box-shadow:0 0 6px ' + accent + '55"></div>' +
+        '<div class="cw-grow-bar-proj-line" style="left:' + pPct + '%"></div>' +
       '</div>';
     }
-    document.getElementById('cw-kpis').innerHTML =
-      '<div class="section-title">Desempeño WK12 · Mar 16–22 <span class="src-tag">Belher Sales Summary</span></div>' +
-      '<div class="cw-kpi-strip">' +
-        cwKpi('Pallets', k.pallets.toLocaleString(), '', 'neutral') +
-        cwKpi('Cargas', k.loads.toLocaleString(), '', 'neutral') +
-        cwKpi('Paquetes', k.pkgs.toLocaleString(), '', 'neutral') +
-        cwKpi('FOB Promedio', cFmt(k.fobPromedio), (fobChgAbs >= 0 ? '+' : '') + cFmt(fobChgAbs) + ' (' + (fobChgPct >= 0 ? '+' : '') + fobChgPct.toFixed(1) + '%) vs WK11', fobDir) +
-        cwKpi('WK11 Referencia', cFmt(k.fobAnterior), k.pkgsAnterior.toLocaleString() + ' pkgs', 'neutral') +
-      '</div>';
-
-    /* ── Proyecciones vs Real — Belher vs ADM ── */
-    function cwProjRow(nombre, p, accent) {
+    function growerRow(lbl, p, accent) {
+      if (!p) return '';
       var cls = p.diffPct > 0 ? 'cw-diff-pos' : p.diffPct < 0 ? 'cw-diff-neg' : 'cw-diff-neu';
-      var maxVal = Math.max(p.proyectado, p.actual) * 1.15 || 1;
-      var actualPct = Math.min(p.actual / maxVal * 100, 100).toFixed(1);
-      var projPct   = Math.min(p.proyectado / maxVal * 100, 100).toFixed(1);
+      if (p.sinPrograma) {
+        return '<div class="cw-grow-no-prog">' + lbl + ' — Sin programa esta semana</div>';
+      }
       return '<div class="cw-grow-row">' +
-        '<div class="cw-grow-label">' + nombre + '</div>' +
-        '<div class="cw-grow-bar-wrap">' +
-          '<div class="cw-grow-bar-fill" style="width:' + actualPct + '%;background:' + accent + '"></div>' +
-          '<div class="cw-grow-bar-proj" style="left:' + projPct + '%"></div>' +
+        '<div class="cw-grow-top">' +
+          '<span class="cw-grow-lbl">' + lbl + '</span>' +
+          '<div class="cw-grow-right">' +
+            '<span class="cw-grow-actual">' + p.actual + '</span>' +
+            '<span class="cw-grow-slash"> /</span>' +
+            '<span class="cw-grow-proj">' + p.proyectado + '</span>' +
+            '<span class="cw-diff-badge ' + cls + '">' + (p.diffPct >= 0 ? '+' : '') + p.diffPct + '%</span>' +
+          '</div>' +
         '</div>' +
-        '<div class="cw-grow-nums">' +
-          '<span class="cw-grow-actual">' + p.actual + '</span>' +
-          '<span class="cw-grow-proj"> / ' + p.proyectado + '</span>' +
-          '<span class="cw-diff-badge ' + cls + '">' + (p.diffPct >= 0 ? '+' : '') + p.diffPct + '%</span>' +
-        '</div>' +
+        growerBar(p, accent) +
         '<div class="cw-grow-meta">' + p.loads + ' cargas · ' + p.pkgs.toLocaleString() + ' pkgs</div>' +
       '</div>';
     }
-    var bel = CW.belher || CW.proyecciones;
-    var adm = CW.adm;
+    function growerCard(grower, cls, accent) {
+      var tot = grower.total || {};
+      return '<div class="card cw-grower-card">' +
+        '<div class="cw-grower-hdr ' + cls + '">' +
+          '<div class="cw-grower-id">' +
+            '<div class="cw-grower-name">' + (cls === 'belher-hdr' ? 'BELHER' : 'ADM') + '</div>' +
+            '<div class="cw-grower-fullname">' + (grower.nombre || '') + '</div>' +
+          '</div>' +
+          '<div class="cw-grower-totals">' +
+            '<div class="cw-grower-tot-item"><span class="cw-grower-tot-val">' + (tot.actual || 0) + '</span><span class="cw-grower-tot-lbl">pallets</span></div>' +
+            '<div class="cw-grower-tot-item"><span class="cw-grower-tot-val">' + (tot.loads || 0) + '</span><span class="cw-grower-tot-lbl">cargas</span></div>' +
+            '<div class="cw-grower-tot-item"><span class="cw-grower-tot-val">' + ((tot.pkgs || 0) > 0 ? (tot.pkgs/1000).toFixed(1) + 'K' : '0') + '</span><span class="cw-grower-tot-lbl">pkgs</span></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cw-grow-rows">' +
+          growerRow('Rounds / Vine Ripe', grower.rounds, accent) +
+          growerRow('Roma 25lb', grower.roma, accent) +
+        '</div>' +
+      '</div>';
+    }
+    var bel = CW.belher || {};
+    bel.nombre = 'Agrícola Belher';
     document.getElementById('cw-proyecciones').innerHTML =
-      '<div class="section-title">Proyecciones vs Real · WK12 <span class="src-tag">Calavo Weekly Report · Irene Amezaga</span></div>' +
+      secHdr('Matriz de Desempeño · WK' + CW.semana.replace('WK',''), 'Proyectado vs Real') +
       '<div class="cw-growers-grid">' +
-
-      /* ── Belher block ── */
-      '<div class="card cw-grower-block cw-grower-belher">' +
-        '<div class="cw-grower-header">' +
-          '<div class="cw-grower-dot" style="background:#34c759"></div>' +
-          '<div class="cw-grower-name">Belher</div>' +
-          '<div class="cw-grower-total">' + (bel.total ? bel.total.actual : '—') + ' pal · ' + (bel.total ? bel.total.loads : '—') + ' car · ' + (bel.total ? bel.total.pkgs.toLocaleString() : '—') + ' pkgs</div>' +
-        '</div>' +
-        cwProjRow('Rounds / Vine Ripe', bel.rounds, '#34c759') +
-        cwProjRow('Roma 25lb',          bel.roma,   '#30d158') +
-      '</div>' +
-
-      /* ── ADM block ── */
-      '<div class="card cw-grower-block cw-grower-adm">' +
-        '<div class="cw-grower-header">' +
-          '<div class="cw-grower-dot" style="background:#636366"></div>' +
-          '<div class="cw-grower-name">ADM <span class="cw-grower-full">· ' + (adm.nombre || 'Agrícola Don Memo') + '</span></div>' +
-          '<div class="cw-grower-total">' + (adm.total ? adm.total.actual : '—') + ' pal · ' + (adm.total ? adm.total.loads : '—') + ' car · ' + (adm.total ? adm.total.pkgs.toLocaleString() : '—') + ' pkgs</div>' +
-        '</div>' +
-        cwProjRow('Rounds / Vine Ripe', adm.rounds, '#636366') +
-        (adm.roma && adm.roma.proyectado > 0 ? cwProjRow('Roma 25lb', adm.roma, '#48484a') : '<div class="cw-grow-row cw-grow-empty"><span class="cw-grow-label">Roma 25lb</span><span style="color:var(--muted);font-size:.72rem">Sin programa esta semana</span></div>') +
-      '</div>' +
-
+        growerCard(bel, 'belher-hdr', '#34c759') +
+        growerCard(CW.adm, 'adm-hdr', '#636366') +
       '</div>';
 
-    /* ── Ventas por variedad ── */
+    /* ── FOB VENTAS ── */
     document.getElementById('cw-ventas').innerHTML =
-      '<div class="section-title">FOB Promedio por Variedad · WK12 <span class="src-tag">Belher Sales Summary</span></div>' +
+      secHdr('FOB Promedio por Variedad · ' + CW.semana, 'Belher Sales Summary') +
       '<div class="cw-ventas-grid">' +
       CW.ventas.map(function(v) {
         return '<div class="card cw-venta-card">' +
           '<div class="cw-venta-name">' + v.variedad + '</div>' +
           '<div class="cw-venta-price">' + cFmt(v.avg) + '</div>' +
-          '<div class="cw-venta-sub">FOB promedio</div>' +
+          '<div class="cw-venta-sub">FOB promedio por caja</div>' +
           '<div class="cw-venta-pkgs">' + v.recibido.toLocaleString() + ' <span class="cw-venta-pkgs-lbl">pkgs recibidos</span></div>' +
         '</div>';
       }).join('') + '</div>';
 
-    /* ── USDA Reference ── */
+    /* ── USDA REFERENCE ── */
     var byZone = {};
     CW.usdaRef.precios.forEach(function(p) {
       if (!byZone[p.zona]) byZone[p.zona] = [];
       byZone[p.zona].push(p);
     });
-    var usdaHtml = '<div class="section-title">Referencia USDA FOB <span class="src-tag">USDA Tomato Fax Report · ' + CW.usdaRef.fecha + '</span></div>' +
+    var uHtml = secHdr('Referencia USDA FOB', 'USDA Tomato Fax Report · ' + CW.usdaRef.fecha) +
       '<div class="cw-usda-grid">';
     Object.keys(byZone).forEach(function(zona) {
-      usdaHtml += '<div class="card" style="padding:16px 20px"><div class="cw-usda-zona">' + zona + '</div>';
+      uHtml += '<div class="card" style="padding:16px 20px">' +
+        '<div class="cw-usda-zona">' + zona + '</div>' +
+        '<table class="cw-usda-tbl"><tbody>';
       byZone[zona].forEach(function(p) {
-        usdaHtml += '<div class="cw-usda-row">' +
-          '<span class="cw-usda-prod">' + p.producto + '</span>' +
-          '<div class="cw-usda-vals">' +
-            '<div class="cw-usda-range">' + cFmt(p.min) + ' – ' + cFmt(p.max) + '</div>' +
-            (p.usual ? '<div class="cw-usda-usual">usual ' + cFmt(p.usual) + '</div>' : '') +
-          '</div>' +
-        '</div>';
+        uHtml += '<tr>' +
+          '<td class="cw-usda-prod">' + p.producto + '</td>' +
+          '<td class="cw-usda-range">' + cFmt(p.min) + '–' + cFmt(p.max) + '</td>' +
+          '<td class="cw-usda-usual">' + (p.usual ? 'usual ' + cFmt(p.usual) : '') + '</td>' +
+        '</tr>';
       });
-      usdaHtml += '</div>';
+      uHtml += '</tbody></table></div>';
     });
-    usdaHtml += '</div>';
-    document.getElementById('cw-usda').innerHTML = usdaHtml;
+    uHtml += '</div>';
+    document.getElementById('cw-usda').innerHTML = uHtml;
 
-    /* ── TOY Comparison ── */
+    /* ── TOY COMPARISON ── */
     document.getElementById('cw-toy').innerHTML =
-      '<div class="section-title">Comparativo Año Anterior <span class="src-tag">Belher Sales Summary</span></div>' +
+      secHdr('Comparativo Año Anterior', 'Belher Sales Summary') +
       '<div class="cw-toy-grid">' +
         '<div class="card" style="padding:16px 20px">' +
-          '<div class="cw-toy-title">Cajas Recibidas por Mes</div>' +
+          '<div class="cw-toy-ttl">Cajas Recibidas</div>' +
           '<table class="cw-toy-tbl"><thead><tr><th>Mes</th><th>2025</th><th>2026</th><th>Δ</th></tr></thead><tbody>' +
           CW.toy.recibido.map(function(r) {
-            var diff = (r.y2025 && r.y2026) ? Math.round((r.y2026 - r.y2025) / r.y2025 * 100) : null;
-            var cls = diff != null ? (diff >= 0 ? 'cw-toy-pos' : 'cw-toy-neg') : '';
-            return '<tr><td>' + r.mes + '</td>' +
-              '<td>' + (r.y2025 ? r.y2025.toLocaleString() : '—') + '</td>' +
-              '<td>' + (r.y2026 ? r.y2026.toLocaleString() : '—') + '</td>' +
-              '<td class="' + cls + '">' + (diff != null ? (diff >= 0 ? '+' : '') + diff + '%' : '—') + '</td></tr>';
-          }).join('') +
-          '</tbody></table></div>' +
+            var d = (r.y2025 && r.y2026) ? Math.round((r.y2026-r.y2025)/r.y2025*100) : null;
+            var c = d!=null ? (d>=0?'cw-toy-pos':'cw-toy-neg') : '';
+            return '<tr><td>' + r.mes + '</td><td>' + (r.y2025?r.y2025.toLocaleString():'—') + '</td><td>' + (r.y2026?r.y2026.toLocaleString():'—') + '</td><td class="' + c + '">' + (d!=null?(d>=0?'+':'')+d+'%':'—') + '</td></tr>';
+          }).join('') + '</tbody></table></div>' +
         '<div class="card" style="padding:16px 20px">' +
-          '<div class="cw-toy-title">Precio FOB Promedio ($/caja)</div>' +
+          '<div class="cw-toy-ttl">Precio FOB ($/caja)</div>' +
           '<table class="cw-toy-tbl"><thead><tr><th>Mes</th><th>Ant.</th><th>2026</th><th>Δ</th></tr></thead><tbody>' +
           CW.toy.pricing.map(function(p) {
-            var diff = (p.yPrev && p.yCurr) ? Math.round((p.yCurr - p.yPrev) / p.yPrev * 100) : null;
-            var cls = diff != null ? (diff >= 0 ? 'cw-toy-pos' : 'cw-toy-neg') : '';
-            return '<tr><td>' + p.mes + '</td>' +
-              '<td>' + cFmt(p.yPrev) + ' <small style="color:var(--muted)">(' + p.prevLabel + ')</small></td>' +
-              '<td>' + cFmt(p.yCurr) + '</td>' +
-              '<td class="' + cls + '">' + (diff != null ? (diff >= 0 ? '+' : '') + diff + '%' : '—') + '</td></tr>';
-          }).join('') +
-          '</tbody></table></div>' +
+            var d = (p.yPrev && p.yCurr) ? Math.round((p.yCurr-p.yPrev)/p.yPrev*100) : null;
+            var c = d!=null ? (d>=0?'cw-toy-pos':'cw-toy-neg') : '';
+            return '<tr><td>' + p.mes + '</td><td>' + cFmt(p.yPrev) + ' <small style="color:var(--muted)">(' + p.prevLabel + ')</small></td><td>' + cFmt(p.yCurr) + '</td><td class="' + c + '">' + (d!=null?(d>=0?'+':'')+d+'%':'—') + '</td></tr>';
+          }).join('') + '</tbody></table></div>' +
       '</div>';
   }
 
