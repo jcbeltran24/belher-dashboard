@@ -389,6 +389,80 @@ window.BELHER = {
     ]
   },
 
+  predicciones: {
+    generado: "25/03/2026 · 12:00",
+    modelo: "Claude claude-opus-4-6",
+    horizonte: "7 días",
+    nota: "Síntesis de precios USDA + Corbel Seeds + báscula + calidad outbound + noticias de industria. Se regenera automáticamente cada mañana.",
+    items: [
+      {
+        id: "vine-ripe",
+        producto: "Tomate Vine-ripe",
+        unidad: "carton 25lb · SoCal/Nogales",
+        tendencia: "lateral",
+        confianza: 65,
+        precio_actual:    { min: 46.95, max: 48.95 },
+        precio_proyectado:{ min: 42.00, max: 47.00 },
+        razonamiento: "El mercado vine-ripe alcanzó +50% en una semana impulsado por escasez simultánea en Florida (enfermedad + clima) y México, con precios europeos también en máximos históricos. Esto confirma una tesis de escasez global, no local. Sin embargo, a +50% el mercado está en territorio de sobrecompra extrema — la transición a Salinas prevista para las próximas 2-3 semanas introducirá volumen significativo. Las primeras 48 horas después de ese evento serán decisivas. En los próximos 7 días el precio debería mantenerse firme ($42-47) pero con riesgo asimétrico a la baja.",
+        factores: ["Escasez simultánea Florida + México", "Precios europeos en máximos históricos", "Transición Salinas aún sin volumen", "Calor extremo en Yuma ya completo"],
+        riesgo: "Entrada anticipada de volumen de Salinas o recuperación climática en Florida → corrección del 15-20% en menos de 5 días. Señal de alerta: si vine-ripe cae >$3 en una sesión, el mercado se voltea.",
+        accion: "Maximizar envíos ahora. El riesgo de seguir subiendo es menor que el riesgo de corrección. No retener producto especulando con mayor alza — la ventana óptima es esta semana."
+      },
+      {
+        id: "roma",
+        producto: "Tomate Roma 25lb",
+        unidad: "carton 25lb · SoCal/Nogales",
+        tendencia: "lateral",
+        confianza: 72,
+        precio_actual:    { min: 38.95, max: 40.95 },
+        precio_proyectado:{ min: 37.00, max: 41.00 },
+        razonamiento: "Roma sigue la misma dinámica de oferta que vine-ripe pero con menor volatilidad estructural. El spike de +33% se sostiene por compromisos de corto plazo en el canal foodservice — restaurantes y procesadores tienen órdenes abiertas que no pueden cancelar de inmediato. La calidad outbound de Belher está en 93.92% primera (24-Mar) lo que permite sostener precio premium. A diferencia de vine-ripe, Roma tiene una base de demanda más estable que amortigua correcciones bruscas.",
+        factores: ["Correlación con vine-ripe pero menor volatilidad", "Canal foodservice con compromisos abiertos", "Calidad exportación Belher en 93.92% primera", "Sin sustitutos directos en procesamiento"],
+        riesgo: "Si vine-ripe corrige, Roma sigue dentro de 24-48 horas. Procesadores con márgenes comprimidos pueden recortar pedidos si el precio no cede.",
+        accion: "Esta es la ventana de máximo margen por caja Roma de toda la temporada. Priorizar calidad de empaque y clasificación para sostener precio. Confirmar órdenes abiertas con Calavo antes de fin de semana."
+      },
+      {
+        id: "jalap",
+        producto: "Jalapeño",
+        unidad: "bu · SoCal/AZ",
+        tendencia: "lateral",
+        confianza: 75,
+        precio_actual:    { min: 48.00, max: 50.00 },
+        precio_proyectado:{ min: 44.00, max: 52.00 },
+        razonamiento: "La corrección de $58-64 → $48-50 (-20%) era técnicamente necesaria y saludable después del pico más extremo del ciclo. Crucialmente, la causa subyacente — enfermedad y clima adverso en México y Florida — no se ha resuelto. Esto significa que la corrección no es el inicio de una caída prolongada sino una normalización. La alta volatilidad del jalapeño (±$6-8 por sesión) continuará. El nivel $48-50 representa un piso de soporte razonablemente sólido mientras la escasez persista.",
+        factores: ["Escasez estructural en México y Florida sin resolver", "Corrección técnica post-pico — no derrumbe", "Alta volatilidad inherente al mercado jalapeño", "Demanda sostenida en canal Texas"],
+        riesgo: "Recuperación productiva más rápida en Sinaloa/Sonora podría llevar el precio a $38-42 en 10-14 días. Monitorear reportes de campo semanalmente.",
+        accion: "Precio actual de $48-50 sigue siendo históricamente muy alto. Si hay volumen disponible de jalapeño, es el producto con mejor margen relativo del portafolio chile en este momento. Priorizar envíos antes de cualquier señal de recuperación de oferta."
+      },
+      {
+        id: "bell",
+        producto: "Chile Bell GH",
+        unidad: "carton XL · SoCal/AZ",
+        tendencia: "lateral",
+        confianza: 68,
+        precio_actual:    { min: 42.95, max: 44.95 },
+        precio_proyectado:{ min: 41.00, max: 46.00 },
+        razonamiento: "El bell pepper GH lleva más de dos semanas estabilizado en estos niveles, lo que es la señal más sólida posible de equilibrio real de mercado. A diferencia del jalapeño (pico especulativo puntual), el bell ha tenido una apreciación gradual desde $17.50 hace varias semanas — subida estructural, no coyuntural. La demanda de greenhouse premium en retail es relativamente inelástica al precio. Sin nueva oferta visible (los ciclos de invernadero típicamente tienen 3-4 semanas de anticipo), el rango $41-46 es sostenible.",
+        factores: ["2+ semanas de estabilidad = confirmación de equilibrio real", "Subida estructural (no pico especulativo)", "Demanda retail inelástica para GH premium", "Sin oferta nueva visible en el horizonte de 7 días"],
+        riesgo: "Nueva producción en invernaderos de Baja California o Sonora. Señal de alerta: si el precio cae $3+ en 2 sesiones consecutivas, oferta nueva está entrando.",
+        accion: "Si Belher tiene producción de bell pepper, este es el mejor momento sostenido de la temporada. Evaluar seriamente la expansión en el plan de siembra 2026-27 — el mercado manda una señal clara."
+      },
+      {
+        id: "limon",
+        producto: "Limón Persa 40lb",
+        unidad: "FOB Nogales, AZ",
+        tendencia: "bajista",
+        confianza: 60,
+        precio_actual:    { min: 18.00, max: 22.00 },
+        precio_proyectado:{ min: 16.00, max: 20.00 },
+        razonamiento: "La combinación de dos factores presiona a la baja: (1) el flush primaveral de producción de limón persa en México se acentúa en marzo-abril, aumentando oferta naturalmente; (2) el riesgo arancelario EE.UU.-México mencionado en Corbel #0017 podría crear fricción en exportaciones, acumulando oferta en México y agravando la caída de FOB. La confianza es menor (60%) porque el factor arancelario es incierto — paradójicamente podría también generar pánico de compra anticipada que sostenga precios brevemente.",
+        factores: ["Flush primaveral de producción México (estacional)", "Tendencia histórica bajista Mar-Abr en limón", "Riesgo arancelario EE.UU. como multiplicador bajista", "Concentración 100% en Maui Fresh sin presión competitiva"],
+        riesgo: "Implementación de aranceles EE.UU. a produce mexicano → acumulación de oferta → caída FOB 15-25% adicional en 2-3 semanas.",
+        accion: "Priorizar envíos ahora antes de que la presión bajista se materialice. Coordinar con Maui Fresh el forecast de volumen para abril. Urgente: explorar compradores alternativos como contingencia ante el doble riesgo (estacional + arancelario)."
+      }
+    ]
+  },
+
   industria: [
     { cat:"Mercado",      titulo:"Vine-ripe tomate escala a $46.95–48.95/carton — pico histórico de temporada",   impacto:"Alto",       fuente:"Corbel Seeds #0017", resumen:"Mercado de tomate en máximos históricos para esta temporada. Brecha de oferta sostenida impulsa precios al alza en todos los formatos." },
     { cat:"Mercado",      titulo:"Tomate Roma sube a $38.95–40.95 (+33% vs semana previa)",                       impacto:"Alto",       fuente:"Corbel Seeds #0017", resumen:"Roma 25lb carton rompe niveles altos. Demanda firme de distribuidores y retailers ante escasez en California y Florida." },
