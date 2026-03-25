@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Dashboard Ejecutivo · Agrícola Belher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,6 +69,8 @@ header {
   background: var(--dark);
   color: #fff;
   padding: 0 28px;
+  padding-left: max(28px, env(safe-area-inset-left));
+  padding-right: max(28px, env(safe-area-inset-right));
   height: 64px;
   display: flex;
   align-items: center;
@@ -168,6 +170,7 @@ nav.tabs {
   display: flex; overflow-x: auto; scrollbar-width: none;
   border-bottom: 1px solid rgba(255,255,255,.07);
   flex-shrink: 0;
+  -webkit-overflow-scrolling: touch;
 }
 nav.tabs::-webkit-scrollbar { display: none; }
 nav.tabs button {
@@ -179,6 +182,7 @@ nav.tabs button {
   white-space: nowrap;
   position: relative;
   transition: color .2s;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
 nav.tabs button::after {
   content: '';
@@ -439,7 +443,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 ══════════════════════════════════════════════ */
 .price-hero-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr));
   gap: 12px;
 }
 .price-hero {
@@ -555,7 +559,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 ══════════════════════════════════════════════ */
 .price-compare-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
   gap: 14px;
 }
 .pc-card {
@@ -631,7 +635,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 /* ═══════════════════════════════════════════════
    QUALITY BREAKDOWN CARDS (legacy, used in Tomate tab)
 ══════════════════════════════════════════════ */
-.quality-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.quality-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 14px; }
 .qual-card {
   background: var(--card); border-radius: var(--r-lg);
   padding: 18px 20px; box-shadow: var(--shadow); border: 1px solid var(--border);
@@ -688,7 +692,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .audit-title  { font-size:1rem; font-weight:800; color:var(--text); }
 .audit-meta   { font-size:.74rem; color:var(--muted); margin-top:3px; }
 .audit-status-badge { font-size:.72rem; font-weight:700; padding:4px 12px; border-radius:20px; white-space:nowrap; }
-.audit-grid   { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin:14px 0; }
+.audit-grid   { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr)); gap:10px; margin:14px 0; }
 .audit-stat   { background:var(--bg); border-radius:var(--r); padding:10px 14px; }
 .audit-stat-val { font-size:1.2rem; font-weight:900; }
 .audit-stat-lbl { font-size:.67rem; color:var(--muted); margin-top:2px; }
@@ -1152,6 +1156,109 @@ footer span { color: var(--accent2); font-weight: 600; }
 @media (max-width: 440px) {
   .price-hero-grid { grid-template-columns: 1fr; }
   .h-pill { display: none; }
+}
+
+/* ═══════════════════════════════════════════════
+   iPHONE — 430px y menor (SE, 13 mini, 14, 15, 16)
+══════════════════════════════════════════════ */
+@media (max-width: 430px) {
+
+  /* Safe area & layout base */
+  header {
+    height: auto; padding: 10px 16px;
+    padding-left:  max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    flex-wrap: wrap; gap: 8px;
+  }
+  header img { height: 28px !important; }
+  .header-text h1 { font-size: .9rem; }
+  .header-text p  { display: none; }
+  .header-pills   { display: none; }
+
+  /* Ticker — más compacto */
+  .ticker-wrap::before, .ticker-wrap::after { width: 40px; }
+  .ticker-track { padding-left: 40px; }
+
+  /* Tabs — más pequeños y scroll suave */
+  nav.tabs button { padding: 0 12px; height: 40px; font-size: .75rem; }
+
+  /* Main padding */
+  main {
+    padding: 12px 12px 24px;
+    padding-left:  max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  /* Section titles */
+  .section-title { font-size: .58rem; margin: 16px 0 9px; }
+
+  /* Cards — menos padding */
+  .card { padding: 14px; }
+
+  /* ── HOY TAB ── */
+  .hoy-hero { padding: 20px 18px 18px; border-radius: 16px; }
+  .hoy-hero-num { font-size: 2rem; }
+  .hoy-hero-badge { padding: 7px 12px; }
+  .hoy-hero-badge .hbw { font-size: .9rem; }
+
+  .hoy-kpi-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hoy-kpi { padding: 14px 12px 10px; border-radius: 12px; }
+  .hoy-kpi-val { font-size: 1.25rem; }
+  .hoy-kpi-lbl { font-size: .55rem; }
+
+  .hoy-pulso { grid-template-columns: 1fr 1fr; }
+  .hoy-pulso-item { padding: 12px 12px; gap: 8px; }
+  .hoy-pulso-icon { width: 30px; height: 30px; border-radius: 9px; }
+  .hoy-pulso-val  { font-size: 1.1rem; }
+
+  .hoy-mid { grid-template-columns: 1fr; }
+
+  /* Donuts — más pequeños */
+  .donut-canvas-wrap,
+  .donut-canvas-wrap canvas { width: 120px !important; height: 120px !important; }
+  .donut-card { padding: 14px 12px; }
+  .dc-pct { font-size: 1.3rem; }
+
+  /* ── GRID GENÉRICOS ── */
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .fin-kpi-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .kpi-row     { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .kpi-value   { font-size: 1.4rem; }
+
+  /* ── CDC ── */
+  .cdc-hero { grid-template-columns: 1fr; }
+  .cdc-hero-card { padding: 20px 18px 16px; }
+  .cdc-hero-total { font-size: 2.2rem; }
+  .cdc-grid { grid-template-columns: 1fr; }
+
+  /* ── FINANZAS ── */
+  .fin-grid-2c { grid-template-columns: 1fr !important; }
+
+  /* ── TABLAS — scroll horizontal ── */
+  .tbl-wrap { -webkit-overflow-scrolling: touch; }
+
+  /* ── CALIDAD row ── */
+  .qr-name    { min-width: 90px; font-size: .75rem; }
+  .qr-bar     { min-width: 50px; }
+  .qr-primera { min-width: 40px; }
+  .qr-merma   { min-width: 44px; }
+  .qr-peso    { min-width: 38px; font-size: .66rem; }
+
+  /* ── CANAL GRID (Tomate exportación/nacional) ── */
+  .canal-grid { grid-template-columns: 1fr !important; }
+
+  /* Tap targets — mínimo 44px */
+  .vt-btn { min-height: 36px; padding: 0 14px; }
+  .filter-btn { min-height: 34px; }
+}
+
+/* iPhone landscape */
+@media (max-width: 812px) and (orientation: landscape) and (max-height: 430px) {
+  header { height: auto; padding: 8px 16px; }
+  .header-pills { display: none; }
+  main { padding: 10px 16px 16px; }
+  .hoy-mid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
