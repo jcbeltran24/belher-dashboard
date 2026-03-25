@@ -1462,12 +1462,8 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 }
 .canal-card-enhanced:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
 /* Dual-column cajas + revenue — equal weight */
-.cce-dual { display: flex; align-items: stretch; gap: 0; margin-bottom: 10px; }
-.cce-dual-item { flex: 1; }
-.cce-dual-item:last-child { padding-left: 20px; }
-.cce-dual-divider { width: 1px; background: var(--border); margin: 4px 20px 4px 0; flex-shrink: 0; }
-.cce-dual-val { font-size: 1.55rem; font-weight: 900; letter-spacing: -.5px; line-height: 1; font-variant-numeric: tabular-nums; }
-.cce-dual-lbl { font-size: .6rem; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); margin-top: 4px; }
+.cce-rev-primary { font-size: 2rem; font-weight: 900; letter-spacing: -1px; line-height: 1; font-variant-numeric: tabular-nums; margin-bottom: 6px; }
+.cce-rev-sub { font-size: .78rem; color: var(--muted); line-height: 1.4; }
 .cce-sub  { font-size: .74rem; color: var(--muted); margin-top: 4px; }
 .cce-detail { font-size: .7rem; color: var(--muted); margin-top: 3px; }
 .cce-sep { height: 1px; background: var(--border); margin: 14px 0; }
@@ -3475,11 +3471,11 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 
     /* ── Canal headers: both cajas and revenue equally bold ── */
     document.getElementById('tomateExpTotal').innerHTML =
-      '<span style="font-weight:900">' + fmtN(expCajas) + ' cajas</span>' +
-      '<span style="font-weight:900;margin-left:12px">' + fmt(expRev) + '</span>';
+      '<span style="font-size:1.15rem;font-weight:900">' + fmt(expRev) + '</span>' +
+      '<span style="font-size:.78rem;font-weight:600;margin-left:10px;opacity:.7">' + fmtN(expCajas) + ' cajas</span>';
     document.getElementById('tomateNacTotal').innerHTML =
-      '<span style="font-weight:900">' + fmtN(nacCajas) + ' cajas</span>' +
-      '<span style="font-weight:900;margin-left:12px">' + fmt(nacRev) + '</span>';
+      '<span style="font-size:1.15rem;font-weight:900">' + fmt(nacRev) + '</span>' +
+      '<span style="font-size:.78rem;font-weight:600;margin-left:10px;opacity:.7">' + fmtN(nacCajas) + ' cajas</span>';
 
     /* ── Enhanced canal cards: cajas + revenue side-by-side, equal weight ── */
     var expRomaBola = [];
@@ -3488,26 +3484,18 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 
     var canalCardHtml = function (cajas, rev, pct, revPCaja, romaBola, accentColor, metaItems, progressPct) {
       return '<div class="canal-card-enhanced">' +
-        '<div class="cce-dual">' +
-          '<div class="cce-dual-item">' +
-            '<div class="cce-dual-val" style="color:' + accentColor + '">' + fmtN(cajas) + '</div>' +
-            '<div class="cce-dual-lbl">cajas</div>' +
-          '</div>' +
-          '<div class="cce-dual-divider"></div>' +
-          '<div class="cce-dual-item">' +
-            '<div class="cce-dual-val" style="color:' + accentColor + '">' + fmt(rev) + '</div>' +
-            '<div class="cce-dual-lbl">revenue</div>' +
-          '</div>' +
+        '<div class="cce-rev-primary" style="color:' + accentColor + '">' + fmt(rev) + '</div>' +
+        '<div class="cce-rev-sub">' +
+          fmtN(cajas) + ' cajas' +
+          (romaBola.length ? ' &nbsp;·&nbsp; ' + romaBola.join(' · ') : '') +
+          ' &nbsp;·&nbsp; ' + fmt(revPCaja, 2) + '/caja' +
         '</div>' +
-        (romaBola.length ? '<div class="cce-detail" style="margin-bottom:2px">' + romaBola.join(' · ') + '</div>' : '') +
-        '<div class="cce-sub">' + pct.toFixed(1) + '% del total · ' + fmt(revPCaja, 2) + '/caja</div>' +
-        '<div class="cce-sep"></div>' +
+        '<div class="cce-progress" style="margin:12px 0 14px"><div class="cce-progress-fill" style="width:' + progressPct.toFixed(1) + '%;background:' + accentColor + '"></div></div>' +
         '<div class="cce-meta">' +
           metaItems.map(function (m) {
             return '<div class="cce-meta-item"><div class="cce-meta-val">' + m.val + '</div><div class="cce-meta-lbl">' + m.lbl + '</div></div>';
           }).join('') +
         '</div>' +
-        '<div class="cce-progress"><div class="cce-progress-fill" style="width:' + progressPct.toFixed(1) + '%;background:' + accentColor + '"></div></div>' +
       '</div>';
     };
 
