@@ -726,18 +726,54 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
   border-radius:10px; padding:1px 6px; margin-left:6px; vertical-align:middle;
 }
 
-/* ── Nacional dropdown group ────────────── */
-.nac-group { border: 1px solid var(--border); border-radius: var(--r); background: var(--card); }
-.nac-group-summary {
-  list-style: none; cursor: pointer; padding: 12px 16px;
-  display: flex; flex-direction: column; gap: 2px;
-  user-select: none;
+/* ── Nacional dropdown group — Apple-style ────────────── */
+.nac-group {
+  border: 1px solid var(--border); border-radius: var(--r); background: var(--card);
+  transition: box-shadow var(--transition);
 }
+.nac-group:hover { box-shadow: var(--shadow-sm); }
+.nac-group-summary {
+  list-style: none; cursor: pointer;
+  padding: 14px 16px;
+  display: flex; flex-direction: row; align-items: center; gap: 12px;
+  user-select: none;
+  transition: background var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+.nac-group-summary:hover { background: rgba(0,0,0,.03); }
+.nac-group-summary:active { background: rgba(0,0,0,.06); }
 .nac-group-summary::-webkit-details-marker { display: none; }
-.nac-group-summary::before { content: '▶ '; font-size: .65rem; color: var(--muted); }
-details[open] .nac-group-summary::before { content: '▼ '; }
-.nac-group-label { font-size: .8rem; font-weight: 700; color: var(--text); }
-.nac-group-body { padding: 0 12px 12px; border-top: 1px solid var(--border); margin-top: 2px; padding-top: 10px; }
+.nac-group-summary::before { display: none !important; }
+.nac-group-sum-content { flex: 1; min-width: 0; }
+.nac-group-label { font-size: .84rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.nac-group-stats { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.nac-group-stat { font-size: .74rem; color: var(--text2); }
+.nac-group-stat strong { font-weight: 700; }
+.nac-group-stat.muted { color: var(--muted); font-size: .7rem; }
+.nac-chevron {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bg); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--muted);
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.nac-chevron svg { transition: transform .22s cubic-bezier(.25,.46,.45,.94); }
+.nac-group-summary:hover .nac-chevron { background: rgba(0,0,0,.06); border-color: rgba(0,0,0,.15); }
+details[open] .nac-chevron { background: var(--green2); border-color: var(--green2); color: #fff; }
+details[open] .nac-chevron svg { transform: rotate(180deg); }
+.nac-group-body { padding: 14px 16px 16px; border-top: 1px solid var(--border); }
+
+/* ── Clickable KPI / nav cards ────────────── */
+.nav-card { cursor: pointer; }
+.nav-card:hover { box-shadow: var(--shadow-md) !important; transform: translateY(-2px) !important; }
+.nav-card::after {
+  content: '→';
+  position: absolute; top: 10px; right: 12px;
+  font-size: .65rem; color: var(--muted); opacity: 0;
+  transition: opacity var(--transition);
+}
+.nav-card { position: relative; }
+.nav-card:hover::after { opacity: 1; }
 .ql-dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 3px; vertical-align: middle; }
 .qual-meta { font-size: .71rem; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
 
@@ -1425,8 +1461,13 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   transition: box-shadow var(--transition), transform var(--transition);
 }
 .canal-card-enhanced:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
-.cce-main { font-size: 1.7rem; font-weight: 900; letter-spacing: -.6px; line-height: 1; font-variant-numeric: tabular-nums; }
-.cce-rev  { font-size: 1rem; font-weight: 700; margin-top: 4px; font-variant-numeric: tabular-nums; }
+/* Dual-column cajas + revenue — equal weight */
+.cce-dual { display: flex; align-items: stretch; gap: 0; margin-bottom: 10px; }
+.cce-dual-item { flex: 1; }
+.cce-dual-item:last-child { padding-left: 20px; }
+.cce-dual-divider { width: 1px; background: var(--border); margin: 4px 20px 4px 0; flex-shrink: 0; }
+.cce-dual-val { font-size: 1.55rem; font-weight: 900; letter-spacing: -.5px; line-height: 1; font-variant-numeric: tabular-nums; }
+.cce-dual-lbl { font-size: .6rem; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); margin-top: 4px; }
 .cce-sub  { font-size: .74rem; color: var(--muted); margin-top: 4px; }
 .cce-detail { font-size: .7rem; color: var(--muted); margin-top: 3px; }
 .cce-sep { height: 1px; background: var(--border); margin: 14px 0; }
@@ -2044,6 +2085,19 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     return Number(n).toFixed(dec != null ? dec : 1) + '%';
   };
 
+  /* ── Tab navigation helper ── */
+  var navigateToTab = function (tabId) {
+    var btn = document.querySelector('#tabNav button[data-tab="' + tabId + '"]');
+    if (btn) btn.click();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  /* Global click handler for data-nav-tab elements */
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-nav-tab]');
+    if (el) { e.preventDefault(); navigateToTab(el.dataset.navTab); }
+  });
+
   /* ── Header pills ── */
   var paidTotal = 0;
   D.calavo.pagos.forEach(function (p) { if (p.pago) paidTotal += p.pago; });
@@ -2143,8 +2197,9 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     var ebitdaPct    = ebtd.mes.budget ? Math.min(ebtd.mes.actual / ebtd.mes.budget * 100, 120) : 0;
     var saldoBarPct  = revFob ? Math.min(Math.abs(ventaNeta) / revFob * 100, 100) : 0;
 
-    function hoyKpi(lbl, val, sub, color, barPct, tagTxt, tagColor) {
-      return '<div class="hoy-kpi">' +
+    function hoyKpi(lbl, val, sub, color, barPct, tagTxt, tagColor, navTab) {
+      var navAttrs = navTab ? ' data-nav-tab="' + navTab + '" class="hoy-kpi nav-card" title="Ver en detalle →"' : ' class="hoy-kpi"';
+      return '<div' + navAttrs + '>' +
         '<div class="hoy-kpi-stripe" style="background:' + color + '"></div>' +
         '<div class="hoy-kpi-lbl">' + lbl + '</div>' +
         '<div class="hoy-kpi-val" style="color:' + color + '">' + val + '</div>' +
@@ -2158,22 +2213,22 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
       hoyKpi('Revenue Bruto · WK01–WK12', fmt(revTotal),
         'Calavo ' + fmt(revFob) + ' · Nac ' + fmt(revNac),
         '#16a34a', Math.min(revFob / (revTotal || 1) * 100, 100),
-        '↑ CF Leima 22-Mar', '#16a34a') +
+        '↑ CF Leima 22-Mar', '#16a34a', 'tomate') +
       hoyKpi('EBITDA · ' + ebtd.mes.nombre, fmt(ebtd.mes.actual),
         'Budget ' + fmt(ebtd.mes.budget),
         ebitdaMesOK ? '#16a34a' : '#d97706', Math.max(0, ebitdaPct),
         mesPctStr + ' vs budget',
-        ebitdaMesOK ? '#16a34a' : '#d97706') +
+        ebitdaMesOK ? '#16a34a' : '#d97706', 'finanzas') +
       hoyKpi('Venta Neta · Calavo WK12', fmt(ventaNeta),
         'Comisión ' + fmt(cv.comision) + ' · Exp+AD deducidos',
         '#0ea5e9', saldoBarPct,
-        'Comisión 12% aplicada', '#0ea5e9') +
+        'Comisión 12% aplicada', '#0ea5e9', 'finanzas') +
       hoyKpi('Saldo · Due from Calavo', fmt(saldoActual),
         saldoNeg ? 'Calavo ha adelantado más que lo cosechado' : 'Balance a favor de Belher',
         saldoNeg ? '#dc2626' : '#16a34a',
         saldoNeg ? Math.min(Math.abs(saldoActual) / (revFob || 1) * 100, 100) : 80,
         saldoNeg ? '⚠ Due to Calavo' : '✓ A favor de Belher',
-        saldoNeg ? '#dc2626' : '#16a34a');
+        saldoNeg ? '#dc2626' : '#16a34a', 'finanzas');
 
     /* ── PULSO OPERATIVO ── */
     var lastEmbarque = D.operaciones.embarques[0] || {};
@@ -3418,51 +3473,65 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     /* ── Period label ── */
     document.getElementById('tomatePeriodo').textContent = periodo;
 
-    /* ── Canal headers ── */
+    /* ── Canal headers: both cajas and revenue equally bold ── */
     document.getElementById('tomateExpTotal').innerHTML =
       '<span style="font-weight:900">' + fmtN(expCajas) + ' cajas</span>' +
-      '<span style="font-size:.72rem;font-weight:400;opacity:.72;margin-left:7px">' + fmt(expRev) + '</span>';
+      '<span style="font-weight:900;margin-left:12px">' + fmt(expRev) + '</span>';
     document.getElementById('tomateNacTotal').innerHTML =
       '<span style="font-weight:900">' + fmtN(nacCajas) + ' cajas</span>' +
-      '<span style="font-size:.72rem;font-weight:400;opacity:.72;margin-left:7px">' + fmt(nacRev) + '</span>';
+      '<span style="font-weight:900;margin-left:12px">' + fmt(nacRev) + '</span>';
 
-    /* ── Enhanced canal cards ── */
+    /* ── Enhanced canal cards: cajas + revenue side-by-side, equal weight ── */
     var expRomaBola = [];
     if (expEntry.cajasRoma) expRomaBola.push(fmtN(expEntry.cajasRoma) + ' Roma');
     if (expEntry.cajasBola) expRomaBola.push(fmtN(expEntry.cajasBola) + ' Bola');
 
-    document.getElementById('tomateExpVentas').innerHTML =
-      '<div class="canal-card-enhanced">' +
-        '<div class="cce-main" style="color:var(--green2)">' + fmtN(expCajas) + '</div>' +
-        '<div class="cce-rev" style="color:var(--green2)">' + fmt(expRev) + '</div>' +
-        '<div class="cce-sub">' + expPct.toFixed(1) + '% del total de temporada</div>' +
-        (expRomaBola.length ? '<div class="cce-detail">' + expRomaBola.join(' · ') + '</div>' : '') +
+    var canalCardHtml = function (cajas, rev, pct, revPCaja, romaBola, accentColor, metaItems, progressPct) {
+      return '<div class="canal-card-enhanced">' +
+        '<div class="cce-dual">' +
+          '<div class="cce-dual-item">' +
+            '<div class="cce-dual-val" style="color:' + accentColor + '">' + fmtN(cajas) + '</div>' +
+            '<div class="cce-dual-lbl">cajas</div>' +
+          '</div>' +
+          '<div class="cce-dual-divider"></div>' +
+          '<div class="cce-dual-item">' +
+            '<div class="cce-dual-val" style="color:' + accentColor + '">' + fmt(rev) + '</div>' +
+            '<div class="cce-dual-lbl">revenue</div>' +
+          '</div>' +
+        '</div>' +
+        (romaBola.length ? '<div class="cce-detail" style="margin-bottom:2px">' + romaBola.join(' · ') + '</div>' : '') +
+        '<div class="cce-sub">' + pct.toFixed(1) + '% del total · ' + fmt(revPCaja, 2) + '/caja</div>' +
         '<div class="cce-sep"></div>' +
         '<div class="cce-meta">' +
-          '<div class="cce-meta-item"><div class="cce-meta-val" style="color:var(--green2)">' + fmt(expRevPCaja, 2) + '</div><div class="cce-meta-lbl">Revenue/caja</div></div>' +
-          '<div class="cce-meta-item"><div class="cce-meta-val">Calavo</div><div class="cce-meta-lbl">Comprador único</div></div>' +
-          '<div class="cce-meta-item"><div class="cce-meta-val">AZ · TX</div><div class="cce-meta-lbl">Destinos</div></div>' +
+          metaItems.map(function (m) {
+            return '<div class="cce-meta-item"><div class="cce-meta-val">' + m.val + '</div><div class="cce-meta-lbl">' + m.lbl + '</div></div>';
+          }).join('') +
         '</div>' +
-        '<div class="cce-progress"><div class="cce-progress-fill" style="width:' + expPct.toFixed(1) + '%;background:var(--green2)"></div></div>' +
+        '<div class="cce-progress"><div class="cce-progress-fill" style="width:' + progressPct.toFixed(1) + '%;background:' + accentColor + '"></div></div>' +
       '</div>';
+    };
+
+    document.getElementById('tomateExpVentas').innerHTML = canalCardHtml(
+      expCajas, expRev, expPct, expRevPCaja, expRomaBola, 'var(--green2)',
+      [
+        { val: fmt(expRevPCaja, 2),       lbl: 'Revenue/caja' },
+        { val: 'Calavo',                  lbl: 'Comprador' },
+        { val: 'AZ · TX',                 lbl: 'Destinos' }
+      ], expPct
+    );
 
     var nacRomaBola = [];
     if (nacEntry.cajasRoma) nacRomaBola.push(fmtN(nacEntry.cajasRoma) + ' Roma');
     if (nacEntry.cajasBola) nacRomaBola.push(fmtN(nacEntry.cajasBola) + ' Bola');
 
-    document.getElementById('tomateNacVentas').innerHTML =
-      '<div class="canal-card-enhanced">' +
-        '<div class="cce-main" style="color:#1d4ed8">' + fmtN(nacCajas) + '</div>' +
-        '<div class="cce-rev" style="color:#1d4ed8">' + fmt(nacRev) + '</div>' +
-        '<div class="cce-sub">' + nacPct.toFixed(1) + '% del total de temporada</div>' +
-        (nacRomaBola.length ? '<div class="cce-detail">' + nacRomaBola.join(' · ') + '</div>' : '') +
-        '<div class="cce-sep"></div>' +
-        '<div class="cce-meta">' +
-          '<div class="cce-meta-item"><div class="cce-meta-val" style="color:#1d4ed8">' + fmt(nacRevPCaja, 2) + '</div><div class="cce-meta-lbl">Revenue/caja</div></div>' +
-          '<div class="cce-meta-item"><div class="cce-meta-val">Yameto · Tolin · U/M/Z</div><div class="cce-meta-lbl">Etiquetas</div></div>' +
-        '</div>' +
-        '<div class="cce-progress"><div class="cce-progress-fill" style="width:' + nacPct.toFixed(1) + '%;background:#1d4ed8"></div></div>' +
-      '</div>';
+    document.getElementById('tomateNacVentas').innerHTML = canalCardHtml(
+      nacCajas, nacRev, nacPct, nacRevPCaja, nacRomaBola, '#1d4ed8',
+      [
+        { val: fmt(nacRevPCaja, 2),       lbl: 'Revenue/caja' },
+        { val: 'Yameto · Tolin · U/M/Z',  lbl: 'Etiquetas' },
+        { val: 'MX',                      lbl: 'Mercado' }
+      ], nacPct
+    );
 
     /* ── Calavo P&L Waterfall ── */
     var cv = D.calavo;
@@ -3679,13 +3748,17 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
               avgMerma: nacEntries.reduce(function(s,v){return s+v.merma;},0)/nacEntries.length,
               count: nacEntries.length }
           : null;
-        var nacSummaryHtml = nacStats
-          ? '<div style="display:flex;gap:18px;font-size:.78rem;padding:8px 0 2px">' +
-              '<span>Prom 1ª: <strong style="color:var(--green2)">' + pct(nacStats.avgPrima) + '</strong></span>' +
-              '<span>Prom Merma: <strong>' + pct(nacStats.avgMerma) + '</strong></span>' +
-              '<span style="color:var(--muted)">' + nacStats.count + ' etiqueta(s)</span></div>'
-          : '<div style="font-size:.75rem;color:var(--muted);padding:6px 0">' +
-              (opts.isAyer ? 'No se empacó el ' + ub.fecha : 'Sin datos en los últimos 7 días') + '</div>';
+        var nacStatsHtml = nacStats
+          ? '<div class="nac-group-stats">' +
+              '<span class="nac-group-stat">1ª Prima: <strong style="color:var(--green2)">' + pct(nacStats.avgPrima) + '</strong></span>' +
+              '<span class="nac-group-stat">Merma: <strong>' + pct(nacStats.avgMerma) + '</strong></span>' +
+              '<span class="nac-group-stat muted">' + nacStats.count + ' etiquetas</span>' +
+            '</div>'
+          : '<div class="nac-group-stats"><span class="nac-group-stat muted">' +
+              (opts.isAyer ? 'Sin empaque el ' + ub.fecha : 'Sin datos en los últimos 7 días') +
+            '</span></div>';
+
+        var chevronSvg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
 
         return '<div class="variedad-section">' +
           '<div class="variedad-title">Variedad · ' + vari + '</div>' +
@@ -3698,8 +3771,11 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
               '<div class="canal-header canal-nac" style="margin-bottom:10px"><span class="canal-label">Nacional</span></div>' +
               '<details class="nac-group">' +
                 '<summary class="nac-group-summary">' +
-                  '<span class="nac-group-label">Yameto · Tolin · U · M · Z</span>' +
-                  nacSummaryHtml +
+                  '<div class="nac-group-sum-content">' +
+                    '<div class="nac-group-label">Yameto · Tolin · U · M · Z</div>' +
+                    nacStatsHtml +
+                  '</div>' +
+                  '<div class="nac-chevron">' + chevronSvg + '</div>' +
                 '</summary>' +
                 '<div class="nac-group-body">' +
                   nacEtqs.map(function(etq){ return renderEtqCard(etq,vari,true,qMap,opts); }).join('') +
