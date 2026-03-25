@@ -555,9 +555,9 @@ window.BELHER = {
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: null, prevClose: null, cambio: null, cambioPct: null,
-        h52: null, l52: null, volumen: null,
-        fuente: "N/D"
+        precio: 13.29, prevClose: 12.49, cambio: 0.80, cambioPct: 6.40,
+        h52: 15.02, l52: 9.60, volumen: 732831,
+        fuente: "Yahoo Finance"
       }
     ],
 
