@@ -1474,6 +1474,50 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 .cce-progress { height: 4px; border-radius: 2px; background: rgba(0,0,0,.06); overflow: hidden; margin-top: 14px; }
 .cce-progress-fill { height: 100%; border-radius: 2px; transition: width 1s cubic-bezier(.25,.46,.45,.94); }
 
+/* Channel Revenue Cards */
+.tom-ch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.tom-ch-card { border-radius: var(--r-lg); padding: 22px 24px; position: relative; overflow: hidden; transition: box-shadow var(--transition), transform var(--transition); }
+.tom-ch-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.tom-ch-card.ch-export { background: linear-gradient(135deg, rgba(22,163,74,.07) 0%, rgba(22,163,74,.02) 100%); border: 1.5px solid rgba(22,163,74,.22); }
+.tom-ch-card.ch-nac    { background: linear-gradient(135deg, rgba(29,78,216,.06) 0%, rgba(29,78,216,.01) 100%); border: 1.5px solid rgba(29,78,216,.18); }
+.ch-eyebrow { font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 12px; }
+.ch-rev-row { display: flex; align-items: flex-end; gap: 20px; margin-bottom: 6px; }
+.ch-rev-main-val { font-size: 2rem; font-weight: 900; letter-spacing: -1.5px; line-height: 1; font-variant-numeric: tabular-nums; }
+.ch-rev-main-lbl { font-size: .58rem; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); margin-top: 4px; }
+.ch-rev-arrow { font-size: 1rem; color: var(--muted); padding-bottom: 10px; }
+.ch-rev-net-val { font-size: 1.35rem; font-weight: 800; letter-spacing: -1px; line-height: 1; font-variant-numeric: tabular-nums; }
+.ch-rev-net-lbl { font-size: .58rem; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); margin-top: 4px; }
+.ch-meta { font-size: .76rem; color: var(--muted); margin-top: 10px; line-height: 1.55; }
+.ch-progress { height: 4px; border-radius: 2px; background: rgba(0,0,0,.07); overflow: hidden; margin-top: 14px; }
+.ch-progress-fill { height: 100%; border-radius: 2px; transition: width 1.1s cubic-bezier(.25,.46,.45,.94); }
+
+/* Calavo Financial Strip */
+.tom-calavo-strip { display: flex; background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow-xs); }
+.tcs-item { flex: 1; padding: 14px 20px; border-right: 1px solid var(--border); }
+.tcs-item:last-child { border-right: none; }
+.tcs-val { font-size: 1.05rem; font-weight: 900; letter-spacing: -.4px; font-variant-numeric: tabular-nums; line-height: 1; }
+.tcs-lbl { font-size: .57rem; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); margin-top: 4px; }
+.tcs-divider { width: 1px; background: var(--border); flex-shrink: 0; margin: 10px 0; align-self: stretch; }
+
+/* Calidad Summary Card */
+.tom-cal-summary { display: flex; gap: 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 0; box-shadow: var(--shadow-xs); }
+.tcs-cal-item { flex: 1; padding: 12px 16px; border-right: 1px solid var(--border); }
+.tcs-cal-item:last-child { border-right: none; }
+.tcs-cal-val { font-size: 1.2rem; font-weight: 900; letter-spacing: -.5px; line-height: 1; font-variant-numeric: tabular-nums; }
+.tcs-cal-lbl { font-size: .57rem; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); margin-top: 4px; }
+
+/* Variety details (collapsible) */
+.tom-variety-details { margin-top: 20px; border: 1px solid var(--border); border-radius: var(--r); background: var(--card); }
+.tom-variety-details > summary { list-style: none; cursor: pointer; padding: 14px 18px; display: flex; align-items: center; gap: 10px; user-select: none; }
+.tom-variety-details > summary:hover { background: rgba(0,0,0,.02); border-radius: var(--r); }
+.tvd-label { font-size: .84rem; font-weight: 700; color: var(--text); }
+.tvd-fecha { font-size: .75rem; color: var(--muted); }
+.tvd-chevron { margin-left: auto; width: 26px; height: 26px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: background var(--transition); }
+.tvd-chevron svg { transition: transform .22s cubic-bezier(.25,.46,.45,.94); }
+.tom-variety-details[open] .tvd-chevron { background: var(--green2); border-color: var(--green2); color: #fff; }
+.tom-variety-details[open] .tvd-chevron svg { transform: rotate(180deg); }
+.tom-variety-details > :not(summary) { padding: 0 18px 18px; }
+
 /* Quality trend + market prices 2-col layout */
 .tomate-charts-row {
   display: grid;
@@ -1627,6 +1671,10 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   .tomate-charts-row { grid-template-columns: 1fr; }
   .tom-embarques-layout { flex-direction: column; }
   .tom-fleet-card { flex: none; width: 100%; }
+  .tom-ch-grid { grid-template-columns: 1fr; }
+  .ch-rev-main-val { font-size: 1.6rem; }
+  .tom-calavo-strip { flex-wrap: wrap; }
+  .tcs-item { flex: 0 0 50%; border-bottom: 1px solid var(--border); }
 
   /* Tap targets — mínimo 44px */
   .vt-btn { min-height: 36px; padding: 0 14px; }
@@ -1853,65 +1901,27 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     <!-- Season Hero -->
     <div id="tomateHero"></div>
 
-    <!-- KPI Strip -->
-    <div class="tom-kpi-grid" id="tomateKpis"></div>
+    <!-- Channel Revenue Cards (2-col: Export | Nacional) -->
+    <div class="tom-ch-grid" id="tomateChannels"></div>
 
-    <!-- Canal Split -->
-    <div class="section-title">Ventas por Canal <span id="tomatePeriodo" style="font-weight:500;text-transform:none;letter-spacing:0;font-size:.76rem;color:var(--muted)"></span></div>
-    <div class="canal-grid">
-      <div class="canal-col">
-        <div class="canal-header canal-export">
-          <span class="canal-label">Exportación</span>
-          <span class="canal-total" id="tomateExpTotal"></span>
-        </div>
-        <div id="tomateExpVentas"></div>
-      </div>
-      <div class="canal-col">
-        <div class="canal-header canal-nac">
-          <span class="canal-label">Mercado Nacional</span>
-          <span class="canal-total" id="tomateNacTotal"></span>
-        </div>
-        <div id="tomateNacVentas"></div>
-      </div>
-    </div>
+    <!-- Calavo Financial Strip -->
+    <div id="tomateCalavoStrip"></div>
 
-    <!-- Calavo P&L Waterfall -->
-    <div class="section-title">Calavo · Desglose Financiero <span id="tomatePL_periodo" style="font-weight:500;text-transform:none;letter-spacing:0;font-size:.76rem;color:var(--muted)"></span> <span class="src-tag">Calavo Settlement</span></div>
-    <div id="tomateCalavoPL"></div>
-
-    <!-- Cuenta Corriente + Season Progress -->
-    <div class="tom-finance-row">
-      <div id="tomateCuentaCorriente"></div>
-      <div id="tomateSeasonProgress"></div>
-    </div>
-
-    <!-- Weekly Volume Chart -->
-    <div class="section-title">Cajas Exportadas · por Semana <span class="src-tag">Calavo Pick &amp; Pack Wires WK01–WK12</span></div>
-    <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartTomateVolumen"></canvas></div></div>
-
-    <!-- Quality Trend + Market Prices -->
-    <div class="tomate-charts-row">
+    <!-- Quality + Market (2-col) -->
+    <div class="tomate-charts-row" style="margin-top:4px">
       <div>
-        <div class="section-title">Tendencia de Calidad · Temporada <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
-        <div class="card"><div class="chart-box" style="height:220px"><canvas id="chartTomateCalidad"></canvas></div></div>
+        <div class="section-title">Calidad · Temporada <span class="src-tag">Outbound calidad@agbelher.com</span></div>
+        <div id="tomateCalidadSummary"></div>
+        <div class="card" style="margin-top:8px"><div class="chart-box" style="height:190px"><canvas id="chartTomateCalidad"></canvas></div></div>
       </div>
       <div>
-        <div class="section-title">Precios de Mercado · Tomate <span class="src-tag">Corbel Seeds Daily</span></div>
+        <div class="section-title">Precios Mercado · Tomate <span class="src-tag">Corbel Seeds Daily</span></div>
         <div id="tomatePrecios"></div>
       </div>
     </div>
 
-    <!-- Quality by Variety -->
-    <div class="section-title">Calidad & Cajas · por Variedad <span id="tomateOutboundFecha" style="font-weight:400;font-size:.8rem;color:var(--muted)"></span> <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
-    <div class="view-toggle" data-group="tomate-cal">
-      <button class="vt-btn active" data-view="ayer">Día Anterior</button>
-      <button class="vt-btn" data-view="semana">Últimos 7 días</button>
-    </div>
-    <div class="view-panel active" data-group="tomate-cal" data-view="ayer" id="tomateVariedadesAyer"></div>
-    <div class="view-panel" data-group="tomate-cal" data-view="semana" id="tomateVariedadesSemana"></div>
-
-    <!-- Embarques + Fleet Chart -->
-    <div class="section-title">Embarques · Tomate</div>
+    <!-- Embarques + Fleet -->
+    <div class="section-title" style="margin-top:20px">Embarques · Tomate <span class="src-tag">embarquesbelher@agbelher.com</span></div>
     <div class="tom-embarques-layout">
       <div class="card-table" style="flex:1 1 0;min-width:0"><div class="tbl-wrap"><table id="tomateEmbarquesTbl">
         <thead><tr><th>Fecha</th><th>Cargas</th><th>Unidad</th><th>Flota</th><th>Destino</th><th>Estado</th></tr></thead>
@@ -1922,6 +1932,22 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
         <canvas id="chartTomateFlota" style="max-height:160px"></canvas>
       </div>
     </div>
+
+    <!-- Quality by Variety — collapsible detail -->
+    <details class="tom-variety-details">
+      <summary>
+        <span class="tvd-label">Calidad por Variedad</span>
+        <span id="tomateOutboundFecha" class="tvd-fecha"></span>
+        <span class="src-tag">Outbound</span>
+        <span class="tvd-chevron"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </summary>
+      <div class="view-toggle" data-group="tomate-cal" style="margin:12px 0 8px">
+        <button class="vt-btn active" data-view="ayer">Día Anterior</button>
+        <button class="vt-btn" data-view="semana">Últimos 7 días</button>
+      </div>
+      <div class="view-panel active" data-group="tomate-cal" data-view="ayer" id="tomateVariedadesAyer"></div>
+      <div class="view-panel" data-group="tomate-cal" data-view="semana" id="tomateVariedadesSemana"></div>
+    </details>
 
   </div>
 
@@ -3389,23 +3415,26 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   function renderTomate() {
     var tv = (D.tomate && D.tomate.ventas) || { exportacion:[], nacional:[] };
     var ub = D.calidad.ultimoOutbound;
+    var cv = D.calavo;
 
     /* ── Core numbers ── */
-    var tot      = tv.total || {};
-    var expEntry = tv.exportacion[0] || {};
-    var nacEntry = tv.nacional[0]   || {};
-    var cajasTotal = tot.cajas   || 0;
-    var revReal    = tot.revenue || 0;
-    var expCajas   = expEntry.cajas   || 0;
-    var nacCajas   = nacEntry.cajas   || 0;
-    var expRev     = expEntry.revenue || 0;
-    var nacRev     = nacEntry.revenue || 0;
-    var expPct     = cajasTotal ? (expCajas / cajasTotal * 100) : 0;
-    var nacPct     = cajasTotal ? (nacCajas / cajasTotal * 100) : 0;
-    var revPorCaja = cajasTotal ? (revReal / cajasTotal) : 0;
+    var tot         = tv.total || {};
+    var expEntry    = tv.exportacion[0] || {};
+    var nacEntry    = tv.nacional[0]    || {};
+    var cajasTotal  = tot.cajas      || 0;
+    var revReal     = tot.revenue    || 0;
+    var expCajas    = expEntry.cajas    || 0;
+    var nacCajas    = nacEntry.cajas    || 0;
+    var expRev      = expEntry.revenue  || 0;
+    var nacRev      = nacEntry.revenue  || 0;
+    var expPct      = cajasTotal ? (expCajas / cajasTotal * 100) : 0;
+    var nacPct      = cajasTotal ? (nacCajas / cajasTotal * 100) : 0;
+    var revPorCaja  = cajasTotal ? (revReal / cajasTotal) : 0;
     var expRevPCaja = expCajas ? (expRev / expCajas) : 0;
     var nacRevPCaja = nacCajas ? (nacRev / nacCajas) : 0;
-    var periodo    = (tv.periodo && tv.periodo.label) || '';
+    var periodo     = (tv.periodo && tv.periodo.label) || '';
+    var ventaNeta   = cv.ventaNeta || cv.neto || 0;
+    var retPct      = expRev ? (ventaNeta / expRev * 100).toFixed(1) : 0;
 
     /* ── Hero ── */
     var heroEl = document.getElementById('tomateHero');
@@ -3443,182 +3472,120 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
       if (el && revReal) countUp(el, revReal, 900, '$');
     }, 80);
 
-    /* ── KPI strip ── */
-    document.getElementById('tomateKpis').innerHTML =
-      '<div class="tom-kpi">' +
-        '<div class="tom-kpi-val">' + fmtN(cajasTotal) + '</div>' +
-        '<div class="tom-kpi-lbl">Cajas Totales</div>' +
-        '<div class="tom-kpi-sub">' + periodo + '</div>' +
-      '</div>' +
-      '<div class="tom-kpi">' +
-        '<div class="tom-kpi-val" style="color:var(--green2)">' + fmt(expRev) + '</div>' +
-        '<div class="tom-kpi-lbl">Revenue Exportación</div>' +
-        '<div class="tom-kpi-sub">' + fmtN(expCajas) + ' cajas · Calavo</div>' +
-      '</div>' +
-      '<div class="tom-kpi">' +
-        '<div class="tom-kpi-val" style="color:#1d4ed8">' + fmt(nacRev) + '</div>' +
-        '<div class="tom-kpi-lbl">Revenue Nacional</div>' +
-        '<div class="tom-kpi-sub">' + fmtN(nacCajas) + ' cajas · multi-etiqueta</div>' +
-      '</div>' +
-      '<div class="tom-kpi">' +
-        '<div class="tom-kpi-val" style="color:var(--accent)">' + fmt(revPorCaja, 2) + '</div>' +
-        '<div class="tom-kpi-lbl">Promedio / Caja</div>' +
-        '<div class="tom-kpi-sub">Todos los canales</div>' +
-      '</div>';
-
-    /* ── Period label ── */
-    document.getElementById('tomatePeriodo').textContent = periodo;
-
-    /* ── Canal headers: both cajas and revenue equally bold ── */
-    document.getElementById('tomateExpTotal').innerHTML =
-      '<span style="font-size:1.15rem;font-weight:900">' + fmt(expRev) + '</span>' +
-      '<span style="font-size:.78rem;font-weight:600;margin-left:10px;opacity:.7">' + fmtN(expCajas) + ' cajas</span>';
-    document.getElementById('tomateNacTotal').innerHTML =
-      '<span style="font-size:1.15rem;font-weight:900">' + fmt(nacRev) + '</span>' +
-      '<span style="font-size:.78rem;font-weight:600;margin-left:10px;opacity:.7">' + fmtN(nacCajas) + ' cajas</span>';
-
-    /* ── Enhanced canal cards: cajas + revenue side-by-side, equal weight ── */
+    /* ── Channel Revenue Cards ── */
     var expRomaBola = [];
     if (expEntry.cajasRoma) expRomaBola.push(fmtN(expEntry.cajasRoma) + ' Roma');
     if (expEntry.cajasBola) expRomaBola.push(fmtN(expEntry.cajasBola) + ' Bola');
-
-    var canalCardHtml = function (cajas, rev, pct, revPCaja, romaBola, accentColor, metaItems, progressPct) {
-      return '<div class="canal-card-enhanced">' +
-        '<div class="cce-rev-primary" style="color:' + accentColor + '">' + fmt(rev) + '</div>' +
-        '<div class="cce-rev-sub">' +
-          fmtN(cajas) + ' cajas' +
-          (romaBola.length ? ' &nbsp;·&nbsp; ' + romaBola.join(' · ') : '') +
-          ' &nbsp;·&nbsp; ' + fmt(revPCaja, 2) + '/caja' +
-        '</div>' +
-        '<div class="cce-progress" style="margin:12px 0 14px"><div class="cce-progress-fill" style="width:' + progressPct.toFixed(1) + '%;background:' + accentColor + '"></div></div>' +
-        '<div class="cce-meta">' +
-          metaItems.map(function (m) {
-            return '<div class="cce-meta-item"><div class="cce-meta-val">' + m.val + '</div><div class="cce-meta-lbl">' + m.lbl + '</div></div>';
-          }).join('') +
-        '</div>' +
-      '</div>';
-    };
-
-    document.getElementById('tomateExpVentas').innerHTML = canalCardHtml(
-      expCajas, expRev, expPct, expRevPCaja, expRomaBola, 'var(--green2)',
-      [
-        { val: fmt(expRevPCaja, 2),       lbl: 'Revenue/caja' },
-        { val: 'Calavo',                  lbl: 'Comprador' },
-        { val: 'AZ · TX',                 lbl: 'Destinos' }
-      ], expPct
-    );
-
     var nacRomaBola = [];
     if (nacEntry.cajasRoma) nacRomaBola.push(fmtN(nacEntry.cajasRoma) + ' Roma');
     if (nacEntry.cajasBola) nacRomaBola.push(fmtN(nacEntry.cajasBola) + ' Bola');
 
-    document.getElementById('tomateNacVentas').innerHTML = canalCardHtml(
-      nacCajas, nacRev, nacPct, nacRevPCaja, nacRomaBola, '#1d4ed8',
-      [
-        { val: fmt(nacRevPCaja, 2),       lbl: 'Revenue/caja' },
-        { val: 'Yameto · Tolin · U/M/Z',  lbl: 'Etiquetas' },
-        { val: 'MX',                      lbl: 'Mercado' }
-      ], nacPct
-    );
-
-    /* ── Calavo P&L Waterfall ── */
-    var cv = D.calavo;
-    document.getElementById('tomatePL_periodo').textContent = '· ' + periodo;
-    var plItems = [
-      { label: 'Revenue Bruto FOB',       amt: cv.revenueTotal, color: 'var(--green2)',        deduct: false },
-      { label: '(-) Comisión Calavo 12%', amt: cv.comision,     color: 'rgba(220,38,38,.75)',  deduct: true  },
-      { label: '(-) Z-Code Expenses',     amt: cv.zCode,        color: 'rgba(220,38,38,.6)',   deduct: true  },
-      { label: '(-) Anti-Dumping Duty',   amt: cv.antiDumping,  color: 'rgba(220,38,38,.45)',  deduct: true  },
-      { label: '= Venta Neta Calavo',     amt: cv.ventaNeta,    color: 'var(--green2)',        deduct: false, isNet: true }
-    ];
-    var plMax = cv.revenueTotal;
-    var retPct = (cv.ventaNeta / cv.revenueTotal * 100).toFixed(1);
-    document.getElementById('tomateCalavoPL').innerHTML =
-      '<div class="card" style="padding:20px 24px">' +
-        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">' +
-          '<div style="font-size:.7rem;color:var(--muted)">Deducibles totales: <strong style="color:var(--red2)">' + fmt(cv.comision + cv.zCode + cv.antiDumping) + '</strong></div>' +
-          '<div style="font-size:.7rem;color:var(--muted)">Retención neta: <strong style="color:var(--green2)">' + retPct + '% del bruto</strong></div>' +
+    document.getElementById('tomateChannels').innerHTML =
+      /* Export card */
+      '<div class="tom-ch-card ch-export">' +
+        '<div class="ch-eyebrow">Exportación · Calavo · AZ / TX</div>' +
+        '<div class="ch-rev-row">' +
+          '<div>' +
+            '<div class="ch-rev-main-val" style="color:var(--green2)">' + fmt(expRev) + '</div>' +
+            '<div class="ch-rev-main-lbl">Revenue Bruto FOB</div>' +
+          '</div>' +
+          '<div class="ch-rev-arrow">→</div>' +
+          '<div>' +
+            '<div class="ch-rev-net-val" style="color:var(--green)">' + fmt(ventaNeta) + '</div>' +
+            '<div class="ch-rev-net-lbl">Venta Neta (' + retPct + '%)</div>' +
+          '</div>' +
         '</div>' +
-        plItems.map(function (p) {
-          var barW = (p.amt / plMax * 100).toFixed(1);
-          var pctOfRev = (p.amt / plMax * 100).toFixed(1);
-          return '<div class="tom-pl-item' + (p.isNet ? ' pl-net' : '') + '">' +
-            '<div class="tom-pl-label" style="' + (p.deduct ? 'color:var(--muted)' : 'font-weight:' + (p.isNet ? '800' : '600')) + '">' + p.label + '</div>' +
-            '<div class="tom-pl-bar-wrap"><div class="tom-pl-bar-fill" style="width:' + barW + '%;background:' + p.color + '"></div></div>' +
-            '<div class="tom-pl-pct">' + pctOfRev + '%</div>' +
-            '<div class="tom-pl-amount" style="color:' + p.color + (p.isNet ? ';font-size:1.05rem' : '') + '">' +
-              (p.deduct ? '−' : '') + fmt(p.amt) +
-            '</div>' +
-          '</div>';
-        }).join('') +
+        '<div class="ch-meta">' +
+          fmtN(expCajas) + ' cajas' +
+          (expRomaBola.length ? ' &nbsp;·&nbsp; ' + expRomaBola.join(' / ') : '') +
+          ' &nbsp;·&nbsp; ' + fmt(expRevPCaja, 2) + '/caja' +
+        '</div>' +
+        '<div class="ch-progress"><div class="ch-progress-fill" style="width:' + expPct.toFixed(1) + '%;background:var(--green2)"></div></div>' +
+      '</div>' +
+      /* Nacional card */
+      '<div class="tom-ch-card ch-nac">' +
+        '<div class="ch-eyebrow">Mercado Nacional · MX</div>' +
+        '<div class="ch-rev-row">' +
+          '<div>' +
+            '<div class="ch-rev-main-val" style="color:#1d4ed8">' + fmt(nacRev) + '</div>' +
+            '<div class="ch-rev-main-lbl">Revenue Total</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="ch-meta">' +
+          fmtN(nacCajas) + ' cajas' +
+          (nacRomaBola.length ? ' &nbsp;·&nbsp; ' + nacRomaBola.join(' / ') : '') +
+          ' &nbsp;·&nbsp; ' + fmt(nacRevPCaja, 2) + '/caja<br>' +
+          'Yameto · Tolin · Urson · Millennium · Zazu' +
+        '</div>' +
+        '<div class="ch-progress"><div class="ch-progress-fill" style="width:' + nacPct.toFixed(1) + '%;background:#1d4ed8"></div></div>' +
       '</div>';
 
-    /* ── Cuenta Corriente ── */
+    /* ── Calavo Financial Strip ── */
     var totalRecibido = (cv.pickPack || 0) + (cv.prestamo || 0) + (cv.capitalTrabajo || 0);
-    var saldoNeg = cv.saldoActual < 0;
-    var saldoColor = saldoNeg ? 'var(--red2)' : 'var(--green2)';
-    document.getElementById('tomateCuentaCorriente').innerHTML =
-      '<div class="card" style="padding:20px 24px">' +
-        '<div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:14px">Cuenta Corriente · Calavo a WK12</div>' +
-        '<div class="tom-cc-row"><span class="tom-cc-lbl">Pick &amp; Pack acumulado WK01–WK12</span><span class="tom-cc-val">' + fmt(cv.pickPack) + '</span></div>' +
-        '<div class="tom-cc-row"><span class="tom-cc-lbl">Préstamo Calavo</span><span class="tom-cc-val">' + fmt(cv.prestamo) + '</span></div>' +
-        '<div class="tom-cc-row"><span class="tom-cc-lbl">Capital de trabajo</span><span class="tom-cc-val">' + fmt(cv.capitalTrabajo) + '</span></div>' +
-        '<div class="tom-cc-row"><span class="tom-cc-lbl">Saldo adeudado temporada 2025</span><span class="tom-cc-val">' + fmt(cv.saldoAnterior) + '</span></div>' +
-        '<div class="tom-cc-row" style="padding-top:12px;margin-top:4px;border-top:2px solid var(--border)">' +
-          '<span class="tom-cc-lbl" style="font-weight:700">Total recibido de Calavo</span>' +
-          '<span class="tom-cc-val" style="font-size:1rem">' + fmt(totalRecibido) + '</span>' +
+    var saldoActual   = cv.saldoActual || 0;
+    var saldoNeg      = saldoActual < 0;
+    var saldoColor    = saldoNeg ? 'var(--red2)' : 'var(--green2)';
+    var deducciones   = (cv.comision || 0) + (cv.zCode || 0) + (cv.antiDumping || 0);
+    document.getElementById('tomateCalavoStrip').innerHTML =
+      '<div class="tom-calavo-strip">' +
+        '<div class="tcs-item">' +
+          '<div class="tcs-val" style="color:var(--green2)">' + fmt(expRev) + '</div>' +
+          '<div class="tcs-lbl">Revenue Bruto FOB</div>' +
         '</div>' +
-        '<div class="tom-cc-row"><span class="tom-cc-lbl">Venta Neta devengada a WK12</span><span class="tom-cc-val" style="color:var(--green2)">' + fmt(cv.ventaNeta) + '</span></div>' +
-        '<div class="tom-cc-row" style="padding:12px 0 4px;margin-top:6px;border-top:2px solid var(--border)">' +
-          '<span class="tom-cc-lbl" style="font-weight:800;font-size:.88rem">Saldo Neto WK12</span>' +
-          '<span class="tom-cc-val" style="color:' + saldoColor + ';font-size:1.1rem">' + fmt(cv.saldoActual) + '</span>' +
+        '<div class="tcs-item" style="display:flex;align-items:center;padding:10px 16px;flex:0 0 auto;color:var(--muted);font-size:.8rem">→</div>' +
+        '<div class="tcs-item">' +
+          '<div class="tcs-val" style="color:var(--red2)">− ' + fmt(deducciones) + '</div>' +
+          '<div class="tcs-lbl">Comisión + Z-Code + Anti-Dumping</div>' +
         '</div>' +
-        '<div style="font-size:.68rem;color:var(--muted);margin-top:6px;line-height:1.45">' +
-          (saldoNeg
-            ? 'Calavo ha adelantado más de lo devengado. Diferencia se salda al cierre de temporada.'
-            : 'Balance a favor de Belher · Calavo liquidará al cierre.') +
+        '<div class="tcs-item" style="display:flex;align-items:center;padding:10px 16px;flex:0 0 auto;color:var(--muted);font-size:.8rem">→</div>' +
+        '<div class="tcs-item">' +
+          '<div class="tcs-val" style="color:var(--green)">' + fmt(ventaNeta) + '</div>' +
+          '<div class="tcs-lbl">Venta Neta · ' + retPct + '% del bruto</div>' +
         '</div>' +
-      '</div>';
-
-    /* ── Season Progress ── */
-    var pagosCajas = cv.pagos.filter(function (p) { return p.cajas != null; });
-    var cajasLiquidadas = pagosCajas.reduce(function (s, p) { return s + p.cajas; }, 0);
-    var semsLiquidadas  = pagosCajas.length;
-    var avgCajasSem     = semsLiquidadas ? Math.round(cajasLiquidadas / semsLiquidadas) : 0;
-    var wkActual = 12, wkTotal = 17;
-    var sesPct   = Math.round(wkActual / wkTotal * 100);
-    var cajasRestantes = Math.round(avgCajasSem * (wkTotal - wkActual));
-    var cajasProyect   = cajasTotal + cajasRestantes;
-    var revProyect     = cajasTotal ? Math.round(revReal / cajasTotal * cajasProyect) : 0;
-
-    document.getElementById('tomateSeasonProgress').innerHTML =
-      '<div class="card" style="padding:20px 20px">' +
-        '<div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:12px">Progreso · Temporada</div>' +
-        '<div style="font-size:2.1rem;font-weight:900;letter-spacing:-1px">WK12 <span style="font-size:.85rem;font-weight:500;color:var(--muted)">/ WK17</span></div>' +
-        '<div style="font-size:.75rem;color:var(--muted);margin-bottom:12px">' + sesPct + '% completada · ~' + (wkTotal - wkActual) + ' sem restantes</div>' +
-        '<div style="height:7px;background:rgba(0,0,0,.07);border-radius:4px;overflow:hidden;margin-bottom:16px">' +
-          '<div style="height:100%;width:' + sesPct + '%;background:linear-gradient(90deg,var(--green2),var(--green3));border-radius:4px;transition:width 1s cubic-bezier(.25,.46,.45,.94)"></div>' +
+        '<div class="tcs-item">' +
+          '<div class="tcs-val">' + fmt(totalRecibido) + '</div>' +
+          '<div class="tcs-lbl">Recibido de Calavo</div>' +
         '</div>' +
-        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">' +
-          '<div style="background:var(--bg);border-radius:10px;padding:10px 12px">' +
-            '<div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)">Prom/semana</div>' +
-            '<div style="font-size:1.05rem;font-weight:900;margin-top:2px">' + fmtN(avgCajasSem) + '</div>' +
-            '<div style="font-size:.66rem;color:var(--muted)">cajas</div>' +
-          '</div>' +
-          '<div style="background:var(--bg);border-radius:10px;padding:10px 12px">' +
-            '<div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)">Proyección</div>' +
-            '<div style="font-size:1.05rem;font-weight:900;margin-top:2px;color:var(--accent)">' + fmtN(cajasProyect) + '</div>' +
-            '<div style="font-size:.66rem;color:var(--muted)">cajas totales</div>' +
-          '</div>' +
-        '</div>' +
-        '<div style="margin-top:10px;padding:10px 12px;background:rgba(22,163,74,.06);border-radius:10px;border:1px solid rgba(22,163,74,.14)">' +
-          '<div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)">Revenue proyectado</div>' +
-          '<div style="font-size:1.15rem;font-weight:900;color:var(--green2);margin-top:2px">' + fmt(revProyect) + '</div>' +
-          '<div style="font-size:.65rem;color:var(--muted)">si mantiene ritmo actual</div>' +
+        '<div class="tcs-item">' +
+          '<div class="tcs-val" style="color:' + saldoColor + '">' + fmt(saldoActual) + '</div>' +
+          '<div class="tcs-lbl">Saldo Neto WK12</div>' +
         '</div>' +
       '</div>';
 
-    /* ── Precios mercado ── */
+    /* ── Calidad Summary Card ── */
+    var hist = D.calidad.historico || [];
+    var lastWk  = hist[hist.length - 1] || {};
+    var prevWk  = hist[hist.length - 2] || {};
+    var primaDiff = (lastWk.primaPromedio && prevWk.primaPromedio)
+      ? (lastWk.primaPromedio - prevWk.primaPromedio).toFixed(1) : null;
+    var mermaDiff = (lastWk.mermaPromedio && prevWk.mermaPromedio)
+      ? (lastWk.mermaPromedio - prevWk.mermaPromedio).toFixed(2) : null;
+    var mermaOk   = lastWk.mermaPromedio != null && lastWk.mermaPromedio < 4;
+    document.getElementById('tomateCalidadSummary').innerHTML =
+      '<div class="tom-cal-summary">' +
+        '<div class="tcs-cal-item">' +
+          '<div class="tcs-cal-val" style="color:var(--green2)">' + (lastWk.primaPromedio != null ? lastWk.primaPromedio.toFixed(1) + '%' : '—') + '</div>' +
+          '<div class="tcs-cal-lbl">1ª Prima · ' + (lastWk.fecha || '—') +
+            (primaDiff != null ? ' <span style="color:' + (primaDiff >= 0 ? 'var(--green2)' : 'var(--red2)') + '">' + (primaDiff >= 0 ? '▲ +' : '▼ ') + Math.abs(primaDiff) + '%</span>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div class="tcs-cal-item">' +
+          '<div class="tcs-cal-val" style="color:' + (mermaOk ? 'var(--green2)' : 'var(--red2)') + '">' + (lastWk.mermaPromedio != null ? lastWk.mermaPromedio.toFixed(2) + '%' : '—') + '</div>' +
+          '<div class="tcs-cal-lbl">Merma · ' + (mermaOk ? '✓ OK' : '⚠ Alto') +
+            (mermaDiff != null ? ' <span style="color:' + (mermaDiff <= 0 ? 'var(--green2)' : 'var(--red2)') + '">' + (mermaDiff <= 0 ? '▼ ' : '▲ +') + Math.abs(mermaDiff) + '%</span>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div class="tcs-cal-item">' +
+          '<div class="tcs-cal-val">' + (ub && ub.fecha ? ub.fecha : '—') + '</div>' +
+          '<div class="tcs-cal-lbl">Último Outbound</div>' +
+        '</div>' +
+        '<div class="tcs-cal-item">' +
+          '<div class="tcs-cal-val">' + (ub && ub.variedades ? ub.variedades.length : 0) + '</div>' +
+          '<div class="tcs-cal-lbl">Variedades activas</div>' +
+        '</div>' +
+      '</div>';
+
+    /* ── Market Prices ── */
     var tomKeys = ['tomate','vine','grape','roma','saladet'];
     var tPrecios = (D.mercado.precios || []).filter(function (p) {
       var n = p.producto.toLowerCase();
@@ -3644,10 +3611,9 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
       '</div>';
     }).join('') || '<div class="card" style="padding:16px;color:var(--muted);font-size:.84rem">Sin precios de tomate en el último reporte.</div>';
 
-    /* ── Calidad & Cajas por Variedad ── */
-    document.getElementById('tomateOutboundFecha').textContent = '· ' + ub.fecha;
+    /* ── Variety quality (collapsible) ── */
+    document.getElementById('tomateOutboundFecha').textContent = ub && ub.fecha ? '· ' + ub.fecha : '';
 
-    /* helpers */
     var etqLabel = function (etq) {
       var map = { Urson:'U', Millennium:'M', Zazu:'Z' };
       return map[etq] || etq;
@@ -3658,8 +3624,6 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
       return nombre;
     };
     var NAMED_ETQ = ['Calavo','Yameto','Tolin'];
-
-    /* build quality lookups */
     var buildQualMap = function (variedades) {
       var m = {};
       (variedades || []).forEach(function (v) {
@@ -3670,39 +3634,30 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     };
     var qualMapAyer   = buildQualMap(ub.variedades);
     var qualMapSemana = buildQualMap((D.calidad.semana || {}).variedades);
-
-    /* cajas lookup — Calavo uses real YTD total; nacional no per-etiqueta breakdown */
-    var cajasExp = {}, cajasNac = {};
+    var cajasExp = {};
     (tv.exportacion || []).forEach(function (e) { cajasExp[e.etiqueta] = e.cajas; });
-    /* Nacional is one aggregate entry — individual etiqueta cajas not available */
 
-    /* render one etiqueta mini-card */
     var renderEtqCard = function (etq, vari, isNac, qMap, opts) {
       opts = opts || {};
-      var key       = vari + '|' + etq;
-      var v         = qMap[key];
-      var cajas     = isNac ? cajasNac[etq] : cajasExp[etq];
-      var lbl       = etqLabel(etq);
+      var key   = vari + '|' + etq;
+      var v     = qMap[key];
+      var cajas = isNac ? undefined : cajasExp[etq];
+      var lbl   = etqLabel(etq);
       var nacSuffix = etq === 'Yameto' ? ' · 1ª Nac' : etq === 'Tolin' ? ' · 2ª Nac' : '';
       var cajasText = NAMED_ETQ.indexOf(etq) !== -1
         ? (cajas ? fmtN(cajas) + ' cajas' : 'Cajas: pendiente')
         : 'JZ';
       var diasHtml = (opts.showDias && v && v.dias != null)
         ? ' <span class="dias-badge">' + v.dias + '/7 días</span>' : '';
-
       var top = '<div class="etq-card-mini' + (!v ? ' no-data' : '') + '">' +
         '<div class="ecm-top">' +
           '<span class="ecm-label">' + lbl + nacSuffix + diasHtml + '</span>' +
           '<span class="ecm-cajas">' + cajasText + '</span>' +
         '</div>';
-
       if (!v) {
-        var noMsg = opts.isAyer
-          ? 'No se empacó el ' + ub.fecha
-          : 'Sin datos en los últimos 7 días';
+        var noMsg = opts.isAyer ? 'No se empacó el ' + ub.fecha : 'Sin datos en los últimos 7 días';
         return top + '<div class="ecm-nodata">' + noMsg + '</div></div>';
       }
-
       var tot  = (v.primera||0)+(v.segunda||0)+(v.tercera||0)+(v.merma||0);
       var mCls = (v.merma||0) > 4 ? 'bad' : (v.merma||0) > 3 ? 'warn' : 'ok';
       return top +
@@ -3727,7 +3682,6 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     var expEtqs    = ['Calavo'];
     var nacEtqs    = ['Yameto','Tolin','Urson','Millennium','Zazu'];
 
-    /* build variedad HTML for a given quality map */
     var buildVariedadHtml = function (qMap, opts) {
       return variedades.map(function (vari) {
         var nacEntries = nacEtqs.map(function(etq){ return qMap[vari+'|'+etq]; }).filter(Boolean);
@@ -3745,9 +3699,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
           : '<div class="nac-group-stats"><span class="nac-group-stat muted">' +
               (opts.isAyer ? 'Sin empaque el ' + ub.fecha : 'Sin datos en los últimos 7 días') +
             '</span></div>';
-
         var chevronSvg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
-
         return '<div class="variedad-section">' +
           '<div class="variedad-title">Variedad · ' + vari + '</div>' +
           '<div class="canal-grid">' +
