@@ -1859,7 +1859,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 .cw-hero-kpi:first-child { padding-left:0; }
 .cw-hero-kpi:last-child { border-right:none; }
 .cw-hero-kpi-lbl { font-size:.58rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:rgba(52,199,89,.5); margin-bottom:4px; }
-.cw-hero-kpi-val { font-size:1.2rem; font-weight:700; color:#fff; line-height:1; }
+.cw-hero-kpi-val { font-size:1.9rem; font-weight:700; color:#fff; line-height:1; }
 .cw-hero-kpi-chg { font-size:.65rem; margin-top:3px; }
 .cw-hero-kpi-chg.up { color:#34c759; } .cw-hero-kpi-chg.down { color:#ff453a; } .cw-hero-kpi-chg.flat { color:rgba(255,255,255,.4); }
 @media(max-width:480px){ .cw-hero-kpis { grid-template-columns:1fr 1fr; gap:10px; } .cw-hero-kpi { border-right:none; padding:0; } }
@@ -1928,7 +1928,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 .cw-grower-card { padding:0; overflow:hidden; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.07); }
 .cw-grower-hdr { padding:14px 18px 12px; border-bottom:1px solid rgba(255,255,255,.06); }
 .cw-grower-hdr.belher-hdr { border-top:2px solid #34c759; }
-.cw-grower-hdr.adm-hdr    { border-top:2px solid rgba(255,255,255,.25); }
+.cw-grower-hdr.adm-hdr    { border-top:2px solid #007aff; }
 .cw-grower-id { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
 .cw-grower-name { font-size:.88rem; font-weight:800; color:var(--text); }
 .cw-grower-fullname { font-size:.65rem; color:var(--muted); font-weight:400; }
@@ -4009,7 +4009,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
       var dir = has ? (s.cambio >= 0 ? 'up' : 'down') : 'nd';
       var sign = has && s.cambio >= 0 ? '+' : '';
       var rangePct = (has && s.h52 && s.l52) ? ((s.precio - s.l52) / (s.h52 - s.l52) * 100).toFixed(1) : 50;
-      var rangeColor = dir === 'up' ? '#34c759' : dir === 'down' ? '#ff453a' : '#636366';
+      var rangeColor = dir === 'up' ? '#34c759' : dir === 'down' ? '#ff453a' : '#007aff';
       stocksHtml += '<div class="card cw-stock-card ' + dir + '-card">' +
         '<div class="cw-stock-row1">' +
           '<div>' +
@@ -4133,7 +4133,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
       secHdr('Matriz de Desempeño · WK' + CW.semana.replace('WK',''), 'Proyectado vs Real') +
       '<div class="cw-growers-grid">' +
         growerCard(bel, 'belher-hdr', '#34c759') +
-        growerCard(CW.adm, 'adm-hdr', '#636366') +
+        growerCard(CW.adm, 'adm-hdr', '#007aff') +
       '</div>';
 
     /* ── FOB VENTAS ── */
