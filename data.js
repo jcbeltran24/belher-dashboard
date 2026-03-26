@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 25 Mar 2026",
+    fecha: "Jueves 26 Mar 2026",
     semana: "WK 13",
-    actualizado: "25/03/2026 · 12:00"
+    actualizado: "26/03/2026 · 08:57"
   },
 
   alertas: [
@@ -174,6 +174,49 @@ window.BELHER = {
       periodo:           "Jul 2025 – Feb 2026",
       nota:              "Temporada de granos en curso. Sin ventas registradas a febrero — producción en proceso de cosecha. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo."
     }
+  },
+
+  cashflow: {
+    periodo:      "Febrero 2026",
+    mes_num:      2,
+    anio:         2026,
+    fecha_cierre: "28/02/2026",
+    fuente:       "leima@agbelher.com · CF ABSA GC 2025–2026",
+    moneda:       "USD",
+    saldo_inicial: 842350,
+
+    entradas: [
+      { concepto:"Cobros Calavo (wire transfers)", monto:2241920, budget:2100000, yago:1650000, categoria:"Ventas"     },
+      { concepto:"Cobros mercado nacional",        monto: 485200, budget: 520000, yago: 410000, categoria:"Ventas"     },
+      { concepto:"Capital de trabajo Calavo",      monto:      0, budget:      0, yago: 500000, categoria:"Financiero" },
+      { concepto:"Otras entradas",                 monto:  12400, budget:      0, yago:   8500, categoria:"Otros"      }
+    ],
+
+    salidas: [
+      { concepto:"Nómina agrícola",              monto:178000, budget:144000, yago:155000, categoria:"Nómina"     },
+      { concepto:"Nómina administrativa",         monto: 85000, budget: 82000, yago: 78000, categoria:"Nómina"     },
+      { concepto:"Fertilizantes y agroquímicos",  monto:254000, budget:144000, yago:168000, categoria:"Insumos"    },
+      { concepto:"Semilla y material vegetal",    monto: 32000, budget: 35000, yago: 28000, categoria:"Insumos"    },
+      { concepto:"Insumos de empaque",            monto: 98000, budget:100000, yago: 88000, categoria:"Empaque"    },
+      { concepto:"Flete México",                  monto: 42000, budget: 45000, yago: 38000, categoria:"Logística"  },
+      { concepto:"Agua y energía",                monto: 31000, budget: 30000, yago: 27000, categoria:"Servicios"  },
+      { concepto:"Combustible y maquinaria",      monto: 28000, budget: 25000, yago: 22000, categoria:"Servicios"  },
+      { concepto:"Mantenimiento",                 monto: 15000, budget: 18000, yago: 14000, categoria:"Mant."      },
+      { concepto:"Gastos administrativos",        monto: 38000, budget: 35000, yago: 32000, categoria:"Admin"      },
+      { concepto:"IMSS / INFONAVIT",              monto: 55000, budget: 52000, yago: 48000, categoria:"Fiscal"     },
+      { concepto:"ISR y otros impuestos",         monto: 22000, budget: 20000, yago: 18000, categoria:"Fiscal"     },
+      { concepto:"Servicio de deuda Calavo",      monto: 85000, budget: 85000, yago:     0, categoria:"Financiero" },
+      { concepto:"Gastos financieros",            monto: 12000, budget: 10000, yago:  8000, categoria:"Financiero" }
+    ],
+
+    historico: [
+      { mes:"Sep 25", entradas:1420000, salidas:1380000, neto:  40000, saldo: 420000 },
+      { mes:"Oct 25", entradas:1850000, salidas:1520000, neto: 330000, saldo: 750000 },
+      { mes:"Nov 25", entradas:2100000, salidas:1720000, neto: 380000, saldo:1130000 },
+      { mes:"Dic 25", entradas:3200000, salidas:1850000, neto:1350000, saldo:2480000 },
+      { mes:"Ene 26", entradas:2750000, salidas:2100000, neto: 650000, saldo: 842350 },
+      { mes:"Feb 26", entradas:2739520, salidas: 975000, neto:1764520, saldo:2606870 }
+    ]
   },
 
   mercado: {

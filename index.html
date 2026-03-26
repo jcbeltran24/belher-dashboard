@@ -752,6 +752,73 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .fin-proj-lbl { font-size:.63rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:8px; }
 .fin-proj-val { font-size:1.5rem; font-weight:900; letter-spacing:-.5px; }
 .fin-proj-sub { font-size:.72rem; color:var(--muted); margin-top:4px; }
+
+/* ══ CASH FLOW ══════════════════════════════════════════════════════════════ */
+.cf-header        { display:flex; align-items:center; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
+.cf-semaforo      { display:flex; align-items:center; gap:7px; padding:5px 13px; border-radius:20px; font-size:.7rem; font-weight:700; letter-spacing:.4px; text-transform:uppercase; }
+.cf-semaforo.green  { background:rgba(22,163,74,.13);  color:#4ade80; border:1px solid rgba(22,163,74,.3);  }
+.cf-semaforo.yellow { background:rgba(234,179,8,.13);  color:#facc15; border:1px solid rgba(234,179,8,.3);  }
+.cf-semaforo.red    { background:rgba(239,68,68,.13);  color:#f87171; border:1px solid rgba(239,68,68,.3);  }
+.cf-semaforo-dot  { width:7px; height:7px; border-radius:50%; animation:cfPulse 2s ease-in-out infinite; }
+.cf-semaforo.green  .cf-semaforo-dot { background:#4ade80; }
+.cf-semaforo.yellow .cf-semaforo-dot { background:#facc15; }
+.cf-semaforo.red    .cf-semaforo-dot { background:#f87171; }
+@keyframes cfPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+.cf-kpi-strip     { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:18px; }
+.cf-kpi           { background:var(--bg); border-radius:10px; padding:13px 14px; border:1px solid var(--border); }
+.cf-kpi-lbl       { font-size:.58rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cf-kpi-val       { font-size:1.1rem; font-weight:900; letter-spacing:-.3px; }
+.cf-kpi-sub       { font-size:.62rem; color:var(--muted); margin-top:2px; }
+
+.cf-main-grid     { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
+.cf-waterfall     { background:var(--bg); border-radius:var(--r); padding:18px 20px; }
+.cf-wf-title      { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:14px; }
+.cf-wf-row        { margin-bottom:10px; }
+.cf-wf-label      { font-size:.73rem; font-weight:600; color:var(--text); margin-bottom:4px; display:flex; justify-content:space-between; }
+.cf-wf-label span { font-weight:800; }
+.cf-wf-track      { background:rgba(255,255,255,.05); border-radius:4px; height:10px; overflow:hidden; }
+.cf-wf-bar        { height:100%; border-radius:4px; transition:width .6s cubic-bezier(.4,0,.2,1); }
+.cf-wf-sep        { border-top:1px dashed var(--border); margin:12px 0; }
+
+.cf-analysis      { background:var(--bg); border-radius:var(--r); padding:18px 20px; }
+.cf-analysis-hdr  { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:14px; }
+.cf-insight       { display:flex; gap:9px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--border); }
+.cf-insight:last-child { border-bottom:none; padding-bottom:0; }
+.cf-insight-icon  { font-size:.9rem; flex-shrink:0; margin-top:1px; }
+.cf-insight-body  { flex:1; min-width:0; }
+.cf-insight-title { font-size:.79rem; font-weight:700; color:var(--text); line-height:1.3; }
+.cf-insight-sub   { font-size:.68rem; color:var(--muted); margin-top:2px; line-height:1.4; }
+
+.cf-tables-grid   { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
+.cf-tbl-wrap      { background:var(--bg); border-radius:var(--r); overflow:hidden; }
+.cf-tbl-hdr       { padding:12px 16px; font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.cf-tbl-hdr-total { font-size:.85rem; font-weight:900; color:var(--text); }
+.cf-tbl           { width:100%; border-collapse:collapse; font-size:.75rem; }
+.cf-tbl td        { padding:8px 14px; border-bottom:1px solid rgba(255,255,255,.04); vertical-align:middle; }
+.cf-tbl tr:last-child td { border-bottom:none; }
+.cf-tbl tr:hover td { background:rgba(255,255,255,.025); }
+.cf-tbl .cf-td-concepto { color:var(--text); font-weight:500; }
+.cf-tbl .cf-td-cat  { color:var(--muted); font-size:.64rem; }
+.cf-tbl .cf-td-monto { text-align:right; font-weight:700; font-variant-numeric:tabular-nums; }
+.cf-tbl .cf-td-var  { text-align:right; font-size:.68rem; font-weight:700; white-space:nowrap; }
+.cf-var-over   { color:#f87171; }
+.cf-var-ok     { color:var(--muted); }
+.cf-var-under  { color:#4ade80; }
+.cf-tbl-foot td { padding:10px 14px; background:var(--dark); font-weight:700; font-size:.76rem; }
+
+.cf-chart-card    { background:var(--bg); border-radius:var(--r); padding:18px 20px; margin-bottom:18px; }
+.cf-chart-title   { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:14px; }
+
+@media(max-width:720px) {
+  .cf-kpi-strip   { grid-template-columns:repeat(3,1fr); }
+  .cf-main-grid   { grid-template-columns:1fr; }
+  .cf-tables-grid { grid-template-columns:1fr; }
+}
+@media(max-width:480px) {
+  .cf-kpi-strip   { grid-template-columns:1fr 1fr; }
+}
+
 /* ── Chile: Market context cards ── */
 .chile-mkt-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:0; }
 @media(max-width:640px){.chile-mkt-grid{grid-template-columns:1fr;}}
@@ -2267,6 +2334,19 @@ nav.tabs button { scroll-snap-align: start; flex-shrink: 0; }
 .edit-layout-btn:hover { background:rgba(99,102,241,.25); color:#a5b4fc; border-color:rgba(99,102,241,.4); }
 body.edit-mode .edit-layout-btn { background:rgba(99,102,241,.3); color:#a5b4fc; border-color:rgba(99,102,241,.5); }
 
+.refresh-btn {
+  display:flex; align-items:center; gap:6px;
+  padding:0 13px; height:32px; border-radius:9px;
+  border:1px solid rgba(255,255,255,.15); cursor:pointer;
+  background:rgba(255,255,255,.1); color:rgba(255,255,255,.75);
+  font-size:.7rem; font-weight:600; font-family:inherit; letter-spacing:.3px;
+  transition:background .18s, color .18s, border-color .18s; flex-shrink:0;
+  margin-right:6px;
+}
+.refresh-btn:hover { background:rgba(52,199,89,.18); color:#34c759; border-color:rgba(52,199,89,.35); }
+.refresh-btn.spinning svg { animation: spin360 .6s cubic-bezier(.4,0,.2,1) forwards; }
+@keyframes spin360 { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+
 /* Block wrapper */
 .db-block { position:relative; transition:outline .15s, opacity .2s; }
 body.edit-mode .db-block {
@@ -2383,8 +2463,10 @@ body.edit-mode #editModeBar { display:flex; }
 @media(max-width:480px) {
   .edit-layout-btn { display: none !important; }
   .logout-txt      { display: none; }
+  .refresh-txt     { display: none; }
+  .refresh-btn     { padding: 0 10px; }
   /* title: allow ellipsis so it never pushes logout off-screen */
-  .header-text h1  { max-width: calc(100vw - 120px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .header-text h1  { max-width: calc(100vw - 100px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 }
 
 /* Ticker — hide on very small screens to save vertical space */
@@ -2479,6 +2561,10 @@ function checkPw(){
     </div>
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
   </div>
+  <button class="refresh-btn" id="refreshBtn" onclick="refreshDashboard()" title="Actualizar datos">
+    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+    <span class="refresh-txt">Actualizar</span>
+  </button>
   <button class="edit-layout-btn" onclick="toggleEditMode()" title="Editar layout">
     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
     Editar
@@ -2634,6 +2720,9 @@ function checkPw(){
 
   <!-- ══════════ FINANZAS ══════════ -->
   <div class="tab-panel" id="tab-finanzas">
+
+    <div class="section-title">Cash Flow Mensual <span class="src-tag" id="cfSrcTag">leima@agbelher.com</span></div>
+    <div class="card" id="cfCard" style="padding:22px 24px"></div>
 
     <div class="section-title">Resumen Financiero · Temporada</div>
     <div class="fin-kpi-row" id="finKpis"></div>
@@ -2862,6 +2951,32 @@ function checkPw(){
 
   var D = window.BELHER;
   var chartsInit = {};
+
+  /* ── Fecha dinámica: siempre muestra el día de hoy ── */
+  (function actualizarFechaHoy() {
+    var DIAS  = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+    var MESES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    var hoy   = new Date();
+    var dia   = DIAS[hoy.getDay()];
+    var d     = hoy.getDate();
+    var mes   = MESES[hoy.getMonth()];
+    var anio  = hoy.getFullYear();
+
+    // Semana de temporada: WK01 arranca el 29-Dic-2025 (lunes)
+    var wkBase = new Date('2025-12-29');
+    var diffDias = Math.floor((hoy - wkBase) / 86400000);
+    var wkNum  = Math.max(1, Math.floor(diffDias / 7) + 1);
+
+    // Hora actual para "actualizado"
+    var hh = String(hoy.getHours()).padStart(2,'0');
+    var mm = String(hoy.getMinutes()).padStart(2,'0');
+    var dd = String(d).padStart(2,'0');
+    var mo = String(hoy.getMonth()+1).padStart(2,'0');
+
+    D.meta.fecha      = dia + ' ' + d + ' ' + mes + ' ' + anio;
+    D.meta.semana     = 'WK ' + wkNum;
+    D.meta.actualizado = dd + '/' + mo + '/' + anio + ' · ' + hh + ':' + mm;
+  })();
 
   /* ── Chart.js global defaults ── */
   Chart.defaults.font.family = "'Inter', -apple-system, sans-serif";
@@ -3697,7 +3812,247 @@ function checkPw(){
   }
 
   /* ════════════════ FINANZAS ════════════════ */
+  /* ════════════════════════════════════════════════════
+     CASH FLOW ANALYSIS
+  ════════════════════════════════════════════════════ */
+  function renderCashFlow() {
+    var cf = D.cashflow;
+    if (!cf) return;
+
+    /* ── Totals ── */
+    var totEnt = cf.entradas.reduce(function(s,e){ return s + e.monto; }, 0);
+    var totSal = cf.salidas.reduce(function(s,e){ return s + e.monto; }, 0);
+    var neto   = totEnt - totSal;
+    var saldoFin = cf.saldo_inicial + neto;
+    var coverage = totSal > 0 ? totEnt / totSal : 999;
+
+    /* ── Budget totals ── */
+    var totEntBud = cf.entradas.reduce(function(s,e){ return s + e.budget; }, 0);
+    var totSalBud = cf.salidas.reduce(function(s,e){ return s + e.budget; }, 0);
+
+    /* ── Burn rate (avg salidas last 3 months of historico) ── */
+    var hist = cf.historico;
+    var lastThree = hist.slice(-3);
+    var burnRate = lastThree.length ? lastThree.reduce(function(s,h){ return s + h.salidas; }, 0) / lastThree.length : totSal;
+    var runway = burnRate > 0 ? (saldoFin / burnRate) : 0;
+
+    /* ── Over-budget items (salidas only, sorted by $ variance desc) ── */
+    var overBudget = cf.salidas
+      .filter(function(s){ return s.budget > 0 && s.monto > s.budget; })
+      .map(function(s){ return { concepto:s.concepto, monto:s.monto, budget:s.budget, varAbs:s.monto-s.budget, varPct:(s.monto-s.budget)/s.budget*100 }; })
+      .sort(function(a,b){ return b.varAbs - a.varAbs; });
+
+    /* ── CF trend (last 3 months neto: improving / deteriorating / stable) ── */
+    var trendDir = 'estable';
+    if (hist.length >= 3) {
+      var n1 = hist[hist.length-1].neto, n2 = hist[hist.length-2].neto, n3 = hist[hist.length-3].neto;
+      if (n1 > n2 && n2 > n3)      trendDir = 'mejorando';
+      else if (n1 < n2 && n2 < n3) trendDir = 'deteriorando';
+    }
+
+    /* ── Semáforo ── */
+    var criticalOver = overBudget.filter(function(o){ return o.varPct >= 30; });
+    var semColor, semLabel, semIcon;
+    if (coverage < 1.05 || criticalOver.length >= 2) {
+      semColor = 'red'; semLabel = 'RIESGO'; semIcon = '⚠';
+    } else if (coverage < 1.4 || criticalOver.length >= 1 || trendDir === 'deteriorando') {
+      semColor = 'yellow'; semLabel = 'ATENCIÓN'; semIcon = '●';
+    } else {
+      semColor = 'green'; semLabel = 'SANO'; semIcon = '✓';
+    }
+
+    /* ── Source tag ── */
+    var stEl = document.getElementById('cfSrcTag');
+    if (stEl) stEl.textContent = cf.fuente + ' · ' + cf.fecha_cierre;
+
+    /* ── Build insights ── */
+    var insights = [];
+
+    /* Cobertura */
+    var covIcon  = coverage >= 1.5 ? '✅' : coverage >= 1.1 ? '🟡' : '🔴';
+    insights.push({ icon: covIcon, title: 'Cobertura de flujo: ' + coverage.toFixed(2) + '×',
+      sub: 'Las entradas cubren ' + coverage.toFixed(2) + ' veces las salidas del mes. ' +
+           (coverage >= 2 ? 'Posición de liquidez sólida.' : coverage >= 1.2 ? 'Margen aceptable.' : 'Margen estrecho — monitorear.') });
+
+    /* Top over-budget */
+    overBudget.slice(0,3).forEach(function(o) {
+      var icon = o.varPct >= 50 ? '🔴' : o.varPct >= 20 ? '🟡' : '⚪';
+      insights.push({ icon: icon, title: o.concepto + ': +' + o.varPct.toFixed(1) + '% sobre budget',
+        sub: fmt(o.monto) + ' real vs ' + fmt(o.budget) + ' presupuestado · desviación ' + fmt(o.varAbs) + ' (' + (o.varPct >= 30 ? 'requiere acción inmediata' : 'monitorear') + ')' });
+    });
+
+    /* Entradas bajo budget */
+    var entBajas = cf.entradas.filter(function(e){ return e.budget > 0 && e.monto < e.budget * 0.9; });
+    entBajas.forEach(function(e) {
+      var varPct = (e.monto - e.budget) / e.budget * 100;
+      insights.push({ icon: '🟡', title: e.concepto + ': ' + varPct.toFixed(1) + '% bajo lo esperado',
+        sub: fmt(e.monto) + ' cobrado vs ' + fmt(e.budget) + ' proyectado · ' + fmt(e.budget - e.monto) + ' pendiente de recuperar.' });
+    });
+
+    /* Burn rate & runway */
+    var runIcon = runway >= 3 ? '✅' : runway >= 1.5 ? '🟡' : '🔴';
+    insights.push({ icon: runIcon, title: 'Burn rate: ' + fmt(Math.round(burnRate)) + '/mes · Runway ' + runway.toFixed(1) + ' meses',
+      sub: 'Con el saldo actual de ' + fmt(Math.round(saldoFin)) + ' y el ritmo de gasto de los últimos 3 meses. ' +
+           (runway >= 3 ? 'Posición cómoda.' : runway >= 1.5 ? 'Vigilar ingresos próximos.' : 'Liquidez ajustada — priorizar cobros.') });
+
+    /* Trend */
+    var trendIcon = trendDir === 'mejorando' ? '📈' : trendDir === 'deteriorando' ? '📉' : '➡️';
+    insights.push({ icon: trendIcon, title: 'Tendencia CF: ' + trendDir,
+      sub: 'Flujo neto de los últimos 3 meses: ' +
+        hist.slice(-3).map(function(h){ return h.mes + ' ' + fmt(h.neto); }).join(' → ') });
+
+    /* ── Waterfall bars ── */
+    var maxVal = Math.max(totEnt, saldoFin, cf.saldo_inicial) * 1.05;
+    function wfBar(val, color, label, amtLabel) {
+      var w = (Math.abs(val) / maxVal * 100).toFixed(1);
+      return '<div class="cf-wf-row">' +
+        '<div class="cf-wf-label"><span>' + label + '</span><span style="color:' + color + '">' + amtLabel + '</span></div>' +
+        '<div class="cf-wf-track"><div class="cf-wf-bar" style="width:' + w + '%;background:' + color + '"></div></div>' +
+      '</div>';
+    }
+
+    /* ── Variance helper ── */
+    function varCell(monto, budget) {
+      if (!budget) return '<td class="cf-td-var cf-var-ok">—</td>';
+      var v = (monto - budget) / budget * 100;
+      var cls = v > 15 ? 'cf-var-over' : v < -5 ? 'cf-var-under' : 'cf-var-ok';
+      var sign = v > 0 ? '+' : '';
+      return '<td class="cf-td-var ' + cls + '">' + sign + v.toFixed(1) + '%</td>';
+    }
+
+    /* ── Entradas table ── */
+    var entHTML = cf.entradas.map(function(e) {
+      return '<tr>' +
+        '<td class="cf-td-concepto">' + e.concepto + '</td>' +
+        '<td class="cf-td-cat">' + e.categoria + '</td>' +
+        '<td class="cf-td-monto" style="color:var(--green2)">' + fmt(e.monto) + '</td>' +
+        varCell(e.monto, e.budget) +
+      '</tr>';
+    }).join('');
+
+    /* ── Salidas table ── */
+    var salHTML = cf.salidas.map(function(s) {
+      var isOver = s.budget > 0 && s.monto > s.budget * 1.15;
+      return '<tr' + (isOver ? ' style="background:rgba(239,68,68,.04)"' : '') + '>' +
+        '<td class="cf-td-concepto">' + s.concepto + '</td>' +
+        '<td class="cf-td-cat">' + s.categoria + '</td>' +
+        '<td class="cf-td-monto" style="color:' + (isOver ? '#f87171' : 'var(--text)') + '">' + fmt(s.monto) + '</td>' +
+        varCell(s.monto, s.budget) +
+      '</tr>';
+    }).join('');
+
+    /* ── Render ── */
+    document.getElementById('cfCard').innerHTML =
+      /* Header */
+      '<div class="cf-header">' +
+        '<div style="flex:1">' +
+          '<div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;color:var(--text)">' + cf.periodo + '</div>' +
+          '<div style="font-size:.71rem;color:var(--muted);margin-top:2px">Cierre ' + cf.fecha_cierre + ' · ' + cf.moneda + '</div>' +
+        '</div>' +
+        '<div class="cf-semaforo ' + semColor + '"><span class="cf-semaforo-dot"></span>' + semIcon + ' ' + semLabel + '</div>' +
+      '</div>' +
+
+      /* KPI strip */
+      '<div class="cf-kpi-strip">' +
+        '<div class="cf-kpi"><div class="cf-kpi-lbl">Saldo Inicial</div><div class="cf-kpi-val" style="color:var(--muted)">' + fmt(cf.saldo_inicial) + '</div></div>' +
+        '<div class="cf-kpi"><div class="cf-kpi-lbl">Total Entradas</div><div class="cf-kpi-val" style="color:var(--green2)">' + fmt(totEnt) + '</div><div class="cf-kpi-sub">budget ' + fmt(totEntBud) + '</div></div>' +
+        '<div class="cf-kpi"><div class="cf-kpi-lbl">Total Salidas</div><div class="cf-kpi-val" style="color:var(--text)">' + fmt(totSal) + '</div><div class="cf-kpi-sub">budget ' + fmt(totSalBud) + '</div></div>' +
+        '<div class="cf-kpi"><div class="cf-kpi-lbl">Flujo Neto</div><div class="cf-kpi-val" style="color:' + (neto >= 0 ? 'var(--green2)' : 'var(--red)') + '">' + (neto >= 0 ? '+' : '') + fmt(neto) + '</div></div>' +
+        '<div class="cf-kpi" style="background:rgba(99,102,241,.07);border-color:rgba(99,102,241,.25)"><div class="cf-kpi-lbl">Saldo Final</div><div class="cf-kpi-val" style="color:#a5b4fc">' + fmt(Math.round(saldoFin)) + '</div><div class="cf-kpi-sub">cobertura ' + coverage.toFixed(2) + '×</div></div>' +
+      '</div>' +
+
+      /* Main grid: waterfall + analysis */
+      '<div class="cf-main-grid">' +
+        /* Waterfall */
+        '<div class="cf-waterfall">' +
+          '<div class="cf-wf-title">Flujo de Caja · Cascada</div>' +
+          wfBar(cf.saldo_inicial, 'rgba(99,102,241,.7)', 'Saldo Inicial', fmt(cf.saldo_inicial)) +
+          wfBar(totEnt, 'rgba(22,163,74,.8)', '+ Entradas', fmt(totEnt)) +
+          '<div class="cf-wf-sep"></div>' +
+          wfBar(totSal, 'rgba(239,68,68,.7)', '− Salidas', fmt(totSal)) +
+          '<div class="cf-wf-sep"></div>' +
+          wfBar(saldoFin, 'rgba(99,102,241,.9)', '= Saldo Final', fmt(Math.round(saldoFin))) +
+        '</div>' +
+
+        /* Analysis */
+        '<div class="cf-analysis">' +
+          '<div class="cf-analysis-hdr">Análisis · Señales Clave</div>' +
+          insights.map(function(i) {
+            return '<div class="cf-insight">' +
+              '<div class="cf-insight-icon">' + i.icon + '</div>' +
+              '<div class="cf-insight-body">' +
+                '<div class="cf-insight-title">' + i.title + '</div>' +
+                '<div class="cf-insight-sub">' + i.sub + '</div>' +
+              '</div>' +
+            '</div>';
+          }).join('') +
+        '</div>' +
+      '</div>' +
+
+      /* Tables: entradas / salidas */
+      '<div class="cf-tables-grid">' +
+        '<div class="cf-tbl-wrap">' +
+          '<div class="cf-tbl-hdr"><span>Entradas</span><span class="cf-tbl-hdr-total" style="color:var(--green2)">' + fmt(totEnt) + '</span></div>' +
+          '<table class="cf-tbl"><tbody>' + entHTML + '</tbody>' +
+          '<tfoot class="cf-tbl-foot"><tr>' +
+            '<td colspan="2">Total Entradas</td>' +
+            '<td class="cf-td-monto" style="color:var(--green2)">' + fmt(totEnt) + '</td>' +
+            varCell(totEnt, totEntBud) +
+          '</tr></tfoot></table>' +
+        '</div>' +
+        '<div class="cf-tbl-wrap">' +
+          '<div class="cf-tbl-hdr"><span>Salidas</span><span class="cf-tbl-hdr-total">' + fmt(totSal) + '</span></div>' +
+          '<table class="cf-tbl"><tbody>' + salHTML + '</tbody>' +
+          '<tfoot class="cf-tbl-foot"><tr>' +
+            '<td colspan="2">Total Salidas</td>' +
+            '<td class="cf-td-monto">' + fmt(totSal) + '</td>' +
+            varCell(totSal, totSalBud) +
+          '</tr></tfoot></table>' +
+        '</div>' +
+      '</div>' +
+
+      /* Trend chart */
+      '<div class="cf-chart-card">' +
+        '<div class="cf-chart-title">Tendencia · Flujo Mensual</div>' +
+        '<div class="chart-box"><canvas id="chartCFTendencia"></canvas></div>' +
+      '</div>';
+
+    /* ── Chart: CF Tendencia ── */
+    var ctx = document.getElementById('chartCFTendencia');
+    if (ctx) {
+      new Chart(ctx.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: hist.map(function(h){ return h.mes; }),
+          datasets: [
+            { label:'Entradas', data: hist.map(function(h){ return h.entradas; }),
+              borderColor:'rgba(22,163,74,.9)', backgroundColor:'rgba(22,163,74,.07)',
+              tension:.35, fill:false, pointRadius:4, pointHoverRadius:6, borderWidth:2 },
+            { label:'Salidas', data: hist.map(function(h){ return h.salidas; }),
+              borderColor:'rgba(239,68,68,.8)', backgroundColor:'rgba(239,68,68,.05)',
+              tension:.35, fill:false, pointRadius:4, pointHoverRadius:6, borderWidth:2 },
+            { label:'Flujo Neto', data: hist.map(function(h){ return h.neto; }),
+              borderColor:'rgba(99,102,241,.9)', backgroundColor:'rgba(99,102,241,.07)',
+              tension:.35, fill:true, pointRadius:4, pointHoverRadius:6, borderWidth:2 }
+          ]
+        },
+        options: {
+          responsive:true, maintainAspectRatio:true,
+          plugins: {
+            legend: { position:'top' },
+            tooltip: { callbacks: { label: function(c){ return ' ' + c.dataset.label + ': $' + Number(c.parsed.y).toLocaleString('en-US'); } } }
+          },
+          scales: {
+            y: { ticks: { callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color:'rgba(255,255,255,.04)' } },
+            x: { grid: { display:false } }
+          }
+        }
+      });
+    }
+  }
+
   function renderFinanzas() {
+    renderCashFlow();
     var cv = D.calavo;
     var pagos = cv.pagos;
     var totalPago = 0, totalCajas = 0, totalCont = 0, semCount = 0;
@@ -5006,35 +5361,25 @@ function checkPw(){
         '<div class="ch-progress"><div class="ch-progress-fill" style="width:' + nacPct.toFixed(1) + '%;background:#1d4ed8"></div></div>' +
       '</div>';
 
-    /* ── Calavo Financial Strip ── */
-    var totalRecibido = (cv.pickPack || 0) + (cv.prestamo || 0) + (cv.capitalTrabajo || 0);
-    var saldoActual   = cv.saldoActual || 0;
-    var saldoNeg      = saldoActual < 0;
-    var saldoColor    = saldoNeg ? 'var(--red2)' : 'var(--green2)';
-    var deducciones   = (cv.comision || 0) + (cv.zCode || 0) + (cv.antiDumping || 0);
+    /* ── Calavo Financial Strip (resumen — detalle completo en Finanzas) ── */
+    var saldoActual = cv.saldoActual || 0;
+    var saldoNeg    = saldoActual < 0;
     document.getElementById('tomateCalavoStrip').innerHTML =
       '<div class="tom-calavo-strip">' +
         '<div class="tcs-item">' +
           '<div class="tcs-val" style="color:var(--green2)">' + fmt(expRev) + '</div>' +
           '<div class="tcs-lbl">Revenue Bruto FOB</div>' +
         '</div>' +
-        '<div class="tcs-item" style="display:flex;align-items:center;padding:10px 16px;flex:0 0 auto;color:var(--muted);font-size:.8rem">→</div>' +
-        '<div class="tcs-item">' +
-          '<div class="tcs-val" style="color:var(--red2)">− ' + fmt(deducciones) + '</div>' +
-          '<div class="tcs-lbl">Comisión + Z-Code + Anti-Dumping</div>' +
-        '</div>' +
-        '<div class="tcs-item" style="display:flex;align-items:center;padding:10px 16px;flex:0 0 auto;color:var(--muted);font-size:.8rem">→</div>' +
         '<div class="tcs-item">' +
           '<div class="tcs-val" style="color:var(--green)">' + fmt(ventaNeta) + '</div>' +
           '<div class="tcs-lbl">Venta Neta · ' + retPct + '% del bruto</div>' +
         '</div>' +
         '<div class="tcs-item">' +
-          '<div class="tcs-val">' + fmt(totalRecibido) + '</div>' +
-          '<div class="tcs-lbl">Recibido de Calavo</div>' +
+          '<div class="tcs-val" style="color:' + (saldoNeg ? 'var(--red2)' : 'var(--green2)') + '">' + fmt(saldoActual) + '</div>' +
+          '<div class="tcs-lbl">Saldo Due from (to) Beltran</div>' +
         '</div>' +
-        '<div class="tcs-item">' +
-          '<div class="tcs-val" style="color:' + saldoColor + '">' + fmt(saldoActual) + '</div>' +
-          '<div class="tcs-lbl">Saldo Neto WK12</div>' +
+        '<div class="tcs-item" style="justify-content:center">' +
+          '<button onclick="document.querySelector(\'[data-tab=finanzas]\').click()" style="background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:8px;padding:7px 14px;color:var(--muted);font-size:.68rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px">Ver desglose completo →</button>' +
         '</div>' +
       '</div>';
 
@@ -6032,6 +6377,20 @@ function checkPw(){
   loadLayout();
 
 })();
+
+/* ── Refresh Dashboard ──────────────────────────────── */
+window.refreshDashboard = function () {
+  var btn = document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
+  btn.disabled = true;
+  // Remove spin class after animation completes so it can spin again next click
+  btn.querySelector('svg').addEventListener('animationend', function handler() {
+    btn.querySelector('svg').removeEventListener('animationend', handler);
+    btn.classList.remove('spinning');
+    btn.disabled = false;
+  });
+  location.reload();
+};
 </script>
 </body>
 </html>
