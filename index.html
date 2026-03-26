@@ -4026,7 +4026,7 @@ function checkPw(){
         '<div class="cf-kpi"><div class="cf-kpi-lbl">Total Entradas</div><div class="cf-kpi-val" style="color:var(--green2)">' + fmt(totEnt) + '</div><div class="cf-kpi-sub">budget ' + fmt(totEntBud) + '</div></div>' +
         '<div class="cf-kpi"><div class="cf-kpi-lbl">Total Salidas</div><div class="cf-kpi-val" style="color:var(--text)">' + fmt(totSal) + '</div><div class="cf-kpi-sub">budget ' + fmt(totSalBud) + '</div></div>' +
         '<div class="cf-kpi"><div class="cf-kpi-lbl">Flujo Neto</div><div class="cf-kpi-val" style="color:' + (neto >= 0 ? 'var(--green2)' : 'var(--red)') + '">' + (neto >= 0 ? '+' : '') + fmt(neto) + '</div></div>' +
-        '<div class="cf-kpi" style="background:rgba(99,102,241,.07);border-color:rgba(99,102,241,.25)"><div class="cf-kpi-lbl">Saldo Final</div><div class="cf-kpi-val" style="color:#a5b4fc">' + fmt(Math.round(saldoFin)) + '</div><div class="cf-kpi-sub">cobertura ' + coverage.toFixed(2) + '×</div></div>' +
+        '<div class="cf-kpi" style="background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.25)"><div class="cf-kpi-lbl">Saldo Final</div><div class="cf-kpi-val" style="color:' + (saldoFin < 0 ? '#f87171' : '#a5b4fc') + '">' + fmt(Math.round(saldoFin)) + '</div><div class="cf-kpi-sub">cobertura ' + coverage.toFixed(2) + '×</div></div>' +
       '</div>' +
 
       /* Main grid: waterfall + analysis */
