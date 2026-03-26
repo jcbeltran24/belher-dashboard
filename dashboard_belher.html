@@ -2127,7 +2127,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   border:1px solid rgba(255,255,255,.11);
   border-radius:28px;
   padding:44px 50px 40px;
-  width:360px;
+  width: clamp(280px, calc(100vw - 40px), 360px);
   box-shadow:
     0 40px 100px rgba(0,0,0,.65),
     0 0 0 1px rgba(255,255,255,.07),
@@ -2362,6 +2362,63 @@ body.edit-mode #editModeBar { display:flex; }
   transition:background .15s;
 }
 #editModeBar .em-reset:hover { background:rgba(239,68,68,.2); color:#fca5a5; border-color:rgba(239,68,68,.3); }
+
+/* ══════════════════════════════════════════════════════
+   MOBILE — COMPREHENSIVE PHONE FIX (iPhone / Android)
+══════════════════════════════════════════════════════ */
+
+/* Responsive 2-col class — overrides inline grid-template-columns with !important */
+@media(max-width:640px) {
+  .resp-2col { grid-template-columns: 1fr !important; gap: 20px !important; }
+}
+
+/* Password gate card — fits any phone */
+@media(max-width:420px) {
+  .pw-card   { padding: 30px 22px 26px !important; }
+  .pw-logo-img { width: 150px !important; }
+  .pw-sub    { margin-bottom: 20px !important; }
+}
+
+/* Header — compact at mobile */
+@media(max-width:480px) {
+  .edit-layout-btn { display: none !important; }
+  .logout-txt      { display: none; }
+  /* title: allow ellipsis so it never pushes logout off-screen */
+  .header-text h1  { max-width: calc(100vw - 120px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+/* Ticker — hide on very small screens to save vertical space */
+@media(max-width:360px) {
+  .ticker-wrap { display: none; }
+}
+
+/* Charts — reasonable heights on phones */
+@media(max-width:480px) {
+  .chart-box      { height: 180px !important; }
+  .chart-box-tall { height: 220px !important; }
+}
+
+/* Limón USDA FOB + LA Terminal: border between columns becomes border-top when stacked */
+@media(max-width:640px) {
+  .resp-2col > div:first-child { border-right: none !important; border-bottom: 1px solid var(--border); }
+}
+
+/* Prediction cards price row: tighten on phone */
+@media(max-width:480px) {
+  .pred-price-row { padding: 8px 10px; gap: 4px; }
+  .pred-p-val     { font-size: .88rem; }
+}
+
+/* Section titles with src-tag: allow wrapping */
+@media(max-width:480px) {
+  .section-title { flex-wrap: wrap; }
+}
+
+/* Ensure no horizontal overflow on the entire page */
+@media(max-width:640px) {
+  html, body { overflow-x: hidden; }
+  .card { min-width: 0; }
+}
 </style>
 </head>
 <body>
@@ -2428,7 +2485,7 @@ function checkPw(){
   </button>
   <button class="logout-btn" onclick="sessionStorage.removeItem('bih_auth_2026');document.getElementById('pw-gate').classList.remove('hidden');document.getElementById('pw-input').value='';document.getElementById('pw-err').textContent='';" title="Cerrar sesión">
     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-    Salir
+    <span class="logout-txt">Salir</span>
   </button>
 </header>
 
@@ -3681,7 +3738,7 @@ function checkPw(){
       { label:'Due from (to) Beltran', val: cv.saldoActual||0, color: (cv.saldoActual||0) >= 0 ? 'var(--green2)' : 'var(--red)', bold:true, sep:true }
     ];
     document.getElementById('calavoDesglose').innerHTML =
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">' +
+      '<div class="resp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:32px">' +
         '<div>' +
           '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Settlement Calavo · WK01–WK12 · 15 Mar 2026</div>' +
           cfRows.map(function(r) {
@@ -5227,7 +5284,7 @@ function checkPw(){
       var spread = la ? (((la.precio_min+la.precio_max)/2) - ((lu.precio_min+lu.precio_max)/2)).toFixed(2) : null;
       usdaEl.innerHTML =
         '<div class="card" style="padding:0;overflow:hidden">' +
-          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0">' +
+          '<div class="resp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:0">' +
             /* FOB Nogales */
             '<div style="padding:20px 24px;border-right:1px solid var(--border)">' +
               '<div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px">FOB Nogales, AZ</div>' +
@@ -5327,7 +5384,7 @@ function checkPw(){
         { label:'EBITDA · Cierre Feb 2026',val: ebitda,                                  color: ebitda >= 0 ? 'var(--green2)' : 'var(--red)', bold:true, ebitda:true }
       ];
       pnlEl.innerHTML =
-        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">' +
+        '<div class="resp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:28px">' +
           '<div>' +
             '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Detalle · Febrero 2026 · Maui Fresh</div>' +
             rows.map(function(r) {
@@ -5497,7 +5554,7 @@ function checkPw(){
     var revText     = G.revenue_ytd > 0 ? fmt(G.revenue_ytd) : 'Sin ventas registradas';
 
     document.getElementById('granosPnl').innerHTML =
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex-wrap:wrap">' +
+      '<div class="resp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex-wrap:wrap">' +
         '<div>' +
           '<div style="font-size:.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">INGRESOS</div>' +
           '<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">' +
