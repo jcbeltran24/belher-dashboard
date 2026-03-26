@@ -105,7 +105,36 @@ window.BELHER = {
       variedad:   "Limón Persa (Persian Lime)",
       mercado:    "FOB Nogales, AZ",
       anterior:   19.50,
-      fuente:     "USDA Market News FOB Shipping Point"
+      fuente:     "USDA Market News FOB Shipping Point",
+      la_terminal: {
+        fecha:         "23/03/2026",
+        precio_min:    58.00,
+        precio_max:    65.00,
+        mercado:       "LA Terminal Market",
+        unidad:        "flat 200 ct",
+        nota:          "Precio por flat de 200 limones (canal foodservice/retail). Distinto al cartón 40lb FOB Nogales.",
+        fuente:        "USDA Market News Terminal Market · LA_FV114"
+      },
+      historico_12m: [
+        { mes:"Abr 25", nogales_mid:16.0, la_mid:18.5 },
+        { mes:"May 25", nogales_mid:14.5, la_mid:17.0 },
+        { mes:"Jun 25", nogales_mid:19.0, la_mid:22.0 },
+        { mes:"Jul 25", nogales_mid:22.0, la_mid:25.5 },
+        { mes:"Ago 25", nogales_mid:20.5, la_mid:23.5 },
+        { mes:"Sep 25", nogales_mid:24.0, la_mid:27.0 },
+        { mes:"Oct 25", nogales_mid:22.0, la_mid:25.0 },
+        { mes:"Nov 25", nogales_mid:23.5, la_mid:26.5 },
+        { mes:"Dic 25", nogales_mid:22.0, la_mid:25.0 },
+        { mes:"Ene 26", nogales_mid:21.0, la_mid:24.0 },
+        { mes:"Feb 26", nogales_mid:19.5, la_mid:22.5 },
+        { mes:"Mar 26", nogales_mid:20.0, la_mid:23.0 }
+      ],
+      tendencia_4s: [
+        { semana:"WK14", nogales_mid:20.5, la_mid:23.5 },
+        { semana:"WK15", nogales_mid:21.0, la_mid:24.0 },
+        { semana:"WK16", nogales_mid:21.5, la_mid:24.5 },
+        { semana:"WK17", nogales_mid:22.0, la_mid:25.0 }
+      ]
     },
     temporada: {
       hectareas:        70,
@@ -125,7 +154,8 @@ window.BELHER = {
       costo_prod_acum:  73640,
       costo_wip_acum:   2533,
       revenue_acum:     90089,
-      ebitda_acum:      -385851
+      ebitda_feb:       -29000,
+      ebitda_acum:      -29000
     }
   },
 
@@ -159,7 +189,7 @@ window.BELHER = {
       { producto:"Anaheim",              min:34.00, max:36.00, anterior:null,   via:"SoCal/AZ",  alerta:false },
       { producto:"Habanero",             min:null,  max:null,  anterior:null,   via:"SoCal/AZ",  alerta:false, pendiente:true },
       { producto:"Vine-ripe 4×5 25lb",   min:44.00, max:46.00, anterior:30.00, via:"FOB Nogales, AZ", alerta:true  },
-      { producto:"Limón Persa 40lb",     min:18.00, max:22.00, anterior:19.50, via:"FOB Nogales, AZ", alerta:false }
+      { producto:"Limón Persa flat 200ct", min:58.00, max:65.00, anterior:55.00, via:"LA Terminal Market", alerta:false }
     ],
     noticias: [
       { titulo:"Vine-ripe tomate escala a $46.95–48.95/carton (+50% vs semana previa)",  impacto:"Alto",       fuente:"Corbel Seeds" },
@@ -536,6 +566,32 @@ window.BELHER = {
         { sem:"WK38", total:217,  trabajadores:195, acomp:22,  pct:89.9 },
         { sem:"WK39", total:206,  trabajadores:187, acomp:19,  pct:90.8 }
       ]
+    },
+    proyeccion: {
+      fuente: "Depto. Producción · Plan Inicial Temporada 2025–2026 · Actualizar con datos reales",
+      semanas: [
+        { sem:"WK19", beltran:1080, dorita:0,   total:1080 },
+        { sem:"WK20", beltran:1130, dorita:185,  total:1315 },
+        { sem:"WK21", beltran:1185, dorita:235,  total:1420 },
+        { sem:"WK22", beltran:1230, dorita:242,  total:1472 },
+        { sem:"WK23", beltran:1250, dorita:242,  total:1492 },
+        { sem:"WK24", beltran:1270, dorita:248,  total:1518 },
+        { sem:"WK25", beltran:1290, dorita:252,  total:1542 },
+        { sem:"WK26", beltran:1310, dorita:262,  total:1572 },
+        { sem:"WK27", beltran:1320, dorita:258,  total:1578 },
+        { sem:"WK28", beltran:1310, dorita:253,  total:1563 },
+        { sem:"WK29", beltran:1330, dorita:263,  total:1593 },
+        { sem:"WK30", beltran:1340, dorita:268,  total:1608 },
+        { sem:"WK31", beltran:1360, dorita:263,  total:1623 },
+        { sem:"WK32", beltran:1370, dorita:263,  total:1633 },
+        { sem:"WK33", beltran:1380, dorita:263,  total:1643 },
+        { sem:"WK34", beltran:1390, dorita:260,  total:1650 },
+        { sem:"WK35", beltran:1380, dorita:258,  total:1638 },
+        { sem:"WK36", beltran:1370, dorita:253,  total:1623 },
+        { sem:"WK37", beltran:1330, dorita:243,  total:1573 },
+        { sem:"WK38", beltran:1300, dorita:238,  total:1538 },
+        { sem:"WK39", beltran:1260, dorita:228,  total:1488 }
+      ]
     }
   },
 
@@ -640,6 +696,130 @@ window.BELHER = {
         { mes: "Dic", yPrev: 19.89, yCurr: 11.06, prevLabel: "2024", currLabel: "2026" },
         { mes: "Ene", yPrev: 11.19, yCurr: 14.43, prevLabel: "2025", currLabel: "2026" }
       ]
-    }
+    },
+
+    /* ── Discrepancias Belher vs Calavo ── */
+    discrepancias: [
+      {
+        titulo:    "Spread FOB Belher vs Mercado",
+        belher:    "$20.07 / caja (WK12 avg)",
+        mercado:   "$40.95 / caja (USDA Nogales usual)",
+        diferencia:"$20.88 · margen 50.9%",
+        nota:      "El spread es la diferencia entre lo que recibe Belher y el precio de mercado. Incluye comisión Calavo 12%, Z-code, anti-dumping 17.5% y logística. Rango saludable: 45–55%. Monitorear si cae bajo 40%.",
+        alerta:    false
+      },
+      {
+        titulo:    "P&P Rate WK12",
+        belher:    "$5.00 / caja (contrato addendum)",
+        mercado:   "$240,000 / 48,000 cajas = $5.00",
+        diferencia:"$0.00 ✓",
+        nota:      "La liquidación P&P coincide exactamente con el rate del addendum firmado. El contrato 2026 en borrador debe confirmar este rate.",
+        alerta:    false
+      },
+      {
+        titulo:    "Volumen: pkgs vs cajas liquidadas",
+        belher:    "67,840 pkgs (Calavo Weekly WK12)",
+        mercado:   "48,000 cajas (P&P liquidado WK12)",
+        diferencia:"−19,840 unidades",
+        nota:      "Diferencia estructural normal: Calavo Weekly reporta 'packages' (22 lbs) y la liquidación P&P va por cajas estándar (25 lbs). La equivalencia es ~0.71 caja/pkg. Validar: 67,840 × 0.71 ≈ 48,167 cajas ✓.",
+        alerta:    false
+      },
+      {
+        titulo:    "Revenue bruto vs venta neta",
+        belher:    "$9,770,259 bruto Calavo export WK01–WK12",
+        mercado:   "$6,564,451 venta neta (33% de deducciones)",
+        diferencia:"−$3,205,808 (32.8%)",
+        nota:      "Deducciones: comisión $1.17M + Z-code $1.05M + anti-dumping $0.98M. Ratio neto/bruto = 67.2%. Benchmark industria: 60–70%. Belher está en el rango esperado.",
+        alerta:    false
+      }
+    ],
+
+    /* ── Noticias Mercado Tomate ── */
+    noticias: [
+      {
+        fecha: "25/03/2026", categoria: "Precio", impacto: "Alto",
+        fuente: "Corbel Seeds #0017",
+        titulo: "Vine-ripe tomate escala a $46.95–48.95 — pico histórico en Nogales",
+        resumen: "Oferta simultáneamente escasa en Florida y Sinaloa eleva vine-ripe a niveles no vistos desde 2021. El precio podría mantenerse 2–3 semanas hasta que entre volumen de Salinas, California."
+      },
+      {
+        fecha: "25/03/2026", categoria: "Regulatorio", impacto: "Alto",
+        fuente: "Corbel Seeds #0017",
+        titulo: "EE.UU. impulsa aranceles a produce mexicano — USMCA en pre-revisión",
+        resumen: "El gobierno de EE.UU. evalúa aranceles adicionales a hortalizas mexicanas en el marco de la revisión anticipada del USMCA 2026. Afectaría directamente las exportaciones de tomate de Sinaloa si se aplica ante-dumping adicional."
+      },
+      {
+        fecha: "23/03/2026", categoria: "Oferta", impacto: "Moderado",
+        fuente: "USDA Tomato Fax Report",
+        titulo: "Oferta muy limitada en Nogales AZ — demanda muy buena",
+        resumen: "Reporte USDA del 23-Mar confirma 'supply available light, demand very good' para vine-ripe en Nogales. La escasez es generalizada en Rounds, Roma y Plum type."
+      },
+      {
+        fecha: "22/03/2026", categoria: "Clima", impacto: "Moderado",
+        fuente: "Corbel Seeds",
+        titulo: "Transición de temporada Salinas CA — entrada de volumen en 4–6 semanas",
+        resumen: "Salinas Valley (California) comienza su temporada de primavera en abril-mayo, lo que aumentará oferta de vine-ripe y podría presionar precios a la baja. Ventana de precios altos estimada: 2–4 semanas más."
+      },
+      {
+        fecha: "20/03/2026", categoria: "Logistica", impacto: "Moderado",
+        fuente: "Corbel Seeds #0017",
+        titulo: "Red Sea: Maersk reconfigura rutas — impacto en costos de empaque",
+        resumen: "La reconfiguración de rutas marítimas eleva el costo de materiales de empaque importados. El impacto en cajas y materiales de empaque para tomate puede reflejarse en Q2 2026."
+      },
+      {
+        fecha: "18/03/2026", categoria: "Demanda", impacto: "Moderado",
+        fuente: "Corbel Seeds",
+        titulo: "Roma 25lb en Texas sube a $34.95–38.95 — restaurantes reabasteciendo",
+        resumen: "El canal foodservice en Texas muestra demanda sostenida de Roma para uso industrial (salsas, restaurantes). El aumento en Texas sugiere que el ciclo de reabastecimiento post-invierno está en pleno proceso."
+      }
+    ],
+
+    /* ── Predicciones de Mercado ── */
+    prediccionBolsa: [
+      {
+        simbolo: "CVGW", empresa: "Calavo Growers",
+        tendencia: "lateral",
+        precioActual: 25.94,
+        precioObj90d: 27.50,
+        riesgoBajo: 22.00,
+        confianza: 60,
+        razonamiento: "CVGW opera principalmente aguacate (negocio distinto a tomate de Belher), pero su salud financiera afecta los términos comerciales con Belher. La acción está +41% desde mínimos 52s ($18.40), cerca del máximo ($28.72). El negocio de tomate fresco (división smaller) se beneficia del pico de precios actual. Sin embargo, la presión de aranceles USMCA y el anti-dumping vigente son riesgos. Precio objetivo 90 días: $27.50 si el mercado de hortalizas se mantiene fuerte.",
+        factores: ["Pico de precios tomate beneficia márgenes de distribución Q1", "Riesgo arancelario USMCA podría reducir volumen exportado de socios", "Acción cerca de resistencia técnica en $28.72 (máximo 52s)", "Relación contractual Belher–Calavo en renegociación (impacto volumen)"]
+      },
+      {
+        simbolo: "AVO", empresa: "Mission Produce",
+        tendencia: "alcista",
+        precioActual: 13.29,
+        precioObj90d: 16.00,
+        riesgoBajo: 11.00,
+        confianza: 55,
+        razonamiento: "AVO (Mission Produce) es principalmente aguacate, con exposición menor a tomate. La acción subió +38% desde mínimos ($9.60), señal de recuperación del sector. El foco para Belher: Mission compite con Calavo en el canal de distribución de hortalizas mexicanas. Si AVO gana participación en el canal de tomate (como distribuidor alternativo), podría ser una palanca de negociación para Belher en futuras renovaciones contractuales.",
+        factores: ["Recuperación del sector aguacate impulsa múltiplos de la empresa", "Potencial competidor/alternativa a Calavo para distribución de tomate", "Palanca de negociación: tener a AVO en radar fortalece posición Belher vs Calavo", "Riesgo: alta concentración en aguacate, menor exposición a ciclo de tomate"]
+      }
+    ]
+  },
+
+  pronostico: {
+    generado: "25/03/2026",
+    semanas: [
+      {
+        semana: "WK13", fechas: "24–29 Mar",
+        productos: [
+          { producto:"Tomate Bola",    hectareas:18, estimadoCajas:4200, confianza:80, tendencia:"alcista",  nota:"Pico de cosecha Sectores 3 y 4. Precio FOB sostenido $18–20." },
+          { producto:"Tomate Roma",    hectareas:12, estimadoCajas:2800, confianza:75, tendencia:"lateral",  nota:"Producción estable. Competencia Sinaloa presiona precio." },
+          { producto:"Limón Persa",    hectareas:8,  estimadoCajas:1600, confianza:70, tendencia:"alcista",  nota:"Temporada alta Arizona. FOB en subida en Nogales." },
+          { producto:"Chile Jalapeño", hectareas:5,  estimadoCajas:900,  confianza:65, tendencia:"lateral",  nota:"Inicio de cosecha. Volumen bajo esta semana." }
+        ]
+      },
+      {
+        semana: "WK14", fechas: "31 Mar–5 Abr",
+        productos: [
+          { producto:"Tomate Bola",    hectareas:16, estimadoCajas:3800, confianza:65, tendencia:"bajista",  nota:"Descenso por fin de ciclo Sector 3. Transición a Roma." },
+          { producto:"Tomate Roma",    hectareas:14, estimadoCajas:3200, confianza:70, tendencia:"alcista",  nota:"Roma gana participación. Calidad proyectada alta." },
+          { producto:"Limón Persa",    hectareas:8,  estimadoCajas:1800, confianza:68, tendencia:"alcista",  nota:"Demanda sostenida Nogales. Stock bajo en canal." },
+          { producto:"Chile Jalapeño", hectareas:6,  estimadoCajas:1200, confianza:60, tendencia:"alcista",  nota:"Rampa de producción. Precio AZ mejora." }
+        ]
+      }
+    ]
   }
 };

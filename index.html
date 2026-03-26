@@ -124,6 +124,16 @@ header::after {
   50%      { opacity:.3; transform:scale(.85); }
 }
 
+.logout-btn {
+  display:flex; align-items:center; gap:6px;
+  padding:0 13px; height:32px; border-radius:9px; border:1px solid rgba(255,255,255,.15); cursor:pointer;
+  background:rgba(255,255,255,.1); color:rgba(255,255,255,.75);
+  font-size:.7rem; font-weight:600; font-family:inherit; letter-spacing:.3px;
+  transition:background .18s, color .18s, border-color .18s;
+  flex-shrink:0; white-space:nowrap;
+}
+.logout-btn:hover { background:rgba(255,69,58,.22); color:#ff6b60; border-color:rgba(255,69,58,.35); }
+
 /* ═══════════════════════════════════════════════
    TICKER
 ══════════════════════════════════════════════ */
@@ -1833,8 +1843,20 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
    CALAVO INTELLIGENCE CENTER — Design System
 ══════════════════════════════════════════ */
 
-/* Tab background tint */
-#tab-calavoweekly { background: radial-gradient(ellipse at top left, rgba(0,50,30,.18) 0%, transparent 60%); }
+/* ── Calavo Weekly: full dark theme ── */
+#tab-calavoweekly {
+  background: #080f1e;
+  --text:   #e8f0ff;
+  --text2:  #c4d8f5;
+  --muted:  #8aaad0;
+  --card:   #0e1e38;
+  --border: rgba(40,110,220,.22);
+}
+#tab-calavoweekly .card {
+  background: #0e1e38;
+  border-color: rgba(40,110,220,.22);
+  box-shadow: 0 4px 20px rgba(0,0,30,.4), 0 1px 4px rgba(0,0,0,.3);
+}
 
 /* Intel section header */
 .cw-sec { display:flex; align-items:center; gap:10px; margin:20px 0 10px; }
@@ -1859,7 +1881,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 .cw-hero-kpi:first-child { padding-left:0; }
 .cw-hero-kpi:last-child { border-right:none; }
 .cw-hero-kpi-lbl { font-size:.58rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:rgba(52,199,89,.5); margin-bottom:4px; }
-.cw-hero-kpi-val { font-size:1.9rem; font-weight:700; color:#fff; line-height:1; }
+.cw-hero-kpi-val { font-size:2.6rem; font-weight:800; color:#fff; line-height:1; font-variant-numeric:tabular-nums; }
 .cw-hero-kpi-chg { font-size:.65rem; margin-top:3px; }
 .cw-hero-kpi-chg.up { color:#34c759; } .cw-hero-kpi-chg.down { color:#ff453a; } .cw-hero-kpi-chg.flat { color:rgba(255,255,255,.4); }
 @media(max-width:480px){ .cw-hero-kpis { grid-template-columns:1fr 1fr; gap:10px; } .cw-hero-kpi { border-right:none; padding:0; } }
@@ -1867,16 +1889,17 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 /* ── STOCK TERMINAL ── */
 .cw-stocks-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px; }
 @media(max-width:480px){ .cw-stocks-grid { grid-template-columns:1fr; } }
-.cw-stock-card { padding:16px 20px; background:rgba(0,0,0,.3); border:1px solid rgba(255,255,255,.07); position:relative; overflow:hidden; }
+.cw-stock-card { padding:16px 20px; background:#0a1830; border:1px solid rgba(40,110,220,.2); position:relative; overflow:hidden; }
 .cw-stock-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
 .cw-stock-card.up-card::after  { background:linear-gradient(90deg,#34c759,transparent); }
 .cw-stock-card.down-card::after { background:linear-gradient(90deg,#ff453a,transparent); }
 .cw-stock-card.nd-card::after  { background:linear-gradient(90deg,rgba(255,255,255,.2),transparent); }
 .cw-stock-row1 { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
-.cw-stock-sym { font-size:1.3rem; font-weight:900; letter-spacing:.5px; color:var(--text); font-variant-numeric:tabular-nums; }
-.cw-stock-name { font-size:.62rem; color:var(--muted); margin-top:2px; }
-.cw-stock-mkt-badge { font-size:.55rem; font-weight:700; letter-spacing:.8px; padding:2px 7px; border-radius:4px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.3); margin-top:5px; display:inline-block; }
-.cw-stock-price-big { font-size:2rem; font-weight:700; color:var(--text); line-height:1; font-variant-numeric:tabular-nums; }
+.cw-stock-logo { width:32px; height:32px; border-radius:8px; object-fit:contain; background:#fff; padding:3px; margin-bottom:6px; display:block; }
+.cw-stock-sym { font-size:1.1rem; font-weight:900; letter-spacing:.5px; background:#0c2461; color:#a8c8ff; padding:3px 10px; border-radius:6px; display:inline-block; font-variant-numeric:tabular-nums; }
+.cw-stock-name { font-size:.62rem; color:var(--muted); margin-top:5px; }
+.cw-stock-mkt-badge { font-size:.55rem; font-weight:700; letter-spacing:.8px; padding:2px 7px; border-radius:4px; background:rgba(12,36,97,.4); color:#7aadff; margin-top:4px; display:inline-block; border:1px solid rgba(12,36,97,.6); }
+.cw-stock-price-big { font-size:2.2rem; font-weight:800; color:var(--text); line-height:1; font-variant-numeric:tabular-nums; }
 .cw-stock-chg-row { display:flex; align-items:center; gap:8px; margin-top:5px; flex-wrap:wrap; }
 .cw-stock-chg { font-size:.78rem; font-weight:700; padding:2px 8px; border-radius:6px; }
 .cw-stock-chg.up   { background:rgba(52,199,89,.12); color:#34c759; }
@@ -1925,10 +1948,14 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 /* ── GROWER MATRIX ── */
 .cw-growers-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px; }
 @media(max-width:600px){ .cw-growers-grid { grid-template-columns:1fr; } }
-.cw-grower-card { padding:0; overflow:hidden; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.07); }
-.cw-grower-hdr { padding:14px 18px 12px; border-bottom:1px solid rgba(255,255,255,.06); }
-.cw-grower-hdr.belher-hdr { border-top:2px solid #34c759; }
-.cw-grower-hdr.adm-hdr    { border-top:2px solid #007aff; }
+.cw-grower-card { padding:0; overflow:hidden; background:#091628; border:1px solid rgba(30,80,200,.25); }
+.cw-grower-hdr { padding:14px 18px 12px; border-bottom:1px solid rgba(30,80,180,.15); }
+.cw-grower-hdr.belher-hdr { border-top:3px solid #22c55e; background:rgba(5,40,20,.6); }
+.cw-grower-hdr.adm-hdr    { border-top:3px solid #3b82f6; background:rgba(5,20,60,.6); }
+.cw-grower-name { font-size:.88rem; font-weight:800; }
+.cw-grower-hdr.belher-hdr .cw-grower-name { color:#34c759; }
+.cw-grower-hdr.adm-hdr    .cw-grower-name { color:#7aadff; }
+.cw-grow-rows { background:rgba(5,15,50,.3); }
 .cw-grower-id { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
 .cw-grower-name { font-size:.88rem; font-weight:800; color:var(--text); }
 .cw-grower-fullname { font-size:.65rem; color:var(--muted); font-weight:400; }
@@ -1953,12 +1980,12 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 .cw-grow-bar-fill { position:absolute; top:0; left:0; height:4px; border-radius:2px; transition:width .6s; }
 .cw-grow-bar-proj-line { position:absolute; top:-4px; width:1px; height:12px; background:rgba(255,255,255,.3); }
 .cw-grow-meta { font-size:.62rem; color:var(--muted); }
-.cw-grow-no-prog { font-size:.68rem; color:rgba(255,255,255,.2); font-style:italic; padding:8px 18px 12px; }
+.cw-grow-no-prog { font-size:.68rem; color:rgba(180,210,255,.35); font-style:italic; padding:8px 18px 12px; }
 
 /* ── FOB VENTAS ── */
 .cw-ventas-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px; }
 @media(max-width:500px){ .cw-ventas-grid { grid-template-columns:1fr; } }
-.cw-venta-card { padding:18px 20px; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.07); }
+.cw-venta-card { padding:18px 20px; background:#091628; border:1px solid rgba(40,110,220,.2); }
 .cw-venta-name { font-size:.6rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:8px; }
 .cw-venta-price { font-size:2.4rem; font-weight:700; color:#34c759; line-height:1; font-variant-numeric:tabular-nums; }
 .cw-venta-sub { font-size:.62rem; color:var(--muted); margin-top:4px; }
@@ -1986,9 +2013,387 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 .cw-toy-tbl tr:last-child td { border-bottom:none; }
 .cw-toy-pos { color:#34c759; font-weight:700; }
 .cw-toy-neg { color:#ff453a; font-weight:700; }
+
+/* ── Discrepancias ── */
+.cw-disc-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px; }
+@media(max-width:600px){ .cw-disc-grid { grid-template-columns:1fr; } }
+.cw-disc-card { padding:16px 20px; background:#091628; border:1px solid rgba(30,90,200,.25); }
+.cw-disc-card.alerta { border-color:rgba(255,159,10,.5); background:rgba(30,14,0,.8); }
+.cw-disc-title { font-size:.65rem; font-weight:800; text-transform:uppercase; letter-spacing:.8px; color:#7aadff; margin-bottom:10px; }
+.cw-disc-card.alerta .cw-disc-title { color:#ff9f0a; }
+.cw-disc-row { display:flex; justify-content:space-between; align-items:baseline; gap:8px; padding:5px 0; border-bottom:1px solid rgba(255,255,255,.04); font-size:.73rem; }
+.cw-disc-row:last-of-type { border-bottom:none; }
+.cw-disc-lbl { color:var(--muted); flex-shrink:0; }
+.cw-disc-val { font-weight:600; color:var(--text); text-align:right; font-variant-numeric:tabular-nums; }
+.cw-disc-diff { font-size:.7rem; font-weight:700; padding:1px 7px; border-radius:8px; }
+.cw-disc-ok   { background:rgba(52,199,89,.12); color:#34c759; }
+.cw-disc-warn { background:rgba(255,159,10,.15); color:#ff9f0a; }
+.cw-disc-nota { font-size:.65rem; color:var(--muted); line-height:1.5; margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,255,255,.05); }
+
+/* ── Noticias Tomate ── */
+.cw-news-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px; }
+@media(max-width:600px){ .cw-news-grid { grid-template-columns:1fr; } }
+.cw-news-card { padding:14px 16px; background:#091628; border:1px solid rgba(30,90,200,.22); border-radius:var(--r); }
+.cw-news-top { display:flex; align-items:center; gap:7px; margin-bottom:7px; flex-wrap:wrap; }
+.cw-news-cat { font-size:.55rem; font-weight:800; letter-spacing:.8px; text-transform:uppercase; padding:2px 7px; border-radius:5px; }
+.cw-news-cat.Precio    { background:rgba(52,199,89,.15); color:#34c759; }
+.cw-news-cat.Oferta    { background:rgba(0,122,255,.15); color:#007aff; }
+.cw-news-cat.Demanda   { background:rgba(255,159,10,.15); color:#ff9f0a; }
+.cw-news-cat.Logistica { background:rgba(90,200,250,.12); color:#5ac8fa; }
+.cw-news-cat.Clima     { background:rgba(175,82,222,.15); color:#af52de; }
+.cw-news-cat.Regulatorio { background:rgba(255,69,58,.12); color:#ff453a; }
+.cw-news-imp { font-size:.55rem; font-weight:700; padding:2px 6px; border-radius:5px; }
+.cw-news-imp.Alto     { background:rgba(255,69,58,.15); color:#ff453a; }
+.cw-news-imp.Moderado { background:rgba(255,159,10,.12); color:#ff9f0a; }
+.cw-news-imp.Bajo     { background:rgba(255,255,255,.06); color:var(--muted); }
+.cw-news-fuente { font-size:.6rem; color:var(--muted); margin-left:auto; }
+.cw-news-titulo { font-size:.78rem; font-weight:600; color:var(--text); margin-bottom:5px; line-height:1.4; }
+.cw-news-resumen { font-size:.7rem; color:var(--muted); line-height:1.5; }
+
+/* ── Predicciones Bolsa ── */
+.cw-pred-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media(max-width:600px){ .cw-pred-grid { grid-template-columns:1fr; } }
+.cw-pred-card { padding:18px 20px; background:#091628; border:1px solid rgba(30,90,200,.25); position:relative; overflow:hidden; }
+.cw-pred-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.cw-pred-card.alcista::before { background:linear-gradient(90deg,#34c759,#0c7); }
+.cw-pred-card.bajista::before { background:linear-gradient(90deg,#ff453a,#c00); }
+.cw-pred-card.lateral::before { background:linear-gradient(90deg,#ff9f0a,#c60); }
+.cw-pred-sym { font-size:.6rem; font-weight:800; letter-spacing:1px; color:#7aadff; margin-bottom:4px; }
+.cw-pred-company { font-size:.75rem; font-weight:600; color:var(--text); margin-bottom:10px; }
+.cw-pred-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.cw-pred-lbl { font-size:.62rem; color:var(--muted); }
+.cw-pred-val { font-size:.8rem; font-weight:700; color:var(--text); font-variant-numeric:tabular-nums; }
+.cw-pred-trend { font-size:.7rem; font-weight:800; padding:2px 9px; border-radius:12px; }
+.cw-pred-trend.alcista { background:rgba(52,199,89,.15); color:#34c759; }
+.cw-pred-trend.bajista { background:rgba(255,69,58,.12); color:#ff453a; }
+.cw-pred-trend.lateral { background:rgba(255,159,10,.12); color:#ff9f0a; }
+.cw-pred-reason { font-size:.7rem; color:var(--muted); line-height:1.5; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,.05); }
+.cw-pred-conf { display:flex; align-items:center; gap:8px; margin-top:8px; }
+.cw-pred-conf-bar { flex:1; height:4px; background:rgba(255,255,255,.08); border-radius:2px; }
+.cw-pred-conf-fill { height:4px; border-radius:2px; background:#7aadff; }
+.cw-pred-conf-lbl { font-size:.6rem; color:#7aadff; font-weight:700; white-space:nowrap; }
+
+/* ── Password gate ── */
+/* ─────────────── PASSWORD GATE ─────────────── */
+@keyframes pw-float { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-18px) scale(1.04)} }
+@keyframes pw-spin  { to{transform:rotate(360deg)} }
+@keyframes pw-fadein { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+#pw-gate {
+  position:fixed; inset:0; z-index:9999;
+  background:#020d08;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+#pw-gate.hidden { display:none; }
+
+/* Background depth glows */
+#pw-gate .pw-bg-g1 {
+  position:absolute; width:900px; height:900px; border-radius:50%;
+  background:radial-gradient(circle, rgba(20,110,50,.28) 0%, transparent 65%);
+  top:-320px; left:-280px; pointer-events:none;
+}
+#pw-gate .pw-bg-g2 {
+  position:absolute; width:700px; height:700px; border-radius:50%;
+  background:radial-gradient(circle, rgba(15,60,160,.22) 0%, transparent 65%);
+  bottom:-220px; right:-180px; pointer-events:none;
+}
+#pw-gate .pw-bg-g3 {
+  position:absolute; width:400px; height:400px; border-radius:50%;
+  background:radial-gradient(circle, rgba(34,197,94,.1) 0%, transparent 65%);
+  top:55%; left:60%; pointer-events:none;
+}
+
+/* Floating decorative ring */
+#pw-gate .pw-ring {
+  position:absolute; width:540px; height:540px; border-radius:50%;
+  border:1px solid rgba(34,197,94,.07);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+#pw-gate .pw-ring2 {
+  position:absolute; width:780px; height:780px; border-radius:50%;
+  border:1px solid rgba(34,197,94,.04);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+
+/* Frosted glass card */
+.pw-card {
+  position:relative; z-index:2;
+  background:rgba(255,255,255,.055);
+  backdrop-filter:blur(32px) saturate(200%);
+  -webkit-backdrop-filter:blur(32px) saturate(200%);
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:28px;
+  padding:44px 50px 40px;
+  width:360px;
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.65),
+    0 0 0 1px rgba(255,255,255,.07),
+    inset 0 1px 0 rgba(255,255,255,.13),
+    inset 0 -1px 0 rgba(0,0,0,.1);
+  display:flex; flex-direction:column; align-items:center;
+  animation:pw-fadein .5s ease both;
+}
+
+/* Top shimmer line */
+.pw-card::before {
+  content:'';
+  position:absolute; top:0; left:20%; right:20%; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(34,197,94,.6), rgba(255,255,255,.3), rgba(34,197,94,.6), transparent);
+  border-radius:1px;
+}
+
+/* Logo */
+.pw-logo-img {
+  width:190px; height:auto;
+  margin-bottom:10px;
+  filter:drop-shadow(0 4px 20px rgba(34,197,94,.35));
+}
+
+/* Green divider */
+.pw-divider {
+  width:36px; height:2px;
+  background:linear-gradient(90deg,#16a34a,#4ade80);
+  border-radius:2px;
+  margin:0 auto 18px;
+  box-shadow:0 0 14px rgba(34,197,94,.55);
+}
+
+/* Subtitle */
+.pw-sub {
+  font-size:.6rem; font-weight:700; letter-spacing:2.2px;
+  text-transform:uppercase; color:rgba(255,255,255,.28);
+  margin-bottom:28px; text-align:center;
+}
+
+/* Input */
+.pw-input {
+  width:100%; padding:14px 18px; border-radius:14px; margin-bottom:11px;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.13);
+  color:#fff; font-size:1.05rem; font-family:inherit; letter-spacing:3px;
+  outline:none; text-align:center;
+  transition:border-color .2s, box-shadow .2s, background .2s;
+}
+.pw-input::placeholder { color:rgba(255,255,255,.2); letter-spacing:0; font-size:.88rem; }
+.pw-input:focus {
+  border-color:rgba(34,197,94,.55);
+  background:rgba(255,255,255,.1);
+  box-shadow:0 0 0 4px rgba(34,197,94,.1), 0 2px 12px rgba(0,0,0,.2);
+}
+
+/* Button */
+.pw-btn {
+  width:100%; padding:14px; border-radius:14px; border:none; cursor:pointer;
+  background:linear-gradient(135deg,#14532d 0%,#166534 30%,#16a34a 70%,#22c55e 100%);
+  color:#fff; font-size:.92rem; font-weight:700; font-family:inherit; letter-spacing:.4px;
+  box-shadow:0 6px 28px rgba(22,163,74,.45), 0 2px 8px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.15);
+  transition:box-shadow .2s, transform .12s;
+  margin-bottom:10px;
+}
+.pw-btn:hover  { box-shadow:0 8px 36px rgba(34,197,94,.55), 0 2px 12px rgba(0,0,0,.3); }
+.pw-btn:active { transform:scale(.982); box-shadow:0 3px 14px rgba(22,163,74,.4); }
+
+/* Error */
+.pw-err { font-size:.7rem; color:#ff453a; min-height:16px; text-align:center; letter-spacing:.2px; }
+
+/* ── Enhancement B: Budget vs Actual progress bars ── */
+.budget-bar-row { margin-top:10px; padding:10px 14px; background:var(--bg); border-radius:var(--r-sm); }
+.budget-bar-track { height:5px; border-radius:3px; background:rgba(0,0,0,.08); margin:6px 0 4px; overflow:hidden; }
+.budget-bar-fill { height:5px; border-radius:3px; transition:width .8s; }
+.budget-bar-meta { font-size:.65rem; color:var(--muted); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; }
+.budget-pct-pill { font-size:.62rem; font-weight:700; padding:1px 7px; border-radius:8px; }
+.budget-pct-pill.pos { background:rgba(34,197,94,.12); color:#16a34a; }
+.budget-pct-pill.neg { background:rgba(239,68,68,.1); color:#dc2626; }
+.yoy-pill { font-size:.62rem; font-weight:600; padding:1px 7px; border-radius:8px; background:rgba(99,102,241,.1); color:#6366f1; }
+
+/* ── Enhancement C: Pronóstico de Cosecha ── */
+.pronostico-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+@media(max-width:600px){ .pronostico-grid { grid-template-columns:1fr; } }
+.pronostico-wk-hdr { display:flex; align-items:center; justify-content:space-between; padding:14px 18px 10px; border-bottom:1px solid var(--border); }
+.pronostico-wk-lbl { font-size:.8rem; font-weight:800; color:var(--text); }
+.pronostico-wk-dates { font-size:.62rem; font-weight:600; padding:2px 8px; border-radius:8px; background:rgba(34,197,94,.1); color:var(--green2); }
+.pronostico-prod-row { padding:10px 18px; border-bottom:1px solid var(--border); }
+.pronostico-prod-row:last-child { border-bottom:none; }
+.pronostico-prod-top { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:3px; }
+.pronostico-prod-name { font-size:.78rem; font-weight:600; color:var(--text); }
+.pronostico-cajas { font-size:.8rem; font-weight:700; color:var(--text); font-variant-numeric:tabular-nums; }
+.pronostico-bar { height:4px; border-radius:2px; background:var(--border); overflow:hidden; margin:4px 0; }
+.pronostico-bar-fill { height:4px; border-radius:2px; transition:width .6s; }
+.pronostico-badges { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:3px; }
+.pronostico-conf { font-size:.6rem; font-weight:700; padding:1px 6px; border-radius:5px; }
+.pronostico-conf.hi { background:rgba(34,197,94,.12); color:#16a34a; }
+.pronostico-conf.mid { background:rgba(245,158,11,.12); color:#d97706; }
+.pronostico-conf.lo { background:rgba(239,68,68,.1); color:#dc2626; }
+.pronostico-tend { font-size:.6rem; font-weight:700; padding:1px 6px; border-radius:5px; }
+.pronostico-tend.alcista { background:rgba(34,197,94,.12); color:#16a34a; }
+.pronostico-tend.bajista { background:rgba(239,68,68,.1); color:#dc2626; }
+.pronostico-tend.lateral { background:rgba(245,158,11,.12); color:#d97706; }
+.pronostico-nota { font-size:.65rem; color:var(--muted); line-height:1.4; }
+
+/* ── Enhancement D: Mobile critical fixes ── */
+@media(max-width:480px){
+  .grid-4 { grid-template-columns: 1fr 1fr !important; }
+  .grid-3 { grid-template-columns: 1fr 1fr !important; }
+  .grid-2 { grid-template-columns: 1fr !important; }
+  .chart-box { height: 200px !important; }
+  .chart-box-tall { height: 240px !important; }
+  .pronostico-grid { grid-template-columns: 1fr !important; }
+}
+nav.tabs {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+nav.tabs button { scroll-snap-align: start; flex-shrink: 0; }
+.card-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tbl-wrap   { overflow-x: auto; -webkit-overflow-scrolling: touch; min-width: 0; }
+
+/* ════════════════════════════════════════════════
+   LAYOUT EDITOR
+════════════════════════════════════════════════ */
+/* Edit mode toggle button in header */
+.edit-layout-btn {
+  display:flex; align-items:center; gap:6px;
+  padding:0 13px; height:32px; border-radius:9px;
+  border:1px solid rgba(255,255,255,.15); cursor:pointer;
+  background:rgba(255,255,255,.1); color:rgba(255,255,255,.75);
+  font-size:.7rem; font-weight:600; font-family:inherit; letter-spacing:.3px;
+  transition:background .18s, color .18s, border-color .18s; flex-shrink:0;
+  margin-right:6px;
+}
+.edit-layout-btn:hover { background:rgba(99,102,241,.25); color:#a5b4fc; border-color:rgba(99,102,241,.4); }
+body.edit-mode .edit-layout-btn { background:rgba(99,102,241,.3); color:#a5b4fc; border-color:rgba(99,102,241,.5); }
+
+/* Block wrapper */
+.db-block { position:relative; transition:outline .15s, opacity .2s; }
+body.edit-mode .db-block {
+  outline:2px dashed rgba(99,102,241,.3);
+  outline-offset:3px;
+  border-radius:10px;
+  cursor:default;
+}
+body.edit-mode .db-block:hover { outline-color:rgba(99,102,241,.7); }
+body.edit-mode .db-block.db-dragging { opacity:.35; outline-style:solid; outline-color:#6366f1; cursor:grabbing; }
+body.edit-mode .db-block.db-drag-over { outline-color:#6366f1; outline-style:solid; background:rgba(99,102,241,.04); }
+
+/* Hidden blocks */
+.db-block.db-hidden > *:not(.db-controls) { display:none !important; }
+.db-block.db-hidden .db-placeholder {
+  display:flex !important; align-items:center; justify-content:space-between;
+  padding:10px 14px; font-size:.75rem; color:var(--muted); font-style:italic;
+}
+body.edit-mode .db-block.db-hidden {
+  opacity:.4; outline-style:dashed; outline-color:rgba(156,163,175,.4);
+}
+body.edit-mode .db-block.db-hidden > *:not(.db-controls):not(.db-placeholder) { display:block !important; opacity:.25; pointer-events:none; }
+body.edit-mode .db-block.db-hidden .db-placeholder { display:none !important; }
+
+/* Block controls (drag handle + hide/show button) */
+.db-controls {
+  display:none;
+  position:absolute; top:6px; right:6px; z-index:200;
+  gap:4px; align-items:center;
+  background:rgba(15,20,40,.85);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:9px; padding:3px 5px;
+  backdrop-filter:blur(8px);
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+}
+body.edit-mode .db-controls { display:flex; }
+.db-handle {
+  width:26px; height:26px; border-radius:6px; border:none; cursor:grab;
+  background:transparent; color:rgba(255,255,255,.6); font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s, color .15s;
+}
+.db-handle:hover { background:rgba(99,102,241,.3); color:#a5b4fc; }
+.db-handle:active { cursor:grabbing; }
+.db-toggle-btn {
+  width:26px; height:26px; border-radius:6px; border:none; cursor:pointer;
+  background:transparent; color:rgba(255,255,255,.55); font-size:12px;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s, color .15s;
+}
+.db-toggle-btn.hide-btn:hover { background:rgba(239,68,68,.3); color:#fca5a5; }
+.db-toggle-btn.show-btn { color:rgba(34,197,94,.8); }
+.db-toggle-btn.show-btn:hover { background:rgba(34,197,94,.2); color:#86efac; }
+.db-lbl {
+  font-size:.6rem; font-weight:700; letter-spacing:.5px; color:rgba(255,255,255,.3);
+  text-transform:uppercase; padding:0 4px; white-space:nowrap; max-width:120px;
+  overflow:hidden; text-overflow:ellipsis;
+}
+
+/* Hidden placeholder (shown when block is hidden and NOT in edit mode) */
+.db-placeholder {
+  display:none;
+  padding:10px 14px;
+  font-size:.75rem; color:var(--muted); font-style:italic;
+}
+
+/* Floating edit mode bar */
+#editModeBar {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  background:#0c1a2e;
+  border:1px solid rgba(99,102,241,.35);
+  border-radius:16px; padding:10px 20px;
+  display:none; align-items:center; gap:16px;
+  box-shadow:0 8px 32px rgba(0,0,0,.5), 0 0 0 1px rgba(99,102,241,.1);
+  z-index:500; white-space:nowrap;
+  backdrop-filter:blur(16px);
+}
+body.edit-mode #editModeBar { display:flex; }
+#editModeBar .em-label { font-size:.75rem; font-weight:700; color:#a5b4fc; letter-spacing:.5px; }
+#editModeBar .em-sub { font-size:.65rem; color:rgba(255,255,255,.35); }
+#editModeBar .em-save {
+  padding:7px 18px; border-radius:10px; border:none; cursor:pointer;
+  background:linear-gradient(135deg,#4f46e5,#6366f1); color:#fff;
+  font-size:.78rem; font-weight:700; font-family:inherit;
+  box-shadow:0 4px 14px rgba(99,102,241,.4);
+  transition:opacity .15s;
+}
+#editModeBar .em-save:hover { opacity:.88; }
+#editModeBar .em-reset {
+  padding:7px 14px; border-radius:10px; border:1px solid rgba(255,255,255,.12); cursor:pointer;
+  background:rgba(255,255,255,.07); color:rgba(255,255,255,.6);
+  font-size:.78rem; font-weight:600; font-family:inherit;
+  transition:background .15s;
+}
+#editModeBar .em-reset:hover { background:rgba(239,68,68,.2); color:#fca5a5; border-color:rgba(239,68,68,.3); }
 </style>
 </head>
 <body>
+
+<!-- ── PASSWORD GATE ── -->
+<div id="pw-gate">
+  <div class="pw-bg-g1"></div>
+  <div class="pw-bg-g2"></div>
+  <div class="pw-bg-g3"></div>
+  <div class="pw-ring"></div>
+  <div class="pw-ring2"></div>
+  <div class="pw-card">
+    <img src="logo.svg" alt="Agrícola Belher" class="pw-logo-img">
+    <div class="pw-divider"></div>
+    <div class="pw-sub">Acceso Restringido &nbsp;·&nbsp; GC 2025–2026</div>
+    <input id="pw-input" class="pw-input" type="password" placeholder="Contraseña" autocomplete="current-password">
+    <button class="pw-btn" onclick="checkPw()">Ingresar</button>
+    <div class="pw-err" id="pw-err"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='bih_auth_2026';
+  if(sessionStorage.getItem(KEY)==='1'){document.getElementById('pw-gate').classList.add('hidden');}
+  document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});
+})();
+function checkPw(){
+  var v=document.getElementById('pw-input').value;
+  if(v==='B31h32'){sessionStorage.setItem('bih_auth_2026','1');document.getElementById('pw-gate').classList.add('hidden');}
+  else{document.getElementById('pw-err').textContent='Contraseña incorrecta';document.getElementById('pw-input').value='';document.getElementById('pw-input').focus();}
+}
+</script>
 
 <!-- ══════════════════════════════════════════
      HEADER
@@ -2017,6 +2422,14 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     </div>
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
   </div>
+  <button class="edit-layout-btn" onclick="toggleEditMode()" title="Editar layout">
+    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    Editar
+  </button>
+  <button class="logout-btn" onclick="sessionStorage.removeItem('bih_auth_2026');document.getElementById('pw-gate').classList.remove('hidden');document.getElementById('pw-input').value='';document.getElementById('pw-err').textContent='';" title="Cerrar sesión">
+    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    Salir
+  </button>
 </header>
 
 <!-- ══ TICKER ══ -->
@@ -2051,6 +2464,8 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     <div id="hoyHero"></div>
     <div class="hoy-kpi-grid" id="hoyKpis"></div>
     <div class="hoy-pulso" id="hoyPulso"></div>
+
+    <div id="pronosticoSection"></div>
 
     <div class="hoy-mid">
       <div>
@@ -2275,6 +2690,9 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     <div id="cw-ventas"></div>
     <div id="cw-usda"></div>
     <div id="cw-toy"></div>
+    <div id="cw-discrepancias"></div>
+    <div id="cw-noticias"></div>
+    <div id="cw-predicciones"></div>
   </div>
 
   <!-- ══════════ LIMÓN ══════════ -->
@@ -2282,8 +2700,10 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     <div class="section-title">KPIs · Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
     <div class="grid-4" id="limonKpis"></div>
     <div id="limonClienteRisk"></div>
-    <div class="section-title">Precio FOB California <span class="src-tag">USDA Market News · FOB Shipping Point</span></div>
+    <div class="section-title">Precio FOB Nogales &amp; LA Terminal Market <span class="src-tag">USDA Market News · FOB Shipping Point + Terminal</span></div>
     <div id="limonUsdaPrice"></div>
+    <div class="section-title">Histórico 12 Meses + Tendencia 4 Semanas <span class="src-tag">USDA Market News · Limón Persa 40lb carton</span></div>
+    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
     <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
     <div class="card" id="limonPnl" style="padding:24px"></div>
     <div class="section-title">Precios de Mercado · Referencia</div>
@@ -2361,11 +2781,23 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     <div class="card"><div class="chart-box" style="height:260px"><canvas id="chartCdc"></canvas></div></div>
     <div class="section-title">% Trabajadores por Semana</div>
     <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartCdcPct"></canvas></div></div>
+
+    <div class="section-title">Varianza Total: Real vs Proyectado <span class="src-tag">Depto. Producción · Plan Inicial 2025–2026</span></div>
+    <div class="card"><div class="chart-box" style="height:240px"><canvas id="chartCdcVsProyeccion"></canvas></div></div>
   </div>
 
 </main>
 
 <footer id="footerEl"></footer>
+
+<div id="editModeBar">
+  <div>
+    <div class="em-label">✏ Modo Edición Activo</div>
+    <div class="em-sub">Arrastra secciones · ✕ para ocultar</div>
+  </div>
+  <button class="em-reset" onclick="resetLayout()">Restablecer</button>
+  <button class="em-save" onclick="saveAndExitEdit()">Guardar y Salir</button>
+</div>
 
 <script>
 (function () {
@@ -2622,6 +3054,32 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     var ytdVarPctStr = (ytdVarPct >= 0 ? '+' : '') + ytdVarPct.toFixed(1) + '%';
     var ytdSublbl = ytdBetter ? 'vs budget' : 'vs budget';
 
+    /* Budget bar helper */
+    function budgetBarRow(actual, budget, yago) {
+      var fillPct = budget ? Math.min(actual / budget * 100, 100) : 0;
+      var varAmt  = actual - budget;
+      var varPct  = budget ? (varAmt / Math.abs(budget) * 100) : 0;
+      var isPos   = varAmt >= 0;
+      var varStr  = (isPos ? '+' : '') + varPct.toFixed(1) + '%';
+      var barColor = isPos ? '#22c55e' : '#ef4444';
+      var yoyStr  = '';
+      if (yago != null) {
+        var yoyPct = yago ? ((actual - yago) / Math.abs(yago) * 100) : 0;
+        yoyStr = '<span class="yoy-pill">vs YA: ' + (yoyPct >= 0 ? '+' : '') + yoyPct.toFixed(1) + '%</span>';
+      }
+      return '<div class="budget-bar-row">' +
+        '<div class="budget-bar-meta" style="margin-bottom:2px"><span>vs Presupuesto</span></div>' +
+        '<div class="budget-bar-track"><div class="budget-bar-fill" style="width:' + fillPct.toFixed(1) + '%;background:' + barColor + '"></div></div>' +
+        '<div class="budget-bar-meta">' +
+          '<span>Act: ' + fmt(actual) + ' · Pres: ' + fmt(budget) + '</span>' +
+          '<div style="display:flex;gap:5px;align-items:center">' +
+            '<span class="budget-pct-pill ' + (isPos ? 'pos' : 'neg') + '">' + varStr + '</span>' +
+            yoyStr +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
     document.getElementById('ebitdaDonuts').innerHTML =
       '<div class="donut-card">' +
         '<div class="donut-card-title">Mes · ' + ebtd.mes.nombre + '</div>' +
@@ -2637,6 +3095,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
             (mesOK ? '▲ +' : '▼ ') + fmt(Math.abs(mesVar)) + ' vs budget</span><br>' +
           'Budget <strong>' + fmt(ebtd.mes.budget) + '</strong> &nbsp;·&nbsp; Y/A <strong>' + fmt(ebtd.mes.yago) + '</strong>' +
         '</div>' +
+        budgetBarRow(ebtd.mes.actual, ebtd.mes.budget, ebtd.mes.yago) +
       '</div>' +
       '<div class="donut-card">' +
         '<div class="donut-card-title">Acumulado · ' + ebtd.ytd.nombre + '</div>' +
@@ -2652,6 +3111,7 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
             (ytdBetter ? '▲ +' : '▼ ') + fmt(Math.abs(ytdVar)) + ' vs budget</span><br>' +
           'Budget <strong>' + fmt(ebtd.ytd.budget) + '</strong> &nbsp;·&nbsp; Y/A <strong>' + fmt(ebtd.ytd.yago) + '</strong>' +
         '</div>' +
+        budgetBarRow(ebtd.ytd.actual, ebtd.ytd.budget, ebtd.ytd.yago) +
       '</div>';
 
     renderDonut('chartDonutMes', ebtd.mes.actual, ebtd.mes.budget, mesOK);
@@ -3753,6 +4213,30 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     var totalAcomp  = bLast.acomp + dLast.acomp;
     var pctGlobal   = (totalTrab / totalActual * 100).toFixed(1);
 
+    /* Projected values for WK39 comparison */
+    var proyMap = {};
+    if (cdc.proyeccion && cdc.proyeccion.semanas) {
+      cdc.proyeccion.semanas.forEach(function (s) { proyMap[s.sem] = s; });
+    }
+    var proy39 = proyMap['WK39'] || { beltran: 1260, dorita: 228, total: 1488 };
+    var bActual39 = bLast.total;
+    var dActual39 = dLast.total;
+    var bProy39   = proy39.beltran;
+    var dProy39   = proy39.dorita;
+    var bVar39    = bActual39 - bProy39;
+    var dVar39    = dActual39 - dProy39;
+    var combActual39 = bActual39 + dActual39;
+    var combProy39   = bProy39 + dProy39;
+    var combVar39    = combActual39 - combProy39;
+    function varCell(actual, proy) {
+      var diff = actual - proy;
+      var pct  = proy ? (diff / proy * 100).toFixed(1) : '0.0';
+      var col  = diff >= 0 ? 'var(--green2)' : 'var(--red2)';
+      return '<span style="font-weight:700;color:' + col + '">' + actual.toLocaleString() + '</span>' +
+             ' <span style="font-size:.72rem;color:' + col + '">(' + (diff >= 0 ? '+' : '') + diff + ' / ' + (diff >= 0 ? '+' : '') + pct + '%)</span>' +
+             '<span style="font-size:.68rem;color:var(--muted);margin-left:4px">proy: ' + proy.toLocaleString() + '</span>';
+    }
+
     document.getElementById('cdcCards').innerHTML =
       '<div class="cdc-stat-card">' +
         '<div class="cdc-stat-title">Ambos CDC · Resumen ' + cdc.semanaActual + '</div>' +
@@ -3769,6 +4253,13 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
         '<div class="cdc-stat-row"><span class="lbl">Dorita · actual / pico</span><span class="val">' + dLast.total + ' / ' + d.picoTemporada.total + '</span></div>' +
         '<div class="cdc-stat-row"><span class="lbl">Dorita · trabajadores / pico</span><span class="val">' + dLast.trabajadores + ' / ' + d.picoTemporada.trabajadores + '</span></div>' +
         '<div class="cdc-stat-row"><span class="lbl">Semanas en censo</span><span class="val">' + b.historico.length + ' semanas (WK19–WK39)</span></div>' +
+      '</div>' +
+      '<div class="cdc-stat-card" style="grid-column:1/-1">' +
+        '<div class="cdc-stat-title">Real vs Proyectado · ' + cdc.semanaActual + '</div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Lo de Beltrán</span><span class="val">' + varCell(bActual39, bProy39) + '</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Campo Dorita</span><span class="val">' + varCell(dActual39, dProy39) + '</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Combinado</span><span class="val">' + varCell(combActual39, combProy39) + '</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl" style="font-size:.62rem;color:var(--muted)">Fuente proyección: Depto. Producción · Plan Inicial 2025–2026</span><span class="val"></span></div>' +
       '</div>';
 
     /* ── TREND CHART: total personas ── */
@@ -3777,6 +4268,16 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     var dMap = {};
     d.historico.forEach(function (r) { dMap[r.sem] = r.total; });
     var dTotales = allSems.map(function (s) { return dMap[s] || null; });
+
+    /* Build projected series aligned to allSems */
+    var projBeltran = [];
+    var projDorita  = [];
+    if (cdc.proyeccion && cdc.proyeccion.semanas) {
+      var projMap = {};
+      cdc.proyeccion.semanas.forEach(function (s) { projMap[s.sem] = s; });
+      projBeltran = allSems.map(function (s) { return projMap[s] ? projMap[s].beltran : null; });
+      projDorita  = allSems.map(function (s) { return projMap[s] ? projMap[s].dorita  : null; });
+    }
 
     var ctxT = document.getElementById('chartCdc');
     if (!ctxT) return;
@@ -3789,7 +4290,9 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
           { label:'Lo de Beltrán · Total', data: bTotales, borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,.08)', borderWidth:2.5, tension:.4, pointRadius:3, fill:true },
           { label:'Lo de Beltrán · Trabajadores', data: b.historico.map(function(r){return r.trabajadores;}), borderColor:'#0ea5e9', borderWidth:2, borderDash:[4,3], tension:.4, pointRadius:2, fill:false },
           { label:'Campo Dorita · Total', data: dTotales, borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,.08)', borderWidth:2.5, tension:.4, pointRadius:3, fill:true },
-          { label:'Campo Dorita · Trabajadores', data: allSems.map(function(s){ var r=d.historico.find(function(x){return x.sem===s;}); return r?r.trabajadores:null; }), borderColor:'#7c3aed', borderWidth:2, borderDash:[4,3], tension:.4, pointRadius:2, fill:false }
+          { label:'Campo Dorita · Trabajadores', data: allSems.map(function(s){ var r=d.historico.find(function(x){return x.sem===s;}); return r?r.trabajadores:null; }), borderColor:'#7c3aed', borderWidth:2, borderDash:[4,3], tension:.4, pointRadius:2, fill:false },
+          { label:'Beltrán Proyectado', data: projBeltran, borderColor:'#f59e0b', borderWidth:1.8, borderDash:[5,4], tension:.4, pointRadius:0, fill:false },
+          { label:'Dorita Proyectado',  data: projDorita,  borderColor:'#c084fc', borderWidth:1.8, borderDash:[5,4], tension:.4, pointRadius:0, fill:false }
         ]
       },
       options: { responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
@@ -3821,6 +4324,56 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
         scales:{ y:{ beginAtZero:false, min:30, max:80, ticks:{callback:function(v){return v+'%';}}, grid:{color:'rgba(0,0,0,.04)'} }, x:{ grid:{display:false} } }
       }
     });
+
+    /* ── VARIANCE CHART: Real vs Proyectado ── */
+    var ctxV = document.getElementById('chartCdcVsProyeccion');
+    if (ctxV && cdc.proyeccion && cdc.proyeccion.semanas) {
+      if (chartsInit['chartCdcVsProyeccion']) { chartsInit['chartCdcVsProyeccion'].destroy(); }
+      var varLabels = [];
+      var varData   = [];
+      var varColors = [];
+      allSems.forEach(function (s) {
+        if (!proyMap[s]) return;
+        var bRow = b.historico.find(function (r) { return r.sem === s; });
+        var dRow = d.historico.find(function (r) { return r.sem === s; });
+        if (!bRow) return;
+        var realComb = bRow.total + (dRow ? dRow.total : 0);
+        var projComb = proyMap[s].total;
+        var diff = realComb - projComb;
+        varLabels.push(s);
+        varData.push(diff);
+        varColors.push(diff >= 0 ? 'rgba(34,197,94,.7)' : 'rgba(239,68,68,.7)');
+      });
+      chartsInit['chartCdcVsProyeccion'] = new Chart(ctxV, {
+        type: 'bar',
+        data: {
+          labels: varLabels,
+          datasets: [{
+            label: 'Varianza (Real − Proyectado)',
+            data: varData,
+            backgroundColor: varColors,
+            borderRadius: 4,
+            borderSkipped: false
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode:'index', intersect:false },
+          plugins: {
+            legend: { position:'top' },
+            title: { display:true, text:'Varianza Total: Real vs Proyectado (personas)', font:{size:12,weight:'700'}, color:'#374151', padding:{bottom:10} },
+            tooltip: { callbacks: { label: function(ctx) {
+              var v = ctx.parsed.y;
+              return 'Varianza: ' + (v >= 0 ? '+' : '') + v.toLocaleString() + ' personas';
+            }}}
+          },
+          scales: {
+            y: { grid: { color:'rgba(0,0,0,.04)' }, ticks: { callback: function(v) { return (v >= 0 ? '+' : '') + v; } } },
+            x: { grid: { display:false } }
+          }
+        }
+      });
+    }
   }
 
   function renderIndustria() {
@@ -4010,9 +4563,11 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
       var sign = has && s.cambio >= 0 ? '+' : '';
       var rangePct = (has && s.h52 && s.l52) ? ((s.precio - s.l52) / (s.h52 - s.l52) * 100).toFixed(1) : 50;
       var rangeColor = dir === 'up' ? '#34c759' : dir === 'down' ? '#ff453a' : '#007aff';
+      var logoMap = { CVGW:'https://logo.clearbit.com/calavo.com', AVO:'https://logo.clearbit.com/missionproduce.com' };
       stocksHtml += '<div class="card cw-stock-card ' + dir + '-card">' +
         '<div class="cw-stock-row1">' +
           '<div>' +
+            (logoMap[s.simbolo] ? '<img class="cw-stock-logo" src="' + logoMap[s.simbolo] + '" alt="' + s.nombre + '" onerror="this.style.display=\'none\'">' : '') +
             '<div class="cw-stock-sym">' + s.simbolo + '</div>' +
             '<div class="cw-stock-name">' + s.nombre + '</div>' +
             '<div class="cw-stock-mkt-badge">' + s.mercado + '</div>' +
@@ -4194,6 +4749,60 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
             return '<tr><td>' + p.mes + '</td><td>' + cFmt(p.yPrev) + ' <small style="color:var(--muted)">(' + p.prevLabel + ')</small></td><td>' + cFmt(p.yCurr) + '</td><td class="' + c + '">' + (d!=null?(d>=0?'+':'')+d+'%':'—') + '</td></tr>';
           }).join('') + '</tbody></table></div>' +
       '</div>';
+
+    /* ── DISCREPANCIAS ── */
+    if (CW.discrepancias && CW.discrepancias.length) {
+      document.getElementById('cw-discrepancias').innerHTML =
+        secHdr('Análisis de Discrepancias', 'Belher vs Calavo · Detección de anomalías') +
+        '<div class="cw-disc-grid">' +
+        CW.discrepancias.map(function(d) {
+          return '<div class="cw-disc-card' + (d.alerta ? ' alerta' : '') + '">' +
+            '<div class="cw-disc-title">' + d.titulo + '</div>' +
+            '<div class="cw-disc-row"><span class="cw-disc-lbl">Belher</span><span class="cw-disc-val">' + d.belher + '</span></div>' +
+            '<div class="cw-disc-row"><span class="cw-disc-lbl">Calavo / USDA</span><span class="cw-disc-val">' + d.mercado + '</span></div>' +
+            '<div class="cw-disc-row"><span class="cw-disc-lbl">Diferencia</span><span class="cw-disc-diff ' + (d.alerta ? 'cw-disc-warn' : 'cw-disc-ok') + '">' + d.diferencia + '</span></div>' +
+            '<div class="cw-disc-nota">' + d.nota + '</div>' +
+          '</div>';
+        }).join('') + '</div>';
+    }
+
+    /* ── NOTICIAS MERCADO TOMATE ── */
+    if (CW.noticias && CW.noticias.length) {
+      document.getElementById('cw-noticias').innerHTML =
+        secHdr('Inteligencia de Mercado · Tomate', 'Corbel Seeds · USDA · Prensa especializada') +
+        '<div class="cw-news-grid">' +
+        CW.noticias.map(function(n) {
+          return '<div class="cw-news-card">' +
+            '<div class="cw-news-top">' +
+              '<span class="cw-news-cat ' + n.categoria + '">' + n.categoria + '</span>' +
+              '<span class="cw-news-imp ' + n.impacto + '">' + n.impacto + '</span>' +
+              '<span class="cw-news-fuente">' + n.fuente + '</span>' +
+            '</div>' +
+            '<div class="cw-news-titulo">' + n.titulo + '</div>' +
+            '<div class="cw-news-resumen">' + n.resumen + '</div>' +
+          '</div>';
+        }).join('') + '</div>';
+    }
+
+    /* ── PREDICCIONES BOLSA ── */
+    if (CW.prediccionBolsa && CW.prediccionBolsa.length) {
+      document.getElementById('cw-predicciones').innerHTML =
+        secHdr('Perspectiva Bursátil · 90 días', 'Análisis interno · No es asesoría de inversión') +
+        '<div class="cw-pred-grid">' +
+        CW.prediccionBolsa.map(function(p) {
+          return '<div class="cw-pred-card ' + p.tendencia + '">' +
+            '<div class="cw-pred-sym">' + p.simbolo + ' · NASDAQ</div>' +
+            '<div class="cw-pred-company">' + p.empresa + '</div>' +
+            '<div class="cw-pred-row"><span class="cw-pred-lbl">Precio actual</span><span class="cw-pred-val">' + cFmt(p.precioActual) + '</span></div>' +
+            '<div class="cw-pred-row"><span class="cw-pred-lbl">Objetivo 90d</span><span class="cw-pred-val">' + cFmt(p.precioObj90d) + '</span></div>' +
+            '<div class="cw-pred-row"><span class="cw-pred-lbl">Riesgo bajista</span><span class="cw-pred-val">' + cFmt(p.riesgoBajo) + '</span></div>' +
+            '<div class="cw-pred-row"><span class="cw-pred-lbl">Tendencia</span><span class="cw-pred-trend ' + p.tendencia + '">' + (p.tendencia === 'alcista' ? '▲' : p.tendencia === 'bajista' ? '▼' : '→') + ' ' + p.tendencia.toUpperCase() + '</span></div>' +
+            '<div class="cw-pred-conf"><span style="font-size:.6rem;color:var(--muted)">Confianza</span><div class="cw-pred-conf-bar"><div class="cw-pred-conf-fill" style="width:' + p.confianza + '%"></div></div><span class="cw-pred-conf-lbl">' + p.confianza + '%</span></div>' +
+            '<div class="cw-pred-reason">' + p.razonamiento.substring(0, 220) + '…</div>' +
+            (p.factores ? '<ul style="margin:8px 0 0;padding-left:14px">' + p.factores.map(function(f){ return '<li style="font-size:.65rem;color:var(--muted);margin-bottom:3px">' + f + '</li>'; }).join('') + '</ul>' : '') +
+          '</div>';
+        }).join('') + '</div>';
+    }
   }
 
   function renderTomate() {
@@ -4592,58 +5201,130 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     if (lt) {
       var fobPorCaja = lt.fob_caja_feb;
       var mocPct     = lt.first_moc_pct;
+      var ebitdaKpi  = lt.ebitda_feb != null ? lt.ebitda_feb : lt.ebitda_acum;
       kpisEl.innerHTML =
         kpiCard('Revenue Febrero 2026', fmt(lt.revenue_feb), lt.cajas_feb.toLocaleString('en-US') + ' cajas · ' + lt.libras_feb.toLocaleString('en-US') + ' lb',
           'pos', 'accent-pos', pill('up', 'Maui Fresh · $' + fobPorCaja.toFixed(2) + '/caja FOB')) +
-        kpiCard('Costos Manufactura Feb', fmt(lt.costo_manuf_feb), lt.hectareas + ' ha · Temporada en curso',
-          'neg', 'accent-neg', null) +
         kpiCard('Liquidación Neta Feb', fmt(lt.liquidacion_feb), 'Comisión ' + fmt(lt.comision_feb) + ' · Fletes ' + fmt(lt.flete_mx_feb + lt.flete_eu_feb),
-          'pos', 'accent-pos', pill('up', 'MOC ' + mocPct.toFixed(1) + '%')) +
-        kpiCard('Costos Producción Acum', fmt(lt.costo_prod_acum), 'Jul–Feb 2026 · Orchard + Prod',
-          'acc', 'accent-warn', pill('neu', 'WIP activo'));
+          'pos', 'accent-pos', pill('up', 'MOC bruto ' + mocPct.toFixed(1) + '%')) +
+        kpiCard('Costos Totales Feb', fmt(lt.costo_manuf_feb + lt.costo_dist_feb + lt.comision_feb + lt.flete_mx_feb + lt.flete_eu_feb), 'Manufactura + Dist + Comisión + Fletes',
+          'neg', 'accent-neg', null) +
+        kpiCard('EBITDA · Cierre Feb 2026', (ebitdaKpi < 0 ? '−' : '+') + fmt(Math.abs(ebitdaKpi)), 'Incluye costos de campo · Jul–Feb',
+          ebitdaKpi < 0 ? 'neg' : 'pos', ebitdaKpi < 0 ? 'accent-neg' : 'accent-pos',
+          pill(ebitdaKpi < 0 ? 'dn' : 'up', ebitdaKpi < 0 ? 'Pérdida' : 'Rentable'));
     }
 
-    /* ── USDA FOB California price ── */
+    /* ── USDA FOB Nogales + LA Terminal price ── */
     var lu = D.limon && D.limon.usda;
     var usdaEl = document.getElementById('limonUsdaPrice');
     if (lu && lu.precio_min != null) {
       var chgPct = lu.anterior != null ? ((((lu.precio_min+lu.precio_max)/2) - lu.anterior) / lu.anterior * 100) : null;
-      var chgStr = chgPct != null ? (chgPct >= .5 ? '▲ +' : chgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(chgPct).toFixed(1) + '% vs semana anterior' : '';
+      var chgStr = chgPct != null ? (chgPct >= .5 ? '▲ +' : chgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(chgPct).toFixed(1) + '% vs sem. ant.' : '';
       var chgCls = chgPct == null ? '' : chgPct > .5 ? 'up' : chgPct < -.5 ? 'dn' : 'neu';
+      var la = lu.la_terminal;
+      var laChgPct = (la && lu.anterior) ? ((((la.precio_min+la.precio_max)/2) - (lu.anterior + 3.0)) / (lu.anterior + 3.0) * 100) : null;
+      var laChgCls = laChgPct == null ? '' : laChgPct > .5 ? 'up' : laChgPct < -.5 ? 'dn' : 'neu';
+      var spread = la ? (((la.precio_min+la.precio_max)/2) - ((lu.precio_min+lu.precio_max)/2)).toFixed(2) : null;
       usdaEl.innerHTML =
-        '<div class="card" style="padding:20px 24px">' +
-          '<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' +
-            '<div>' +
-              '<div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px">' + lu.variedad + ' · ' + lu.mercado + '</div>' +
-              '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px">' + fmt(lu.precio_min,2) + '&nbsp;–&nbsp;' + fmt(lu.precio_max,2) + '<span style="font-size:.9rem;font-weight:500;opacity:.6"> /' + lu.unidad + '</span></div>' +
-              (chgStr ? '<div class="pc-chg ' + chgCls + '" style="margin-top:4px">' + chgStr + '</div>' : '') +
+        '<div class="card" style="padding:0;overflow:hidden">' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0">' +
+            /* FOB Nogales */
+            '<div style="padding:20px 24px;border-right:1px solid var(--border)">' +
+              '<div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px">FOB Nogales, AZ</div>' +
+              '<div style="font-size:1.9rem;font-weight:900;letter-spacing:-.5px;line-height:1">' + fmt(lu.precio_min,2) + '&thinsp;–&thinsp;' + fmt(lu.precio_max,2) + '</div>' +
+              '<div style="font-size:.72rem;color:var(--muted);margin-top:2px">/' + lu.unidad + ' · 40lb</div>' +
+              (chgStr ? '<div class="pc-chg ' + chgCls + '" style="margin-top:6px;font-size:.72rem">' + chgStr + '</div>' : '') +
+              '<div style="font-size:.68rem;color:var(--muted);margin-top:8px">' + (lu.anterior != null ? 'Sem. anterior: ' + fmt(lu.anterior,2) : '') + '&nbsp;&nbsp;Act: ' + (lu.fecha||'—') + '</div>' +
             '</div>' +
-            '<div style="margin-left:auto;text-align:right;font-size:.75rem;color:var(--muted)">' +
-              (lu.anterior != null ? 'Semana anterior: ' + fmt(lu.anterior,2) + '<br>' : '') +
-              'Actualizado: ' + (lu.fecha || '—') +
-            '</div>' +
+            /* LA Terminal */
+            (la ?
+            '<div style="padding:20px 24px;background:rgba(29,78,216,.03)">' +
+              '<div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px">LA Terminal Market</div>' +
+              '<div style="font-size:1.9rem;font-weight:900;letter-spacing:-.5px;line-height:1;color:var(--blue)">' + fmt(la.precio_min,2) + '&thinsp;–&thinsp;' + fmt(la.precio_max,2) + '</div>' +
+              '<div style="font-size:.72rem;color:var(--muted);margin-top:2px">/' + (la.unidad || lu.unidad) + '</div>' +
+              (laChgPct != null ? '<div class="pc-chg ' + laChgCls + '" style="margin-top:6px;font-size:.72rem">' + (laChgPct >= .5 ? '▲ +' : laChgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(laChgPct).toFixed(1) + '% vs sem. ant.</div>' : '') +
+              (la.nota ? '<div style="font-size:.63rem;color:var(--muted);margin-top:8px;line-height:1.4;border-top:1px solid var(--border);padding-top:7px">' + la.nota + '</div>' : '') +
+            '</div>' : '<div style="padding:20px 24px;color:var(--muted);font-size:.8rem;display:flex;align-items:center">Sin datos LA Terminal</div>') +
           '</div>' +
         '</div>';
     } else {
       usdaEl.innerHTML =
         '<div class="card" style="padding:18px 24px;color:var(--muted);font-size:.84rem">' +
-          'Precio USDA FOB California pendiente · Se actualiza automáticamente desde ' +
+          'Precio USDA FOB pendiente · Se actualiza automáticamente desde ' +
           '<a href="https://www.ams.usda.gov/market-news/fruits-vegetables" target="_blank" style="color:var(--accent)">USDA Market News</a>' +
         '</div>';
+    }
+
+    /* ── 12-month price chart + 4-week forecast ── */
+    var ctxLim = document.getElementById('chartLimonPrecio');
+    if (ctxLim && lu && lu.historico_12m) {
+      if (chartsInit['chartLimonPrecio']) { chartsInit['chartLimonPrecio'].destroy(); }
+      var hist   = lu.historico_12m;
+      var fcast  = lu.tendencia_4s || [];
+      var histLabels  = hist.map(function(h){ return h.mes; });
+      var fcastLabels = fcast.map(function(f){ return f.semana; });
+      var allLabels   = histLabels.concat(fcastLabels);
+      /* Nogales mid: historical full + forecast extension */
+      var nogHist  = hist.map(function(h){ return h.nogales_mid; });
+      var nogFcast = hist.map(function(){ return null; }).concat(fcast.map(function(f){ return f.nogales_mid; }));
+      /* LA mid: historical full + forecast extension */
+      var laHist  = hist.map(function(h){ return h.la_mid; });
+      var laFcast = hist.map(function(){ return null; }).concat(fcast.map(function(f){ return f.la_mid; }));
+      /* Last hist point bridges to first forecast point */
+      if (fcast.length) { nogFcast[hist.length-1] = nogHist[nogHist.length-1]; laFcast[hist.length-1] = laHist[laHist.length-1]; }
+      chartsInit['chartLimonPrecio'] = new Chart(ctxLim, {
+        type: 'line',
+        data: {
+          labels: allLabels,
+          datasets: [
+            { label:'FOB Nogales (mid)', data: nogHist.concat(fcast.map(function(){ return null; })), borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.08)', borderWidth:2.5, tension:.4, pointRadius:3, pointHoverRadius:5, fill:true },
+            { label:'LA Terminal (mid)', data: laHist.concat(fcast.map(function(){ return null; })),  borderColor:'#1d4ed8', backgroundColor:'rgba(29,78,216,.06)', borderWidth:2.5, tension:.4, pointRadius:3, pointHoverRadius:5, fill:true },
+            { label:'Nogales Tendencia', data: nogFcast, borderColor:'#16a34a', borderWidth:2, borderDash:[6,4], tension:.4, pointRadius:4, pointStyle:'triangle', fill:false },
+            { label:'LA Tendencia',      data: laFcast,  borderColor:'#1d4ed8', borderWidth:2, borderDash:[6,4], tension:.4, pointRadius:4, pointStyle:'triangle', fill:false }
+          ]
+        },
+        options: {
+          responsive:true, maintainAspectRatio:false,
+          interaction:{ mode:'index', intersect:false },
+          plugins:{
+            legend:{ position:'top' },
+            tooltip:{ callbacks:{ label:function(ctx){ return ctx.dataset.label + ': $' + (ctx.parsed.y != null ? ctx.parsed.y.toFixed(2) : '—'); } } },
+            annotation: undefined
+          },
+          scales:{
+            y:{ beginAtZero:false, min:10, ticks:{ callback:function(v){ return '$'+v; } }, grid:{ color:'rgba(0,0,0,.04)' } },
+            x:{ grid:{ display:false },
+              ticks:{ maxRotation:0, font:{ size:10 } }
+            }
+          }
+        }
+      });
+      /* Shade forecast zone with a vertical line at month boundary */
+      if (fcast.length && ctxLim.parentElement) {
+        ctxLim.parentElement.style.position = 'relative';
+        var lbl = document.createElement('div');
+        lbl.style.cssText = 'position:absolute;top:8px;right:8px;font-size:.6rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);background:var(--card);padding:2px 8px;border-radius:5px;border:1px solid var(--border)';
+        lbl.textContent = '--- Pronóstico 4 sem.';
+        ctxLim.parentElement.appendChild(lbl);
+      }
     }
 
     /* ── P&L Limón Febrero ── */
     if (lt) {
       var pnlEl = document.getElementById('limonPnl');
+      var ebitda = lt.ebitda_feb != null ? lt.ebitda_feb : lt.ebitda_acum;
       var rows = [
-        { label:'Revenue FOB Export', val: lt.revenue_feb, color:'var(--green2)' },
-        { label:'Comisión (15%)',      val:-lt.comision_feb, color:'var(--red)' },
-        { label:'Flete MX + EU',       val:-(lt.flete_mx_feb + lt.flete_eu_feb), color:'var(--red)' },
-        { label:'Liquidación Neta',    val: lt.liquidacion_feb, color:'var(--green2)', bold:true },
+        { label:'Revenue FOB Export',     val: lt.revenue_feb,                          color:'var(--green2)' },
+        { label:'Comisión (15%)',          val:-lt.comision_feb,                         color:'var(--red2)' },
+        { label:'Flete MX + EU',           val:-(lt.flete_mx_feb + lt.flete_eu_feb),     color:'var(--red2)' },
+        { label:'Liquidación Neta',        val: lt.liquidacion_feb,                      color:'var(--green2)', bold:true },
         { label:'—', val:null },
-        { label:'Costo Manufactura',   val:-lt.costo_manuf_feb, color:'var(--red)' },
-        { label:'Costo Distribución',  val:-lt.costo_dist_feb,  color:'var(--red)' },
-        { label:'First MOC',           val: lt.first_moc_feb, color: lt.first_moc_feb >= 0 ? 'var(--green2)' : 'var(--red)', bold:true, pct: lt.first_moc_pct }
+        { label:'Costo Manufactura',       val:-lt.costo_manuf_feb,                      color:'var(--red2)' },
+        { label:'Costo Distribución',      val:-lt.costo_dist_feb,                       color:'var(--red2)' },
+        { label:'First MOC',               val: lt.first_moc_feb,                        color: lt.first_moc_feb >= 0 ? 'var(--green2)' : 'var(--red)', bold:true, pct: lt.first_moc_pct },
+        { label:'—', val:null },
+        { label:'Costos Producción Acum',  val:-lt.costo_prod_acum,                      color:'var(--red2)', note:'Jul–Feb · Orchard + Campo' },
+        { label:'EBITDA · Cierre Feb 2026',val: ebitda,                                  color: ebitda >= 0 ? 'var(--green2)' : 'var(--red)', bold:true, ebitda:true }
       ];
       pnlEl.innerHTML =
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">' +
@@ -4651,10 +5332,16 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
             '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Detalle · Febrero 2026 · Maui Fresh</div>' +
             rows.map(function(r) {
               if (!r.label || r.label === '—') return '<div style="height:10px"></div>';
-              return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">' +
-                '<span style="font-size:.84rem' + (r.bold ? ';font-weight:700' : '') + '">' + r.label + '</span>' +
-                '<span style="font-weight:' + (r.bold ? '800' : '600') + ';color:' + (r.color || 'var(--text)') + '">' +
-                  fmt(Math.abs(r.val),0) + (r.val < 0 ? ' <span style="opacity:.5;font-size:.75rem">(gasto)</span>' : '') +
+              var rowStyle = r.ebitda
+                ? 'display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:8px;margin-top:4px;background:' + (r.val < 0 ? 'rgba(220,38,38,.07)' : 'rgba(34,197,94,.07)') + ';border:1px solid ' + (r.val < 0 ? 'rgba(220,38,38,.2)' : 'rgba(34,197,94,.2)')
+                : 'display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)';
+              return '<div style="' + rowStyle + '">' +
+                '<span style="font-size:.84rem' + (r.bold ? ';font-weight:700' : '') + '">' + r.label +
+                  (r.note ? '<br><span style="font-size:.68rem;font-weight:400;color:var(--muted)">' + r.note + '</span>' : '') +
+                '</span>' +
+                '<span style="font-weight:' + (r.bold ? '800' : '600') + ';color:' + (r.color || 'var(--text)') + (r.ebitda ? ';font-size:1.05rem' : '') + '">' +
+                  (r.val < 0 ? '−' : '') + fmt(Math.abs(r.val), 0) +
+                  (r.val < 0 && !r.ebitda ? ' <span style="opacity:.5;font-size:.75rem">(gasto)</span>' : '') +
                   (r.pct != null ? ' <span style="font-size:.75rem;color:var(--muted)">(' + r.pct.toFixed(1) + '%)</span>' : '') +
                 '</span>' +
               '</div>';
@@ -4672,10 +5359,11 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
               '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:var(--green2)">' + fmt(lt.fob_caja_feb,2) + '</div>' +
               '<div style="font-size:.8rem;color:var(--muted)">Neto liquidado: ' + fmt(lt.liquidacion_feb / lt.cajas_feb, 2) + '/caja</div>' +
             '</div>' +
-            '<div style="background:var(--bg);border-radius:10px;padding:18px">' +
-              '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">First MOC</div>' +
-              '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:' + (lt.first_moc_feb >= 0 ? 'var(--green2)' : 'var(--red)') + '">' + lt.first_moc_pct.toFixed(1) + '%</div>' +
-              '<div style="font-size:.8rem;color:var(--muted)">' + fmt(lt.first_moc_feb) + ' · Margen de contribución</div>' +
+            '<div style="background:' + (ebitda < 0 ? 'rgba(220,38,38,.07)' : 'rgba(34,197,94,.07)') + ';border:1.5px solid ' + (ebitda < 0 ? 'rgba(220,38,38,.25)' : 'rgba(34,197,94,.25)') + ';border-radius:10px;padding:18px">' +
+              '<div style="font-size:.7rem;font-weight:700;color:' + (ebitda < 0 ? 'var(--red)' : 'var(--green2)') + ';text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">EBITDA · Feb 2026</div>' +
+              '<div style="font-size:2.2rem;font-weight:900;letter-spacing:-.5px;color:' + (ebitda < 0 ? 'var(--red)' : 'var(--green2)') + ';line-height:1">' + (ebitda < 0 ? '−' : '+') + fmt(Math.abs(ebitda), 0) + '</div>' +
+              '<div style="font-size:.78rem;color:var(--muted);margin-top:5px">Resultado final · incluye costos de campo</div>' +
+              '<div style="font-size:.72rem;margin-top:6px;color:' + (ebitda < 0 ? 'var(--red2)' : 'var(--green2)') + ';font-weight:600">' + (ebitda < 0 ? '⚠ Operación en pérdida' : '✓ Operación rentable') + '</div>' +
             '</div>' +
           '</div>' +
         '</div>';
@@ -5025,9 +5713,60 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
     });
   });
 
+  /* ════════════════ PRONÓSTICO DE COSECHA ════════════════ */
+  function renderPronostico() {
+    var pr = D.pronostico;
+    if (!pr || !pr.semanas) return;
+    var el = document.getElementById('pronosticoSection');
+    if (!el) return;
+
+    var html = '<div class="section-title">Pronóstico de Cosecha · 2 Semanas ' +
+      '<span class="src-tag">IA · Báscula + Corbel Seeds + USDA</span></div>' +
+      '<div class="pronostico-grid">';
+
+    pr.semanas.forEach(function (wk) {
+      var maxCajas = Math.max.apply(null, wk.productos.map(function(p){return p.estimadoCajas;}));
+
+      html += '<div class="card" style="padding:0;overflow:hidden">' +
+        '<div class="pronostico-wk-hdr">' +
+          '<span class="pronostico-wk-lbl">' + wk.semana + '</span>' +
+          '<span class="pronostico-wk-dates">' + wk.fechas + '</span>' +
+        '</div>';
+
+      wk.productos.forEach(function (p) {
+        var barPct = maxCajas ? (p.estimadoCajas / maxCajas * 100).toFixed(1) : 0;
+        var confCls = p.confianza >= 75 ? 'hi' : p.confianza >= 60 ? 'mid' : 'lo';
+        var tendCls = p.tendencia === 'alcista' ? 'alcista' : p.tendencia === 'bajista' ? 'bajista' : 'lateral';
+        var tendLabel = p.tendencia === 'alcista' ? '▲ alcista' : p.tendencia === 'bajista' ? '▼ bajista' : '→ lateral';
+        /* color for bar fill */
+        var barColor = p.tendencia === 'alcista' ? '#22c55e' : p.tendencia === 'bajista' ? '#ef4444' : '#f59e0b';
+
+        html += '<div class="pronostico-prod-row">' +
+          '<div class="pronostico-prod-top">' +
+            '<span class="pronostico-prod-name">' + p.producto + '</span>' +
+            '<span class="pronostico-cajas">' + p.estimadoCajas.toLocaleString() + ' cajas</span>' +
+          '</div>' +
+          '<div class="pronostico-bar"><div class="pronostico-bar-fill" style="width:' + barPct + '%;background:' + barColor + '"></div></div>' +
+          '<div class="pronostico-badges">' +
+            '<span class="pronostico-conf ' + confCls + '">' + p.confianza + '% conf.</span>' +
+            '<span class="pronostico-tend ' + tendCls + '">' + tendLabel + '</span>' +
+            '<span style="font-size:.6rem;color:var(--muted)">' + p.hectareas + ' ha</span>' +
+          '</div>' +
+          '<div class="pronostico-nota">' + p.nota + '</div>' +
+        '</div>';
+      });
+
+      html += '</div>';
+    });
+
+    html += '</div>';
+    el.innerHTML = html;
+  }
+
   /* ── INIT ── */
   renderTicker();
   renderHoy();
+  renderPronostico();
   renderOperaciones();
   renderCalidad();
   renderMercado();
@@ -5041,6 +5780,199 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
   renderIndustria();
   renderAuditorias();
   renderCdc();
+
+  /* ════════════════════════════════════════════════
+     LAYOUT EDITOR
+  ════════════════════════════════════════════════ */
+  var LAYOUT_KEY = 'bih_layout_v1';
+  var editActive = false;
+  var dragSrcBlock = null;
+
+  /* ── Wrap tab panel children into .db-block containers ── */
+  function setupEditBlocks() {
+    document.querySelectorAll('.tab-panel').forEach(function(panel) {
+      var tabId = panel.id;
+      var children = Array.from(panel.children);
+      var i = 0;
+      while (i < children.length) {
+        var child = children[i];
+        // Skip already-wrapped blocks
+        if (child.classList.contains('db-block')) { i++; continue; }
+        var wrapper = document.createElement('div');
+        wrapper.className = 'db-block';
+        // Get a label from section-title text or element id
+        var lbl = '';
+        if (child.classList.contains('section-title')) {
+          lbl = child.textContent.split('·')[0].trim().substring(0, 30);
+        } else if (child.id) {
+          lbl = child.id.replace(/([A-Z])/g,' $1').replace(/^./,function(s){return s.toUpperCase();}).substring(0,30);
+        }
+        wrapper.dataset.label = lbl || ('Sección ' + (i+1));
+        // If it's a section-title, absorb the immediately following non-section-title siblings into same block
+        panel.insertBefore(wrapper, child);
+        wrapper.appendChild(child);
+        i++;
+        if (child.classList.contains('section-title')) {
+          // Absorb subsequent siblings until next section-title or end
+          children = Array.from(panel.children); // refresh after DOM change
+          // children[i] is now the first child after the wrapper we just inserted
+          // We need to get the actual next siblings of the wrapper
+          var next = wrapper.nextElementSibling;
+          while (next && !next.classList.contains('db-block') && !next.classList.contains('section-title')) {
+            var toMove = next;
+            next = next.nextElementSibling;
+            wrapper.appendChild(toMove);
+          }
+        }
+        children = Array.from(panel.children); // refresh
+        i = Array.from(panel.children).indexOf(wrapper) + 1;
+        // Inject controls
+        var label = wrapper.dataset.label || '';
+        var controls = document.createElement('div');
+        controls.className = 'db-controls';
+        controls.innerHTML =
+          '<span class="db-handle" title="Arrastrar">⠿</span>' +
+          (label ? '<span class="db-lbl">' + label + '</span>' : '') +
+          '<button class="db-toggle-btn hide-btn" onclick="dbToggleBlock(this)" title="Ocultar">✕</button>';
+        wrapper.appendChild(controls);
+        // Placeholder shown when hidden (outside edit mode)
+        var ph = document.createElement('div');
+        ph.className = 'db-placeholder';
+        ph.innerHTML = '— ' + (label || 'Sección') + ' (oculta) —';
+        wrapper.appendChild(ph);
+        // Drag events — only trigger when handle is grabbed
+        var handle = controls.querySelector('.db-handle');
+        handle.addEventListener('mousedown', function() { wrapper.draggable = true; });
+        handle.addEventListener('mouseup',   function() { wrapper.draggable = false; });
+        wrapper.addEventListener('dragstart', dbDragStart);
+        wrapper.addEventListener('dragover',  dbDragOver);
+        wrapper.addEventListener('dragleave', dbDragLeave);
+        wrapper.addEventListener('drop',      dbDrop);
+        wrapper.addEventListener('dragend',   dbDragEnd);
+      }
+    });
+  }
+
+  window.dbToggleBlock = function(btn) {
+    var block = btn.closest('.db-block');
+    var isHidden = block.classList.toggle('db-hidden');
+    // Swap button style
+    var ctrlBtn = block.querySelector('.db-toggle-btn');
+    if (isHidden) {
+      ctrlBtn.className = 'db-toggle-btn show-btn';
+      ctrlBtn.title = 'Mostrar';
+      ctrlBtn.textContent = '👁';
+    } else {
+      ctrlBtn.className = 'db-toggle-btn hide-btn';
+      ctrlBtn.title = 'Ocultar';
+      ctrlBtn.textContent = '✕';
+    }
+  };
+
+  /* Drag and drop */
+  function dbDragStart(e) {
+    if (!editActive) return;
+    dragSrcBlock = this;
+    this.classList.add('db-dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', '');
+  }
+  function dbDragOver(e) {
+    if (!editActive || !dragSrcBlock || dragSrcBlock === this) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    this.classList.add('db-drag-over');
+  }
+  function dbDragLeave() {
+    this.classList.remove('db-drag-over');
+  }
+  function dbDrop(e) {
+    e.stopPropagation();
+    if (!editActive || !dragSrcBlock || dragSrcBlock === this) return;
+    this.classList.remove('db-drag-over');
+    var parent = this.parentNode;
+    if (dragSrcBlock.parentNode !== parent) return; // only same tab
+    // Insert before or after based on position
+    var srcRect = dragSrcBlock.getBoundingClientRect();
+    var tgtRect = this.getBoundingClientRect();
+    if (srcRect.top < tgtRect.top) {
+      // src is above target: move src after target
+      parent.insertBefore(dragSrcBlock, this.nextSibling);
+    } else {
+      // src is below target: move src before target
+      parent.insertBefore(dragSrcBlock, this);
+    }
+  }
+  function dbDragEnd() {
+    document.querySelectorAll('.db-block').forEach(function(b) {
+      b.classList.remove('db-drag-over', 'db-dragging');
+      b.draggable = false;
+    });
+    dragSrcBlock = null;
+  }
+
+  /* Save/load layout */
+  function saveLayout() {
+    var layout = {};
+    document.querySelectorAll('.tab-panel').forEach(function(panel) {
+      var tabId = panel.id;
+      var blocks = Array.from(panel.querySelectorAll(':scope > .db-block'));
+      layout[tabId] = {
+        order:  blocks.map(function(b) { return b.dataset.label || ''; }),
+        hidden: blocks.filter(function(b) { return b.classList.contains('db-hidden'); })
+                      .map(function(b) { return b.dataset.label || ''; })
+      };
+    });
+    localStorage.setItem(LAYOUT_KEY, JSON.stringify(layout));
+  }
+
+  function loadLayout() {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(LAYOUT_KEY) || '{}'); } catch(e) {}
+    document.querySelectorAll('.tab-panel').forEach(function(panel) {
+      var tabId = panel.id;
+      var saved_tab = saved[tabId];
+      if (!saved_tab) return;
+      var blocks = Array.from(panel.querySelectorAll(':scope > .db-block'));
+      // Apply hidden state
+      (saved_tab.hidden || []).forEach(function(lbl) {
+        var block = blocks.find(function(b){ return b.dataset.label === lbl; });
+        if (block && !block.classList.contains('db-hidden')) {
+          block.classList.add('db-hidden');
+          var btn = block.querySelector('.db-toggle-btn');
+          if (btn) { btn.className = 'db-toggle-btn show-btn'; btn.title='Mostrar'; btn.textContent='👁'; }
+        }
+      });
+      // Apply order
+      if (saved_tab.order && saved_tab.order.length) {
+        saved_tab.order.forEach(function(lbl) {
+          var block = blocks.find(function(b){ return b.dataset.label === lbl; });
+          if (block) panel.appendChild(block);
+        });
+      }
+    });
+  }
+
+  window.toggleEditMode = function() {
+    editActive = !editActive;
+    document.body.classList.toggle('edit-mode', editActive);
+  };
+
+  window.saveAndExitEdit = function() {
+    saveLayout();
+    editActive = false;
+    document.body.classList.remove('edit-mode');
+  };
+
+  window.resetLayout = function() {
+    if (!confirm('¿Restablecer el layout original? Se borrarán todos los cambios.')) return;
+    localStorage.removeItem(LAYOUT_KEY);
+    location.reload();
+  };
+
+  /* Init: setup blocks after all renders, then load saved layout */
+  setupEditBlocks();
+  loadLayout();
 
 })();
 </script>
