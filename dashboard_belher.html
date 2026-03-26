@@ -3819,16 +3819,89 @@ function checkPw(){
     var cf = D.cashflow;
     if (!cf) return;
 
-    /* ── Totals ── */
-    var totEnt = cf.entradas.reduce(function(s,e){ return s + e.monto; }, 0);
-    var totSal = cf.salidas.reduce(function(s,e){ return s + e.monto; }, 0);
+    /* ── If Excel data is pending, show the season-level CF view ── */
+    if (cf.pendiente_excel) {
+      var stEl = document.getElementById('cfSrcTag');
+      if (stEl) stEl.textContent = cf.fuente + ' · ' + cf.fecha_cierre;
+
+      var req = cf.saldo_requerido_cierre || 0;
+      var calPP = D.calavo ? ((D.calavo.pickPack||0) + (D.calavo.revenueTotal||0)) : 0;
+
+      var sigItems = (cf.pagos_ciclo_siguiente || []).map(function(p) {
+        return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)">' +
+          '<span style="color:var(--accent2);font-size:.8rem">›</span>' +
+          '<span style="font-size:.78rem;color:var(--text)">' + p.concepto + '</span>' +
+          '<span style="margin-left:auto;font-size:.66rem;color:var(--muted)">' + p.nota + '</span>' +
+        '</div>';
+      }).join('');
+
+      document.getElementById('cfCard').innerHTML =
+        /* Header */
+        '<div class="cf-header">' +
+          '<div style="flex:1">' +
+            '<div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;color:var(--text)">' + cf.periodo + '</div>' +
+            '<div style="font-size:.71rem;color:var(--muted);margin-top:2px">Modelo ' + (cf.modelo||'OL 8+4') + ' · Cierre al ' + cf.fecha_cierre + ' · ' + cf.moneda + '</div>' +
+          '</div>' +
+          '<div class="cf-semaforo yellow"><span class="cf-semaforo-dot"></span>⚠ PENDIENTE EXCEL</div>' +
+        '</div>' +
+
+        /* Hero: saldo requerido */
+        '<div style="background:rgba(239,68,68,.07);border:1.5px solid rgba(239,68,68,.25);border-radius:12px;padding:22px 24px;margin-bottom:18px">' +
+          '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#f87171;margin-bottom:8px">Saldo Requerido para Cerrar la Temporada</div>' +
+          '<div style="font-size:2.4rem;font-weight:900;letter-spacing:-1px;color:#f87171">' + fmt(req) + '</div>' +
+          '<div style="font-size:.77rem;color:var(--muted);margin-top:6px;line-height:1.5">' +
+            'Necesario para cubrir todos los compromisos hasta el cierre del ciclo GC 2025–2026,<br>' +
+            'incluyendo pagos de arranque del ciclo 2026–2027 ya incorporados en el forecast.' +
+          '</div>' +
+        '</div>' +
+
+        /* 2-col: modelo + pagos ciclo siguiente */
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">' +
+          '<div style="background:var(--bg);border-radius:var(--r);padding:18px 20px">' +
+            '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:14px">Modelo Forecast · OL 8+4</div>' +
+            '<div style="display:flex;gap:10px;margin-bottom:14px">' +
+              '<div style="flex:1;background:rgba(22,163,74,.08);border:1px solid rgba(22,163,74,.2);border-radius:8px;padding:12px;text-align:center">' +
+                '<div style="font-size:1.5rem;font-weight:900;color:var(--green2)">8</div>' +
+                '<div style="font-size:.65rem;color:var(--muted);margin-top:2px">meses reales<br>Jul 25 – Feb 26</div>' +
+              '</div>' +
+              '<div style="flex:1;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.2);border-radius:8px;padding:12px;text-align:center">' +
+                '<div style="font-size:1.5rem;font-weight:900;color:#facc15">4</div>' +
+                '<div style="font-size:.65rem;color:var(--muted);margin-top:2px">meses forecast<br>Mar – Jun 26</div>' +
+              '</div>' +
+            '</div>' +
+            '<div style="font-size:.72rem;color:var(--muted);line-height:1.6">' +
+              'Los números de línea detallados están en el Excel adjunto<br>' +
+              '<span style="color:var(--accent2);font-weight:600">"Cash Flow ABSA GC 2025-2026 Update 22 Marzo 2026.xlsx"</span><br>' +
+              'Captúralos para activar el análisis completo.' +
+            '</div>' +
+          '</div>' +
+          '<div style="background:var(--bg);border-radius:var(--r);padding:18px 20px">' +
+            '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:12px">Pagos Incluidos · Ciclo 2026–2027</div>' +
+            sigItems +
+          '</div>' +
+        '</div>' +
+
+        /* Calavo settlements as proxy context */
+        '<div style="background:var(--bg);border-radius:var(--r);padding:16px 20px">' +
+          '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:10px">Contexto · Cobros Calavo Confirmados en Temporada</div>' +
+          '<div style="font-size:.78rem;color:var(--muted)">Pick &amp; Pack WK01–WK12 confirmado: <strong style="color:var(--green2)">' + fmt(D.calavo ? D.calavo.pickPack : 0) + '</strong> · ' +
+          'Revenue FOB bruto: <strong style="color:var(--green2)">' + fmt(D.calavo ? D.calavo.revenueTotal : 0) + '</strong> · ' +
+          'Saldo Due from Calavo: <strong style="color:' + ((D.calavo&&D.calavo.saldoActual||0)<0?'var(--red2)':'var(--green2)') + '">' + fmt(D.calavo ? D.calavo.saldoActual : 0) + '</strong></div>' +
+        '</div>';
+
+      return; /* skip full render until Excel data is captured */
+    }
+
+    /* ── Totals (full render when pendiente_excel = false) ── */
+    var totEnt = cf.entradas.reduce(function(s,e){ return s + (e.monto||0); }, 0);
+    var totSal = cf.salidas.reduce(function(s,e){ return s + (e.monto||0); }, 0);
     var neto   = totEnt - totSal;
-    var saldoFin = cf.saldo_inicial + neto;
+    var saldoFin = (cf.saldo_inicial||0) + neto;
     var coverage = totSal > 0 ? totEnt / totSal : 999;
 
     /* ── Budget totals ── */
-    var totEntBud = cf.entradas.reduce(function(s,e){ return s + e.budget; }, 0);
-    var totSalBud = cf.salidas.reduce(function(s,e){ return s + e.budget; }, 0);
+    var totEntBud = cf.entradas.reduce(function(s,e){ return s + (e.budget||0); }, 0);
+    var totSalBud = cf.salidas.reduce(function(s,e){ return s + (e.budget||0); }, 0);
 
     /* ── Burn rate (avg salidas last 3 months of historico) ── */
     var hist = cf.historico;

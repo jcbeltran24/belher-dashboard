@@ -6,9 +6,9 @@ window.BELHER = {
   },
 
   alertas: [
+    { nivel: "danger",  texto: "CF ABSA GC 2025–2026 (al 22-Mar): saldo requerido para cerrar temporada = $6,804K USD — incluye pagos arranque ciclo 2026–2027 (Leima · 25-Mar)" },
     { nivel: "warning", texto: "Tomate Vine-ripe sube a $46.95–48.95 (+50% vs WK prev) — mercado en pico histórico según Corbel #0017" },
     { nivel: "warning", texto: "US aranceles a México: USMCA en pre-revisión · riesgo regulatorio para exportaciones de hortalizas" },
-    { nivel: "warning", texto: "Jalapeño TX cae a $48–50/bu (-20% vs $58–64 WK prev) — corrección después del pico" },
     { nivel: "success", texto: "Calidad 24-Mar: merma promedio 2.85% · 1ª promedio 91.91% — dentro de parámetros de exportación" },
     { nivel: "danger",  texto: "Fertilizantes Feb: +$110k vs presupuesto (plaga Tizón)" }
   ],
@@ -177,45 +177,70 @@ window.BELHER = {
   },
 
   cashflow: {
-    periodo:      "Febrero 2026",
-    mes_num:      2,
-    anio:         2026,
-    fecha_cierre: "28/02/2026",
-    fuente:       "leima@agbelher.com · CF ABSA GC 2025–2026",
-    moneda:       "USD",
-    saldo_inicial: 842350,
+    /* ─── META ─────────────────────────────────────────────────────────────
+       CF de temporada completa GC 2025–2026, actualizado al 22-Mar-2026.
+       Modelo OL 8+4: 8 meses reales (Jul 25–Feb 26) + 4 meses forecast
+       (Mar–Jun 26). Incluye pagos de arranque ciclo 2026–2027.
+       Fuente: "Cash Flow ABSA GC 2025-2026 Update 22 Marzo 2026 ultimo.xlsx"
+       enviado por Leima Leyva el 25-Mar-2026.
+       Los números de línea detallados requieren captura manual del Excel.
+    ─────────────────────────────────────────────────────────────────────── */
+    periodo:        "GC 2025–2026 · al 22 Mar 2026",
+    modelo:         "OL 8+4",
+    fecha_cierre:   "22/03/2026",
+    fuente:         "leima@agbelher.com · 25 Mar 2026",
+    moneda:         "USD",
+    pendiente_excel: true,   /* true = líneas detalladas por capturar del Excel */
 
+    /* Dato clave del email: saldo requerido para cerrar la temporada */
+    saldo_requerido_cierre: 6804000,
+
+    /* Pagos adicionales incluidos en el CF para arranque ciclo 2026–2027
+       (mencionados explícitamente por Leima en el email) */
+    pagos_ciclo_siguiente: [
+      { concepto:"Semilleras — ciclo 2026–2027",              monto:null, nota:"Incluido en forecast" },
+      { concepto:"Cinta de riego — ciclo 2026–2027",          monto:null, nota:"Incluido en forecast" },
+      { concepto:"Plástico para acolchado — ciclo 2026–2027", monto:null, nota:"Incluido en forecast" },
+      { concepto:"Saldo pendiente Hishtil — ciclo actual",    monto:null, nota:"Incluido en forecast" },
+      { concepto:"Anticipo 50% plántula — ciclo 2026–2027",   monto:null, nota:"Incluido en forecast" }
+    ],
+
+    /* ── Entradas acumuladas temporada (pendiente captura del Excel) ── */
     entradas: [
-      { concepto:"Cobros Calavo (wire transfers)", monto:2241920, budget:2100000, yago:1650000, categoria:"Ventas"     },
-      { concepto:"Cobros mercado nacional",        monto: 485200, budget: 520000, yago: 410000, categoria:"Ventas"     },
-      { concepto:"Capital de trabajo Calavo",      monto:      0, budget:      0, yago: 500000, categoria:"Financiero" },
-      { concepto:"Otras entradas",                 monto:  12400, budget:      0, yago:   8500, categoria:"Otros"      }
+      { concepto:"Cobros Calavo (wire transfers WK01–WK12)", monto:2482785, budget:null, yago:null, categoria:"Ventas"     },
+      { concepto:"Cobros mercado nacional",                  monto:null,    budget:null, yago:null, categoria:"Ventas"     },
+      { concepto:"Capital de trabajo Calavo",                monto:null,    budget:null, yago:null, categoria:"Financiero" },
+      { concepto:"Otras entradas",                           monto:null,    budget:null, yago:null, categoria:"Otros"      }
     ],
 
+    /* ── Salidas acumuladas temporada (pendiente captura del Excel) ── */
     salidas: [
-      { concepto:"Nómina agrícola",              monto:178000, budget:144000, yago:155000, categoria:"Nómina"     },
-      { concepto:"Nómina administrativa",         monto: 85000, budget: 82000, yago: 78000, categoria:"Nómina"     },
-      { concepto:"Fertilizantes y agroquímicos",  monto:254000, budget:144000, yago:168000, categoria:"Insumos"    },
-      { concepto:"Semilla y material vegetal",    monto: 32000, budget: 35000, yago: 28000, categoria:"Insumos"    },
-      { concepto:"Insumos de empaque",            monto: 98000, budget:100000, yago: 88000, categoria:"Empaque"    },
-      { concepto:"Flete México",                  monto: 42000, budget: 45000, yago: 38000, categoria:"Logística"  },
-      { concepto:"Agua y energía",                monto: 31000, budget: 30000, yago: 27000, categoria:"Servicios"  },
-      { concepto:"Combustible y maquinaria",      monto: 28000, budget: 25000, yago: 22000, categoria:"Servicios"  },
-      { concepto:"Mantenimiento",                 monto: 15000, budget: 18000, yago: 14000, categoria:"Mant."      },
-      { concepto:"Gastos administrativos",        monto: 38000, budget: 35000, yago: 32000, categoria:"Admin"      },
-      { concepto:"IMSS / INFONAVIT",              monto: 55000, budget: 52000, yago: 48000, categoria:"Fiscal"     },
-      { concepto:"ISR y otros impuestos",         monto: 22000, budget: 20000, yago: 18000, categoria:"Fiscal"     },
-      { concepto:"Servicio de deuda Calavo",      monto: 85000, budget: 85000, yago:     0, categoria:"Financiero" },
-      { concepto:"Gastos financieros",            monto: 12000, budget: 10000, yago:  8000, categoria:"Financiero" }
+      { concepto:"Nómina agrícola",              monto:null, budget:null, yago:null, categoria:"Nómina"     },
+      { concepto:"Nómina administrativa",         monto:null, budget:null, yago:null, categoria:"Nómina"     },
+      { concepto:"Fertilizantes y agroquímicos",  monto:null, budget:null, yago:null, categoria:"Insumos"    },
+      { concepto:"Semilla y material vegetal",    monto:null, budget:null, yago:null, categoria:"Insumos"    },
+      { concepto:"Insumos de empaque",            monto:null, budget:null, yago:null, categoria:"Empaque"    },
+      { concepto:"Flete México",                  monto:null, budget:null, yago:null, categoria:"Logística"  },
+      { concepto:"Agua y energía",                monto:null, budget:null, yago:null, categoria:"Servicios"  },
+      { concepto:"Combustible y maquinaria",      monto:null, budget:null, yago:null, categoria:"Servicios"  },
+      { concepto:"Mantenimiento",                 monto:null, budget:null, yago:null, categoria:"Mant."      },
+      { concepto:"Gastos administrativos",        monto:null, budget:null, yago:null, categoria:"Admin"      },
+      { concepto:"IMSS / INFONAVIT",              monto:null, budget:null, yago:null, categoria:"Fiscal"     },
+      { concepto:"ISR y otros impuestos",         monto:null, budget:null, yago:null, categoria:"Fiscal"     },
+      { concepto:"Servicio de deuda Calavo",      monto:null, budget:null, yago:null, categoria:"Financiero" },
+      { concepto:"Gastos financieros",            monto:null, budget:null, yago:null, categoria:"Financiero" }
     ],
+
+    saldo_inicial: null,   /* pendiente del Excel */
 
     historico: [
-      { mes:"Sep 25", entradas:1420000, salidas:1380000, neto:  40000, saldo: 420000 },
-      { mes:"Oct 25", entradas:1850000, salidas:1520000, neto: 330000, saldo: 750000 },
-      { mes:"Nov 25", entradas:2100000, salidas:1720000, neto: 380000, saldo:1130000 },
-      { mes:"Dic 25", entradas:3200000, salidas:1850000, neto:1350000, saldo:2480000 },
-      { mes:"Ene 26", entradas:2750000, salidas:2100000, neto: 650000, saldo: 842350 },
-      { mes:"Feb 26", entradas:2739520, salidas: 975000, neto:1764520, saldo:2606870 }
+      { mes:"Sep 25", entradas:null, salidas:null, neto:null, saldo:null },
+      { mes:"Oct 25", entradas:null, salidas:null, neto:null, saldo:null },
+      { mes:"Nov 25", entradas:null, salidas:null, neto:null, saldo:null },
+      { mes:"Dic 25", entradas:null, salidas:null, neto:null, saldo:null },
+      { mes:"Ene 26", entradas:null, salidas:null, neto:null, saldo:null },
+      { mes:"Feb 26", entradas:null, salidas:null, neto:null, saldo:null },
+      { mes:"Mar 26", entradas:null, salidas:null, neto:null, saldo:null }
     ]
   },
 
