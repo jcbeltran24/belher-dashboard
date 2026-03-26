@@ -814,9 +814,13 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
   .cf-kpi-strip   { grid-template-columns:repeat(3,1fr); }
   .cf-main-grid   { grid-template-columns:1fr; }
   .cf-tables-grid { grid-template-columns:1fr; }
+  .cf-bottom-grid { grid-template-columns:1fr !important; }
 }
 @media(max-width:480px) {
   .cf-kpi-strip   { grid-template-columns:1fr 1fr; }
+  .cf-kpi-val     { font-size:.9rem; }
+  .cf-tbl .cf-td-cat { display:none; }
+  .cf-bottom-grid { grid-template-columns:1fr !important; }
 }
 
 /* ── Chile: Market context cards ── */
@@ -3071,15 +3075,23 @@ function checkPw(){
   /* ── Tabs ── */
   var tabBtns   = document.querySelectorAll('#tabNav button');
   var tabPanels = document.querySelectorAll('.tab-panel');
+  function activateTab(tabId) {
+    tabBtns.forEach(function (b) { b.classList.remove('active'); });
+    tabPanels.forEach(function (p) { p.classList.remove('active'); });
+    var btn = document.querySelector('#tabNav button[data-tab="' + tabId + '"]');
+    if (!btn) return;
+    btn.classList.add('active');
+    btn.scrollIntoView({ inline:'center', block:'nearest', behavior:'smooth' });
+    document.getElementById('tab-' + tabId).classList.add('active');
+    initChartsForTab(tabId);
+    sessionStorage.setItem('belher_tab', tabId);
+  }
   tabBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      tabBtns.forEach(function (b) { b.classList.remove('active'); });
-      tabPanels.forEach(function (p) { p.classList.remove('active'); });
-      btn.classList.add('active');
-      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-      initChartsForTab(btn.dataset.tab);
-    });
+    btn.addEventListener('click', function () { activateTab(btn.dataset.tab); });
   });
+  /* Restore last active tab on load/refresh */
+  var savedTab = sessionStorage.getItem('belher_tab');
+  if (savedTab && document.getElementById('tab-' + savedTab)) activateTab(savedTab);
 
   /* ════════════════ HOY ════════════════ */
   function renderHoy() {
@@ -4037,9 +4049,9 @@ function checkPw(){
           wfBar(cf.saldo_inicial, 'rgba(99,102,241,.7)', 'Saldo Inicial', fmt(cf.saldo_inicial)) +
           wfBar(totEnt, 'rgba(22,163,74,.8)', '+ Entradas', fmt(totEnt)) +
           '<div class="cf-wf-sep"></div>' +
-          wfBar(totSal, 'rgba(239,68,68,.7)', '− Salidas', fmt(totSal)) +
+          wfBar(totSal, 'rgba(59,130,246,.8)', '− Salidas', fmt(totSal)) +
           '<div class="cf-wf-sep"></div>' +
-          wfBar(saldoFin, 'rgba(99,102,241,.9)', '= Saldo Final', fmt(Math.round(saldoFin))) +
+          wfBar(saldoFin, saldoFin < 0 ? 'rgba(239,68,68,.85)' : 'rgba(22,163,74,.85)', '= Saldo Final', fmt(Math.round(saldoFin))) +
         '</div>' +
 
         /* Analysis */
@@ -4086,7 +4098,7 @@ function checkPw(){
       '</div>' +
 
       /* Break-even + pagos ciclo siguiente */
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">' +
+      '<div class="cf-bottom-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">' +
         /* Break-even */
         (cf.breakeven_precio_por_caja ? '<div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);border-radius:12px;padding:18px 20px">' +
           '<div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#f87171;margin-bottom:10px">Break-Even · Precio de Exportación</div>' +
