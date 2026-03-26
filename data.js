@@ -202,8 +202,27 @@ window.BELHER = {
     breakeven_precio_base:     15.00,  /* Precio promedio FOB/caja en OL */
     breakeven_precio_target:   23.50,  /* Precio objetivo para break-even */
     breakeven_precio_por_caja:  8.50,  /* Incremento requerido para break-even total */
-    breakeven_volumen:         910000, /* Cajas exportación Mar–Jun 2026 */
+    breakeven_volumen:         900000, /* Cajas exportación Mar–Jun 2026 */
     breakeven_monto:           6804221,
+
+    /* Inteligencia de precios de mercado (reunión 26-Mar-2026) */
+    precio_mercado: {
+      precio_actual_promedio:  23.49,  /* Promedio real Mar 26 – Jun 30, 2026 */
+      rango_tipico_min:        27,
+      rango_tipico_max:        35,
+      sweet_spot:              35,     /* Arriba de $35 cae la demanda — Irene */
+      pico_historico:          42,     /* Solo 3 días; nunca visto antes */
+      semana_12_two_layers:    24.95,
+      semana_12_25lb:          26.24,
+      semana_actual_promedio:  29,     /* Promedio primeros días sem 13 */
+      fecha_actualizacion:     "26/03/2026"
+    },
+
+    /* Estructura contratos vs spot por mes */
+    contratos: [
+      { mes:"Marzo", cajas_contrato:229000, cajas_spot:0,      precio_contrato:16.95, escalador_desde:20 },
+      { mes:"Abril",  cajas_contrato:220000, cajas_spot:173000, precio_contrato:16.95, escalador_desde:20 }
+    ],
 
     /* Bridge — escenario realista para cubrir el déficit */
     bridge: [
