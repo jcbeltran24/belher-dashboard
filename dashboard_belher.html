@@ -3941,38 +3941,32 @@ function checkPw(){
     /* ── Build insights ── */
     var insights = [];
 
-    /* Cobertura */
-    var covIcon  = coverage >= 1.5 ? '✅' : coverage >= 1.1 ? '🟡' : '🔴';
-    insights.push({ icon: covIcon, title: 'Cobertura de flujo: ' + coverage.toFixed(2) + '×',
-      sub: 'Las entradas cubren ' + coverage.toFixed(2) + ' veces las salidas del mes. ' +
-           (coverage >= 2 ? 'Posición de liquidez sólida.' : coverage >= 1.2 ? 'Margen aceptable.' : 'Margen estrecho — monitorear.') });
+    /* Gap de cierre */
+    if (cf.saldo_forecast && cf.saldo_ajustado) {
+      insights.push({ icon: '🔴', title: 'Gap de cierre: ' + fmt(Math.abs(cf.saldo_forecast)) + ' requeridos',
+        sub: 'Saldo base al 31-Jul: ' + fmt(cf.saldo_forecast) + '. Con WK Calavo 4/4 + avance Bajío + sorgo: saldo ajustado ' + fmt(cf.saldo_ajustado) + '. Prioridad: cerrar brecha de ' + fmt(Math.abs(cf.saldo_forecast)) + '.' });
+    }
 
-    /* Top over-budget */
-    overBudget.slice(0,3).forEach(function(o) {
-      var icon = o.varPct >= 50 ? '🔴' : o.varPct >= 20 ? '🟡' : '⚪';
-      insights.push({ icon: icon, title: o.concepto + ': +' + o.varPct.toFixed(1) + '% sobre budget',
-        sub: fmt(o.monto) + ' real vs ' + fmt(o.budget) + ' presupuestado · desviación ' + fmt(o.varAbs) + ' (' + (o.varPct >= 30 ? 'requiere acción inmediata' : 'monitorear') + ')' });
-    });
+    /* Break-even de precio */
+    if (cf.breakeven_precio_por_caja) {
+      insights.push({ icon: '📊', title: 'Break-even: +$' + cf.breakeven_precio_por_caja + '/caja sobre ' + (cf.breakeven_volumen/1000).toFixed(0) + 'K cajas Mar–Jun',
+        sub: 'Un incremento de $' + cf.breakeven_precio_por_caja + '/caja en el volumen de exportación Mar–Jun 26 (' + Number(cf.breakeven_volumen).toLocaleString('en-US') + ' cajas) cubre el gap completo de ' + fmt(Math.abs(cf.saldo_forecast||6804221)) + '.' });
+    }
 
-    /* Entradas bajo budget */
-    var entBajas = cf.entradas.filter(function(e){ return e.budget > 0 && e.monto < e.budget * 0.9; });
-    entBajas.forEach(function(e) {
-      var varPct = (e.monto - e.budget) / e.budget * 100;
-      insights.push({ icon: '🟡', title: e.concepto + ': ' + varPct.toFixed(1) + '% bajo lo esperado',
-        sub: fmt(e.monto) + ' cobrado vs ' + fmt(e.budget) + ' proyectado · ' + fmt(e.budget - e.monto) + ' pendiente de recuperar.' });
-    });
+    /* Anticipos por aplicar */
+    if (cf.anticipos_por_pagar) {
+      insights.push({ icon: '🟡', title: 'Anticipos venta nacional por aplicar: ' + fmt(cf.anticipos_por_pagar),
+        sub: 'Recibidos ' + fmt(cf.anticipos_recibidos) + ' · Aplicados ' + fmt(cf.anticipos_aplicados) + ' · Pendiente de liquidar ' + fmt(cf.anticipos_por_pagar) + '. Ingresos ya comprometidos con compradores nacionales.' });
+    }
 
-    /* Burn rate & runway */
-    var runIcon = runway >= 3 ? '✅' : runway >= 1.5 ? '🟡' : '🔴';
-    insights.push({ icon: runIcon, title: 'Burn rate: ' + fmt(Math.round(burnRate)) + '/mes · Runway ' + runway.toFixed(1) + ' meses',
-      sub: 'Con el saldo actual de ' + fmt(Math.round(saldoFin)) + ' y el ritmo de gasto de los últimos 3 meses. ' +
-           (runway >= 3 ? 'Posición cómoda.' : runway >= 1.5 ? 'Vigilar ingresos próximos.' : 'Liquidez ajustada — priorizar cobros.') });
+    /* Burn rate forecast */
+    insights.push({ icon: '🔴', title: 'Gasto promedio mensual (forecast): ' + fmt(Math.round(burnRate)),
+      sub: 'Promedio salidas May–Jul 26. Saldo proyectado al 31-Jul: ' + fmt(Math.round(saldoFin)) + '. Maximizar cobros de P&P Calavo y venta nacional.' });
 
     /* Trend */
     var trendIcon = trendDir === 'mejorando' ? '📈' : trendDir === 'deteriorando' ? '📉' : '➡️';
-    insights.push({ icon: trendIcon, title: 'Tendencia CF: ' + trendDir,
-      sub: 'Flujo neto de los últimos 3 meses: ' +
-        hist.slice(-3).map(function(h){ return h.mes + ' ' + fmt(h.neto); }).join(' → ') });
+    insights.push({ icon: trendIcon, title: 'Tendencia flujo neto: ' + trendDir,
+      sub: 'Últimos 3 meses forecast: ' + hist.slice(-3).map(function(h){ return h.mes + ' ' + fmt(h.neto); }).join(' → ') + '. Las pérdidas mensuales se reducen conforme avanzan los pagos de Calavo.' });
 
     /* ── Waterfall bars ── */
     var maxVal = Math.max(totEnt, saldoFin, cf.saldo_inicial) * 1.05;
@@ -3995,22 +3989,23 @@ function checkPw(){
 
     /* ── Entradas table ── */
     var entHTML = cf.entradas.map(function(e) {
+      var fcBadge = e.forecast ? '<span style="font-size:.55rem;font-weight:700;padding:1px 5px;border-radius:4px;background:rgba(234,179,8,.12);color:#fbbf24;margin-left:5px;vertical-align:middle">FCST</span>' : '';
       return '<tr>' +
-        '<td class="cf-td-concepto">' + e.concepto + '</td>' +
+        '<td class="cf-td-concepto">' + e.concepto + fcBadge + '</td>' +
         '<td class="cf-td-cat">' + e.categoria + '</td>' +
-        '<td class="cf-td-monto" style="color:var(--green2)">' + fmt(e.monto) + '</td>' +
-        varCell(e.monto, e.budget) +
+        '<td class="cf-td-monto" style="color:' + (e.forecast ? 'rgba(22,163,74,.6)' : 'var(--green2)') + '">' + fmt(e.monto) + '</td>' +
+        '<td class="cf-td-var cf-var-ok">—</td>' +
       '</tr>';
     }).join('');
 
     /* ── Salidas table ── */
     var salHTML = cf.salidas.map(function(s) {
-      var isOver = s.budget > 0 && s.monto > s.budget * 1.15;
-      return '<tr' + (isOver ? ' style="background:rgba(239,68,68,.04)"' : '') + '>' +
-        '<td class="cf-td-concepto">' + s.concepto + '</td>' +
+      var fcBadge = '<span style="font-size:.55rem;font-weight:700;padding:1px 5px;border-radius:4px;background:rgba(234,179,8,.12);color:#fbbf24;margin-left:5px;vertical-align:middle">FCST</span>';
+      return '<tr>' +
+        '<td class="cf-td-concepto">' + s.concepto + fcBadge + '</td>' +
         '<td class="cf-td-cat">' + s.categoria + '</td>' +
-        '<td class="cf-td-monto" style="color:' + (isOver ? '#f87171' : 'var(--text)') + '">' + fmt(s.monto) + '</td>' +
-        varCell(s.monto, s.budget) +
+        '<td class="cf-td-monto">' + fmt(s.monto) + '</td>' +
+        '<td class="cf-td-var cf-var-ok">—</td>' +
       '</tr>';
     }).join('');
 
@@ -4020,7 +4015,7 @@ function checkPw(){
       '<div class="cf-header">' +
         '<div style="flex:1">' +
           '<div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;color:var(--text)">' + cf.periodo + '</div>' +
-          '<div style="font-size:.71rem;color:var(--muted);margin-top:2px">Cierre ' + cf.fecha_cierre + ' · ' + cf.moneda + '</div>' +
+          '<div style="font-size:.71rem;color:var(--muted);margin-top:2px">Último real ' + cf.fecha_cierre + ' · Forecast Jul 31, 2026 · ' + cf.moneda + '</div>' +
         '</div>' +
         '<div class="cf-semaforo ' + semColor + '"><span class="cf-semaforo-dot"></span>' + semIcon + ' ' + semLabel + '</div>' +
       '</div>' +
@@ -4070,7 +4065,7 @@ function checkPw(){
           '<tfoot class="cf-tbl-foot"><tr>' +
             '<td colspan="2">Total Entradas</td>' +
             '<td class="cf-td-monto" style="color:var(--green2)">' + fmt(totEnt) + '</td>' +
-            varCell(totEnt, totEntBud) +
+            '<td class="cf-td-var cf-var-ok">—</td>' +
           '</tr></tfoot></table>' +
         '</div>' +
         '<div class="cf-tbl-wrap">' +
@@ -4079,44 +4074,82 @@ function checkPw(){
           '<tfoot class="cf-tbl-foot"><tr>' +
             '<td colspan="2">Total Salidas</td>' +
             '<td class="cf-td-monto">' + fmt(totSal) + '</td>' +
-            varCell(totSal, totSalBud) +
+            '<td class="cf-td-var cf-var-ok">—</td>' +
           '</tr></tfoot></table>' +
         '</div>' +
       '</div>' +
 
-      /* Trend chart */
+      /* Saldo chart */
       '<div class="cf-chart-card">' +
-        '<div class="cf-chart-title">Tendencia · Flujo Mensual</div>' +
+        '<div class="cf-chart-title">Saldo de Caja · Evolución Mensual <span style="font-size:.6rem;font-weight:400;color:var(--muted)">real ▬  forecast ╌</span></div>' +
         '<div class="chart-box"><canvas id="chartCFTendencia"></canvas></div>' +
+      '</div>' +
+
+      /* Break-even + pagos ciclo siguiente */
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">' +
+        /* Break-even */
+        (cf.breakeven_precio_por_caja ? '<div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);border-radius:12px;padding:18px 20px">' +
+          '<div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#f87171;margin-bottom:10px">Break-Even · Precio de Exportación</div>' +
+          '<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:8px">' +
+            '<div style="font-size:2rem;font-weight:900;color:#f87171">$' + cf.breakeven_precio_por_caja + '</div>' +
+            '<div style="font-size:.72rem;color:var(--muted)">/caja requerido sobre ' + (cf.breakeven_volumen/1000).toFixed(0) + 'K cajas</div>' +
+          '</div>' +
+          '<div style="font-size:.72rem;color:var(--muted);line-height:1.7">' +
+            'Gap base: <strong style="color:#f87171">' + fmt(Math.abs(cf.saldo_forecast||0)) + '</strong><br>' +
+            'Saldo ajustado (WK 4/4 + Bajío + sorgo): <strong style="color:#fbbf24">' + fmt(cf.saldo_ajustado||0) + '</strong>' +
+          '</div>' +
+        '</div>' : '<div></div>') +
+        /* Pagos ciclo siguiente */
+        (cf.pagos_ciclo_siguiente && cf.pagos_ciclo_siguiente.length ? '<div style="background:var(--bg);border-radius:12px;padding:18px 20px">' +
+          '<div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:10px">Inversiones Arranque GC 2026–2027</div>' +
+          cf.pagos_ciclo_siguiente.map(function(p) {
+            return '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">' +
+              '<span style="font-size:.73rem;color:var(--text)">' + p.concepto + '</span>' +
+              '<div style="text-align:right;flex-shrink:0;margin-left:8px">' +
+                '<div style="font-size:.78rem;font-weight:700;color:var(--accent2)">' + fmt(p.monto) + '</div>' +
+                '<div style="font-size:.6rem;color:var(--muted)">' + p.fecha + '</div>' +
+              '</div>' +
+            '</div>';
+          }).join('') +
+          '<div style="display:flex;justify-content:space-between;margin-top:8px;padding-top:6px">' +
+            '<span style="font-size:.7rem;font-weight:700;color:var(--muted)">Total inversiones</span>' +
+            '<span style="font-size:.82rem;font-weight:900;color:var(--accent2)">' + fmt(cf.pagos_ciclo_siguiente.reduce(function(s,p){ return s+(p.monto||0); },0)) + '</span>' +
+          '</div>' +
+        '</div>' : '<div></div>') +
       '</div>';
 
-    /* ── Chart: CF Tendencia ── */
+    /* ── Chart: Saldo de Caja ── */
     var ctx = document.getElementById('chartCFTendencia');
     if (ctx) {
+      var saldoActual   = hist.map(function(h){ return h.tipo === 'real' ? h.saldo : null; });
+      var saldoForecast = hist.map(function(h){ return h.tipo !== 'real' ? h.saldo : null; });
+      /* Stitch last actual point into forecast dataset for continuity */
+      var junctionIdx = hist.findIndex(function(h){ return h.tipo !== 'real'; });
+      if (junctionIdx > 0) saldoForecast[junctionIdx - 1] = hist[junctionIdx - 1].saldo;
+
       new Chart(ctx.getContext('2d'), {
         type: 'line',
         data: {
           labels: hist.map(function(h){ return h.mes; }),
           datasets: [
-            { label:'Entradas', data: hist.map(function(h){ return h.entradas; }),
-              borderColor:'rgba(22,163,74,.9)', backgroundColor:'rgba(22,163,74,.07)',
-              tension:.35, fill:false, pointRadius:4, pointHoverRadius:6, borderWidth:2 },
-            { label:'Salidas', data: hist.map(function(h){ return h.salidas; }),
-              borderColor:'rgba(239,68,68,.8)', backgroundColor:'rgba(239,68,68,.05)',
-              tension:.35, fill:false, pointRadius:4, pointHoverRadius:6, borderWidth:2 },
-            { label:'Flujo Neto', data: hist.map(function(h){ return h.neto; }),
-              borderColor:'rgba(99,102,241,.9)', backgroundColor:'rgba(99,102,241,.07)',
-              tension:.35, fill:true, pointRadius:4, pointHoverRadius:6, borderWidth:2 }
+            { label:'Saldo · Real', data: saldoActual,
+              borderColor:'rgba(99,102,241,.95)', backgroundColor:'rgba(99,102,241,.1)',
+              tension:.3, fill:true, pointRadius:5, pointHoverRadius:7, borderWidth:2.5,
+              pointBackgroundColor:'rgba(99,102,241,1)' },
+            { label:'Saldo · Forecast', data: saldoForecast,
+              borderColor:'rgba(250,204,21,.8)', backgroundColor:'rgba(250,204,21,.05)',
+              tension:.3, fill:true, pointRadius:4, pointHoverRadius:6, borderWidth:2,
+              borderDash:[6,4], pointBackgroundColor:'rgba(250,204,21,.9)' }
           ]
         },
         options: {
           responsive:true, maintainAspectRatio:true,
           plugins: {
             legend: { position:'top' },
-            tooltip: { callbacks: { label: function(c){ return ' ' + c.dataset.label + ': $' + Number(c.parsed.y).toLocaleString('en-US'); } } }
+            tooltip: { callbacks: { label: function(c){ return ' ' + c.dataset.label + ': $' + Number(c.parsed.y).toLocaleString('en-US', {maximumFractionDigits:0}); } } }
           },
           scales: {
-            y: { ticks: { callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color:'rgba(255,255,255,.04)' } },
+            y: { ticks: { callback: function(v){ return '$' + (v/1000000).toFixed(1) + 'M'; } }, grid: { color:'rgba(255,255,255,.04)' } },
             x: { grid: { display:false } }
           }
         }

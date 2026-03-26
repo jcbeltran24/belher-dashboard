@@ -177,70 +177,82 @@ window.BELHER = {
   },
 
   cashflow: {
-    /* ─── META ─────────────────────────────────────────────────────────────
-       CF de temporada completa GC 2025–2026, actualizado al 22-Mar-2026.
-       Modelo OL 8+4: 8 meses reales (Jul 25–Feb 26) + 4 meses forecast
-       (Mar–Jun 26). Incluye pagos de arranque ciclo 2026–2027.
-       Fuente: "Cash Flow ABSA GC 2025-2026 Update 22 Marzo 2026 ultimo.xlsx"
-       enviado por Leima Leyva el 25-Mar-2026.
-       Los números de línea detallados requieren captura manual del Excel.
-    ─────────────────────────────────────────────────────────────────────── */
-    periodo:        "GC 2025–2026 · al 22 Mar 2026",
-    modelo:         "OL 8+4",
-    fecha_cierre:   "22/03/2026",
-    fuente:         "leima@agbelher.com · 25 Mar 2026",
-    moneda:         "USD",
-    pendiente_excel: true,   /* true = líneas detalladas por capturar del Excel */
+    /* ─── Fuente: "Copy of Cash Flow ABSA GC 2025-2026 Update 22 Marzo 2026 ultimo.xlsx"
+       Leima Leyva · leima@agbelher.com · 25-Mar-2026
+       Modelo OL 8+4: actuals Dic 15 2025–Mar 22 2026 + forecast Mar 26–Jul 31 2026
+       Todos los montos en USD. ─── */
+    periodo:             "GC 2025–2026 · Dic 15, 2025 – Jul 31, 2026",
+    modelo:              "OL 8+4",
+    fecha_cierre:        "22/03/2026",
+    fuente:              "leima@agbelher.com · 25 Mar 2026",
+    moneda:              "USD",
+    pendiente_excel:     false,
 
-    /* Dato clave del email: saldo requerido para cerrar la temporada */
-    saldo_requerido_cierre: 6804000,
+    saldo_inicial:       9137,       /* Saldo al 15-Dic-2025 */
+    saldo_actual:        21046,      /* Último real: 22-Mar-2026 */
+    fecha_ultimo_actual: "22/03/2026",
+    saldo_forecast:      -6804221,   /* Proyectado al 31-Jul-2026 (sin ajuste) */
+    saldo_ajustado:      -1300206,   /* Con WK Calavo 4/4 ($1.25M ago), sorgo ($100K), avance Bajío ($1.75M) */
 
-    /* Pagos adicionales incluidos en el CF para arranque ciclo 2026–2027
-       (mencionados explícitamente por Leima en el email) */
-    pagos_ciclo_siguiente: [
-      { concepto:"Semilleras — ciclo 2026–2027",              monto:null, nota:"Incluido en forecast" },
-      { concepto:"Cinta de riego — ciclo 2026–2027",          monto:null, nota:"Incluido en forecast" },
-      { concepto:"Plástico para acolchado — ciclo 2026–2027", monto:null, nota:"Incluido en forecast" },
-      { concepto:"Saldo pendiente Hishtil — ciclo actual",    monto:null, nota:"Incluido en forecast" },
-      { concepto:"Anticipo 50% plántula — ciclo 2026–2027",   monto:null, nota:"Incluido en forecast" }
-    ],
+    /* Anticipos de venta nacional (posición al 22-Mar-2026) */
+    anticipos_recibidos: 6792043,
+    anticipos_aplicados: 4661061,
+    anticipos_por_pagar: 2130983,
 
-    /* ── Entradas acumuladas temporada (pendiente captura del Excel) ── */
+    /* Análisis break-even */
+    breakeven_precio_por_caja: 8.49,   /* USD/caja adicional requerido */
+    breakeven_volumen:         910000, /* cajas Mar–Jun 2026 */
+
+    /* ── Entradas temporada completa (actuals Dec–Mar + forecast Abr–Jul) ── */
     entradas: [
-      { concepto:"Cobros Calavo (wire transfers WK01–WK12)", monto:2482785, budget:null, yago:null, categoria:"Ventas"     },
-      { concepto:"Cobros mercado nacional",                  monto:null,    budget:null, yago:null, categoria:"Ventas"     },
-      { concepto:"Capital de trabajo Calavo",                monto:null,    budget:null, yago:null, categoria:"Financiero" },
-      { concepto:"Otras entradas",                           monto:null,    budget:null, yago:null, categoria:"Otros"      }
+      { concepto:"Pick & Pack · Calavo (liquidaciones WK)",         monto:7235033, forecast:false, categoria:"Exportación" },
+      { concepto:"WK Calavo GC 2026–2027 (capital trabajo 3 de 4)", monto:3750000, forecast:true,  categoria:"Exportación" },
+      { concepto:"Anticipos venta nacional",                         monto:3394962, forecast:false, categoria:"Nacional"    },
+      { concepto:"Liquidación final Calavo GC 2025–2026",           monto:1208761, forecast:true,  categoria:"Exportación" },
+      { concepto:"Recuperación de IVAs",                            monto:746510,  forecast:false, categoria:"Fiscal"      },
+      { concepto:"BHN — quinta y última ministración",              monto:244000,  forecast:false, categoria:"Financiero"  },
+      { concepto:"Cobranza VK International",                       monto:150591,  forecast:false, categoria:"Exportación" },
+      { concepto:"Ventas limón exportación",                        monto:140000,  forecast:false, categoria:"Nacional"    },
+      { concepto:"Cobranza nacional GC 2024–2025",                  monto:128625,  forecast:false, categoria:"Nacional"    },
+      { concepto:"Varios (rentas, rezaga, ingresos menores)",       monto:106950,  forecast:false, categoria:"Otros"       }
     ],
 
-    /* ── Salidas acumuladas temporada (pendiente captura del Excel) ── */
+    /* ── Salidas temporada completa (actuals + forecast) ── */
     salidas: [
-      { concepto:"Nómina agrícola",              monto:null, budget:null, yago:null, categoria:"Nómina"     },
-      { concepto:"Nómina administrativa",         monto:null, budget:null, yago:null, categoria:"Nómina"     },
-      { concepto:"Fertilizantes y agroquímicos",  monto:null, budget:null, yago:null, categoria:"Insumos"    },
-      { concepto:"Semilla y material vegetal",    monto:null, budget:null, yago:null, categoria:"Insumos"    },
-      { concepto:"Insumos de empaque",            monto:null, budget:null, yago:null, categoria:"Empaque"    },
-      { concepto:"Flete México",                  monto:null, budget:null, yago:null, categoria:"Logística"  },
-      { concepto:"Agua y energía",                monto:null, budget:null, yago:null, categoria:"Servicios"  },
-      { concepto:"Combustible y maquinaria",      monto:null, budget:null, yago:null, categoria:"Servicios"  },
-      { concepto:"Mantenimiento",                 monto:null, budget:null, yago:null, categoria:"Mant."      },
-      { concepto:"Gastos administrativos",        monto:null, budget:null, yago:null, categoria:"Admin"      },
-      { concepto:"IMSS / INFONAVIT",              monto:null, budget:null, yago:null, categoria:"Fiscal"     },
-      { concepto:"ISR y otros impuestos",         monto:null, budget:null, yago:null, categoria:"Fiscal"     },
-      { concepto:"Servicio de deuda Calavo",      monto:null, budget:null, yago:null, categoria:"Financiero" },
-      { concepto:"Gastos financieros",            monto:null, budget:null, yago:null, categoria:"Financiero" }
+      { concepto:"Gastos operativos (nóminas, insumos, empaque, flete)", monto:16008072, forecast:true, categoria:"Operación"  },
+      { concepto:"Bajío — capital avío (4 disposiciones)",               monto:3850000,  forecast:true, categoria:"Financiero" },
+      { concepto:"Pagos IMSS e INFONAVIT",                               monto:1230613,  forecast:true, categoria:"Fiscal"     },
+      { concepto:"Proveedores GC 2026–2027 (semilleras, cinta, plástico)", monto:1114375, forecast:true, categoria:"Inversión" },
+      { concepto:"Pagos SAT",                                            monto:547185,   forecast:true, categoria:"Fiscal"     },
+      { concepto:"Anticipos maquila plántula (Tajin + Hishtil)",         monto:382500,   forecast:true, categoria:"Inversión"  },
+      { concepto:"Bajío — intereses",                                    monto:250000,   forecast:true, categoria:"Financiero" },
+      { concepto:"Santander — amortizaciones crédito",                   monto:297500,   forecast:true, categoria:"Financiero" },
+      { concepto:"Hishtil GC 2024–2025 — saldo pendiente (12 abonos)",   monto:239154,   forecast:true, categoria:"Financiero" }
     ],
 
-    saldo_inicial: null,   /* pendiente del Excel */
-
+    /* ── Histórico mensual (saldos reales + meses forecast) ── */
     historico: [
-      { mes:"Sep 25", entradas:null, salidas:null, neto:null, saldo:null },
-      { mes:"Oct 25", entradas:null, salidas:null, neto:null, saldo:null },
-      { mes:"Nov 25", entradas:null, salidas:null, neto:null, saldo:null },
-      { mes:"Dic 25", entradas:null, salidas:null, neto:null, saldo:null },
-      { mes:"Ene 26", entradas:null, salidas:null, neto:null, saldo:null },
-      { mes:"Feb 26", entradas:null, salidas:null, neto:null, saldo:null },
-      { mes:"Mar 26", entradas:null, salidas:null, neto:null, saldo:null }
+      { mes:"Jul 25",  entradas:null,    salidas:null,    neto:null,       saldo:60704,    tipo:"real"     },
+      { mes:"Ago 25",  entradas:null,    salidas:null,    neto:null,       saldo:722457,   tipo:"real"     },
+      { mes:"Oct 25",  entradas:null,    salidas:null,    neto:null,       saldo:7996,     tipo:"real"     },
+      { mes:"Nov 25",  entradas:null,    salidas:null,    neto:null,       saldo:29349,    tipo:"real"     },
+      { mes:"Dic 25",  entradas:877343,  salidas:804177,  neto:73166,      saldo:82304,    tipo:"real"     },
+      { mes:"Ene 26",  entradas:2682400, salidas:2706276, neto:-23876,     saldo:58428,    tipo:"real"     },
+      { mes:"Feb 26",  entradas:2481092, salidas:2526852, neto:-45760,     saldo:12668,    tipo:"real"     },
+      { mes:"Mar 26",  entradas:2151857, salidas:2550870, neto:-399013,    saldo:-386345,  tipo:"mixto"    },
+      { mes:"Abr 26",  entradas:2329276, salidas:2476379, neto:-147103,    saldo:-533448,  tipo:"forecast" },
+      { mes:"May 26",  entradas:2538251, salidas:5207923, neto:-2669672,   saldo:-3203120, tipo:"forecast" },
+      { mes:"Jun 26",  entradas:1487060, salidas:3476694, neto:-1989634,   saldo:-5192754, tipo:"forecast" },
+      { mes:"Jul 26",  entradas:2558761, salidas:4170227, neto:-1611466,   saldo:-6804220, tipo:"forecast" }
+    ],
+
+    /* Inversiones arranque ciclo 2026–2027 incluidas en el forecast */
+    pagos_ciclo_siguiente: [
+      { concepto:"Semilleras GC 2026–2027",              monto:983590, fecha:"31/05/2026" },
+      { concepto:"Anticipo 50% maquila plántula Tajin",  monto:194000, fecha:"10/07/2026" },
+      { concepto:"Anticipo 50% plántula Hishtil",        monto:188500, fecha:"17/07/2026" },
+      { concepto:"Cinta de riego GC 2026–2027",          monto:73785,  fecha:"26/06/2026" },
+      { concepto:"Plástico para acolchado GC 2026–2027", monto:57000,  fecha:"03/07/2026" }
     ]
   },
 
