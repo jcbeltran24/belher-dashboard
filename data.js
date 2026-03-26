@@ -178,59 +178,63 @@ window.BELHER = {
 
   cashflow: {
     /* ─── Fuente: "Copy of Cash Flow ABSA GC 2025-2026 Update 22 Marzo 2026 ultimo.xlsx"
-       Leima Leyva · leima@agbelher.com · 25-Mar-2026
-       Modelo OL 8+4: actuals Dic 15 2025–Mar 22 2026 + forecast Mar 26–Jul 31 2026
-       Todos los montos en USD. ─── */
-    periodo:             "GC 2025–2026 · Dic 15, 2025 – Jul 31, 2026",
+       Leima Leyva + CFO · leima@agbelher.com · 25-Mar-2026
+       OL 8+4: saldo_inicial = línea 105 Excel (saldo real al 22-Mar-2026 = $21,046)
+       Entradas y salidas = FORECAST únicamente (Mar 26 – Jul 31 2026). ─── */
+    periodo:             "GC 2025–2026 · OL 8+4 · Forecast Mar 26 – Jul 31, 2026",
     modelo:              "OL 8+4",
     fecha_cierre:        "22/03/2026",
     fuente:              "leima@agbelher.com · 25 Mar 2026",
     moneda:              "USD",
     pendiente_excel:     false,
 
-    saldo_inicial:       9137,       /* Saldo al 15-Dic-2025 */
-    saldo_actual:        21046,      /* Último real: 22-Mar-2026 */
+    saldo_inicial:       21046,      /* Línea 105 Excel — saldo real al 22-Mar-2026 */
     fecha_ultimo_actual: "22/03/2026",
-    saldo_forecast:      -6804221,   /* Proyectado al 31-Jul-2026 (sin ajuste) */
-    saldo_ajustado:      -1300206,   /* Con WK Calavo 4/4 ($1.25M ago), sorgo ($100K), avance Bajío ($1.75M) */
+    saldo_forecast:      -6804221,   /* Proyectado al 31-Jul-2026 sin ajuste */
+    saldo_ajustado:      -1300206,   /* Bridge completo: precio +$3/caja + WK 4/4 + BanBajío */
 
     /* Anticipos de venta nacional (posición al 22-Mar-2026) */
     anticipos_recibidos: 6792043,
     anticipos_aplicados: 4661061,
     anticipos_por_pagar: 2130983,
 
-    /* Análisis break-even */
-    breakeven_precio_por_caja: 8.49,   /* USD/caja adicional requerido */
-    breakeven_volumen:         910000, /* cajas Mar–Jun 2026 */
+    /* Break-even analysis (requerido para cubrir déficit de $6.8M) */
+    breakeven_precio_base:     15.00,  /* Precio promedio FOB/caja en OL */
+    breakeven_precio_target:   23.50,  /* Precio objetivo para break-even */
+    breakeven_precio_por_caja:  8.50,  /* Incremento requerido para break-even total */
+    breakeven_volumen:         910000, /* Cajas exportación Mar–Jun 2026 */
+    breakeven_monto:           6804221,
 
-    /* ── Entradas temporada completa (actuals Dec–Mar + forecast Abr–Jul) ── */
+    /* Bridge — escenario realista para cubrir el déficit */
+    bridge: [
+      { concepto:"Incremento precio $3/caja × 910K cajas (neto comisión)",  monto:2404015, tipo:"precio"  },
+      { concepto:"WK Calavo 4 de 4 — agosto 2026",                          monto:1250000, tipo:"calavo"  },
+      { concepto:"BanBajío — primer avance agosto 2026",                     monto:1750000, tipo:"bajio"   },
+      { concepto:"Ingreso estimado sorgo",                                   monto:100000,  tipo:"otros"   }
+    ],
+
+    /* ── Entradas FORECAST (Mar 26 – Jul 31) — base línea 105 = $21,046 ── */
     entradas: [
-      { concepto:"Pick & Pack · Calavo (liquidaciones WK)",         monto:7235033, forecast:false, categoria:"Exportación" },
-      { concepto:"WK Calavo GC 2026–2027 (capital trabajo 3 de 4)", monto:3750000, forecast:true,  categoria:"Exportación" },
-      { concepto:"Anticipos venta nacional",                         monto:3394962, forecast:false, categoria:"Nacional"    },
-      { concepto:"Liquidación final Calavo GC 2025–2026",           monto:1208761, forecast:true,  categoria:"Exportación" },
-      { concepto:"Recuperación de IVAs",                            monto:746510,  forecast:false, categoria:"Fiscal"      },
-      { concepto:"BHN — quinta y última ministración",              monto:244000,  forecast:false, categoria:"Financiero"  },
-      { concepto:"Cobranza VK International",                       monto:150591,  forecast:false, categoria:"Exportación" },
-      { concepto:"Ventas limón exportación",                        monto:140000,  forecast:false, categoria:"Nacional"    },
-      { concepto:"Cobranza nacional GC 2024–2025",                  monto:128625,  forecast:false, categoria:"Nacional"    },
-      { concepto:"Varios (rentas, rezaga, ingresos menores)",       monto:106950,  forecast:false, categoria:"Otros"       }
+      { concepto:"Pick & Pack · Calavo WK (Mar 26 – Jul 31)",         monto:3964828, categoria:"Exportación" },
+      { concepto:"WK Calavo GC 2026–2027 · capital trabajo (3 de 4)", monto:3750000, categoria:"Exportación" },
+      { concepto:"Liquidación final Calavo GC 2025–2026",             monto:1208761, categoria:"Exportación" },
+      { concepto:"Recuperación de IVAs (Mar–Jul)",                    monto:302448,  categoria:"Fiscal"      }
     ],
 
-    /* ── Salidas temporada completa (actuals + forecast) ── */
+    /* ── Salidas FORECAST (Mar 26 – Jul 31) ── */
     salidas: [
-      { concepto:"Gastos operativos (nóminas, insumos, empaque, flete)", monto:16008072, forecast:true, categoria:"Operación"  },
-      { concepto:"Bajío — capital avío (4 disposiciones)",               monto:3850000,  forecast:true, categoria:"Financiero" },
-      { concepto:"Pagos IMSS e INFONAVIT",                               monto:1230613,  forecast:true, categoria:"Fiscal"     },
-      { concepto:"Proveedores GC 2026–2027 (semilleras, cinta, plástico)", monto:1114375, forecast:true, categoria:"Inversión" },
-      { concepto:"Pagos SAT",                                            monto:547185,   forecast:true, categoria:"Fiscal"     },
-      { concepto:"Anticipos maquila plántula (Tajin + Hishtil)",         monto:382500,   forecast:true, categoria:"Inversión"  },
-      { concepto:"Bajío — intereses",                                    monto:250000,   forecast:true, categoria:"Financiero" },
-      { concepto:"Santander — amortizaciones crédito",                   monto:297500,   forecast:true, categoria:"Financiero" },
-      { concepto:"Hishtil GC 2024–2025 — saldo pendiente (12 abonos)",   monto:239154,   forecast:true, categoria:"Financiero" }
+      { concepto:"Gastos operativos (nóminas, insumos, empaque, flete)", monto:8600000, categoria:"Operación"  },
+      { concepto:"Bajío — capital avío (4 disposiciones)",               monto:3850000, categoria:"Financiero" },
+      { concepto:"IMSS e INFONAVIT",                                     monto:1023375, categoria:"Fiscal"     },
+      { concepto:"Proveedores GC 2026–2027 (semilleras, cinta, plástico)", monto:1114375, categoria:"Inversión"},
+      { concepto:"SAT e impuestos",                                      monto:386900,  categoria:"Fiscal"     },
+      { concepto:"Bajío — intereses",                                    monto:250000,  categoria:"Financiero" },
+      { concepto:"Anticipo 50% plántula GC 2026–2027 (Tajin + Hishtil)", monto:382500, categoria:"Inversión"  },
+      { concepto:"Santander — amortizaciones",                           monto:205000,  categoria:"Financiero" },
+      { concepto:"Hishtil GC 2024–2025 — 12 abonos mensuales",          monto:239154,  categoria:"Financiero" }
     ],
 
-    /* ── Histórico mensual (saldos reales + meses forecast) ── */
+    /* ── Histórico mensual — actuals + forecast ── */
     historico: [
       { mes:"Jul 25",  entradas:null,    salidas:null,    neto:null,       saldo:60704,    tipo:"real"     },
       { mes:"Ago 25",  entradas:null,    salidas:null,    neto:null,       saldo:722457,   tipo:"real"     },
@@ -239,14 +243,18 @@ window.BELHER = {
       { mes:"Dic 25",  entradas:877343,  salidas:804177,  neto:73166,      saldo:82304,    tipo:"real"     },
       { mes:"Ene 26",  entradas:2682400, salidas:2706276, neto:-23876,     saldo:58428,    tipo:"real"     },
       { mes:"Feb 26",  entradas:2481092, salidas:2526852, neto:-45760,     saldo:12668,    tipo:"real"     },
-      { mes:"Mar 26",  entradas:2151857, salidas:2550870, neto:-399013,    saldo:-386345,  tipo:"mixto"    },
+      { mes:"Mar 26",  entradas:312688,  salidas:720079,  neto:-407391,    saldo:-386345,  tipo:"mixto",
+        nota:"Real al 22-Mar ($21,046) + forecast Mar 26-31" },
       { mes:"Abr 26",  entradas:2329276, salidas:2476379, neto:-147103,    saldo:-533448,  tipo:"forecast" },
-      { mes:"May 26",  entradas:2538251, salidas:5207923, neto:-2669672,   saldo:-3203120, tipo:"forecast" },
-      { mes:"Jun 26",  entradas:1487060, salidas:3476694, neto:-1989634,   saldo:-5192754, tipo:"forecast" },
-      { mes:"Jul 26",  entradas:2558761, salidas:4170227, neto:-1611466,   saldo:-6804220, tipo:"forecast" }
+      { mes:"May 26",  entradas:2538251, salidas:5207923, neto:-2669672,   saldo:-3203120, tipo:"forecast",
+        nota:"Incluye pago semilleras $983K y WK Calavo $1.25M" },
+      { mes:"Jun 26",  entradas:1487060, salidas:3476694, neto:-1989634,   saldo:-5192754, tipo:"forecast",
+        nota:"Incluye WK Calavo $1.25M y pagos Bajío $1.45M" },
+      { mes:"Jul 26",  entradas:2558761, salidas:4170227, neto:-1611466,   saldo:-6804220, tipo:"forecast",
+        nota:"Liquidación Calavo $1.21M + WK $1.25M vs pagos Bajío $1.33M" }
     ],
 
-    /* Inversiones arranque ciclo 2026–2027 incluidas en el forecast */
+    /* Inversiones arranque ciclo 2026–2027 */
     pagos_ciclo_siguiente: [
       { concepto:"Semilleras GC 2026–2027",              monto:983590, fecha:"31/05/2026" },
       { concepto:"Anticipo 50% maquila plántula Tajin",  monto:194000, fecha:"10/07/2026" },
