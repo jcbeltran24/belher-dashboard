@@ -3386,51 +3386,40 @@ function checkPw(){
       if (heroNumEl && revTotal) countUp(heroNumEl, revTotal, 900, '$');
     }, 80);
 
-    /* ── CDC Line Chart: Gente Trabajando Real vs Proyectado ── */
+    /* ── CDC Line Chart: Total / Trabajadores / Acompañantes ── */
     var cdcWrap = document.getElementById('hoyCdcChartWrap');
-    if (cdcWrap && D.cdc && D.cdc.beltran && D.cdc.proyeccion) {
-      var bHist2  = D.cdc.beltran.historico;
-      var dHist2  = D.cdc.dorita ? D.cdc.dorita.historico : [];
-      var proyMap2 = {};
-      D.cdc.proyeccion.semanas.forEach(function(r){ proyMap2[r.sem] = r; });
+    if (cdcWrap && D.cdc && D.cdc.beltran) {
+      var bH = D.cdc.beltran.historico;
+      var dH = D.cdc.dorita ? D.cdc.dorita.historico : [];
+      var dMap3 = {};
+      dH.forEach(function(r){ dMap3[r.sem] = r; });
 
-      var cdcLabels = [], cdcReal = [], cdcProy = [], cdcVars = [];
-      bHist2.forEach(function(b) {
-        if (!b.trabajadores || b.trabajadores <= 0) return;
-        var d2   = dHist2.find(function(r){ return r.sem === b.sem; });
-        var dT   = (d2 && d2.trabajadores > 0) ? d2.trabajadores : 0;
-        var real = b.trabajadores + dT;
-        var pr   = proyMap2[b.sem];
-        if (!pr) return;
-        var proy = (b.trabajadores > 0 ? pr.beltran : 0) + (dT > 0 ? pr.dorita : 0);
-        cdcLabels.push(b.sem);
-        cdcReal.push(real);
-        cdcProy.push(proy);
-        cdcVars.push(real - proy);
+      var lbl3 = [], totLine = [], trabLine = [], acompLine = [];
+      bH.forEach(function(b) {
+        if (!b.total || b.total <= 0) return;
+        var d3 = dMap3[b.sem] || { total:0, trabajadores:0, acomp:0 };
+        lbl3.push(b.sem);
+        totLine.push(b.total  + d3.total);
+        trabLine.push(b.trabajadores + d3.trabajadores);
+        acompLine.push(b.acomp + d3.acomp);
       });
 
-      var avgPct2 = 0;
-      if (cdcReal.length) {
-        var sumPct = 0;
-        for (var i = 0; i < cdcReal.length; i++) sumPct += (cdcReal[i] / (cdcProy[i] || 1) * 100);
-        avgPct2 = Math.round(sumPct / cdcReal.length);
-      }
-      var kpiColor2 = avgPct2 >= 95 ? '#16a34a' : avgPct2 >= 80 ? '#d97706' : '#dc2626';
+      var lastTot  = totLine[totLine.length-1]   || 0;
+      var lastTrab = trabLine[trabLine.length-1]  || 0;
+      var lastAco  = acompLine[acompLine.length-1] || 0;
+      var lastSem  = lbl3[lbl3.length-1] || '';
 
       cdcWrap.innerHTML =
-        '<div class="card" style="margin-bottom:14px;cursor:pointer;position:relative" data-nav-tab="cdc" data-nav-target="chartCdcVsProyeccion">' +
-          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">' +
-            '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Gente Trabajando · Real vs Proyectado <span style="color:var(--muted);font-weight:400">(sin acompañantes)</span></div>' +
-            '<div style="display:flex;align-items:center;gap:10px">' +
-              '<span style="font-size:1.1rem;font-weight:900;color:' + kpiColor2 + '">' + avgPct2 + '%</span>' +
-              '<span style="font-size:.6rem;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:2px 8px">' + cdcLabels.length + ' semanas · ver detalle →</span>' +
+        '<div class="card" style="margin-bottom:14px;cursor:pointer" data-nav-tab="cdc" data-nav-target="chartCdcVsProyeccion">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">' +
+            '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Gente en CDC · ' + lastSem + ' <span style="font-weight:400;color:var(--muted)">· ver detalle →</span></div>' +
+            '<div style="display:flex;gap:12px;flex-wrap:wrap">' +
+              '<span style="font-size:.68rem;color:var(--muted)"><span style="font-size:.8rem;font-weight:800;color:#60a5fa">' + lastTot.toLocaleString() + '</span> total</span>' +
+              '<span style="font-size:.68rem;color:var(--muted)"><span style="font-size:.8rem;font-weight:800;color:#4ade80">' + lastTrab.toLocaleString() + '</span> trabajan</span>' +
+              '<span style="font-size:.68rem;color:var(--muted)"><span style="font-size:.8rem;font-weight:800;color:#fbbf24">' + lastAco.toLocaleString() + '</span> no trabajan</span>' +
             '</div>' +
           '</div>' +
-          '<div style="height:180px"><canvas id="chartHoyCdc"></canvas></div>' +
-          '<div style="display:flex;gap:14px;margin-top:8px">' +
-            '<span style="font-size:.62rem;color:var(--muted);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:16px;height:2px;background:#22c55e;border-radius:1px"></span>Real</span>' +
-            '<span style="font-size:.62rem;color:var(--muted);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:16px;height:2px;background:rgba(156,163,175,.6);border-radius:1px;border-top:2px dashed rgba(156,163,175,.6)"></span>Proyectado</span>' +
-          '</div>' +
+          '<div style="height:200px"><canvas id="chartHoyCdc"></canvas></div>' +
         '</div>';
 
       if (chartsInit['chartHoyCdc']) { chartsInit['chartHoyCdc'].destroy(); }
@@ -3439,49 +3428,30 @@ function checkPw(){
         chartsInit['chartHoyCdc'] = new Chart(ctx2.getContext('2d'), {
           type: 'line',
           data: {
-            labels: cdcLabels,
+            labels: lbl3,
             datasets: [
-              {
-                label: 'Real (trabajadores)',
-                data: cdcReal,
-                borderColor: '#22c55e',
-                backgroundColor: 'rgba(34,197,94,.08)',
-                borderWidth: 2,
-                pointRadius: 3,
-                pointHoverRadius: 5,
-                fill: true,
-                tension: 0.35
-              },
-              {
-                label: 'Proyectado',
-                data: cdcProy,
-                borderColor: 'rgba(156,163,175,.6)',
-                backgroundColor: 'transparent',
-                borderWidth: 1.5,
-                borderDash: [5, 4],
-                pointRadius: 0,
-                pointHoverRadius: 4,
-                fill: false,
-                tension: 0.35
-              }
+              { label:'Total',         data: totLine,   borderColor:'#60a5fa', backgroundColor:'rgba(96,165,250,.07)', borderWidth:2, pointRadius:2, pointHoverRadius:5, fill:true,  tension:0.3 },
+              { label:'Trabajan',      data: trabLine,  borderColor:'#4ade80', backgroundColor:'rgba(74,222,128,.07)', borderWidth:2, pointRadius:2, pointHoverRadius:5, fill:true,  tension:0.3 },
+              { label:'No trabajan',   data: acompLine, borderColor:'#fbbf24', backgroundColor:'rgba(251,191,36,.07)', borderWidth:2, pointRadius:2, pointHoverRadius:5, fill:true,  tension:0.3 }
             ]
           },
           options: {
             responsive: true, maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
             plugins: {
-              legend: { display: false },
+              legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } },
               tooltip: {
                 callbacks: {
                   label: function(ctx) {
-                    var v = ctx.parsed.y;
-                    if (ctx.datasetIndex === 0) return 'Real: ' + v.toLocaleString() + ' pers.';
-                    return 'Proy: ' + v.toLocaleString() + ' pers.';
+                    return ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString() + ' pers.';
                   },
                   afterBody: function(items) {
-                    if (items.length < 2) return;
-                    var gap = items[0].parsed.y - items[1].parsed.y;
-                    return [(gap >= 0 ? '+' : '') + gap.toLocaleString() + ' varianza'];
+                    if (items.length < 2) return [];
+                    var tot  = items.find(function(i){ return i.datasetIndex === 0; });
+                    var trab = items.find(function(i){ return i.datasetIndex === 1; });
+                    if (!tot || !trab) return [];
+                    var pct = (trab.parsed.y / tot.parsed.y * 100).toFixed(1);
+                    return ['— ' + pct + '% trabajan del total'];
                   }
                 }
               }
@@ -5074,17 +5044,22 @@ function checkPw(){
       data: {
         labels: allSems,
         datasets: [
-          { label:'Lo de Beltrán · Total', data: bTotales, borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,.08)', borderWidth:2.5, tension:.4, pointRadius:3, fill:true },
-          { label:'Lo de Beltrán · Trabajadores', data: b.historico.map(function(r){return r.trabajadores;}), borderColor:'#0ea5e9', borderWidth:2, borderDash:[4,3], tension:.4, pointRadius:2, fill:false },
-          { label:'Campo Dorita · Total', data: dTotales, borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,.08)', borderWidth:2.5, tension:.4, pointRadius:3, fill:true },
-          { label:'Campo Dorita · Trabajadores', data: allSems.map(function(s){ var r=d.historico.find(function(x){return x.sem===s;}); return r?r.trabajadores:null; }), borderColor:'#7c3aed', borderWidth:2, borderDash:[4,3], tension:.4, pointRadius:2, fill:false },
-          { label:'Beltrán Proyectado', data: projBeltran, borderColor:'#f59e0b', borderWidth:1.8, borderDash:[5,4], tension:.4, pointRadius:0, fill:false },
-          { label:'Dorita Proyectado',  data: projDorita,  borderColor:'#c084fc', borderWidth:1.8, borderDash:[5,4], tension:.4, pointRadius:0, fill:false }
+          { label:'Beltrán · Total',        data: bTotales,   borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,.07)',  borderWidth:2.5, tension:.4, pointRadius:2, pointHoverRadius:5, fill:true  },
+          { label:'Beltrán · Trabajan',     data: b.historico.map(function(r){return r.trabajadores;}), borderColor:'#4ade80', backgroundColor:'rgba(74,222,128,.05)', borderWidth:2, tension:.4, pointRadius:2, pointHoverRadius:5, fill:true },
+          { label:'Beltrán · No trabajan',  data: b.historico.map(function(r){return r.acomp;}),        borderColor:'#fbbf24', backgroundColor:'rgba(251,191,36,.05)',  borderWidth:2, tension:.4, pointRadius:2, pointHoverRadius:5, fill:true },
+          { label:'Dorita · Total',         data: dTotales,   borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,.07)', borderWidth:2.5, tension:.4, pointRadius:2, pointHoverRadius:5, fill:true  },
+          { label:'Dorita · Trabajan',      data: allSems.map(function(s){ var r=d.historico.find(function(x){return x.sem===s;}); return r?r.trabajadores:null; }), borderColor:'#c084fc', borderWidth:2, tension:.4, pointRadius:2, pointHoverRadius:5, fill:false },
+          { label:'Dorita · No trabajan',   data: allSems.map(function(s){ var r=d.historico.find(function(x){return x.sem===s;}); return r?r.acomp:null; }),        borderColor:'#f59e0b', borderWidth:2, borderDash:[4,3], tension:.4, pointRadius:2, pointHoverRadius:5, fill:false },
+          { label:'Beltrán Proyectado',     data: projBeltran, borderColor:'rgba(56,189,248,.4)',  borderWidth:1.5, borderDash:[5,4], tension:.4, pointRadius:0, pointHoverRadius:4, fill:false },
+          { label:'Dorita Proyectado',      data: projDorita,  borderColor:'rgba(167,139,250,.4)', borderWidth:1.5, borderDash:[5,4], tension:.4, pointRadius:0, pointHoverRadius:4, fill:false }
         ]
       },
       options: { responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
-        plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:function(ctx){ return ctx.dataset.label+': '+ctx.parsed.y.toLocaleString()+' personas'; }}} },
-        scales:{ y:{ beginAtZero:false, grid:{color:'rgba(0,0,0,.04)'} }, x:{ grid:{display:false} } }
+        plugins:{
+          legend:{ position:'top', labels:{ boxWidth:10, font:{size:10} } },
+          tooltip:{ callbacks:{ label:function(ctx){ return ctx.dataset.label+': '+ctx.parsed.y.toLocaleString()+' personas'; } } }
+        },
+        scales:{ y:{ beginAtZero:false, grid:{color:'rgba(0,0,0,.04)'}, ticks:{font:{size:10}} }, x:{ grid:{display:false}, ticks:{font:{size:9}} } }
       }
     });
 
