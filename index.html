@@ -3056,7 +3056,16 @@ function checkPw(){
   /* Global click handler for data-nav-tab elements */
   document.addEventListener('click', function (e) {
     var el = e.target.closest('[data-nav-tab]');
-    if (el) { e.preventDefault(); navigateToTab(el.dataset.navTab); }
+    if (el) {
+      e.preventDefault();
+      navigateToTab(el.dataset.navTab);
+      if (el.dataset.navTarget) {
+        setTimeout(function () {
+          var t = document.getElementById(el.dataset.navTarget);
+          if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 320);
+      }
+    }
   });
 
   /* ── Header pills ── */
@@ -3166,8 +3175,10 @@ function checkPw(){
     var ebitdaPct    = ebtd.mes.budget ? Math.min(ebtd.mes.actual / ebtd.mes.budget * 100, 120) : 0;
     var saldoBarPct  = revFob ? Math.min(Math.abs(ventaNeta) / revFob * 100, 100) : 0;
 
-    function hoyKpi(lbl, val, sub, color, barPct, tagTxt, tagColor, navTab) {
-      var navAttrs = navTab ? ' data-nav-tab="' + navTab + '" class="hoy-kpi nav-card" title="Ver en detalle →"' : ' class="hoy-kpi"';
+    function hoyKpi(lbl, val, sub, color, barPct, tagTxt, tagColor, navTab, navTarget) {
+      var navAttrs = navTab
+        ? ' data-nav-tab="' + navTab + '"' + (navTarget ? ' data-nav-target="' + navTarget + '"' : '') + ' class="hoy-kpi nav-card" title="Ver en detalle →"'
+        : ' class="hoy-kpi"';
       return '<div' + navAttrs + '>' +
         '<div class="hoy-kpi-stripe" style="background:' + color + '"></div>' +
         '<div class="hoy-kpi-lbl">' + lbl + '</div>' +
@@ -3197,7 +3208,25 @@ function checkPw(){
         saldoNeg ? '#dc2626' : '#16a34a',
         saldoNeg ? Math.min(Math.abs(saldoActual) / (revFob || 1) * 100, 100) : 80,
         saldoNeg ? '⚠ Due to Calavo' : '✓ A favor de Belher',
-        saldoNeg ? '#dc2626' : '#16a34a', 'finanzas');
+        saldoNeg ? '#dc2626' : '#16a34a', 'finanzas') +
+      (function () {
+        if (!D.cdc || !D.cdc.beltran || !D.cdc.proyeccion) return '';
+        var bHist = D.cdc.beltran.historico;
+        var dHist = D.cdc.dorita  ? D.cdc.dorita.historico : [];
+        var lastB = bHist[bHist.length - 1];
+        if (!lastB) return '';
+        var lastD = dHist.find(function(r){ return r.sem === lastB.sem; });
+        var realTotal = lastB.total + (lastD ? lastD.total : 0);
+        var proyRow   = D.cdc.proyeccion.semanas.find(function(r){ return r.sem === lastB.sem; });
+        var proyTotal = proyRow ? proyRow.total : null;
+        var pctReal   = proyTotal ? Math.round(realTotal / proyTotal * 100) : null;
+        var gap       = proyTotal ? realTotal - proyTotal : null;
+        var color     = pctReal == null ? '#6b7280' : (pctReal >= 95 ? '#16a34a' : pctReal >= 80 ? '#d97706' : '#dc2626');
+        var tagTxt    = pctReal == null ? '— sin proyección' : (gap >= 0 ? '+' : '') + gap + ' vs proyectado';
+        var sub       = lastB.sem + ' · Real ' + realTotal.toLocaleString() + (proyTotal ? ' · Proy ' + proyTotal.toLocaleString() : '');
+        var barPct    = pctReal != null ? Math.min(pctReal, 100) : 0;
+        return hoyKpi('% Gente Trabajando', pctReal != null ? pctReal + '%' : '—', sub, color, barPct, tagTxt, color, 'cdc', 'chartCdcVsProyeccion');
+      })();
 
     /* ── PULSO OPERATIVO ── */
     var lastEmbarque = D.operaciones.embarques[0] || {};
