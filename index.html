@@ -2610,6 +2610,7 @@ function checkPw(){
 
     <div id="hoyHero"></div>
     <div class="hoy-kpi-grid" id="hoyKpis"></div>
+    <div id="hoyCdcChartWrap"></div>
     <div class="hoy-pulso" id="hoyPulso"></div>
 
     <div id="pronosticoSection"></div>
@@ -3209,36 +3210,6 @@ function checkPw(){
         saldoNeg ? Math.min(Math.abs(saldoActual) / (revFob || 1) * 100, 100) : 80,
         saldoNeg ? '⚠ Due to Calavo' : '✓ A favor de Belher',
         saldoNeg ? '#dc2626' : '#16a34a', 'finanzas') +
-      (function () {
-        if (!D.cdc || !D.cdc.beltran || !D.cdc.proyeccion) return '';
-        var bHist  = D.cdc.beltran.historico;
-        var dHist  = D.cdc.dorita ? D.cdc.dorita.historico : [];
-        var proyMap = {};
-        D.cdc.proyeccion.semanas.forEach(function(r){ proyMap[r.sem] = r; });
-        var variances = [], pcts = [];
-        bHist.forEach(function(b) {
-          if (!b.trabajadores || b.trabajadores <= 0) return;   /* excluye semanas sin gente */
-          var d = dHist.find(function(r){ return r.sem === b.sem; });
-          var dTrab = (d && d.trabajadores > 0) ? d.trabajadores : 0;
-          var realTrab = b.trabajadores + dTrab;
-          var pRow = proyMap[b.sem];
-          if (!pRow) return;
-          /* proyección ajustada: solo incluye los campos que realmente trabajaron */
-          var projTrab = (b.trabajadores > 0 ? pRow.beltran : 0) + (dTrab > 0 ? pRow.dorita : 0);
-          if (!projTrab) return;
-          variances.push(realTrab - projTrab);
-          pcts.push(realTrab / projTrab * 100);
-        });
-        if (!variances.length) return '';
-        var n       = variances.length;
-        var avgVar  = Math.round(variances.reduce(function(s,v){ return s+v; }, 0) / n);
-        var avgPct  = Math.round(pcts.reduce(function(s,v){ return s+v; }, 0) / n);
-        var color   = avgPct >= 95 ? '#16a34a' : avgPct >= 80 ? '#d97706' : '#dc2626';
-        var sign    = avgVar >= 0 ? '+' : '';
-        var tagTxt  = sign + avgVar + ' pers/sem prom';
-        var sub     = 'Prom ' + n + ' semanas · solo trabajadores, sin acomp.';
-        return hoyKpi('% Gente Trabajando', avgPct + '%', sub, color, Math.min(avgPct, 100), tagTxt, color, 'cdc', 'chartCdcVsProyeccion');
-      })();
 
     /* ── PULSO OPERATIVO ── */
     var lastEmbarque = D.operaciones.embarques[0] || {};
@@ -3414,6 +3385,115 @@ function checkPw(){
       var heroNumEl = document.querySelector('#hoyHero .hoy-hero-num');
       if (heroNumEl && revTotal) countUp(heroNumEl, revTotal, 900, '$');
     }, 80);
+
+    /* ── CDC Line Chart: Gente Trabajando Real vs Proyectado ── */
+    var cdcWrap = document.getElementById('hoyCdcChartWrap');
+    if (cdcWrap && D.cdc && D.cdc.beltran && D.cdc.proyeccion) {
+      var bHist2  = D.cdc.beltran.historico;
+      var dHist2  = D.cdc.dorita ? D.cdc.dorita.historico : [];
+      var proyMap2 = {};
+      D.cdc.proyeccion.semanas.forEach(function(r){ proyMap2[r.sem] = r; });
+
+      var cdcLabels = [], cdcReal = [], cdcProy = [], cdcVars = [];
+      bHist2.forEach(function(b) {
+        if (!b.trabajadores || b.trabajadores <= 0) return;
+        var d2   = dHist2.find(function(r){ return r.sem === b.sem; });
+        var dT   = (d2 && d2.trabajadores > 0) ? d2.trabajadores : 0;
+        var real = b.trabajadores + dT;
+        var pr   = proyMap2[b.sem];
+        if (!pr) return;
+        var proy = (b.trabajadores > 0 ? pr.beltran : 0) + (dT > 0 ? pr.dorita : 0);
+        cdcLabels.push(b.sem);
+        cdcReal.push(real);
+        cdcProy.push(proy);
+        cdcVars.push(real - proy);
+      });
+
+      var avgPct2 = 0;
+      if (cdcReal.length) {
+        var sumPct = 0;
+        for (var i = 0; i < cdcReal.length; i++) sumPct += (cdcReal[i] / (cdcProy[i] || 1) * 100);
+        avgPct2 = Math.round(sumPct / cdcReal.length);
+      }
+      var kpiColor2 = avgPct2 >= 95 ? '#16a34a' : avgPct2 >= 80 ? '#d97706' : '#dc2626';
+
+      cdcWrap.innerHTML =
+        '<div class="card" style="margin-bottom:14px;cursor:pointer;position:relative" data-nav-tab="cdc" data-nav-target="chartCdcVsProyeccion">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">' +
+            '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Gente Trabajando · Real vs Proyectado <span style="color:var(--muted);font-weight:400">(sin acompañantes)</span></div>' +
+            '<div style="display:flex;align-items:center;gap:10px">' +
+              '<span style="font-size:1.1rem;font-weight:900;color:' + kpiColor2 + '">' + avgPct2 + '%</span>' +
+              '<span style="font-size:.6rem;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:2px 8px">' + cdcLabels.length + ' semanas · ver detalle →</span>' +
+            '</div>' +
+          '</div>' +
+          '<div style="height:180px"><canvas id="chartHoyCdc"></canvas></div>' +
+          '<div style="display:flex;gap:14px;margin-top:8px">' +
+            '<span style="font-size:.62rem;color:var(--muted);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:16px;height:2px;background:#22c55e;border-radius:1px"></span>Real</span>' +
+            '<span style="font-size:.62rem;color:var(--muted);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:16px;height:2px;background:rgba(156,163,175,.6);border-radius:1px;border-top:2px dashed rgba(156,163,175,.6)"></span>Proyectado</span>' +
+          '</div>' +
+        '</div>';
+
+      if (chartsInit['chartHoyCdc']) { chartsInit['chartHoyCdc'].destroy(); }
+      var ctx2 = document.getElementById('chartHoyCdc');
+      if (ctx2) {
+        chartsInit['chartHoyCdc'] = new Chart(ctx2.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: cdcLabels,
+            datasets: [
+              {
+                label: 'Real (trabajadores)',
+                data: cdcReal,
+                borderColor: '#22c55e',
+                backgroundColor: 'rgba(34,197,94,.08)',
+                borderWidth: 2,
+                pointRadius: 3,
+                pointHoverRadius: 5,
+                fill: true,
+                tension: 0.35
+              },
+              {
+                label: 'Proyectado',
+                data: cdcProy,
+                borderColor: 'rgba(156,163,175,.6)',
+                backgroundColor: 'transparent',
+                borderWidth: 1.5,
+                borderDash: [5, 4],
+                pointRadius: 0,
+                pointHoverRadius: 4,
+                fill: false,
+                tension: 0.35
+              }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    var v = ctx.parsed.y;
+                    if (ctx.datasetIndex === 0) return 'Real: ' + v.toLocaleString() + ' pers.';
+                    return 'Proy: ' + v.toLocaleString() + ' pers.';
+                  },
+                  afterBody: function(items) {
+                    if (items.length < 2) return;
+                    var gap = items[0].parsed.y - items[1].parsed.y;
+                    return [(gap >= 0 ? '+' : '') + gap.toLocaleString() + ' varianza'];
+                  }
+                }
+              }
+            },
+            scales: {
+              y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { font: { size: 10 } } },
+              x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 0 } }
+            }
+          }
+        });
+      }
+    }
   }
 
   function kpiCard(label, value, sub, valCls, cardCls, pillHtml) {
