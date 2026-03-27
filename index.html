@@ -2625,13 +2625,6 @@ function checkPw(){
     <div class="section-title">Señales del Día</div>
     <div id="alertasContainer"></div>
 
-    <!-- 5. Pronóstico -->
-    <div id="pronosticoSection"></div>
-
-    <!-- 6. Posición de caja — liquidez -->
-    <div class="section-title">Posición de Caja · Calavo <span class="src-tag">Settlement actualizado</span></div>
-    <div id="hoyCashSummary"></div>
-
     <!-- 7. Riesgos activos -->
     <div class="section-title" style="margin-top:22px">Riesgos Activos <span class="src-tag">Watchlist Estratégico</span></div>
     <div id="hoyWatchlist"></div>
@@ -2746,9 +2739,6 @@ function checkPw(){
     <div class="section-title">Proyección · Temporada Restante <span class="src-tag">estimado basado en ritmo actual</span></div>
     <div class="card" id="finProyeccion" style="padding:22px"></div>
 
-    <div class="section-title">Revenue Total · Temporada <span class="src-tag">leima@agbelher.com · CF ABSA GC 2025–2026</span></div>
-    <div class="card" id="revSplitCard" style="padding:24px"></div>
-
     <div class="section-title">EBITDA: Actual vs Budget vs Y/A <span class="src-tag">jacruz@agbelher.com · Estado Financiero Feb 2026</span></div>
     <div class="card" style="padding:22px">
       <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
@@ -2794,30 +2784,15 @@ function checkPw(){
     <!-- Calavo Financial Strip -->
     <div id="tomateCalavoStrip"></div>
 
-    <!-- Quality + Market (2-col) -->
-    <div class="tomate-charts-row" style="margin-top:4px">
-      <div>
-        <div class="section-title">Calidad · Temporada <span class="src-tag">Outbound calidad@agbelher.com</span></div>
-        <div id="tomateCalidadSummary"></div>
-        <div class="card" style="margin-top:8px"><div class="chart-box" style="height:190px"><canvas id="chartTomateCalidad"></canvas></div></div>
-      </div>
-      <div>
-        <div class="section-title">Precios Mercado · Tomate <span class="src-tag">Corbel Seeds Daily</span></div>
-        <div id="tomatePrecios"></div>
-      </div>
-    </div>
+    <!-- Quality (full width) -->
+    <div class="section-title" style="margin-top:4px">Calidad · Temporada <span class="src-tag">Outbound calidad@agbelher.com</span></div>
+    <div id="tomateCalidadSummary"></div>
+    <div class="card" style="margin-top:8px"><div class="chart-box" style="height:190px"><canvas id="chartTomateCalidad"></canvas></div></div>
 
-    <!-- Embarques + Fleet -->
-    <div class="section-title" style="margin-top:20px">Embarques · Tomate <span class="src-tag">embarquesbelher@agbelher.com</span></div>
-    <div class="tom-embarques-layout">
-      <div class="card-table" style="flex:1 1 0;min-width:0"><div class="tbl-wrap"><table id="tomateEmbarquesTbl">
-        <thead><tr><th>Fecha</th><th>Cargas</th><th>Unidad</th><th>Flota</th><th>Destino</th><th>Estado</th></tr></thead>
-        <tbody></tbody>
-      </table></div></div>
-      <div class="card tom-fleet-card" id="tomateFleetCard">
-        <div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:12px">Flota · Distribución</div>
-        <canvas id="chartTomateFlota" style="max-height:160px"></canvas>
-      </div>
+    <!-- Cross-tab navigation -->
+    <div class="dup-nav-row" style="display:flex;gap:10px;margin-top:16px">
+      <button data-nav-tab="operaciones" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Embarques completos → <span style="opacity:.5;font-weight:400">Tab OPERACIONES</span></button>
+      <button data-nav-tab="mercado" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Precios de mercado → <span style="opacity:.5;font-weight:400">Tab MERCADO</span></button>
     </div>
 
     <!-- Quality by Variety — collapsible detail -->
@@ -2865,13 +2840,11 @@ function checkPw(){
     <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
     <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
     <div class="card" id="limonPnl" style="padding:24px"></div>
-    <div class="section-title">Precios de Mercado · Referencia</div>
-    <div class="price-compare-grid" id="limonPrecios"></div>
-    <div class="section-title">Embarques · Limón</div>
-    <div class="card-table"><div class="tbl-wrap"><table id="limonEmbarquesTbl">
-      <thead><tr><th>Fecha</th><th>Cargas</th><th>Unidad</th><th>Flota</th><th>Destino</th><th>Estado</th></tr></thead>
-      <tbody></tbody>
-    </table></div></div>
+    <!-- Cross-tab navigation -->
+    <div class="dup-nav-row" style="display:flex;gap:10px;margin-top:16px">
+      <button data-nav-tab="operaciones" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Embarques completos → <span style="opacity:.5;font-weight:400">Tab OPERACIONES</span></button>
+      <button data-nav-tab="mercado" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Precios de mercado → <span style="opacity:.5;font-weight:400">Tab MERCADO</span></button>
+    </div>
   </div>
 
   <!-- ══════════ CHILE ══════════ -->
@@ -2880,13 +2853,11 @@ function checkPw(){
     <div class="grid-3" id="chileKpis"></div>
     <div class="section-title">Análisis de Mercado · Oportunidad <span class="src-tag">Corbel Seeds Daily · USDA</span></div>
     <div id="chileContext"></div>
-    <div class="section-title">Precios de Mercado</div>
-    <div class="price-compare-grid" id="chilePrecios"></div>
-    <div class="section-title">Embarques · Chile</div>
-    <div class="card-table"><div class="tbl-wrap"><table id="chileEmbarquesTbl">
-      <thead><tr><th>Fecha</th><th>Cargas</th><th>Unidad</th><th>Flota</th><th>Destino</th><th>Estado</th></tr></thead>
-      <tbody></tbody>
-    </table></div></div>
+    <!-- Cross-tab navigation -->
+    <div class="dup-nav-row" style="display:flex;gap:10px;margin-top:16px">
+      <button data-nav-tab="operaciones" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Embarques completos → <span style="opacity:.5;font-weight:400">Tab OPERACIONES</span></button>
+      <button data-nav-tab="mercado" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Precios de mercado → <span style="opacity:.5;font-weight:400">Tab MERCADO</span></button>
+    </div>
   </div>
 
 
@@ -3367,7 +3338,8 @@ function checkPw(){
     var estimPendiente = pagosActual.length && pagosActual[0].pago
       ? pagosActual[0].pago * pagosPendiente.length : null;
     var saldoColor = saldoNeg ? 'var(--red2)' : 'var(--green2)';
-    document.getElementById('hoyCashSummary').innerHTML =
+    var hoyCashEl = document.getElementById('hoyCashSummary');
+    if (hoyCashEl) hoyCashEl.innerHTML =
       '<div class="hoy-cf-strip">' +
         '<div class="hoy-cf-item">' +
           '<div class="hoy-cf-lbl">Venta Neta · Calavo</div>' +
@@ -4806,10 +4778,11 @@ function checkPw(){
       var ebd = D.ebitda;
       var rv  = D.revenue;
 
-      /* Revenue split card */
+      /* Revenue split card (removed from HTML — now only in HOY hero) */
       var fobPct = (rv.fob / rv.total * 100).toFixed(1);
       var nacPct = (rv.nacional / rv.total * 100).toFixed(1);
-      document.getElementById('revSplitCard').innerHTML =
+      var revSplitEl = document.getElementById('revSplitCard');
+      if (revSplitEl) revSplitEl.innerHTML =
         '<div class="rev-total-label">Revenue Total · Temporada</div>' +
         '<div class="rev-total-hero">' + fmt(rv.total) + '</div>' +
         '<div class="rev-split-bar">' +
@@ -5249,9 +5222,10 @@ function checkPw(){
     }
 
     /* Prices grid */
-    if (precios.length) {
+    var preciosIdEl = document.getElementById(preciosId);
+    if (preciosIdEl && precios.length) {
       var scaleMax = Math.max.apply(null, precios.map(function (p) { return p.max; })) * 1.15;
-      document.getElementById(preciosId).innerHTML = precios.map(function (p) {
+      preciosIdEl.innerHTML = precios.map(function (p) {
         var mid = (p.min + p.max) / 2;
         var chgPct = p.anterior != null ? ((mid - p.anterior) / p.anterior * 100) : null;
         var chgStr = chgPct != null ? (chgPct >= .5 ? '▲ +' : chgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(chgPct).toFixed(1) + '% vs semana anterior' : 'Sin comparativo anterior';
@@ -5269,8 +5243,8 @@ function checkPw(){
           '<div class="pc-footer"><span>' + (p.anterior != null ? 'Anterior: ' + fmt(p.anterior,2) : 'Sin dato ant.') + '</span><span>Mid: $' + fmt(mid,2) + '</span></div>' +
         '</div>';
       }).join('');
-    } else {
-      document.getElementById(preciosId).innerHTML = '<div class="card" style="padding:20px;color:var(--muted);font-size:.85rem">Sin precios de mercado disponibles para ' + tipo + ' en el último reporte.</div>';
+    } else if (preciosIdEl) {
+      preciosIdEl.innerHTML = '<div class="card" style="padding:20px;color:var(--muted);font-size:.85rem">Sin precios de mercado disponibles para ' + tipo + ' en el último reporte.</div>';
     }
 
     /* Shipments table */
@@ -5784,7 +5758,8 @@ function checkPw(){
       return tomKeys.some(function (k) { return n.indexOf(k) !== -1; });
     });
     var scaleMax = tPrecios.length ? Math.max.apply(null, tPrecios.map(function (p) { return p.max; })) * 1.15 : 1;
-    document.getElementById('tomatePrecios').innerHTML = tPrecios.map(function (p) {
+    var tomPreciosEl = document.getElementById('tomatePrecios');
+    if (tomPreciosEl) tomPreciosEl.innerHTML = tPrecios.map(function (p) {
       var mid = (p.min + p.max) / 2;
       var chgPct = p.anterior != null ? ((mid - p.anterior) / p.anterior * 100) : null;
       var chgStr = chgPct != null ? (chgPct >= .5 ? '▲ +' : chgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(chgPct).toFixed(1) + '% vs semana anterior' : 'Sin comparativo';
@@ -5934,7 +5909,7 @@ function checkPw(){
     };
     var emb = (D.operaciones.embarques||[]).filter(function(e){ return e.tipo==='Tomate'; });
     var tbody = document.querySelector('#tomateEmbarquesTbl tbody');
-    tbody.innerHTML = emb.length
+    if (tbody) tbody.innerHTML = emb.length
       ? emb.map(function(e){
           return '<tr><td>'+e.fecha+'</td><td class="td-num">'+e.cargas+'</td><td>'+e.unidad+'</td><td>'+clasificarUnidad(e.unidad)+'</td><td><span class="badge badge-blue">'+e.destino+'</span></td><td>'+e.estado+'</td></tr>';
         }).join('')
@@ -6139,7 +6114,7 @@ function checkPw(){
       return limonKeys.some(function (k) { return n.indexOf(k) !== -1; });
     });
     var preciosEl = document.getElementById('limonPrecios');
-    if (limonPrecios.length) {
+    if (preciosEl && limonPrecios.length) {
       var scaleMax = Math.max.apply(null, limonPrecios.map(function (p) { return p.max; })) * 1.15;
       preciosEl.innerHTML = limonPrecios.map(function (p) {
         var mid = (p.min + p.max) / 2;
@@ -6158,24 +6133,26 @@ function checkPw(){
           '<div class="pc-footer"><span>' + (p.anterior != null ? 'Ant: ' + fmt(p.anterior,2) : '—') + '</span><span>Mid: ' + fmt(mid,2) + '</span></div>' +
         '</div>';
       }).join('');
-    } else {
+    } else if (preciosEl) {
       preciosEl.innerHTML = '<div class="card" style="padding:16px;color:var(--muted);font-size:.84rem">Sin precios de Limón en el último reporte de mercado.</div>';
     }
 
-    var limonEmb = (D.operaciones.embarques || []).filter(function (e) { return e.tipo === 'Limón'; });
-    var clasificarUnidad = function (u) {
-      u = (u||'').toUpperCase().trim();
-      if (/^ST[\-\s]?\d/i.test(u)) return 'Transfrios (ST)';
-      if (/^JL[\-\s]?\d/i.test(u)) return 'Elogística (JL)';
-      if (/^CGG[\-\s]?\d/i.test(u)) return 'CGG (CGG)';
-      return 'Otros';
-    };
     var limonTbody = document.querySelector('#limonEmbarquesTbl tbody');
-    limonTbody.innerHTML = limonEmb.length
-      ? limonEmb.map(function(e){
-          return '<tr><td>'+e.fecha+'</td><td class="td-num">'+e.cargas+'</td><td>'+e.unidad+'</td><td>'+clasificarUnidad(e.unidad)+'</td><td><span class="badge badge-blue">'+e.destino+'</span></td><td>'+e.estado+'</td></tr>';
-        }).join('')
-      : '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Sin embarques registrados para Limón</td></tr>';
+    if (limonTbody) {
+      var limonEmb = (D.operaciones.embarques || []).filter(function (e) { return e.tipo === 'Limón'; });
+      var clasificarUnidad = function (u) {
+        u = (u||'').toUpperCase().trim();
+        if (/^ST[\-\s]?\d/i.test(u)) return 'Transfrios (ST)';
+        if (/^JL[\-\s]?\d/i.test(u)) return 'Elogística (JL)';
+        if (/^CGG[\-\s]?\d/i.test(u)) return 'CGG (CGG)';
+        return 'Otros';
+      };
+      limonTbody.innerHTML = limonEmb.length
+        ? limonEmb.map(function(e){
+            return '<tr><td>'+e.fecha+'</td><td class="td-num">'+e.cargas+'</td><td>'+e.unidad+'</td><td>'+clasificarUnidad(e.unidad)+'</td><td><span class="badge badge-blue">'+e.destino+'</span></td><td>'+e.estado+'</td></tr>';
+          }).join('')
+        : '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Sin embarques registrados para Limón</td></tr>';
+    }
   }
   function renderChile() {
     renderProductTab({ tipo:'Chile', tabId:'chile', kpisId:'chileKpis', preciosId:'chilePrecios', tblId:'chileEmbarquesTbl', badgeCls:'prod-badge-chile' });
@@ -6529,7 +6506,6 @@ function checkPw(){
   /* ── INIT ── */
   renderTicker();
   renderHoy();
-  renderPronostico();
   renderOperaciones();
   renderCalidad();
   renderMercado();
