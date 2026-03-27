@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Jueves 26 Mar 2026",
     semana: "WK 13",
-    actualizado: "26/03/2026 · 08:57"
+    actualizado: "26/03/2026 · 23:50"
   },
 
   alertas: [
@@ -319,6 +319,13 @@ window.BELHER = {
       { fecha:"18/03", productos:["Chile","Limón Persa"] }
     ],
     embarques: [
+      { fecha:"25/03/2026", tipo:"Tomate", cargas:1, unidad:"CGG-107",  destino:"Arizona", estado:"OK" },
+      { fecha:"25/03/2026", tipo:"Tomate", cargas:1, unidad:"CHARLY-4", destino:"Arizona", estado:"OK" },
+      { fecha:"25/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-110",   destino:"Arizona", estado:"OK" },
+      { fecha:"25/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-109",   destino:"Arizona", estado:"OK" },
+      { fecha:"24/03/2026", tipo:"Tomate", cargas:1, unidad:"JL-50",    destino:"Arizona", estado:"OK" },
+      { fecha:"24/03/2026", tipo:"Tomate", cargas:1, unidad:"JL-30",    destino:"Arizona", estado:"OK" },
+      { fecha:"24/03/2026", tipo:"Tomate", cargas:1, unidad:"AC-26",    destino:"Texas",   estado:"OK" },
       { fecha:"23/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-110",   destino:"Arizona", estado:"OK" },
       { fecha:"23/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-109",   destino:"Arizona", estado:"OK" },
       { fecha:"23/03/2026", tipo:"Tomate", cargas:1, unidad:"CGG-114",  destino:"Arizona", estado:"OK" },
@@ -335,11 +342,14 @@ window.BELHER = {
   },
 
   correos: [
-    { hora:"07:30", asunto:"Corbel Seeds Daily News Summary #0017",             de:"Raymundo Elizalde",leido:false },
-    { hora:"11:27", asunto:"REPORTE DE OUTBOUND TOMATE 24/03/2026",             de:"Calidad Belher",   leido:false },
-    { hora:"21:04", asunto:"24-03-2026 REPORTES GENERALES",                    de:"Embarques Belher", leido:true  },
-    { hora:"17:11", asunto:"REPORTE DE BASCULA 24/03/2026 (TOMATE)",           de:"Báscula Belher",   leido:false },
-    { hora:"17:07", asunto:"REPORTE DE BASCULA 23/03/2026 (REZAGA DE TOMATE)", de:"Báscula Belher",   leido:true  }
+    { hora:"19:55", asunto:"25-03-2026 REPORTES GENERALES",                    de:"Embarques Belher", leido:false },
+    { hora:"19:52", asunto:"BILL,MANIFIESTO NOGALES CGG 25-03-2026",           de:"Embarques Belher", leido:false },
+    { hora:"18:50", asunto:"BILL,MANIFIESTO NOGALES ST 25-03-2026",            de:"Embarques Belher", leido:false },
+    { hora:"21:04", asunto:"24-03-2026 REPORTES GENERALES",                    de:"Embarques Belher", leido:false },
+    { hora:"20:44", asunto:"BILL,MANIFIESTO NOGALES JL 24-03-2026",            de:"Embarques Belher", leido:false },
+    { hora:"20:24", asunto:"BILL,MANIFIESTO MCALLEN 24-03-2026",               de:"Embarques Belher", leido:false },
+    { hora:"11:27", asunto:"REPORTE DE OUTBOUND TOMATE 24/03/2026",            de:"Calidad Belher",   leido:false },
+    { hora:"17:11", asunto:"REPORTE DE BASCULA 24/03/2026 (TOMATE)",           de:"Báscula Belher",   leido:false }
   ],
 
   ticker: [
