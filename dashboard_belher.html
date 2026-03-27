@@ -3209,7 +3209,7 @@ function checkPw(){
         saldoNeg ? '#dc2626' : '#16a34a',
         saldoNeg ? Math.min(Math.abs(saldoActual) / (revFob || 1) * 100, 100) : 80,
         saldoNeg ? '⚠ Due to Calavo' : '✓ A favor de Belher',
-        saldoNeg ? '#dc2626' : '#16a34a', 'finanzas') +
+        saldoNeg ? '#dc2626' : '#16a34a', 'finanzas');
 
     /* ── PULSO OPERATIVO ── */
     var lastEmbarque = D.operaciones.embarques[0] || {};
