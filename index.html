@@ -3211,21 +3211,33 @@ function checkPw(){
         saldoNeg ? '#dc2626' : '#16a34a', 'finanzas') +
       (function () {
         if (!D.cdc || !D.cdc.beltran || !D.cdc.proyeccion) return '';
-        var bHist = D.cdc.beltran.historico;
-        var dHist = D.cdc.dorita  ? D.cdc.dorita.historico : [];
-        var lastB = bHist[bHist.length - 1];
-        if (!lastB) return '';
-        var lastD = dHist.find(function(r){ return r.sem === lastB.sem; });
-        var realTotal = lastB.total + (lastD ? lastD.total : 0);
-        var proyRow   = D.cdc.proyeccion.semanas.find(function(r){ return r.sem === lastB.sem; });
-        var proyTotal = proyRow ? proyRow.total : null;
-        var pctReal   = proyTotal ? Math.round(realTotal / proyTotal * 100) : null;
-        var gap       = proyTotal ? realTotal - proyTotal : null;
-        var color     = pctReal == null ? '#6b7280' : (pctReal >= 95 ? '#16a34a' : pctReal >= 80 ? '#d97706' : '#dc2626');
-        var tagTxt    = pctReal == null ? '— sin proyección' : (gap >= 0 ? '+' : '') + gap + ' vs proyectado';
-        var sub       = lastB.sem + ' · Real ' + realTotal.toLocaleString() + (proyTotal ? ' · Proy ' + proyTotal.toLocaleString() : '');
-        var barPct    = pctReal != null ? Math.min(pctReal, 100) : 0;
-        return hoyKpi('% Gente Trabajando', pctReal != null ? pctReal + '%' : '—', sub, color, barPct, tagTxt, color, 'cdc', 'chartCdcVsProyeccion');
+        var bHist  = D.cdc.beltran.historico;
+        var dHist  = D.cdc.dorita ? D.cdc.dorita.historico : [];
+        var proyMap = {};
+        D.cdc.proyeccion.semanas.forEach(function(r){ proyMap[r.sem] = r; });
+        var variances = [], pcts = [];
+        bHist.forEach(function(b) {
+          if (!b.trabajadores || b.trabajadores <= 0) return;   /* excluye semanas sin gente */
+          var d = dHist.find(function(r){ return r.sem === b.sem; });
+          var dTrab = (d && d.trabajadores > 0) ? d.trabajadores : 0;
+          var realTrab = b.trabajadores + dTrab;
+          var pRow = proyMap[b.sem];
+          if (!pRow) return;
+          /* proyección ajustada: solo incluye los campos que realmente trabajaron */
+          var projTrab = (b.trabajadores > 0 ? pRow.beltran : 0) + (dTrab > 0 ? pRow.dorita : 0);
+          if (!projTrab) return;
+          variances.push(realTrab - projTrab);
+          pcts.push(realTrab / projTrab * 100);
+        });
+        if (!variances.length) return '';
+        var n       = variances.length;
+        var avgVar  = Math.round(variances.reduce(function(s,v){ return s+v; }, 0) / n);
+        var avgPct  = Math.round(pcts.reduce(function(s,v){ return s+v; }, 0) / n);
+        var color   = avgPct >= 95 ? '#16a34a' : avgPct >= 80 ? '#d97706' : '#dc2626';
+        var sign    = avgVar >= 0 ? '+' : '';
+        var tagTxt  = sign + avgVar + ' pers/sem prom';
+        var sub     = 'Prom ' + n + ' semanas · solo trabajadores, sin acomp.';
+        return hoyKpi('% Gente Trabajando', avgPct + '%', sub, color, Math.min(avgPct, 100), tagTxt, color, 'cdc', 'chartCdcVsProyeccion');
       })();
 
     /* ── PULSO OPERATIVO ── */
