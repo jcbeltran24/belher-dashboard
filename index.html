@@ -3962,18 +3962,16 @@ function checkPw(){
 
     /* Break-even */
     if (cf.breakeven_precio_por_caja) {
-      var beActual = cf.precio_mercado ? cf.precio_mercado.precio_actual_promedio : null;
-      var beAtMeta = beActual != null && Math.abs(beActual - cf.breakeven_precio_target) < 0.05;
-      var beIcon = beAtMeta ? '🟢' : '📊';
-      var beSub = 'Precio FOB base OL: $' + cf.breakeven_precio_base + '/caja. Break-even total requiere $' + cf.breakeven_precio_target + '/caja · ' + (cf.breakeven_volumen/1000).toFixed(0) + 'K cajas.';
-      if (beActual != null) {
-        beSub += beAtMeta
-          ? ' Precio promedio actual $' + beActual.toFixed(2) + ' — prácticamente EN PUNTO DE EQUILIBRIO. Mercado esta semana: ~$' + (cf.precio_mercado.semana_actual_promedio||'—') + '/caja.'
-          : ' Precio promedio actual $' + beActual.toFixed(2) + ' vs meta $' + cf.breakeven_precio_target + '.';
-      }
-      insights.push({ icon: beIcon,
-        title: 'Break-even $' + cf.breakeven_precio_target + '/caja' + (beAtMeta ? ' · ✓ Precio actual $' + beActual.toFixed(2) + ' — en meta' : ''),
-        sub: beSub });
+      var pm = cf.precio_mercado || {};
+      var beActual = pm.precio_actual_fob != null ? pm.precio_actual_fob : null;
+      var beDelta  = beActual != null ? (beActual - cf.breakeven_precio_target) : null;
+      var beIcon = beDelta != null && beDelta >= 0 ? '🟢' : '🔴';
+      var beSub = 'FOB promedio sem 12 · Calavo · al 24-Mar: $' + (beActual != null ? beActual.toFixed(2) : '—') + '. Meta break-even: $' + cf.breakeven_precio_target + '/caja · ' + (cf.breakeven_volumen/1000).toFixed(0) + 'K cajas.';
+      if (pm.precio_requerido_ol) beSub += ' Precio promedio requerido Mar 26–Jun 30: $' + pm.precio_requerido_ol.toFixed(2) + '.';
+      if (pm.semana_actual_promedio) beSub += ' Mercado inicio sem 13: ~$' + pm.semana_actual_promedio + '/caja.';
+      var beTitle = 'Break-even $' + cf.breakeven_precio_target + '/caja · FOB sem 12: $' + (beActual != null ? beActual.toFixed(2) : '—');
+      if (beDelta != null) beTitle += beDelta >= 0 ? ' (+$' + beDelta.toFixed(2) + ' sobre meta)' : ' (−$' + Math.abs(beDelta).toFixed(2) + ' bajo meta)';
+      insights.push({ icon: beIcon, title: beTitle, sub: beSub });
     }
 
     /* Anticipos */
@@ -4048,14 +4046,14 @@ function checkPw(){
         '<div class="cf-kpi" style="background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.25)"><div class="cf-kpi-lbl">Saldo Final</div><div class="cf-kpi-val" style="color:' + (saldoFin < 0 ? '#f87171' : '#a5b4fc') + '">' + fmt(Math.round(saldoFin)) + '</div><div class="cf-kpi-sub">cobertura ' + coverage.toFixed(2) + '×</div></div>' +
         (cf.precio_mercado ? (function(){
           var pm = cf.precio_mercado;
-          var delta = pm.precio_actual_promedio - cf.breakeven_precio_target;
-          var atMeta = Math.abs(delta) < 0.05;
-          var bg = atMeta ? 'rgba(34,197,94,.08)' : (delta > 0 ? 'rgba(34,197,94,.08)' : 'rgba(239,68,68,.07)');
-          var bc = atMeta ? 'rgba(34,197,94,.3)'  : (delta > 0 ? 'rgba(34,197,94,.3)'  : 'rgba(239,68,68,.25)');
-          var vc = atMeta ? '#4ade80' : (delta > 0 ? '#4ade80' : '#f87171');
-          var badge = atMeta ? '<span style="font-size:.5rem;font-weight:800;background:rgba(34,197,94,.2);color:#4ade80;padding:1px 5px;border-radius:4px;margin-left:4px">EN META</span>' : '';
-          var sub = atMeta ? 'Δ $' + delta.toFixed(2) + ' vs $' + cf.breakeven_precio_target + ' meta' : (delta > 0 ? '+$' + delta.toFixed(2) + ' sobre meta' : '$' + Math.abs(delta).toFixed(2) + ' bajo meta');
-          return '<div class="cf-kpi" style="background:' + bg + ';border-color:' + bc + '"><div class="cf-kpi-lbl">Precio Actual' + badge + '</div><div class="cf-kpi-val" style="color:' + vc + '">$' + pm.precio_actual_promedio.toFixed(2) + '</div><div class="cf-kpi-sub">' + sub + '</div></div>';
+          var actual = pm.precio_actual_fob;
+          var delta = actual - cf.breakeven_precio_target;
+          var bg = delta >= 0 ? 'rgba(34,197,94,.08)' : 'rgba(239,68,68,.07)';
+          var bc = delta >= 0 ? 'rgba(34,197,94,.3)'  : 'rgba(239,68,68,.25)';
+          var vc = delta >= 0 ? '#4ade80' : '#f87171';
+          var sign = delta >= 0 ? '+' : '';
+          var sub = sign + '$' + delta.toFixed(2) + ' vs meta $' + cf.breakeven_precio_target;
+          return '<div class="cf-kpi" style="background:' + bg + ';border-color:' + bc + '"><div class="cf-kpi-lbl">FOB Avg Sem 12</div><div class="cf-kpi-val" style="color:' + vc + '">$' + actual.toFixed(2) + '</div><div class="cf-kpi-sub">' + sub + '</div></div>';
         })() : '') +
       '</div>' +
 
@@ -4121,8 +4119,8 @@ function checkPw(){
         '<div style="display:flex;flex-direction:column;gap:10px">' +
           (cf.breakeven_precio_por_caja ? (function(){
             var pm = cf.precio_mercado || {};
-            var actual = pm.precio_actual_promedio;
-            var atMeta = actual != null && Math.abs(actual - cf.breakeven_precio_target) < 0.05;
+            var actual = pm.precio_actual_fob != null ? pm.precio_actual_fob : null;
+            var atMeta = actual != null && actual >= cf.breakeven_precio_target;
             var beColor = atMeta ? 'rgba(34,197,94,.06)' : 'rgba(239,68,68,.06)';
             var beBorder = atMeta ? 'rgba(34,197,94,.25)' : 'rgba(239,68,68,.18)';
             var beLblColor = atMeta ? '#4ade80' : '#f87171';
@@ -4162,7 +4160,7 @@ function checkPw(){
                   '</div>'
                 : '') +
               '<div style="font-size:.68rem;color:var(--muted)">Cubre el déficit completo de <strong style="color:#f87171">' + fmt(Math.abs(cf.saldo_forecast||0)) + '</strong>.' +
-                (atMeta ? ' <strong style="color:#4ade80">Precio promedio actual $' + actual.toFixed(2) + ' — prácticamente en punto de equilibrio.</strong>' : '') + '</div>' +
+                (actual != null ? ' FOB avg sem 12 · Calavo · al 24-Mar: <strong style="color:' + (atMeta ? '#4ade80' : '#f87171') + '">$' + actual.toFixed(2) + '</strong>' + (pm.precio_requerido_ol ? ' · Precio promedio requerido OL: $' + pm.precio_requerido_ol.toFixed(2) : '') + '.' : '') + '</div>' +
             '</div>';
           })() : '') +
           /* Bridge */

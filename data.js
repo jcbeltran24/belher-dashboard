@@ -207,7 +207,8 @@ window.BELHER = {
 
     /* Inteligencia de precios de mercado (reunión 26-Mar-2026) */
     precio_mercado: {
-      precio_actual_promedio:  23.49,  /* Promedio real Mar 26 – Jun 30, 2026 */
+      precio_actual_fob:       20.07,  /* FOB avg sem 12 · Calavo · al 24-Mar-2026 */
+      precio_requerido_ol:     23.49,  /* Precio promedio requerido Mar 26–Jun 30 para break-even */
       rango_tipico_min:        27,
       rango_tipico_max:        35,
       sweet_spot:              35,     /* Arriba de $35 cae la demanda — Irene */
