@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Sábado 28 Mar 2026",
     semana: "WK 13",
-    actualizado: "28/03/2026 · 08:30"
+    actualizado: "28/03/2026 · 12:00"
   },
 
   alertas: [
@@ -273,14 +273,14 @@ window.BELHER = {
     fecha: "27/03/2026",
     resumen: "Vine-ripe tomate sube a $50.95/carton en Nogales — nuevo pico histórico de temporada. Jalapeño se recupera a $58–60/bu en Texas (+21% vs semana anterior), confirmando que la corrección fue temporal. Grape tomato escala a $24.95–26.95/flat (+30%). Frost en Sinaloa, Zacatecas, Puebla y Morelos comprime oferta. Negociaciones técnicas USMCA activas — presión arancelaria a hortalizas mexicanas persiste.",
     precios: [
-      { producto:"Vine-ripe 4×4 25lb",     min:50.95, max:50.95, anterior:47.95, via:"Nogales AZ",        alerta:false },
-      { producto:"Tomate Roma 25lb (XL)",   min:40.95, max:44.95, anterior:39.95, via:"Nogales AZ",        alerta:false },
-      { producto:"Grape tomato flat",       min:24.95, max:26.95, anterior:19.95, via:"Nogales AZ",        alerta:true  },
-      { producto:"Chile Bell GH (XL)",      min:44.95, max:44.95, anterior:43.95, via:"Nogales AZ",        alerta:false },
-      { producto:"Jalapeño",                min:58.00, max:60.00, anterior:49.00, via:"Texas",             alerta:true  },
-      { producto:"Anaheim",                 min:34.00, max:36.00, anterior:null,   via:"SoCal/AZ",          alerta:false },
-      { producto:"Habanero",                min:44.00, max:47.00, anterior:null,   via:"SoCal/AZ",          alerta:false },
-      { producto:"Vine-ripe 4×5 25lb",      min:50.95, max:50.95, anterior:45.00, via:"Nogales AZ",        alerta:false },
+      { producto:"Vine-ripe 4×4 25lb",     min:50.95, max:50.95, anterior:47.95, via:"Nogales AZ",         alerta:false },
+      { producto:"Tomate Roma 25lb (XL)",   min:40.95, max:44.95, anterior:39.95, via:"Nogales AZ",         alerta:false },
+      { producto:"Grape tomato flat",       min:24.95, max:26.95, anterior:19.95, via:"Nogales AZ",         alerta:true  },
+      { producto:"Chile Bell GH (XL)",      min:44.95, max:44.95, anterior:43.95, via:"Nogales AZ",         alerta:false },
+      { producto:"Jalapeño",                min:58.00, max:60.00, anterior:49.00, via:"Texas",              alerta:true  },
+      { producto:"Anaheim",                 min:34.00, max:36.00, anterior:null,   via:"SoCal/AZ",           alerta:false },
+      { producto:"Habanero",                min:44.00, max:47.00, anterior:null,   via:"SoCal/AZ",           alerta:false },
+      { producto:"Vine-ripe 4×5 25lb",      min:50.95, max:50.95, anterior:45.00, via:"Nogales AZ",         alerta:false },
       { producto:"Limón Persa flat 200ct",  min:58.00, max:65.00, anterior:55.00, via:"LA Terminal Market", alerta:false }
     ],
     noticias: [
