@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Lunes 30 Mar 2026",
     semana: "WK 14",
-    actualizado: "30/03/2026 · 15:00"
+    actualizado: "30/03/2026 · 19:30"
   },
 
   alertas: [
@@ -68,14 +68,22 @@ window.BELHER = {
       { fecha:"WK10", primaPromedio:87.45, mermaPromedio:3.80 },
       { fecha:"WK11", primaPromedio:88.10, mermaPromedio:3.55 },
       { fecha:"WK12", primaPromedio:88.35, mermaPromedio:3.39 },
-      { fecha:"WK13", primaPromedio:90.32, mermaPromedio:2.32 },
+      { fecha:"WK13", primaPromedio:89.20, mermaPromedio:2.82 },
       { fecha:"WK14", primaPromedio:87.73, mermaPromedio:3.22 }
     ],
     ultimoOutbound: {
       fecha: "29/03/2026",
       variedades: [
         { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:87.73, segunda:5.65, tercera:3.40, merma:3.22, peso:25.46, alerta:false }
-      ]
+      ],
+      anterior: {
+        fecha: "27/03/2026",
+        variedades: [
+          { nombre:"Bola Calavo",  etiqueta:"Calavo",  canal:"exportacion", primera:86.39, segunda:5.01, tercera:4.40, merma:4.20, peso:22.47, alerta:true  },
+          { nombre:"Bola Yameto",  etiqueta:"Yameto",  canal:"exportacion", primera:87.40, segunda:4.19, tercera:4.64, merma:3.77, peso:31.30, alerta:false },
+          { nombre:"Roma Calavo",  etiqueta:"Roma",    canal:"exportacion", primera:90.46, segunda:5.03, tercera:2.51, merma:2.00, peso:25.14, alerta:false }
+        ]
+      }
     }
   },
 
@@ -320,8 +328,11 @@ window.BELHER = {
   },
 
   correos: [
-    { hora:"09:15", asunto:"30-03-2026 REPORTES GENERALES",                          de:"Embarques Belher", leido:false },
-    { hora:"09:10", asunto:"BILL,MANIFIESTO NOGALES JL 30-03-2026",                  de:"Embarques Belher", leido:false },
+    { hora:"18:20", asunto:"Re: ABSa CF OL 8+4 w/Break-Even price analysis",         de:"Leima Leyva",      leido:false },
+    { hora:"17:44", asunto:"Invitación: ABSA CF GC 2025-2026 OL 9+3 — 21-Abr-2026", de:"Leima Leyva",      leido:false },
+    { hora:"17:29", asunto:"Invitación: BPSI F/S Marzo 2026 y Forecast Q2 — 16-Abr", de:"Leima Leyva",     leido:false },
+    { hora:"09:15", asunto:"30-03-2026 REPORTES GENERALES",                          de:"Embarques Belher", leido:true  },
+    { hora:"09:10", asunto:"BILL,MANIFIESTO NOGALES JL 30-03-2026",                  de:"Embarques Belher", leido:true  },
     { hora:"21:15", asunto:"29-03-2026 REPORTES GENERALES",                          de:"Embarques Belher", leido:true  },
     { hora:"17:45", asunto:"REPORTE DE BASCULA 29/03/2026 (TOMATE)",                 de:"Báscula Belher",   leido:true  },
     { hora:"17:30", asunto:"REPORTE DE BASCULA 28/03/2026 (CHILE Y LIMON)",          de:"Báscula Belher",   leido:true  },
@@ -343,7 +354,7 @@ window.BELHER = {
     { label:"WK13 PEND.",     valor:"~$240K",         cambio:"wire pendiente", dir:"neutral" },
     { label:"1ª PRIMERA",     valor:"87.73%",         cambio:"29-Mar ▼",       dir:"down"    },
     { label:"MERMA PROM",     valor:"3.22%",          cambio:"29-Mar",         dir:"down"    },
-    { label:"CVGW",           valor:"$26.40",         cambio:"+11.0%",         dir:"up"      }
+    { label:"CVGW",           valor:"$25.88",         cambio:"+5.0%",          dir:"up"      }
   ],
 
   auditorias: [
@@ -526,15 +537,16 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"~22-Mar (pendiente)",         evento:"Settlement WK13 Calavo — wire aún no confirmado al 30-Mar",        tipo:"pago",      participantes:"Leima Leyva · Calavo" },
-      { fecha:"16/04/2026",                  evento:"Reunión BPSI — seguimiento plan de acción post-cancelación cliente",tipo:"reunion",   participantes:"JC, Antonio, Equipo BPSI" },
-      { fecha:"21/04/2026",                  evento:"CF OL 9+3 review — revisión forecast ciclo cierre",                tipo:"reunion",   participantes:"Leima Leyva · Equipo financiero" },
-      { fecha:"Por confirmar (Abr 2026)",    evento:"Reunión alineación Contrato 2026 — John Lindeman · James Snyder · Irene", tipo:"reunion", participantes:"Antonio, JC, Calavo" }
+      { fecha:"~22-Mar (pendiente)",         evento:"Settlement WK13 Calavo — wire aún no confirmado al 30-Mar",                 tipo:"pago",    participantes:"Leima Leyva · Calavo" },
+      { fecha:"13/04/2026",                  evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado",      tipo:"reunion", participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
+      { fecha:"16/04/2026",                  evento:"BPSI F/S Marzo 2026 y Forecast Q2 2026 — revisión financiera y pipeline",   tipo:"reunion", participantes:"JC · Armando Llanes · hildelisa@beautyjunkies.com" },
+      { fecha:"21/04/2026",                  evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre",  tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
+      { fecha:"Por confirmar (Abr 2026)",    evento:"Reunión alineación Contrato 2026 — John Lindeman · James Snyder · Irene",   tipo:"reunion", participantes:"Antonio, JC, Calavo" }
     ]
   },
 
   predicciones: {
-    generado:  "30/03/2026 · 15:00",
+    generado:  "30/03/2026 · 19:30",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
     nota:      "Síntesis de precios USDA + Corbel Seeds #0022 + báscula + calidad outbound + noticias de industria. Se regenera automáticamente cada mañana.",
@@ -715,15 +727,15 @@ window.BELHER = {
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 26.40, prevClose: 23.79, cambio: 2.61, cambioPct: 10.97,
+        precio: 25.88, prevClose: 24.64, cambio: 1.24, cambioPct: 5.04,
         h52: 28.72, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · 27-Mar-2026"
+        fuente: "Yahoo Finance · 30-Mar-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 13.94, prevClose: 12.22, cambio: 1.72, cambioPct: 14.07,
+        precio: 13.70, prevClose: 12.66, cambio: 1.04, cambioPct: 8.22,
         h52: 15.02, l52: 9.60, volumen: null,
-        fuente: "Yahoo Finance · 27-Mar-2026"
+        fuente: "Yahoo Finance · 30-Mar-2026"
       }
     ],
 
@@ -757,7 +769,7 @@ window.BELHER = {
     alertas: [
       { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
       { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
-      { nivel: "success", texto: "CVGW cotiza $26.40 (+11.0%) · AVO $13.94 (+14.1%) — sector en recuperación sostenida." }
+      { nivel: "success", texto: "CVGW cotiza $25.88 (+5.0%) · AVO $13.70 (+8.2%) — sector en recuperación sostenida (30-Mar)." }
     ],
 
     kpi: {
@@ -883,17 +895,17 @@ window.BELHER = {
       {
         simbolo: "CVGW", empresa: "Calavo Growers",
         tendencia: "alcista",
-        precioActual: 26.40,
+        precioActual: 25.88,
         precioObj90d: 28.50,
         riesgoBajo: 22.00,
-        confianza: 62,
-        razonamiento: "CVGW sube a $26.40 (+11% vs cierre anterior $23.79). La acción está cerca del máximo 52 semanas ($28.72). El pico de precios de tomate en WK13-14 beneficia los márgenes de distribución de Calavo. Sin embargo, la presión arancelaria USMCA y la renegociación del contrato Belher son riesgos latentes. Precio objetivo 90 días: $28.50 si el mercado de hortalizas se mantiene firme.",
+        confianza: 60,
+        razonamiento: "CVGW cierra $25.88 (+5.0% vs cierre anterior $24.64). La acción está cerca del máximo 52 semanas ($28.72). El pico de precios de tomate en WK13-14 beneficia los márgenes de distribución de Calavo. Sin embargo, la presión arancelaria USMCA y la renegociación del contrato Belher son riesgos latentes. Precio objetivo 90 días: $28.50 si el mercado de hortalizas se mantiene firme.",
         factores: ["Pico de precios tomate $50.95 beneficia márgenes distribución Q1", "Riesgo arancelario USMCA podría reducir volumen exportado de socios mexicanos", "Acción cerca de resistencia técnica en $28.72 (máximo 52s)", "Contrato Belher–Calavo en renegociación — impacto en volumen incierto"]
       },
       {
         simbolo: "AVO", empresa: "Mission Produce",
         tendencia: "alcista",
-        precioActual: 13.94,
+        precioActual: 13.70,
         precioObj90d: 16.00,
         riesgoBajo: 11.50,
         confianza: 55,
