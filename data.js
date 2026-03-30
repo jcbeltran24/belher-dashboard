@@ -328,17 +328,16 @@ window.BELHER = {
   },
 
   correos: [
-    { hora:"18:20", asunto:"Re: ABSa CF OL 8+4 w/Break-Even price analysis",         de:"Leima Leyva",      leido:false },
-    { hora:"17:44", asunto:"Invitación: ABSA CF GC 2025-2026 OL 9+3 — 21-Abr-2026", de:"Leima Leyva",      leido:false },
-    { hora:"17:29", asunto:"Invitación: BPSI F/S Marzo 2026 y Forecast Q2 — 16-Abr", de:"Leima Leyva",     leido:false },
-    { hora:"09:15", asunto:"30-03-2026 REPORTES GENERALES",                          de:"Embarques Belher", leido:true  },
-    { hora:"09:10", asunto:"BILL,MANIFIESTO NOGALES JL 30-03-2026",                  de:"Embarques Belher", leido:true  },
-    { hora:"21:15", asunto:"29-03-2026 REPORTES GENERALES",                          de:"Embarques Belher", leido:true  },
-    { hora:"17:45", asunto:"REPORTE DE BASCULA 29/03/2026 (TOMATE)",                 de:"Báscula Belher",   leido:true  },
-    { hora:"17:30", asunto:"REPORTE DE BASCULA 28/03/2026 (CHILE Y LIMON)",          de:"Báscula Belher",   leido:true  },
-    { hora:"12:10", asunto:"REPORTE DE OUTBOUND TOMATE 29/03/2026",                  de:"Calidad Belher",   leido:true  },
-    { hora:"09:05", asunto:"Corbel Seeds Daily News Summary (Report No. 0022)",      de:"Raymundo Elizalde",leido:true  },
-    { hora:"08:30", asunto:"PrimusGFS VK Certificates — CUP-PGFS-524",              de:"VK Certifications",leido:true  }
+    { hora:"15:23", asunto:"VENTA DE REZAGA Y TOMATE PARA INDUSTRIA RESUMEN",              de:"Gladis Galaviz · Belher",    leido:false },
+    { hora:"15:48", asunto:"Re: BILL,MANIFIESTO MCALLEN — JL-13 moduló verde 15:41",       de:"Barrenechea Reynosa",        leido:false },
+    { hora:"18:20", asunto:"Re: ABSa CF OL 8+4 w/Break-Even price analysis",               de:"Leima Leyva",                leido:false },
+    { hora:"17:44", asunto:"Invitación: ABSA CF GC 2025-2026 OL 9+3 — mar 21 abr 2pm",   de:"Leima Leyva",                leido:false },
+    { hora:"17:29", asunto:"Invitación: BPSI F/S Marzo 2026 y Forecast Q2 — jue 16 abr 10am", de:"Leima Leyva",           leido:false },
+    { hora:"12:01", asunto:"ABSa CF OL 8+4 w/Break-Even price analysis",                   de:"Armando Llanes · Don Memo", leido:false },
+    { hora:"10:23", asunto:"REPORTE DE OUTBOUND TOMATE 29/03/2026",                        de:"Calidad Belher",             leido:false },
+    { hora:"09:53", asunto:"Corbel Seeds Daily News Summary (Report No. 0022)",            de:"Raymundo Elizalde",          leido:false },
+    { hora:"09:41", asunto:"Re: BILL,MANIFIESTO NOGALES JL — JL-101 09:10 · JL-104 09:15", de:"Barrenechea Nogales",       leido:false },
+    { hora:"09:39", asunto:"Certificados PrimusGFS para VK",                               de:"Chrysthian Marisol Castro",  leido:false }
   ],
 
   ticker: [
