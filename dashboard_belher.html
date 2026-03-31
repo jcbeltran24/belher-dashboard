@@ -2655,6 +2655,7 @@ function checkPw(){
   <button data-tab="otros">Otros</button>
   <button data-tab="cdc">CDC</button>
   <button data-tab="market">Market Intelligence</button>
+  <button data-tab="cert">Certificaciones</button>
 </nav>
 
 <main>
@@ -2692,6 +2693,21 @@ function checkPw(){
       <div id="correosContainer"></div>
     </div>
 
+    <!-- 10. Estrategia — secondary / support data -->
+    <div class="section-title" style="margin-top:28px">Contratos &amp; Comercial</div>
+    <div id="contratosContainer"></div>
+    <div class="section-title">Oportunidades Activas</div>
+    <div id="opContainer"></div>
+    <div class="section-title">Watchlist · Riesgos &amp; Seguimiento</div>
+    <div id="watchContainer"></div>
+    <div class="section-title">Agenda Próxima</div>
+    <div class="card-table">
+      <table class="agenda-tbl" id="agendaTbl">
+        <thead><tr><th>Fecha</th><th>Evento</th><th>Tipo</th><th>Participantes</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
   </div>
 
   <!-- ══════════ MARKET INTELLIGENCE ══════════ -->
@@ -2721,27 +2737,29 @@ function checkPw(){
   <!-- ══════════ FINANZAS ══════════ -->
   <div class="tab-panel" id="tab-finanzas">
 
-    <div class="section-title">Cash Flow Mensual <span class="src-tag" id="cfSrcTag">leima@agbelher.com</span></div>
-    <div class="card" id="cfCard" style="padding:22px 24px"></div>
-
+    <!-- CEO KPIs first -->
     <div class="section-title">Resumen Financiero · Temporada</div>
     <div class="fin-kpi-row" id="finKpis"></div>
 
-    <div class="section-title">Calavo Settlement · Desglose CF GC 2025–2026 <span class="src-tag">leima@agbelher.com · CF actualizado 22 Mar 2026</span></div>
-    <div class="card" id="calavoDesglose" style="padding:24px"></div>
-
-    <div class="section-title">Proyección · Temporada Restante <span class="src-tag">estimado basado en ritmo actual</span></div>
-    <div class="card" id="finProyeccion" style="padding:22px"></div>
+    <div class="section-title">Cash Flow Mensual <span class="src-tag" id="cfSrcTag">leima@agbelher.com</span></div>
+    <div class="card" id="cfCard" style="padding:22px 24px"></div>
 
     <div class="section-title">EBITDA: Actual vs Budget vs Y/A <span class="src-tag">jacruz@agbelher.com · Estado Financiero Feb 2026</span></div>
     <div class="card" style="padding:22px">
       <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
     </div>
 
+    <div class="section-title">Proyección · Temporada Restante <span class="src-tag">estimado basado en ritmo actual</span></div>
+    <div class="card" id="finProyeccion" style="padding:22px"></div>
+
     <div class="section-title">Pagos Semanales Calavo <span class="src-tag">leima@agbelher.com · Settlement Calavo</span></div>
     <div class="card">
       <div class="chart-box"><canvas id="chartPagos"></canvas></div>
     </div>
+
+    <!-- Detail / secondary data -->
+    <div class="section-title">Calavo Settlement · Desglose CF GC 2025–2026 <span class="src-tag">leima@agbelher.com · CF actualizado 22 Mar 2026</span></div>
+    <div class="card" id="calavoDesglose" style="padding:24px"></div>
 
     <div class="section-title">Liquidaciones Detalladas</div>
     <div class="card-table">
@@ -2760,25 +2778,6 @@ function checkPw(){
           <tfoot id="liquidFoot"></tfoot>
         </table>
       </div>
-    </div>
-
-    <!-- ── Auditorías ── -->
-    <div class="section-title" style="margin-top:28px">Certificaciones &amp; Auditorías <span class="src-tag">c.marisol@agbelher.com · Calidad</span></div>
-    <div id="auditoriasContainer"></div>
-
-    <!-- ── Estrategia ── -->
-    <div class="section-title" style="margin-top:28px">Contratos &amp; Comercial</div>
-    <div id="contratosContainer"></div>
-    <div class="section-title">Oportunidades Activas</div>
-    <div id="opContainer"></div>
-    <div class="section-title">Watchlist · Riesgos &amp; Seguimiento</div>
-    <div id="watchContainer"></div>
-    <div class="section-title">Agenda Próxima</div>
-    <div class="card-table">
-      <table class="agenda-tbl" id="agendaTbl">
-        <thead><tr><th>Fecha</th><th>Evento</th><th>Tipo</th><th>Participantes</th></tr></thead>
-        <tbody></tbody>
-      </table>
     </div>
 
   </div>
@@ -2944,6 +2943,14 @@ function checkPw(){
     <div id="granosCostMetrics"></div>
     <div class="section-title">Notas Operativas</div>
     <div class="card" id="granosNotas" style="padding:20px"></div>
+
+  </div>
+
+  <!-- ══════════ CERTIFICACIONES ══════════ -->
+  <div class="tab-panel" id="tab-cert">
+
+    <div class="section-title">Certificaciones &amp; Auditorías <span class="src-tag">c.marisol@agbelher.com · Calidad</span></div>
+    <div id="auditoriasContainer"></div>
 
   </div>
 
