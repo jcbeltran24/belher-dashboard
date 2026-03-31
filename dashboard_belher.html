@@ -2650,18 +2650,11 @@ function checkPw(){
 <nav class="tabs" id="tabNav">
   <button class="active" data-tab="hoy">Resumen</button>
   <button data-tab="calavoweekly">Calavo Weekly</button>
-  <button data-tab="estrategia">Estrategia</button>
   <button data-tab="finanzas">Finanzas</button>
-  <button data-tab="calidad">Calidad</button>
   <button data-tab="tomate">Tomate</button>
-  <button data-tab="limon">Limón</button>
-  <button data-tab="chile">Chile</button>
-  <button data-tab="granos">Granos</button>
-  <button data-tab="operaciones">Embarques</button>
+  <button data-tab="otros">Otros</button>
   <button data-tab="cdc">CDC</button>
-  <button data-tab="auditorias">Auditorías</button>
-  <button data-tab="mercado">Mercado</button>
-  <button data-tab="industria">Industria</button>
+  <button data-tab="market">Market Intelligence</button>
 </nav>
 
 <main>
@@ -2701,99 +2694,8 @@ function checkPw(){
 
   </div>
 
-  <!-- ══════════ OPERACIONES ══════════ -->
-  <div class="tab-panel" id="tab-operaciones">
-
-    <div class="section-title">Embarques · TX / AZ · Cargas por Día <span class="src-tag">embarquesbelher@agbelher.com</span></div>
-    <div class="card-table">
-      <div class="tbl-wrap">
-        <table id="embTbl">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th class="td-center">Cargas</th>
-              <th>Producto</th>
-              <th>Destino</th>
-              <th>Unidad</th>
-              <th>Flota</th>
-              <th class="td-center">Estado</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="section-title">Flota · Resumen Últimos 7 Días</div>
-    <div class="card-table" id="flotaResumen"></div>
-
-    <div class="section-title">Volumen Diario de Embarques</div>
-    <div class="card">
-      <div class="chart-box"><canvas id="chartEmbarques"></canvas></div>
-    </div>
-
-  </div>
-
-  <!-- ══════════ CALIDAD ══════════ -->
-  <div class="tab-panel" id="tab-calidad">
-
-    <!-- ── INBOUND (campo) ── -->
-    <div class="section-title">Calidad Campo · Inbound <span class="src-tag">REPORTES INBOUND-MUESTRAS · muestras manuales de campo</span></div>
-    <div class="ib-kpi-grid" id="inboundKpis"></div>
-
-    <div class="section-title" style="margin-top:20px">Merma de Empaque <span class="src-tag">Delta: Primera Inbound campo → Primera Outbound exportación</span></div>
-    <div class="merma-emp-wrap">
-      <div class="merma-emp-hero card" id="mermaEmpHero"></div>
-      <div class="card">
-        <div class="chart-box chart-box-tall"><canvas id="chartMermaEmpaque"></canvas></div>
-      </div>
-    </div>
-
-    <div class="section-title">Incidencia de Defectos · Campo <span class="src-tag">Top 12 · acumulado temporada</span></div>
-    <div class="card">
-      <div class="def-legend">
-        <span><span class="def-dot mfg"></span>Manufactura</span>
-        <span><span class="def-dot agro"></span>Agronómico</span>
-        <span><span class="def-dot fisio"></span>Fisiológico</span>
-      </div>
-      <div class="chart-box" style="height:340px"><canvas id="chartDefectosInbound"></canvas></div>
-    </div>
-
-    <div class="section-title">Tendencia Semanal · Inbound vs Outbound <span class="src-tag">% Primera · comparativo campo vs empaque</span></div>
-    <div class="card">
-      <div class="chart-box chart-box-tall"><canvas id="chartInboundTrend"></canvas></div>
-    </div>
-
-    <!-- ── OUTBOUND (exportación) ── -->
-    <div class="section-title" id="outboundTitle" style="margin-top:28px">Calidad Exportación <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
-    <div class="view-toggle" data-group="calidad-out">
-      <button class="vt-btn active" data-view="ayer">Día Anterior</button>
-      <button class="vt-btn" data-view="semana">Últimos 7 días</button>
-    </div>
-    <div class="view-panel active" data-group="calidad-out" data-view="ayer">
-      <div id="calidadSummary"></div>
-      <div class="card" style="padding:0" id="qualidadRows"></div>
-    </div>
-    <div class="view-panel" data-group="calidad-out" data-view="semana">
-      <div id="calidadSemana"></div>
-    </div>
-
-    <!-- Trend chart -->
-    <div class="section-title">Tendencia Semanal · 1ª Primera &amp; Merma <span class="src-tag">calidad@agbelher.com · promedio por semana</span></div>
-    <div class="card">
-      <div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div>
-    </div>
-
-    <!-- Báscula (menor prioridad) -->
-    <div class="section-title">Báscula · Actividad de Pesaje <span class="src-tag">basculabelher@gmail.com</span></div>
-    <div class="card">
-      <div class="bascula-grid" id="bascWidget"></div>
-    </div>
-
-  </div>
-
-  <!-- ══════════ MERCADO ══════════ -->
-  <div class="tab-panel" id="tab-mercado">
+  <!-- ══════════ MARKET INTELLIGENCE ══════════ -->
+  <div class="tab-panel" id="tab-market">
 
     <div class="section-title">Predicciones IA · Próximos 7 Días <span class="src-tag">Claude claude-opus-4-6 · síntesis multimodal diaria</span></div>
     <div id="prediccionesIA"></div>
@@ -2809,6 +2711,10 @@ function checkPw(){
 
     <div class="section-title">Señales de Mercado</div>
     <div class="card" id="noticiasList"></div>
+
+    <div class="section-title" id="industriaTitle" style="margin-top:28px">Noticias de Industria</div>
+    <div class="filters-row" id="catFilters"></div>
+    <div id="newsGrid"></div>
 
   </div>
 
@@ -2856,6 +2762,25 @@ function checkPw(){
       </div>
     </div>
 
+    <!-- ── Auditorías ── -->
+    <div class="section-title" style="margin-top:28px">Certificaciones &amp; Auditorías <span class="src-tag">c.marisol@agbelher.com · Calidad</span></div>
+    <div id="auditoriasContainer"></div>
+
+    <!-- ── Estrategia ── -->
+    <div class="section-title" style="margin-top:28px">Contratos &amp; Comercial</div>
+    <div id="contratosContainer"></div>
+    <div class="section-title">Oportunidades Activas</div>
+    <div id="opContainer"></div>
+    <div class="section-title">Watchlist · Riesgos &amp; Seguimiento</div>
+    <div id="watchContainer"></div>
+    <div class="section-title">Agenda Próxima</div>
+    <div class="card-table">
+      <table class="agenda-tbl" id="agendaTbl">
+        <thead><tr><th>Fecha</th><th>Evento</th><th>Tipo</th><th>Participantes</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
   </div>
 
   <!-- ══════════ TOMATE ══════════ -->
@@ -2877,12 +2802,6 @@ function checkPw(){
     <div id="tomateCalidadSummary"></div>
     <div class="card" style="margin-top:8px"><div class="chart-box" style="height:190px"><canvas id="chartTomateCalidad"></canvas></div></div>
 
-    <!-- Cross-tab navigation -->
-    <div class="dup-nav-row" style="display:flex;gap:10px;margin-top:16px">
-      <button data-nav-tab="operaciones" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Embarques completos → <span style="opacity:.5;font-weight:400">Tab OPERACIONES</span></button>
-      <button data-nav-tab="mercado" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Precios de mercado → <span style="opacity:.5;font-weight:400">Tab MERCADO</span></button>
-    </div>
-
     <!-- Quality by Variety — collapsible detail -->
     <details class="tom-variety-details">
       <summary>
@@ -2898,6 +2817,85 @@ function checkPw(){
       <div class="view-panel active" data-group="tomate-cal" data-view="ayer" id="tomateVariedadesAyer"></div>
       <div class="view-panel" data-group="tomate-cal" data-view="semana" id="tomateVariedadesSemana"></div>
     </details>
+
+    <!-- ── Calidad Inbound & Outbound ── -->
+    <div class="section-title" style="margin-top:28px">Calidad Campo · Inbound <span class="src-tag">REPORTES INBOUND-MUESTRAS · muestras manuales de campo</span></div>
+    <div class="ib-kpi-grid" id="inboundKpis"></div>
+
+    <div class="section-title" style="margin-top:20px">Merma de Empaque <span class="src-tag">Delta: Primera Inbound campo → Primera Outbound exportación</span></div>
+    <div class="merma-emp-wrap">
+      <div class="merma-emp-hero card" id="mermaEmpHero"></div>
+      <div class="card">
+        <div class="chart-box chart-box-tall"><canvas id="chartMermaEmpaque"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section-title">Incidencia de Defectos · Campo <span class="src-tag">Top 12 · acumulado temporada</span></div>
+    <div class="card">
+      <div class="def-legend">
+        <span><span class="def-dot mfg"></span>Manufactura</span>
+        <span><span class="def-dot agro"></span>Agronómico</span>
+        <span><span class="def-dot fisio"></span>Fisiológico</span>
+      </div>
+      <div class="chart-box" style="height:340px"><canvas id="chartDefectosInbound"></canvas></div>
+    </div>
+
+    <div class="section-title">Tendencia Semanal · Inbound vs Outbound <span class="src-tag">% Primera · comparativo campo vs empaque</span></div>
+    <div class="card">
+      <div class="chart-box chart-box-tall"><canvas id="chartInboundTrend"></canvas></div>
+    </div>
+
+    <div class="section-title" id="outboundTitle" style="margin-top:28px">Calidad Exportación <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
+    <div class="view-toggle" data-group="calidad-out">
+      <button class="vt-btn active" data-view="ayer">Día Anterior</button>
+      <button class="vt-btn" data-view="semana">Últimos 7 días</button>
+    </div>
+    <div class="view-panel active" data-group="calidad-out" data-view="ayer">
+      <div id="calidadSummary"></div>
+      <div class="card" style="padding:0" id="qualidadRows"></div>
+    </div>
+    <div class="view-panel" data-group="calidad-out" data-view="semana">
+      <div id="calidadSemana"></div>
+    </div>
+
+    <div class="section-title">Tendencia Semanal · 1ª Primera &amp; Merma <span class="src-tag">calidad@agbelher.com · promedio por semana</span></div>
+    <div class="card">
+      <div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div>
+    </div>
+
+    <div class="section-title">Báscula · Actividad de Pesaje <span class="src-tag">basculabelher@gmail.com</span></div>
+    <div class="card">
+      <div class="bascula-grid" id="bascWidget"></div>
+    </div>
+
+    <!-- ── Embarques ── -->
+    <div class="section-title" style="margin-top:28px">Embarques · TX / AZ · Cargas por Día <span class="src-tag">embarquesbelher@agbelher.com</span></div>
+    <div class="card-table">
+      <div class="tbl-wrap">
+        <table id="embTbl">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th class="td-center">Cargas</th>
+              <th>Producto</th>
+              <th>Destino</th>
+              <th>Unidad</th>
+              <th>Flota</th>
+              <th class="td-center">Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-title">Flota · Resumen Últimos 7 Días</div>
+    <div class="card-table" id="flotaResumen"></div>
+
+    <div class="section-title">Volumen Diario de Embarques</div>
+    <div class="card">
+      <div class="chart-box"><canvas id="chartEmbarques"></canvas></div>
+    </div>
 
   </div>
 
@@ -2917,9 +2915,11 @@ function checkPw(){
     <div id="cw-predicciones"></div>
   </div>
 
-  <!-- ══════════ LIMÓN ══════════ -->
-  <div class="tab-panel" id="tab-limon">
-    <div class="section-title">KPIs · Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
+  <!-- ══════════ OTROS ══════════ -->
+  <div class="tab-panel" id="tab-otros">
+
+    <!-- ── LIMÓN ── -->
+    <div class="section-title">Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
     <div class="grid-4" id="limonKpis"></div>
     <div id="limonClienteRisk"></div>
     <div class="section-title">Precio FOB Nogales &amp; LA Terminal Market <span class="src-tag">USDA Market News · FOB Shipping Point + Terminal</span></div>
@@ -2928,30 +2928,15 @@ function checkPw(){
     <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
     <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
     <div class="card" id="limonPnl" style="padding:24px"></div>
-    <!-- Cross-tab navigation -->
-    <div class="dup-nav-row" style="display:flex;gap:10px;margin-top:16px">
-      <button data-nav-tab="operaciones" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Embarques completos → <span style="opacity:.5;font-weight:400">Tab OPERACIONES</span></button>
-      <button data-nav-tab="mercado" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Precios de mercado → <span style="opacity:.5;font-weight:400">Tab MERCADO</span></button>
-    </div>
-  </div>
 
-  <!-- ══════════ CHILE ══════════ -->
-  <div class="tab-panel" id="tab-chile">
-    <div class="section-title">KPIs · Chile</div>
+    <!-- ── CHILE ── -->
+    <div class="section-title" style="margin-top:28px">Chile <span class="src-tag">Corbel Seeds Daily · USDA</span></div>
     <div class="grid-3" id="chileKpis"></div>
-    <div class="section-title">Análisis de Mercado · Oportunidad <span class="src-tag">Corbel Seeds Daily · USDA</span></div>
+    <div class="section-title">Análisis de Mercado · Oportunidad</div>
     <div id="chileContext"></div>
-    <!-- Cross-tab navigation -->
-    <div class="dup-nav-row" style="display:flex;gap:10px;margin-top:16px">
-      <button data-nav-tab="operaciones" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Embarques completos → <span style="opacity:.5;font-weight:400">Tab OPERACIONES</span></button>
-      <button data-nav-tab="mercado" class="dup-nav-btn" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px;text-align:left">Precios de mercado → <span style="opacity:.5;font-weight:400">Tab MERCADO</span></button>
-    </div>
-  </div>
 
-
-  <!-- ══════════ GRANOS ══════════ -->
-  <div class="tab-panel" id="tab-granos">
-    <div class="section-title">KPIs · Granos · Temporada <span class="src-tag">jacruz@agbelher.com · P&amp;L Granos Jul–Feb 2026</span></div>
+    <!-- ── GRANOS ── -->
+    <div class="section-title" style="margin-top:28px">Granos · Temporada <span class="src-tag">jacruz@agbelher.com · P&amp;L Granos Jul–Feb 2026</span></div>
     <div class="grid-4" id="granosKpis"></div>
     <div class="section-title">P&amp;L Temporada · Jul 2025 – Feb 2026</div>
     <div class="card" id="granosPnl" style="padding:24px"></div>
@@ -2959,36 +2944,7 @@ function checkPw(){
     <div id="granosCostMetrics"></div>
     <div class="section-title">Notas Operativas</div>
     <div class="card" id="granosNotas" style="padding:20px"></div>
-  </div>
 
-  <!-- ══════════ AUDITORÍAS ══════════ -->
-  <div class="tab-panel" id="tab-auditorias">
-    <div class="section-title">Estado de Certificaciones <span class="src-tag">c.marisol@agbelher.com · Calidad</span></div>
-    <div id="auditoriasContainer"></div>
-  </div>
-
-  <!-- ══════════ ESTRATEGIA ══════════ -->
-  <div class="tab-panel" id="tab-estrategia">
-    <div class="section-title">Contratos &amp; Comercial</div>
-    <div id="contratosContainer"></div>
-    <div class="section-title">Oportunidades Activas</div>
-    <div id="opContainer"></div>
-    <div class="section-title">Watchlist · Riesgos &amp; Seguimiento</div>
-    <div id="watchContainer"></div>
-    <div class="section-title">Agenda Próxima</div>
-    <div class="card-table">
-      <table class="agenda-tbl" id="agendaTbl">
-        <thead><tr><th>Fecha</th><th>Evento</th><th>Tipo</th><th>Participantes</th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- ══════════ INDUSTRIA ══════════ -->
-  <div class="tab-panel" id="tab-industria">
-    <div class="section-title" id="industriaTitle">Noticias de Industria</div>
-    <div class="filters-row" id="catFilters"></div>
-    <div id="newsGrid"></div>
   </div>
 
   <!-- ══════════ CDC ══════════ -->
