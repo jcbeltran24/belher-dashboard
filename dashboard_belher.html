@@ -2566,6 +2566,216 @@ body.edit-mode #editModeBar { display:flex; }
   html, body { overflow-x: hidden; }
   .card { min-width: 0; }
 }
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║   PREMIUM OVERHAUL — Extraordinary Level                    ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+
+/* 1. Background: premium mesh gradient — instantly elevates everything */
+:root { --bg: #ecf0ec; }
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 5% 0%,   rgba(34,197,94,.09)   0%, transparent 50%),
+    radial-gradient(ellipse at 95% 100%, rgba(12,33,23,.07)    0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%,  rgba(255,255,255,.55) 0%, transparent 65%);
+  background-attachment: fixed;
+}
+
+/* 2. Tab Nav: pill-style active indicator (remove underline, use capsule) */
+nav.tabs {
+  padding: 0 20px;
+  align-items: center;
+  height: 50px;
+  gap: 2px;
+}
+nav.tabs button {
+  border-radius: 9px;
+  margin: 0 1px;
+  height: 34px;
+  padding: 0 17px;
+  transition: background .18s cubic-bezier(.25,.46,.45,.94), color .18s;
+}
+nav.tabs button::after { display: none !important; }
+nav.tabs button:hover:not(.active) {
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.88);
+}
+nav.tabs button.active {
+  background: rgba(251,191,36,.13);
+  border: 1px solid rgba(251,191,36,.22);
+  color: var(--accent2) !important;
+  font-weight: 700;
+  box-shadow: 0 1px 6px rgba(251,191,36,.12);
+}
+nav.tabs button[data-tab="calavoweekly"].active {
+  background: rgba(52,199,89,.11) !important;
+  border-color: rgba(52,199,89,.22) !important;
+  color: #34c759 !important;
+  box-shadow: 0 1px 6px rgba(52,199,89,.14);
+}
+
+/* 3. Header: Logo pulse + sharper accent line */
+.header-logo {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 55%, #15803d 100%);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 4px 16px rgba(22,163,74,.5);
+  animation: logo-pulse 4s ease-in-out infinite;
+}
+@keyframes logo-pulse {
+  0%,100% { box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 4px 16px rgba(22,163,74,.5); }
+  50%     { box-shadow: 0 0 0 1px rgba(255,255,255,.18), 0 4px 22px rgba(22,163,74,.72); }
+}
+header::after {
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--accent2) 0%, #4ade80 35%, rgba(34,197,94,0) 70%) !important;
+}
+
+/* 4. Ticker: gold shimmer on LIVE label */
+@keyframes ticker-shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 300% center; }
+}
+.ticker-label {
+  background: linear-gradient(90deg, #92400e 0%, #d97706 30%, #fbbf24 50%, #d97706 70%, #92400e 100%) !important;
+  background-size: 300% 100% !important;
+  animation: ticker-shimmer 4s linear infinite !important;
+  color: rgba(255,255,255,.95) !important;
+}
+
+/* 5. Cards: inner gradient sheen + premium green-glow hover */
+.card {
+  background: linear-gradient(160deg, #ffffff 0%, #f9fbf9 100%);
+  border-color: rgba(0,0,0,.065);
+}
+.card:hover {
+  border-color: rgba(22,163,74,.2) !important;
+  box-shadow: 0 2px 2px rgba(0,0,0,.02), 0 16px 52px rgba(12,33,23,.1), 0 0 0 1px rgba(22,163,74,.08) !important;
+  transform: translateY(-2px);
+}
+.card-table {
+  background: linear-gradient(160deg, #ffffff 0%, #f9fbf9 100%);
+}
+.card-table:hover { border-color: rgba(22,163,74,.12); }
+.kpi-card {
+  background: linear-gradient(160deg, #ffffff 0%, #f9fbf9 100%);
+}
+.donut-card {
+  background: linear-gradient(160deg, #ffffff 0%, #f9fbf9 100%);
+}
+
+/* 6. Hoy KPI cards: sharper hover */
+.hoy-kpi {
+  background: linear-gradient(160deg, #ffffff 0%, #f9fbf9 100%);
+  border-color: rgba(0,0,0,.065);
+}
+.hoy-kpi:hover {
+  border-color: rgba(22,163,74,.22) !important;
+  box-shadow: 0 0 0 1px rgba(22,163,74,.09), 0 8px 36px rgba(12,33,23,.1) !important;
+  transform: translateY(-2px);
+}
+
+/* 7. Section titles: consistent vertical bar, tighter spacing */
+.section-title {
+  font-size: .61rem; font-weight: 700; letter-spacing: 1.3px;
+  text-transform: uppercase; color: var(--muted);
+  margin: 32px 0 16px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 0; border: none;
+}
+.section-title::before {
+  content: ''; display: block;
+  width: 3px; height: 16px;
+  border-radius: 2px; flex-shrink: 0;
+  background: linear-gradient(to bottom, var(--accent2) 0%, var(--green3) 100%);
+}
+.section-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, rgba(0,0,0,.09), transparent);
+}
+.section-title:first-child { margin-top: 4px; }
+
+/* 8. Hero sections: deeper, richer dark cards */
+.hoy-hero {
+  background: linear-gradient(145deg, #060e08 0%, #0a1c11 38%, #0e2318 65%, #091609 100%);
+  border: 1px solid rgba(34,197,94,.1);
+  box-shadow: 0 20px 72px rgba(0,0,0,.3), 0 4px 18px rgba(0,0,0,.16);
+}
+.hoy-hero::before {
+  background:
+    radial-gradient(ellipse at 80% 22%, rgba(34,197,94,.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 12% 85%, rgba(251,191,36,.09) 0%, transparent 45%);
+}
+.tom-hero {
+  box-shadow: 0 18px 64px rgba(0,0,0,.24), 0 4px 16px rgba(0,0,0,.12);
+  border: 1px solid rgba(255,255,255,.05);
+}
+.price-hero.hero-tomate {
+  background: linear-gradient(145deg, #070e09 0%, #0c2216 48%, #0a1c12 100%);
+  box-shadow: 0 10px 36px rgba(0,0,0,.22);
+}
+.price-hero.hero-jalap {
+  background: linear-gradient(145deg, #180400 0%, #5c1b00 55%, #3a1000 100%);
+  box-shadow: 0 10px 36px rgba(0,0,0,.22);
+}
+.cdc-hero-card.beltran {
+  background: linear-gradient(145deg, #05111e 0%, #0b2340 50%, #071930 100%);
+  box-shadow: 0 18px 56px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.cdc-hero-card.dorita {
+  background: linear-gradient(145deg, #0e051d 0%, #200e3e 50%, #140824 100%);
+  box-shadow: 0 18px 56px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+/* 9. Alerts: stronger left-border accent */
+.hoy-alert { border-radius: 12px; }
+.hoy-alert.danger  { border-left: 3px solid #ef4444 !important; background: rgba(220,38,38,.07);  border-color: rgba(220,38,38,.2);  }
+.hoy-alert.warning { border-left: 3px solid #f59e0b !important; background: rgba(217,119,6,.07);  border-color: rgba(217,119,6,.2);  }
+.hoy-alert.success { border-left: 3px solid #22c55e !important; background: rgba(22,163,74,.06);  border-color: rgba(22,163,74,.18); }
+.hoy-alert.info    { border-left: 3px solid #60a5fa !important; background: rgba(59,130,246,.06); border-color: rgba(59,130,246,.18);}
+
+/* 10. Table headers: polished dark */
+thead { background: linear-gradient(to bottom, #0f2419 0%, #0c2117 100%); }
+thead th {
+  background: transparent;
+  color: rgba(255,255,255,.55);
+  font-weight: 700; letter-spacing: .9px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  padding: 11px 14px;
+}
+tbody tr:hover { background: rgba(22,163,74,.03); }
+
+/* 11. Correo unread dot: pulse */
+@keyframes unread-pulse {
+  0%,100% { box-shadow: 0 0 0 0   rgba(22,163,74,.4); }
+  50%     { box-shadow: 0 0 0 4px rgba(22,163,74,.0); }
+}
+.hoy-correo-dot:not(.leido) {
+  animation: unread-pulse 2.5s ease-in-out infinite;
+}
+
+/* 12. Footer: deeper black */
+footer {
+  background: #060c07;
+  border-top: 1px solid rgba(34,197,94,.07);
+  letter-spacing: .4px;
+}
+
+/* 13. Main area: generous padding */
+@media(min-width:641px) {
+  main { padding: 28px 32px 48px; max-width: 1440px; }
+}
+
+/* 14. Smooth tab entrance */
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.tab-panel.active { animation: tabFadeIn .3s cubic-bezier(.25,.46,.45,.94); }
+
+/* 15. Large KPI numbers: subtle text shadow */
+.hoy-hero-num, .hoy-kpi-val, .th-revenue, .cdc-hero-total, .kpi-value {
+  text-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
 </style>
 </head>
 <body>
