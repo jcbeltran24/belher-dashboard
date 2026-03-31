@@ -310,20 +310,22 @@ window.BELHER = {
       { fecha:"23/03", productos:["Tomate","Rezaga Tomate"] }
     ],
     embarques: [
-      { fecha:"30/03/2026", tipo:"Tomate", cargas:1, unidad:"JL-101",  destino:"Arizona",  estado:"OK", hora:"09:10" },
-      { fecha:"30/03/2026", tipo:"Tomate", cargas:1, unidad:"JL-104",  destino:"Arizona",  estado:"OK", hora:"09:15" },
-      { fecha:"30/03/2026", tipo:"Tomate", cargas:1, unidad:"JL-13",   destino:"Texas",    estado:"OK", hora:"15:41" },
-      { fecha:"29/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-94",   destino:"Arizona",  estado:"OK" },
-      { fecha:"29/03/2026", tipo:"Limón",  cargas:1, unidad:"JL-50",   destino:"Arizona",  estado:"OK" },
-      { fecha:"29/03/2026", tipo:"Chile",  cargas:1, unidad:"AC-26",   destino:"Texas",    estado:"OK" },
-      { fecha:"27/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-95",   destino:"Arizona",  estado:"OK" },
-      { fecha:"27/03/2026", tipo:"Tomate", cargas:1, unidad:"CGG-90",  destino:"Arizona",  estado:"OK" },
-      { fecha:"27/03/2026", tipo:"Tomate", cargas:1, unidad:"CGG-88",  destino:"Arizona",  estado:"OK" },
-      { fecha:"27/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-94",   destino:"Arizona",  estado:"OK" },
-      { fecha:"27/03/2026", tipo:"Tomate", cargas:1, unidad:"JL-13",   destino:"Texas",    estado:"OK" },
-      { fecha:"25/03/2026", tipo:"Tomate", cargas:1, unidad:"CGG-107", destino:"Arizona",  estado:"OK" },
-      { fecha:"25/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-110",  destino:"Arizona",  estado:"OK" },
-      { fecha:"25/03/2026", tipo:"Tomate", cargas:1, unidad:"ST-109",  destino:"Arizona",  estado:"OK" }
+      { fecha:"30/03/2026", tipo:"Tomate",      cargas:1, unidad:"JL-13",    destino:"Texas",   estado:"OK",               hora:"15:41" },
+      { fecha:"29/03/2026", tipo:"Tomate",      cargas:1, unidad:"JL-101",   destino:"Arizona", estado:"OK" },
+      { fecha:"29/03/2026", tipo:"Tomate",      cargas:1, unidad:"JL-104",   destino:"Arizona", estado:"OK" },
+      { fecha:"29/03/2026", tipo:"Limón+Chile", cargas:1, unidad:"CGG-53",   destino:"Arizona", estado:"Cruce pendiente" },
+      { fecha:"27/03/2026", tipo:"Tomate",      cargas:1, unidad:"ST-94",    destino:"Arizona", estado:"OK" },
+      { fecha:"27/03/2026", tipo:"Tomate",      cargas:1, unidad:"ST-95",    destino:"Arizona", estado:"OK" },
+      { fecha:"27/03/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-90",   destino:"Arizona", estado:"OK" },
+      { fecha:"27/03/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-88",   destino:"Arizona", estado:"OK" },
+      { fecha:"27/03/2026", tipo:"Tomate",      cargas:1, unidad:"JL-13",    destino:"Texas",   estado:"OK" },
+      { fecha:"25/03/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-107",  destino:"Arizona", estado:"OK" },
+      { fecha:"25/03/2026", tipo:"Tomate",      cargas:1, unidad:"CHARLY-4", destino:"Arizona", estado:"OK" },
+      { fecha:"25/03/2026", tipo:"Tomate",      cargas:1, unidad:"ST-110",   destino:"Arizona", estado:"OK" },
+      { fecha:"25/03/2026", tipo:"Tomate",      cargas:1, unidad:"ST-109",   destino:"Arizona", estado:"OK" },
+      { fecha:"24/03/2026", tipo:"Tomate",      cargas:1, unidad:"JL-50",    destino:"Arizona", estado:"OK" },
+      { fecha:"24/03/2026", tipo:"Tomate",      cargas:1, unidad:"JL-30",    destino:"Arizona", estado:"OK" },
+      { fecha:"24/03/2026", tipo:"Tomate",      cargas:1, unidad:"AC-26",    destino:"Texas",   estado:"OK" }
     ]
   },
 
