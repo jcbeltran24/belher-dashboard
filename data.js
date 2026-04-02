@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 01 Abr 2026",
+    fecha: "Jueves 02 Abr 2026",
     semana: "WK 14",
-    actualizado: "01/04/2026 · 07:15"
+    actualizado: "02/04/2026 · 09:00"
   },
 
   alertas: [
     { nivel: "danger",  texto: "Roma Calavo outbound 30-Mar: merma 5.60% — calidad exportación crítica. Revisar lotes en proceso urgente." },
     { nivel: "warning", texto: "Bola Yameto outbound 30-Mar: merma 4.09% — por encima del umbral 4.0%" },
     { nivel: "danger",  texto: "CF ABSA GC 2025–2026 (al 22-Mar): saldo requerido para cerrar temporada = $6,804K USD — incluye pagos arranque ciclo 2026–2027 (Leima · 25-Mar)" },
-    { nivel: "warning", texto: "Settlement WK13 Calavo aún pendiente al 01-Apr — 10 días de retraso vs fecha estimada ~22-Mar" },
-    { nivel: "warning", texto: "Weekly Tomato Meeting Calavo cancelada esta semana — reporte WK13 Tomato Weekly Update esperado 'end of week' (Irene Amezaga · 31-Mar)" }
+    { nivel: "warning", texto: "Settlement WK13 Calavo aún pendiente al 02-Abr — 11 días de retraso vs fecha estimada ~22-Mar" },
+    { nivel: "danger",  texto: "WK13 Tomato Weekly Update: Irene Amezaga prometió envío 'end of week' (31-Mar) — reporte no recibido al 02-Abr (2 días tarde). Seguimiento urgente." }
   ],
 
   ebitda: {
@@ -355,7 +355,7 @@ window.BELHER = {
     { label:"WK13 PEND.",     valor:"~$240K",         cambio:"wire pendiente",  dir:"neutral" },
     { label:"1ª PRIMERA",     valor:"87.19%",         cambio:"30-Mar ▼",        dir:"down"    },
     { label:"MERMA PROM",     valor:"3.74%",          cambio:"WK14 avg ▲",      dir:"down"    },
-    { label:"CVGW",           valor:"$25.79",         cambio:"+1.1%",           dir:"up"      }
+    { label:"CVGW",           valor:"$26.18",         cambio:"+0.9%",           dir:"up"      }
   ],
 
   auditorias: [
@@ -726,20 +726,20 @@ window.BELHER = {
     semana:      "WK12",
     fechas:      "16–22 Mar 2026",
     fuente:      "Irene Amezaga · Calavo Growers",
-    actualizado: "01/04/2026",
+    actualizado: "02/04/2026",
 
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 25.79, prevClose: 25.51, cambio: 0.28, cambioPct: 1.10,
-        h52: 28.72, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · 31-Mar-2026"
+        precio: 26.18, prevClose: 25.94, cambio: 0.24, cambioPct: 0.93,
+        h52: 28.72, l52: 18.40, volumen: 230816,
+        fuente: "Yahoo Finance · 01-Abr-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 13.76, prevClose: 12.99, cambio: 0.77, cambioPct: 5.94,
-        h52: 15.02, l52: 9.60, volumen: null,
-        fuente: "Yahoo Finance · 31-Mar-2026"
+        precio: 13.87, prevClose: 13.76, cambio: 0.11, cambioPct: 0.80,
+        h52: 15.02, l52: 9.60, volumen: 593200,
+        fuente: "Yahoo Finance · 01-Abr-2026"
       }
     ],
 
@@ -783,7 +783,7 @@ window.BELHER = {
     ],
 
     alertas: [
-      { nivel: "warning", texto: "WK13 Tomato Weekly Update pendiente — Irene canceló meeting semanal. Confirmó envío de reporte antes del fin de semana (31-Mar)." },
+      { nivel: "danger",  texto: "WK13 Tomato Weekly Update no recibido al 02-Abr — Irene Amezaga prometió envío 'end of week' (31-Mar). Reporte con 2 días de retraso. Seguimiento urgente." },
       { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
       { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
       { nivel: "neutral", texto: "CVGW $25.79 (+1.1%) · AVO $13.76 (+5.9%) — sector produce sostenido (31-Mar)." }
@@ -912,21 +912,21 @@ window.BELHER = {
       {
         simbolo: "CVGW", empresa: "Calavo Growers",
         tendencia: "lateral",
-        precioActual: 25.79,
+        precioActual: 26.18,
         precioObj90d: 28.50,
         riesgoBajo: 22.00,
         confianza: 58,
-        razonamiento: "CVGW cierra $25.79 (+1.1% vs cierre anterior $25.51). La acción cede ligeramente desde el pico de $25.88 del 30-Mar pero mantiene nivel elevado. Corrección de precios de tomate en WK14 puede presionar márgenes Q2. El riesgo arancelario USMCA y la renegociación del contrato Belher son factores de incertidumbre para el trimestre. Precio objetivo 90 días: $28.50 si el mercado de hortalizas se estabiliza.",
+        razonamiento: "CVGW cierra $26.18 (+0.93% vs cierre anterior $25.94 del 01-Abr). La acción mantiene tendencia positiva, subiendo desde $25.79 del 31-Mar. Corrección de precios de tomate en WK14 puede presionar márgenes Q2. El riesgo arancelario USMCA y la renegociación del contrato Belher son factores de incertidumbre para el trimestre. Precio objetivo 90 días: $28.50 si el mercado de hortalizas se estabiliza.",
         factores: ["Corrección vine-ripe a $46.95 reduce expectativas de margen Q2", "Riesgo arancelario USMCA podría reducir volumen exportado de socios mexicanos", "Acción cerca de resistencia técnica en $28.72 (máximo 52s)", "Contrato Belher–Calavo en renegociación — impacto en volumen incierto"]
       },
       {
         simbolo: "AVO", empresa: "Mission Produce",
         tendencia: "alcista",
-        precioActual: 13.76,
+        precioActual: 13.87,
         precioObj90d: 16.00,
         riesgoBajo: 11.50,
         confianza: 55,
-        razonamiento: "AVO sube a $13.76 (+5.94% vs cierre anterior $12.99). La recuperación continúa sostenida. Para Belher: Mission Produce compite con Calavo en canal de distribución de hortalizas mexicanas y puede servir como palanca de negociación en renovaciones contractuales.",
+        razonamiento: "AVO cierra $13.87 (+0.80% vs cierre anterior $13.76 del 01-Abr). La recuperación continúa sostenida desde mínimos de $9.60. Para Belher: Mission Produce compite con Calavo en canal de distribución de hortalizas mexicanas y puede servir como palanca de negociación en renovaciones contractuales.",
         factores: ["Recuperación aguacate impulsa múltiplos sector", "Potencial competidor/alternativa a Calavo — palanca de negociación Belher", "Alta concentración en aguacate, menor exposición al ciclo tomate", "Sector produce recuperando confianza de inversores"]
       }
     ]
