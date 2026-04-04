@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Sábado 04 Abr 2026",
     semana: "WK 14",
-    actualizado: "04/04/2026 · 07:35"
+    actualizado: "04/04/2026 · 15:09"
   },
 
   alertas: [
@@ -10,7 +10,7 @@ window.BELHER = {
     { nivel: "danger",  texto: "Declaración Anual 2025 Belher — Auditoría no terminó revisión antes del 31-Mar. Presentada con resultado a pagar en acuerdo con Despacho Terrazas. Monto definitivo pendiente (jacruz · 01-Abr)." },
     { nivel: "danger",  texto: "WK13 Tomato Weekly Update — Irene Amezaga: 5 días de retraso (prometió 'end of week' 31-Mar). Sin reporte al cierre de la semana. Seguimiento urgente lunes 06-Abr." },
     { nivel: "success", texto: "Limón Persa outbound 02-Abr: merma 0%, exportación 80%, peso 40.2–40.5 lbs — calidad excelente en pico estacional. Embarque ST-106 Arizona confirmado." },
-    { nivel: "warning", texto: "Bola Calavo outbound 01-Abr: merma 4.47% — sobre umbral 4.0%. Monitorear calidad al reinicio de operaciones el lunes 07-Abr." }
+    { nivel: "warning", texto: "Outbound 02-Abr: Bola Calavo merma 4.07%, Bola Yameto 4.86%, Chile Habanero 5.50% — tres variedades sobre umbral 4.0%. Monitorear calidad al reinicio post-Semana Santa el lunes 07-Abr." }
   ],
 
   ebitda: {
@@ -59,11 +59,12 @@ window.BELHER = {
       desde: "30/03/2026",
       hasta:  "05/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:86.11, segunda:5.06, tercera:4.82, merma:4.01, peso:25.23, dias:2, alerta:true  },
-        { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:87.77, segunda:3.64, tercera:4.50, merma:4.09, peso:31.76, dias:1, alerta:true  },
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:86.13, segunda:4.94, tercera:4.91, merma:4.03, peso:25.28, dias:3, alerta:true  },
+        { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:84.85, segunda:4.31, tercera:6.36, merma:4.48, peso:31.74, dias:2, alerta:true  },
         { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:84.88, segunda:9.68, tercera:3.52, merma:1.92, peso:25.49, dias:1, alerta:false },
-        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:80.36, segunda:8.36, tercera:7.38, merma:3.91, peso:26.42, dias:3, alerta:false },
-        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:83.97, segunda:9.45, tercera:3.29, merma:3.29, peso:27.29, dias:2, alerta:false }
+        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:82.11, segunda:7.63, tercera:6.58, merma:3.69, peso:26.15, dias:4, alerta:false },
+        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:83.97, segunda:9.45, tercera:3.29, merma:3.29, peso:27.29, dias:2, alerta:false },
+        { nombre:"Chile Habanero",  etiqueta:"Habanero",   canal:"exportacion", primera:80.07, segunda:14.43, tercera:0,   merma:5.50, peso:23.53, dias:1, alerta:true  }
       ]
     },
     historico: [
@@ -72,19 +73,20 @@ window.BELHER = {
       { fecha:"WK11", primaPromedio:88.10, mermaPromedio:3.55 },
       { fecha:"WK12", primaPromedio:88.35, mermaPromedio:3.39 },
       { fecha:"WK13", primaPromedio:89.20, mermaPromedio:2.82 },
-      { fecha:"WK14", primaPromedio:83.76, mermaPromedio:3.59 }
+      { fecha:"WK14", primaPromedio:84.11, mermaPromedio:3.69 }
     ],
     ultimoOutbound: {
       fecha: "02/04/2026",
       variedades: [
-        { nombre:"Limón Persa", etiqueta:"Limón", canal:"exportacion", primera:6, segunda:75, tercera:17, merma:0, peso:40.35, alerta:false }
+        { nombre:"Bola Calavo",    etiqueta:"Calavo",   canal:"exportacion", primera:86.17, segunda:4.69,  tercera:5.08, merma:4.07, peso:25.38, alerta:true  },
+        { nombre:"Bola Yameto",    etiqueta:"Yameto",   canal:"exportacion", primera:81.93, segunda:4.98,  tercera:8.22, merma:4.86, peso:31.71, alerta:true  },
+        { nombre:"Roma Calavo",    etiqueta:"Roma",     canal:"exportacion", primera:87.36, segunda:5.44,  tercera:4.16, merma:3.04, peso:25.32, alerta:false },
+        { nombre:"Chile Habanero", etiqueta:"Habanero", canal:"exportacion", primera:80.07, segunda:14.43, tercera:0,    merma:5.50, peso:23.53, alerta:true  }
       ],
       anterior: {
-        fecha: "01/04/2026",
+        fecha: "02/04/2026",
         variedades: [
-          { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:84.75, segunda:5.05, tercera:5.72, merma:4.47, peso:24.38, alerta:true  },
-          { nombre:"Roma Calavo", etiqueta:"Roma",   canal:"exportacion", primera:85.20, segunda:8.67, tercera:4.93, merma:1.20, peso:25.80, alerta:false },
-          { nombre:"Roma Urson",  etiqueta:"Urson",  canal:"exportacion", primera:84.86, segunda:8.57, tercera:2.57, merma:4.00, peso:27.07, alerta:false }
+          { nombre:"Limón Persa", etiqueta:"Limón", canal:"exportacion", primera:6, segunda:75, tercera:17, merma:0, peso:40.35, alerta:false }
         ]
       }
     }
@@ -329,6 +331,7 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"10:43", asunto:"REPORTE DE OUTBOUND TOMATE Y CHILE 02/04/2026",                                      de:"Calidad Belher",             leido:false, fecha:"04/04" },
     { hora:"19:54", asunto:"Re: Anual 2025 — Declaración presentada con resultado a pagar (pendiente montos)",   de:"jacruz · Antonio Cruz",      leido:false, fecha:"03/04" },
     { hora:"23:12", asunto:"02-04-2026 REPORTES GENERALES LIMON",                                               de:"EMBARQUES BELHER",           leido:false, fecha:"02/04" },
     { hora:"23:10", asunto:"02-04-2026 REPORTES GENERALES CHILE",                                               de:"EMBARQUES BELHER",           leido:false, fecha:"02/04" },
@@ -355,7 +358,7 @@ window.BELHER = {
     { label:"SALDO CALAVO",   valor:"-$2.87M",       cambio:"WK13 pendiente",          dir:"down"    },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",         dir:"up"      },
     { label:"SETTLE WK13",    valor:"pendiente",     cambio:"no recibido 03-Abr",      dir:"neutral" },
-    { label:"1ª PRIMERA",     valor:"84.75%",        cambio:"01-Abr Bola Calavo",      dir:"down"    },
+    { label:"1ª PRIMERA",     valor:"86.17%",        cambio:"02-Abr Bola Calavo ↑",    dir:"up"      },
     { label:"MERMA LIMÓN",    valor:"0.00%",         cambio:"02-Abr excelente",        dir:"up"      },
     { label:"CVGW",           valor:"$26.85",        cambio:"+2.2% 02-Abr",            dir:"up"      }
   ],
@@ -557,7 +560,7 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "04/04/2026 · 07:35",
+    generado:  "04/04/2026 · 15:09",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
     nota:      "Síntesis de precios USDA + Corbel Seeds #0018 (01-Abr) + báscula + calidad outbound 02/04 (Limón Persa merma 0%) + noticias de industria. Se regenera automáticamente cada mañana.",
