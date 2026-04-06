@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Lunes 06 Abr 2026",
     semana: "WK 15",
-    actualizado: "06/04/2026 · 14:35"
+    actualizado: "06/04/2026 · 07:45"
   },
 
   alertas: [
@@ -565,7 +565,7 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "06/04/2026 · 14:35",
+    generado:  "06/04/2026 · 07:45",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
     nota:      "Síntesis de precios USDA + Corbel Seeds #0018 (01-Abr) + báscula + calidad outbound tomate 04/04 (Bola Calavo 1ª 87.83%, merma 3.35%) + outbound limón 06/04 (merma 1%, exportación 62%) + noticias de industria. Se regenera automáticamente cada mañana.",
