@@ -2,15 +2,15 @@ window.BELHER = {
   meta: {
     fecha: "Lunes 06 Abr 2026",
     semana: "WK 15",
-    actualizado: "06/04/2026 · 06:05"
+    actualizado: "06/04/2026 · 14:35"
   },
 
   alertas: [
-    { nivel: "danger",  texto: "Settlement WK13 Calavo — Carlos Valadez no envió el jueves 03-Abr. Próximo envío estimado: jueves 09-Abr. Verificar con Leima hoy lunes 06-Abr (inicio post-Semana Santa)." },
-    { nivel: "danger",  texto: "WK13 Tomato Weekly Update — Irene Amezaga: 8 días de retraso (prometió 'end of week' 31-Mar). Sin reporte al 06-Abr. Seguimiento urgente hoy al reinicio de operaciones." },
+    { nivel: "danger",  texto: "Settlement WK13 Calavo — Leima le escribió hoy 06-Abr a Carlos Valadez. Próximo envío estimado: jueves 09-Abr. Monitorear respuesta." },
+    { nivel: "danger",  texto: "WK13 Tomato Weekly Update — Irene Amezaga: reporte con más de 8 días de retraso (prometió 'end of week' 31-Mar). Sin reporte al 06-Abr. Seguimiento urgente." },
     { nivel: "warning", texto: "Declaración Anual 2025 Belher — presentada con resultado a pagar en acuerdo con Despacho Terrazas. Monto definitivo pendiente. Revisar en reunión Dashboard con Leima mañana 07-Abr." },
-    { nivel: "warning", texto: "Inicio WK15 post-Semana Santa — primera báscula y outbound de la semana pendientes. Monitorear calidad al reinicio de operaciones hoy lunes 06-Abr." },
-    { nivel: "success", texto: "Calidad WK14 cierre: merma promedio semana 3.69% — por debajo del umbral crítico 4.0%. Limón Persa outbound 02-Abr merma 0%, exportación 80%." }
+    { nivel: "success", texto: "WK15 arranca con operaciones: báscula 04-Abr (Tomate + Rezaga), outbound tomate 04-Abr y outbound limón persa 06-Abr recibidos. Merma tomate Bola Calavo 3.35% — bajo umbral 4%." },
+    { nivel: "success", texto: "Calidad WK14 cierre: merma promedio semana 3.69% — por debajo del umbral crítico 4.0%. Outbound tomate 04-Abr: Bola Calavo 1ª 87.83%, Roma Calavo 1ª 90.54% — excelente." }
   ],
 
   ebitda: {
@@ -59,12 +59,12 @@ window.BELHER = {
       desde: "06/04/2026",
       hasta:  "12/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:86.13, segunda:4.94, tercera:4.91, merma:4.03, peso:25.28, dias:0, alerta:true  },
-        { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:84.85, segunda:4.31, tercera:6.36, merma:4.48, peso:31.74, dias:0, alerta:true  },
-        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:84.88, segunda:9.68, tercera:3.52, merma:1.92, peso:25.49, dias:0, alerta:false },
-        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:82.11, segunda:7.63, tercera:6.58, merma:3.69, peso:26.15, dias:0, alerta:false },
-        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:83.97, segunda:9.45, tercera:3.29, merma:3.29, peso:27.29, dias:0, alerta:false },
-        { nombre:"Chile Habanero",  etiqueta:"Habanero",   canal:"exportacion", primera:80.07, segunda:14.43, tercera:0,   merma:5.50, peso:23.53, dias:0, alerta:true  }
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:87.83, segunda:3.98, tercera:4.85, merma:3.35, peso:26.84, dias:1, alerta:false },
+        { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:83.81, segunda:6.08, tercera:5.67, merma:4.44, peso:30.68, dias:1, alerta:true  },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:87.58, segunda:5.06, tercera:5.17, merma:2.19, peso:27.49, dias:1, alerta:false },
+        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:90.54, segunda:4.19, tercera:3.13, merma:2.14, peso:27.15, dias:1, alerta:false },
+        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:86.67, segunda:6.00, tercera:3.78, merma:3.56, peso:27.37, dias:1, alerta:false },
+        { nombre:"Limón Persa",     etiqueta:"Limón",      canal:"exportacion", primera:15,    segunda:47,   tercera:13,   merma:1,    peso:40.35, dias:1, alerta:false }
       ]
     },
     historico: [
@@ -73,20 +73,22 @@ window.BELHER = {
       { fecha:"WK11", primaPromedio:88.10, mermaPromedio:3.55 },
       { fecha:"WK12", primaPromedio:88.35, mermaPromedio:3.39 },
       { fecha:"WK13", primaPromedio:89.20, mermaPromedio:2.82 },
-      { fecha:"WK14", primaPromedio:84.11, mermaPromedio:3.69 }
+      { fecha:"WK14", primaPromedio:84.11, mermaPromedio:3.69 },
+      { fecha:"WK15", primaPromedio:87.28, mermaPromedio:3.14, nota:"Día 1 — outbound tomate 04/04 · 5 variedades" }
     ],
     ultimoOutbound: {
-      fecha: "02/04/2026",
+      fecha: "04/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",    etiqueta:"Calavo",   canal:"exportacion", primera:86.17, segunda:4.69,  tercera:5.08, merma:4.07, peso:25.38, alerta:true  },
-        { nombre:"Bola Yameto",    etiqueta:"Yameto",   canal:"exportacion", primera:81.93, segunda:4.98,  tercera:8.22, merma:4.86, peso:31.71, alerta:true  },
-        { nombre:"Roma Calavo",    etiqueta:"Roma",     canal:"exportacion", primera:87.36, segunda:5.44,  tercera:4.16, merma:3.04, peso:25.32, alerta:false },
-        { nombre:"Chile Habanero", etiqueta:"Habanero", canal:"exportacion", primera:80.07, segunda:14.43, tercera:0,    merma:5.50, peso:23.53, alerta:true  }
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:87.83, segunda:3.98, tercera:4.85, merma:3.35, peso:26.84, alerta:false },
+        { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:83.81, segunda:6.08, tercera:5.67, merma:4.44, peso:30.68, alerta:true  },
+        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:90.54, segunda:4.19, tercera:3.13, merma:2.14, peso:27.15, alerta:false },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:87.58, segunda:5.06, tercera:5.17, merma:2.19, peso:27.49, alerta:false },
+        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:86.67, segunda:6.00, tercera:3.78, merma:3.56, peso:27.37, alerta:false }
       ],
       anterior: {
-        fecha: "02/04/2026",
+        fecha: "06/04/2026",
         variedades: [
-          { nombre:"Limón Persa", etiqueta:"Limón", canal:"exportacion", primera:6, segunda:75, tercera:17, merma:0, peso:40.35, alerta:false }
+          { nombre:"Limón Persa", etiqueta:"Limón", canal:"exportacion", primera:15, segunda:47, tercera:13, merma:1, peso:40.35, alerta:false }
         ]
       }
     }
@@ -307,44 +309,46 @@ window.BELHER = {
 
   operaciones: {
     bascula: [
+      { fecha:"06/04", productos:["Limón Persa"] },
+      { fecha:"04/04", productos:["Tomate","Rezaga Tomate"] },
       { fecha:"02/04", productos:["Tomate","Limón Persa","Rezaga Tomate"] },
       { fecha:"01/04", productos:["Tomate","Limón Persa"] },
       { fecha:"31/03", productos:["Tomate","Limón Persa","Rezaga Tomate"] },
-      { fecha:"29/03", productos:["Tomate","Rezaga Tomate"] },
-      { fecha:"28/03", productos:["Chile","Limón Persa"] },
-      { fecha:"27/03", productos:["Tomate","Limón Persa"] }
+      { fecha:"29/03", productos:["Tomate","Rezaga Tomate"] }
     ],
     embarques: [
-      { fecha:"02/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-88",  destino:"Arizona", estado:"OK" },
-      { fecha:"02/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-103", destino:"Arizona", estado:"OK" },
-      { fecha:"02/04/2026", tipo:"Tomate",      cargas:1, unidad:"ARV-29",  destino:"Arizona", estado:"OK" },
-      { fecha:"02/04/2026", tipo:"Tomate",      cargas:1, unidad:"ARV-31",  destino:"Arizona", estado:"OK" },
-      { fecha:"02/04/2026", tipo:"Tomate",      cargas:1, unidad:"ST-109",  destino:"Arizona", estado:"OK" },
-      { fecha:"02/04/2026", tipo:"Tomate",      cargas:1, unidad:"ST-110",  destino:"Arizona", estado:"OK" },
-      { fecha:"02/04/2026", tipo:"Tomate",      cargas:1, unidad:"ST-105",  destino:"Arizona", estado:"OK" },
-      { fecha:"02/04/2026", tipo:"Limón+Chile", cargas:1, unidad:"ST-106",  destino:"Arizona", estado:"OK" },
-      { fecha:"01/04/2026", tipo:"Tomate",      cargas:1, unidad:"JL-104",  destino:"Arizona", estado:"OK" },
-      { fecha:"01/04/2026", tipo:"Tomate",      cargas:1, unidad:"JL-101",  destino:"Arizona", estado:"OK" },
-      { fecha:"01/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-41",  destino:"Arizona", estado:"OK" },
-      { fecha:"01/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-130", destino:"Arizona", estado:"OK" }
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-111",  destino:"Arizona", estado:"OK" },
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-93",   destino:"Arizona", estado:"OK" },
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-97",   destino:"Arizona", estado:"OK" },
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-64",   destino:"Arizona", estado:"OK" },
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-44",   destino:"Arizona", estado:"OK" },
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"LC-43",   destino:"Arizona", estado:"OK" },
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-13",   destino:"Texas",   estado:"OK" },
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-12",  destino:"Arizona", estado:"OK" },
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-16",  destino:"Arizona", estado:"OK" },
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-26",  destino:"Arizona", estado:"OK" },
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"CHARLY-3",destino:"Arizona", estado:"OK" },
+      { fecha:"02/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-88",  destino:"Arizona", estado:"OK" }
     ]
   },
 
   correos: [
-    { hora:"10:43", asunto:"REPORTE DE OUTBOUND TOMATE Y CHILE 02/04/2026",                                      de:"Calidad Belher",             leido:false, fecha:"04/04" },
-    { hora:"19:54", asunto:"Re: Anual 2025 — Declaración presentada con resultado a pagar (pendiente montos)",   de:"jacruz · Antonio Cruz",      leido:false, fecha:"03/04" },
-    { hora:"23:12", asunto:"02-04-2026 REPORTES GENERALES LIMON",                                               de:"EMBARQUES BELHER",           leido:false, fecha:"02/04" },
-    { hora:"23:10", asunto:"02-04-2026 REPORTES GENERALES CHILE",                                               de:"EMBARQUES BELHER",           leido:false, fecha:"02/04" },
-    { hora:"23:07", asunto:"BILL, MANIFIESTO NOGALES CGG · CGG-88 · CGG-103 · ARV-29 · ARV-31",                 de:"EMBARQUES BELHER",           leido:false, fecha:"02/04" },
-    { hora:"23:06", asunto:"02-04-2026 REPORTES GENERALES TOMATE",                                              de:"EMBARQUES BELHER",           leido:false, fecha:"02/04" },
-    { hora:"21:10", asunto:"BILL, MANIFIESTO NOGALES ST · ST-109 · ST-110 · ST-105",                            de:"EMBARQUES BELHER",           leido:false, fecha:"02/04" },
-    { hora:"21:10", asunto:"MANIFIESTO CARGA LIMON PERSA Y CHILE FRESNO-HABANERO · ST-106",                     de:"EMBARQUES BELHER",           leido:false, fecha:"02/04" },
-    { hora:"16:45", asunto:"REPORTE DE BASCULA 02/04/2026 (REZAGA DE TOMATE)",                                  de:"Bascula Belher",             leido:false, fecha:"02/04" },
-    { hora:"16:36", asunto:"REPORTE DE BASCULA 02/04/2026 (TOMATE)",                                            de:"Bascula Belher",             leido:false, fecha:"02/04" },
-    { hora:"16:35", asunto:"REPORTE DE BASCULA 02/04/2026 (LIMON PERSA)",                                       de:"Bascula Belher",             leido:false, fecha:"02/04" },
-    { hora:"13:25", asunto:"REPORTE DE OUTBOUND DE LIMON PERSA DEL 02/04/2026",                                 de:"Calidad Belher",             leido:false, fecha:"02/04" },
-    { hora:"11:00", asunto:"REPORTE DE OUTBOUND TOMATE 01/04/2026",                                             de:"Calidad Belher",             leido:false, fecha:"02/04" },
-    { hora:"18:00", asunto:"RE: 2026 15-03 Agricola Belher Settle WK12 — envíos settlement los jueves",         de:"Carlos Valadez · Calavo",    leido:false, fecha:"01/04" }
+    { hora:"12:16", asunto:"REPORTE DE OUTBOUND DE LIMON PERSA DEL 06/04/2026 — 1ª 15%, 2ª Export 47%, merma 1%",de:"Calidad Belher",            leido:false, fecha:"06/04" },
+    { hora:"10:37", asunto:"REPORTE DE OUTBOUND TOMATE 04/04/2026 — Bola Calavo 1ª 87.83%, Roma Calavo 1ª 90.54%",de:"Calidad Belher",           leido:false, fecha:"06/04" },
+    { hora:"09:47", asunto:"Re: Settle WK12 — seguimiento settlement WK13 a Carlos Valadez",                      de:"Leima Leyva · Administración",leido:false, fecha:"06/04" },
+    { hora:"23:58", asunto:"04-04-2026 REPORTES GENERALES (empaque y embarque)",                                  de:"EMBARQUES BELHER",          leido:false, fecha:"04/04" },
+    { hora:"23:41", asunto:"BILL, MANIFIESTO NOGALES CGG · CGG-12 · CGG-16 · CGG-26 · CHARLY-3",                 de:"EMBARQUES BELHER",          leido:false, fecha:"04/04" },
+    { hora:"22:38", asunto:"BILL, MANIFIESTO NOGALES JL · JL-44 · LC-43",                                         de:"EMBARQUES BELHER",          leido:false, fecha:"04/04" },
+    { hora:"21:51", asunto:"BILL, MANIFIESTO MCALLEN (Texas) · JL-13",                                            de:"EMBARQUES BELHER",          leido:false, fecha:"04/04" },
+    { hora:"21:49", asunto:"BILL, MANIFIESTO NOGALES ST · ST-111 · ST-64 · ST-97 · ST-93",                        de:"EMBARQUES BELHER",          leido:false, fecha:"04/04" },
+    { hora:"23:00", asunto:"REPORTE DE BASCULA 04/04/2026 (REZAGA DE TOMATE)",                                    de:"Bascula Belher",            leido:false, fecha:"04/04" },
+    { hora:"18:10", asunto:"REPORTE DE BASCULA 04/04/2026 (TOMATE)",                                              de:"Bascula Belher",            leido:false, fecha:"04/04" },
+    { hora:"10:43", asunto:"REPORTE DE OUTBOUND TOMATE Y CHILE 02/04/2026",                                       de:"Calidad Belher",            leido:false, fecha:"04/04" },
+    { hora:"19:54", asunto:"Re: Anual 2025 — Declaración presentada con resultado a pagar (pendiente montos)",    de:"jacruz · Antonio Cruz",     leido:false, fecha:"03/04" },
+    { hora:"23:12", asunto:"02-04-2026 REPORTES GENERALES LIMON",                                                 de:"EMBARQUES BELHER",          leido:false, fecha:"02/04" },
+    { hora:"23:06", asunto:"02-04-2026 REPORTES GENERALES TOMATE",                                                de:"EMBARQUES BELHER",          leido:false, fecha:"02/04" },
+    { hora:"13:25", asunto:"REPORTE DE OUTBOUND DE LIMON PERSA DEL 02/04/2026",                                   de:"Calidad Belher",            leido:false, fecha:"02/04" },
+    { hora:"18:00", asunto:"RE: 2026 15-03 Agricola Belher Settle WK12 — envíos settlement los jueves",           de:"Carlos Valadez · Calavo",   leido:false, fecha:"01/04" }
   ],
 
   ticker: [
@@ -357,10 +361,11 @@ window.BELHER = {
     { label:"VENTA NETA",     valor:"$6.56M",        cambio:"Calavo WK12",             dir:"up"      },
     { label:"SALDO CALAVO",   valor:"-$2.87M",       cambio:"WK13 pendiente",          dir:"down"    },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",         dir:"up"      },
-    { label:"SETTLE WK13",    valor:"pendiente",     cambio:"esperado 09-Abr",         dir:"neutral" },
-    { label:"1ª PRIMERA",     valor:"86.17%",        cambio:"02-Abr Bola Calavo ↑",    dir:"up"      },
-    { label:"MERMA LIMÓN",    valor:"0.00%",         cambio:"02-Abr excelente",        dir:"up"      },
-    { label:"CVGW",           valor:"$26.85",        cambio:"+2.2% 02-Abr",            dir:"up"      }
+    { label:"SETTLE WK13",    valor:"pendiente",     cambio:"Leima siguiendo 06-Abr",  dir:"neutral" },
+    { label:"1ª PRIMERA WK15",valor:"87.83%",        cambio:"04-Abr Bola Calavo ↑",    dir:"up"      },
+    { label:"MERMA LIMÓN",    valor:"1.00%",         cambio:"06-Abr WK15 día 1",       dir:"up"      },
+    { label:"CVGW",           valor:"$27.24",        cambio:"+3.2% 04-Abr",            dir:"up"      },
+    { label:"AVO",            valor:"$14.44",        cambio:"+3.6% 04-Abr",            dir:"up"      }
   ],
 
   auditorias: [
@@ -549,9 +554,9 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"07/04/2026",   evento:"Seguimiento Dashboard Belher — sala de juntas 11am–12pm (Leima aceptó 31-Mar). Confirmar asistencia hoy lunes 06-Abr.", tipo:"reunion",  participantes:"JC · Leima Leyva" },
-      { fecha:"09/04/2026",   evento:"Settlement WK13 Calavo — Carlos Valadez no envió el 03-Abr (jueves). Próximo envío estimado: jueves 09-Abr. Confirmar estatus con Leima hoy.", tipo:"pago",    participantes:"Leima Leyva · Carlos Valadez · Calavo" },
-      { fecha:"Urgente",      evento:"WK13 Tomato Weekly Update — Irene Amezaga: 8 días de retraso al 06-Abr (prometió 'end of week' 31-Mar). Contactar hoy al inicio de operaciones WK15.", tipo:"reporte",  participantes:"Irene Amezaga · Calavo" },
+      { fecha:"07/04/2026",   evento:"Seguimiento Dashboard Belher — sala de juntas 11am–12pm (Leima aceptó 31-Mar). Confirmar asistencia.", tipo:"reunion",  participantes:"JC · Leima Leyva" },
+      { fecha:"09/04/2026",   evento:"Settlement WK13 Calavo — Leima siguió a Carlos Valadez el 06-Abr. Próximo envío estimado: jueves 09-Abr.", tipo:"pago",    participantes:"Leima Leyva · Carlos Valadez · Calavo" },
+      { fecha:"Urgente",      evento:"WK13 Tomato Weekly Update — Irene Amezaga: reporte con +8 días de retraso. Pendiente al 06-Abr.", tipo:"reporte",  participantes:"Irene Amezaga · Calavo" },
       { fecha:"13/04/2026",   evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar)", tipo:"reunion",  participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
       { fecha:"16/04/2026",   evento:"BPSI F/S Marzo 2026 y Forecast Q2 2026 — revisión financiera y pipeline", tipo:"reunion",  participantes:"JC · Armando Llanes · hildelisa@beautyjunkies.com" },
       { fecha:"21/04/2026",   evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion",  participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
@@ -560,10 +565,10 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "04/04/2026 · 15:09",
+    generado:  "06/04/2026 · 14:35",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
-    nota:      "Síntesis de precios USDA + Corbel Seeds #0018 (01-Abr) + báscula + calidad outbound 02/04 (Limón Persa merma 0%) + noticias de industria. Se regenera automáticamente cada mañana.",
+    nota:      "Síntesis de precios USDA + Corbel Seeds #0018 (01-Abr) + báscula + calidad outbound tomate 04/04 (Bola Calavo 1ª 87.83%, merma 3.35%) + outbound limón 06/04 (merma 1%, exportación 62%) + noticias de industria. Se regenera automáticamente cada mañana.",
     items: [
       {
         id: "vine-ripe",
@@ -625,8 +630,8 @@ window.BELHER = {
         confianza: 65,
         precio_actual:     { min: 56.00, max: 70.00 },
         precio_proyectado: { min: 58.00, max: 72.00 },
-        razonamiento: "Limón persa Texas en pico estacional: USDA citrus 01-Abr reporta $68-70 para 175s, $66-68 para 200s, $62-66 para 230s y $56-60 para 250s (Corbel #0018). Báscula Belher procesó limón el 01/04 y 02/04 con embarque vía Nogales (ST-106). Outbound 02-Abr: merma 0%, exportación 80%, peso 40.2-40.5 lbs — calidad excelente que soporta precio premium. El flush primaveral en abril podría moderar precios en WK16-17.",
-        factores: ["USDA citrus 01-Abr confirma precios máximos estacionales $56-70 por talla", "Báscula activa 01-02 Abr — temporada en plena operación", "Merma 0% outbound 02-Abr — calidad excelente para precio premium", "Flush primaveral esperado en abril → mayor oferta puede moderar precio en WK16-17"],
+        razonamiento: "Limón persa Texas en pico estacional: USDA citrus 01-Abr reporta $68-70 para 175s, $66-68 para 200s, $62-66 para 230s y $56-60 para 250s (Corbel #0018). Báscula Belher procesó limón el 06/04 — arranque WK15 activo. Outbound 06/04: merma 1%, exportación 62%, peso 40.2-40.5 lbs, calibres 200/230/250 activos. Defectos principales: wood pocket, roña y trips — todos menores. El flush primaveral en abril podría moderar precios en WK16-17.",
+        factores: ["USDA citrus 01-Abr confirma precios máximos estacionales $56-70 por talla", "Báscula activa 06-Abr (WK15 día 1) — temporada en plena operación", "Merma 1% outbound 06-Abr — calidad excelente; exportación 62%", "Flush primaveral esperado en abril → mayor oferta puede moderar precio en WK16-17"],
         riesgo: "Mayor oferta estacional en abril-mayo + aranceles potenciales USMCA → corrección FOB posible si flush supera expectativas.",
         accion: "Maximizar embarques de limón ahora mientras el precio está en pico. Coordinar con Maui Fresh forecast semanal para resto de abril. Monitorear USDA Nogales para confirmar FOB local."
       }
@@ -743,15 +748,15 @@ window.BELHER = {
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 26.85, prevClose: 26.27, cambio: 0.58, cambioPct: 2.21,
+        precio: 27.24, prevClose: 26.40, cambio: 0.84, cambioPct: 3.18,
         h52: 28.72, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · 02-Abr-2026"
+        fuente: "Yahoo Finance · 04-Abr-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 14.44, prevClose: 13.60, cambio: 0.84, cambioPct: 6.18,
+        precio: 14.44, prevClose: 13.94, cambio: 0.50, cambioPct: 3.58,
         h52: 15.02, l52: 9.60, volumen: null,
-        fuente: "Yahoo Finance · 02-Abr-2026"
+        fuente: "Yahoo Finance · 04-Abr-2026"
       }
     ],
 
@@ -805,7 +810,7 @@ window.BELHER = {
       { nivel: "warning", texto: "Settlement WK13: Carlos Valadez confirmó envíos los jueves. No recibido el 03-Abr. Próximo estimado: jueves 09-Abr." },
       { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
       { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
-      { nivel: "success", texto: "CVGW $26.85 (+2.2%) · AVO $14.44 (+6.2%) — sector produce con fuerte momentum (02-Abr)." }
+      { nivel: "success", texto: "CVGW $27.24 (+3.2%) · AVO $14.44 (+3.6%) — sector produce con fuerte momentum (04-Abr). CVGW acercándose a máximo 52s $28.72." }
     ],
 
     kpi: {
@@ -924,13 +929,13 @@ window.BELHER = {
     prediccionBolsa: [
       {
         simbolo: "CVGW", empresa: "Calavo Growers",
-        tendencia: "lateral",
-        precioActual: 26.85,
-        precioObj90d: 28.50,
+        tendencia: "alcista",
+        precioActual: 27.24,
+        precioObj90d: 29.00,
         riesgoBajo: 22.00,
-        confianza: 58,
-        razonamiento: "CVGW cierra $26.85 (+2.21% vs cierre anterior $26.27 del 02-Abr). Acción en recuperación sostenida desde mínimos. Grape tomato y jalapeño recuperando precios es positivo para márgenes Q2. El riesgo arancelario USMCA 1-Jul-2026 y la pendiente renegociación del contrato Belher son factores de incertidumbre. Precio objetivo 90 días: $28.50 si mercado de hortalizas se estabiliza.",
-        factores: ["Grape tomato y jalapeño recuperando precios — positivo para márgenes", "Riesgo arancelario USMCA podría reducir volumen exportado de socios mexicanos", "Acción cerca de resistencia técnica en $28.72 (máximo 52s)", "Contrato Belher–Calavo en renegociación — impacto en volumen incierto"]
+        confianza: 60,
+        razonamiento: "CVGW cierra $27.24 (+3.18% vs cierre anterior $26.40 del 04-Abr). Acción rompiendo hacia máximos de 52 semanas ($28.72). Grape tomato y jalapeño con precios recuperados es positivo para márgenes Q2. El riesgo arancelario USMCA 1-Jul-2026 y la pendiente renegociación del contrato Belher son factores de incertidumbre. Precio objetivo 90 días: $29.00 si mercado de hortalizas se estabiliza.",
+        factores: ["Grape tomato y jalapeño recuperando precios — positivo para márgenes", "Riesgo arancelario USMCA podría reducir volumen exportado de socios mexicanos", "Acción acercándose a resistencia técnica en $28.72 (máximo 52s)", "Contrato Belher–Calavo en renegociación — impacto en volumen incierto"]
       },
       {
         simbolo: "AVO", empresa: "Mission Produce",
@@ -939,8 +944,8 @@ window.BELHER = {
         precioObj90d: 16.00,
         riesgoBajo: 11.50,
         confianza: 55,
-        razonamiento: "AVO cierra $14.44 (+6.18% vs cierre anterior $13.60 del 02-Abr) — fuerte sesión. La recuperación continúa sostenida desde mínimos de $9.60. Para Belher: Mission Produce puede servir como palanca de negociación en renovaciones contractuales con Calavo.",
-        factores: ["Recuperación aguacate impulsa múltiplos del sector", "Potencial competidor/alternativa a Calavo — palanca de negociación Belher", "Alta concentración en aguacate, menor exposición al ciclo tomate", "Fuerte sesión +6.2% — momentum alcista de corto plazo"]
+        razonamiento: "AVO cierra $14.44 (+3.58% vs cierre anterior $13.94 del 04-Abr). La recuperación continúa sostenida desde mínimos de $9.60. Para Belher: Mission Produce puede servir como palanca de negociación en renovaciones contractuales con Calavo.",
+        factores: ["Recuperación aguacate impulsa múltiplos del sector", "Potencial competidor/alternativa a Calavo — palanca de negociación Belher", "Alta concentración en aguacate, menor exposición al ciclo tomate", "Sesión sólida +3.6% — momentum alcista sostenido"]
       }
     ]
   },
