@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 05 Abr 2026",
-    semana: "WK 14",
-    actualizado: "05/04/2026 · 06:00"
+    fecha: "Lunes 06 Abr 2026",
+    semana: "WK 15",
+    actualizado: "06/04/2026 · 06:05"
   },
 
   alertas: [
-    { nivel: "danger",  texto: "Settlement WK13 Calavo NO recibido el jueves 03-Abr (esperado según confirmación Carlos Valadez). Próximo envío estimado: jueves 09-Abr. Verificar lunes con Leima." },
-    { nivel: "danger",  texto: "Declaración Anual 2025 Belher — Auditoría no terminó revisión antes del 31-Mar. Presentada con resultado a pagar en acuerdo con Despacho Terrazas. Monto definitivo pendiente (jacruz · 01-Abr)." },
-    { nivel: "danger",  texto: "WK13 Tomato Weekly Update — Irene Amezaga: 5 días de retraso (prometió 'end of week' 31-Mar). Sin reporte al cierre de la semana. Seguimiento urgente lunes 06-Abr." },
-    { nivel: "success", texto: "Limón Persa outbound 02-Abr: merma 0%, exportación 80%, peso 40.2–40.5 lbs — calidad excelente en pico estacional. Embarque ST-106 Arizona confirmado." },
-    { nivel: "warning", texto: "Outbound 02-Abr: Bola Calavo merma 4.07%, Bola Yameto 4.86%, Chile Habanero 5.50% — tres variedades sobre umbral 4.0%. Monitorear calidad al reinicio post-Semana Santa el lunes 07-Abr." }
+    { nivel: "danger",  texto: "Settlement WK13 Calavo — Carlos Valadez no envió el jueves 03-Abr. Próximo envío estimado: jueves 09-Abr. Verificar con Leima hoy lunes 06-Abr (inicio post-Semana Santa)." },
+    { nivel: "danger",  texto: "WK13 Tomato Weekly Update — Irene Amezaga: 8 días de retraso (prometió 'end of week' 31-Mar). Sin reporte al 06-Abr. Seguimiento urgente hoy al reinicio de operaciones." },
+    { nivel: "warning", texto: "Declaración Anual 2025 Belher — presentada con resultado a pagar en acuerdo con Despacho Terrazas. Monto definitivo pendiente. Revisar en reunión Dashboard con Leima mañana 07-Abr." },
+    { nivel: "warning", texto: "Inicio WK15 post-Semana Santa — primera báscula y outbound de la semana pendientes. Monitorear calidad al reinicio de operaciones hoy lunes 06-Abr." },
+    { nivel: "success", texto: "Calidad WK14 cierre: merma promedio semana 3.69% — por debajo del umbral crítico 4.0%. Limón Persa outbound 02-Abr merma 0%, exportación 80%." }
   ],
 
   ebitda: {
@@ -56,15 +56,15 @@ window.BELHER = {
 
   calidad: {
     semana: {
-      desde: "30/03/2026",
-      hasta:  "05/04/2026",
+      desde: "06/04/2026",
+      hasta:  "12/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:86.13, segunda:4.94, tercera:4.91, merma:4.03, peso:25.28, dias:3, alerta:true  },
-        { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:84.85, segunda:4.31, tercera:6.36, merma:4.48, peso:31.74, dias:2, alerta:true  },
-        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:84.88, segunda:9.68, tercera:3.52, merma:1.92, peso:25.49, dias:1, alerta:false },
-        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:82.11, segunda:7.63, tercera:6.58, merma:3.69, peso:26.15, dias:4, alerta:false },
-        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:83.97, segunda:9.45, tercera:3.29, merma:3.29, peso:27.29, dias:2, alerta:false },
-        { nombre:"Chile Habanero",  etiqueta:"Habanero",   canal:"exportacion", primera:80.07, segunda:14.43, tercera:0,   merma:5.50, peso:23.53, dias:1, alerta:true  }
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:86.13, segunda:4.94, tercera:4.91, merma:4.03, peso:25.28, dias:0, alerta:true  },
+        { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:84.85, segunda:4.31, tercera:6.36, merma:4.48, peso:31.74, dias:0, alerta:true  },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:84.88, segunda:9.68, tercera:3.52, merma:1.92, peso:25.49, dias:0, alerta:false },
+        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:82.11, segunda:7.63, tercera:6.58, merma:3.69, peso:26.15, dias:0, alerta:false },
+        { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:83.97, segunda:9.45, tercera:3.29, merma:3.29, peso:27.29, dias:0, alerta:false },
+        { nombre:"Chile Habanero",  etiqueta:"Habanero",   canal:"exportacion", primera:80.07, segunda:14.43, tercera:0,   merma:5.50, peso:23.53, dias:0, alerta:true  }
       ]
     },
     historico: [
@@ -357,7 +357,7 @@ window.BELHER = {
     { label:"VENTA NETA",     valor:"$6.56M",        cambio:"Calavo WK12",             dir:"up"      },
     { label:"SALDO CALAVO",   valor:"-$2.87M",       cambio:"WK13 pendiente",          dir:"down"    },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",         dir:"up"      },
-    { label:"SETTLE WK13",    valor:"pendiente",     cambio:"no recibido 03-Abr",      dir:"neutral" },
+    { label:"SETTLE WK13",    valor:"pendiente",     cambio:"esperado 09-Abr",         dir:"neutral" },
     { label:"1ª PRIMERA",     valor:"86.17%",        cambio:"02-Abr Bola Calavo ↑",    dir:"up"      },
     { label:"MERMA LIMÓN",    valor:"0.00%",         cambio:"02-Abr excelente",        dir:"up"      },
     { label:"CVGW",           valor:"$26.85",        cambio:"+2.2% 02-Abr",            dir:"up"      }
@@ -549,9 +549,9 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"09/04/2026",   evento:"Settlement WK13 Calavo — Carlos Valadez no envió el 03-Abr (jueves). Próximo envío estimado: jueves 09-Abr. Verificar con Leima el lunes 06-Abr.", tipo:"pago",    participantes:"Leima Leyva · Carlos Valadez · Calavo" },
-      { fecha:"Urgente",      evento:"WK13 Tomato Weekly Update — Irene Amezaga: 5 días de retraso (prometió 'end of week' 31-Mar). Seguimiento inmediato lunes 06-Abr.", tipo:"reporte",  participantes:"Irene Amezaga · Calavo" },
-      { fecha:"07/04/2026",   evento:"Seguimiento Dashboard Belher — sala de juntas 11am–12pm (Leima aceptó 31-Mar)", tipo:"reunion",  participantes:"JC · Leima Leyva" },
+      { fecha:"07/04/2026",   evento:"Seguimiento Dashboard Belher — sala de juntas 11am–12pm (Leima aceptó 31-Mar). Confirmar asistencia hoy lunes 06-Abr.", tipo:"reunion",  participantes:"JC · Leima Leyva" },
+      { fecha:"09/04/2026",   evento:"Settlement WK13 Calavo — Carlos Valadez no envió el 03-Abr (jueves). Próximo envío estimado: jueves 09-Abr. Confirmar estatus con Leima hoy.", tipo:"pago",    participantes:"Leima Leyva · Carlos Valadez · Calavo" },
+      { fecha:"Urgente",      evento:"WK13 Tomato Weekly Update — Irene Amezaga: 8 días de retraso al 06-Abr (prometió 'end of week' 31-Mar). Contactar hoy al inicio de operaciones WK15.", tipo:"reporte",  participantes:"Irene Amezaga · Calavo" },
       { fecha:"13/04/2026",   evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar)", tipo:"reunion",  participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
       { fecha:"16/04/2026",   evento:"BPSI F/S Marzo 2026 y Forecast Q2 2026 — revisión financiera y pipeline", tipo:"reunion",  participantes:"JC · Armando Llanes · hildelisa@beautyjunkies.com" },
       { fecha:"21/04/2026",   evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion",  participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
@@ -766,7 +766,7 @@ window.BELHER = {
         fecha: "31/03/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya",
         asunto: "RE: Canceled: Weekly Tomato Meeting — WK13 update by end of week",
         tipo: "fyi", nivel: "warning",
-        resumen: "Irene confirma: 'Yes I will send to both by end of week.' Reunión semanal Teams cancelada. Reporte WK13 Tomato Weekly Update prometido antes del fin de semana — no recibido al 04-Abr (5 días de retraso)."
+        resumen: "Irene confirma: 'Yes I will send to both by end of week.' Reunión semanal Teams cancelada. Reporte WK13 Tomato Weekly Update prometido antes del fin de semana — no recibido al 06-Abr (8 días de retraso)."
       },
       {
         fecha: "31/03/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya",
@@ -801,7 +801,7 @@ window.BELHER = {
     ],
 
     alertas: [
-      { nivel: "danger",  texto: "WK13 Tomato Weekly Update no recibido al 04-Abr — Irene Amezaga prometió envío 'end of week' (31-Mar). Reporte con 5 días de retraso. Seguimiento urgente lunes 06-Abr." },
+      { nivel: "danger",  texto: "WK13 Tomato Weekly Update no recibido al 06-Abr — Irene Amezaga prometió envío 'end of week' (31-Mar). Reporte con 8 días de retraso. Contactar hoy al inicio de operaciones WK15." },
       { nivel: "warning", texto: "Settlement WK13: Carlos Valadez confirmó envíos los jueves. No recibido el 03-Abr. Próximo estimado: jueves 09-Abr." },
       { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
       { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
