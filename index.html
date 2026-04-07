@@ -3126,17 +3126,14 @@ function checkPw(){
     <div class="section-title" style="margin-top:28px">Predicciones IA · Próximos 7 Días <span class="src-tag">Claude claude-opus-4-6 · síntesis multimodal diaria</span></div>
     <div id="prediccionesIA"></div>
 
-    <div class="section-title" id="mercadoReporteTitle" style="margin-top:20px">Precios de Mercado <span class="src-tag">ray@agbelher.com · Corbel Seeds Daily</span></div>
-    <div class="price-hero-grid" id="priceHeroCards"></div>
+    <!-- priceHeroCards y priceCompareGrid ocultos — datos ya visibles en las gráficas de arriba -->
+    <div style="display:none" id="priceHeroCards"></div>
+    <div style="display:none" id="priceCompareGrid"></div>
+    <div style="display:none" id="mercadoReporteTitle"></div>
 
-    <div class="section-title">Comparativo vs Semana Anterior <span class="src-tag">Corbel Seeds Daily · USDA AMS</span></div>
-    <div class="price-compare-grid" id="priceCompareGrid"></div>
-
-    <div class="section-title">Resumen Ejecutivo</div>
+    <div class="section-title" style="margin-top:28px">Contexto de Mercado <span class="src-tag" id="mercadoFechaSrc"></span></div>
     <div class="card" id="mercadoResumenBox"></div>
-
-    <div class="section-title">Señales de Mercado</div>
-    <div class="card" id="noticiasList"></div>
+    <div class="card" style="margin-top:12px" id="noticiasList"></div>
 
     <div class="section-title" id="industriaTitle" style="margin-top:28px">Noticias de Industria</div>
     <div class="filters-row" id="catFilters"></div>
@@ -4268,8 +4265,8 @@ function checkPw(){
   /* ════════════════ MERCADO ════════════════ */
   function renderMercado() {
     renderPredicciones();
-    document.getElementById('mercadoReporteTitle').textContent =
-      'Precios · ' + D.mercado.reporte + ' · ' + D.mercado.fecha;
+    var srcEl = document.getElementById('mercadoFechaSrc');
+    if (srcEl) srcEl.textContent = D.mercado.reporte + ' · ' + D.mercado.fecha;
 
     /* Hero cards */
     document.getElementById('priceHeroCards').innerHTML = D.mercado.precios.map(function (p) {
