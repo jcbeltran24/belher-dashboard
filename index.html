@@ -2135,6 +2135,22 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 .cw-usda-range { text-align:right; font-weight:700; color:var(--text); font-variant-numeric:tabular-nums; }
 .cw-usda-usual { text-align:right; font-size:.62rem; color:var(--muted); font-variant-numeric:tabular-nums; }
 
+/* ── Market Intelligence Price Charts ── */
+.mi-chart-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+@media(max-width:640px){ .mi-chart-grid { grid-template-columns:1fr; } }
+.mi-chart-card { padding:18px 20px 14px; }
+.mi-chart-full { margin-bottom:0; }
+.mi-chart-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; gap:12px; }
+.mi-chart-title { font-size:.8rem; font-weight:700; color:var(--text); }
+.mi-chart-sub   { font-size:.65rem; color:var(--muted); margin-top:2px; }
+.mi-chart-stat  { text-align:right; flex-shrink:0; }
+.mi-stat-last   { font-size:1.05rem; font-weight:800; color:var(--text); font-variant-numeric:tabular-nums; }
+.mi-stat-chg    { font-size:.67rem; font-weight:700; margin-top:1px; }
+.mi-stat-chg.up { color:var(--green2); }
+.mi-stat-chg.dn { color:var(--red); }
+.mi-stat-avg    { font-size:.65rem; color:var(--muted); margin-top:1px; font-variant-numeric:tabular-nums; }
+.mi-chart-note  { font-size:.62rem; color:var(--muted); text-align:center; padding:8px 0 2px; line-height:1.6; }
+
 /* ── TOY ── */
 .cw-toy-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 @media(max-width:500px){ .cw-toy-grid { grid-template-columns:1fr; } }
@@ -3059,6 +3075,68 @@ function checkPw(){
 
     <div class="section-title">Señales de Mercado</div>
     <div class="card" id="noticiasList"></div>
+
+    <div class="section-title" style="margin-top:28px">Evolución de Precios · Último Mes <span class="src-tag">USDA-AMS Phoenix via Corbel Seeds · Mar 9 – Abr 7, 2026</span></div>
+    <div class="mi-price-charts" id="miPriceCharts">
+      <div class="mi-chart-grid">
+        <!-- Vine-ripe -->
+        <div class="card mi-chart-card">
+          <div class="mi-chart-header">
+            <div>
+              <div class="mi-chart-title">Tomate Vine-ripe 4×4 · 25 lb</div>
+              <div class="mi-chart-sub">Nogales</div>
+            </div>
+            <div id="mi-stat-vine" class="mi-chart-stat"></div>
+          </div>
+          <div class="chart-box" style="height:180px"><canvas id="chartMiVine"></canvas></div>
+        </div>
+        <!-- Roma XL -->
+        <div class="card mi-chart-card">
+          <div class="mi-chart-header">
+            <div>
+              <div class="mi-chart-title">Tomate Roma XL · 25 lb</div>
+              <div class="mi-chart-sub">Nogales</div>
+            </div>
+            <div id="mi-stat-roma" class="mi-chart-stat"></div>
+          </div>
+          <div class="chart-box" style="height:180px"><canvas id="chartMiRoma"></canvas></div>
+        </div>
+        <!-- Jalapeño -->
+        <div class="card mi-chart-card">
+          <div class="mi-chart-header">
+            <div>
+              <div class="mi-chart-title">Chile Jalapeño</div>
+              <div class="mi-chart-sub">Texas</div>
+            </div>
+            <div id="mi-stat-jal" class="mi-chart-stat"></div>
+          </div>
+          <div class="chart-box" style="height:180px"><canvas id="chartMiJal"></canvas></div>
+        </div>
+        <!-- Bell GH -->
+        <div class="card mi-chart-card">
+          <div class="mi-chart-header">
+            <div>
+              <div class="mi-chart-title">Chile Bell GH</div>
+              <div class="mi-chart-sub">Nogales · Greenhouse</div>
+            </div>
+            <div id="mi-stat-bell" class="mi-chart-stat"></div>
+          </div>
+          <div class="chart-box" style="height:180px"><canvas id="chartMiBell"></canvas></div>
+        </div>
+      </div>
+      <!-- Limón full-width -->
+      <div class="card mi-chart-card mi-chart-full">
+        <div class="mi-chart-header">
+          <div>
+            <div class="mi-chart-title">Limón Persa · 40 lb</div>
+            <div class="mi-chart-sub">Texas · datos desde Mar 30</div>
+          </div>
+          <div id="mi-stat-limon" class="mi-chart-stat"></div>
+        </div>
+        <div class="chart-box" style="height:160px"><canvas id="chartMiLimon"></canvas></div>
+      </div>
+      <div class="mi-chart-note">Precio mid = (mín + máx) / 2 · Línea punteada = promedio del período · Mar 19 excluido (anomalía USDA) · Fuente: USDA-AMS ix_fv120.pdf vía Corbel Seeds Daily</div>
+    </div>
 
     <div class="section-title" id="industriaTitle" style="margin-top:28px">Noticias de Industria</div>
     <div class="filters-row" id="catFilters"></div>
@@ -4910,6 +4988,124 @@ function checkPw(){
 
   /* ════════════════ CHARTS ════════════════ */
   function initChartsForTab(tab) {
+
+    /* ── Market Intelligence — Price History Charts ── */
+    if (tab === 'market' && !chartsInit.miPriceCharts) {
+      chartsInit.miPriceCharts = true;
+
+      var miLabels = ['Mar 9','Mar 12','Mar 13','Mar 17','Mar 18','Mar 20','Mar 23','Mar 24','Mar 25','Mar 26','Mar 27','Mar 30','Abr 1','Abr 7'];
+      var miVine   = [26.95, 25.95, 25.95, 26.95, 29.95, 31.95, 31.95, 39.95, 47.95, 47.95, 50.95, 47.95, 47.95, 56.95];
+      var miRoma   = [15.95, 18.95, 18.45, 19.95, 24.45, 25.95, 29.95, 36.95, 39.95, 41.95, 42.95, 39.95, 39.95, 39.95];
+      var miJal    = [35.00, 38.00, 35.00, 35.00, 43.50, 57.00, 61.00, 61.00, 49.00, 59.00, 59.00, 49.00, 51.50, 41.00];
+      var miBell   = [14.95, 38.95, 39.95, 34.95,  null, 39.95, 41.95,  null, 43.95, 43.95, 44.95, 44.95, 45.95, 45.95];
+      var miLimon  = [ null,  null,  null,  null,  null,  null,  null,  null,  null,  null,  null, 42.00, 63.00, 63.00];
+
+      function miAvg(arr) {
+        var v = arr.filter(function(x){ return x !== null; });
+        return v.reduce(function(s,x){ return s+x; }, 0) / v.length;
+      }
+      function miAvgLine(arr) {
+        var a = parseFloat(miAvg(arr).toFixed(2));
+        return arr.map(function(v){ return v !== null ? a : null; });
+      }
+      function miRenderStat(elId, arr) {
+        var valid = arr.filter(function(x){ return x !== null; });
+        var last  = valid[valid.length-1];
+        var first = valid[0];
+        var a     = miAvg(arr);
+        var pct   = ((last - first) / first * 100).toFixed(1);
+        var dir   = pct >= 0 ? 'up' : 'dn';
+        var arrow = pct >= 0 ? '▲' : '▼';
+        var el = document.getElementById(elId);
+        if (!el) return;
+        el.innerHTML =
+          '<div class="mi-stat-last">$' + last.toFixed(2) + '</div>' +
+          '<div class="mi-stat-chg ' + dir + '">' + arrow + ' ' + Math.abs(pct) + '%</div>' +
+          '<div class="mi-stat-avg">x̄ $' + a.toFixed(2) + '</div>';
+      }
+      miRenderStat('mi-stat-vine',  miVine);
+      miRenderStat('mi-stat-roma',  miRoma);
+      miRenderStat('mi-stat-jal',   miJal);
+      miRenderStat('mi-stat-bell',  miBell);
+      miRenderStat('mi-stat-limon', miLimon);
+
+      function miMakeChart(canvasId, data, color) {
+        var ctx = document.getElementById(canvasId);
+        if (!ctx) return;
+        var c2d = ctx.getContext('2d');
+        var grad = c2d.createLinearGradient(0, 0, 0, 180);
+        grad.addColorStop(0, color + '28');
+        grad.addColorStop(1, color + '00');
+        new Chart(c2d, {
+          type: 'line',
+          data: {
+            labels: miLabels,
+            datasets: [
+              {
+                label: 'Precio diario',
+                data: data,
+                borderColor: color,
+                backgroundColor: grad,
+                borderWidth: 2,
+                pointRadius: 3.5,
+                pointHoverRadius: 5.5,
+                pointBackgroundColor: color,
+                pointBorderColor: '#fff',
+                pointBorderWidth: 1.5,
+                fill: true,
+                tension: .35,
+                spanGaps: false
+              },
+              {
+                label: 'Promedio período',
+                data: miAvgLine(data),
+                borderColor: color,
+                borderWidth: 1.5,
+                borderDash: [5, 4],
+                pointRadius: 0,
+                pointHoverRadius: 0,
+                backgroundColor: 'transparent',
+                fill: false,
+                spanGaps: false
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    var v = ctx.parsed.y;
+                    if (v == null) return null;
+                    return '  ' + ctx.dataset.label + ': $' + v.toFixed(2);
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { color: 'rgba(0,0,0,.035)' },
+                ticks: { maxRotation: 35, font: { size: 9.5 } }
+              },
+              y: {
+                grid: { color: 'rgba(0,0,0,.035)' },
+                ticks: { callback: function(v){ return '$' + v; }, font: { size: 10 } }
+              }
+            }
+          }
+        });
+      }
+
+      miMakeChart('chartMiVine',  miVine,  '#15803d');
+      miMakeChart('chartMiRoma',  miRoma,  '#16a34a');
+      miMakeChart('chartMiJal',   miJal,   '#d97706');
+      miMakeChart('chartMiBell',  miBell,  '#7c3aed');
+      miMakeChart('chartMiLimon', miLimon, '#0891b2');
+    }
 
     /* ── Tomate — quality trend + fleet donut ── */
     if (tab === 'tomate' && !chartsInit.tomateCalidad) {
