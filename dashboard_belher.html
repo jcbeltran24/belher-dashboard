@@ -3032,8 +3032,8 @@ function checkPw(){
     <div class="section-title" style="margin-top:22px">Riesgos Activos <span class="src-tag">Watchlist Estratégico</span></div>
     <div id="hoyWatchlist"></div>
 
-    <!-- 8. Gente en CDC — contexto operativo -->
-    <div id="hoyCdcChartWrap" style="margin-top:22px"></div>
+    <!-- CDC chart → tab CDC (evitar duplicado) -->
+    <div id="hoyCdcChartWrap" style="display:none"></div>
 
     <!-- 9. Correos — referencia -->
     <div class="section-title">Correos Operativos</div>
@@ -3046,8 +3046,8 @@ function checkPw(){
     <div id="contratosContainer"></div>
     <div class="section-title">Oportunidades Activas</div>
     <div id="opContainer"></div>
-    <div class="section-title">Watchlist · Riesgos &amp; Seguimiento</div>
-    <div id="watchContainer"></div>
+    <!-- Watchlist duplicado de "Riesgos Activos" arriba — oculto -->
+    <div id="watchContainer" style="display:none"></div>
     <div class="section-title">Agenda Próxima</div>
     <div class="card-table">
       <table class="agenda-tbl" id="agendaTbl">
@@ -3164,28 +3164,9 @@ function checkPw(){
       <div class="chart-box"><canvas id="chartPagos"></canvas></div>
     </div>
 
-    <!-- Detail / secondary data -->
-    <div class="section-title">Calavo Settlement · Desglose CF GC 2025–2026 <span class="src-tag">leima@agbelher.com · CF actualizado 22 Mar 2026</span></div>
-    <div class="card" id="calavoDesglose" style="padding:24px"></div>
-
-    <div class="section-title">Liquidaciones Detalladas</div>
-    <div class="card-table">
-      <div class="tbl-wrap">
-        <table id="liquidTbl">
-          <thead>
-            <tr>
-              <th>Semana</th><th>Wire</th>
-              <th class="td-num">Pago USD</th>
-              <th class="td-num">Cajas</th>
-              <th class="td-num">Contenedores</th>
-              <th class="td-center">Estado</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-          <tfoot id="liquidFoot"></tfoot>
-        </table>
-      </div>
-    </div>
+    <!-- calavoDesglose y liquidTbl: detalle completo en tab CalavoWeekly — ocultos -->
+    <div id="calavoDesglose" style="display:none"></div>
+    <table id="liquidTbl" style="display:none"><tbody></tbody><tfoot id="liquidFoot"></tfoot></table>
 
   </div>
 
@@ -3195,13 +3176,13 @@ function checkPw(){
     <!-- Season Hero -->
     <div id="tomateHero"></div>
 
-    <!-- Channel Revenue Cards (2-col: Export | Nacional) -->
-    <div class="tom-ch-grid" id="tomateChannels"></div>
+    <!-- tomateChannels: datos ya en tomateHero — oculto -->
+    <div id="tomateChannels" style="display:none"></div>
 
     <!-- Revenue Pace strip -->
     <div id="tomatePaceStrip"></div>
-    <!-- Calavo Financial Strip -->
-    <div id="tomateCalavoStrip"></div>
+    <!-- tomateCalavoStrip: Finanzas cubre esto — oculto -->
+    <div id="tomateCalavoStrip" style="display:none"></div>
 
     <!-- Quality (full width) -->
     <div class="section-title" style="margin-top:4px">Calidad · Temporada <span class="src-tag">Outbound calidad@agbelher.com</span></div>
@@ -3224,18 +3205,11 @@ function checkPw(){
       <div class="view-panel" data-group="tomate-cal" data-view="semana" id="tomateVariedadesSemana"></div>
     </details>
 
-    <div class="section-title" id="outboundTitle" style="margin-top:28px">Calidad Exportación <span class="src-tag">calidad@agbelher.com · Outbound</span></div>
-    <div class="view-toggle" data-group="calidad-out">
-      <button class="vt-btn active" data-view="ayer">Día Anterior</button>
-      <button class="vt-btn" data-view="semana">Últimos 7 días</button>
-    </div>
-    <div class="view-panel active" data-group="calidad-out" data-view="ayer">
-      <div id="calidadSummary"></div>
-      <div class="card" style="padding:0" id="qualidadRows"></div>
-    </div>
-    <div class="view-panel" data-group="calidad-out" data-view="semana">
-      <div id="calidadSemana"></div>
-    </div>
+    <!-- "Calidad Exportación" duplicado de "Calidad por Variedad" arriba — oculto -->
+    <div id="outboundTitle" style="display:none"></div>
+    <div id="calidadSummary" style="display:none"></div>
+    <div id="qualidadRows" style="display:none"></div>
+    <div id="calidadSemana" style="display:none"></div>
 
     <div class="section-title">Tendencia Semanal · 1ª Primera &amp; Merma <span class="src-tag">calidad@agbelher.com · promedio por semana</span></div>
     <div class="card">
@@ -3268,8 +3242,8 @@ function checkPw(){
       </div>
     </div>
 
-    <div class="section-title">Flota · Resumen Últimos 7 Días</div>
-    <div class="card-table" id="flotaResumen"></div>
+    <!-- flotaResumen: redundante con embTbl + chartTomateFlota — oculto -->
+    <div id="flotaResumen" style="display:none"></div>
 
     <div class="section-title">Volumen Diario de Embarques</div>
     <div class="card">
@@ -3298,15 +3272,18 @@ function checkPw(){
     <div id="cw-header"></div>
     <div id="cw-stocks"></div>
     <div id="cw-alertas"></div>
-    <div id="cw-correos"></div>
+    <!-- cw-correos: ya en tab Hoy — oculto -->
+    <div id="cw-correos" style="display:none"></div>
     <div id="cw-kpis"></div>
     <div id="cw-proyecciones"></div>
     <div id="cw-ventas"></div>
     <div id="cw-usda"></div>
     <div id="cw-toy"></div>
     <div id="cw-discrepancias"></div>
-    <div id="cw-noticias"></div>
-    <div id="cw-predicciones"></div>
+    <!-- cw-noticias: en Market Intelligence — oculto -->
+    <div id="cw-noticias" style="display:none"></div>
+    <!-- cw-predicciones: en Market Intelligence → prediccionesIA — oculto -->
+    <div id="cw-predicciones" style="display:none"></div>
   </div>
 
   <!-- ══════════ OTROS ══════════ -->
