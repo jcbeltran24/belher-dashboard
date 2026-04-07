@@ -812,7 +812,7 @@ window.BELHER = {
 
     kpi: {
       pallets: 488, loads: 40, pkgs: 67840,
-      fobPromedio: 20.07, fobAnterior: 18.06, pkgsAnterior: 50053
+      fobPromedio: 20.07, fobAnterior: 19.06, pkgsAnterior: 50653
     },
 
     belher: {
@@ -829,29 +829,34 @@ window.BELHER = {
     },
 
     ventas: [
-      { variedad: "Rounds / Vine Ripe", avg: 21.37, recibido: 28606 },
-      { variedad: "Roma 25lb",          avg: 16.41, recibido: 16727 }
+      { variedad: "Rounds / Vine Ripe", avg: 21.37, recibido: 28806 },
+      { variedad: "Roma 25lb",          avg: 18.41, recibido: 16727 }
     ],
 
     usdaRef: {
       fecha: "23/03/2026",
+      nota: "Precios promedio realizados WK12 (Calavo Market Avg Price) — precio neto que recibe Belher antes de P&P",
       precios: [
-        { producto: "Vine Ripe 25lb", zona: "Nogales AZ", min: 38.95, max: 43.95, usual: 40.95 },
-        { producto: "Vine Ripe 4×5",  zona: "Nogales AZ", min: 36.95, max: 40.95, usual: null  },
-        { producto: "Roma 25lb",      zona: "Nogales AZ", min: 32.95, max: 38.95, usual: 34.95 },
-        { producto: "Vine Ripe 25lb", zona: "Texas",      min: 36.95, max: 42.95, usual: 38.95 },
-        { producto: "Roma 25lb",      zona: "Texas",      min: 34.95, max: 38.95, usual: 35.95 }
+        { producto: "Rounds 2LYR",    zona: "Nogales/McAllen", min: 22.95, max: 24.95 },
+        { producto: "Rounds 25lb",    zona: "Nogales/McAllen", min: 24.95, max: 26.95 },
+        { producto: "Rounds 25lb",    zona: "Texas",           min: 20.95, max: 26.95 },
+        { producto: "Roma JB/XL",     zona: "Nogales/McAllen", min: 18.95, max: 20.95 },
+        { producto: "Roma JB/XL",     zona: "Texas",           min: 18.95, max: 20.95 },
+        { producto: "Roma LG",        zona: "Nogales/Texas",   min: 16.95, max: 16.95 },
+        { producto: "Roma MD",        zona: "Nogales/Texas",   min: 14.95, max: 16.95 }
       ]
     },
 
     toy: {
       recibido: [
-        { mes: "Dic", y2025: 337541, y2026: 234353 },
-        { mes: "Ene", y2025: 209098, y2026: 299053 }
+        { mes: "Dic", y2024: 20635,  y2025: 6607,   prevLabel: "2024", currLabel: "2025" },
+        { mes: "Ene", y2025: 237541, y2026: 214493, prevLabel: "2025", currLabel: "2026", diffPct: -10.7 },
+        { mes: "Feb", y2025: 289068, y2026: 295953, prevLabel: "2025", currLabel: "2026", diffPct: 2.3  }
       ],
       pricing: [
-        { mes: "Dic", yPrev: 19.89, yCurr: 11.06, prevLabel: "2024", currLabel: "2026" },
-        { mes: "Ene", yPrev: 11.19, yCurr: 14.43, prevLabel: "2025", currLabel: "2026" }
+        { mes: "Dic", yPrev: 19.89, yCurr: 11.06, prevLabel: "2024", currLabel: "2025" },
+        { mes: "Ene", yPrev: 11.10, yCurr: 12.23, prevLabel: "2025", currLabel: "2026" },
+        { mes: "Feb", yPrev:  9.83, yCurr: 14.43, prevLabel: "2025", currLabel: "2026" }
       ]
     },
 
@@ -891,10 +896,10 @@ window.BELHER = {
     discrepancias: [
       {
         titulo:    "Spread FOB Belher vs Mercado",
-        belher:    "$20.07 / caja (WK12 avg)",
-        mercado:   "$40.95 / caja (USDA Nogales usual)",
-        diferencia:"$20.88 · margen 50.9%",
-        nota:      "El spread es la diferencia entre lo que recibe Belher y el precio de mercado. Incluye comisión Calavo 12%, Z-code, anti-dumping 17.5% y logística. Rango saludable: 45–55%. Monitorear si cae bajo 40%.",
+        belher:    "$20.07 / caja WK12 avg (Rounds $21.37 · Roma $18.41)",
+        mercado:   "$25.95 / caja Calavo Market Avg (Rounds 25lb Nogales $24.95–26.95)",
+        diferencia:"$5.88 · margen ~22.7% sobre precio Calavo realizado",
+        nota:      "El spread Belher/mercado en settlement es ~$5-6 por caja sobre precio Calavo realizado (comisión Calavo 12%, freight, Z-code, anti-dumping 17.5%). Precio Calavo realizado WK12 ~$25-27 — muy por debajo del FOB USDA de mercado abierto $38-44 en esas fechas. Diferencia atribuible al contrato precio-fijo $16.95 base.",
         alerta:    false
       },
       {
