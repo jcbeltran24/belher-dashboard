@@ -1,14 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 06 Abr 2026",
+    fecha: "Martes 07 Abr 2026",
     semana: "WK 15",
-    actualizado: "06/04/2026 · 14:35"
+    actualizado: "07/04/2026 · 09:20"
   },
 
   alertas: [
-    { nivel: "danger",  texto: "Settlement WK13 Calavo — Leima le escribió hoy 06-Abr a Carlos Valadez. Próximo envío estimado: jueves 09-Abr. Monitorear respuesta." },
-    { nivel: "danger",  texto: "WK13 Tomato Weekly Update — Irene Amezaga: reporte con más de 8 días de retraso (prometió 'end of week' 31-Mar). Sin reporte al 06-Abr. Seguimiento urgente." },
-    { nivel: "warning", texto: "Declaración Anual 2025 Belher — presentada con resultado a pagar en acuerdo con Despacho Terrazas. Monto definitivo pendiente. Revisar en reunión Dashboard con Leima mañana 07-Abr." },
+    { nivel: "danger",  texto: "Settlement WK13 Calavo — Leima siguió a Carlos Valadez el 06-Abr. Próximo envío estimado: jueves 09-Abr. Sin respuesta confirmada al 07-Abr." },
+    { nivel: "danger",  texto: "WK13 Tomato Weekly Update — Irene Amezaga: reporte con más de 9 días de retraso (prometió 'end of week' 31-Mar). Sin reporte al 07-Abr. Seguimiento urgente." },
+    { nivel: "warning", texto: "Declaración Anual 2025 Belher — presentada con resultado a pagar en acuerdo con Despacho Terrazas. Monto definitivo pendiente. Revisar en reunión Dashboard con Leima HOY 07-Abr (11am)." },
     { nivel: "success", texto: "WK15 arranca con operaciones: báscula 04-Abr (Tomate + Rezaga), outbound tomate 04-Abr y outbound limón persa 06-Abr recibidos. Merma tomate Bola Calavo 3.35% — bajo umbral 4%." },
     { nivel: "success", texto: "Calidad WK14 cierre: merma promedio semana 3.69% — por debajo del umbral crítico 4.0%. Outbound tomate 04-Abr: Bola Calavo 1ª 87.83%, Roma Calavo 1ª 90.54% — excelente." }
   ],
@@ -554,7 +554,7 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"07/04/2026",   evento:"Seguimiento Dashboard Belher — sala de juntas 11am–12pm (Leima aceptó 31-Mar). Confirmar asistencia.", tipo:"reunion",  participantes:"JC · Leima Leyva" },
+      { fecha:"07/04/2026",   evento:"HOY — Seguimiento Dashboard Belher — sala de juntas 11am–12pm (Leima aceptó 31-Mar). Incluye revisión Declaración Anual 2025 y OL 8+4.", tipo:"reunion",  participantes:"JC · Leima Leyva" },
       { fecha:"09/04/2026",   evento:"Settlement WK13 Calavo — Leima siguió a Carlos Valadez el 06-Abr. Próximo envío estimado: jueves 09-Abr.", tipo:"pago",    participantes:"Leima Leyva · Carlos Valadez · Calavo" },
       { fecha:"Urgente",      evento:"WK13 Tomato Weekly Update — Irene Amezaga: reporte con +8 días de retraso. Pendiente al 06-Abr.", tipo:"reporte",  participantes:"Irene Amezaga · Calavo" },
       { fecha:"13/04/2026",   evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar)", tipo:"reunion",  participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
