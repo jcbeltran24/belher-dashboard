@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Martes 07 Abr 2026",
     semana: "WK 15",
-    actualizado: "07/04/2026 · 09:20"
+    actualizado: "07/04/2026 · 10:45"
   },
 
   alertas: [
@@ -317,22 +317,26 @@ window.BELHER = {
       { fecha:"29/03", productos:["Tomate","Rezaga Tomate"] }
     ],
     embarques: [
+      { fecha:"06/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-114", destino:"Arizona", estado:"OK" },
+      { fecha:"06/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-100", destino:"Arizona", estado:"OK" },
+      { fecha:"06/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-80",  destino:"Arizona", estado:"OK" },
+      { fecha:"06/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-19",  destino:"Arizona", estado:"OK" },
+      { fecha:"06/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-131",  destino:"Arizona", estado:"OK" },
+      { fecha:"06/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-115",  destino:"Arizona", estado:"OK" },
+      { fecha:"06/04/2026", tipo:"Tomate", cargas:1, unidad:"AC-26",   destino:"Texas",   estado:"OK" },
       { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-111",  destino:"Arizona", estado:"OK" },
       { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-93",   destino:"Arizona", estado:"OK" },
       { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-97",   destino:"Arizona", estado:"OK" },
       { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-64",   destino:"Arizona", estado:"OK" },
-      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-44",   destino:"Arizona", estado:"OK" },
-      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"LC-43",   destino:"Arizona", estado:"OK" },
-      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-13",   destino:"Texas",   estado:"OK" },
-      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-12",  destino:"Arizona", estado:"OK" },
-      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-16",  destino:"Arizona", estado:"OK" },
-      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-26",  destino:"Arizona", estado:"OK" },
-      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"CHARLY-3",destino:"Arizona", estado:"OK" },
-      { fecha:"02/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-88",  destino:"Arizona", estado:"OK" }
+      { fecha:"04/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-44",   destino:"Arizona", estado:"OK" }
     ]
   },
 
   correos: [
+    { hora:"21:00", asunto:"06-04-2026 REPORTES GENERALES (empaque y embarque)",                                  de:"EMBARQUES BELHER",          leido:false, fecha:"06/04" },
+    { hora:"20:08", asunto:"BILL, MANIFIESTO MCALLEN (Texas) · AC-26",                                            de:"EMBARQUES BELHER",          leido:false, fecha:"06/04" },
+    { hora:"19:57", asunto:"BILL, MANIFIESTO NOGALES CGG · CGG-19 · CGG-80 · CGG-100 · CGG-114",                 de:"EMBARQUES BELHER",          leido:false, fecha:"06/04" },
+    { hora:"18:52", asunto:"BILL, MANIFIESTO NOGALES JL · JL-115 · JL-131",                                       de:"EMBARQUES BELHER",          leido:false, fecha:"06/04" },
     { hora:"12:16", asunto:"REPORTE DE OUTBOUND DE LIMON PERSA DEL 06/04/2026 — 1ª 15%, 2ª Export 47%, merma 1%",de:"Calidad Belher",            leido:false, fecha:"06/04" },
     { hora:"10:37", asunto:"REPORTE DE OUTBOUND TOMATE 04/04/2026 — Bola Calavo 1ª 87.83%, Roma Calavo 1ª 90.54%",de:"Calidad Belher",           leido:false, fecha:"06/04" },
     { hora:"09:47", asunto:"Re: Settle WK12 — seguimiento settlement WK13 a Carlos Valadez",                      de:"Leima Leyva · Administración",leido:false, fecha:"06/04" },
