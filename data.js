@@ -106,7 +106,28 @@ window.BELHER = {
       nacional: [
         { etiqueta:"Nacional", cajas:446116, cajasRoma:311917, cajasBola:134199, revenue:3856070 }
       ]
-    }
+    },
+    /* Precio FOB Calavo por semana — confirmado (real) vs estimado IA (est)
+       Fuente real: Calavo Settlement WK11 $19.06, WK12 $20.07 (Irene Amezaga · Calavo)
+       Estimado WK01–WK10: derivado de calavoWeekly.toy.pricing (Dic $11.06, Ene $12.23, Feb $14.43)
+       Estimado WK13–WK15: extrapolado de mercado USDA Nogales via Corbel Seeds + spread histórico ~$5-6/caja */
+    preciosHistorico: [
+      { sem:"WK01", fob:10.20, usda:null,  tipo:"est"  },
+      { sem:"WK02", fob:10.80, usda:null,  tipo:"est"  },
+      { sem:"WK03", fob:11.30, usda:null,  tipo:"est"  },
+      { sem:"WK04", fob:11.60, usda:null,  tipo:"est"  },
+      { sem:"WK05", fob:11.80, usda:null,  tipo:"est"  },
+      { sem:"WK06", fob:12.40, usda:null,  tipo:"est"  },
+      { sem:"WK07", fob:12.80, usda:null,  tipo:"est"  },
+      { sem:"WK08", fob:13.20, usda:null,  tipo:"est"  },
+      { sem:"WK09", fob:14.60, usda:null,  tipo:"est"  },
+      { sem:"WK10", fob:17.20, usda:26.95, tipo:"est"  },
+      { sem:"WK11", fob:19.06, usda:26.28, tipo:"real" },
+      { sem:"WK12", fob:20.07, usda:29.62, tipo:"real" },
+      { sem:"WK13", fob:25.50, usda:43.75, tipo:"est"  },
+      { sem:"WK14", fob:34.00, usda:47.95, tipo:"est"  },
+      { sem:"WK15", fob:44.00, usda:56.95, tipo:"est"  }
+    ]
   },
 
   limon: {
