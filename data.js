@@ -2,13 +2,13 @@ window.BELHER = {
   meta: {
     fecha: "Martes 07 Abr 2026",
     semana: "WK 15",
-    actualizado: "07/04/2026 · 13:15"
+    actualizado: "07/04/2026 · 14:35"
   },
 
   alertas: [
     { nivel: "success", texto: "Vine-ripe $55.95–57.95 (4×4/4×5 Nogales) — mayor subida de temporada: +$9/caja vs semana previa $46.95-48.95 (+19%). Corbel #0022 07-Abr: 'much higher'. Embarcar todo el volumen disponible HOY." },
     { nivel: "danger",  texto: "Jalapeño colapsa a $40–42 desde $53–55 (-24%) — corrección abrupta por llegada de oferta primaveral. Habanero también baja a $38-40. Ajuste de expectativas para WK15-16." },
-    { nivel: "warning", texto: "Settlement WK13 + Tomato Weekly Update — Irene Amezaga comprometida HOY 07-Abr después de 1pm (cerres de fracturas pendientes, confirmado 06-Abr 4:20pm). Leima confirmó: 'esperamos para mañana'." },
+    { nivel: "warning", texto: "Settlement WK13 + Tomato Weekly Update — NO RECIBIDO aún (14:35). Irene comprometida >1pm HOY. Leima en espera. Si no llega hoy, seguimiento urgente mañana miércoles." },
     { nivel: "danger",  texto: "Bola Yameto merma 4.97% WK15 día 2 — segundo consecutivo >4% (04/04: 4.44%). Promedio WK15: 4.71%. Con vine-ripe en máximos de temporada, la calidad es crítica para no perder precio." },
     { nivel: "success", texto: "CVGW $27.63 (+6.76%) · AVO $14.89 (+8.68%) · Roma Calavo merma 1.63% outbound 06/04 ✓ · Báscula 06/04 Tomate + Limón activos. WK15 en ritmo pleno." }
   ],
@@ -560,7 +560,7 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"07/04/2026 · HOY >1pm", evento:"Settlement WK13 + Tomato Weekly Update — Irene Amezaga confirmó envío hoy después de la 1pm (cerres de fracturas pendientes). Leima confirmó recepción 06-Abr 23:47.", tipo:"pago",   participantes:"Irene Amezaga · Carlos Valadez · Leima Leyva · Calavo" },
+      { fecha:"07/04/2026 · pendiente 14:35", evento:"Settlement WK13 + Tomato Weekly Update — Irene prometió >1pm HOY. Aún no recibido a las 14:35. Si no llega hoy, seguimiento a Irene y Carlos Valadez mañana miércoles.", tipo:"pago",   participantes:"Irene Amezaga · Carlos Valadez · Leima Leyva · Calavo" },
       { fecha:"13/04/2026",            evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar)", tipo:"reunion", participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
       { fecha:"16/04/2026",            evento:"BPSI F/S Marzo 2026 y Forecast Q2 2026 — revisión financiera y pipeline", tipo:"reunion", participantes:"JC · Armando Llanes · hildelisa@beautyjunkies.com" },
       { fecha:"21/04/2026",            evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
@@ -569,7 +569,7 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "07/04/2026 · 13:15",
+    generado:  "07/04/2026 · 14:35",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
     nota:      "Síntesis de precios USDA Phoenix (Corbel Seeds #0022 · 07-Abr) + báscula + calidad outbound tomate 04/04 y 06/04 (Bola Yameto merma 4.71% prom WK15, Roma Calavo merma 1.89% prom WK15) + outbound limón 06/04 (merma 1%) + noticias de industria. Se regenera automáticamente cada mañana.",
@@ -804,7 +804,7 @@ window.BELHER = {
     ],
 
     alertas: [
-      { nivel: "warning", texto: "Settlement WK13 + Tomato Weekly Update HOY 07-Abr después de 1pm — Irene Amezaga comprometida directamente (06-Abr 4:20pm cc: Carlos Valadez, JC). Leima confirmó recepción." },
+      { nivel: "warning", texto: "Settlement WK13 + Tomato Weekly Update — NO RECIBIDO a las 14:35. Irene comprometida >1pm HOY. Seguimiento urgente si no llega antes del cierre." },
       { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
       { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
       { nivel: "success", texto: "CVGW $27.63 (+6.76%) · AVO $14.89 (+8.68%) — fuerte momentum sector produce (07-Abr). CVGW en máximos de 52 semanas ($28.72 techo)." }
