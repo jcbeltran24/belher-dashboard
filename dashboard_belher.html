@@ -2987,7 +2987,7 @@ function checkPw(){
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
 
-<!-- ══ CONTEXT BAR ══ -->
+<!-- ══ FINANCIAL STRIP ══ -->
 <div class="fin-bar" id="finBar">
   <div class="fin-bar-today">
     <div class="fin-bar-today-pulse"></div>
@@ -2996,25 +2996,30 @@ function checkPw(){
       <div class="fin-bar-today-date" id="fbFecha">—</div>
     </div>
   </div>
-  <div class="fin-bar-kpi" id="fbExport">
-    <div class="fin-bar-kpi-lbl">Exportación · Calavo</div>
-    <div class="fin-bar-kpi-val pos" id="fbExportVal">—</div>
-    <div class="fin-bar-kpi-sub" id="fbExportSub">cajas facturadas</div>
+  <div class="fin-bar-kpi" id="fbVBCalavo">
+    <div class="fin-bar-kpi-lbl">Venta Bruta Calavo</div>
+    <div class="fin-bar-kpi-val pos" id="fbVBCalavoVal">—</div>
+    <div class="fin-bar-kpi-sub" id="fbVBCalavoSub">Gross FOB export</div>
   </div>
-  <div class="fin-bar-kpi" id="fbNacional">
-    <div class="fin-bar-kpi-lbl">Nacional</div>
-    <div class="fin-bar-kpi-val acc" id="fbNacionalVal">—</div>
-    <div class="fin-bar-kpi-sub" id="fbNacionalSub">canal independiente</div>
+  <div class="fin-bar-kpi" id="fbVBNacional">
+    <div class="fin-bar-kpi-lbl">Venta Bruta Nacional</div>
+    <div class="fin-bar-kpi-val acc" id="fbVBNacionalVal">—</div>
+    <div class="fin-bar-kpi-sub" id="fbVBNacionalSub">canal directo</div>
   </div>
   <div class="fin-bar-kpi" id="fbDeuda">
     <div class="fin-bar-kpi-lbl">Deuda Total</div>
     <div class="fin-bar-kpi-val neg" id="fbDeudaVal">—</div>
-    <div class="fin-bar-kpi-sub" id="fbDeudaSub">Calavo + Bancos + Prov.</div>
+    <div class="fin-bar-kpi-sub" id="fbDeudaSub">Calavo · Bancos · Prov. · SAT</div>
   </div>
-  <div class="fin-bar-kpi" style="border-right:none" id="fbLiqInicio">
-    <div class="fin-bar-kpi-lbl">Liq. Real Calavo</div>
-    <div class="fin-bar-kpi-val" id="fbLiqInicioVal">—</div>
-    <div class="fin-bar-kpi-sub" id="fbLiqInicioSub">inicio estimado</div>
+  <div class="fin-bar-kpi" id="fbLiq">
+    <div class="fin-bar-kpi-lbl">Liquidado a Calavo</div>
+    <div class="fin-bar-kpi-val" id="fbLiqVal">—</div>
+    <div class="fin-bar-kpi-sub" id="fbLiqSub">amortización deuda $6M</div>
+  </div>
+  <div class="fin-bar-kpi" style="border-right:none" id="fbNeto">
+    <div class="fin-bar-kpi-lbl">Neto Belher</div>
+    <div class="fin-bar-kpi-val acc" id="fbNetoVal">—</div>
+    <div class="fin-bar-kpi-sub" id="fbNetoSub">P&amp;P recibido</div>
   </div>
 </div>
 
@@ -3562,35 +3567,45 @@ function checkPw(){
 
   /* ── Context Bar (fin-bar) ── */
   (function () {
-    var cv   = D.calavo;
-    var rev  = D.revenue || {};
-    var dd   = D.deudas  || {};
-    var dc   = cv.deudaCalavo || {};
-    var tc   = (D.tomate && D.tomate.canales) || {};
-    var nacC = (tc.nacional && tc.nacional[0]) || {};
+    var cv  = D.calavo;
+    var rev = D.revenue || {};
+    var dd  = D.deudas  || {};
+    var dc  = cv.deudaCalavo || {};
 
-    // Cajas facturadas export (settle)
+    // Cajas facturadas export (settle confirmed)
     var cajasExp = 0;
     D.calavo.pagos.forEach(function(p){ cajasExp += p.cajas || 0; });
+
+    // Nacional cajas
+    var cajasNac = 0;
+    var tc = (D.tomate && D.tomate.canales) || {};
+    if (tc.nacional) tc.nacional.forEach(function(s){ cajasNac += s.cajas || 0; });
 
     document.getElementById('fbWeek').textContent  = D.meta.semana + ' · HOY';
     document.getElementById('fbFecha').textContent = D.meta.fecha;
 
-    // Exportación
-    document.getElementById('fbExportVal').textContent = fmtN(cajasExp) + ' cajas';
-    document.getElementById('fbExportSub').textContent = fmt(rev.fob || 0) + ' bruto';
+    // Venta Bruta Calavo
+    document.getElementById('fbVBCalavoVal').textContent = fmt(cv.revenueTotal || rev.fob || 0);
+    document.getElementById('fbVBCalavoSub').textContent = fmtN(cajasExp) + ' cajas facturadas';
 
-    // Nacional
-    document.getElementById('fbNacionalVal').textContent = fmtN(nacC.cajas || 0) + ' cajas';
-    document.getElementById('fbNacionalSub').textContent = fmt(rev.nacional || 0) + ' revenue';
+    // Venta Bruta Nacional
+    document.getElementById('fbVBNacionalVal').textContent = fmt(rev.nacional || 0);
+    document.getElementById('fbVBNacionalSub').textContent = fmtN(cajasNac) + ' cajas';
 
     // Deuda Total
-    document.getElementById('fbDeudaVal').textContent = fmt(dd.resumen ? dd.resumen.total : 0);
+    var deudaTotal = (dd.resumen && (dd.resumen.total || dd.totalGeneral)) || dd.totalGeneral || 0;
+    document.getElementById('fbDeudaVal').textContent = fmt(deudaTotal);
     document.getElementById('fbDeudaSub').textContent = 'Calavo · Bancos · Prov. · SAT';
 
-    // Liquidación real inicio
-    document.getElementById('fbLiqInicioVal').textContent = dc.cruceEstimado || '—';
-    document.getElementById('fbLiqInicioSub').textContent = dc.cruceEstimadoFecha || 'estimado';
+    // Liquidado a Calavo (amortización deuda $6M)
+    var amort = dc.amortizadoWk15 || 0;
+    var pct   = dc.total ? Math.round(amort / dc.total * 100) : 0;
+    document.getElementById('fbLiqVal').textContent = fmt(amort);
+    document.getElementById('fbLiqSub').textContent = pct + '% de $6M · pendiente ' + fmt(dc.pendiente || 0);
+
+    // Neto Belher (P&P recibido)
+    document.getElementById('fbNetoVal').textContent = fmt(cv.pickPack || 0);
+    document.getElementById('fbNetoSub').textContent = 'P&P recibido';
   })();
 
   /* ── Footer ── */
