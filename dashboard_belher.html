@@ -3221,7 +3221,11 @@ function checkPw(){
     <div class="section-title">Proyección · Temporada Restante <span class="src-tag">estimado basado en ritmo actual</span></div>
     <div class="card" id="finProyeccion" style="padding:22px"></div>
 
-    <div class="section-title">Pagos Semanales Calavo <span class="src-tag">leima@agbelher.com · Settlement Calavo</span></div>
+    <!-- Anticipo de Capital Calavo -->
+    <div class="section-title">Anticipo de Capital Calavo · Recuperación <span class="src-tag">$5M en 4 pagos May–Ago 2025</span></div>
+    <div id="finAnticipo"></div>
+
+    <div class="section-title">Pagos Semanales Calavo <span class="src-tag">leima@agbelher.com · Settlement Calavo · <b>settle parcial — facturas pendientes en cada corte</b></span></div>
     <div class="card">
       <div class="chart-box"><canvas id="chartPagos"></canvas></div>
     </div>
@@ -5123,10 +5127,68 @@ function checkPw(){
 
     try { renderCashFlow(); } catch(e) { console.warn('renderCashFlow error:', e); }
 
+    /* ── Anticipo Capital Calavo ── */
+    (function() {
+      var el = document.getElementById('finAnticipo');
+      if (!el) return;
+      var ac = cv.capitalAnticipo || {};
+      var total = ac.total || 5000000;
+      var rec   = ac.recuperado || 0;
+      var pend  = total - rec;
+      var pct   = Math.min(100, (rec / total * 100));
+      var pagos = ac.pagos || [];
+
+      var pagosHtml = pagos.map(function(p){
+        return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.74rem">' +
+          '<span style="color:var(--muted)">'+p.fecha+'</span>' +
+          '<span style="font-weight:600">'+fmt(p.monto)+'</span>' +
+          '<span style="font-size:.65rem;padding:2px 8px;border-radius:8px;background:rgba(52,199,89,.12);color:#34c759;font-weight:700">'+p.estado+'</span>' +
+        '</div>';
+      }).join('');
+
+      el.innerHTML =
+        '<div class="card" style="padding:20px 22px">' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex-wrap:wrap">' +
+
+            /* Left: progress */
+            '<div>' +
+              '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Estado del Anticipo</div>' +
+              '<div style="display:flex;justify-content:space-between;margin-bottom:6px">' +
+                '<span style="font-size:.72rem;color:var(--muted)">Recuperado por Calavo</span>' +
+                '<span style="font-size:.78rem;font-weight:700;color:var(--accent2)">'+fmt(rec)+' <span style="font-size:.65rem;font-weight:400;color:var(--muted)">/ '+fmt(total)+'</span></span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,.06);border-radius:6px;height:8px;overflow:hidden;margin-bottom:8px">' +
+                '<div style="height:100%;width:'+pct.toFixed(1)+'%;background:linear-gradient(90deg,#34c759,#16a34a);border-radius:6px;transition:width .4s"></div>' +
+              '</div>' +
+              '<div style="display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-bottom:14px">' +
+                '<span>'+pct.toFixed(1)+'% recuperado</span>' +
+                '<span style="color:#f59e0b;font-weight:600">'+fmt(pend)+' pendiente</span>' +
+              '</div>' +
+              '<div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.18);border-radius:10px;padding:12px 14px;font-size:.73rem;line-height:1.55">' +
+                '<b style="color:#f59e0b">Mecánica de cobro:</b> Calavo descuenta la amortización del anticipo en cada settle <i>antes</i> de enviar el wire a Belher. ' +
+                'El wire semanal es siempre menor al neto real hasta que el anticipo quede liquidado.' +
+              '</div>' +
+            '</div>' +
+
+            /* Right: payment schedule */
+            '<div>' +
+              '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Pagos Recibidos (4 × $1.25M)</div>' +
+              pagosHtml +
+              '<div style="margin-top:12px;background:rgba(52,199,89,.06);border:1px solid rgba(52,199,89,.15);border-radius:10px;padding:11px 14px;font-size:.72rem;line-height:1.5;color:var(--muted)">' +
+                'Pick &amp; Pack: <b style="color:var(--fg)">$5.00 / caja</b> · Calavo paga este addendum al mismo tiempo que el wire. ' +
+                'WK01–WK15: <b style="color:var(--fg)">'+fmt(cv.pickPack)+'</b> recibido.' +
+              '</div>' +
+            '</div>' +
+
+          '</div>' +
+        '</div>';
+    })();
+
     /* ── CF Calavo desglose ── */
     var cfRows = [
       { label:'Ventas brutas (FOB)',   val: cv.revenueTotal,   color:'var(--green2)',  bold:false },
-      { label:'Comisión (12%)',        val:-cv.comision,       color:'var(--red)',     bold:false },
+      { label:'Comisión real (12%)',    val:-cv.comision,       color:'var(--red)',     bold:false },
+      { label:'Anti-dumping retenido (~10%)', val:-(cv.antiDumpingRetenido||0), color:'var(--red)', bold:false, nota:'reembolsable al cierre' },
       { label:'Expenses (Z-code)',     val:-cv.zCode,          color:'var(--red)',     bold:false },
       { label:'Anti Dumping Duty',     val:-(cv.antiDumping||0),color:'var(--red)',    bold:false },
       { label:'Venta Neta',            val: cv.ventaNeta||cv.neto, color:'var(--green2)', bold:true, sep:true },
@@ -5144,7 +5206,7 @@ function checkPw(){
           cfRows.map(function(r) {
             return '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;' +
               (r.sep ? 'border-top:2px solid var(--dark);margin-top:4px;' : 'border-bottom:1px solid var(--border)') + '">' +
-              '<span style="font-size:.84rem' + (r.bold?';font-weight:700':'') + '">' + r.label + '</span>' +
+              '<span style="font-size:.84rem' + (r.bold?';font-weight:700':'') + '">' + r.label + (r.nota ? ' <span style="font-size:.63rem;color:#34c759;font-weight:600">['+r.nota+']</span>' : '') + '</span>' +
               '<span style="font-weight:' + (r.bold?'800':'600') + ';color:' + r.color + '">' + fmt(Math.abs(r.val)) +
                 (r.val < 0 ? ' <span style="opacity:.4;font-size:.72rem">(salida)</span>' : '') +
               '</span></div>';
@@ -6709,11 +6771,17 @@ function checkPw(){
       /* ── Stacked bar chart ── */
       lqEl.innerHTML =
         secHdr('Desglose Semanal · FOB → Deducciones → Liquidación', 'Gass Sheet WK15 · Overview Payments · Weekly Liquidations') +
+        '<div class="hoy-alert info" style="margin-bottom:10px">' +
+          '<div class="hoy-alert-ico">i</div>' +
+          '<div class="hoy-alert-txt"><b>Settle semanal parcial.</b> Cada liquidación incluye únicamente las facturas procesadas al corte de esa semana. Las facturas pendientes se consolidan en el siguiente settle. ' +
+          'Los datos de la semana en curso son estimados — no usar como cifra definitiva hasta que Calavo confirme el cierre. ' +
+          'Comisión en settle = 22% (12% real Calavo + ~10% anti-dumping retenido reembolsable al cierre).</div>' +
+        '</div>' +
         '<div class="card" style="padding:20px 20px 14px">' +
           '<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px">' +
             '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#34c759;border-radius:3px;display:inline-block"></span>Liquidación neta</span>' +
             '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#ff9f0a;border-radius:3px;display:inline-block"></span>Gastos (Z-code+otros)</span>' +
-            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#ff453a;border-radius:3px;display:inline-block"></span>Comisión (22%)</span>' +
+            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#ff453a;border-radius:3px;display:inline-block"></span>Comisión settle (22% = 12% real + ~10% AD reembolsable)</span>' +
             '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#3b82f6;border-radius:3px;display:inline-block"></span>Pick &amp; Pack ($5/caja)</span>' +
           '</div>' +
           '<div style="height:240px"><canvas id="chartLiquidaciones"></canvas></div>' +

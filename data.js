@@ -41,12 +41,36 @@ window.BELHER = {
     antiDumping:     980391,
     ventaNeta:      6564451,
     pickPack:       3901285,
-    prestamo:        472037,
     intereses:        32128,
+
+    /* ANTICIPO DE CAPITAL CALAVO — $5,000,000
+       Calavo entregó capital de trabajo en 4 pagos antes del inicio de temporada.
+       MECÁNICA: Calavo se cobra primero (comisión + P&P + gastos + amortización préstamo)
+       y DESPUÉS liquida el remanente a Belher como wire semanal.
+       El campo "loan" en cada semana del settle es la amortización semanal de este anticipo. */
     capitalTrabajo: 5000000,
+    capitalAnticipo: {
+      total: 5000000,
+      pagos: [
+        { fecha:"15-May-2025", monto:1250000, estado:"Recibido" },
+        { fecha:"15-Jun-2025", monto:1250000, estado:"Recibido" },
+        { fecha:"15-Jul-2025", monto:1250000, estado:"Recibido" },
+        { fecha:"15-Ago-2025", monto:1250000, estado:"Recibido" }
+      ],
+      recuperado:  357789,  /* suma campo "loan" WK01–WK15 — actualizar con cada settle */
+      pendiente:  4642211,  /* 5,000,000 - recuperado — lo que Calavo aún descuenta antes de liquidar */
+      nota: "Calavo aplica la amortización semanal ANTES del wire a Belher. Hasta que este préstamo esté liquidado, cada wire es menor al neto real."
+    },
+    prestamo:        472037,   /* saldo distinto — verificar si es banco o anticipo adicional */
     saldoAnterior:   655867,
     saldoActual:   -2873787,
     neto:           6564451,
+
+    /* NOTA GENERAL SOBRE SETTLEMENTS:
+       Cada settle semanal es PARCIAL — solo incluye las facturas procesadas al corte.
+       Las facturas pendientes aparecen en el siguiente settle.
+       Nunca usar el settle de la semana en curso como cifra definitiva. */
+    notaSettlement: "Settle semanal parcial — facturas pendientes se consolidan en el siguiente periodo. Cifras en curso son estimadas, no definitivas.",
     pagos: [
       { sem:"WK01", wire:"02-Ene", pago:54120,  cajas:10824, cont:6,  estado:"Pagado"   },
       { sem:"WK02", wire:"02-Ene", pago:121400, cajas:24280, cont:14, estado:"Pagado"   },
