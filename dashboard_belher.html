@@ -3745,8 +3745,8 @@ function checkPw(){
     btn.classList.add('active');
     btn.scrollIntoView({ inline:'center', block:'nearest', behavior:'smooth' });
     document.getElementById('tab-' + tabId).classList.add('active');
-    /* double-RAF: let browser paint the tab visible before Chart.js measures canvas */
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ initChartsForTab(tabId); }); });
+    /* setTimeout: ensure browser finishes painting before Chart.js measures canvas */
+    setTimeout(function(){ initChartsForTab(tabId); }, 60);
     sessionStorage.setItem('belher_tab', tabId);
   }
   tabBtns.forEach(function (btn) {
@@ -3755,7 +3755,7 @@ function checkPw(){
   /* Restore last active tab on load/refresh */
   var savedTab = sessionStorage.getItem('belher_tab');
   if (savedTab && document.getElementById('tab-' + savedTab)) activateTab(savedTab);
-  else requestAnimationFrame(function(){ requestAnimationFrame(function(){ initChartsForTab('ejecutivo'); }); });
+  else setTimeout(function(){ initChartsForTab('ejecutivo'); }, 60);
 
   /* ════════════════ HOY ════════════════ */
   function renderHoy() {
@@ -5885,10 +5885,19 @@ function checkPw(){
   }
 
   /* ════════════════ CHARTS ════════════════ */
+  function makeChart(cvs, config) {
+    if (!cvs) return null;
+    if (typeof Chart === 'undefined') return null;
+    var ctx = cvs.getContext('2d');
+    if (!ctx) return null;
+    try { return new Chart(ctx, config); } catch(e) { return null; }
+  }
+
   function initChartsForTab(tab) {
 
     /* Normalize renamed tabs */
     if (tab === 'optomate') tab = 'tomate';
+    if (typeof Chart === 'undefined') return;
 
     /* ── Nacional — Precio comparativo ── */
     if (tab === 'nacional' && !chartsInit.nacPrecio) {
@@ -5896,15 +5905,17 @@ function checkPw(){
       (function() {
         var cvs = document.getElementById('chartNacPrecio');
         if (!cvs) return;
-        var tc   = (D.tomate && D.tomate.canales) || {};
-        var nacC = (tc.nacional && tc.nacional[0]) || {};
-        var expC = (tc.exportacion && tc.exportacion[0]) || {};
+        var tv   = (D.tomate && D.tomate.ventas) || {};
+        var nacC = (tv.nacional && tv.nacional[0]) || {};
         var rev  = D.revenue || {};
+        var totCajasExp = 0;
+        D.calavo.pagos.forEach(function(p){ totCajasExp += p.cajas||0; });
         var cajasNac = nacC.cajas || 1;
-        var cajasExp = expC.cajas || 1;
         var precNac  = (nacC.revenue || rev.nacional || 0) / cajasNac;
-        var precExp  = (rev.fob || 0) / cajasExp;
-        new Chart(cvs.getContext('2d'), {
+        var precExp  = totCajasExp > 0 ? (rev.fob || 0) / totCajasExp : 0;
+        var ctx2d = cvs.getContext('2d');
+        if (!ctx2d) return;
+        new Chart(ctx2d, {
           type: 'bar',
           data: {
             labels: ['Nacional', 'Exportación Calavo'],
@@ -5941,6 +5952,7 @@ function checkPw(){
         ph.forEach(function(p){ fobMap[p.sem] = p.fob; });
         var fobLine  = pag.map(function(p){ return fobMap[p.sem] != null ? fobMap[p.sem] : null; });
         var c2d = cvs.getContext('2d');
+        if (!c2d) return;
         var grad = c2d.createLinearGradient(0,0,0,160);
         grad.addColorStop(0,'rgba(52,199,89,.28)');
         grad.addColorStop(1,'rgba(52,199,89,.0)');
@@ -5982,6 +5994,7 @@ function checkPw(){
         var fobPrc  = liq.map(function(r){ return r.pkgs ? (r.fob / r.pkgs) : null; });
         var usdaArr = liq.map(function(r){ return phMap[r.sem] && phMap[r.sem].usda != null ? phMap[r.sem].usda : null; });
         var c2d = cvs.getContext('2d');
+        if (!c2d) return;
         new Chart(c2d, {
           type: 'bar',
           data: {
