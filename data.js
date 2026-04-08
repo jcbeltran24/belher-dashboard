@@ -110,26 +110,25 @@ window.BELHER = {
         { etiqueta:"Nacional", cajas:446116, cajasRoma:311917, cajasBola:134199, revenue:3856070 }
       ]
     },
-    /* Precio FOB Calavo por semana — confirmado (real) vs estimado IA (est)
-       Fuente real: Calavo Settlement WK11 $19.06, WK12 $20.07 (Irene Amezaga · Calavo)
-       Estimado WK01–WK10: derivado de calavoWeekly.toy.pricing (Dic $11.06, Ene $12.23, Feb $14.43)
-       Estimado WK13–WK15: extrapolado de mercado USDA Nogales via Corbel Seeds + spread histórico ~$5-6/caja */
+    /* Precio FOB Calavo por semana — Fuente: Gass Sheet WK15 (2026 05-04 Agricola Belher Settle WK15 1.xlsx)
+       WK01–WK14: Total Revenue / Pckgs Invcd por batch de pago · Summary sheet · Carlos Valadez + Irene Amezaga
+       WK15: parcial — solo 14,208 de 53,976 pkgs invoicados al 05-Abr */
     preciosHistorico: [
-      { sem:"WK01", fob:10.20, usda:null,  tipo:"est"  },
-      { sem:"WK02", fob:10.80, usda:null,  tipo:"est"  },
-      { sem:"WK03", fob:11.30, usda:null,  tipo:"est"  },
-      { sem:"WK04", fob:11.60, usda:null,  tipo:"est"  },
-      { sem:"WK05", fob:11.80, usda:null,  tipo:"est"  },
-      { sem:"WK06", fob:12.40, usda:null,  tipo:"est"  },
-      { sem:"WK07", fob:12.80, usda:null,  tipo:"est"  },
-      { sem:"WK08", fob:13.20, usda:null,  tipo:"est"  },
-      { sem:"WK09", fob:14.60, usda:null,  tipo:"est"  },
-      { sem:"WK10", fob:17.20, usda:26.95, tipo:"est"  },
-      { sem:"WK11", fob:19.06, usda:26.28, tipo:"real" },
-      { sem:"WK12", fob:20.07, usda:29.62, tipo:"real" },
+      { sem:"WK01", fob:11.80, usda:null,  tipo:"real", nota:"12-Dic–28-Dic · 10,824 pkgs · $127,737" },
+      { sem:"WK02", fob:10.57, usda:null,  tipo:"real", nota:"29-Dic–04-Ene · 24,200 pkgs · $255,896" },
+      { sem:"WK03", fob:11.16, usda:null,  tipo:"real", nota:"05-Ene–10-Ene · 44,384 pkgs · $495,284" },
+      { sem:"WK04", fob:12.85, usda:null,  tipo:"real", nota:"12-Ene–17-Ene · 48,606 pkgs · $624,488" },
+      { sem:"WK05", fob:15.45, usda:null,  tipo:"real", nota:"19-Ene–25-Ene · 60,965 pkgs · $942,051" },
+      { sem:"WK06", fob:14.57, usda:null,  tipo:"real", nota:"26-Ene–01-Feb · 85,505 pkgs · $1,245,692" },
+      { sem:"WK07", fob:12.81, usda:null,  tipo:"real", nota:"02-Feb–08-Feb · 86,106 pkgs · $1,103,258" },
+      { sem:"WK08", fob:13.71, usda:null,  tipo:"real", nota:"09-Feb–14-Feb · 58,907 pkgs · $807,878" },
+      { sem:"WK09", fob:17.13, usda:null,  tipo:"real", nota:"16-Feb–20-Feb · 43,120 pkgs · $738,537" },
+      { sem:"WK10", fob:28.46, usda:null,  tipo:"real", nota:"23-Feb–01-Mar · 67,760 pkgs · $1,928,398" },
+      { sem:"WK11", fob:20.99, usda:26.28, tipo:"real", nota:"02-Mar–07-Mar · 68,038 pkgs · $1,428,197" },
+      { sem:"WK12", fob:19.94, usda:29.62, tipo:"real", nota:"09-Mar–14-Mar · 46,560 pkgs · $928,429" },
       { sem:"WK13", fob:22.23, usda:43.75, tipo:"real", nota:"Revenue settle $890,284 / 40,048 pkgs" },
       { sem:"WK14", fob:24.93, usda:47.95, tipo:"real", nota:"Revenue settle $762,704 / 30,592 pkgs" },
-      { sem:"WK15", fob:11.07, usda:56.95, tipo:"est",  nota:"Parcial al 05-Abr · $597,772 / 53,976 pkgs — semana en curso" }
+      { sem:"WK15", fob:42.07, usda:56.95, tipo:"est",  nota:"Parcial al 05-Abr · 14,208 de 53,976 pkgs invoicados — primer batch alta gama" }
     ]
   },
 
