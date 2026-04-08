@@ -3221,8 +3221,8 @@ function checkPw(){
     <div class="section-title">Proyección · Temporada Restante <span class="src-tag">estimado basado en ritmo actual</span></div>
     <div class="card" id="finProyeccion" style="padding:22px"></div>
 
-    <!-- Anticipo de Capital Calavo -->
-    <div class="section-title">Anticipo de Capital Calavo · Recuperación <span class="src-tag">$5M en 4 pagos May–Ago 2025</span></div>
+    <!-- Deuda Calavo & Liquidación Real -->
+    <div class="section-title">Deuda Calavo · Camino a la Liquidación Real <span class="src-tag">$6M total · $5M anticipo + $1M puente</span></div>
     <div id="finAnticipo"></div>
 
     <div class="section-title">Pagos Semanales Calavo <span class="src-tag">leima@agbelher.com · Settlement Calavo · <b>settle parcial — facturas pendientes en cada corte</b></span></div>
@@ -4061,7 +4061,7 @@ function checkPw(){
         { lbl:'Cajas Exportadas', val: fmtN(totCajas), sub:'WK01–WK'+semCount+' · Calavo', color:'var(--green2)' },
         { lbl:'FOB Promedio',     val: '$'+avgFob.toFixed(2), sub:'ponderado por caja',      color:'var(--accent2)' },
         { lbl:'Revenue Bruto',   val: fmt(totRevenue),        sub:'Calavo Gross FOB',         color:'var(--green2)' },
-        { lbl:'Neto Cobrado',    val: fmt(totLiq),             sub:'wire recibido a Belher',   color:'#60a5fa' }
+        { lbl:'Amortizado Deuda', val: fmt(totLiq),              sub:'de $6M deuda — wire≠neto', color:'#f59e0b' }
       ].map(function(k){
         return '<div class="ej-kpi-box">' +
           '<div class="ej-kpi-lbl">'+k.lbl+'</div>' +
@@ -4151,7 +4151,7 @@ function checkPw(){
         { lbl:'Total Cajas Export', val: fmtN(totCajas),        sub:'WK01–WK15 · Calavo',      color:'var(--green2)', extra:'' },
         { lbl:'FOB Ponderado',      val: '$'+avgFob.toFixed(2), sub:'revenue / cajas',           color:'var(--accent2)', extra:'' },
         { lbl:'Revenue Bruto',      val: fmt(totRevenue),        sub:'Calavo Gross FOB',          color:'var(--green2)', extra:'' },
-        { lbl:'Neto Belher',        val: fmt(totLiq),             sub:'después de deducciones',   color:'#60a5fa', extra:'' }
+        { lbl:'Amortizado Deuda',   val: fmt(totLiq),             sub:'de $6M · wire ≠ neto real', color:'#f59e0b', extra:'' }
       ];
       vKpis.innerHTML = kpiRows.map(function(k){
         return '<div class="card" style="padding:18px 16px">' +
@@ -5120,62 +5120,104 @@ function checkPw(){
         'pos', 'accent-pos', pill('up', '12% comisión')) +
       kpiCard('Pick &amp; Pack Recibido', fmt(cv.pickPack), 'WK01–WK' + semCount + ' · ' + semCount + ' sem.',
         'dark', 'accent-blue', pill('up', '✓ ' + semCount + ' semanas pagadas')) +
-      kpiCard('Saldo · Due from (to) Beltran', fmt(cvsaldo != null ? cvsaldo : 0),
-        cvsaldo < 0 ? 'Calavo ha adelantado más del valor cosechado' : 'Balance a favor de Belher',
-        cvsaldo < 0 ? 'neg' : 'pos', cvsaldo < 0 ? 'accent-neg' : 'accent-pos',
-        pill(cvsaldo < 0 ? 'down' : 'up', cvsaldo < 0 ? '⚠ Se liquida al cierre' : '✓ A favor'));
+      (function(){
+        var dc = cv.deudaCalavo || {};
+        var pend = dc.pendiente || 0;
+        var cruce = dc.cruceEstimado || '—';
+        return kpiCard('Pendiente Deuda Calavo', fmt(pend),
+          'Liq. real inicia ~' + cruce + ' · Wire ≠ neto hasta cruzar $6M',
+          'neg', 'accent-neg',
+          pill('down', '⚠ ' + (dc.semanasEstimadas||'~3') + ' sem. para cruzar $0'));
+      })();
 
     try { renderCashFlow(); } catch(e) { console.warn('renderCashFlow error:', e); }
 
-    /* ── Anticipo Capital Calavo ── */
+    /* ── Deuda Calavo & Camino a Liquidación Real ── */
     (function() {
       var el = document.getElementById('finAnticipo');
       if (!el) return;
-      var ac = cv.capitalAnticipo || {};
-      var total = ac.total || 5000000;
-      var rec   = ac.recuperado || 0;
-      var pend  = total - rec;
+      var dc    = cv.deudaCalavo || {};
+      var total = dc.total || 6000000;
+      var rec   = dc.amortizadoWk15 || 0;
+      var pend  = dc.pendiente || (total - rec);
       var pct   = Math.min(100, (rec / total * 100));
-      var pagos = ac.pagos || [];
+      var pagos = dc.pagosAnticipo || [];
+      var cruce = dc.cruceEstimadoFecha || '—';
+      var cruceSem = dc.cruceEstimado || '—';
+      var semsLeft = dc.semanasEstimadas || '—';
+      var avg   = dc.avgLiq_wk11_14 || 0;
 
       var pagosHtml = pagos.map(function(p){
-        return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.74rem">' +
+        var bgColor = p.tipo === 'Puente' ? 'rgba(96,165,250,.12)' : 'rgba(52,199,89,.10)';
+        var txtColor = p.tipo === 'Puente' ? '#60a5fa' : '#34c759';
+        return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.73rem">' +
           '<span style="color:var(--muted)">'+p.fecha+'</span>' +
           '<span style="font-weight:600">'+fmt(p.monto)+'</span>' +
-          '<span style="font-size:.65rem;padding:2px 8px;border-radius:8px;background:rgba(52,199,89,.12);color:#34c759;font-weight:700">'+p.estado+'</span>' +
+          '<span style="font-size:.62rem;padding:2px 8px;border-radius:8px;background:'+bgColor+';color:'+txtColor+';font-weight:700">'+p.tipo+'</span>' +
         '</div>';
       }).join('');
 
       el.innerHTML =
-        '<div class="card" style="padding:20px 22px">' +
-          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex-wrap:wrap">' +
+        /* Critical mechanic banner */
+        '<div class="hoy-alert warning" style="margin-bottom:12px">' +
+          '<div class="hoy-alert-ico">⚠</div>' +
+          '<div class="hoy-alert-txt">' +
+            '<b>Los wires semanales NO son dinero neto a Belher.</b> Son amortización de la deuda de $6M con Calavo. ' +
+            'Calavo se cobra primero — solo después de recuperar los $6M comienza la liquidación real a Belher. ' +
+            '<b style="color:#f59e0b">Estimado de cruce: '+cruceSem+' · '+cruce+'</b>' +
+          '</div>' +
+        '</div>' +
 
-            /* Left: progress */
+        '<div class="card" style="padding:20px 22px">' +
+          '<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:28px">' +
+
+            /* Left: progress + projection */
             '<div>' +
-              '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Estado del Anticipo</div>' +
-              '<div style="display:flex;justify-content:space-between;margin-bottom:6px">' +
-                '<span style="font-size:.72rem;color:var(--muted)">Recuperado por Calavo</span>' +
-                '<span style="font-size:.78rem;font-weight:700;color:var(--accent2)">'+fmt(rec)+' <span style="font-size:.65rem;font-weight:400;color:var(--muted)">/ '+fmt(total)+'</span></span>' +
+              /* Progress bar */
+              '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Amortización · WK01–WK15</div>' +
+              '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px">' +
+                '<span style="font-size:1.5rem;font-weight:800;color:var(--accent2)">'+fmt(rec)+'</span>' +
+                '<span style="font-size:.75rem;color:var(--muted)">de <b style="color:var(--fg)">'+fmt(total)+'</b> total</span>' +
               '</div>' +
-              '<div style="background:rgba(255,255,255,.06);border-radius:6px;height:8px;overflow:hidden;margin-bottom:8px">' +
-                '<div style="height:100%;width:'+pct.toFixed(1)+'%;background:linear-gradient(90deg,#34c759,#16a34a);border-radius:6px;transition:width .4s"></div>' +
+              '<div style="background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;margin-bottom:6px">' +
+                '<div style="height:100%;width:'+pct.toFixed(1)+'%;background:linear-gradient(90deg,#fbbf24 0%,#f59e0b 60%,#34c759 100%);border-radius:8px"></div>' +
               '</div>' +
-              '<div style="display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-bottom:14px">' +
-                '<span>'+pct.toFixed(1)+'% recuperado</span>' +
-                '<span style="color:#f59e0b;font-weight:600">'+fmt(pend)+' pendiente</span>' +
+              '<div style="display:flex;justify-content:space-between;font-size:.69rem;margin-bottom:18px">' +
+                '<span style="color:#34c759;font-weight:700">'+pct.toFixed(1)+'% amortizado</span>' +
+                '<span style="color:#f59e0b;font-weight:700">'+fmt(pend)+' pendiente</span>' +
               '</div>' +
-              '<div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.18);border-radius:10px;padding:12px 14px;font-size:.73rem;line-height:1.55">' +
-                '<b style="color:#f59e0b">Mecánica de cobro:</b> Calavo descuenta la amortización del anticipo en cada settle <i>antes</i> de enviar el wire a Belher. ' +
-                'El wire semanal es siempre menor al neto real hasta que el anticipo quede liquidado.' +
+
+              /* Projection box */
+              '<div style="background:rgba(52,199,89,.06);border:1.5px solid rgba(52,199,89,.2);border-radius:12px;padding:14px 16px">' +
+                '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#34c759;margin-bottom:10px">Proyección — Inicio Liquidación Real</div>' +
+                '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">' +
+                  '<div><div style="font-size:.65rem;color:var(--muted)">Semana estimada</div><div style="font-size:1.3rem;font-weight:800;color:#34c759">'+cruceSem+'</div></div>' +
+                  '<div><div style="font-size:.65rem;color:var(--muted)">Fecha aprox.</div><div style="font-size:.85rem;font-weight:700;color:var(--fg);margin-top:2px">'+cruce+'</div></div>' +
+                  '<div><div style="font-size:.65rem;color:var(--muted)">Pendiente por cruzar</div><div style="font-size:.85rem;font-weight:700;color:#f59e0b;margin-top:2px">'+fmt(pend)+'</div></div>' +
+                  '<div><div style="font-size:.65rem;color:var(--muted)">Ritmo WK11–WK14</div><div style="font-size:.85rem;font-weight:700;color:var(--muted);margin-top:2px">'+fmt(avg)+'/sem</div></div>' +
+                '</div>' +
+                '<div style="margin-top:10px;font-size:.7rem;color:var(--muted);line-height:1.5">A partir de '+cruceSem+', cada wire semanal es <b style="color:var(--fg)">ganancia neta real</b> para Belher.</div>' +
               '</div>' +
             '</div>' +
 
-            /* Right: payment schedule */
+            /* Right: payment breakdown */
             '<div>' +
-              '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Pagos Recibidos (4 × $1.25M)</div>' +
+              '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Composición de la Deuda ($6M)</div>' +
+              '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">' +
+                '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px">' +
+                  '<div style="font-size:.62rem;color:var(--muted)">Anticipo capital</div>' +
+                  '<div style="font-size:1.1rem;font-weight:800;color:#34c759">'+fmt(dc.anticipo||5000000)+'</div>' +
+                  '<div style="font-size:.62rem;color:var(--muted)">4 × $1.25M · May–Ago 2025</div>' +
+                '</div>' +
+                '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px">' +
+                  '<div style="font-size:.62rem;color:var(--muted)">Préstamo puente</div>' +
+                  '<div style="font-size:1.1rem;font-weight:800;color:#60a5fa">'+fmt(dc.prestamoPuente||1000000)+'</div>' +
+                  '<div style="font-size:.62rem;color:var(--muted)">Temporada anterior</div>' +
+                '</div>' +
+              '</div>' +
               pagosHtml +
-              '<div style="margin-top:12px;background:rgba(52,199,89,.06);border:1px solid rgba(52,199,89,.15);border-radius:10px;padding:11px 14px;font-size:.72rem;line-height:1.5;color:var(--muted)">' +
-                'Pick &amp; Pack: <b style="color:var(--fg)">$5.00 / caja</b> · Calavo paga este addendum al mismo tiempo que el wire. ' +
+              '<div style="margin-top:12px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:.71rem;line-height:1.6;color:var(--muted)">' +
+                '<b style="color:var(--fg)">Pick &amp; Pack $5/caja</b> — Se liquida en paralelo, independiente de la deuda. ' +
                 'WK01–WK15: <b style="color:var(--fg)">'+fmt(cv.pickPack)+'</b> recibido.' +
               '</div>' +
             '</div>' +

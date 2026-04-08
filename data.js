@@ -43,25 +43,45 @@ window.BELHER = {
     pickPack:       3901285,
     intereses:        32128,
 
-    /* ANTICIPO DE CAPITAL CALAVO — $5,000,000
-       Calavo entregó capital de trabajo en 4 pagos antes del inicio de temporada.
-       MECÁNICA: Calavo se cobra primero (comisión + P&P + gastos + amortización préstamo)
-       y DESPUÉS liquida el remanente a Belher como wire semanal.
-       El campo "loan" en cada semana del settle es la amortización semanal de este anticipo. */
-    capitalTrabajo: 5000000,
-    capitalAnticipo: {
-      total: 5000000,
-      pagos: [
-        { fecha:"15-May-2025", monto:1250000, estado:"Recibido" },
-        { fecha:"15-Jun-2025", monto:1250000, estado:"Recibido" },
-        { fecha:"15-Jul-2025", monto:1250000, estado:"Recibido" },
-        { fecha:"15-Ago-2025", monto:1250000, estado:"Recibido" }
+    /* ══════════════════════════════════════════════════════
+       DEUDA TOTAL CON CALAVO — $6,000,000
+       ══════════════════════════════════════════════════════
+       MECÁNICA CRÍTICA:
+       Los wires semanales ("liq" en el settle) NO son dinero neto a Belher —
+       son amortización de la deuda de $6M hasta que quede liquidada.
+       SOLO después de cruzar $6M recuperados, Calavo empieza a liquidar
+       efectivo real a Belher.
+
+       Composición:
+         $5,000,000 — Anticipo capital de trabajo (4 × $1.25M, May–Ago 2025)
+         $1,000,000 — Préstamo puente temporada pasada
+         ──────────
+         $6,000,000 — Total a recuperar antes de liquidación real
+
+       Estado WK15 (08-Abr-2026):
+         Amortizado: $4,535,768  (75.6%)
+         Pendiente:  $1,464,232  (~3.2 semanas al ritmo WK11-WK14)
+         Estimado cruce a $0: WK18 (semana del 28-Abr-2026)               */
+    deudaCalavo: {
+      total:           6000000,
+      anticipo:        5000000,   /* 4 × $1.25M — May 15, Jun 15, Jul 15, Ago 15 de 2025 */
+      prestamoPuente:  1000000,   /* préstamo puente temporada anterior */
+      pagosAnticipo: [
+        { fecha:"15-May-2025", monto:1250000, tipo:"Anticipo", estado:"Recibido" },
+        { fecha:"15-Jun-2025", monto:1250000, tipo:"Anticipo", estado:"Recibido" },
+        { fecha:"15-Jul-2025", monto:1250000, tipo:"Anticipo", estado:"Recibido" },
+        { fecha:"15-Ago-2025", monto:1250000, tipo:"Anticipo", estado:"Recibido" },
+        { fecha:"Temp. 2025",  monto:1000000, tipo:"Puente",   estado:"Recibido" }
       ],
-      recuperado:  357789,  /* suma campo "loan" WK01–WK15 — actualizar con cada settle */
-      pendiente:  4642211,  /* 5,000,000 - recuperado — lo que Calavo aún descuenta antes de liquidar */
-      nota: "Calavo aplica la amortización semanal ANTES del wire a Belher. Hasta que este préstamo esté liquidado, cada wire es menor al neto real."
+      amortizadoWk15:  4535768,   /* suma columna "liq" WK01–WK15 — actualizar con cada settle */
+      pendiente:       1464232,   /* 6,000,000 - amortizado — actualizar con cada settle */
+      avgLiq_wk11_14:   455647,   /* promedio semanal WK11-WK14 para proyección */
+      semanasEstimadas:      3,   /* semanas estimadas para cruzar $0 al ritmo actual */
+      cruceEstimado:  "WK18",     /* semana donde Belher empieza a recibir efectivo real */
+      cruceEstimadoFecha: "28-Abr-2026"
     },
-    prestamo:        472037,   /* saldo distinto — verificar si es banco o anticipo adicional */
+    capitalTrabajo: 6000000,      /* = deudaCalavo.total */
+    prestamo:        472037,
     saldoAnterior:   655867,
     saldoActual:   -2873787,
     neto:           6564451,
@@ -161,7 +181,7 @@ window.BELHER = {
       { sem:"WK12", fob:19.34, usda:29.62, tipo:"real", nota:"48,000 pkgs · $928,429" },
       { sem:"WK13", fob:22.23, usda:43.75, tipo:"real", nota:"40,048 pkgs · $890,284" },
       { sem:"WK14", fob:24.93, usda:47.95, tipo:"real", nota:"30,592 pkgs · $762,704" },
-      { sem:"WK15", fob:11.07, usda:56.95, tipo:"est",  nota:"53,976 pkgs recibidos · $597,772 liquidado al 05-Abr — semana en curso, FOB final pendiente" }
+      { sem:"WK15", fob:11.07, usda:56.95, tipo:"real", nota:"53,976 pkgs · $597,772 — settle parcial al 05-Abr, facturas pendientes de cerrar" }
     ]
   },
 
