@@ -10,6 +10,7 @@ window.BELHER = {
     { nivel: "danger",  texto: "Bola Yameto merma 4.71% promedio WK15 (días 1-2): 04/04 = 4.44%, 06/04 = 4.97%. Sin outbound del 07/04 aún — revisar calidad hoy urgente. Con vine-ripe en máximos, cada punto de merma es pérdida directa de precio." },
     { nivel: "success", texto: "CVGW $27.97 (+1.2% 08-Abr) · AVO $15.36 (+3.2% 08-Abr) — sector produce en fuerte momentum. CVGW sigue acercándose a máximo 52s ($28.72). Señal de demanda institucional sostenida." },
     { nivel: "danger",   texto: "URGENTE: Solicitar a Calavo (Irene Amezaga / Carlos Valadez) el desglose 'Gross FOB by item' del Gass Sheet para verificar precio de referencia del contrato. Sin este dato no es posible auditar el escalador ($16.95 base + $4 collar desde $20.95). Escalar hoy mismo." },
+    { nivel: "success",  texto: "WK14 REAL: 57,760 pkgs recibidos (676 pallets · 34 cargas) — Rounds +44% vs proyectado · Roma +121% vs proyectado · avg FOB mkt $39.34/cj · settle 30,592 pkgs · $762,704." },
     { nivel: "success",  texto: "Liquidaciones WK01–WK15 cargadas desde Gass Sheet 05-Abr · FOB total $12.87M · 780,257 pkgs · WK15 settle parcial $597,772 (en curso). Confirmar wire WK15 ($269,880)." },
     { nivel: "success", texto: "Trilla sorgo completa WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha) = 48 ha cosechadas. El Panteón+San Blas pendientes." }
   ],
@@ -261,8 +262,8 @@ window.BELHER = {
       { sem:"WK11", fob:20.46, usda:26.28, tipo:"real", nota:"69,798 pkgs · $1,428,197" },
       { sem:"WK12", fob:19.34, usda:29.62, tipo:"real", nota:"48,000 pkgs · $928,429" },
       { sem:"WK13", fob:22.23, usda:43.75, tipo:"real", nota:"40,048 pkgs · $890,284" },
-      { sem:"WK14", fob:24.93, usda:47.95, tipo:"real", nota:"30,592 pkgs · $762,704" },
-      { sem:"WK15", fob:11.07, usda:56.95, tipo:"real", nota:"Settle parcial al 05-Abr · 53,976 pkgs · $597,772 FOB. WK15 en curso — precio final será mayor cuando cierren el settle completo." }
+      { sem:"WK14", fob:24.93, usda:47.95, tipo:"real", nota:"Settle: 30,592 pkgs · $762,704 · Recibido total semana: 57,760 pkgs (676 pallets · 34 cargas) · Rounds +44% vs proy · Roma +121% vs proy · avg FOB mkt $39.34/cj · size mix 20% 45+ / 80% 55 & smaller" },
+      { sem:"WK15", fob:11.07, usda:46.95, tipo:"real", nota:"Settle parcial al 05-Abr · 53,976 pkgs · $597,772 FOB (en curso). Mkt actual: Rounds $44.95–48.95, Roma $39.95–40.00 (Nogales, 07-Abr)" }
     ]
   },
 
@@ -383,8 +384,8 @@ window.BELHER = {
       pico_historico:          42,
       semana_12_two_layers:    24.95,
       semana_12_25lb:          26.24,
-      semana_actual_promedio:  29,
-      fecha_actualizacion:     "26/03/2026"
+      semana_actual_promedio:  44,
+      fecha_actualizacion:     "08/04/2026"
     },
 
     contratos: [
