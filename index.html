@@ -2630,18 +2630,18 @@ nav.tabs button[data-tab="calavoweekly"].active {
   color: #34c759 !important;
   box-shadow: 0 1px 6px rgba(52,199,89,.14);
 }
-/* Resumen Hoy — tab especial: siempre visible como el más importante */
-nav.tabs button[data-tab="hoy"] {
+/* Ejecutivo — tab principal CEO */
+nav.tabs button[data-tab="ejecutivo"] {
   color: rgba(255,255,255,.65);
   font-weight: 700;
 }
-nav.tabs button[data-tab="hoy"].active {
+nav.tabs button[data-tab="ejecutivo"].active {
   background: rgba(251,191,36,.15) !important;
   border-color: rgba(251,191,36,.28) !important;
   color: var(--accent2) !important;
   box-shadow: 0 1px 8px rgba(251,191,36,.18);
 }
-nav.tabs button[data-tab="hoy"]::before {
+nav.tabs button[data-tab="ejecutivo"]::before {
   content: '';
   display: inline-block;
   width: 6px; height: 6px;
@@ -2651,6 +2651,30 @@ nav.tabs button[data-tab="hoy"]::before {
   animation: live-pulse 2s infinite;
   vertical-align: middle;
   position: relative; top: -1px;
+}
+
+/* Ejecutivo tab components */
+.ej-kpi-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+.ej-kpi-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 18px 16px; }
+.ej-kpi-lbl { font-size: .6rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.ej-kpi-val { font-size: 1.45rem; font-weight: 700; color: var(--accent2); line-height: 1; }
+.ej-kpi-sub { font-size: .65rem; color: var(--muted); margin-top: 4px; }
+.ej-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ej-senal-card { border: 1px solid; border-radius: 14px; padding: 20px 22px; background: var(--bg2); }
+.ej-senal-label { font-size: .88rem; font-weight: 800; letter-spacing: .3px; margin-bottom: 14px; }
+.ej-senal-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+.ej-senal-row:last-child { border-bottom: none; }
+.ej-senal-key { font-size: .72rem; color: var(--muted); }
+.ej-senal-val { font-size: .78rem; font-weight: 700; }
+.ej-bas-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; }
+.ej-bas-today { font-size: .6rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.ej-bas-carga-num { font-size: 2.2rem; font-weight: 800; color: var(--green2); line-height: 1; margin: 6px 0 2px; }
+.ej-bas-carga-lbl { font-size: .75rem; font-weight: 600; color: var(--green2); }
+.ej-bas-productos { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.ej-bas-pill { font-size: .65rem; font-weight: 600; padding: 3px 9px; border-radius: 10px; background: rgba(255,255,255,.07); border: 1px solid var(--border); color: var(--fg); }
+@media (max-width: 720px) {
+  .ej-kpi-strip { grid-template-columns: 1fr 1fr; }
+  .ej-two-col   { grid-template-columns: 1fr; }
 }
 
 /* 3. Header: Logo pulse + sharper accent line */
@@ -3001,20 +3025,58 @@ function checkPw(){
 
 <!-- ══ TABS ══ -->
 <nav class="tabs" id="tabNav">
-  <button class="active" data-tab="hoy">Resumen Hoy</button>
-  <button data-tab="calavoweekly">Calavo Weekly</button>
-  <button data-tab="tomate">Tomate</button>
-  <button data-tab="cdc">CDC</button>
-  <button data-tab="otros">Otros</button>
+  <button class="active" data-tab="ejecutivo">Ejecutivo</button>
+  <button data-tab="ventas">Ventas &amp; Precio</button>
   <button data-tab="finanzas">Finanzas</button>
-  <button data-tab="market">Market Intelligence</button>
-  <button data-tab="cert">Certificaciones</button>
+  <button data-tab="optomate">Ops Tomate</button>
+  <button data-tab="otros">Otros Cultivos</button>
+  <button data-tab="calavoweekly">Intel Calavo</button>
+  <button data-tab="estrategia">Estrategia</button>
 </nav>
 
 <main>
 
-  <!-- ══════════ HOY ══════════ -->
-  <div class="tab-panel active" id="tab-hoy">
+  <!-- ══════════ EJECUTIVO ══════════ -->
+  <div class="tab-panel active" id="tab-ejecutivo">
+
+    <div class="section-title" style="margin-top:4px">Dashboard CEO · Temporada 2025–2026 <span class="src-tag" id="ejFechaTag">live</span></div>
+    <div class="ej-kpi-strip" id="ejKpiStrip"></div>
+
+    <div class="ej-two-col" style="margin-top:20px">
+      <div>
+        <div class="section-title" style="margin-top:0">Señal del Mercado <span class="src-tag">USDA + Calavo Settlement</span></div>
+        <div id="ejSenal"></div>
+      </div>
+      <div>
+        <div class="section-title" style="margin-top:0">Báscula &amp; Embarques · Último Día</div>
+        <div id="ejBascula"></div>
+      </div>
+    </div>
+
+    <div class="section-title">Cajas &amp; FOB por Semana <span class="src-tag">Calavo Settlement WK01–WK15</span></div>
+    <div class="card"><div class="chart-box" style="height:210px"><canvas id="chartEjVolFob"></canvas></div></div>
+
+    <div class="section-title">Alertas del CEO</div>
+    <div id="ejAlertas"></div>
+
+  </div>
+
+  <!-- ══════════ VENTAS & PRECIO ══════════ -->
+  <div class="tab-panel" id="tab-ventas">
+
+    <div class="section-title" style="margin-top:4px">Ventas &amp; Precio · Temporada 2025–2026 <span class="src-tag">Calavo Settlement</span></div>
+    <div class="grid-4" id="ventasKpis"></div>
+
+    <div class="section-title">Volumen Semanal vs Precio FOB <span class="src-tag">Cajas liquidadas (barras) · FOB $/caja (línea)</span></div>
+    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartVentasVolFob"></canvas></div></div>
+
+    <div class="section-title">Análisis de Contrato · Escalador de Precio <span class="src-tag">Calavo 2025–2026 · base $16.95 · collar $4 activo desde $20.95</span></div>
+    <div id="ventasContrato"></div>
+
+  </div>
+
+  <!-- ══════════ ESTRATEGIA (ex-HOY) ══════════ -->
+  <div class="tab-panel" id="tab-estrategia">
 
     <!-- 1. Señales del día — lo que necesita atención AHORA -->
     <div class="section-title" style="margin-top:4px">Señales del Día</div>
@@ -3171,8 +3233,8 @@ function checkPw(){
 
   </div>
 
-  <!-- ══════════ TOMATE ══════════ -->
-  <div class="tab-panel" id="tab-tomate">
+  <!-- ══════════ OPS TOMATE ══════════ -->
+  <div class="tab-panel" id="tab-optomate">
 
     <!-- Season Hero -->
     <div id="tomateHero"></div>
@@ -3547,6 +3609,7 @@ function checkPw(){
   /* Restore last active tab on load/refresh */
   var savedTab = sessionStorage.getItem('belher_tab');
   if (savedTab && document.getElementById('tab-' + savedTab)) activateTab(savedTab);
+  else initChartsForTab('ejecutivo');
 
   /* ════════════════ HOY ════════════════ */
   function renderHoy() {
@@ -3639,7 +3702,7 @@ function checkPw(){
       hoyKpi('Revenue Bruto · WK01–WK12', fmt(revTotal),
         'Calavo ' + fmt(revFob) + ' · Nac ' + fmt(revNac),
         '#16a34a', Math.min(revFob / (revTotal || 1) * 100, 100),
-        '↑ CF Leima 22-Mar', '#16a34a', 'tomate') +
+        '↑ CF Leima 22-Mar', '#16a34a', 'optomate') +
       hoyKpi('EBITDA · ' + ebtd.mes.nombre, fmt(ebtd.mes.actual),
         'Budget ' + fmt(ebtd.mes.budget),
         ebitdaMesOK ? '#16a34a' : '#d97706', Math.max(0, ebitdaPct),
@@ -3947,6 +4010,227 @@ function checkPw(){
         animation: { duration: 900, easing: 'easeInOutQuart' }
       }
     });
+  }
+
+  /* ════════════════ EJECUTIVO ════════════════ */
+  function renderEjecutivo() {
+    var pag  = D.calavo.pagos || [];
+    var ph   = (D.tomate && D.tomate.preciosHistorico) || [];
+    var liq  = (D.calavoWeekly && D.calavoWeekly.liquidaciones) || [];
+    var emb  = (D.operaciones && D.operaciones.embarques) || [];
+    var bas  = (D.operaciones && D.operaciones.bascula)   || [];
+    var al   = D.alertas || [];
+    var iconMap = { success:'✓', danger:'!', warning:'⚠', info:'i' };
+
+    /* Season totals from liquidaciones */
+    var totCajas = 0, totRevenue = 0, totLiq = 0;
+    liq.forEach(function(r){ totCajas += r.pkgs||0; totRevenue += r.fob||0; totLiq += r.liq||0; });
+    var avgFob = totCajas > 0 ? totRevenue / totCajas : 0;
+
+    /* Latest confirmed FOB (tipo:'real') + latest USDA */
+    var lastReal = null, lastUsda = null;
+    for (var i = ph.length-1; i >= 0; i--) {
+      if (!lastReal && ph[i].tipo === 'real') lastReal = ph[i];
+      if (!lastUsda && ph[i].usda != null)    lastUsda = ph[i];
+      if (lastReal && lastUsda) break;
+    }
+
+    /* Today's embarques */
+    var todayFecha = emb.length ? emb[0].fecha : null;
+    var todayCargas = 0;
+    var todayDests  = {};
+    emb.forEach(function(e){
+      if (e.fecha === todayFecha) {
+        todayCargas += (e.cargas || 1);
+        todayDests[e.destino] = (todayDests[e.destino] || 0) + (e.cargas || 1);
+      }
+    });
+    var todayProds = bas.length ? bas[0].productos : [];
+    var todayBasFecha = bas.length ? bas[0].fecha : null;
+
+    /* ── KPI Strip ── */
+    var kStrip = document.getElementById('ejKpiStrip');
+    if (kStrip) {
+      var semCount = 0;
+      pag.forEach(function(p){ if (p.cajas) semCount++; });
+      kStrip.innerHTML = [
+        { lbl:'Cajas Exportadas', val: fmtN(totCajas), sub:'WK01–WK'+semCount+' · Calavo', color:'var(--green2)' },
+        { lbl:'FOB Promedio',     val: '$'+avgFob.toFixed(2), sub:'ponderado por caja',      color:'var(--accent2)' },
+        { lbl:'Revenue Bruto',   val: fmt(totRevenue),        sub:'Calavo Gross FOB',         color:'var(--green2)' },
+        { lbl:'Neto Cobrado',    val: fmt(totLiq),             sub:'wire recibido a Belher',   color:'#60a5fa' }
+      ].map(function(k){
+        return '<div class="ej-kpi-box">' +
+          '<div class="ej-kpi-lbl">'+k.lbl+'</div>' +
+          '<div class="ej-kpi-val" style="color:'+k.color+'">'+k.val+'</div>' +
+          '<div class="ej-kpi-sub">'+k.sub+'</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    /* ── Señal del Mercado ── */
+    var senEl = document.getElementById('ejSenal');
+    if (senEl) {
+      var usdaVal  = lastUsda ? lastUsda.usda  : null;
+      var fobVal   = lastReal ? lastReal.fob   : null;
+      var usdaSem  = lastUsda ? lastUsda.sem   : '—';
+      var fobSem   = lastReal ? lastReal.sem   : '—';
+      var escActive = usdaVal != null && usdaVal >= 20.95;
+      var level     = usdaVal == null ? 'nd' : usdaVal >= 45 ? 'max' : usdaVal >= 30 ? 'alta' : 'normal';
+      var senColor  = level==='max' ? '#34c759' : level==='alta' ? '#fbbf24' : level==='normal' ? 'rgba(255,255,255,.5)' : 'var(--muted)';
+      var senLabel  = level==='max' ? 'MERCADO EN MÁXIMOS — EMBARCAR TODO' :
+                      level==='alta' ? 'Precio alto — priorizar exportación' :
+                      level==='normal' ? 'Mercado normal — operación estándar' : 'Sin datos de mercado';
+      senEl.innerHTML = '<div class="ej-senal-card" style="border-color:'+senColor+';height:100%;box-sizing:border-box">' +
+        '<div class="ej-senal-label" style="color:'+senColor+'">'+senLabel+'</div>' +
+        '<div class="ej-senal-row"><span class="ej-senal-key">USDA Nogales vine-ripe ('+usdaSem+')</span><span class="ej-senal-val" style="color:'+senColor+'">'+(usdaVal!=null?'$'+usdaVal.toFixed(2):'—')+'</span></div>' +
+        '<div class="ej-senal-row"><span class="ej-senal-key">FOB Calavo ('+fobSem+')</span><span class="ej-senal-val">'+(fobVal!=null?'$'+fobVal.toFixed(2):'—')+'</span></div>' +
+        '<div class="ej-senal-row"><span class="ej-senal-key">Escalador $20.95</span><span class="ej-senal-val" style="color:'+(escActive?'#34c759':'var(--muted)')+'">'+(escActive&&usdaVal?'✓ Activo +$'+(usdaVal-20.95).toFixed(2):'✗ No activo')+'</span></div>' +
+        '<div class="ej-senal-row"><span class="ej-senal-key">Contrato base</span><span class="ej-senal-val">$16.95 / caja</span></div>' +
+      '</div>';
+    }
+
+    /* ── Báscula & Embarques ── */
+    var ejBas = document.getElementById('ejBascula');
+    if (ejBas) {
+      var destList = Object.keys(todayDests).map(function(d){ return todayDests[d]+' '+d; }).join(' · ');
+      ejBas.innerHTML = '<div class="ej-bas-card">' +
+        '<div class="ej-bas-today">Último día registrado'+(todayBasFecha ? ' · '+todayBasFecha : '')+'</div>' +
+        (todayCargas > 0
+          ? '<div class="ej-bas-carga-num">'+todayCargas+'</div><div class="ej-bas-carga-lbl">camiones exportados'+(destList?' · '+destList:'')+'</div>'
+          : '<div style="color:var(--muted);font-size:.75rem;margin-top:6px">Sin embarques registrados</div>') +
+        (todayProds.length
+          ? '<div class="ej-bas-productos">'+todayProds.map(function(p){ return '<span class="ej-bas-pill">'+p+'</span>'; }).join('')+'</div>'
+          : '') +
+      '</div>';
+    }
+
+    /* ── Alertas CEO ── */
+    var ejAlEl = document.getElementById('ejAlertas');
+    if (ejAlEl) {
+      var reemb    = (D.calavo && D.calavo.reembolsoPendiente) || 0;
+      var confirmed = (D.calavo && D.calavo.reembolsoConfirmado) || 0;
+      var reembHtml = '';
+      if (reemb > confirmed) {
+        reembHtml = '<div class="hoy-alert warning">' +
+          '<div class="hoy-alert-ico">⚠</div>' +
+          '<div class="hoy-alert-txt"><b>Reembolso Anti-Dumping Calavo: ' + fmt(reemb - confirmed) + ' pendiente.</b> ' +
+          'El 22% cargado en el settle incluye 12% comisión real + ~10% anti-dumping retenido por Calavo. ' +
+          'Ese ~10% debe ser devuelto al cierre de temporada. Negociar con Irene Amezaga / John Lindeman.</div>' +
+        '</div>';
+      }
+      ejAlEl.innerHTML = reembHtml + (al.length ? al.map(function(a){
+        return '<div class="hoy-alert '+a.nivel+'">' +
+          '<div class="hoy-alert-ico">'+(iconMap[a.nivel]||'i')+'</div>' +
+          '<div class="hoy-alert-txt">'+a.texto+'</div>' +
+        '</div>';
+      }).join('') : '');
+    }
+  }
+
+  /* ════════════════ VENTAS & PRECIO ════════════════ */
+  function renderVentas() {
+    var liq  = (D.calavoWeekly && D.calavoWeekly.liquidaciones) || [];
+    var ph   = (D.tomate && D.tomate.preciosHistorico) || [];
+    var cont = (D.cashflow && D.cashflow.contratos) || [];
+
+    /* Season totals */
+    var totCajas = 0, totRevenue = 0, totLiq = 0, totComision = 0;
+    liq.forEach(function(r){ totCajas+=r.pkgs||0; totRevenue+=r.fob||0; totLiq+=r.liq||0; totComision+=r.comision||0; });
+    var avgFob = totCajas > 0 ? totRevenue / totCajas : 0;
+
+    /* KPIs */
+    var cv    = D.calavo || {};
+    var reemb = cv.reembolsoPendiente || 0;
+    var vKpis = document.getElementById('ventasKpis');
+    if (vKpis) {
+      var kpiRows = [
+        { lbl:'Total Cajas Export', val: fmtN(totCajas),        sub:'WK01–WK15 · Calavo',      color:'var(--green2)', extra:'' },
+        { lbl:'FOB Ponderado',      val: '$'+avgFob.toFixed(2), sub:'revenue / cajas',           color:'var(--accent2)', extra:'' },
+        { lbl:'Revenue Bruto',      val: fmt(totRevenue),        sub:'Calavo Gross FOB',          color:'var(--green2)', extra:'' },
+        { lbl:'Neto Belher',        val: fmt(totLiq),             sub:'después de deducciones',   color:'#60a5fa', extra:'' }
+      ];
+      vKpis.innerHTML = kpiRows.map(function(k){
+        return '<div class="card" style="padding:18px 16px">' +
+          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">'+k.lbl+'</div>' +
+          '<div style="font-size:1.35rem;font-weight:700;color:'+k.color+';line-height:1">'+k.val+'</div>' +
+          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">'+k.sub+'</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    /* Reembolso anti-dumping alert banner */
+    var vCont0 = document.getElementById('ventasContrato');
+    if (vCont0 && reemb > 0) {
+      var confirmed = cv.reembolsoConfirmado || 0;
+      var pendiente = reemb - confirmed;
+      var reembBanner = '<div class="hoy-alert warning" style="margin-bottom:16px">' +
+        '<div class="hoy-alert-ico">⚠</div>' +
+        '<div class="hoy-alert-txt">' +
+          '<b>Reembolso Anti-Dumping Pendiente · ' + fmt(pendiente) + '</b> — ' +
+          'El 22% que aparece como "Commission" en el Gass Sheet incluye el 12% real de comisión Calavo ' +
+          'MÁS ~10% de apoyo al arancel anti-dumping (AD/CVD) que Calavo retiene temporalmente. ' +
+          'Ese ~10% <b>debe ser reembolsado al cierre de temporada</b>. ' +
+          'Confirmar con Irene Amezaga / John Lindeman antes del cierre. ' +
+          '<span style="color:var(--accent2);font-weight:700">Negociar hoy.</span>' +
+        '</div>' +
+      '</div>';
+      // Prepend to ventasContrato after it's built — store temporarily
+      vCont0._reembBanner = reembBanner;
+    }
+
+    /* Contrato & escalador analysis */
+    var vCont = document.getElementById('ventasContrato');
+    if (vCont) {
+      var html = (vCont._reembBanner || '') + '<div class="card" style="padding:20px 22px">';
+
+      /* Contract summary boxes */
+      if (cont.length) {
+        html += '<div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:18px">';
+        cont.forEach(function(c){
+          html += '<div style="flex:1;min-width:190px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:14px 16px">' +
+            '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">'+c.mes+' · '+c.tipo+'</div>' +
+            '<div style="font-size:.78rem;color:var(--fg);line-height:1.9">' +
+              '<div><span style="color:var(--muted)">Base: </span><b style="color:var(--accent2)">$'+(c.precio_contrato||0).toFixed(2)+'/caja</b></div>' +
+              '<div><span style="color:var(--muted)">Escalador activo desde: </span><b style="color:#34c759">$'+(c.escalador_desde||0).toFixed(2)+'</b></div>' +
+              '<div><span style="color:var(--muted)">Cajas contrato: </span>'+fmtN(c.cajas_contrato)+'</div>' +
+              (c.cajas_spot ? '<div><span style="color:var(--muted)">Cajas spot: </span>'+fmtN(c.cajas_spot)+'</div>' : '') +
+            '</div>' +
+          '</div>';
+        });
+        html += '</div>';
+      }
+
+      /* FOB vs escalador per-week table */
+      html += '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">FOB Real vs Umbrales de Contrato · Por Semana</div>';
+      html += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.73rem">';
+      html += '<thead><tr style="border-bottom:1px solid var(--border)">' +
+        '<th style="text-align:left;padding:6px 8px;color:var(--muted);font-weight:600">Sem</th>' +
+        '<th style="text-align:right;padding:6px 8px;color:var(--muted);font-weight:600">Cajas</th>' +
+        '<th style="text-align:right;padding:6px 8px;color:var(--muted);font-weight:600">FOB/caja</th>' +
+        '<th style="text-align:right;padding:6px 8px;color:var(--muted);font-weight:600">USDA ref</th>' +
+        '<th style="text-align:right;padding:6px 8px;color:var(--muted);font-weight:600">Escalador</th>' +
+        '<th style="text-align:left;padding:6px 8px;color:var(--muted);font-weight:600">Nota</th>' +
+      '</tr></thead><tbody>';
+      ph.forEach(function(p){
+        var liqRow   = liq.find ? liq.find(function(r){ return r.sem===p.sem; }) : null;
+        var pkgs     = liqRow ? liqRow.pkgs : null;
+        var escActive = p.usda != null && p.usda >= 20.95;
+        var fobColor  = p.fob >= 20 ? '#34c759' : p.fob >= 16.95 ? 'var(--accent2)' : '#ef4444';
+        var escColor  = escActive ? '#34c759' : 'var(--muted)';
+        var rowBg     = p.tipo==='est' ? 'rgba(59,130,246,.04)' : '';
+        html += '<tr style="border-bottom:1px solid rgba(255,255,255,.04);background:'+rowBg+'">' +
+          '<td style="padding:5px 8px;font-weight:700">'+p.sem+(p.tipo==='est'?' <span style="font-size:.58rem;color:var(--muted);font-weight:400">est</span>':'')+'</td>' +
+          '<td style="text-align:right;padding:5px 8px;color:var(--muted)">'+(pkgs!=null?fmtN(pkgs):'—')+'</td>' +
+          '<td style="text-align:right;padding:5px 8px;color:'+fobColor+';font-weight:700">$'+p.fob.toFixed(2)+'</td>' +
+          '<td style="text-align:right;padding:5px 8px;color:var(--muted)">'+(p.usda!=null?'$'+p.usda.toFixed(2):'—')+'</td>' +
+          '<td style="text-align:right;padding:5px 8px;color:'+escColor+';font-weight:600">'+(escActive?'✓ +$'+(p.usda-20.95).toFixed(2):'—')+'</td>' +
+          '<td style="padding:5px 8px;font-size:.65rem;color:var(--muted)">'+( p.nota||'')+'</td>' +
+        '</tr>';
+      });
+      html += '</tbody></table></div>';
+      html += '</div>';
+      vCont.innerHTML = html;
+    }
   }
 
   /* ════════════════ OPERACIONES ════════════════ */
@@ -4999,6 +5283,95 @@ function checkPw(){
 
   /* ════════════════ CHARTS ════════════════ */
   function initChartsForTab(tab) {
+
+    /* Normalize renamed tabs */
+    if (tab === 'optomate') tab = 'tomate';
+
+    /* ── Ejecutivo — Cajas & FOB dual-axis ── */
+    if (tab === 'ejecutivo' && !chartsInit.ejVolFob) {
+      chartsInit.ejVolFob = true;
+      (function() {
+        var cvs = document.getElementById('chartEjVolFob');
+        if (!cvs) return;
+        var pag = D.calavo.pagos || [];
+        var ph  = (D.tomate && D.tomate.preciosHistorico) || [];
+        var labels   = pag.map(function(p){ return p.sem; });
+        var cajas    = pag.map(function(p){ return p.cajas || 0; });
+        var fobMap   = {};
+        ph.forEach(function(p){ fobMap[p.sem] = p.fob; });
+        var fobLine  = pag.map(function(p){ return fobMap[p.sem] != null ? fobMap[p.sem] : null; });
+        var c2d = cvs.getContext('2d');
+        var grad = c2d.createLinearGradient(0,0,0,160);
+        grad.addColorStop(0,'rgba(52,199,89,.28)');
+        grad.addColorStop(1,'rgba(52,199,89,.0)');
+        new Chart(c2d, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              { type:'bar',  label:'Cajas', data:cajas,   backgroundColor:'rgba(52,199,89,.22)', borderColor:'#34c759', borderWidth:1, borderRadius:4, yAxisID:'y' },
+              { type:'line', label:'FOB $/caja', data:fobLine, borderColor:'#fbbf24', backgroundColor:'rgba(251,191,36,.0)', borderWidth:2, pointRadius:3, pointBackgroundColor:'#fbbf24', tension:.35, yAxisID:'y2', spanGaps:false }
+            ]
+          },
+          options: {
+            responsive:true, maintainAspectRatio:false, interaction:{ mode:'index', intersect:false },
+            plugins:{ legend:{ labels:{ boxWidth:10, font:{ size:10 } } }, tooltip:{ callbacks:{
+              label: function(ctx){ return ctx.dataset.yAxisID==='y2' ? ' FOB $'+ctx.parsed.y.toFixed(2) : ' '+fmtN(ctx.parsed.y)+' cajas'; }
+            }}},
+            scales:{
+              y:  { beginAtZero:true, grid:{ color:'rgba(255,255,255,.04)' }, ticks:{ callback:function(v){ return fmtN(v/1000)+'K'; }, font:{size:9} } },
+              y2: { position:'right', beginAtZero:false, grid:{ drawOnChartArea:false }, ticks:{ callback:function(v){ return '$'+v.toFixed(0); }, font:{size:9} } }
+            }
+          }
+        });
+      })();
+    }
+
+    /* ── Ventas — Volumen vs FOB dual-axis (detailed) ── */
+    if (tab === 'ventas' && !chartsInit.ventasVolFob) {
+      chartsInit.ventasVolFob = true;
+      (function() {
+        var cvs = document.getElementById('chartVentasVolFob');
+        if (!cvs) return;
+        var liq = (D.calavoWeekly && D.calavoWeekly.liquidaciones) || [];
+        var ph  = (D.tomate && D.tomate.preciosHistorico) || [];
+        var phMap = {};
+        ph.forEach(function(p){ phMap[p.sem] = p; });
+        var labels  = liq.map(function(r){ return r.sem; });
+        var cajas   = liq.map(function(r){ return r.pkgs || 0; });
+        var fobPrc  = liq.map(function(r){ return r.pkgs ? (r.fob / r.pkgs) : null; });
+        var usdaArr = liq.map(function(r){ return phMap[r.sem] && phMap[r.sem].usda != null ? phMap[r.sem].usda : null; });
+        var c2d = cvs.getContext('2d');
+        new Chart(c2d, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              { type:'bar',  label:'Cajas', data:cajas,  backgroundColor:'rgba(52,199,89,.2)', borderColor:'rgba(52,199,89,.7)', borderWidth:1, borderRadius:4, yAxisID:'y' },
+              { type:'line', label:'FOB Calavo $/caja', data:fobPrc,  borderColor:'#fbbf24', backgroundColor:'transparent', borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#fbbf24', tension:.3, yAxisID:'y2', spanGaps:true },
+              { type:'line', label:'USDA Nogales', data:usdaArr, borderColor:'rgba(96,165,250,.7)', backgroundColor:'transparent', borderWidth:1.5, borderDash:[4,3], pointRadius:3, pointBackgroundColor:'rgba(96,165,250,.7)', tension:.3, yAxisID:'y2', spanGaps:false }
+            ]
+          },
+          options:{
+            responsive:true, maintainAspectRatio:false, interaction:{ mode:'index', intersect:false },
+            plugins:{
+              legend:{ labels:{ boxWidth:10, font:{size:10} } },
+              tooltip:{ callbacks:{ label:function(ctx){
+                return ctx.dataset.yAxisID==='y'
+                  ? ' '+fmtN(ctx.parsed.y)+' cajas'
+                  : ' $'+ctx.parsed.y.toFixed(2);
+              }}}
+            },
+            scales:{
+              y:  { beginAtZero:true, grid:{ color:'rgba(255,255,255,.04)' }, ticks:{ callback:function(v){ return fmtN(v/1000)+'K'; }, font:{size:9} } },
+              y2: { position:'right', beginAtZero:false, min:8, grid:{ drawOnChartArea:false },
+                    ticks:{ callback:function(v){ return '$'+v.toFixed(0); }, font:{size:9} },
+                    afterDataLimits: function(axis){ axis.max = Math.max(axis.max, 30); } }
+            }
+          }
+        });
+      })();
+    }
 
     /* ── Market Intelligence — Price History Charts ── */
     if (tab === 'market' && !chartsInit.miPriceCharts) {
@@ -7476,6 +7849,8 @@ function checkPw(){
 
   /* ── INIT ── */
   renderTicker();
+  renderEjecutivo();
+  renderVentas();
   renderHoy();
   renderOperaciones();
 
