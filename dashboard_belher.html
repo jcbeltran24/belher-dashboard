@@ -779,7 +779,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .cf-wf-row        { margin-bottom:10px; }
 .cf-wf-label      { font-size:.73rem; font-weight:600; color:var(--text); margin-bottom:4px; display:flex; justify-content:space-between; }
 .cf-wf-label span { font-weight:800; }
-.cf-wf-track      { background:rgba(255,255,255,.05); border-radius:4px; height:10px; overflow:hidden; }
+.cf-wf-track      { background:rgba(0,0,0,.07); border-radius:4px; height:10px; overflow:hidden; }
 .cf-wf-bar        { height:100%; border-radius:4px; transition:width .6s cubic-bezier(.4,0,.2,1); }
 .cf-wf-sep        { border-top:1px dashed var(--border); margin:12px 0; }
 
@@ -797,9 +797,9 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .cf-tbl-hdr       { padding:12px 16px; font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
 .cf-tbl-hdr-total { font-size:.85rem; font-weight:900; color:var(--text); }
 .cf-tbl           { width:100%; border-collapse:collapse; font-size:.75rem; }
-.cf-tbl td        { padding:8px 14px; border-bottom:1px solid rgba(255,255,255,.04); vertical-align:middle; }
+.cf-tbl td        { padding:8px 14px; border-bottom:1px solid rgba(0,0,0,.05); vertical-align:middle; }
 .cf-tbl tr:last-child td { border-bottom:none; }
-.cf-tbl tr:hover td { background:rgba(255,255,255,.025); }
+.cf-tbl tr:hover td { background:rgba(22,163,74,.04); }
 .cf-tbl .cf-td-concepto { color:var(--text); font-weight:500; }
 .cf-tbl .cf-td-cat  { color:var(--muted); font-size:.64rem; }
 .cf-tbl .cf-td-monto { text-align:right; font-weight:700; font-variant-numeric:tabular-nums; }
@@ -1486,6 +1486,8 @@ footer span { color: var(--accent2); font-weight: 600; }
 /* ── 1. Refined Design Tokens ── */
 :root {
   --bg:        #f0f4f0;
+  --bg2:       #ffffff;
+  --fg:        #0f1f14;
   --border:    rgba(0,0,0,.08);
   --shadow-xs: 0 1px 2px rgba(0,0,0,.04);
   --shadow-sm: 0 2px 8px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.03);
@@ -2702,7 +2704,7 @@ nav.tabs button[data-tab="ejecutivo"]::before {
   max-height: 270px; overflow-y: auto;
 }
 .ej2-alerts::-webkit-scrollbar { width: 3px; }
-.ej2-alerts::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 2px; }
+.ej2-alerts::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 2px; }
 /* Compact alert rows inside ej2 */
 .ej2-alerts .hoy-alert { padding: 10px 12px; }
 .ej2-alerts .hoy-alert-txt { font-size: .7rem; line-height: 1.45; }
@@ -2727,13 +2729,12 @@ nav.tabs button[data-tab="ejecutivo"]::before {
   cursor: default;
 }
 .strat-ind:hover {
-  box-shadow: 0 0 0 1px rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.12);
+  box-shadow: 0 4px 16px rgba(0,0,0,.08), 0 0 0 1px rgba(22,163,74,.18);
+  border-color: rgba(22,163,74,.25);
 }
-/* Rows & action hidden by default, visible on hover */
-.strat-ind-rows { display: none; }
+/* Rows always visible; action shows on hover */
+.strat-ind-rows { display: flex; }
 .strat-ind-action { display: none; }
-.strat-ind:hover .strat-ind-rows { display: flex; }
 .strat-ind:hover .strat-ind-action { display: block; }
 .strat-ind-badge {
   font-size: .5rem; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
@@ -2742,11 +2743,11 @@ nav.tabs button[data-tab="ejecutivo"]::before {
 .strat-ind-lbl { font-size: .58rem; font-weight: 700; letter-spacing: .9px; text-transform: uppercase; color: var(--muted); }
 .strat-ind-val { font-size: 1.4rem; font-weight: 800; line-height: 1.05; letter-spacing: -.4px; }
 .strat-ind-sub { font-size: .63rem; color: var(--muted); }
-.strat-ind-bar-wrap { height: 5px; background: rgba(255,255,255,.07); border-radius: 3px; margin: 6px 0 3px; overflow: hidden; }
+.strat-ind-bar-wrap { height: 5px; background: rgba(0,0,0,.07); border-radius: 3px; margin: 6px 0 3px; overflow: hidden; }
 .strat-ind-bar { height: 100%; border-radius: 3px; transition: width .4s; }
 .strat-ind-action {
   font-size: .6rem; font-weight: 700; margin-top: 6px; padding: 5px 8px;
-  border-radius: 6px; background: rgba(255,255,255,.04);
+  border-radius: 6px; background: rgba(0,0,0,.03);
   border-left: 2px solid; line-height: 1.4;
 }
 .strat-ind-rows { display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
@@ -2765,7 +2766,7 @@ nav.tabs button[data-tab="ejecutivo"]::before {
 .ej-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .ej-senal-card { border: 1px solid; border-radius: 14px; padding: 20px 22px; background: var(--bg2); }
 .ej-senal-label { font-size: .88rem; font-weight: 800; letter-spacing: .3px; margin-bottom: 14px; }
-.ej-senal-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+.ej-senal-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,.06); }
 .ej-senal-row:last-child { border-bottom: none; }
 .ej-senal-key { font-size: .72rem; color: var(--muted); }
 .ej-senal-val { font-size: .78rem; font-weight: 700; }
@@ -2774,7 +2775,7 @@ nav.tabs button[data-tab="ejecutivo"]::before {
 .ej-bas-carga-num { font-size: 2.2rem; font-weight: 800; color: var(--green2); line-height: 1; margin: 6px 0 2px; }
 .ej-bas-carga-lbl { font-size: .75rem; font-weight: 600; color: var(--green2); }
 .ej-bas-productos { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.ej-bas-pill { font-size: .65rem; font-weight: 600; padding: 3px 9px; border-radius: 10px; background: rgba(255,255,255,.07); border: 1px solid var(--border); color: var(--fg); }
+.ej-bas-pill { font-size: .65rem; font-weight: 600; padding: 3px 9px; border-radius: 10px; background: rgba(22,163,74,.08); border: 1px solid rgba(22,163,74,.18); color: var(--green2); }
 @media (max-width: 720px) {
   .ej-kpi-strip { grid-template-columns: 1fr 1fr; }
   .ej-two-col   { grid-template-columns: 1fr; }
@@ -4301,7 +4302,7 @@ function checkPw(){
           pct3, '#34c759',
           [
             ['Amortizado', fmt(amort3), '#34c759'],
-            ['Promedio WK11–14', fmt(dc3.avgLiq_wk11_14 || 0) + '/sem', 'rgba(255,255,255,.6)'],
+            ['Promedio WK11–14', fmt(dc3.avgLiq_wk11_14 || 0) + '/sem', 'var(--muted)'],
             ['Cruce estimado', (dc3.cruceEstimado||'—') + ' · ' + (dc3.cruceEstimadoFecha||''), '#fbbf24']
           ],
           '⚡ Después del cruce, cada wire = efectivo real a Belher', '#fbbf24') +
@@ -4314,7 +4315,7 @@ function checkPw(){
           [
             ['Retenido por Calavo', fmt(adRiesgo), '#f97316'],
             ['Confirmado devuelto', fmt(adConf), adConf > 0 ? '#34c759' : 'var(--muted)'],
-            ['Comisión real Calavo', '12% (no 22%)', 'rgba(255,255,255,.6)']
+            ['Comisión real Calavo', '12% (no 22%)', 'var(--muted)']
           ],
           '→ Negociar con Irene Amezaga / John Lindeman antes del cierre', '#f97316') +
 
@@ -4341,9 +4342,9 @@ function checkPw(){
             fobLast ? '$' + fobLast.fob.toFixed(2) : '—', fobValColor,
             fobSub, null, null,
             fobPrev ? [
-              ['Semana anterior ('+fobPrev.sem+')', '$'+fobPrev.fob.toFixed(2)+'/caja', 'rgba(255,255,255,.7)'],
-              ['Variación', (fobLast.fob >= fobPrev.fob ? '+' : '') + (fobLast.fob - fobPrev.fob).toFixed(2), fobLast.fob >= fobPrev.fob ? '#34c759' : '#f87171'],
-              ['Pico temporada (WK10)', '$27.58/caja', 'rgba(255,255,255,.4)']
+              ['Semana anterior ('+fobPrev.sem+')', '$'+fobPrev.fob.toFixed(2)+'/caja', 'var(--muted)'],
+              ['Variación', (fobLast.fob >= fobPrev.fob ? '+' : '') + (fobLast.fob - fobPrev.fob).toFixed(2), fobLast.fob >= fobPrev.fob ? '#16a34a' : '#dc2626'],
+              ['Pico temporada (WK10)', '$27.58/caja', 'var(--muted)']
             ] : null,
             fobIsEst ? '⚡ WK15 estimado al 64% pass-through del escalador — actualizar con settle final' : null,
             '#fbbf24');
@@ -4372,7 +4373,7 @@ function checkPw(){
       var fobSem   = lastReal ? lastReal.sem   : '—';
       var escActive = usdaVal != null && usdaVal >= 20.95;
       var level     = usdaVal == null ? 'nd' : usdaVal >= 45 ? 'max' : usdaVal >= 30 ? 'alta' : 'normal';
-      var senColor  = level==='max' ? '#34c759' : level==='alta' ? '#fbbf24' : level==='normal' ? 'rgba(255,255,255,.5)' : 'var(--muted)';
+      var senColor  = level==='max' ? '#16a34a' : level==='alta' ? '#d97706' : level==='normal' ? 'var(--muted)' : 'var(--muted)';
       var senLabel  = level==='max' ? 'MERCADO EN MÁXIMOS — EMBARCAR TODO' :
                       level==='alta' ? 'Precio alto — priorizar exportación' :
                       level==='normal' ? 'Mercado normal — operación estándar' : 'Sin datos de mercado';
@@ -4511,7 +4512,7 @@ function checkPw(){
       if (cont.length) {
         html += '<div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:18px">';
         cont.forEach(function(c){
-          html += '<div style="flex:1;min-width:190px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:14px 16px">' +
+          html += '<div style="flex:1;min-width:190px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px">' +
             '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">'+c.mes+' · '+c.tipo+'</div>' +
             '<div style="font-size:.78rem;color:var(--fg);line-height:1.9">' +
               '<div><span style="color:var(--muted)">Base: </span><b style="color:var(--accent2)">$'+(c.precio_contrato||0).toFixed(2)+'/caja</b></div>' +
@@ -4542,7 +4543,7 @@ function checkPw(){
         var fobColor  = p.fob >= 20 ? '#34c759' : p.fob >= 16.95 ? 'var(--accent2)' : '#ef4444';
         var escColor  = escActive ? '#34c759' : 'var(--muted)';
         var rowBg     = p.tipo==='est' ? 'rgba(59,130,246,.04)' : '';
-        html += '<tr style="border-bottom:1px solid rgba(255,255,255,.04);background:'+rowBg+'">' +
+        html += '<tr style="border-bottom:1px solid rgba(0,0,0,.05);background:'+rowBg+'">' +
           '<td style="padding:5px 8px;font-weight:700">'+p.sem+(p.tipo==='est'?' <span style="font-size:.58rem;color:var(--muted);font-weight:400">est</span>':'')+'</td>' +
           '<td style="text-align:right;padding:5px 8px;color:var(--muted)">'+(pkgs!=null?fmtN(pkgs):'—')+'</td>' +
           '<td style="text-align:right;padding:5px 8px;color:'+fobColor+';font-weight:700">$'+p.fob.toFixed(2)+'</td>' +
@@ -4601,7 +4602,7 @@ function checkPw(){
             '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Roma</div>' +
             '<div style="font-size:1.6rem;font-weight:800;color:#60a5fa;line-height:1">'+fmtN(cajasRoma)+'</div>' +
             '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">cajas · '+romaPct.toFixed(1)+'% del total nacional</div>' +
-            '<div style="background:rgba(255,255,255,.06);border-radius:4px;height:6px;margin-top:8px;overflow:hidden">' +
+            '<div style="background:rgba(0,0,0,.07);border-radius:4px;height:6px;margin-top:8px;overflow:hidden">' +
               '<div style="height:100%;width:'+romaPct.toFixed(0)+'%;background:#60a5fa;border-radius:4px"></div>' +
             '</div>' +
           '</div>' +
@@ -4609,7 +4610,7 @@ function checkPw(){
             '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Bola</div>' +
             '<div style="font-size:1.6rem;font-weight:800;color:#818cf8;line-height:1">'+fmtN(cajasBola)+'</div>' +
             '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">cajas · '+bolaPct.toFixed(1)+'% del total nacional</div>' +
-            '<div style="background:rgba(255,255,255,.06);border-radius:4px;height:6px;margin-top:8px;overflow:hidden">' +
+            '<div style="background:rgba(0,0,0,.07);border-radius:4px;height:6px;margin-top:8px;overflow:hidden">' +
               '<div style="height:100%;width:'+bolaPct.toFixed(0)+'%;background:#818cf8;border-radius:4px"></div>' +
             '</div>' +
           '</div>' +
@@ -5028,7 +5029,7 @@ function checkPw(){
       var calPP = D.calavo ? ((D.calavo.pickPack||0) + (D.calavo.revenueTotal||0)) : 0;
 
       var sigItems = (cf.pagos_ciclo_siguiente || []).map(function(p) {
-        return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)">' +
+        return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.06)">' +
           '<span style="color:var(--accent2);font-size:.8rem">›</span>' +
           '<span style="font-size:.78rem;color:var(--text)">' + p.concepto + '</span>' +
           '<span style="margin-left:auto;font-size:.66rem;color:var(--muted)">' + p.nota + '</span>' +
@@ -5355,7 +5356,7 @@ function checkPw(){
           (cf.bridge && cf.bridge.length ? '<div style="background:rgba(234,179,8,.06);border:1px solid rgba(234,179,8,.2);border-radius:12px;padding:16px 18px">' +
             '<div style="font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#fbbf24;margin-bottom:10px">Bridge · Escenario Realista (+$3/caja)</div>' +
             cf.bridge.map(function(b) {
-              return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">' +
+              return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.05)">' +
                 '<span style="font-size:.72rem;color:var(--text)">' + b.concepto + '</span>' +
                 '<span style="font-size:.78rem;font-weight:700;color:#4ade80;flex-shrink:0;margin-left:8px">+' + fmt(b.monto) + '</span>' +
               '</div>';
@@ -5368,14 +5369,14 @@ function checkPw(){
           (cf.contratos && cf.contratos.length ? '<div style="background:rgba(99,102,241,.05);border:1px solid rgba(99,102,241,.18);border-radius:12px;padding:16px 18px">' +
             '<div style="font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#a5b4fc;margin-bottom:10px">Contratos vs Spot · Volumen por Mes</div>' +
             '<table style="width:100%;border-collapse:collapse;font-size:.72rem">' +
-              '<thead><tr style="border-bottom:1px solid rgba(255,255,255,.06)">' +
+              '<thead><tr style="border-bottom:1px solid rgba(0,0,0,.07)">' +
                 '<th style="padding:4px 6px;text-align:left;font-size:.6rem;color:var(--muted);font-weight:700">Mes</th>' +
                 '<th style="padding:4px 6px;text-align:right;font-size:.6rem;color:var(--muted);font-weight:700">Contrato</th>' +
                 '<th style="padding:4px 6px;text-align:right;font-size:.6rem;color:var(--muted);font-weight:700">Spot</th>' +
                 '<th style="padding:4px 6px;text-align:right;font-size:.6rem;color:var(--muted);font-weight:700">$/caja</th>' +
               '</tr></thead><tbody>' +
             cf.contratos.map(function(c) {
-              return '<tr style="border-bottom:1px solid rgba(255,255,255,.04)">' +
+              return '<tr style="border-bottom:1px solid rgba(0,0,0,.05)">' +
                 '<td style="padding:5px 6px;font-weight:600">' + c.mes + '</td>' +
                 '<td style="padding:5px 6px;text-align:right;color:#a5b4fc">' + c.cajas_contrato.toLocaleString('en-US') + '</td>' +
                 '<td style="padding:5px 6px;text-align:right;color:#fbbf24">' + (c.cajas_spot > 0 ? c.cajas_spot.toLocaleString('en-US') : '—') + '</td>' +
@@ -5484,7 +5485,6 @@ function checkPw(){
             y: {
               min: yMin, max: yMax,
               ticks: { callback: function(v){ return v >= 1000000 || v <= -1000000 ? '$' + (v/1000000).toFixed(1) + 'M' : '$' + (v/1000).toFixed(0) + 'K'; }, maxTicksLimit: 8 },
-              grid: { color:'rgba(255,255,255,.04)' }
             },
             x: { grid: { display:false } }
           }
@@ -5921,15 +5921,15 @@ function checkPw(){
             labels: ['Nacional', 'Exportación Calavo'],
             datasets: [{
               data: [precNac, precExp],
-              backgroundColor: ['rgba(96,165,250,.3)', 'rgba(52,199,89,.3)'],
-              borderColor: ['#60a5fa', '#34c759'],
+              backgroundColor: ['rgba(59,130,246,.55)', 'rgba(52,199,89,.55)'],
+              borderColor: ['rgba(59,130,246,.9)', 'rgba(52,199,89,.9)'],
               borderWidth: 2, borderRadius: 8
             }]
           },
           options: {
             responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
             scales: {
-              y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,.04)' },
+              y: { beginAtZero: true,
                    ticks: { callback: function(v){ return '$'+v.toFixed(2); }, font: { size: 10 } } },
               x: { grid: { display: false }, ticks: { font: { size: 11 } } }
             }
@@ -5961,8 +5961,8 @@ function checkPw(){
           data: {
             labels: labels,
             datasets: [
-              { type:'bar',  label:'Cajas', data:cajas,   backgroundColor:'rgba(52,199,89,.22)', borderColor:'#34c759', borderWidth:1, borderRadius:4, yAxisID:'y' },
-              { type:'line', label:'FOB $/caja', data:fobLine, borderColor:'#fbbf24', backgroundColor:'rgba(251,191,36,.0)', borderWidth:2, pointRadius:3, pointBackgroundColor:'#fbbf24', tension:.35, yAxisID:'y2', spanGaps:false }
+              { type:'bar',  label:'Cajas', data:cajas,   backgroundColor:'rgba(52,199,89,.55)', borderColor:'rgba(52,199,89,.85)', borderWidth:1, borderRadius:4, yAxisID:'y' },
+              { type:'line', label:'FOB $/caja', data:fobLine, borderColor:'#d97706', backgroundColor:'rgba(217,119,6,.0)', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#d97706', tension:.35, yAxisID:'y2', spanGaps:false }
             ]
           },
           options: {
@@ -5971,7 +5971,7 @@ function checkPw(){
               label: function(ctx){ return ctx.dataset.yAxisID==='y2' ? ' FOB $'+ctx.parsed.y.toFixed(2) : ' '+fmtN(ctx.parsed.y)+' cajas'; }
             }}},
             scales:{
-              y:  { beginAtZero:true, grid:{ color:'rgba(255,255,255,.04)' }, ticks:{ callback:function(v){ return fmtN(v/1000)+'K'; }, font:{size:9} } },
+              y:  { beginAtZero:true, ticks:{ callback:function(v){ return fmtN(v/1000)+'K'; }, font:{size:9} } },
               y2: { position:'right', beginAtZero:false, grid:{ drawOnChartArea:false }, ticks:{ callback:function(v){ return '$'+v.toFixed(0); }, font:{size:9} } }
             }
           }
@@ -6000,9 +6000,9 @@ function checkPw(){
           data: {
             labels: labels,
             datasets: [
-              { type:'bar',  label:'Cajas', data:cajas,  backgroundColor:'rgba(52,199,89,.2)', borderColor:'rgba(52,199,89,.7)', borderWidth:1, borderRadius:4, yAxisID:'y' },
-              { type:'line', label:'FOB Calavo $/caja', data:fobPrc,  borderColor:'#fbbf24', backgroundColor:'transparent', borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#fbbf24', tension:.3, yAxisID:'y2', spanGaps:true },
-              { type:'line', label:'USDA Nogales', data:usdaArr, borderColor:'rgba(96,165,250,.7)', backgroundColor:'transparent', borderWidth:1.5, borderDash:[4,3], pointRadius:3, pointBackgroundColor:'rgba(96,165,250,.7)', tension:.3, yAxisID:'y2', spanGaps:false }
+              { type:'bar',  label:'Cajas', data:cajas,  backgroundColor:'rgba(52,199,89,.55)', borderColor:'rgba(52,199,89,.85)', borderWidth:1, borderRadius:4, yAxisID:'y' },
+              { type:'line', label:'FOB Calavo $/caja', data:fobPrc,  borderColor:'#d97706', backgroundColor:'transparent', borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#d97706', tension:.3, yAxisID:'y2', spanGaps:true },
+              { type:'line', label:'USDA Nogales', data:usdaArr, borderColor:'rgba(59,130,246,.8)', backgroundColor:'transparent', borderWidth:1.5, borderDash:[4,3], pointRadius:3, pointBackgroundColor:'rgba(59,130,246,.8)', tension:.3, yAxisID:'y2', spanGaps:false }
             ]
           },
           options:{
@@ -6016,7 +6016,7 @@ function checkPw(){
               }}}
             },
             scales:{
-              y:  { beginAtZero:true, grid:{ color:'rgba(255,255,255,.04)' }, ticks:{ callback:function(v){ return fmtN(v/1000)+'K'; }, font:{size:9} } },
+              y:  { beginAtZero:true, ticks:{ callback:function(v){ return fmtN(v/1000)+'K'; }, font:{size:9} } },
               y2: { position:'right', beginAtZero:false, min:8, grid:{ drawOnChartArea:false },
                     ticks:{ callback:function(v){ return '$'+v.toFixed(0); }, font:{size:9} },
                     afterDataLimits: function(axis){ axis.max = Math.max(axis.max, 30); } }
