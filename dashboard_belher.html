@@ -2987,7 +2987,7 @@ function checkPw(){
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
 
-<!-- ══ FINANCIAL STRIP ══ -->
+<!-- ══ CONTEXT BAR ══ -->
 <div class="fin-bar" id="finBar">
   <div class="fin-bar-today">
     <div class="fin-bar-today-pulse"></div>
@@ -2996,37 +2996,33 @@ function checkPw(){
       <div class="fin-bar-today-date" id="fbFecha">—</div>
     </div>
   </div>
-  <div class="fin-bar-kpi" id="fbEbitda">
-    <div class="fin-bar-kpi-lbl">EBITDA Mes</div>
-    <div class="fin-bar-kpi-val" id="fbEbitdaVal">—</div>
-    <div class="fin-bar-kpi-sub" id="fbEbitdaSub">vs presupuesto</div>
+  <div class="fin-bar-kpi" id="fbExport">
+    <div class="fin-bar-kpi-lbl">Exportación · Calavo</div>
+    <div class="fin-bar-kpi-val pos" id="fbExportVal">—</div>
+    <div class="fin-bar-kpi-sub" id="fbExportSub">cajas facturadas</div>
   </div>
-  <div class="fin-bar-kpi" id="fbRevenue">
-    <div class="fin-bar-kpi-lbl">Revenue Temporada</div>
-    <div class="fin-bar-kpi-val white" id="fbRevenueVal">—</div>
-    <div class="fin-bar-kpi-sub" id="fbRevenueSub">FOB + Nacional</div>
+  <div class="fin-bar-kpi" id="fbNacional">
+    <div class="fin-bar-kpi-lbl">Nacional</div>
+    <div class="fin-bar-kpi-val acc" id="fbNacionalVal">—</div>
+    <div class="fin-bar-kpi-sub" id="fbNacionalSub">canal independiente</div>
   </div>
-  <div class="fin-bar-kpi" id="fbVentaNeta">
-    <div class="fin-bar-kpi-lbl">Venta Neta Calavo</div>
-    <div class="fin-bar-kpi-val acc" id="fbVentaNetaVal">—</div>
-    <div class="fin-bar-kpi-sub">después de comisión + ZCode</div>
+  <div class="fin-bar-kpi" id="fbDeuda">
+    <div class="fin-bar-kpi-lbl">Deuda Total</div>
+    <div class="fin-bar-kpi-val neg" id="fbDeudaVal">—</div>
+    <div class="fin-bar-kpi-sub" id="fbDeudaSub">Calavo + Bancos + Prov.</div>
   </div>
-  <div class="fin-bar-kpi" id="fbSaldo">
-    <div class="fin-bar-kpi-lbl">Saldo Calavo</div>
-    <div class="fin-bar-kpi-val" id="fbSaldoVal">—</div>
-    <div class="fin-bar-kpi-sub" id="fbSaldoSub">posición financiera</div>
-  </div>
-  <div class="fin-bar-kpi" style="border-right:none" id="fbPagado">
-    <div class="fin-bar-kpi-lbl">Pagado WK01–WK12</div>
-    <div class="fin-bar-kpi-val white" id="fbPagadoVal">—</div>
-    <div class="fin-bar-kpi-sub" id="fbPagadoSub">12 semanas</div>
+  <div class="fin-bar-kpi" style="border-right:none" id="fbLiqInicio">
+    <div class="fin-bar-kpi-lbl">Liq. Real Calavo</div>
+    <div class="fin-bar-kpi-val" id="fbLiqInicioVal">—</div>
+    <div class="fin-bar-kpi-sub" id="fbLiqInicioSub">inicio estimado</div>
   </div>
 </div>
 
 <!-- ══ TABS ══ -->
 <nav class="tabs" id="tabNav">
   <button class="active" data-tab="ejecutivo">Ejecutivo</button>
-  <button data-tab="ventas">Ventas &amp; Precio</button>
+  <button data-tab="ventas">Export Calavo</button>
+  <button data-tab="nacional">Nacional</button>
   <button data-tab="finanzas">Finanzas</button>
   <button data-tab="optomate">Ops Tomate</button>
   <button data-tab="otros">Otros Cultivos</button>
@@ -3072,6 +3068,23 @@ function checkPw(){
 
     <div class="section-title">Análisis de Contrato · Escalador de Precio <span class="src-tag">Calavo 2025–2026 · base $16.95 · collar $4 activo desde $20.95</span></div>
     <div id="ventasContrato"></div>
+
+  </div>
+
+  <!-- ══════════ NACIONAL ══════════ -->
+  <div class="tab-panel" id="tab-nacional">
+
+    <div class="section-title" style="margin-top:4px">Ventas Nacional · Temporada 2025–2026 <span class="src-tag">canal independiente — sin relación con Calavo</span></div>
+    <div class="grid-4" id="nacKpis"></div>
+
+    <div class="section-title">Distribución Roma vs Bola <span class="src-tag">jacruz@agbelher.com · datos de temporada</span></div>
+    <div id="nacCanales"></div>
+
+    <div class="section-title">Precio Promedio Nacional vs Exportación <span class="src-tag">revenue / cajas por canal</span></div>
+    <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartNacPrecio"></canvas></div></div>
+
+    <div class="section-title">Notas Operativas Nacional</div>
+    <div id="nacNotas"></div>
 
   </div>
 
@@ -3220,6 +3233,10 @@ function checkPw(){
 
     <div class="section-title">Proyección · Temporada Restante <span class="src-tag">estimado basado en ritmo actual</span></div>
     <div class="card" id="finProyeccion" style="padding:22px"></div>
+
+    <!-- Deuda Total ABSA -->
+    <div class="section-title" style="margin-top:4px">Posición de Deuda · ABSA <span class="src-tag">Cash Flow 22-Mar-2026 · leima@agbelher.com</span></div>
+    <div id="finDeudaTotal"></div>
 
     <!-- Deuda Calavo & Liquidación Real -->
     <div class="section-title">Deuda Calavo · Camino a la Liquidación Real <span class="src-tag">$6M total · $5M anticipo + $1M puente</span></div>
@@ -3543,48 +3560,37 @@ function checkPw(){
     }
   });
 
-  /* ── Financial Strip (fin-bar) ── */
-  var paidTotal = 0;
-  D.calavo.pagos.forEach(function (p) { if (p.pago) paidTotal += p.pago; });
+  /* ── Context Bar (fin-bar) ── */
   (function () {
-    var eb   = D.ebitda;
     var cv   = D.calavo;
     var rev  = D.revenue || {};
+    var dd   = D.deudas  || {};
+    var dc   = cv.deudaCalavo || {};
+    var tc   = (D.tomate && D.tomate.canales) || {};
+    var nacC = (tc.nacional && tc.nacional[0]) || {};
 
-    // Date / week
+    // Cajas facturadas export (settle)
+    var cajasExp = 0;
+    D.calavo.pagos.forEach(function(p){ cajasExp += p.cajas || 0; });
+
     document.getElementById('fbWeek').textContent  = D.meta.semana + ' · HOY';
     document.getElementById('fbFecha').textContent = D.meta.fecha;
 
-    // EBITDA Mes
-    var ebitdaOK  = eb.mes.actual >= eb.mes.budget;
-    var ebitdaVar = eb.mes.actual - eb.mes.budget;
-    var ebitdaEl  = document.getElementById('fbEbitdaVal');
-    ebitdaEl.textContent = (eb.mes.actual >= 0 ? '+' : '−') + fmt(Math.abs(eb.mes.actual));
-    ebitdaEl.className   = 'fin-bar-kpi-val ' + (ebitdaOK ? 'pos' : 'neg');
-    document.getElementById('fbEbitdaSub').textContent =
-      eb.mes.nombre + ' · ' + (ebitdaOK ? '+' : '') + fmt(ebitdaVar) + ' vs budget';
+    // Exportación
+    document.getElementById('fbExportVal').textContent = fmtN(cajasExp) + ' cajas';
+    document.getElementById('fbExportSub').textContent = fmt(rev.fob || 0) + ' bruto';
 
-    // Revenue
-    document.getElementById('fbRevenueVal').textContent = fmt(rev.total || 0);
-    document.getElementById('fbRevenueSub').textContent =
-      'FOB ' + fmt(rev.fob || 0) + ' · Nac ' + fmt(rev.nacional || 0);
+    // Nacional
+    document.getElementById('fbNacionalVal').textContent = fmtN(nacC.cajas || 0) + ' cajas';
+    document.getElementById('fbNacionalSub').textContent = fmt(rev.nacional || 0) + ' revenue';
 
-    // Venta Neta
-    document.getElementById('fbVentaNetaVal').textContent = fmt(cv.ventaNeta || cv.neto || 0);
+    // Deuda Total
+    document.getElementById('fbDeudaVal').textContent = fmt(dd.resumen ? dd.resumen.total : 0);
+    document.getElementById('fbDeudaSub').textContent = 'Calavo · Bancos · Prov. · SAT';
 
-    // Saldo Calavo
-    var saldo   = cv.saldoActual != null ? cv.saldoActual : cv.neto;
-    var saldoEl = document.getElementById('fbSaldoVal');
-    saldoEl.textContent = (saldo >= 0 ? '+' : '−') + fmt(Math.abs(saldo));
-    saldoEl.className   = 'fin-bar-kpi-val ' + (saldo >= 0 ? 'pos' : 'neg');
-    document.getElementById('fbSaldoSub').textContent =
-      saldo >= 0 ? 'a favor Belher' : 'capital de trabajo utilizado';
-
-    // Pagado
-    document.getElementById('fbPagadoVal').textContent = fmt(paidTotal);
-    var pagSemsCount = 0;
-    D.calavo.pagos.forEach(function(p){ if(p.pago) pagSemsCount++; });
-    document.getElementById('fbPagadoSub').textContent = pagSemsCount + ' semanas liquidadas';
+    // Liquidación real inicio
+    document.getElementById('fbLiqInicioVal').textContent = dc.cruceEstimado || '—';
+    document.getElementById('fbLiqInicioSub').textContent = dc.cruceEstimadoFecha || 'estimado';
   })();
 
   /* ── Footer ── */
@@ -4291,6 +4297,80 @@ function checkPw(){
       html += '</tbody></table></div>';
       html += '</div>';
       vCont.innerHTML = html;
+    }
+  }
+
+  /* ════════════════ NACIONAL ════════════════ */
+  function renderNacional() {
+    var tc    = (D.tomate && D.tomate.canales) || {};
+    var nacC  = (tc.nacional && tc.nacional[0])    || {};
+    var expC  = (tc.exportacion && tc.exportacion[0]) || {};
+    var rev   = D.revenue || {};
+
+    var cajasNac   = nacC.cajas    || 0;
+    var cajasRoma  = nacC.cajasRoma  || 0;
+    var cajasBola  = nacC.cajasBola  || 0;
+    var revNac     = nacC.revenue  || rev.nacional || 0;
+    var precNac    = cajasNac > 0 ? revNac / cajasNac : 0;
+    var cajasExp   = expC.cajas    || 0;
+    var revExp     = rev.fob || 0;
+    var precExp    = cajasExp > 0 ? revExp / cajasExp : 0;
+    var romaPct    = cajasNac > 0 ? (cajasRoma / cajasNac * 100) : 0;
+    var bolaPct    = cajasNac > 0 ? (cajasBola / cajasNac * 100) : 0;
+
+    /* KPIs */
+    var el = document.getElementById('nacKpis');
+    if (el) {
+      el.innerHTML = [
+        { lbl:'Cajas Nacionales',    val: fmtN(cajasNac),        sub:'temporada total',                      color:'#60a5fa' },
+        { lbl:'Revenue Nacional',    val: fmt(revNac),            sub:'sin comisión Calavo',                  color:'#60a5fa' },
+        { lbl:'Precio Promedio',     val: '$'+precNac.toFixed(2), sub:'USD / caja',                           color:'var(--accent2)' },
+        { lbl:'vs Export Calavo',    val: '$'+(precNac-precExp).toFixed(2), sub: precNac>precExp?'↑ sobre export':'↓ bajo export', color: precNac>precExp?'#34c759':'#ef4444' }
+      ].map(function(k){
+        return '<div class="card" style="padding:18px 16px;border-left:3px solid #60a5fa">' +
+          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">'+k.lbl+'</div>' +
+          '<div style="font-size:1.35rem;font-weight:700;color:'+k.color+';line-height:1">'+k.val+'</div>' +
+          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">'+k.sub+'</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    /* Roma vs Bola breakdown */
+    var canEl = document.getElementById('nacCanales');
+    if (canEl) {
+      canEl.innerHTML =
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">' +
+          '<div class="card" style="padding:18px 20px">' +
+            '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Roma</div>' +
+            '<div style="font-size:1.6rem;font-weight:800;color:#60a5fa;line-height:1">'+fmtN(cajasRoma)+'</div>' +
+            '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">cajas · '+romaPct.toFixed(1)+'% del total nacional</div>' +
+            '<div style="background:rgba(255,255,255,.06);border-radius:4px;height:6px;margin-top:8px;overflow:hidden">' +
+              '<div style="height:100%;width:'+romaPct.toFixed(0)+'%;background:#60a5fa;border-radius:4px"></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card" style="padding:18px 20px">' +
+            '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Bola</div>' +
+            '<div style="font-size:1.6rem;font-weight:800;color:#818cf8;line-height:1">'+fmtN(cajasBola)+'</div>' +
+            '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">cajas · '+bolaPct.toFixed(1)+'% del total nacional</div>' +
+            '<div style="background:rgba(255,255,255,.06);border-radius:4px;height:6px;margin-top:8px;overflow:hidden">' +
+              '<div style="height:100%;width:'+bolaPct.toFixed(0)+'%;background:#818cf8;border-radius:4px"></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    /* Notas */
+    var notaEl = document.getElementById('nacNotas');
+    if (notaEl) {
+      notaEl.innerHTML =
+        '<div class="hoy-alert info">' +
+          '<div class="hoy-alert-ico">i</div>' +
+          '<div class="hoy-alert-txt">' +
+            'Canal Nacional es <b>independiente de Calavo</b> — precio, logística y clientes son distintos. ' +
+            'No aplican comisión Calavo, ni deducción P&P, ni anticipo de capital. ' +
+            'Revenue se cobra directamente a clientes nacionales (anticipos: '+fmt((D.deudas&&D.deudas.anticiposNacional)||0)+' recibidos a cuenta).' +
+          '</div>' +
+        '</div>';
     }
   }
 
@@ -5194,6 +5274,106 @@ function checkPw(){
 
     try { renderCashFlow(); } catch(e) { console.warn('renderCashFlow error:', e); }
 
+    /* ── Deuda Total ABSA ── */
+    (function() {
+      var el = document.getElementById('finDeudaTotal');
+      if (!el) return;
+      var dd = D.deudas || {};
+      var rs = dd.resumen || {};
+      var bancos = dd.bancos || [];
+      var prov   = dd.proveedores || {};
+      var imp    = dd.impuestos || {};
+      var dc     = (D.calavo && D.calavo.deudaCalavo) || {};
+
+      var items = [
+        { lbl:'Calavo',             val: rs.calavo    || 0, color:'#f59e0b', nota:'Wire semanal = amortización · liq. real ~WK18' },
+        { lbl:'BanBajío',           val: 3850000,            color:'#ef4444', nota:'Vence May–Jul 2026 · 4 líneas' },
+        { lbl:'Santander',          val:  490000,            color:'#ef4444', nota:'~$25K/mes · liquida Mar-2027' },
+        { lbl:'Proveedores',        val: rs.proveedores|| 0, color:'#ff9f0a', nota:'Top: Celulosa $2.82M · Sierra $406K · Ahern $380K' },
+        { lbl:'SAT + IMSS',         val: rs.impuestos || 0,  color:'#a78bfa', nota:'Convenio IMSS vigente · SAT/IVA pendiente' }
+      ];
+      var totalMostrado = items.reduce(function(s,i){ return s+i.val; }, 0);
+
+      // Donut-style bar
+      var barsHtml = items.map(function(it){
+        var pct = totalMostrado > 0 ? (it.val / totalMostrado * 100) : 0;
+        return '<div style="margin-bottom:10px">' +
+          '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px">' +
+            '<span style="font-size:.73rem;font-weight:600;color:var(--fg)">'+it.lbl+'</span>' +
+            '<span style="font-size:.78rem;font-weight:700;color:'+it.color+'">'+fmt(it.val)+'</span>' +
+          '</div>' +
+          '<div style="background:rgba(255,255,255,.06);border-radius:4px;height:6px;overflow:hidden;margin-bottom:3px">' +
+            '<div style="height:100%;width:'+pct.toFixed(1)+'%;background:'+it.color+';border-radius:4px"></div>' +
+          '</div>' +
+          '<div style="font-size:.62rem;color:var(--muted)">'+it.nota+'</div>' +
+        '</div>';
+      }).join('');
+
+      // Vencimientos BanBajío
+      var bb = bancos.find(function(b){ return b.banco === 'BanBajío'; }) || {};
+      var venc = bb.vencimientos || {};
+      var vencHtml =
+        '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Vencimientos BanBajío</div>' +
+        ['mayo2026','junio2026','julio2026'].map(function(k){
+          var mes = k.replace('2026','').replace('mayo','May').replace('junio','Jun').replace('julio','Jul');
+          return '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.73rem">' +
+            '<span style="color:var(--muted)">'+mes+' 2026</span>' +
+            '<span style="font-weight:700;color:#ef4444">'+fmt(venc[k]||0)+'</span>' +
+          '</div>';
+        }).join('');
+
+      // Top proveedores
+      var tops = (prov.principales||[]).slice(0,6);
+      var topHtml =
+        '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Top Proveedores</div>' +
+        tops.map(function(p){
+          return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.7rem">' +
+            '<span style="color:var(--muted);max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+p.nombre+'</span>' +
+            '<span style="font-weight:600;color:#ff9f0a">'+fmt(p.saldo)+'</span>' +
+          '</div>';
+        }).join('');
+
+      el.innerHTML =
+        /* Total banner */
+        '<div style="display:flex;align-items:center;gap:16px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);border-radius:14px;padding:16px 20px;margin-bottom:14px">' +
+          '<div style="flex:1">' +
+            '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Deuda Total ABSA · Corte '+( dd.corte||'Mar-2026')+'</div>' +
+            '<div style="font-size:2rem;font-weight:900;color:#ef4444;line-height:1">'+fmt(rs.total||dd.totalGeneral||0)+'</div>' +
+            '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">Calavo + Bancos + Proveedores + SAT/IMSS</div>' +
+          '</div>' +
+          '<div style="text-align:right">' +
+            '<div style="font-size:.65rem;color:var(--muted)">Sin anticipos</div>' +
+            '<div style="font-size:1.1rem;font-weight:700;color:#ef4444">'+fmt(rs.subtotal||0)+'</div>' +
+            '<div style="font-size:.65rem;color:var(--muted);margin-top:6px">Anticipos Nacional</div>' +
+            '<div style="font-size:.85rem;font-weight:600;color:#60a5fa">'+fmt(rs.anticiposNac||0)+'</div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px">' +
+
+          /* Left: bars */
+          '<div class="card" style="padding:18px 20px">' +
+            '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Composición</div>' +
+            barsHtml +
+          '</div>' +
+
+          /* Center: BanBajío vencimientos */
+          '<div class="card" style="padding:18px 20px">' +
+            vencHtml +
+            '<div style="margin-top:14px;background:rgba(239,68,68,.06);border-radius:8px;padding:10px 12px;font-size:.7rem;line-height:1.55;color:var(--muted)">' +
+              '<b style="color:#ef4444">Urgente:</b> $1.1M vence May-2026 · $1.45M Jun · $1.3M Jul. Requiere liquidaciones Calavo o refinanciamiento.' +
+            '</div>' +
+          '</div>' +
+
+          /* Right: top proveedores */
+          '<div class="card" style="padding:18px 20px">' +
+            topHtml +
+            '<div style="margin-top:10px;font-size:.65rem;color:var(--muted)">'+fmt(prov.total||0)+' total · corte '+(prov.corte||'Mar-2026')+'</div>' +
+          '</div>' +
+
+        '</div>';
+    })();
+
     /* ── Deuda Calavo & Camino a Liquidación Real ── */
     (function() {
       var el = document.getElementById('finAnticipo');
@@ -5452,6 +5632,43 @@ function checkPw(){
 
     /* Normalize renamed tabs */
     if (tab === 'optomate') tab = 'tomate';
+
+    /* ── Nacional — Precio comparativo ── */
+    if (tab === 'nacional' && !chartsInit.nacPrecio) {
+      chartsInit.nacPrecio = true;
+      (function() {
+        var cvs = document.getElementById('chartNacPrecio');
+        if (!cvs) return;
+        var tc   = (D.tomate && D.tomate.canales) || {};
+        var nacC = (tc.nacional && tc.nacional[0]) || {};
+        var expC = (tc.exportacion && tc.exportacion[0]) || {};
+        var rev  = D.revenue || {};
+        var cajasNac = nacC.cajas || 1;
+        var cajasExp = expC.cajas || 1;
+        var precNac  = (nacC.revenue || rev.nacional || 0) / cajasNac;
+        var precExp  = (rev.fob || 0) / cajasExp;
+        new Chart(cvs.getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: ['Nacional', 'Exportación Calavo'],
+            datasets: [{
+              data: [precNac, precExp],
+              backgroundColor: ['rgba(96,165,250,.3)', 'rgba(52,199,89,.3)'],
+              borderColor: ['#60a5fa', '#34c759'],
+              borderWidth: 2, borderRadius: 8
+            }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+            scales: {
+              y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,.04)' },
+                   ticks: { callback: function(v){ return '$'+v.toFixed(2); }, font: { size: 10 } } },
+              x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+          }
+        });
+      })();
+    }
 
     /* ── Ejecutivo — Cajas & FOB dual-axis ── */
     if (tab === 'ejecutivo' && !chartsInit.ejVolFob) {
@@ -8023,6 +8240,7 @@ function checkPw(){
   renderTicker();
   renderEjecutivo();
   renderVentas();
+  renderNacional();
   renderHoy();
   renderOperaciones();
 

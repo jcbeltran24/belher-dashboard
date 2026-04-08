@@ -25,6 +25,89 @@ window.BELHER = {
     nacional:  3856070
   },
 
+  /* ══════════════════════════════════════════════════════
+     DEUDA TOTAL ABSA · Corte 22 Marzo 2026
+     Fuente: Cash Flow ABSA GC 2025-2026 (Leima Leyva)
+     ══════════════════════════════════════════════════════ */
+  deudas: {
+    corte: "22-Mar-2026",
+    totalGeneral: 16130436,   /* incluye anticipos nacionales */
+    totalSinAnticipos: 15568498,
+
+    calavo: {
+      saldo: 2873787,
+      nota: "Incluye anticipo capital ($6M), intereses, balance temporada anterior. Wire semanal = amortización — liquidación real inicia ~WK18."
+    },
+
+    bancos: [
+      {
+        banco: "BanBajío",
+        saldo: 3850000,
+        creditos: [
+          { fecha:"14-Ago-2025", disposicion:1000000, vence_mayo:  500000, vence_junio:  500000, vence_julio:       0 },
+          { fecha:"28-Ago-2025", disposicion: 750000, vence_mayo:  600000, vence_junio:  150000, vence_julio:       0 },
+          { fecha:"17-Sep-2025", disposicion:1000000, vence_mayo:       0, vence_junio:  400000, vence_julio:  600000 },
+          { fecha:"03-Oct-2025", disposicion:1100000, vence_mayo:       0, vence_junio:  400000, vence_julio:  700000 }
+        ],
+        vencimientos: { mayo2026: 1100000, junio2026: 1450000, julio2026: 1300000 },
+        nota: "4 líneas de crédito — vencen May–Jul 2026. Fuente: Hoja 'Créditos Bajio'"
+      },
+      {
+        banco: "Santander",
+        saldo: 490000,   /* saldo al 08-Abr-2026 tras amortización 12 */
+        creditos: [
+          { disposicion: 115000, saldoActual:  63315, fechaFin:"Mar-2027", amortMensual:  3230 },
+          { disposicion: 775000, saldoActual: 426685, fechaFin:"Mar-2027", amortMensual: 21770 }
+        ],
+        amortMensualTotal: 25000,   /* ~$25K/mes pago combinado ambos créditos */
+        nota: "2 créditos USD · mensualidad ~$25K · liquidan Mar-2027. Fuente: Hoja 'Santander'"
+      }
+    ],
+    totalBancos: 4340000,   /* BanBajío $3.85M + Santander $490K */
+
+    proveedores: {
+      total: 7160000,
+      corte: "12-Mar-2026",
+      principales: [
+        { nombre:"Celulosa y Corrugados de Sonora",     concepto:"Empaques (cartón)",         saldo: 2823510 },
+        { nombre:"Sierra Seed Internacional",            concepto:"Semillas",                  saldo:  405900 },
+        { nombre:"Aliado Continental",                   concepto:"Insumos agrícolas",          saldo:  260849 },
+        { nombre:"Ahern Internacional de México",        concepto:"Insumos / fertilizantes",   saldo:  379876 },
+        { nombre:"Hishtil México",                       concepto:"Plántulas / material vegetal",saldo: 239154 },
+        { nombre:"LOF Agro de Guasave",                  concepto:"Agroquímicos",               saldo:  160397 },
+        { nombre:"Keithly Williams Semillas",            concepto:"Semillas",                  saldo:  197814 },
+        { nombre:"ANSA VIDA",                            concepto:"Seguros / servicios",        saldo:  131785 },
+        { nombre:"Misael Sánchez Valdivia",              concepto:"Servicios campo",            saldo:  128553 },
+        { nombre:"Cuauhtémoc Ángulo Torres",             concepto:"Servicios campo",            saldo:  132141 },
+        { nombre:"Transportes CGG",                      concepto:"Flete refrigerado",          saldo:  118307 },
+        { nombre:"Otros proveedores (81% cubierto)",     concepto:"Varios",                     saldo: 1181714 }
+      ],
+      nota: "81% de cuentas por pagar cubiertas en los 21 proveedores principales al 12-Mar-2026"
+    },
+
+    impuestos: {
+      total: 1144712,   /* USD — converso desde MXP */
+      detalle: {
+        imssInfonav_vencido:  296000,   /* MXP 5,032,195 — vencido Dic25–Feb26 */
+        sat_vencido:          178000,   /* MXP 3,022,000 — IVA + ISR vencido */
+        convenioImss:         671000    /* MXP ~12.17M — pagos convenio IMSS 2026-2027 */
+      },
+      nota: "Convenio IMSS vigente — pagos mensuales de acuerdo a convenio. Multas IMSS pendientes. Tipo cambio aprox 17 MXP/USD."
+    },
+
+    anticiposNacional: 561938,   /* anticipos recibidos de clientes nacionales — pasivo */
+
+    resumen: {
+      calavo:        2873787,
+      bancos:        4340000,
+      proveedores:   7160000,
+      impuestos:     1144712,
+      subtotal:     15518499,
+      anticiposNac:   561938,
+      total:        16080437
+    }
+  },
+
   calavo: {
     revenueTotal:   9770259,
     /* ESTRUCTURA DE COMISIÓN — IMPORTANTE:
