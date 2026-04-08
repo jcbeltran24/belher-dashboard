@@ -3134,6 +3134,7 @@ function checkPw(){
   <button data-tab="nacional">Nacional</button>
   <button data-tab="finanzas">Finanzas</button>
   <button data-tab="optomate">Ops Tomate</button>
+  <button data-tab="cdc">CDC · Personal</button>
   <button data-tab="otros">Otros Cultivos</button>
   <button data-tab="calavoweekly">Intel Calavo</button>
   <button data-tab="estrategia">Estrategia</button>
@@ -6496,6 +6497,12 @@ function checkPw(){
       }
     }
 
+    /* ── CDC — lazy render on first visit ── */
+    if (tab === 'cdc' && !chartsInit.cdcTab) {
+      chartsInit.cdcTab = true;
+      renderCdc();
+    }
+
     if (tab === 'finanzas' && !chartsInit.finanzas) {
       chartsInit.finanzas = true;
       var cv  = D.calavo;
@@ -8525,7 +8532,7 @@ function checkPw(){
   renderEstrategia();
   renderIndustria();
   renderAuditorias();
-  renderCdc();
+  /* renderCdc() is called lazily inside initChartsForTab('cdc') */
 
   /* ════════════════════════════════════════════════
      LAYOUT EDITOR
