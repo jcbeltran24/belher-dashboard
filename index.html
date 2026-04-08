@@ -5990,7 +5990,7 @@ function checkPw(){
           '</div>' +
         '</div>' +
         '<div class="cw-hero-kpis">' +
-          '<div class="cw-hero-kpi"><div class="cw-hero-kpi-lbl">Pallets</div><div class="cw-hero-kpi-val">' + k.pallets.toLocaleString() + '</div><div class="cw-hero-kpi-chg flat">totales</div></div>' +
+          '<div class="cw-hero-kpi"><div class="cw-hero-kpi-lbl">Pallets</div><div class="cw-hero-kpi-val">' + (k.pallets != null ? k.pallets.toLocaleString() : '—') + '</div><div class="cw-hero-kpi-chg flat">totales</div></div>' +
           '<div class="cw-hero-kpi"><div class="cw-hero-kpi-lbl">Cargas</div><div class="cw-hero-kpi-val">' + k.loads + '</div><div class="cw-hero-kpi-chg flat">loads</div></div>' +
           '<div class="cw-hero-kpi"><div class="cw-hero-kpi-lbl">Paquetes</div><div class="cw-hero-kpi-val">' + Math.round(k.pkgs/1000) + 'K</div><div class="cw-hero-kpi-chg flat">' + k.pkgs.toLocaleString() + '</div></div>' +
           '<div class="cw-hero-kpi"><div class="cw-hero-kpi-lbl">FOB Prom.</div><div class="cw-hero-kpi-val">' + cFmt(k.fobPromedio) + '</div><div class="cw-hero-kpi-chg ' + fobDir + '">' + (fobChg >= 0 ? '+' : '') + fobChg.toFixed(1) + '% vs WK11</div></div>' +
@@ -6102,7 +6102,7 @@ function checkPw(){
           '</div>' +
         '</div>' +
         growerBar(p, accent) +
-        '<div class="cw-grow-meta">' + p.loads + ' cargas · ' + p.pkgs.toLocaleString() + ' pkgs</div>' +
+        '<div class="cw-grow-meta">' + (p.loads != null ? p.loads : '—') + ' cargas · ' + (p.pkgs != null ? p.pkgs.toLocaleString() : '—') + ' pkgs</div>' +
       '</div>';
     }
     function growerCard(grower, cls, accent) {
