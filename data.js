@@ -987,6 +987,27 @@ window.BELHER = {
       }
     ],
 
+    /* Desglose semanal: FOB bruto → Deducciones → Liquidación neta
+       Fuente: Gass Sheet WK15 · Overview Payments → Weekly Liquidations
+       comision=22%FOB · pp=$5/caja fijo · gastos=Z-code+otros · loan=amortización */
+    liquidaciones: [
+      { sem:"WK01", pkgs:10824,  fob:127737,   comision:28102,  pp:54120,   gastos:19843, loan:5412,  liq:20260  },
+      { sem:"WK02", pkgs:24200,  fob:255896,   comision:56297,  pp:121400,  gastos:42363, loan:12100, liq:23736  },
+      { sem:"WK03", pkgs:44384,  fob:495284,   comision:108963, pp:221925,  gastos:86497, loan:22192, liq:55708  },
+      { sem:"WK04", pkgs:48606,  fob:624488,   comision:137387, pp:243040,  gastos:79198, loan:24303, liq:140560 },
+      { sem:"WK05", pkgs:60965,  fob:942051,   comision:207251, pp:306600,  gastos:100125,loan:30483, liq:297592 },
+      { sem:"WK06", pkgs:85593,  fob:1245692,  comision:274052, pp:432880,  gastos:150188,loan:42753, liq:345819 },
+      { sem:"WK07", pkgs:86722,  fob:1103258,  comision:242717, pp:446320,  gastos:155545,loan:43053, liq:215624 },
+      { sem:"WK08", pkgs:58995,  fob:807878,   comision:177733, pp:297720,  gastos:96190, loan:29454, liq:206781 },
+      { sem:"WK09", pkgs:43120,  fob:738537,   comision:162478, pp:215600,  gastos:68040, loan:21560, liq:270859 },
+      { sem:"WK10", pkgs:69920,  fob:1928398,  comision:424248, pp:349600,  gastos:102627,loan:33880, liq:1018043},
+      { sem:"WK11", pkgs:69798,  fob:1428197,  comision:314203, pp:349000,  gastos:104022,loan:34019, liq:626953 },
+      { sem:"WK12", pkgs:48000,  fob:928429,   comision:204254, pp:240000,  gastos:70394, loan:23280, liq:390501 },
+      { sem:"WK13", pkgs:40048,  fob:890284,   comision:195862, pp:200240,  gastos:59152, loan:17836, liq:417193 },
+      { sem:"WK14", pkgs:30592,  fob:762704,   comision:167795, pp:152960,  gastos:43649, loan:10360, liq:387940 },
+      { sem:"WK15", pkgs:53976,  fob:597772,   comision:131510, pp:269880,  gastos:71079, loan:7104,  liq:118199 }
+    ],
+
     prediccionBolsa: [
       {
         simbolo: "CVGW", empresa: "Calavo Growers",

@@ -3281,6 +3281,7 @@ function checkPw(){
     <div id="cw-usda"></div>
     <div id="cw-toy"></div>
     <div id="cw-po-chart"></div>
+    <div id="cw-liquidaciones"></div>
     <div id="cw-discrepancias"></div>
     <!-- cw-noticias: en Market Intelligence — oculto -->
     <div id="cw-noticias" style="display:none"></div>
@@ -6324,6 +6325,147 @@ function checkPw(){
           }
         });
       }, 50);
+    })();
+
+    /* ── LIQUIDACIONES SEMANALES ── */
+    (function() {
+      var lq = CW.liquidaciones;
+      var lqEl = document.getElementById('cw-liquidaciones');
+      if (!lqEl || !lq || !lq.length) return;
+
+      /* ── Stacked bar chart ── */
+      lqEl.innerHTML =
+        secHdr('Desglose Semanal · FOB → Deducciones → Liquidación', 'Gass Sheet WK15 · Overview Payments · Weekly Liquidations') +
+        '<div class="card" style="padding:20px 20px 14px">' +
+          '<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px">' +
+            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#34c759;border-radius:3px;display:inline-block"></span>Liquidación neta</span>' +
+            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#ff9f0a;border-radius:3px;display:inline-block"></span>Gastos (Z-code+otros)</span>' +
+            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#ff453a;border-radius:3px;display:inline-block"></span>Comisión (22%)</span>' +
+            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#3b82f6;border-radius:3px;display:inline-block"></span>Pick &amp; Pack ($5/caja)</span>' +
+          '</div>' +
+          '<div style="height:240px"><canvas id="chartLiquidaciones"></canvas></div>' +
+        '</div>' +
+        /* ── Detail table ── */
+        secHdr('Tabla de Liquidaciones WK01–WK15', 'Fuente: Weekly Liquidations · en USD') +
+        '<div class="card" style="padding:0;overflow:hidden">' +
+          '<div class="tbl-wrap"><table class="liq-tbl" style="width:100%;border-collapse:collapse;font-size:.72rem;font-variant-numeric:tabular-nums">' +
+            '<thead><tr>' +
+              '<th style="padding:10px 14px;text-align:left;color:var(--muted);font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">WK</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:var(--muted);font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Pkgs</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#34c759;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">FOB Total</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#34c759;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">FOB $/caja</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#ff453a;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Comisión</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#3b82f6;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">P&P</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#ff9f0a;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Gastos</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:var(--muted);font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Loan</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#fff;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Liquidación</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#fff;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Liq $/caja</th>' +
+            '</tr></thead><tbody>' +
+            (function() {
+              var rows = '';
+              var totFob=0,totComis=0,totPP=0,totGast=0,totLoan=0,totLiq=0,totPkgs=0;
+              lq.forEach(function(w, i) {
+                var fobPk = w.fob / w.pkgs;
+                var liqPk = w.liq / w.pkgs;
+                var bg = i%2===0 ? 'rgba(255,255,255,.018)' : 'transparent';
+                var liqColor = liqPk >= 10 ? '#34c759' : liqPk >= 5 ? '#a3e635' : liqPk >= 2 ? '#facc15' : '#ff9f0a';
+                totFob+=w.fob; totComis+=w.comision; totPP+=w.pp; totGast+=w.gastos; totLoan+=w.loan; totLiq+=w.liq; totPkgs+=w.pkgs;
+                rows += '<tr style="background:' + bg + '">' +
+                  '<td style="padding:8px 14px;font-weight:700;color:rgba(255,255,255,.85)">' + w.sem + '</td>' +
+                  '<td style="padding:8px 14px;text-align:right;color:var(--muted)">' + w.pkgs.toLocaleString() + '</td>' +
+                  '<td style="padding:8px 14px;text-align:right;color:#34c759">$' + Math.round(w.fob).toLocaleString() + '</td>' +
+                  '<td style="padding:8px 14px;text-align:right;color:#34c759;font-weight:600">$' + fobPk.toFixed(2) + '</td>' +
+                  '<td style="padding:8px 14px;text-align:right;color:#ff453a">$' + Math.round(w.comision).toLocaleString() + '</td>' +
+                  '<td style="padding:8px 14px;text-align:right;color:#3b82f6">$' + Math.round(w.pp).toLocaleString() + '</td>' +
+                  '<td style="padding:8px 14px;text-align:right;color:#ff9f0a">$' + Math.round(w.gastos).toLocaleString() + '</td>' +
+                  '<td style="padding:8px 14px;text-align:right;color:var(--muted)">$' + Math.round(w.loan).toLocaleString() + '</td>' +
+                  '<td style="padding:8px 14px;text-align:right;font-weight:700;color:#fff">$' + Math.round(w.liq).toLocaleString() + '</td>' +
+                  '<td style="padding:8px 14px;text-align:right;font-weight:700;color:' + liqColor + '">$' + liqPk.toFixed(2) + '</td>' +
+                '</tr>';
+              });
+              // Totals row
+              rows += '<tr style="background:rgba(255,255,255,.04);border-top:1px solid rgba(255,255,255,.12)">' +
+                '<td style="padding:9px 14px;font-weight:800;color:#fff;letter-spacing:.5px">TOTAL</td>' +
+                '<td style="padding:9px 14px;text-align:right;font-weight:700;color:rgba(255,255,255,.7)">' + totPkgs.toLocaleString() + '</td>' +
+                '<td style="padding:9px 14px;text-align:right;font-weight:800;color:#34c759">$' + Math.round(totFob).toLocaleString() + '</td>' +
+                '<td style="padding:9px 14px;text-align:right;font-weight:800;color:#34c759">$' + (totFob/totPkgs).toFixed(2) + '</td>' +
+                '<td style="padding:9px 14px;text-align:right;font-weight:700;color:#ff453a">$' + Math.round(totComis).toLocaleString() + '</td>' +
+                '<td style="padding:9px 14px;text-align:right;font-weight:700;color:#3b82f6">$' + Math.round(totPP).toLocaleString() + '</td>' +
+                '<td style="padding:9px 14px;text-align:right;font-weight:700;color:#ff9f0a">$' + Math.round(totGast).toLocaleString() + '</td>' +
+                '<td style="padding:9px 14px;text-align:right;font-weight:700;color:var(--muted)">$' + Math.round(totLoan).toLocaleString() + '</td>' +
+                '<td style="padding:9px 14px;text-align:right;font-weight:800;color:#fff">$' + Math.round(totLiq).toLocaleString() + '</td>' +
+                '<td style="padding:9px 14px;text-align:right;font-weight:800;color:#34c759">$' + (totLiq/totPkgs).toFixed(2) + '</td>' +
+              '</tr>';
+              return rows;
+            })() +
+            '</tbody></table></div>' +
+        '</div>';
+
+      /* ── Chart ── */
+      setTimeout(function() {
+        var cvs = document.getElementById('chartLiquidaciones');
+        if (!cvs) return;
+        var labels = lq.map(function(w) { return w.sem; });
+        function pkVal(fn) { return lq.map(fn); }
+
+        new Chart(cvs.getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              { label:'Liquidación neta', data: pkVal(function(w){ return +(w.liq/w.pkgs).toFixed(2); }),
+                backgroundColor:'rgba(52,199,89,.82)',  borderWidth:0, stack:'s' },
+              { label:'Gastos',           data: pkVal(function(w){ return +(w.gastos/w.pkgs).toFixed(2); }),
+                backgroundColor:'rgba(255,159,10,.78)', borderWidth:0, stack:'s' },
+              { label:'Comisión',         data: pkVal(function(w){ return +(w.comision/w.pkgs).toFixed(2); }),
+                backgroundColor:'rgba(255,69,58,.78)',  borderWidth:0, stack:'s' },
+              { label:'Pick & Pack',      data: pkVal(function(w){ return +(w.pp/w.pkgs).toFixed(2); }),
+                backgroundColor:'rgba(59,130,246,.80)', borderWidth:0, stack:'s' }
+            ]
+          },
+          options: {
+            responsive:true, maintainAspectRatio:false,
+            interaction:{ mode:'index', intersect:false },
+            plugins:{
+              legend:{ display:false },
+              tooltip:{
+                backgroundColor:'rgba(20,20,28,.93)',
+                titleColor:'rgba(255,255,255,.85)',
+                bodyColor:'rgba(255,255,255,.65)',
+                borderColor:'rgba(255,255,255,.08)',
+                borderWidth:1, padding:10,
+                callbacks:{
+                  afterTitle: function(items) {
+                    var i = items[0].dataIndex;
+                    var w = lq[i];
+                    return 'FOB total: $' + Math.round(w.fob).toLocaleString() + '  (' + w.pkgs.toLocaleString() + ' pkgs)';
+                  },
+                  label: function(ctx) {
+                    var i = ctx.dataIndex;
+                    var w = lq[i];
+                    var total = w.fob / w.pkgs;
+                    var pct = (ctx.parsed.y / total * 100).toFixed(1);
+                    return ' ' + ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2) + '/caja  (' + pct + '%)';
+                  },
+                  footer: function(items) {
+                    var i = items[0].dataIndex;
+                    var w = lq[i];
+                    return 'FOB $/caja: $' + (w.fob/w.pkgs).toFixed(2) + '  →  Liq $/caja: $' + (w.liq/w.pkgs).toFixed(2);
+                  }
+                }
+              }
+            },
+            scales:{
+              y:{
+                stacked:true,
+                ticks:{ callback:function(v){ return '$'+v.toFixed(0); }, color:'rgba(255,255,255,.4)', font:{size:10}, maxTicksLimit:7 },
+                grid:{ color:'rgba(255,255,255,.04)' }
+              },
+              x:{ stacked:true, ticks:{ color:'rgba(255,255,255,.4)', font:{size:9.5} }, grid:{ display:false } }
+            }
+          }
+        });
+      }, 60);
     })();
 
     /* ── DISCREPANCIAS ── */
