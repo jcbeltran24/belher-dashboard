@@ -4026,10 +4026,25 @@ function checkPw(){
     var al   = D.alertas || [];
     var iconMap = { success:'✓', danger:'!', warning:'⚠', info:'i' };
 
-    /* Season totals from liquidaciones */
-    var totCajas = 0, totRevenue = 0, totLiq = 0;
-    liq.forEach(function(r){ totCajas += r.pkgs||0; totRevenue += r.fob||0; totLiq += r.liq||0; });
-    var avgFob = totCajas > 0 ? totRevenue / totCajas : 0;
+    /* Season totals from liquidaciones (exportación Calavo) */
+    var totLiqCajas = 0, totRevLiq = 0, totLiq = 0;
+    liq.forEach(function(r){ totLiqCajas += r.pkgs||0; totRevLiq += r.fob||0; totLiq += r.liq||0; });
+    var avgFob = totLiqCajas > 0 ? totRevLiq / totLiqCajas : 0;
+
+    /* Canal data */
+    var rev = D.revenue || {};
+    var tc  = (D.tomate && D.tomate.canales) || {};
+    var expCanal = (tc.exportacion && tc.exportacion[0]) || {};
+    var nacCanal = (tc.nacional    && tc.nacional[0])    || {};
+    var cajasExp = expCanal.cajas || totLiqCajas;
+    var cajasNac = nacCanal.cajas || 0;
+    var revExp   = rev.fob      || totRevLiq;
+    var revNac   = rev.nacional || nacCanal.revenue || 0;
+
+    /* Deuda pendiente */
+    var dc   = (D.calavo && D.calavo.deudaCalavo) || {};
+    var pend = dc.pendiente || 0;
+    var cruceSem = dc.cruceEstimado || '—';
 
     /* Latest confirmed FOB (tipo:'real') + latest USDA */
     var lastReal = null, lastUsda = null;
@@ -4050,25 +4065,39 @@ function checkPw(){
       }
     });
     var todayProds = bas.length ? bas[0].productos : [];
-    var todayBasFecha = bas.length ? bas[0].fecha : null;
 
-    /* ── KPI Strip ── */
+    /* ── KPI Strip (2 canales separados) ── */
     var kStrip = document.getElementById('ejKpiStrip');
     if (kStrip) {
-      var semCount = 0;
-      pag.forEach(function(p){ if (p.cajas) semCount++; });
-      kStrip.innerHTML = [
-        { lbl:'Cajas Exportadas', val: fmtN(totCajas), sub:'WK01–WK'+semCount+' · Calavo', color:'var(--green2)' },
-        { lbl:'FOB Promedio',     val: '$'+avgFob.toFixed(2), sub:'ponderado por caja',      color:'var(--accent2)' },
-        { lbl:'Revenue Bruto',   val: fmt(totRevenue),        sub:'Calavo Gross FOB',         color:'var(--green2)' },
-        { lbl:'Amortizado Deuda', val: fmt(totLiq),              sub:'de $6M deuda — wire≠neto', color:'#f59e0b' }
-      ].map(function(k){
-        return '<div class="ej-kpi-box">' +
-          '<div class="ej-kpi-lbl">'+k.lbl+'</div>' +
-          '<div class="ej-kpi-val" style="color:'+k.color+'">'+k.val+'</div>' +
-          '<div class="ej-kpi-sub">'+k.sub+'</div>' +
+      kStrip.innerHTML =
+        /* Exportación Calavo — cajas facturadas del settle */
+        '<div class="ej-kpi-box" style="border-left:3px solid #34c759">' +
+          '<div class="ej-kpi-lbl">Exportación · Calavo</div>' +
+          '<div class="ej-kpi-val" style="color:var(--green2)">'+fmtN(totLiqCajas)+'</div>' +
+          '<div class="ej-kpi-sub">cajas facturadas · '+fmt(revExp)+' bruto</div>' +
+          '<div style="font-size:.65rem;color:var(--muted);margin-top:3px">FOB prom $'+avgFob.toFixed(2)+'/caja facturada</div>' +
+        '</div>' +
+        /* Nacional */
+        '<div class="ej-kpi-box" style="border-left:3px solid #60a5fa">' +
+          '<div class="ej-kpi-lbl">Nacional</div>' +
+          '<div class="ej-kpi-val" style="color:#60a5fa">'+fmtN(cajasNac)+'</div>' +
+          '<div class="ej-kpi-sub">cajas · '+fmt(revNac)+' revenue</div>' +
+          '<div style="font-size:.65rem;color:var(--muted);margin-top:3px">Sin relación con Calavo / deuda</div>' +
+        '</div>' +
+        /* Señal FOB vs USDA */
+        '<div class="ej-kpi-box">' +
+          '<div class="ej-kpi-lbl">FOB Calavo vs USDA</div>' +
+          '<div class="ej-kpi-val" style="color:var(--accent2)">'+(lastReal?'$'+lastReal.fob.toFixed(2):'—')+'</div>' +
+          '<div class="ej-kpi-sub">'+(lastReal?lastReal.sem+' · Calavo':'—')+'</div>' +
+          '<div style="font-size:.65rem;color:var(--muted);margin-top:3px">USDA: '+(lastUsda?'$'+lastUsda.usda.toFixed(2)+' '+lastUsda.sem:'—')+'</div>' +
+        '</div>' +
+        /* Deuda pendiente */
+        '<div class="ej-kpi-box" style="border-left:3px solid #f59e0b">' +
+          '<div class="ej-kpi-lbl">Deuda Calavo Pendiente</div>' +
+          '<div class="ej-kpi-val" style="color:#f59e0b">'+fmt(pend)+'</div>' +
+          '<div class="ej-kpi-sub">de $6M — wire ≠ neto a Belher</div>' +
+          '<div style="font-size:.65rem;color:#34c759;margin-top:3px;font-weight:700">Cruce estimado: '+cruceSem+'</div>' +
         '</div>';
-      }).join('');
     }
 
     /* ── Señal del Mercado ── */
@@ -4142,24 +4171,52 @@ function checkPw(){
     liq.forEach(function(r){ totCajas+=r.pkgs||0; totRevenue+=r.fob||0; totLiq+=r.liq||0; totComision+=r.comision||0; });
     var avgFob = totCajas > 0 ? totRevenue / totCajas : 0;
 
-    /* KPIs */
+    /* KPIs — separado por canal */
     var cv    = D.calavo || {};
     var reemb = cv.reembolsoPendiente || 0;
+    var rev   = D.revenue || {};
+    var tc2   = (D.tomate && D.tomate.canales) || {};
+    var nacC  = (tc2.nacional && tc2.nacional[0]) || {};
+    var revExp2 = rev.fob      || totRevenue;
+    var revNac2 = rev.nacional || nacC.revenue || 0;
+    var cajasNac2 = nacC.cajas || 0;
+    var precNac   = cajasNac2 > 0 ? revNac2 / cajasNac2 : 0;
+    var dc2  = cv.deudaCalavo || {};
+    var pend2 = dc2.pendiente || 0;
+    var cruce2 = dc2.cruceEstimado || '—';
+    var amort2 = dc2.amortizadoWk15 || totLiq;
+
     var vKpis = document.getElementById('ventasKpis');
     if (vKpis) {
-      var kpiRows = [
-        { lbl:'Total Cajas Export', val: fmtN(totCajas),        sub:'WK01–WK15 · Calavo',      color:'var(--green2)', extra:'' },
-        { lbl:'FOB Ponderado',      val: '$'+avgFob.toFixed(2), sub:'revenue / cajas',           color:'var(--accent2)', extra:'' },
-        { lbl:'Revenue Bruto',      val: fmt(totRevenue),        sub:'Calavo Gross FOB',          color:'var(--green2)', extra:'' },
-        { lbl:'Amortizado Deuda',   val: fmt(totLiq),             sub:'de $6M · wire ≠ neto real', color:'#f59e0b', extra:'' }
-      ];
-      vKpis.innerHTML = kpiRows.map(function(k){
-        return '<div class="card" style="padding:18px 16px">' +
-          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">'+k.lbl+'</div>' +
-          '<div style="font-size:1.35rem;font-weight:700;color:'+k.color+';line-height:1">'+k.val+'</div>' +
-          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">'+k.sub+'</div>' +
+      vKpis.innerHTML =
+        /* Exportación */
+        '<div class="card" style="padding:18px 16px;border-left:3px solid #34c759">' +
+          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Exportación · Calavo</div>' +
+          '<div style="font-size:1.35rem;font-weight:700;color:var(--green2);line-height:1">'+fmtN(totCajas)+'</div>' +
+          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">cajas facturadas</div>' +
+          '<div style="font-size:.67rem;color:var(--green2);margin-top:2px;font-weight:600">'+fmt(revExp2)+' bruto · $'+avgFob.toFixed(2)+'/caja</div>' +
+        '</div>' +
+        /* Nacional */
+        '<div class="card" style="padding:18px 16px;border-left:3px solid #60a5fa">' +
+          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Nacional</div>' +
+          '<div style="font-size:1.35rem;font-weight:700;color:#60a5fa;line-height:1">'+fmtN(cajasNac2)+'</div>' +
+          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">cajas vendidas</div>' +
+          '<div style="font-size:.67rem;color:#60a5fa;margin-top:2px;font-weight:600">'+fmt(revNac2)+' · $'+precNac.toFixed(2)+'/caja</div>' +
+        '</div>' +
+        /* Amortizado deuda Calavo */
+        '<div class="card" style="padding:18px 16px;border-left:3px solid #f59e0b">' +
+          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Amortizado Deuda Calavo</div>' +
+          '<div style="font-size:1.35rem;font-weight:700;color:#f59e0b;line-height:1">'+fmt(amort2)+'</div>' +
+          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">de $6M total</div>' +
+          '<div style="font-size:.67rem;color:#f59e0b;margin-top:2px;font-weight:600">'+fmt(pend2)+' pendiente</div>' +
+        '</div>' +
+        /* Cruce a liquidación real */
+        '<div class="card" style="padding:18px 16px;border-left:3px solid #34c759;background:rgba(52,199,89,.04)">' +
+          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Inicio Liquidación Real</div>' +
+          '<div style="font-size:1.35rem;font-weight:700;color:#34c759;line-height:1">'+cruce2+'</div>' +
+          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">~28-Abr-2026 estimado</div>' +
+          '<div style="font-size:.67rem;color:#34c759;margin-top:2px;font-weight:600">Wire = neto real a Belher desde '+cruce2+'</div>' +
         '</div>';
-      }).join('');
     }
 
     /* Reembolso anti-dumping alert banner */
@@ -5113,12 +5170,17 @@ function checkPw(){
     /* ── CF Calavo summary card ── */
     var cvsaldo = cv.saldoActual;
     var saldoOK = cvsaldo != null && cvsaldo >= 0;
+    var revF  = D.revenue || {};
+    var tc3   = (D.tomate && D.tomate.canales) || {};
+    var nacC3 = (tc3.nacional && tc3.nacional[0]) || {};
     document.getElementById('finKpis').innerHTML =
-      kpiCard('Ventas Brutas · Calavo WK12', fmt(cv.revenueTotal), 'Gross FOB · Calavo GC 2025–26', 'pos', 'accent-pos', pill('up', fmtN(totalCajas) + ' cajas')) +
-      kpiCard('Venta Neta · Calavo WK12', fmt(cv.ventaNeta || cv.neto),
-        'Comisión ' + fmt(cv.comision) + ' · AD ' + fmt(cv.antiDumping),
-        'pos', 'accent-pos', pill('up', '12% comisión')) +
-      kpiCard('Pick &amp; Pack Recibido', fmt(cv.pickPack), 'WK01–WK' + semCount + ' · ' + semCount + ' sem.',
+      kpiCard('Exportación Calavo · Cajas Fact.', fmt(cv.revenueTotal),
+        fmtN(totalCajas) + ' cajas facturadas · $' + (totalCajas ? (cv.revenueTotal/totalCajas).toFixed(2) : '—') + '/caja',
+        'pos', 'accent-pos', pill('up', 'FOB Gross')) +
+      kpiCard('Nacional · Cajas &amp; Revenue', fmt(revF.nacional || nacC3.revenue || 0),
+        fmtN(nacC3.cajas || 0) + ' cajas · sin relación Calavo',
+        'dark', 'accent-blue', pill('up', 'canal independiente')) +
+      kpiCard('Pick &amp; Pack Recibido', fmt(cv.pickPack), 'WK01–WK' + semCount + ' · $5/caja · independiente de deuda',
         'dark', 'accent-blue', pill('up', '✓ ' + semCount + ' semanas pagadas')) +
       (function(){
         var dc = cv.deudaCalavo || {};
