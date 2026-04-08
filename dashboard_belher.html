@@ -3035,20 +3035,20 @@ function checkPw(){
     <div class="fin-bar-kpi-val acc" id="fbVBNacionalVal">—</div>
     <div class="fin-bar-kpi-sub" id="fbVBNacionalSub">canal directo</div>
   </div>
+  <div class="fin-bar-kpi" id="fbVBTotal">
+    <div class="fin-bar-kpi-lbl">Venta Bruta Total</div>
+    <div class="fin-bar-kpi-val pos" id="fbVBTotalVal">—</div>
+    <div class="fin-bar-kpi-sub" id="fbVBTotalSub">Calavo + Nacional</div>
+  </div>
   <div class="fin-bar-kpi" id="fbDeuda">
     <div class="fin-bar-kpi-lbl">Deuda Total</div>
     <div class="fin-bar-kpi-val neg" id="fbDeudaVal">—</div>
     <div class="fin-bar-kpi-sub" id="fbDeudaSub">Calavo · Bancos · Prov. · SAT</div>
   </div>
-  <div class="fin-bar-kpi" id="fbLiq">
-    <div class="fin-bar-kpi-lbl">Liquidado a Calavo</div>
-    <div class="fin-bar-kpi-val" id="fbLiqVal">—</div>
-    <div class="fin-bar-kpi-sub" id="fbLiqSub">amortización deuda $6M</div>
-  </div>
-  <div class="fin-bar-kpi" style="border-right:none" id="fbNeto">
-    <div class="fin-bar-kpi-lbl">Neto Belher</div>
-    <div class="fin-bar-kpi-val acc" id="fbNetoVal">—</div>
-    <div class="fin-bar-kpi-sub" id="fbNetoSub">P&amp;P recibido</div>
+  <div class="fin-bar-kpi" style="border-right:none" id="fbPendiente">
+    <div class="fin-bar-kpi-lbl">Pendiente · Liquidar Calavo</div>
+    <div class="fin-bar-kpi-val" style="color:#fbbf24" id="fbPendienteVal">—</div>
+    <div class="fin-bar-kpi-sub" id="fbPendienteSub">de $6M · cruce est. WK18</div>
   </div>
 </div>
 
@@ -3624,20 +3624,22 @@ function checkPw(){
     document.getElementById('fbVBNacionalVal').textContent = fmt(rev.nacional || 0);
     document.getElementById('fbVBNacionalSub').textContent = fmtN(cajasNac) + ' cajas';
 
+    // Venta Bruta Total
+    var vbCalavo  = cv.revenueTotal || rev.fob || 0;
+    var vbNac     = rev.nacional || 0;
+    document.getElementById('fbVBTotalVal').textContent = fmt(vbCalavo + vbNac);
+    document.getElementById('fbVBTotalSub').textContent = fmtN(cajasExp + cajasNac) + ' cajas totales';
+
     // Deuda Total
     var deudaTotal = (dd.resumen && (dd.resumen.total || dd.totalGeneral)) || dd.totalGeneral || 0;
     document.getElementById('fbDeudaVal').textContent = fmt(deudaTotal);
     document.getElementById('fbDeudaSub').textContent = 'Calavo · Bancos · Prov. · SAT';
 
-    // Liquidado a Calavo (amortización deuda $6M)
-    var amort = dc.amortizadoWk15 || 0;
-    var pct   = dc.total ? Math.round(amort / dc.total * 100) : 0;
-    document.getElementById('fbLiqVal').textContent = fmt(amort);
-    document.getElementById('fbLiqSub').textContent = pct + '% de $6M · pendiente ' + fmt(dc.pendiente || 0);
-
-    // Neto Belher (P&P recibido)
-    document.getElementById('fbNetoVal').textContent = fmt(cv.pickPack || 0);
-    document.getElementById('fbNetoSub').textContent = 'P&P recibido';
+    // Pendiente a liquidar Calavo
+    var pend = dc.pendiente || 0;
+    var pct  = dc.total ? Math.round((dc.amortizadoWk15 || 0) / dc.total * 100) : 0;
+    document.getElementById('fbPendienteVal').textContent = fmt(pend);
+    document.getElementById('fbPendienteSub').textContent = pct + '% amortizado · cruce est. ' + (dc.cruceEstimado || 'WK18');
   })();
 
   /* ── Footer ── */
