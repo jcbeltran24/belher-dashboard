@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Martes 07 Abr 2026",
     semana: "WK 15",
-    actualizado: "07/04/2026 · 18:30"
+    actualizado: "07/04/2026 · 23:45"
   },
 
   alertas: [
@@ -365,6 +365,7 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"17:45", asunto:"Re: Settle WK12 — Leima confirma a Carlos: 'Gracias Carlos. Buen día.' (Gass Sheet WK15 recibido ✓)", de:"Leima Leyva · Administración", leido:false, fecha:"07/04" },
     { hora:"18:17", asunto:"AVANCE DE TRILLA 07/04/2026 SORGO — Carrillo + Campo Beltrán + El Dos · 18 ha trilladas hoy", de:"Bascula Belher", leido:false, fecha:"07/04" },
     { hora:"17:30", asunto:"REPORTE DE BASCULA 07/04/2026 (REZAGA DE TOMATE)", de:"Bascula Belher", leido:false, fecha:"07/04" },
     { hora:"16:51", asunto:"REPORTE DE BASCULA 07/04/2026 (TOMATE)", de:"Bascula Belher", leido:false, fecha:"07/04" },
@@ -799,6 +800,12 @@ window.BELHER = {
     ],
 
     correos: [
+      {
+        fecha: "07/04/2026", de: "Leima Leyva", cargo: "Finance Manager · Agrícola Belher",
+        asunto: "Re: Settle WK12 — confirmación recibo Gass Sheet WK15",
+        tipo: "settlement", nivel: "success",
+        resumen: "Leima a Carlos Valadez (17:45): 'Gracias Carlos. Buen día.' Confirma recibo del Gass Sheet WK15 (2026 05-04 Agricola Belher Settle WK15 1.xlsx). Cierre del ciclo de seguimiento settlement WK13-WK15."
+      },
       {
         fecha: "07/04/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya · Calavo",
         asunto: "Gass Sheet -Belher WK 15 — reporte hasta semana 14",
