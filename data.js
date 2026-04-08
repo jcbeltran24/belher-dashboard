@@ -243,7 +243,9 @@ window.BELHER = {
         { etiqueta:"Calavo", cajas:826841, cajasRoma:null, cajasBola:null, revenue:null, nota:"WK01–WK15 al 05-Abr · P&P settle $3,901,285" }
       ],
       nacional: [
-        { etiqueta:"Nacional", cajas:446116, cajasRoma:311917, cajasBola:134199, revenue:3856070 }
+        { etiqueta:"Nacional", cajas:446116, cajasRoma:311917, cajasBola:134199, revenue:3856070,
+          comisionPct:0.05, comision:192804, revenueNeto:3663267,
+          revPorCaja:8.64, revNetoPorCaja:8.21 }
       ]
     },
     /* Precio FOB Calavo por semana — Fuente: Gass Sheet WK15 · "Weekly Liquidations" (Overview Payments sheet)

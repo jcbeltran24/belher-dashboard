@@ -2653,6 +2653,35 @@ nav.tabs button[data-tab="ejecutivo"]::before {
   position: relative; top: -1px;
 }
 
+/* Panel Estratégico — 5 indicadores clave */
+.strat-panel { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; }
+.strat-ind {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 14px;
+  padding: 18px 16px; display: flex; flex-direction: column; gap: 5px;
+  transition: box-shadow .15s;
+}
+.strat-ind:hover { box-shadow: 0 0 0 1px rgba(255,255,255,.09); }
+.strat-ind-badge {
+  font-size: .5rem; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 4px; align-self: flex-start; margin-bottom: 4px;
+}
+.strat-ind-lbl { font-size: .58rem; font-weight: 700; letter-spacing: .9px; text-transform: uppercase; color: var(--muted); }
+.strat-ind-val { font-size: 1.4rem; font-weight: 800; line-height: 1.05; letter-spacing: -.4px; }
+.strat-ind-sub { font-size: .63rem; color: var(--muted); }
+.strat-ind-bar-wrap { height: 5px; background: rgba(255,255,255,.07); border-radius: 3px; margin: 6px 0 3px; overflow: hidden; }
+.strat-ind-bar { height: 100%; border-radius: 3px; transition: width .4s; }
+.strat-ind-action {
+  font-size: .6rem; font-weight: 700; margin-top: 6px; padding: 5px 8px;
+  border-radius: 6px; background: rgba(255,255,255,.04);
+  border-left: 2px solid; line-height: 1.4;
+}
+.strat-ind-rows { display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
+.strat-ind-row { display: flex; justify-content: space-between; font-size: .63rem; }
+.strat-ind-row-k { color: var(--muted); }
+.strat-ind-row-v { font-weight: 700; }
+@media (max-width: 900px) { .strat-panel { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 600px) { .strat-panel { grid-template-columns: 1fr 1fr; } }
+
 /* Ejecutivo tab components */
 .ej-kpi-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
 .ej-kpi-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 18px 16px; }
@@ -3042,6 +3071,9 @@ function checkPw(){
 
     <div class="section-title" style="margin-top:4px">Dashboard CEO · Temporada 2025–2026 <span class="src-tag" id="ejFechaTag">live</span></div>
     <div class="ej-kpi-strip" id="ejKpiStrip"></div>
+
+    <!-- Panel Estratégico — 5 indicadores clave de negocio -->
+    <div id="ejStratPanel" style="margin-top:18px"></div>
 
     <div class="ej-two-col" style="margin-top:20px">
       <div>
@@ -4119,6 +4151,129 @@ function checkPw(){
           '<div class="ej-kpi-sub">de $6M — wire ≠ neto a Belher</div>' +
           '<div style="font-size:.65rem;color:#34c759;margin-top:3px;font-weight:700">Cruce estimado: '+cruceSem+'</div>' +
         '</div>';
+    }
+
+    /* ── Panel Estratégico — 5 indicadores clave ── */
+    var sp = document.getElementById('ejStratPanel');
+    if (sp) {
+      var dc3  = D.calavo.deudaCalavo || {};
+      var dd3  = D.deudas || {};
+      var cv3  = D.calavo || {};
+      var baj  = (dd3.bancos && dd3.bancos[0]) || {};
+      var bajV = baj.vencimientos || {};
+      var nacD = (D.tomate && D.tomate.ventas && D.tomate.ventas.nacional && D.tomate.ventas.nacional[0]) || {};
+
+      /* 1 — Cruce Calavo */
+      var amort3 = dc3.amortizadoWk15 || 0;
+      var total3 = dc3.total || 6000000;
+      var pct3   = Math.round(amort3 / total3 * 100);
+      var pend3  = dc3.pendiente || 0;
+
+      /* 2 — Anti-Dumping retenido */
+      var ad3    = cv3.reembolsoPendiente || 0;
+      var adConf = cv3.reembolsoConfirmado || 0;
+      var adRiesgo = ad3 - adConf;
+
+      /* 3 — BanBajío vencimientos urgentes */
+      var bajMay = bajV.mayo2026 || 0;
+      var bajJun = bajV.junio2026 || 0;
+      var bajJul = bajV.julio2026 || 0;
+
+      /* 4 — FOB tendencia (últimas 2 semanas reales) */
+      var fobLast = null, fobPrev = null;
+      for (var ii = ph.length-1; ii >= 0; ii--) {
+        if (ph[ii].tipo === 'real') { if (!fobLast) fobLast = ph[ii]; else if (!fobPrev) { fobPrev = ph[ii]; break; } }
+      }
+
+      /* 5 — Canal neto: Nacional vs Exportación */
+      var nacRevPorCaja  = nacD.revNetoPorCaja  || (nacD.cajas > 0 ? (nacD.revenue*(1-(nacD.comisionPct||0.05))) / nacD.cajas : 0);
+      var totCajasExp3   = 0;
+      D.calavo.pagos.forEach(function(p){ totCajasExp3 += p.cajas||0; });
+      var fobBrutoXcaja  = totCajasExp3 > 0 ? (D.revenue.fob || 0) / totCajasExp3 : 0;
+      /* Neto export estimado: FOB - 12% comisión (sin AD que es reembolsable) */
+      var fobNetoXcaja   = fobBrutoXcaja * (1 - (cv3.comisionPct || 0.12));
+
+      /* Build HTML */
+      function ind(lbl, badge, badgeColor, val, valColor, sub, barPct, barColor, rows, action, actionColor) {
+        var barH = (typeof barPct === 'number')
+          ? '<div class="strat-ind-bar-wrap"><div class="strat-ind-bar" style="width:'+Math.min(barPct,100)+'%;background:'+barColor+'"></div></div>'
+          : '';
+        var rowsH = rows ? '<div class="strat-ind-rows">'+rows.map(function(r){
+          return '<div class="strat-ind-row"><span class="strat-ind-row-k">'+r[0]+'</span><span class="strat-ind-row-v" style="color:'+(r[2]||'rgba(255,255,255,.7)')+'">'+r[1]+'</span></div>';
+        }).join('')+'</div>' : '';
+        var actH = action ? '<div class="strat-ind-action" style="border-color:'+actionColor+';color:'+actionColor+'">'+action+'</div>' : '';
+        return '<div class="strat-ind">' +
+          '<span class="strat-ind-badge" style="background:'+badgeColor+'22;color:'+badgeColor+'">'+badge+'</span>' +
+          '<div class="strat-ind-lbl">'+lbl+'</div>' +
+          '<div class="strat-ind-val" style="color:'+valColor+'">'+val+'</div>' +
+          (sub ? '<div class="strat-ind-sub">'+sub+'</div>' : '') +
+          barH + rowsH + actH +
+        '</div>';
+      }
+
+      sp.innerHTML =
+        /* 1. Cruce deuda Calavo */
+        ind('Cruce Deuda Calavo', 'WK18 · 28-Abr', '#fbbf24',
+          fmt(pend3), '#fbbf24',
+          'pendiente de $6M — ' + pct3 + '% amortizado',
+          pct3, '#34c759',
+          [
+            ['Amortizado', fmt(amort3), '#34c759'],
+            ['Promedio WK11–14', fmt(dc3.avgLiq_wk11_14 || 0) + '/sem', 'rgba(255,255,255,.6)'],
+            ['Cruce estimado', (dc3.cruceEstimado||'—') + ' · ' + (dc3.cruceEstimadoFecha||''), '#fbbf24']
+          ],
+          '⚡ Después del cruce, cada wire = efectivo real a Belher', '#fbbf24') +
+
+        /* 2. Anti-Dumping retenido */
+        ind('Anti-Dumping Retenido', 'En Riesgo', '#f97316',
+          fmt(adRiesgo), '#f97316',
+          '~10% del settle — Calavo debe reembolsar',
+          adConf > 0 ? Math.round(adConf/ad3*100) : 0, '#f97316',
+          [
+            ['Retenido por Calavo', fmt(adRiesgo), '#f97316'],
+            ['Confirmado devuelto', fmt(adConf), adConf > 0 ? '#34c759' : 'var(--muted)'],
+            ['Comisión real Calavo', '12% (no 22%)', 'rgba(255,255,255,.6)']
+          ],
+          '→ Negociar con Irene Amezaga / John Lindeman antes del cierre', '#f97316') +
+
+        /* 3. BanBajío urgente */
+        ind('BanBajío · Vencimientos', 'Urgente', '#ef4444',
+          fmt(baj.saldo || 3850000), '#ef4444',
+          '4 líneas — vencen Mayo–Jul 2026',
+          null, null,
+          [
+            ['Mayo 2026', fmt(bajMay), bajMay > 0 ? '#ef4444' : 'var(--muted)'],
+            ['Junio 2026', fmt(bajJun), bajJun > 0 ? '#ef4444' : 'var(--muted)'],
+            ['Julio 2026', fmt(bajJul), bajJul > 0 ? '#ef4444' : 'var(--muted)']
+          ],
+          '→ Renegociar antes de WK18 — usar cruce Calavo como palanca', '#ef4444') +
+
+        /* 4. FOB tendencia */
+        ind('FOB Calavo · Tendencia', fobLast ? fobLast.sem : 'Último', fobLast && fobPrev && fobLast.fob > fobPrev.fob ? '#34c759' : '#fbbf24',
+          fobLast ? '$' + fobLast.fob.toFixed(2) : '—',
+          fobLast && fobPrev ? (fobLast.fob >= fobPrev.fob ? '#34c759' : '#fbbf24') : '#60a5fa',
+          fobLast ? fobLast.sem + (fobLast.nota && fobLast.nota.indexOf('parcial') >= 0 ? ' · settle parcial' : '') : '',
+          null, null,
+          fobPrev ? [
+            ['Semana anterior ('+fobPrev.sem+')', '$'+fobPrev.fob.toFixed(2)+'/caja', 'rgba(255,255,255,.7)'],
+            ['Variación', (fobLast.fob >= fobPrev.fob ? '+' : '') + (fobLast.fob - fobPrev.fob).toFixed(2), fobLast.fob >= fobPrev.fob ? '#34c759' : '#f87171'],
+            ['Pico temporada (WK10)', '$27.58/caja', 'rgba(255,255,255,.4)']
+          ] : null,
+          fobLast && fobLast.nota && fobLast.nota.indexOf('parcial') >= 0 ? '⚠ WK15 settle parcial — facturas pendientes de cerrar' : null,
+          '#fbbf24') +
+
+        /* 5. Canal: Nacional vs Export */
+        ind('Neto por Caja · Canales', 'Comparativo', '#60a5fa',
+          '$' + nacRevPorCaja.toFixed(2), '#60a5fa',
+          'Nacional neto (5% comisión)',
+          null, null,
+          [
+            ['Nacional bruto/caja', '$' + ((nacD.revenue||0) / (nacD.cajas||1)).toFixed(2), '#60a5fa'],
+            ['Nacional neto/caja', '$' + nacRevPorCaja.toFixed(2) + ' (−5%)', '#60a5fa'],
+            ['Export FOB neto/caja', '$' + fobNetoXcaja.toFixed(2) + ' (−12%)', '#34c759'],
+            ['Export: sin Calavo debt', 'Post-WK18', '#fbbf24']
+          ],
+          '→ Export gana en FOB; Nacional = flujo limpio ya desde hoy', '#60a5fa');
     }
 
     /* ── Señal del Mercado ── */
