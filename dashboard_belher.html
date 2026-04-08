@@ -3280,6 +3280,7 @@ function checkPw(){
     <div id="cw-ventas"></div>
     <div id="cw-usda"></div>
     <div id="cw-toy"></div>
+    <div id="cw-po-chart"></div>
     <div id="cw-discrepancias"></div>
     <!-- cw-noticias: en Market Intelligence — oculto -->
     <div id="cw-noticias" style="display:none"></div>
@@ -6192,6 +6193,138 @@ function checkPw(){
             return '<tr><td>' + p.mes + '</td><td>' + cFmt(p.yPrev) + ' <small style="color:var(--muted)">(' + p.prevLabel + ')</small></td><td>' + cFmt(p.yCurr) + '</td><td class="' + c + '">' + (d!=null?(d>=0?'+':'')+d+'%':'—') + '</td></tr>';
           }).join('') + '</tbody></table></div>' +
       '</div>';
+
+    /* ── PO PRICE HISTORY CHART ── */
+    (function() {
+      var ph = (D.tomate && D.tomate.preciosHistorico) || [];
+      var poEl = document.getElementById('cw-po-chart');
+      if (!poEl || !ph.length) return;
+
+      poEl.innerHTML =
+        secHdr('Evolución Precio FOB por Semana · PO History', 'Calavo Settle WK11–WK14 confirmado · WK01–WK10 + WK15 estimado IA') +
+        '<div class="card" style="padding:20px 20px 14px">' +
+          '<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px">' +
+            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
+              '<span style="width:22px;height:2.5px;background:#34c759;border-radius:2px;display:inline-block"></span>FOB Real (settle confirmado)</span>' +
+            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
+              '<span style="width:22px;height:2px;background:#3b82f6;border-radius:2px;display:inline-block;opacity:.7"></span>FOB Estimado (IA)</span>' +
+            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
+              '<span style="width:22px;height:1.5px;background:rgba(250,204,21,.7);border-radius:2px;display:inline-block"></span>Contrato $16.95</span>' +
+            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
+              '<span style="width:22px;height:1.5px;background:rgba(255,149,0,.75);border-radius:2px;display:inline-block"></span>Escalador desde $20.95</span>' +
+          '</div>' +
+          '<div style="height:240px"><canvas id="chartPOPrices"></canvas></div>' +
+        '</div>';
+
+      setTimeout(function() {
+        var cvs = document.getElementById('chartPOPrices');
+        if (!cvs) return;
+        var labels   = ph.map(function(d) { return d.sem; });
+        var fobData  = ph.map(function(d) { return d.fob; });
+        var ptBg     = ph.map(function(d) { return d.tipo === 'real' ? '#34c759' : '#3b82f6'; });
+        var ptBorder = ph.map(function(d) { return d.tipo === 'real' ? '#34c759' : '#3b82f6'; });
+        var ptRadius = ph.map(function(d) { return d.tipo === 'real' ? 5.5 : 4; });
+        var nFob     = ph.length;
+        var refLine  = function(val) { return ph.map(function() { return val; }); };
+
+        new Chart(cvs.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: 'FOB $/caja',
+                data: fobData,
+                fill: 'origin',
+                backgroundColor: 'rgba(52,199,89,.07)',
+                tension: 0.38,
+                borderWidth: 2.5,
+                pointRadius: ptRadius,
+                pointHoverRadius: 7,
+                pointBackgroundColor: ptBg,
+                pointBorderColor: 'transparent',
+                segment: {
+                  borderColor: function(ctx) {
+                    var d = ph[ctx.p0DataIndex];
+                    return (d && d.tipo === 'real') ? '#34c759' : 'rgba(59,130,246,.75)';
+                  },
+                  borderDash: function(ctx) {
+                    var d = ph[ctx.p0DataIndex];
+                    return (d && d.tipo === 'est') ? [5, 4] : undefined;
+                  }
+                }
+              },
+              {
+                label: 'Contrato $16.95',
+                data: refLine(16.95),
+                borderColor: 'rgba(250,204,21,.65)',
+                backgroundColor: 'transparent',
+                borderWidth: 1.5,
+                borderDash: [8, 6],
+                pointRadius: 0,
+                fill: false,
+                tension: 0
+              },
+              {
+                label: 'Escalador desde $20.95',
+                data: refLine(20.95),
+                borderColor: 'rgba(255,149,0,.7)',
+                backgroundColor: 'transparent',
+                borderWidth: 1.5,
+                borderDash: [4, 4],
+                pointRadius: 0,
+                fill: false,
+                tension: 0
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: 'rgba(20,20,28,.92)',
+                titleColor: 'rgba(255,255,255,.85)',
+                bodyColor: 'rgba(255,255,255,.6)',
+                borderColor: 'rgba(255,255,255,.08)',
+                borderWidth: 1,
+                padding: 10,
+                callbacks: {
+                  label: function(ctx) {
+                    if (ctx.datasetIndex === 0) {
+                      var d = ph[ctx.dataIndex];
+                      var tag = d.tipo === 'real' ? ' ✓ Real' : ' ~ Estimado';
+                      var line = ' FOB: $' + ctx.parsed.y.toFixed(2) + '/caja' + tag;
+                      return d.nota ? [line, '  ' + d.nota] : line;
+                    }
+                    return ' ' + ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2);
+                  }
+                }
+              }
+            },
+            scales: {
+              y: {
+                min: 0,
+                suggestedMax: 30,
+                ticks: {
+                  callback: function(v) { return '$' + v.toFixed(0); },
+                  color: 'rgba(255,255,255,.4)',
+                  font: { size: 10 },
+                  maxTicksLimit: 7
+                },
+                grid: { color: 'rgba(255,255,255,.04)' }
+              },
+              x: {
+                ticks: { color: 'rgba(255,255,255,.4)', font: { size: 9.5 } },
+                grid: { display: false }
+              }
+            }
+          }
+        });
+      }, 50);
+    })();
 
     /* ── DISCREPANCIAS ── */
     if (CW.discrepancias && CW.discrepancias.length) {
