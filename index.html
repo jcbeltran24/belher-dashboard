@@ -4253,12 +4253,7 @@ function checkPw(){
       var pct3   = Math.round(amort3 / total3 * 100);
       var pend3  = dc3.pendiente || 0;
 
-      /* 2 — Anti-Dumping retenido */
-      var ad3    = cv3.reembolsoPendiente || 0;
-      var adConf = cv3.reembolsoConfirmado || 0;
-      var adRiesgo = ad3 - adConf;
-
-      /* 3 — BanBajío vencimientos urgentes */
+      /* 2 — BanBajío vencimientos urgentes */
       var bajMay = bajV.mayo2026 || 0;
       var bajJun = bajV.junio2026 || 0;
       var bajJul = bajV.julio2026 || 0;
@@ -4274,8 +4269,8 @@ function checkPw(){
       var totCajasExp3   = 0;
       D.calavo.pagos.forEach(function(p){ totCajasExp3 += p.cajas||0; });
       var fobBrutoXcaja  = totCajasExp3 > 0 ? (D.revenue.fob || 0) / totCajasExp3 : 0;
-      /* Neto export estimado: FOB - 12% comisión (sin AD que es reembolsable) */
-      var fobNetoXcaja   = fobBrutoXcaja * (1 - (cv3.comisionPct || 0.12));
+      /* Neto export: FOB - 22% comisión total Calavo */
+      var fobNetoXcaja   = fobBrutoXcaja * (1 - (cv3.comisionPct || 0.22));
 
       /* Build HTML */
       function ind(lbl, badge, badgeColor, val, valColor, sub, barPct, barColor, rows, action, actionColor) {
@@ -4308,19 +4303,7 @@ function checkPw(){
           ],
           '⚡ Después del cruce, cada wire = efectivo real a Belher', '#fbbf24') +
 
-        /* 2. Anti-Dumping retenido */
-        ind('Anti-Dumping Retenido', 'En Riesgo', '#f97316',
-          fmt(adRiesgo), '#f97316',
-          '~10% del settle — Calavo debe reembolsar',
-          adConf > 0 ? Math.round(adConf/ad3*100) : 0, '#f97316',
-          [
-            ['Retenido por Calavo', fmt(adRiesgo), '#f97316'],
-            ['Confirmado devuelto', fmt(adConf), adConf > 0 ? '#34c759' : 'var(--muted)'],
-            ['Comisión real Calavo', '12% (no 22%)', 'var(--muted)']
-          ],
-          '→ Negociar con Irene Amezaga / John Lindeman antes del cierre', '#f97316') +
-
-        /* 3. BanBajío urgente */
+        /* 2. BanBajío urgente */
         ind('BanBajío · Vencimientos', 'Urgente', '#ef4444',
           fmt(baj.saldo || 3850000), '#ef4444',
           '4 líneas — vencen Mayo–Jul 2026',
@@ -4405,18 +4388,7 @@ function checkPw(){
     /* ── Alertas CEO ── */
     var ejAlEl = document.getElementById('ejAlertas');
     if (ejAlEl) {
-      var reemb    = (D.calavo && D.calavo.reembolsoPendiente) || 0;
-      var confirmed = (D.calavo && D.calavo.reembolsoConfirmado) || 0;
-      var reembHtml = '';
-      if (reemb > confirmed) {
-        reembHtml = '<div class="hoy-alert warning">' +
-          '<div class="hoy-alert-ico">⚠</div>' +
-          '<div class="hoy-alert-txt"><b>Reembolso Anti-Dumping Calavo: ' + fmt(reemb - confirmed) + ' pendiente.</b> ' +
-          'El 22% cargado en el settle incluye 12% comisión real + ~10% anti-dumping retenido por Calavo. ' +
-          'Ese ~10% debe ser devuelto al cierre de temporada. Negociar con Irene Amezaga / John Lindeman.</div>' +
-        '</div>';
-      }
-      ejAlEl.innerHTML = reembHtml + (al.length ? al.map(function(a){
+      ejAlEl.innerHTML = (al.length ? al.map(function(a){
         return '<div class="hoy-alert '+a.nivel+'">' +
           '<div class="hoy-alert-ico">'+(iconMap[a.nivel]||'i')+'</div>' +
           '<div class="hoy-alert-txt">'+a.texto+'</div>' +
@@ -4438,7 +4410,6 @@ function checkPw(){
 
     /* KPIs — separado por canal */
     var cv    = D.calavo || {};
-    var reemb = cv.reembolsoPendiente || 0;
     var rev   = D.revenue || {};
     var tc2   = (D.tomate && D.tomate.canales) || {};
     var nacC  = (tc2.nacional && tc2.nacional[0]) || {};
@@ -4484,25 +4455,7 @@ function checkPw(){
         '</div>';
     }
 
-    /* Reembolso anti-dumping alert banner */
     var vCont0 = document.getElementById('ventasContrato');
-    if (vCont0 && reemb > 0) {
-      var confirmed = cv.reembolsoConfirmado || 0;
-      var pendiente = reemb - confirmed;
-      var reembBanner = '<div class="hoy-alert warning" style="margin-bottom:16px">' +
-        '<div class="hoy-alert-ico">⚠</div>' +
-        '<div class="hoy-alert-txt">' +
-          '<b>Reembolso Anti-Dumping Pendiente · ' + fmt(pendiente) + '</b> — ' +
-          'El 22% que aparece como "Commission" en el Gass Sheet incluye el 12% real de comisión Calavo ' +
-          'MÁS ~10% de apoyo al arancel anti-dumping (AD/CVD) que Calavo retiene temporalmente. ' +
-          'Ese ~10% <b>debe ser reembolsado al cierre de temporada</b>. ' +
-          'Confirmar con Irene Amezaga / John Lindeman antes del cierre. ' +
-          '<span style="color:var(--accent2);font-weight:700">Negociar hoy.</span>' +
-        '</div>' +
-      '</div>';
-      // Prepend to ventasContrato after it's built — store temporarily
-      vCont0._reembBanner = reembBanner;
-    }
 
     /* Contrato & escalador analysis */
     var vCont = document.getElementById('ventasContrato');
@@ -5729,10 +5682,8 @@ function checkPw(){
     /* ── CF Calavo desglose ── */
     var cfRows = [
       { label:'Ventas brutas (FOB)',   val: cv.revenueTotal,   color:'var(--green2)',  bold:false },
-      { label:'Comisión real (12%)',    val:-cv.comision,       color:'var(--red)',     bold:false },
-      { label:'Anti-dumping retenido (~10%)', val:-(cv.antiDumpingRetenido||0), color:'var(--red)', bold:false, nota:'reembolsable al cierre' },
+      { label:'Comisión Calavo (22%)', val:-cv.comision,       color:'var(--red)',     bold:false, nota:'incluye gastos logísticos' },
       { label:'Expenses (Z-code)',     val:-cv.zCode,          color:'var(--red)',     bold:false },
-      { label:'Anti Dumping Duty',     val:-(cv.antiDumping||0),color:'var(--red)',    bold:false },
       { label:'Venta Neta',            val: cv.ventaNeta||cv.neto, color:'var(--green2)', bold:true, sep:true },
       { label:'Pick & Pack recibido',  val:-cv.pickPack,       color:'var(--muted)',   bold:false },
       { label:'Préstamo Calavo',       val:-(cv.prestamo||0),  color:'var(--muted)',   bold:false },
@@ -5759,12 +5710,12 @@ function checkPw(){
           '<div style="background:var(--bg);border-radius:10px;padding:18px;margin-bottom:12px">' +
             '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Ventas Brutas Calavo</div>' +
             '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:var(--green2)">' + fmt(cv.revenueTotal) + '</div>' +
-            '<div style="font-size:.8rem;color:var(--muted)">Comisión 12%: ' + fmt(cv.comision) + ' · AD: ' + fmt(cv.antiDumping||0) + '</div>' +
+            '<div style="font-size:.8rem;color:var(--muted)">Comisión 22%: ' + fmt(cv.comision) + ' · Z-code: ' + fmt(cv.zCode||0) + '</div>' +
           '</div>' +
           '<div style="background:var(--bg);border-radius:10px;padding:18px;margin-bottom:12px">' +
             '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Venta Neta</div>' +
             '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:var(--green2)">' + fmt(cv.ventaNeta||cv.neto) + '</div>' +
-            '<div style="font-size:.8rem;color:var(--muted)">Después de comisión, expenses y anti-dumping</div>' +
+            '<div style="font-size:.8rem;color:var(--muted)">Después de comisión 22% y Z-code expenses</div>' +
           '</div>' +
           '<div style="background:' + ((cv.saldoActual||0)<0?'rgba(220,38,38,.08)':'rgba(22,163,74,.08)') + ';border:1.5px solid ' + ((cv.saldoActual||0)<0?'var(--red2)':'var(--green2)') + ';border-radius:10px;padding:18px">' +
             '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Due from (to) Beltran</div>' +
@@ -7373,7 +7324,7 @@ function checkPw(){
           '<div class="hoy-alert-ico">i</div>' +
           '<div class="hoy-alert-txt"><b>Settle semanal parcial.</b> Cada liquidación incluye únicamente las facturas procesadas al corte de esa semana. Las facturas pendientes se consolidan en el siguiente settle. ' +
           'Los datos de la semana en curso son estimados — no usar como cifra definitiva hasta que Calavo confirme el cierre. ' +
-          'Comisión en settle = 22% (12% real Calavo + ~10% anti-dumping retenido reembolsable al cierre).</div>' +
+          'Comisión en settle = 22% total (incluye gastos logísticos, flete, inspecciones frontera; ~12% ganancia neta Calavo).</div>' +
         '</div>' +
         '<div class="card" style="padding:20px 20px 14px">' +
           '<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px">' +

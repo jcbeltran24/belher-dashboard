@@ -110,18 +110,14 @@ window.BELHER = {
 
   calavo: {
     revenueTotal:   9770259,
-    /* ESTRUCTURA DE COMISIÓN — IMPORTANTE:
-       El Gass Sheet muestra 22% de "Commission" pero la comisión REAL a Calavo es solo 12%.
-       El 10% restante (~$977K) es apoyo al cumplimiento del arancel anti-dumping (AD/CVD).
-       Calavo retiene ese 10% pero DEBE reembolsarlo al final de temporada.
-       Seguimiento obligatorio — negociar/confirmar con Irene Amezaga / John Lindeman antes del cierre. */
-    comision:            1172431,   /* 12% real — fee Calavo */
-    comisionPct:            0.12,
-    antiDumpingRetenido:  977026,   /* ~10% retenido por Calavo (reembolsable) — WK01–WK15 estimado */
-    reembolsoPendiente:   977026,   /* = antiDumpingRetenido — NEGOCIAR al cierre de temporada */
-    reembolsoConfirmado:       0,   /* actualizar cuando Calavo confirme devolución */
-    zCode:          1052986,
-    antiDumping:     980391,
+    /* ESTRUCTURA DE COMISIÓN — ACTUALIZADO:
+       Calavo cobra 22% de comisión total sobre el FOB.
+       De ese 22%, ~10% son gastos reales (flete, inspecciones frontera, Z-code, etc.)
+       y el ~12% restante es la ganancia neta de Calavo.
+       NO hay anti-dumping reembolsable — el 22% es comisión definitiva. */
+    comision:            2149457,   /* 22% total — comisión Calavo (incluye gastos logísticos) */
+    comisionPct:             0.22,
+    zCode:           1052986,
     ventaNeta:      6564451,
     pickPack:       3901285,
     intereses:        32128,
@@ -1127,7 +1123,7 @@ window.BELHER = {
 
     /* Desglose semanal: FOB bruto → Deducciones → Liquidación neta
        Fuente: Gass Sheet WK15 · Overview Payments → Weekly Liquidations
-       comision=22%FOB (12% real Calavo + ~10% anti-dumping retenido reembolsable) · pp=$5/caja fijo · gastos=Z-code+otros · loan=amortización */
+       comision=22%FOB total (incluye gastos logísticos ~10% + ganancia neta Calavo ~12%) · pp=$5/caja fijo · gastos=Z-code+otros · loan=amortización */
     liquidaciones: [
       { sem:"WK01", pkgs:10824,  fob:127737,   comision:28102,  pp:54120,   gastos:19843, loan:5412,  liq:20260  },
       { sem:"WK02", pkgs:24200,  fob:255896,   comision:56297,  pp:121400,  gastos:42363, loan:12100, liq:23736  },
