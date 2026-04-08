@@ -4810,7 +4810,6 @@ function checkPw(){
   }
 
   function renderFinanzas() {
-    renderCashFlow();
     var cv = D.calavo;
     var pagos = cv.pagos;
     var totalPago = 0, totalCajas = 0, totalCont = 0, semCount = 0;
@@ -4835,6 +4834,8 @@ function checkPw(){
         cvsaldo < 0 ? 'Calavo ha adelantado más del valor cosechado' : 'Balance a favor de Belher',
         cvsaldo < 0 ? 'neg' : 'pos', cvsaldo < 0 ? 'accent-neg' : 'accent-pos',
         pill(cvsaldo < 0 ? 'down' : 'up', cvsaldo < 0 ? '⚠ Se liquida al cierre' : '✓ A favor'));
+
+    try { renderCashFlow(); } catch(e) { console.warn('renderCashFlow error:', e); }
 
     /* ── CF Calavo desglose ── */
     var cfRows = [
@@ -4931,7 +4932,8 @@ function checkPw(){
         '<td class="td-center"><span class="badge ' + ({'Pagado':'badge-green','Actual':'badge-yellow','Pendiente':'badge-gray'}[p.estado]||'badge-gray') + '">' + p.estado + '</span></td>' +
       '</tr>';
     }).join('');
-    document.getElementById('pagosVariaciones').innerHTML =
+    var pvEl = document.getElementById('pagosVariaciones');
+    if (pvEl) pvEl.innerHTML =
       '<div class="tbl-wrap"><table>' +
         '<thead><tr>' +
           '<th>Sem</th>' +
