@@ -3163,6 +3163,7 @@ function checkPw(){
     <div class="card">
       <div class="chart-box"><canvas id="chartPagos"></canvas></div>
     </div>
+    <div class="card-table" id="pagosVariaciones" style="margin-top:12px"></div>
 
     <!-- calavoDesglose y liquidTbl: detalle completo en tab CalavoWeekly — ocultos -->
     <div id="calavoDesglose" style="display:none"></div>
@@ -4904,6 +4905,55 @@ function checkPw(){
         '<td class="td-num" style="padding:11px 15px">' + totalCont + '</td>' +
         '<td></td>' +
       '</tr>';
+
+    /* ── TABLA VARIACIONES SEMANA A SEMANA ── */
+    var pagosData = pagos.filter(function(p){ return p.pago != null; });
+    var varRows = pagosData.map(function(p, i) {
+      var prev = pagosData[i - 1];
+      var deltaPago  = prev && prev.pago  ? ((p.pago  - prev.pago)  / prev.pago  * 100) : null;
+      var deltaCajas = prev && prev.cajas ? ((p.cajas - prev.cajas) / prev.cajas * 100) : null;
+      var fmtDelta = function(d) {
+        if (d === null) return '<span style="color:var(--muted)">—</span>';
+        var sign = d >= 0 ? '+' : '';
+        var col  = d >= 0 ? 'var(--green)' : 'var(--red)';
+        var arrow = d >= 0 ? '▲' : '▼';
+        return '<span style="color:' + col + ';font-size:.78rem;font-weight:600">' + arrow + ' ' + sign + d.toFixed(1) + '%</span>';
+      };
+      var pp = p.cajas ? (p.pago / p.cajas).toFixed(2) : null;
+      return '<tr>' +
+        '<td><strong>' + p.sem + '</strong></td>' +
+        '<td style="color:var(--muted);font-size:.78rem">' + p.wire + '</td>' +
+        '<td class="td-num">' + fmt(p.pago) + '</td>' +
+        '<td class="td-num">' + fmtDelta(deltaPago) + '</td>' +
+        '<td class="td-num">' + (p.cajas != null ? fmtN(p.cajas) : '—') + '</td>' +
+        '<td class="td-num">' + fmtDelta(deltaCajas) + '</td>' +
+        '<td class="td-num" style="color:var(--muted);font-size:.78rem">' + (pp ? '$' + pp : '—') + '</td>' +
+        '<td class="td-center"><span class="badge ' + ({'Pagado':'badge-green','Actual':'badge-yellow','Pendiente':'badge-gray'}[p.estado]||'badge-gray') + '">' + p.estado + '</span></td>' +
+      '</tr>';
+    }).join('');
+    document.getElementById('pagosVariaciones').innerHTML =
+      '<div class="tbl-wrap"><table>' +
+        '<thead><tr>' +
+          '<th>Sem</th>' +
+          '<th>Wire</th>' +
+          '<th class="td-num">P&amp;P</th>' +
+          '<th class="td-num">Δ P&amp;P</th>' +
+          '<th class="td-num">Cajas</th>' +
+          '<th class="td-num">Δ Cajas</th>' +
+          '<th class="td-num">$/caja</th>' +
+          '<th class="td-center">Estado</th>' +
+        '</tr></thead>' +
+        '<tbody>' + varRows + '</tbody>' +
+        '<tfoot><tr style="background:var(--dark);color:#fff;font-weight:700">' +
+          '<td colspan="2" style="padding:10px 15px;font-size:.73rem;letter-spacing:.8px">TOTAL WK01–WK15</td>' +
+          '<td class="td-num" style="padding:10px 15px">' + fmt(totalPago) + '</td>' +
+          '<td></td>' +
+          '<td class="td-num" style="padding:10px 15px">' + fmtN(totalCajas) + '</td>' +
+          '<td></td>' +
+          '<td class="td-num" style="padding:10px 15px;font-size:.78rem;color:#ccc">' + (totalCajas ? '$' + (totalPago/totalCajas).toFixed(2) : '—') + '</td>' +
+          '<td></td>' +
+        '</tr></tfoot>' +
+      '</table></div>';
 
     /* ── PROYECCIÓN TEMPORADA RESTANTE ── */
     var paidWeeks = pagos.filter(function(p){ return p.pago && p.estado !== 'Pendiente'; });
