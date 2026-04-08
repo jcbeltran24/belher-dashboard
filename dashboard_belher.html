@@ -4206,7 +4206,8 @@ function checkPw(){
         todayDests[e.destino] = (todayDests[e.destino] || 0) + (e.cargas || 1);
       }
     });
-    var todayProds = bas.length ? bas[0].productos : [];
+    var todayProds    = bas.length ? bas[0].productos : [];
+    var todayBasFecha = bas.length ? bas[0].fecha    : null;
 
     /* ── KPI Cards (new compact grid) ── */
     var elExp = document.getElementById('ejExpVal');
