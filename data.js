@@ -9,6 +9,7 @@ window.BELHER = {
     { nivel: "success", texto: "Vine-ripe $55.95–57.95 (4×4/4×5 Nogales) — MÁXIMO DE TEMPORADA sostenido. WK15 día 3 (08/04): ventana de precio crítica antes del cierre de ciclo mexicano. 07/04: 4 camiones Nogales (6,144 cajas). EMBARCAR TODO el volumen disponible." },
     { nivel: "danger",  texto: "Bola Yameto merma 4.71% promedio WK15 (días 1-2): 04/04 = 4.44%, 06/04 = 4.97%. Sin outbound del 07/04 aún — revisar calidad hoy urgente. Con vine-ripe en máximos, cada punto de merma es pérdida directa de precio." },
     { nivel: "success", texto: "CVGW $27.97 (+1.2% 08-Abr) · AVO $15.36 (+3.2% 08-Abr) — sector produce en fuerte momentum. CVGW sigue acercándose a máximo 52s ($28.72). Señal de demanda institucional sostenida." },
+    { nivel: "danger",   texto: "URGENTE: Solicitar a Calavo (Irene Amezaga / Carlos Valadez) el desglose 'Gross FOB by item' del Gass Sheet para verificar precio de referencia del contrato. Sin este dato no es posible auditar el escalador ($16.95 base + $4 collar desde $20.95). Escalar hoy mismo." },
     { nivel: "warning",  texto: "HOY 08/04: Revisión Excel Gass Sheet WK15 con Leima — datos de Carlos Valadez + Irene Amezaga (WK14 completo + WK15 parcial). Actualizar liquidaciones formales WK13–WK15 y confirmar wire WK15 ($269,880)." },
     { nivel: "success", texto: "Trilla sorgo completa WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha) = 48 ha cosechadas. El Panteón+San Blas pendientes." }
   ],
@@ -254,8 +255,8 @@ window.BELHER = {
     },
 
     contratos: [
-      { mes:"Marzo", cajas_contrato:229000, cajas_spot:0,      precio_contrato:16.95, escalador_desde:20 },
-      { mes:"Abril",  cajas_contrato:220000, cajas_spot:173000, precio_contrato:16.95, escalador_desde:20 }
+      { mes:"Marzo", cajas_contrato:229000, cajas_spot:0,      precio_contrato:16.95, escalador_desde:20.95 },
+      { mes:"Abril",  cajas_contrato:220000, cajas_spot:173000, precio_contrato:16.95, escalador_desde:20.95 }
     ],
 
     bridge: [
