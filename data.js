@@ -266,7 +266,7 @@ window.BELHER = {
       { sem:"WK12", fob:19.34, usda:29.62, tipo:"real", nota:"48,000 pkgs · $928,429" },
       { sem:"WK13", fob:22.23, usda:43.75, tipo:"real", nota:"40,048 pkgs · $890,284" },
       { sem:"WK14", fob:24.93, usda:47.95, tipo:"real", nota:"30,592 pkgs · $762,704" },
-      { sem:"WK15", fob:11.07, usda:56.95, tipo:"real", nota:"53,976 pkgs · $597,772 — settle parcial al 05-Abr, facturas pendientes de cerrar" }
+      { sem:"WK15", fob:27.50, usda:56.95, tipo:"est",  nota:"Estimado — settle parcial $11.07 al 05-Abr (53,976 pkgs · $597K). Estimado $27.50 basado en USDA $56.95 + escalador histórico WK13–WK14 (~64% pass-through). Actualizar con settle final." }
     ]
   },
 

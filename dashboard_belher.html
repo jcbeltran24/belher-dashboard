@@ -4226,10 +4226,11 @@ function checkPw(){
     if (elPrc) {
       elPrc.textContent = '$' + avgFob.toFixed(2);
       document.getElementById('ejPrecioSub').textContent = 'FOB / caja · acumulado temporada';
-      var lastRealNote = lastReal && lastReal.nota && lastReal.nota.indexOf('parcial') >= 0 ? ' · parcial' : '';
+      var isEst = lastReal && lastReal.tipo === 'est';
       document.getElementById('ejPrecioFoot').innerHTML = lastReal
         ? '<span style="color:var(--muted)">' + lastReal.sem + ': </span>' +
-          '<span style="font-weight:700">$' + lastReal.fob.toFixed(2) + '</span>' + lastRealNote
+          '<span style="font-weight:700">$' + lastReal.fob.toFixed(2) + '</span>' +
+          (isEst ? ' <span style="font-size:.55rem;background:rgba(251,191,36,.18);color:#fbbf24;padding:1px 5px;border-radius:3px;font-weight:700;letter-spacing:.5px">EST</span>' : '')
         : '';
     }
 
@@ -4329,18 +4330,23 @@ function checkPw(){
           '→ Renegociar antes de WK18 — usar cruce Calavo como palanca', '#ef4444') +
 
         /* 4. FOB tendencia */
-        ind('FOB Calavo · Tendencia', fobLast ? fobLast.sem : 'Último', fobLast && fobPrev && fobLast.fob > fobPrev.fob ? '#34c759' : '#fbbf24',
-          fobLast ? '$' + fobLast.fob.toFixed(2) : '—',
-          fobLast && fobPrev ? (fobLast.fob >= fobPrev.fob ? '#34c759' : '#fbbf24') : '#60a5fa',
-          fobLast ? fobLast.sem + (fobLast.nota && fobLast.nota.indexOf('parcial') >= 0 ? ' · settle parcial' : '') : '',
-          null, null,
-          fobPrev ? [
-            ['Semana anterior ('+fobPrev.sem+')', '$'+fobPrev.fob.toFixed(2)+'/caja', 'rgba(255,255,255,.7)'],
-            ['Variación', (fobLast.fob >= fobPrev.fob ? '+' : '') + (fobLast.fob - fobPrev.fob).toFixed(2), fobLast.fob >= fobPrev.fob ? '#34c759' : '#f87171'],
-            ['Pico temporada (WK10)', '$27.58/caja', 'rgba(255,255,255,.4)']
-          ] : null,
-          fobLast && fobLast.nota && fobLast.nota.indexOf('parcial') >= 0 ? '⚠ WK15 settle parcial — facturas pendientes de cerrar' : null,
-          '#fbbf24') +
+        (function(){
+          var fobIsEst = fobLast && fobLast.tipo === 'est';
+          var fobBadge = fobLast ? (fobIsEst ? fobLast.sem + ' · est.' : fobLast.sem) : 'Último';
+          var fobBadgeColor = fobLast && fobPrev && fobLast.fob > fobPrev.fob ? '#34c759' : '#fbbf24';
+          var fobValColor = fobLast && fobPrev ? (fobLast.fob >= fobPrev.fob ? '#34c759' : '#fbbf24') : '#60a5fa';
+          var fobSub = fobLast ? (fobIsEst ? 'estimado · USDA $56.95 · escalador activo' : fobLast.sem) : '';
+          return ind('FOB Calavo · Tendencia', fobBadge, fobBadgeColor,
+            fobLast ? '$' + fobLast.fob.toFixed(2) : '—', fobValColor,
+            fobSub, null, null,
+            fobPrev ? [
+              ['Semana anterior ('+fobPrev.sem+')', '$'+fobPrev.fob.toFixed(2)+'/caja', 'rgba(255,255,255,.7)'],
+              ['Variación', (fobLast.fob >= fobPrev.fob ? '+' : '') + (fobLast.fob - fobPrev.fob).toFixed(2), fobLast.fob >= fobPrev.fob ? '#34c759' : '#f87171'],
+              ['Pico temporada (WK10)', '$27.58/caja', 'rgba(255,255,255,.4)']
+            ] : null,
+            fobIsEst ? '⚡ WK15 estimado al 64% pass-through del escalador — actualizar con settle final' : null,
+            '#fbbf24');
+        })() +
 
         /* 5. Canal: Nacional vs Export */
         ind('Neto por Caja · Canales', 'Comparativo', '#60a5fa',
