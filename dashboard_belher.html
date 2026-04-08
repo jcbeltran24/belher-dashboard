@@ -4125,26 +4125,24 @@ function checkPw(){
     var kStrip = document.getElementById('ejKpiStrip');
     if (kStrip) {
       kStrip.innerHTML =
-        /* Exportación Calavo — cajas facturadas del settle */
+        /* Exportación Calavo — revenue y cajas del settle */
         '<div class="ej-kpi-box" style="border-left:3px solid #34c759">' +
           '<div class="ej-kpi-lbl">Exportación · Calavo</div>' +
-          '<div class="ej-kpi-val" style="color:var(--green2)">'+fmtN(totLiqCajas)+'</div>' +
-          '<div class="ej-kpi-sub">cajas facturadas · '+fmt(revExp)+' bruto</div>' +
-          '<div style="font-size:.65rem;color:var(--muted);margin-top:3px">FOB prom $'+avgFob.toFixed(2)+'/caja facturada</div>' +
+          '<div class="ej-kpi-val" style="color:var(--green2)">'+fmt(revExp)+'</div>' +
+          '<div class="ej-kpi-sub">'+fmtN(totLiqCajas)+' cajas facturadas · WK01–'+D.meta.semana.replace('WK ','WK')+'</div>' +
         '</div>' +
-        /* Nacional */
+        /* Nacional — solo revenue, sin cajas (datos jacruz no son semanales) */
         '<div class="ej-kpi-box" style="border-left:3px solid #60a5fa">' +
           '<div class="ej-kpi-lbl">Nacional</div>' +
-          '<div class="ej-kpi-val" style="color:#60a5fa">'+fmtN(cajasNac)+'</div>' +
-          '<div class="ej-kpi-sub">cajas · '+fmt(revNac)+' revenue</div>' +
-          '<div style="font-size:.65rem;color:var(--muted);margin-top:3px">Sin relación con Calavo / deuda</div>' +
+          '<div class="ej-kpi-val" style="color:#60a5fa">'+fmt(revNac)+'</div>' +
+          '<div class="ej-kpi-sub">venta bruta · canal directo</div>' +
         '</div>' +
-        /* Señal FOB vs USDA */
-        '<div class="ej-kpi-box">' +
-          '<div class="ej-kpi-lbl">FOB Calavo vs USDA</div>' +
-          '<div class="ej-kpi-val" style="color:var(--accent2)">'+(lastReal?'$'+lastReal.fob.toFixed(2):'—')+'</div>' +
-          '<div class="ej-kpi-sub">'+(lastReal?lastReal.sem+' · Calavo':'—')+'</div>' +
-          '<div style="font-size:.65rem;color:var(--muted);margin-top:3px">USDA: '+(lastUsda?'$'+lastUsda.usda.toFixed(2)+' '+lastUsda.sem:'—')+'</div>' +
+        /* Precio promedio real de venta (FOB acumulado del settle) */
+        '<div class="ej-kpi-box" style="border-left:3px solid var(--accent2)">' +
+          '<div class="ej-kpi-lbl">Precio Promedio Real · Export</div>' +
+          '<div class="ej-kpi-val" style="color:var(--accent2)">$'+avgFob.toFixed(2)+'</div>' +
+          '<div class="ej-kpi-sub">FOB / caja facturada · acumulado temporada</div>' +
+          '<div style="font-size:.65rem;color:var(--muted);margin-top:3px">Última sem: '+(lastReal?lastReal.sem+' $'+lastReal.fob.toFixed(2):'—')+(lastReal&&lastReal.nota&&lastReal.nota.indexOf('parcial')>=0?' · parcial':'')+'</div>' +
         '</div>' +
         /* Deuda pendiente */
         '<div class="ej-kpi-box" style="border-left:3px solid #f59e0b">' +
