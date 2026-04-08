@@ -10,7 +10,7 @@ window.BELHER = {
     { nivel: "danger",  texto: "Bola Yameto merma 4.71% promedio WK15 (días 1-2): 04/04 = 4.44%, 06/04 = 4.97%. Sin outbound del 07/04 aún — revisar calidad hoy urgente. Con vine-ripe en máximos, cada punto de merma es pérdida directa de precio." },
     { nivel: "success", texto: "CVGW $27.97 (+1.2% 08-Abr) · AVO $15.36 (+3.2% 08-Abr) — sector produce en fuerte momentum. CVGW sigue acercándose a máximo 52s ($28.72). Señal de demanda institucional sostenida." },
     { nivel: "danger",   texto: "URGENTE: Solicitar a Calavo (Irene Amezaga / Carlos Valadez) el desglose 'Gross FOB by item' del Gass Sheet para verificar precio de referencia del contrato. Sin este dato no es posible auditar el escalador ($16.95 base + $4 collar desde $20.95). Escalar hoy mismo." },
-    { nivel: "warning",  texto: "HOY 08/04: Revisión Excel Gass Sheet WK15 con Leima — datos de Carlos Valadez + Irene Amezaga (WK14 completo + WK15 parcial). Actualizar liquidaciones formales WK13–WK15 y confirmar wire WK15 ($269,880)." },
+    { nivel: "success",  texto: "Liquidaciones WK01–WK15 cargadas desde Gass Sheet 05-Abr · FOB total $12.87M · 780,257 pkgs · WK15 settle parcial $597,772 (en curso). Confirmar wire WK15 ($269,880)." },
     { nivel: "success", texto: "Trilla sorgo completa WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha) = 48 ha cosechadas. El Panteón+San Blas pendientes." }
   ],
 
@@ -20,8 +20,8 @@ window.BELHER = {
   },
 
   revenue: {
-    total:    13626329,
-    fob:       9770259,
+    total:    16732676,
+    fob:      12876606,
     nacional:  3856070
   },
 
@@ -109,16 +109,16 @@ window.BELHER = {
   },
 
   calavo: {
-    revenueTotal:   9770259,
+    revenueTotal:  12876606,
     /* ESTRUCTURA DE COMISIÓN — ACTUALIZADO:
        Calavo cobra 22% de comisión total sobre el FOB.
        De ese 22%, ~10% son gastos reales (flete, inspecciones frontera, Z-code, etc.)
        y el ~12% restante es la ganancia neta de Calavo.
        NO hay anti-dumping reembolsable — el 22% es comisión definitiva. */
-    comision:            2149457,   /* 22% total — comisión Calavo (incluye gastos logísticos) */
+    comision:            2832853,   /* 22% total — comisión Calavo (incluye gastos logísticos) */
     comisionPct:             0.22,
-    zCode:           1052986,
-    ventaNeta:      6564451,
+    zCode:           1248911,
+    ventaNeta:      8794842,
     pickPack:       3901285,
     intereses:        32128,
 
@@ -249,8 +249,8 @@ window.BELHER = {
        WK15 parcial: 53,976 pkgs recibidos pero ventas en curso — FOB final será mayor */
     preciosHistorico: [
       { sem:"WK01", fob:11.80, usda:null,  tipo:"real", nota:"10,824 pkgs · $127,737" },
-      { sem:"WK02", fob:10.57, usda:null,  tipo:"real", nota:"24,200 pkgs · $255,896" },
-      { sem:"WK03", fob:11.16, usda:null,  tipo:"real", nota:"44,384 pkgs · $495,284" },
+      { sem:"WK02", fob:10.57, usda:null,  tipo:"real", nota:"24,280 pkgs · $255,896" },
+      { sem:"WK03", fob:11.16, usda:null,  tipo:"real", nota:"44,385 pkgs · $495,284" },
       { sem:"WK04", fob:12.85, usda:null,  tipo:"real", nota:"48,606 pkgs · $624,488" },
       { sem:"WK05", fob:15.45, usda:null,  tipo:"real", nota:"60,965 pkgs · $942,051" },
       { sem:"WK06", fob:14.55, usda:null,  tipo:"real", nota:"85,593 pkgs · $1,245,692" },
@@ -262,7 +262,7 @@ window.BELHER = {
       { sem:"WK12", fob:19.34, usda:29.62, tipo:"real", nota:"48,000 pkgs · $928,429" },
       { sem:"WK13", fob:22.23, usda:43.75, tipo:"real", nota:"40,048 pkgs · $890,284" },
       { sem:"WK14", fob:24.93, usda:47.95, tipo:"real", nota:"30,592 pkgs · $762,704" },
-      { sem:"WK15", fob:27.50, usda:56.95, tipo:"est",  nota:"Estimado — settle parcial $11.07 al 05-Abr (53,976 pkgs · $597K). Estimado $27.50 basado en USDA $56.95 + escalador histórico WK13–WK14 (~64% pass-through). Actualizar con settle final." }
+      { sem:"WK15", fob:11.07, usda:56.95, tipo:"real", nota:"Settle parcial al 05-Abr · 53,976 pkgs · $597,772 FOB. WK15 en curso — precio final será mayor cuando cierren el settle completo." }
     ]
   },
 
@@ -995,7 +995,7 @@ window.BELHER = {
     ],
 
     alertas: [
-      { nivel: "success", texto: "Gass Sheet WK15 recibido el 07-Abr: Carlos Valadez (16:11) e Irene Amezaga (16:25) enviaron Excel con datos a WK14 completo + WK15 parcial. Revisar con Leima hoy 08-Abr para actualizar liquidaciones formales." },
+      { nivel: "success", texto: "Liquidaciones WK01–WK15 actualizadas · FOB total $12.87M · 780,257 pkgs. WK15 settle parcial al 05-Abr ($597,772 · 53,976 pkgs) — precio por caja $11.07, settle final pendiente." },
       { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
       { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
       { nivel: "success", texto: "CVGW $27.97 (+1.23%) · AVO $15.36 (+3.16%) — sector produce en fuerte momentum (08-Abr). CVGW cerca de máximos de 52 semanas ($28.72 techo). AVO en nuevo máximo 52s $15.36." }
@@ -1126,16 +1126,16 @@ window.BELHER = {
        comision=22%FOB total (incluye gastos logísticos ~10% + ganancia neta Calavo ~12%) · pp=$5/caja fijo · gastos=Z-code+otros · loan=amortización */
     liquidaciones: [
       { sem:"WK01", pkgs:10824,  fob:127737,   comision:28102,  pp:54120,   gastos:19843, loan:5412,  liq:20260  },
-      { sem:"WK02", pkgs:24200,  fob:255896,   comision:56297,  pp:121400,  gastos:42363, loan:12100, liq:23736  },
-      { sem:"WK03", pkgs:44384,  fob:495284,   comision:108963, pp:221925,  gastos:86497, loan:22192, liq:55708  },
-      { sem:"WK04", pkgs:48606,  fob:624488,   comision:137387, pp:243040,  gastos:79198, loan:24303, liq:140560 },
-      { sem:"WK05", pkgs:60965,  fob:942051,   comision:207251, pp:306600,  gastos:100125,loan:30483, liq:297592 },
-      { sem:"WK06", pkgs:85593,  fob:1245692,  comision:274052, pp:432880,  gastos:150188,loan:42753, liq:345819 },
-      { sem:"WK07", pkgs:86722,  fob:1103258,  comision:242717, pp:446320,  gastos:155545,loan:43053, liq:215624 },
-      { sem:"WK08", pkgs:58995,  fob:807878,   comision:177733, pp:297720,  gastos:96190, loan:29454, liq:206781 },
+      { sem:"WK02", pkgs:24280,  fob:255896,   comision:56297,  pp:121400,  gastos:42363, loan:12100, liq:23736  },
+      { sem:"WK03", pkgs:44385,  fob:495284,   comision:108963, pp:221925,  gastos:86497, loan:22192, liq:55708  },
+      { sem:"WK04", pkgs:48608,  fob:624488,   comision:137387, pp:243040,  gastos:79198, loan:24303, liq:140560 },
+      { sem:"WK05", pkgs:61320,  fob:942051,   comision:207251, pp:306600,  gastos:100125,loan:30482, liq:297592 },
+      { sem:"WK06", pkgs:86576,  fob:1245692,  comision:274052, pp:432880,  gastos:150188,loan:42752, liq:345819 },
+      { sem:"WK07", pkgs:89264,  fob:1103258,  comision:242717, pp:446320,  gastos:155545,loan:43053, liq:215624 },
+      { sem:"WK08", pkgs:59544,  fob:807878,   comision:177733, pp:297720,  gastos:96190, loan:29454, liq:206781 },
       { sem:"WK09", pkgs:43120,  fob:738537,   comision:162478, pp:215600,  gastos:68040, loan:21560, liq:270859 },
       { sem:"WK10", pkgs:69920,  fob:1928398,  comision:424248, pp:349600,  gastos:102627,loan:33880, liq:1018043},
-      { sem:"WK11", pkgs:69798,  fob:1428197,  comision:314203, pp:349000,  gastos:104022,loan:34019, liq:626953 },
+      { sem:"WK11", pkgs:69800,  fob:1428197,  comision:314203, pp:349000,  gastos:104022,loan:34019, liq:626953 },
       { sem:"WK12", pkgs:48000,  fob:928429,   comision:204254, pp:240000,  gastos:70394, loan:23280, liq:390501 },
       { sem:"WK13", pkgs:40048,  fob:890284,   comision:195862, pp:200240,  gastos:59152, loan:17836, liq:417193 },
       { sem:"WK14", pkgs:30592,  fob:762704,   comision:167795, pp:152960,  gastos:43649, loan:10360, liq:387940 },
