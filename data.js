@@ -10,7 +10,7 @@ window.BELHER = {
     { nivel: "danger",  texto: "Jalapeño colapsa a $40–42 desde $53–55 (-24%) — corrección abrupta por llegada de oferta primaveral. Habanero también baja a $38-40. Ajuste de expectativas para WK15-16." },
     { nivel: "success", texto: "Gass Sheet WK15 recibido — Carlos Valadez (16:11) e Irene Amezaga (16:25) enviaron '2026 05-04 Agricola Belher Settle WK15 1.xlsx'. Datos a WK14 completo + WK15 parcial al 05-Abr. Pendiente: revisar Excel con Leima para actualizar liquidaciones WK13–WK15." },
     { nivel: "danger",  texto: "Bola Yameto merma 4.97% WK15 día 2 — segundo consecutivo >4% (04/04: 4.44%). Promedio WK15: 4.71%. Con vine-ripe en máximos de temporada, la calidad es crítica para no perder precio." },
-    { nivel: "success", texto: "CVGW $27.63 (+6.76%) · AVO $14.89 (+8.68%) · Roma Calavo merma 1.63% outbound 06/04 ✓ · Báscula 06/04 Tomate + Limón activos. WK15 en ritmo pleno." }
+    { nivel: "success", texto: "CVGW $27.63 (+6.76%) · AVO $14.89 (+8.68%) · Trilla sorgo activa: Carrillo 12 ha (06-Abr) + Carrillo/C.Beltrán/El Dos 18 ha (07-Abr) · Báscula 07/04 Tomate + Rezaga + Trilla. WK15 en ritmo pleno." }
   ],
 
   ebitda: {
@@ -30,7 +30,7 @@ window.BELHER = {
     zCode:          1052986,
     antiDumping:     980391,
     ventaNeta:      6564451,
-    pickPack:       3278205,
+    pickPack:       3901285,
     prestamo:        472037,
     intereses:        32128,
     capitalTrabajo: 5000000,
@@ -49,10 +49,10 @@ window.BELHER = {
       { sem:"WK09", wire:"25-Feb", pago:215600, cajas:43120, cont:26, estado:"Pagado"   },
       { sem:"WK10", wire:"04-Mar", pago:349600, cajas:69920, cont:40, estado:"Pagado"   },
       { sem:"WK11", wire:"08-Mar", pago:349000, cajas:69800, cont:39, estado:"Pagado"   },
-      { sem:"WK12", wire:"15-Mar", pago:240000, cajas:48000, cont:29, estado:"Actual"   },
-      { sem:"WK13", wire:"07-Abr (GS recibido)", pago:null, cajas:null, cont:null, estado:"Pendiente" },
-      { sem:"WK14", wire:"Pendiente wire", pago:null, cajas:null, cont:null, estado:"Pendiente" },
-      { sem:"WK15", wire:"Pendiente wire", pago:null, cajas:null, cont:null, estado:"Pendiente" }
+      { sem:"WK12", wire:"15-Mar", pago:240000,  cajas:48000, cont:29, estado:"Pagado"   },
+      { sem:"WK13", wire:"25-Mar", pago:200240,  cajas:40048, cont:24, estado:"Pagado"   },
+      { sem:"WK14", wire:"25-Mar", pago:152960,  cajas:30592, cont:18, estado:"Pagado"   },
+      { sem:"WK15", wire:"08-Abr", pago:269880,  cajas:53976, cont:33, estado:"Actual"   }
     ]
   },
 
@@ -100,10 +100,10 @@ window.BELHER = {
 
   tomate: {
     ventas: {
-      periodo: { desde:"01/12/2025", hasta:"22/03/2026", label:"WK01–WK12" },
-      total:   { cajas:1148341, cajasRoma:533667, cajasBola:614674, revenue:13626329 },
+      periodo: { desde:"01/12/2025", hasta:"05/04/2026", label:"WK01–WK15" },
+      total:   { cajas:1272957, cajasRoma:null, cajasBola:null, revenue:null },
       exportacion: [
-        { etiqueta:"Calavo", cajas:702225, cajasRoma:null, cajasBola:null, revenue:9770259 }
+        { etiqueta:"Calavo", cajas:826841, cajasRoma:null, cajasBola:null, revenue:null, nota:"WK01–WK15 al 05-Abr · P&P settle $3,901,285" }
       ],
       nacional: [
         { etiqueta:"Nacional", cajas:446116, cajasRoma:311917, cajasBola:134199, revenue:3856070 }
@@ -126,9 +126,9 @@ window.BELHER = {
       { sem:"WK10", fob:17.20, usda:26.95, tipo:"est"  },
       { sem:"WK11", fob:19.06, usda:26.28, tipo:"real" },
       { sem:"WK12", fob:20.07, usda:29.62, tipo:"real" },
-      { sem:"WK13", fob:25.50, usda:43.75, tipo:"est"  },
-      { sem:"WK14", fob:34.00, usda:47.95, tipo:"est"  },
-      { sem:"WK15", fob:44.00, usda:56.95, tipo:"est"  }
+      { sem:"WK13", fob:22.23, usda:43.75, tipo:"real", nota:"Revenue settle $890,284 / 40,048 pkgs" },
+      { sem:"WK14", fob:24.93, usda:47.95, tipo:"real", nota:"Revenue settle $762,704 / 30,592 pkgs" },
+      { sem:"WK15", fob:11.07, usda:56.95, tipo:"est",  nota:"Parcial al 05-Abr · $597,772 / 53,976 pkgs — semana en curso" }
     ]
   },
 
@@ -208,7 +208,12 @@ window.BELHER = {
       ebitda_yago:       -513373,
       ebitda_var_yago:   127522,
       periodo:           "Jul 2025 – Feb 2026",
-      nota:              "Temporada de granos en curso. Cosecha sorgo activa: El 17 (12 ha, 01-Abr). Trilla Dorita+El 17 (18 ha, 31-Mar) completada. El Panteón+San Blas en proceso. Sin ventas registradas a febrero — producción en proceso de cosecha. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo."
+      nota:              "Temporada de granos en curso. AVANCE DE TRILLA: 06-Abr Carrillo 12 ha · 07-Abr Carrillo+Campo Beltrán+El Dos 18 ha. Trilla Dorita+El 17 (18 ha, 31-Mar) completada previamente. El Panteón+San Blas en proceso. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
+      trilla: [
+        { fecha:"31/03/2026", campos:"Dorita + El 17",                       ha:18, cultivo:"Sorgo" },
+        { fecha:"06/04/2026", campos:"Carrillo",                             ha:12, cultivo:"Sorgo" },
+        { fecha:"07/04/2026", campos:"Carrillo + Campo Beltrán + El Dos",    ha:18, cultivo:"Sorgo" }
+      ]
     }
   },
 
@@ -335,7 +340,8 @@ window.BELHER = {
 
   operaciones: {
     bascula: [
-      { fecha:"06/04", productos:["Tomate","Limón Persa"] },
+      { fecha:"07/04", productos:["Tomate","Rezaga Tomate","Trilla Sorgo"] },
+      { fecha:"06/04", productos:["Tomate","Limón Persa","Trilla Sorgo"] },
       { fecha:"04/04", productos:["Tomate","Rezaga Tomate"] },
       { fecha:"02/04", productos:["Tomate","Limón Persa","Rezaga Tomate"] },
       { fecha:"01/04", productos:["Tomate","Limón Persa"] },
@@ -359,6 +365,9 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"18:17", asunto:"AVANCE DE TRILLA 07/04/2026 SORGO — Carrillo + Campo Beltrán + El Dos · 18 ha trilladas hoy", de:"Bascula Belher", leido:false, fecha:"07/04" },
+    { hora:"17:30", asunto:"REPORTE DE BASCULA 07/04/2026 (REZAGA DE TOMATE)", de:"Bascula Belher", leido:false, fecha:"07/04" },
+    { hora:"16:51", asunto:"REPORTE DE BASCULA 07/04/2026 (TOMATE)", de:"Bascula Belher", leido:false, fecha:"07/04" },
     { hora:"16:25", asunto:"Gass Sheet -Belher WK 15 — reporte hasta WK14 · Excel adjunto: '2026 05-04 Agricola Belher Settle WK15 1.xlsx'", de:"Irene Amezaga · Calavo VP Sales", leido:false, fecha:"07/04" },
     { hora:"16:11", asunto:"RE: Settle WK12 — Reporte Belher actualizado al 4/5/2026 semana 15 (mismo Excel)", de:"Carlos Valadez · Calavo Settlement", leido:false, fecha:"07/04" },
     { hora:"08:40", asunto:"Corbel Seeds Daily Report #0022 — Vine-ripe $55.95-57.95 'much higher', Jalapeño colapsa $40-42, Mexfly quarantine TX", de:"Raymundo Elizalde · Corbel Seeds", leido:false, fecha:"07/04" },
@@ -391,7 +400,7 @@ window.BELHER = {
     { label:"CUCUMBER NOG",   valor:"$36.95–38.95", cambio:"↓ -$4 leve",                 dir:"down"    },
     { label:"MERMA YAMETO",   valor:"4.97%",         cambio:"⚠ día 2 >4% WK15",          dir:"down"    },
     { label:"VENTA NETA",     valor:"$6.56M",        cambio:"Calavo WK12",                dir:"up"      },
-    { label:"SALDO CALAVO",   valor:"-$2.87M",       cambio:"WK13 pendiente",             dir:"down"    },
+    { label:"P&P ACUM WK15",  valor:"$3.90M",        cambio:"780,257 cajas · 458 cont",   dir:"up"      },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",            dir:"up"      },
     { label:"GASS SHEET WK15", valor:"✓ Recibido",     cambio:"Irene + Carlos 07-Abr 16:11", dir:"up"      },
     { label:"1ª WK15 PROM",   valor:"86.88%",        cambio:"Días 1-2 · 8 reportes",      dir:"up"      },
@@ -769,9 +778,9 @@ window.BELHER = {
   },
 
   calavoWeekly: {
-    semana:      "WK12",
-    fechas:      "16–22 Mar 2026",
-    fuente:      "Irene Amezaga · Calavo Growers",
+    semana:      "WK14",
+    fechas:      "23–29 Mar 2026",
+    fuente:      "Carlos Valadez + Irene Amezaga · Calavo Growers · Gass Sheet WK15",
     actualizado: "07/04/2026",
 
     acciones: [
@@ -848,14 +857,16 @@ window.BELHER = {
     ],
 
     kpi: {
-      pallets: 488, loads: 40, pkgs: 67840,
-      fobPromedio: 20.07, fobAnterior: 19.06, pkgsAnterior: 50653
+      pallets: null, loads: 18, pkgs: 30592,
+      fobPromedio: 24.93, fobAnterior: 22.23, pkgsAnterior: 40048,
+      nota: "WK14 — loads/pkgs de settle WK15 (Carlos+Irene 07-Abr). FOB = rev/pkgs ($762,704/30,592). Pallets pendiente en Tomato Weekly Update."
     },
 
     belher: {
-      rounds: { proyectado: 309, actual: 329, loads: 24, pkgs: 42240, diffPct: 7  },
-      roma:   { proyectado: 133, actual: 159, loads: 16, pkgs: 25600, diffPct: 20 },
-      total:  { proyectado: 442, actual: 488, loads: 40, pkgs: 67840 }
+      rounds: { proyectado: null, actual: null, loads: null, pkgs: null, diffPct: null },
+      roma:   { proyectado: null, actual: null, loads: null, pkgs: null, diffPct: null },
+      total:  { proyectado: null, actual: null, loads: 18, pkgs: 30592,
+                nota: "WK14 desde settle WK15 — desglose rounds/roma pendiente Tomato Weekly Update" }
     },
 
     adm: {
