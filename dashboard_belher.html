@@ -419,8 +419,10 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 /* ═══════════════════════════════════════════════
    CHART CONTAINERS
 ══════════════════════════════════════════════ */
+.chart-box      { position: relative; height: 220px; }
+.chart-box-tall { position: relative; height: 300px; }
 .chart-box canvas      { max-height: 260px; }
-.chart-box-tall canvas { max-height: 320px; }
+.chart-box-tall canvas { max-height: 340px; }
 
 /* ═══════════════════════════════════════════════
    BÁSCULA WIDGET
@@ -2684,8 +2686,6 @@ nav.tabs button[data-tab="ejecutivo"]::before {
 }
 .ej2-chartcard {
   padding: 14px 16px 12px;
-  display: flex; flex-direction: column;
-  min-height: 150px;
 }
 .ej2-charthdr {
   font-size: .55rem; font-weight: 700; letter-spacing: .9px;
@@ -3164,7 +3164,7 @@ function checkPw(){
       </div>
       <div class="card ej2-chartcard">
         <div class="ej2-charthdr">Cajas &amp; FOB $/caja <span class="src-tag">Calavo WK01–WK15</span></div>
-        <div style="flex:1;min-height:0;position:relative"><canvas id="chartEjVolFob"></canvas></div>
+        <div class="chart-box" style="height:145px"><canvas id="chartEjVolFob"></canvas></div>
       </div>
     </div>
 
