@@ -2,13 +2,13 @@ window.BELHER = {
   meta: {
     fecha: "Martes 07 Abr 2026",
     semana: "WK 15",
-    actualizado: "07/04/2026 · 14:35"
+    actualizado: "07/04/2026 · 18:30"
   },
 
   alertas: [
     { nivel: "success", texto: "Vine-ripe $55.95–57.95 (4×4/4×5 Nogales) — mayor subida de temporada: +$9/caja vs semana previa $46.95-48.95 (+19%). Corbel #0022 07-Abr: 'much higher'. Embarcar todo el volumen disponible HOY." },
     { nivel: "danger",  texto: "Jalapeño colapsa a $40–42 desde $53–55 (-24%) — corrección abrupta por llegada de oferta primaveral. Habanero también baja a $38-40. Ajuste de expectativas para WK15-16." },
-    { nivel: "warning", texto: "Settlement WK13 + Tomato Weekly Update — NO RECIBIDO aún (14:35). Irene comprometida >1pm HOY. Leima en espera. Si no llega hoy, seguimiento urgente mañana miércoles." },
+    { nivel: "success", texto: "Gass Sheet WK15 recibido — Carlos Valadez (16:11) e Irene Amezaga (16:25) enviaron '2026 05-04 Agricola Belher Settle WK15 1.xlsx'. Datos a WK14 completo + WK15 parcial al 05-Abr. Pendiente: revisar Excel con Leima para actualizar liquidaciones WK13–WK15." },
     { nivel: "danger",  texto: "Bola Yameto merma 4.97% WK15 día 2 — segundo consecutivo >4% (04/04: 4.44%). Promedio WK15: 4.71%. Con vine-ripe en máximos de temporada, la calidad es crítica para no perder precio." },
     { nivel: "success", texto: "CVGW $27.63 (+6.76%) · AVO $14.89 (+8.68%) · Roma Calavo merma 1.63% outbound 06/04 ✓ · Báscula 06/04 Tomate + Limón activos. WK15 en ritmo pleno." }
   ],
@@ -50,7 +50,9 @@ window.BELHER = {
       { sem:"WK10", wire:"04-Mar", pago:349600, cajas:69920, cont:40, estado:"Pagado"   },
       { sem:"WK11", wire:"08-Mar", pago:349000, cajas:69800, cont:39, estado:"Pagado"   },
       { sem:"WK12", wire:"15-Mar", pago:240000, cajas:48000, cont:29, estado:"Actual"   },
-      { sem:"WK13", wire:"~07-Abr >1pm", pago:null, cajas:null, cont:null, estado:"Pendiente" }
+      { sem:"WK13", wire:"07-Abr (GS recibido)", pago:null, cajas:null, cont:null, estado:"Pendiente" },
+      { sem:"WK14", wire:"Pendiente wire", pago:null, cajas:null, cont:null, estado:"Pendiente" },
+      { sem:"WK15", wire:"Pendiente wire", pago:null, cajas:null, cont:null, estado:"Pendiente" }
     ]
   },
 
@@ -357,6 +359,8 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"16:25", asunto:"Gass Sheet -Belher WK 15 — reporte hasta WK14 · Excel adjunto: '2026 05-04 Agricola Belher Settle WK15 1.xlsx'", de:"Irene Amezaga · Calavo VP Sales", leido:false, fecha:"07/04" },
+    { hora:"16:11", asunto:"RE: Settle WK12 — Reporte Belher actualizado al 4/5/2026 semana 15 (mismo Excel)", de:"Carlos Valadez · Calavo Settlement", leido:false, fecha:"07/04" },
     { hora:"08:40", asunto:"Corbel Seeds Daily Report #0022 — Vine-ripe $55.95-57.95 'much higher', Jalapeño colapsa $40-42, Mexfly quarantine TX", de:"Raymundo Elizalde · Corbel Seeds", leido:false, fecha:"07/04" },
     { hora:"11:47", asunto:"REPORTE DE OUTBOUND TOMATE 06/04/2026 — Bola Yameto merma 4.97% ⚠, Roma Calavo 1ª 91.13%, Roma Millennium 1ª 86.47%", de:"Calidad Belher",             leido:false, fecha:"07/04" },
     { hora:"23:47", asunto:"Re: Settle WK12 — Leima confirma a Irene: 'esperamos para mañana' (settlement HOY 07-Abr >1pm)",                       de:"Leima Leyva · Administración",leido:false, fecha:"06/04" },
@@ -389,7 +393,7 @@ window.BELHER = {
     { label:"VENTA NETA",     valor:"$6.56M",        cambio:"Calavo WK12",                dir:"up"      },
     { label:"SALDO CALAVO",   valor:"-$2.87M",       cambio:"WK13 pendiente",             dir:"down"    },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",            dir:"up"      },
-    { label:"SETTLE WK13",    valor:"HOY >1pm",      cambio:"Irene confirmó 06-Abr",      dir:"up"      },
+    { label:"GASS SHEET WK15", valor:"✓ Recibido",     cambio:"Irene + Carlos 07-Abr 16:11", dir:"up"      },
     { label:"1ª WK15 PROM",   valor:"86.88%",        cambio:"Días 1-2 · 8 reportes",      dir:"up"      },
     { label:"CVGW",           valor:"$27.63",        cambio:"+6.8% 07-Abr",               dir:"up"      },
     { label:"AVO",            valor:"$14.89",        cambio:"+8.7% 07-Abr",               dir:"up"      }
@@ -581,7 +585,7 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"07/04/2026 · pendiente 14:35", evento:"Settlement WK13 + Tomato Weekly Update — Irene prometió >1pm HOY. Aún no recibido a las 14:35. Si no llega hoy, seguimiento a Irene y Carlos Valadez mañana miércoles.", tipo:"pago",   participantes:"Irene Amezaga · Carlos Valadez · Leima Leyva · Calavo" },
+      { fecha:"08/04/2026", evento:"Revisión Excel Gass Sheet WK15 con Leima — Carlos e Irene enviaron '2026 05-04 Agricola Belher Settle WK15 1.xlsx' el 07-Abr. Revisar montos de liquidación WK13–WK14–WK15 y actualizar dashboard con datos reales.", tipo:"pago", participantes:"Leima Leyva · Carlos Valadez · Irene Amezaga · Calavo" },
       { fecha:"13/04/2026",            evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar)", tipo:"reunion", participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
       { fecha:"16/04/2026",            evento:"BPSI F/S Marzo 2026 y Forecast Q2 2026 — revisión financiera y pipeline", tipo:"reunion", participantes:"JC · Armando Llanes · hildelisa@beautyjunkies.com" },
       { fecha:"21/04/2026",            evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
@@ -787,6 +791,18 @@ window.BELHER = {
 
     correos: [
       {
+        fecha: "07/04/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya · Calavo",
+        asunto: "Gass Sheet -Belher WK 15 — reporte hasta semana 14",
+        tipo: "reporte", nivel: "success",
+        resumen: "Irene envía a Antonio y JC (16:25): 'Adjunto esta el reporte hasta la semana 14. Estoy al pendiente para cualquier pregunta o duda.' Archivo adjunto: '2026 05-04 Agricola Belher Settle WK15 1.xlsx' (664KB). Contiene ventas/liquidación Belher actualizado al 05-Abr-2026. WK14 completo + WK15 parcial."
+      },
+      {
+        fecha: "07/04/2026", de: "Carlos Valadez", cargo: "Settlement Coordinator · Calavo",
+        asunto: "RE: Settle WK12 — reporte Belher actualizado al 4/5/2026 semana 15",
+        tipo: "reporte", nivel: "success",
+        resumen: "Carlos a Leima (cc: Irene) a las 16:11: 'Buen día, anexo te envío reporte de Belhel actualizado al día 4/5/2026 semana 15, cualquier duda nos dejas saber.' Mismo archivo Excel adjunto. Confirma proceso de settlement activo — datos completos al día 5 de abril."
+      },
+      {
         fecha: "06/04/2026", de: "Leima Leyva", cargo: "Finance Manager · Agrícola Belher",
         asunto: "Re: Settle WK12 — 'De acuerdo Irene, esperamos para mañana'",
         tipo: "settlement", nivel: "info",
@@ -825,7 +841,7 @@ window.BELHER = {
     ],
 
     alertas: [
-      { nivel: "warning", texto: "Settlement WK13 + Tomato Weekly Update — NO RECIBIDO a las 14:35. Irene comprometida >1pm HOY. Seguimiento urgente si no llega antes del cierre." },
+      { nivel: "success", texto: "Gass Sheet WK15 recibido el 07-Abr: Carlos Valadez (16:11) e Irene Amezaga (16:25) enviaron Excel con datos a WK14 completo + WK15 parcial. Revisar con Leima para actualizar liquidaciones formales." },
       { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
       { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
       { nivel: "success", texto: "CVGW $27.63 (+6.76%) · AVO $14.89 (+8.68%) — fuerte momentum sector produce (07-Abr). CVGW en máximos de 52 semanas ($28.72 techo)." }
