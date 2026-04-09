@@ -3480,7 +3480,7 @@ function checkPw(){
       <div class="chart-box" style="height:220px"><canvas id="chartProdBascula"></canvas></div>
     </div>
 
-    <div class="section-title" style="margin-top:8px">Producción · Empaque WK01–WK15 (bultos) <span class="src-tag">Primera vs Tercera calidad</span></div>
+    <div class="section-title" style="margin-top:8px">Eficiencia de Empaque · % Empacado vs Báscula WK01–WK15 <span class="src-tag">todas las calidades combinadas</span></div>
     <div class="card">
       <div class="chart-box" style="height:220px"><canvas id="chartProdEmpaque"></canvas></div>
     </div>
@@ -3492,12 +3492,13 @@ function checkPw(){
           <thead>
             <tr>
               <th>Semana</th>
-              <th class="td-num">Báscula (t)</th>
-              <th class="td-num">ÁLAMO (t)</th>
-              <th class="td-num">LA 25 (t)</th>
-              <th class="td-num">Bultos</th>
-              <th class="td-num">Kg Empaque</th>
-              <th class="td-num">1ª %</th>
+              <th class="td-num">Báscula (cj 25lb)</th>
+              <th class="td-num">ÁLAMO (cj)</th>
+              <th class="td-num">LA 25 (cj)</th>
+              <th class="td-num">Empacado (cj)</th>
+              <th class="td-num">1ª % báscula</th>
+              <th class="td-num">3ª % báscula</th>
+              <th class="td-num">Total %</th>
             </tr>
           </thead>
           <tbody id="prodSemanalBody"></tbody>
@@ -6484,43 +6485,22 @@ function checkPw(){
       chartsInit.prodSemanal = true;
       var pd = (D.operaciones && D.operaciones.produccionSemanal) || [];
       if (pd.length) {
-        var pdLabels  = pd.map(function(r){ return r.wk; });
-        var pdAlamo   = pd.map(function(r){ return r.bascAlamo; });
-        var pdLA25    = pd.map(function(r){ return r.bascLA25; });
-        var pdPrim    = pd.map(function(r){ return r.empPrim; });
-        var pdTerc    = pd.map(function(r){ return r.empTerc; });
-        var pdKgEmp   = pd.map(function(r){ return r.empKg; });
+        var pdLabels = pd.map(function(r){ return r.wk; });
+        var pdAlaCj  = pd.map(function(r){ return r.alaCj; });
+        var pdLA25Cj = pd.map(function(r){ return r.la25Cj; });
+        var pdEmpCj  = pd.map(function(r){ return r.empCajas; });
+        var pdPct    = pd.map(function(r){ return r.pctEmp; });
 
-        /* Báscula stacked bar */
+        /* Chart 1: Báscula (cajas 25lb) ÁLAMO + LA25 stacked + Empaque cajas line */
         var ctxB = document.getElementById('chartProdBascula');
         if (ctxB) new Chart(ctxB.getContext('2d'), {
           type: 'bar',
           data: {
             labels: pdLabels,
             datasets: [
-              { label: 'ÁLAMO',  data: pdAlamo, backgroundColor: 'rgba(39,174,96,.85)',  borderRadius: 3, maxBarThickness: 28 },
-              { label: 'LA 25',  data: pdLA25,  backgroundColor: 'rgba(36,113,163,.75)', borderRadius: 3, maxBarThickness: 28 }
-            ]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { font: { size: 10 }, boxWidth: 12 } } },
-            scales: {
-              x: { stacked: true, ticks: { font: { size: 9 } }, grid: { display: false } },
-              y: { stacked: true, ticks: { callback: function(v){ return (v/1000).toFixed(0)+'t'; }, font: { size: 9 } }, grid: { color: 'rgba(0,0,0,.045)' } }
-            }
-          }
-        });
-
-        /* Empaque stacked bar */
-        var ctxE = document.getElementById('chartProdEmpaque');
-        if (ctxE) new Chart(ctxE.getContext('2d'), {
-          type: 'bar',
-          data: {
-            labels: pdLabels,
-            datasets: [
-              { label: '1ª Primera', data: pdPrim, backgroundColor: 'rgba(39,174,96,.85)',  borderRadius: 3, maxBarThickness: 28 },
-              { label: 'Tercera',    data: pdTerc, backgroundColor: 'rgba(230,126,34,.80)', borderRadius: 3, maxBarThickness: 28 }
+              { label: 'Báscula ÁLAMO (cj)', data: pdAlaCj, backgroundColor: 'rgba(39,174,96,.80)',  borderRadius: 3, maxBarThickness: 26, stack: 'basc' },
+              { label: 'Báscula LA 25 (cj)', data: pdLA25Cj, backgroundColor: 'rgba(36,113,163,.70)', borderRadius: 3, maxBarThickness: 26, stack: 'basc' },
+              { label: 'Empacado (cj)', data: pdEmpCj, type: 'line', borderColor: '#e67e22', backgroundColor: 'rgba(230,126,34,.15)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#e67e22', tension: 0.3, yAxisID: 'y' }
             ]
           },
           options: {
@@ -6533,36 +6513,82 @@ function checkPw(){
           }
         });
 
+        /* Chart 2: % Eficiencia por calidad vs báscula */
+        var pdPct1a = pd.map(function(r){ return r.pct1a; });
+        var pdPct3a = pd.map(function(r){ return r.pct3a; });
+        var pdMerma = pd.map(function(r){ return +(100 - r.pctEmp).toFixed(1); });
+        var ctxE = document.getElementById('chartProdEmpaque');
+        if (ctxE) new Chart(ctxE.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: pdLabels,
+            datasets: [
+              {
+                label: '1ª Primera % báscula',
+                data: pdPct1a,
+                borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,.08)',
+                borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#27ae60', fill: true, tension: 0.3
+              },
+              {
+                label: 'Tercera % báscula',
+                data: pdPct3a,
+                borderColor: '#e67e22', backgroundColor: 'rgba(230,126,34,.06)',
+                borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#e67e22', fill: true, tension: 0.3
+              },
+              {
+                label: 'Total empacado % báscula',
+                data: pdPct,
+                borderColor: '#2471a3', backgroundColor: 'transparent',
+                borderWidth: 2, borderDash: [5,3], pointRadius: 3, pointBackgroundColor: '#2471a3', fill: false, tension: 0.3
+              }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { font: { size: 10 }, boxWidth: 12 } },
+              tooltip: { callbacks: { label: function(c){ return ' '+c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'; } } }
+            },
+            scales: {
+              x: { ticks: { font: { size: 9 } }, grid: { display: false } },
+              y: { min: 0, max: 100, ticks: { callback: function(v){ return v+'%'; }, font: { size: 9 } }, grid: { color: 'rgba(0,0,0,.045)' } }
+            }
+          }
+        });
+
         /* Detail table */
         var tbody = document.getElementById('prodSemanalBody');
         if (tbody) {
-          var totBasc=0,totAlamo=0,totLA25=0,totBultos=0,totKgEmp=0,totPrim=0,totTerc=0;
+          var totBascCj=0, totAlaCj=0, totLA25Cj=0, totEmpCj=0, totBascKg=0;
           pd.forEach(function(r){
-            var pct = r.empBultos ? (r.empPrim/r.empBultos*100).toFixed(1) : '—';
-            var cls = parseFloat(pct)>=88 ? 'badge-green' : parseFloat(pct)>=80 ? 'badge-orange' : 'badge-red';
+            var clsT = r.pctEmp>=85?'badge-green':r.pctEmp>=75?'badge-orange':'badge-red';
+            var cls1 = r.pct1a>=70?'badge-green':r.pct1a>=60?'badge-orange':'badge-red';
             tbody.insertAdjacentHTML('beforeend',
               '<tr>' +
               '<td><strong>'+r.wk+'</strong></td>' +
-              '<td class="td-num">'+(r.bascKg/1000).toFixed(1)+' t</td>' +
-              '<td class="td-num">'+(r.bascAlamo/1000).toFixed(1)+' t</td>' +
-              '<td class="td-num">'+(r.bascLA25/1000).toFixed(1)+' t</td>' +
-              '<td class="td-num">'+r.empBultos.toLocaleString('es-MX')+'</td>' +
-              '<td class="td-num">'+(r.empKg/1000).toFixed(1)+' t</td>' +
-              '<td class="td-num"><span class="badge '+cls+'">'+pct+'%</span></td>' +
+              '<td class="td-num">'+r.bascCj.toLocaleString('en-US')+'</td>' +
+              '<td class="td-num">'+r.alaCj.toLocaleString('en-US')+'</td>' +
+              '<td class="td-num">'+r.la25Cj.toLocaleString('en-US')+'</td>' +
+              '<td class="td-num">'+r.empCajas.toLocaleString('en-US')+'</td>' +
+              '<td class="td-num"><span class="badge '+cls1+'">'+r.pct1a.toFixed(1)+'%</span></td>' +
+              '<td class="td-num">'+r.pct3a.toFixed(1)+'%</td>' +
+              '<td class="td-num"><span class="badge '+clsT+'">'+r.pctEmp.toFixed(1)+'%</span></td>' +
               '</tr>'
             );
-            totBasc+=r.bascKg; totAlamo+=r.bascAlamo; totLA25+=r.bascLA25;
-            totBultos+=r.empBultos; totKgEmp+=r.empKg; totPrim+=r.empPrim;
+            totBascCj+=r.bascCj; totAlaCj+=r.alaCj; totLA25Cj+=r.la25Cj; totEmpCj+=r.empCajas; totBascKg+=r.bascKg;
           });
-          var totPct = totBultos ? (totPrim/totBultos*100).toFixed(1) : '—';
+          var totPct1a = (pd.reduce(function(s,r){return s+r.cj1a;},0) / pd.reduce(function(s,r){return s+r.bascCj;},0)*100).toFixed(1);
+          var totPct3a = (pd.reduce(function(s,r){return s+r.cj3a;},0) / pd.reduce(function(s,r){return s+r.bascCj;},0)*100).toFixed(1);
+          var totPct   = (totEmpCj / totBascCj * 100).toFixed(1);
           tbody.insertAdjacentHTML('beforeend',
             '<tr style="font-weight:700;background:#f0faf3">' +
             '<td>WK01–WK15</td>' +
-            '<td class="td-num">'+(totBasc/1000).toFixed(1)+' t</td>' +
-            '<td class="td-num">'+(totAlamo/1000).toFixed(1)+' t</td>' +
-            '<td class="td-num">'+(totLA25/1000).toFixed(1)+' t</td>' +
-            '<td class="td-num">'+totBultos.toLocaleString('es-MX')+'</td>' +
-            '<td class="td-num">'+(totKgEmp/1000).toFixed(1)+' t</td>' +
+            '<td class="td-num">'+totBascCj.toLocaleString('en-US')+'</td>' +
+            '<td class="td-num">'+totAlaCj.toLocaleString('en-US')+'</td>' +
+            '<td class="td-num">'+totLA25Cj.toLocaleString('en-US')+'</td>' +
+            '<td class="td-num">'+totEmpCj.toLocaleString('en-US')+'</td>' +
+            '<td class="td-num"><span class="badge badge-green">'+totPct1a+'%</span></td>' +
+            '<td class="td-num">'+totPct3a+'%</td>' +
             '<td class="td-num"><span class="badge badge-green">'+totPct+'%</span></td>' +
             '</tr>'
           );
