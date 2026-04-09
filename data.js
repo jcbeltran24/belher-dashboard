@@ -483,6 +483,23 @@ window.BELHER = {
       { fecha:"31/03", productos:["Tomate","Limón Persa","Rezaga Tomate"] },
       { fecha:"29/03", productos:["Tomate","Rezaga Tomate"] }
     ],
+    produccionSemanal: [
+      { wk:"WK01", bascKg:883690,   bascAlamo:303910,  bascLA25:579780,  empBultos:66528,  empKg:750821,  empPrim:56280,  empTerc:10248 },
+      { wk:"WK02", bascKg:1155860,  bascAlamo:438110,  bascLA25:717750,  empBultos:90065,  empKg:1008662, empPrim:79449,  empTerc:10616 },
+      { wk:"WK03", bascKg:1316130,  bascAlamo:602900,  bascLA25:713230,  empBultos:102359, empKg:1150858, empPrim:94855,  empTerc:7504  },
+      { wk:"WK04", bascKg:1550690,  bascAlamo:729820,  bascLA25:820870,  empBultos:114109, empKg:1330534, empPrim:103661, empTerc:10448 },
+      { wk:"WK05", bascKg:2202620,  bascAlamo:1028200, bascLA25:1174420, empBultos:150088, empKg:1696130, empPrim:131424, empTerc:18664 },
+      { wk:"WK06", bascKg:2032610,  bascAlamo:941460,  bascLA25:1091150, empBultos:142587, empKg:1631906, empPrim:129411, empTerc:13176 },
+      { wk:"WK07", bascKg:1464090,  bascAlamo:614010,  bascLA25:850080,  empBultos:94177,  empKg:1081898, empPrim:82801,  empTerc:11376 },
+      { wk:"WK08", bascKg:901060,   bascAlamo:409240,  bascLA25:491570,  empBultos:67355,  empKg:803389,  empPrim:57747,  empTerc:9608  },
+      { wk:"WK09", bascKg:1464390,  bascAlamo:781300,  bascLA25:683090,  empBultos:97746,  empKg:1113301, empPrim:88674,  empTerc:9072  },
+      { wk:"WK10", bascKg:1340040,  bascAlamo:760300,  bascLA25:579740,  empBultos:99306,  empKg:1135026, empPrim:90666,  empTerc:8640  },
+      { wk:"WK11", bascKg:1012180,  bascAlamo:557610,  bascLA25:454570,  empBultos:67147,  empKg:780072,  empPrim:59947,  empTerc:7200  },
+      { wk:"WK12", bascKg:777850,   bascAlamo:497250,  bascLA25:280600,  empBultos:59257,  empKg:683683,  empPrim:52665,  empTerc:6592  },
+      { wk:"WK13", bascKg:657030,   bascAlamo:385570,  bascLA25:271460,  empBultos:45565,  empKg:537135,  empPrim:37789,  empTerc:7776  },
+      { wk:"WK14", bascKg:1074760,  bascAlamo:646960,  bascLA25:427800,  empBultos:75847,  empKg:880910,  empPrim:67271,  empTerc:8576  },
+      { wk:"WK15", bascKg:458030,   bascAlamo:328680,  bascLA25:129350,  empBultos:25931,  empKg:300612,  empPrim:21899,  empTerc:4032  }
+    ],
     embarques: [
       { fecha:"07/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-108", destino:"Arizona", estado:"OK" },
       { fecha:"07/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-64",  destino:"Arizona", estado:"OK" },
