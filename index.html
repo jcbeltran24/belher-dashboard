@@ -138,7 +138,7 @@ header::after {
    TICKER
 ══════════════════════════════════════════════ */
 .ticker-wrap {
-  background: #060e09;
+  background: var(--ticker-bg);
   border-bottom: 1px solid rgba(34,197,94,.08);
   overflow: hidden; white-space: nowrap; padding: 7px 0;
   position: relative; flex-shrink: 0;
@@ -146,8 +146,8 @@ header::after {
 .ticker-wrap::before, .ticker-wrap::after {
   content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
 }
-.ticker-wrap::before { left:  0; background: linear-gradient(90deg,  #060e09 40%, transparent); }
-.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, #060e09 40%, transparent); }
+.ticker-wrap::before { left:  0; background: linear-gradient(90deg,  var(--ticker-bg) 40%, transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, var(--ticker-bg) 40%, transparent); }
 .ticker-label {
   position: absolute; left: 0; top: 0; bottom: 0; z-index: 3;
   background: var(--accent); color: var(--dark);
@@ -188,7 +188,7 @@ nav.tabs button {
   color: rgba(255,255,255,.42);
   padding: 0 22px; height: 44px;
   font-family: 'Inter', sans-serif;
-  font-size: .82rem; font-weight: 600; letter-spacing: .2px;
+  font-size: var(--text-base, .875rem); font-weight: 600; letter-spacing: .2px;
   white-space: nowrap;
   position: relative;
   transition: color .2s;
@@ -233,7 +233,7 @@ main {
    SECTION TITLE
 ══════════════════════════════════════════════ */
 .section-title {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 8px;
   font-size: .66rem; font-weight: 700; letter-spacing: 1.5px;
   text-transform: uppercase; color: var(--muted);
   margin: 28px 0 14px;
@@ -290,9 +290,9 @@ main {
 .kpi-card.accent-warn { --kpi-accent: var(--accent); }
 .kpi-card.accent-blue { --kpi-accent: var(--blue); }
 
-.kpi-label { font-size: .63rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.kpi-label { font-size: var(--text-2xs, .63rem); font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
 .kpi-value {
-  font-size: 2rem; font-weight: 800; line-height: 1;
+  font-size: var(--text-2xl, 2rem); font-weight: 800; line-height: 1;
   color: var(--text); letter-spacing: -.5px;
   margin-bottom: 5px;
 }
@@ -400,7 +400,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .badge {
   display: inline-flex; align-items: center;
   padding: 2px 9px; border-radius: 20px;
-  font-size: .67rem; font-weight: 700; letter-spacing: .2px; white-space: nowrap;
+  font-size: var(--text-xs, .67rem); font-weight: 700; letter-spacing: .2px; white-space: nowrap;
 }
 .badge-green  { background: #dcfce7; color: #15803d; }
 .badge-yellow { background: #fef3c7; color: #92400e; }
@@ -429,9 +429,9 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 ══════════════════════════════════════════════ */
 .bascula-grid { display: flex; flex-direction: column; gap: 6px; }
 .basc-row {
-  display: flex; align-items: center; gap: 14px;
-  padding: 9px 14px;
-  background: #f8faf8;
+  display: flex; align-items: center; gap: 16px;
+  padding: 8px 16px;
+  background: var(--surface-subtle);
   border: 1px solid var(--border); border-radius: var(--r-sm);
   transition: background .12s;
 }
@@ -440,7 +440,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .basc-chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .chip {
   display: inline-block; padding: 2px 10px; border-radius: 20px;
-  font-size: .69rem; font-weight: 600;
+  font-size: var(--text-xs, .67rem); font-weight: 600;
   background: #dcfce7; color: #15803d;
 }
 .chip.rezaga { background: #fef3c7; color: #92400e; }
@@ -452,7 +452,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 ══════════════════════════════════════════════ */
 .tipo-pill {
   display: inline-block; padding: 2px 10px; border-radius: 20px;
-  font-size: .69rem; font-weight: 700;
+  font-size: var(--text-xs, .67rem); font-weight: 700;
 }
 .tipo-tomate { background: #fee2e2; color: #9f1239; }
 .tipo-limon  { background: #dbeafe; color: #1e40af; }
@@ -1035,12 +1035,13 @@ details[open] .nac-chevron svg { transform: rotate(180deg); }
 .strat-desc        { font-size: .81rem; color: var(--muted); line-height: 1.6; margin-bottom: 9px; }
 .strat-action      { font-size: .77rem; color: var(--green); font-weight: 600; border-top: 1px dashed var(--border); padding-top: 8px; }
 
-.badge-success  { background: #dcfce7; color: #15803d; }
-.badge-info     { background: #dbeafe; color: #1d4ed8; }
-.badge-warning  { background: #fef3c7; color: #92400e; }
-.badge-danger   { background: #fee2e2; color: #dc2626; }
-.badge-alta     { background: #fee2e2; color: #dc2626; }
-.badge-media    { background: #fff7ed; color: #c2410c; }
+/* Badge aliases — Sistema consolidado: usar badge-green/yellow/red/blue/orange/gray */
+.badge-success { background: #dcfce7; color: #15803d; }  /* = badge-green */
+.badge-info    { background: #dbeafe; color: #1d4ed8; }  /* = badge-blue */
+.badge-warning { background: #fef3c7; color: #92400e; }  /* = badge-yellow */
+.badge-danger  { background: #fee2e2; color: #dc2626; }  /* = badge-red */
+.badge-alta    { background: #fee2e2; color: #dc2626; }  /* = badge-red */
+.badge-media   { background: #fff7ed; color: #c2410c; }  /* = badge-orange */
 
 .agenda-tbl      { width: 100%; border-collapse: collapse; font-size: .83rem; }
 .agenda-tbl th   { text-align: left; padding: 9px 14px; border-bottom: 2px solid var(--border); color: var(--muted); font-size: .64rem; text-transform: uppercase; letter-spacing: .9px; }
@@ -1094,6 +1095,14 @@ details[open] .nac-chevron svg { transform: rotate(180deg); }
   border: 1px solid var(--border);
   overflow: hidden;
 }
+
+/* ═══════════════════════════════════════════════
+   PRODUCCIÓN — table row hover
+══════════════════════════════════════════════ */
+#prodSemanalTbl tbody tr,
+#tblHistorico tbody tr { transition: background var(--transition, .2s); }
+#prodSemanalTbl tbody tr:hover,
+#tblHistorico tbody tr:hover { background: #f0fdf4; }
 
 /* ═══════════════════════════════════════════════
    FOOTER
@@ -1499,6 +1508,17 @@ footer span { color: var(--accent2); font-weight: 600; }
   --r-lg:  18px;
   --r-xl:  24px;
   --transition: .22s cubic-bezier(.25,.46,.45,.94);
+  /* Surface extras */
+  --surface-subtle: #f8faf8;
+  --ticker-bg:      #060e09;
+  /* Typography scale — 7 semantic steps */
+  --text-2xs:  0.60rem;
+  --text-xs:   0.67rem;
+  --text-sm:   0.75rem;
+  --text-base: 0.875rem;
+  --text-lg:   1.0rem;
+  --text-xl:   1.5rem;
+  --text-2xl:  2.0rem;
 }
 
 /* ── 2. Font Rendering ── */
@@ -1615,7 +1635,20 @@ tbody tr:hover { background: rgba(22,163,74,.025); }
 ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.22); }
 
 /* ── 16. Focus rings — accessibility ── */
-button:focus-visible { outline: 2px solid var(--green2); outline-offset: 2px; border-radius: 4px; }
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible { outline: 2px solid var(--green2); outline-offset: 2px; border-radius: 4px; }
+
+/* ── 16b. Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track     { animation: none; }
+  .live-dot         { animation: none; opacity: 1; }
+  .cf-semaforo-dot  { animation: none; opacity: 1; }
+  .tab-panel.active { animation: none; }
+  *                 { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
 
 /* ── 17. Footer ── */
 footer { letter-spacing: .3px; font-size: .67rem; }
@@ -3128,22 +3161,22 @@ function checkPw(){
 </div>
 
 <!-- ══ TABS ══ -->
-<nav class="tabs" id="tabNav">
-  <button class="active" data-tab="ejecutivo">Ejecutivo</button>
-  <button data-tab="ventas">Export Calavo</button>
-  <button data-tab="nacional">Nacional</button>
-  <button data-tab="finanzas">Finanzas</button>
-  <button data-tab="optomate">Ops Tomate</button>
-  <button data-tab="cdc">CDC · Personal</button>
-  <button data-tab="otros">Otros Cultivos</button>
-  <button data-tab="calavoweekly">Intel Calavo</button>
-  <button data-tab="estrategia">Estrategia</button>
+<nav class="tabs" id="tabNav" role="tablist" aria-label="Secciones del dashboard">
+  <button class="active" data-tab="ejecutivo" role="tab" aria-selected="true"  aria-controls="tab-ejecutivo">Ejecutivo</button>
+  <button data-tab="ventas"        role="tab" aria-selected="false" aria-controls="tab-ventas">Export Calavo</button>
+  <button data-tab="nacional"      role="tab" aria-selected="false" aria-controls="tab-nacional">Nacional</button>
+  <button data-tab="finanzas"      role="tab" aria-selected="false" aria-controls="tab-finanzas">Finanzas</button>
+  <button data-tab="optomate"      role="tab" aria-selected="false" aria-controls="tab-optomate">Ops Tomate</button>
+  <button data-tab="cdc"           role="tab" aria-selected="false" aria-controls="tab-cdc">CDC · Personal</button>
+  <button data-tab="otros"         role="tab" aria-selected="false" aria-controls="tab-otros">Otros Cultivos</button>
+  <button data-tab="calavoweekly"  role="tab" aria-selected="false" aria-controls="tab-calavoweekly">Intel Calavo</button>
+  <button data-tab="estrategia"    role="tab" aria-selected="false" aria-controls="tab-estrategia">Estrategia</button>
 </nav>
 
 <main>
 
   <!-- ══════════ EJECUTIVO ══════════ -->
-  <div class="tab-panel active" id="tab-ejecutivo">
+  <div class="tab-panel active" id="tab-ejecutivo" role="tabpanel" aria-labelledby="tab-ejecutivo-btn">
 
     <!-- ROW 1: 3 KPI cards + FOB sparkline -->
     <div class="ej2-top" style="margin-top:6px">
@@ -3183,7 +3216,7 @@ function checkPw(){
   </div>
 
   <!-- ══════════ VENTAS & PRECIO ══════════ -->
-  <div class="tab-panel" id="tab-ventas">
+  <div class="tab-panel" id="tab-ventas" role="tabpanel" aria-labelledby="tab-ventas-btn">
 
     <div class="section-title" style="margin-top:4px">Ventas &amp; Precio · Temporada 2025–2026 <span class="src-tag">Calavo Settlement</span></div>
     <div class="grid-4" id="ventasKpis"></div>
@@ -3197,7 +3230,7 @@ function checkPw(){
   </div>
 
   <!-- ══════════ NACIONAL ══════════ -->
-  <div class="tab-panel" id="tab-nacional">
+  <div class="tab-panel" id="tab-nacional" role="tabpanel" aria-labelledby="tab-nacional-btn">
 
     <div class="section-title" style="margin-top:4px">Ventas Nacional · Temporada 2025–2026 <span class="src-tag">canal independiente — sin relación con Calavo</span></div>
     <div class="grid-4" id="nacKpis"></div>
@@ -3214,7 +3247,7 @@ function checkPw(){
   </div>
 
   <!-- ══════════ ESTRATEGIA (ex-HOY) ══════════ -->
-  <div class="tab-panel" id="tab-estrategia">
+  <div class="tab-panel" id="tab-estrategia" role="tabpanel" aria-labelledby="tab-estrategia-btn">
 
     <!-- 1. Señales del día — lo que necesita atención AHORA -->
     <div class="section-title" style="margin-top:4px">Señales del Día</div>
@@ -3342,7 +3375,7 @@ function checkPw(){
   </div>
 
   <!-- ══════════ FINANZAS ══════════ -->
-  <div class="tab-panel" id="tab-finanzas">
+  <div class="tab-panel" id="tab-finanzas" role="tabpanel" aria-labelledby="tab-finanzas-btn">
 
     <!-- CEO KPIs first -->
     <div class="section-title">Resumen Financiero · Temporada</div>
@@ -3380,7 +3413,7 @@ function checkPw(){
   </div>
 
   <!-- ══════════ OPS TOMATE ══════════ -->
-  <div class="tab-panel" id="tab-optomate">
+  <div class="tab-panel" id="tab-optomate" role="tabpanel" aria-labelledby="tab-optomate-btn">
 
     <!-- Season Hero -->
     <div id="tomateHero"></div>
@@ -3532,7 +3565,7 @@ function checkPw(){
   </div>
 
   <!-- ══════════ CALAVO WEEKLY ══════════ -->
-  <div class="tab-panel" id="tab-calavoweekly">
+  <div class="tab-panel" id="tab-calavoweekly" role="tabpanel" aria-labelledby="tab-calavoweekly-btn">
     <div id="cw-header"></div>
     <div id="cw-stocks"></div>
     <div id="cw-alertas"></div>
@@ -3553,7 +3586,7 @@ function checkPw(){
   </div>
 
   <!-- ══════════ OTROS ══════════ -->
-  <div class="tab-panel" id="tab-otros">
+  <div class="tab-panel" id="tab-otros" role="tabpanel" aria-labelledby="tab-otros-btn">
 
     <!-- ── LIMÓN ── -->
     <div class="section-title">Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
@@ -3593,7 +3626,7 @@ function checkPw(){
   </div>
 
   <!-- ══════════ CDC ══════════ -->
-  <div class="tab-panel" id="tab-cdc">
+  <div class="tab-panel" id="tab-cdc" role="tabpanel" aria-labelledby="tab-cdc-btn">
     <div id="cdcHero"></div>
     <div class="cdc-grid" id="cdcCards"></div>
     <div class="section-title">Tendencia Semanal · Personas Censadas <span class="src-tag">capitalhumano@agbelher.com · Censo 2026</span></div>
@@ -3795,11 +3828,12 @@ function checkPw(){
   var tabBtns   = document.querySelectorAll('#tabNav button');
   var tabPanels = document.querySelectorAll('.tab-panel');
   function activateTab(tabId) {
-    tabBtns.forEach(function (b) { b.classList.remove('active'); });
+    tabBtns.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
     tabPanels.forEach(function (p) { p.classList.remove('active'); });
     var btn = document.querySelector('#tabNav button[data-tab="' + tabId + '"]');
     if (!btn) return;
     btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
     btn.scrollIntoView({ inline:'center', block:'nearest', behavior:'smooth' });
     document.getElementById('tab-' + tabId).classList.add('active');
     /* setTimeout: ensure browser finishes painting before Chart.js measures canvas */
