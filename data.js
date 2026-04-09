@@ -485,7 +485,7 @@ window.BELHER = {
     ],
     produccionSemanal: [
       /* bascCj/alaCj/la25Cj = cajas equiv 25lb | empCajas = bultos totales (todas calidades)
-         pct1a/pct3a = % del kg báscula empacado como 1a/3a | pctEmp = total empKg/bascKg */
+         pct1a/pct3a = % del kg báscula empacado como 1a/Nacional | pctEmp = total empKg/bascKg */
       { wk:"WK01", bascKg:883690,   bascCj:77928,   alaCj:26800,  la25Cj:51128,  empCajas:66528,  cj1a:56280, cj3a:10248, pct1a:71.5, pct3a:13.5, pctEmp:85.0 },
       { wk:"WK02", bascKg:1155860,  bascCj:101929,  alaCj:38635,  la25Cj:63295,  empCajas:90065,  cj1a:79449, cj3a:10616, pct1a:76.7, pct3a:10.6, pctEmp:87.3 },
       { wk:"WK03", bascKg:1316130,  bascCj:116063,  alaCj:53167,  la25Cj:62896,  empCajas:102359, cj1a:94855, cj3a:7504,  pct1a:80.1, pct3a:7.3,  pctEmp:87.4 },
