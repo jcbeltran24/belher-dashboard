@@ -3485,6 +3485,11 @@ function checkPw(){
       <div class="chart-box" style="height:220px"><canvas id="chartProdEmpaque"></canvas></div>
     </div>
 
+    <div class="section-title" style="margin-top:8px">Eficiencia Histórica · % Empacado vs Báscula · Últimas 6 Temporadas <span class="src-tag">Base de datos producción 2020–2026</span></div>
+    <div class="card">
+      <div class="chart-box" style="height:260px"><canvas id="chartProdHistorico"></canvas></div>
+    </div>
+
     <div class="section-title" style="margin-top:8px">Detalle Semanal · Báscula &amp; Empaque</div>
     <div class="card-table">
       <div class="tbl-wrap">
@@ -6551,6 +6556,52 @@ function checkPw(){
               scales: {
                 x: { ticks: { font: { size: 9 } }, grid: { display: false } },
                 y: { min: 0, max: 100, ticks: { callback: function(v){ return v+'%'; }, font: { size: 9 } }, grid: { color: 'rgba(0,0,0,.045)' } }
+              }
+            }
+          });
+        }
+
+        /* Chart 3: % histórico 6 temporadas */
+        var hist = (D.operaciones && D.operaciones.produccionHistorica) || null;
+        var ctxH = document.getElementById('chartProdHistorico');
+        if (ctxH && hist) {
+          var histColors = ['#95a5a6','#3498db','#2ecc71','#e67e22','#9b59b6','#e74c3c'];
+          var histWidths = [1.5,1.5,1.5,1.5,1.5,3];
+          var histDash   = [[4,3],[4,3],[4,3],[4,3],[4,3],[]];
+          var histDatasets = hist.temporadas.map(function(t,i){
+            return {
+              label: t.label,
+              data: t.data,
+              borderColor: histColors[i],
+              backgroundColor: 'transparent',
+              borderWidth: histWidths[i],
+              borderDash: histDash[i],
+              pointRadius: i===5 ? 5 : 3,
+              pointBackgroundColor: histColors[i],
+              fill: false,
+              tension: 0.3
+            };
+          });
+          new Chart(ctxH.getContext('2d'), {
+            type: 'line',
+            data: { labels: hist.semanas, datasets: histDatasets },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              plugins: {
+                legend: { position: 'bottom', labels: { font: { size: 10 }, boxWidth: 12, padding: 10 } },
+                tooltip: {
+                  callbacks: {
+                    label: function(c){ return ' '+c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'; }
+                  }
+                }
+              },
+              scales: {
+                x: { ticks: { font: { size: 9 } }, grid: { color: 'rgba(0,0,0,.04)' } },
+                y: {
+                  min: 40, max: 120,
+                  ticks: { callback: function(v){ return v+'%'; }, font: { size: 9 } },
+                  grid: { color: 'rgba(0,0,0,.045)' }
+                }
               }
             }
           });

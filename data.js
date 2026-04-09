@@ -483,6 +483,18 @@ window.BELHER = {
       { fecha:"31/03", productos:["Tomate","Limón Persa","Rezaga Tomate"] },
       { fecha:"29/03", productos:["Tomate","Rezaga Tomate"] }
     ],
+    produccionHistorica: {
+      /* % kg empacado / kg báscula por semana · 6 temporadas */
+      semanas: ['WK01','WK02','WK03','WK04','WK05','WK06','WK07','WK08','WK09','WK10','WK11','WK12','WK13','WK14','WK15'],
+      temporadas: [
+        { label:'2020-21', data:[52.7, 87.5, 76.4, 99.6, 76.2, 75.5, 75.6, 64.9, 55.6, 74.4, 74.3, 78.6, 80.6, 83.1, 62.6] },
+        { label:'2021-22', data:[94.7, 93.5, 89.9, 87.8, 92.4, 85.7, 87.7, 91.8, 84.4, 78.8, 85.8, 89.4, 87.1, 88.3, 83.1] },
+        { label:'2022-23', data:[83.3,105.1, 89.7, 98.4, 89.6, 75.7, 85.8, 78.8,102.7, 92.5, 93.8, 90.8, 92.8, 93.1, 88.4] },
+        { label:'2023-24', data:[52.9,143.0, 81.4, 81.9, 87.3,108.2, 95.5, 87.4, 81.5, 92.7, 89.4, 87.8, 80.9, 95.4, 82.6] },
+        { label:'2024-25', data:[77.8, 99.1, 89.9, 79.6, 83.0, 80.0, 85.3, 75.3, 72.1, 71.6, 72.5, 88.4, 93.3, 85.6, 79.5] },
+        { label:'2025-26', data:[85.0, 87.3, 87.4, 85.8, 77.0, 80.3, 73.9, 89.2, 76.0, 84.7, 77.1, 88.6, 81.8, 82.0, 65.6] }
+      ]
+    },
     produccionSemanal: [
       /* bascCj = cajas equiv 25lb (÷11.34 kg) | cjXxx = cajas empacadas por etiqueta | pctXxx = % del kg báscula */
       { wk:"WK01", bascKg:883690,  bascCj:77928,  pctEmp:85.0, cjCalavo:24840, cjYameto:25840, cjTolin:10248, cjZazu:5600,  cjUrson:0,     cjMillennium:0,    cjOtros:0,    pctCalavo:30.7, pctYameto:33.6, pctTolin:13.5, pctZazu:7.2,  pctUrson:0.0, pctMillennium:0.0, pctOtros:0.0 },
