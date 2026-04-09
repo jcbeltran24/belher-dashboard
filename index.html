@@ -3537,8 +3537,8 @@ function checkPw(){
       </div>
 
       <div class="section-title">Flota · Distribución por Transportista</div>
-      <div class="card" id="tomateFleetCard" style="padding:20px;max-width:340px">
-        <canvas id="chartTomateFlota" height="180"></canvas>
+      <div class="card" id="tomateFleetCard" style="padding:20px 24px">
+        <canvas id="chartTomateFlota"></canvas>
       </div>
     </div>
 
@@ -6348,36 +6348,53 @@ function checkPw(){
       var fleetColors = ['rgba(22,163,74,.8)', 'rgba(29,78,216,.8)', 'rgba(217,119,6,.8)', 'rgba(107,114,128,.6)'];
       var ctxFleet = document.getElementById('chartTomateFlota');
       if (ctxFleet && fleetLabels.length) {
+        var fleetTotal = fleetData.reduce(function (a, b) { return a + b; }, 0);
         new Chart(ctxFleet.getContext('2d'), {
-          type: 'doughnut',
+          type: 'bar',
           data: {
             labels: fleetLabels,
             datasets: [{
+              label: 'Cargas',
               data: fleetData,
               backgroundColor: fleetColors.slice(0, fleetLabels.length),
-              borderWidth: 0,
-              hoverOffset: 6
+              borderRadius: 6,
+              borderSkipped: false,
+              barThickness: 28
             }]
           },
           options: {
-            responsive: true, maintainAspectRatio: true,
-            cutout: '60%',
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-              legend: {
-                display: true, position: 'bottom',
-                labels: { font: { size: 10 }, padding: 10, boxWidth: 8, boxHeight: 8 }
-              },
+              legend: { display: false },
               tooltip: {
                 callbacks: {
                   label: function (ctx) {
-                    var total = ctx.dataset.data.reduce(function (a, b) { return a + b; }, 0);
-                    return ctx.label + ': ' + ctx.parsed + ' cargas (' + (ctx.parsed / total * 100).toFixed(0) + '%)';
+                    var pct = fleetTotal ? (ctx.parsed.x / fleetTotal * 100).toFixed(0) : 0;
+                    return ' ' + ctx.parsed.x + ' cargas · ' + pct + '%';
                   }
                 }
+              }
+            },
+            scales: {
+              x: {
+                beginAtZero: true,
+                grid: { color: 'rgba(0,0,0,.04)' },
+                ticks: {
+                  font: { size: 10 },
+                  callback: function (v) { return v + ' cg'; }
+                }
+              },
+              y: {
+                grid: { display: false },
+                ticks: { font: { size: 11, weight: '600' } }
               }
             }
           }
         });
+        /* Set canvas height proportional to number of carriers */
+        ctxFleet.style.height = (fleetLabels.length * 52 + 20) + 'px';
       } else if (ctxFleet) {
         document.getElementById('tomateFleetCard').style.display = 'none';
       }
