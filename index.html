@@ -3475,12 +3475,12 @@ function checkPw(){
     </div>
 
     <!-- ── PRODUCCIÓN SEMANAL WK01-WK15 ── -->
-    <div class="section-title" style="margin-top:28px">Producción · Báscula WK01–WK15 <span class="src-tag">Base de datos producción 2025-2026</span></div>
+    <div class="section-title" style="margin-top:28px">Producción · Cajas Empacadas por Etiqueta WK01–WK15 <span class="src-tag">vs báscula producida · cajas equiv. 25 lb</span></div>
     <div class="card">
       <div class="chart-box" style="height:220px"><canvas id="chartProdBascula"></canvas></div>
     </div>
 
-    <div class="section-title" style="margin-top:8px">Eficiencia de Empaque · % Empacado vs Báscula WK01–WK15 <span class="src-tag">Primera · Nacional · Total</span></div>
+    <div class="section-title" style="margin-top:8px">Eficiencia de Empaque · % Báscula Empacada por Etiqueta WK01–WK15</div>
     <div class="card">
       <div class="chart-box" style="height:220px"><canvas id="chartProdEmpaque"></canvas></div>
     </div>
@@ -3492,13 +3492,15 @@ function checkPw(){
           <thead>
             <tr>
               <th>Semana</th>
-              <th class="td-num">Báscula (cj 25lb)</th>
-              <th class="td-num">ÁLAMO (cj)</th>
-              <th class="td-num">LA 25 (cj)</th>
-              <th class="td-num">Empacado (cj)</th>
-              <th class="td-num">1ª % báscula</th>
-              <th class="td-num">Nacional % báscula</th>
-              <th class="td-num">Total %</th>
+              <th class="td-num">Báscula (cj)</th>
+              <th class="td-num">CALAVO</th>
+              <th class="td-num">YAMETO</th>
+              <th class="td-num">TOLIN</th>
+              <th class="td-num">ZAZU</th>
+              <th class="td-num">URSON</th>
+              <th class="td-num">MILLENNIUM</th>
+              <th class="td-num">OTROS</th>
+              <th class="td-num">% Emp/Basc</th>
             </tr>
           </thead>
           <tbody id="prodSemanalBody"></tbody>
@@ -6486,111 +6488,103 @@ function checkPw(){
       var pd = (D.operaciones && D.operaciones.produccionSemanal) || [];
       if (pd.length) {
         var pdLabels = pd.map(function(r){ return r.wk; });
-        var pdAlaCj  = pd.map(function(r){ return r.alaCj; });
-        var pdLA25Cj = pd.map(function(r){ return r.la25Cj; });
-        var pdEmpCj  = pd.map(function(r){ return r.empCajas; });
         var pdPct    = pd.map(function(r){ return r.pctEmp; });
+        var etiqCfg = [
+          { key:'Calavo',     label:'CALAVO',      color:'rgba(39,174,96,.85)'  },
+          { key:'Yameto',     label:'YAMETO',      color:'rgba(240,165,0,.85)'  },
+          { key:'Tolin',      label:'TOLIN',       color:'rgba(36,113,163,.85)' },
+          { key:'Zazu',       label:'ZAZU',        color:'rgba(155,89,182,.80)' },
+          { key:'Urson',      label:'URSON',       color:'rgba(231,76,60,.80)'  },
+          { key:'Millennium', label:'MILLENNIUM',  color:'rgba(26,188,156,.80)' },
+          { key:'Otros',      label:'OTROS',       color:'rgba(149,165,166,.70)'}
+        ];
 
-        /* Chart 1: Báscula (cajas 25lb) ÁLAMO + LA25 stacked + Empaque cajas line */
+        /* Chart 1: cajas por etiqueta (stacked) + línea báscula */
         var ctxB = document.getElementById('chartProdBascula');
-        if (ctxB) new Chart(ctxB.getContext('2d'), {
-          type: 'bar',
-          data: {
-            labels: pdLabels,
-            datasets: [
-              { label: 'Báscula ÁLAMO (cj)', data: pdAlaCj, backgroundColor: 'rgba(39,174,96,.80)',  borderRadius: 3, maxBarThickness: 26, stack: 'basc' },
-              { label: 'Báscula LA 25 (cj)', data: pdLA25Cj, backgroundColor: 'rgba(36,113,163,.70)', borderRadius: 3, maxBarThickness: 26, stack: 'basc' },
-              { label: 'Empacado (cj)', data: pdEmpCj, type: 'line', borderColor: '#e67e22', backgroundColor: 'rgba(230,126,34,.15)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#e67e22', tension: 0.3, yAxisID: 'y' }
-            ]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { font: { size: 10 }, boxWidth: 12 } } },
-            scales: {
-              x: { stacked: true, ticks: { font: { size: 9 } }, grid: { display: false } },
-              y: { stacked: true, ticks: { callback: function(v){ return (v/1000).toFixed(0)+'K'; }, font: { size: 9 } }, grid: { color: 'rgba(0,0,0,.045)' } }
-            }
-          }
-        });
-
-        /* Chart 2: % Eficiencia por calidad vs báscula */
-        var pdPct1a = pd.map(function(r){ return r.pct1a; });
-        var pdPct3a = pd.map(function(r){ return r.pct3a; });
-        var pdMerma = pd.map(function(r){ return +(100 - r.pctEmp).toFixed(1); });
-        var ctxE = document.getElementById('chartProdEmpaque');
-        if (ctxE) new Chart(ctxE.getContext('2d'), {
-          type: 'line',
-          data: {
-            labels: pdLabels,
-            datasets: [
-              {
-                label: '1ª Primera % báscula',
-                data: pdPct1a,
-                borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,.08)',
-                borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#27ae60', fill: true, tension: 0.3
-              },
-              {
-                label: 'Nacional % báscula',
-                data: pdPct3a,
-                borderColor: '#e67e22', backgroundColor: 'rgba(230,126,34,.06)',
-                borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#e67e22', fill: true, tension: 0.3
-              },
-              {
-                label: 'Total empacado % báscula',
-                data: pdPct,
-                borderColor: '#2471a3', backgroundColor: 'transparent',
-                borderWidth: 2, borderDash: [5,3], pointRadius: 3, pointBackgroundColor: '#2471a3', fill: false, tension: 0.3
+        if (ctxB) {
+          var datasets = etiqCfg.map(function(e){
+            return { label: e.label, data: pd.map(function(r){ return r['cj'+e.key]; }),
+              backgroundColor: e.color, borderRadius: 2, maxBarThickness: 26, stack: 'emp' };
+          });
+          datasets.push({
+            label: 'Báscula (cj equiv.)',
+            data: pd.map(function(r){ return r.bascCj; }),
+            type: 'line', borderColor: '#2c3e50', borderWidth: 2, borderDash: [4,3],
+            pointRadius: 3, pointBackgroundColor: '#2c3e50', fill: false, tension: 0.2
+          });
+          new Chart(ctxB.getContext('2d'), {
+            type: 'bar',
+            data: { labels: pdLabels, datasets: datasets },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              plugins: { legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 10, padding: 8 } } },
+              scales: {
+                x: { stacked: true, ticks: { font: { size: 9 } }, grid: { display: false } },
+                y: { stacked: true, ticks: { callback: function(v){ return (v/1000).toFixed(0)+'K'; }, font: { size: 9 } }, grid: { color: 'rgba(0,0,0,.045)' } }
               }
-            ]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: {
-              legend: { position: 'bottom', labels: { font: { size: 10 }, boxWidth: 12 } },
-              tooltip: { callbacks: { label: function(c){ return ' '+c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'; } } }
-            },
-            scales: {
-              x: { ticks: { font: { size: 9 } }, grid: { display: false } },
-              y: { min: 0, max: 100, ticks: { callback: function(v){ return v+'%'; }, font: { size: 9 } }, grid: { color: 'rgba(0,0,0,.045)' } }
             }
-          }
-        });
+          });
+        }
+
+        /* Chart 2: % por etiqueta vs báscula (líneas) */
+        var ctxE = document.getElementById('chartProdEmpaque');
+        if (ctxE) {
+          var pctDatasets = etiqCfg.slice(0,5).map(function(e){
+            return { label: e.label, data: pd.map(function(r){ return r['pct'+e.key]; }),
+              borderColor: e.color.replace(/[\d.]+\)$/,'1)'), backgroundColor: 'transparent',
+              borderWidth: 2, pointRadius: 3, fill: false, tension: 0.3 };
+          });
+          pctDatasets.push({
+            label: 'Total %', data: pdPct,
+            borderColor: '#2c3e50', backgroundColor: 'transparent',
+            borderWidth: 2.5, borderDash: [5,3], pointRadius: 4, fill: false, tension: 0.3
+          });
+          new Chart(ctxE.getContext('2d'), {
+            type: 'line',
+            data: { labels: pdLabels, datasets: pctDatasets },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              plugins: {
+                legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 10, padding: 8 } },
+                tooltip: { callbacks: { label: function(c){ return ' '+c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'; } } }
+              },
+              scales: {
+                x: { ticks: { font: { size: 9 } }, grid: { display: false } },
+                y: { min: 0, max: 100, ticks: { callback: function(v){ return v+'%'; }, font: { size: 9 } }, grid: { color: 'rgba(0,0,0,.045)' } }
+              }
+            }
+          });
+        }
 
         /* Detail table */
         var tbody = document.getElementById('prodSemanalBody');
         if (tbody) {
-          var totBascCj=0, totAlaCj=0, totLA25Cj=0, totEmpCj=0, totBascKg=0;
+          var totBascCj=0, totEmpCj=0;
+          var totEtiq = {}; etiqCfg.forEach(function(e){ totEtiq[e.key]=0; });
           pd.forEach(function(r){
+            var empTot = etiqCfg.reduce(function(s,e){ return s + r['cj'+e.key]; }, 0);
             var clsT = r.pctEmp>=85?'badge-green':r.pctEmp>=75?'badge-orange':'badge-red';
-            var cls1 = r.pct1a>=70?'badge-green':r.pct1a>=60?'badge-orange':'badge-red';
+            var cells = etiqCfg.map(function(e){
+              var v=r['cj'+e.key]; totEtiq[e.key]+=v;
+              return '<td class="td-num">'+(v?v.toLocaleString('en-US'):'—')+'</td>';
+            }).join('');
             tbody.insertAdjacentHTML('beforeend',
-              '<tr>' +
-              '<td><strong>'+r.wk+'</strong></td>' +
+              '<tr><td><strong>'+r.wk+'</strong></td>' +
               '<td class="td-num">'+r.bascCj.toLocaleString('en-US')+'</td>' +
-              '<td class="td-num">'+r.alaCj.toLocaleString('en-US')+'</td>' +
-              '<td class="td-num">'+r.la25Cj.toLocaleString('en-US')+'</td>' +
-              '<td class="td-num">'+r.empCajas.toLocaleString('en-US')+'</td>' +
-              '<td class="td-num"><span class="badge '+cls1+'">'+r.pct1a.toFixed(1)+'%</span></td>' +
-              '<td class="td-num">'+r.pct3a.toFixed(1)+'%</td>' +
-              '<td class="td-num"><span class="badge '+clsT+'">'+r.pctEmp.toFixed(1)+'%</span></td>' +
-              '</tr>'
+              cells +
+              '<td class="td-num"><span class="badge '+clsT+'">'+r.pctEmp.toFixed(1)+'%</span></td></tr>'
             );
-            totBascCj+=r.bascCj; totAlaCj+=r.alaCj; totLA25Cj+=r.la25Cj; totEmpCj+=r.empCajas; totBascKg+=r.bascKg;
+            totBascCj+=r.bascCj; totEmpCj+=empTot;
           });
-          var totPct1a = (pd.reduce(function(s,r){return s+r.cj1a;},0) / pd.reduce(function(s,r){return s+r.bascCj;},0)*100).toFixed(1);
-          var totPct3a = (pd.reduce(function(s,r){return s+r.cj3a;},0) / pd.reduce(function(s,r){return s+r.bascCj;},0)*100).toFixed(1);
-          var totPct   = (totEmpCj / totBascCj * 100).toFixed(1);
+          var totCells = etiqCfg.map(function(e){
+            return '<td class="td-num">'+totEtiq[e.key].toLocaleString('en-US')+'</td>';
+          }).join('');
+          var totPct = (totEmpCj/totBascCj*100).toFixed(1);
           tbody.insertAdjacentHTML('beforeend',
-            '<tr style="font-weight:700;background:#f0faf3">' +
-            '<td>WK01–WK15</td>' +
+            '<tr style="font-weight:700;background:#f0faf3"><td>WK01–WK15</td>' +
             '<td class="td-num">'+totBascCj.toLocaleString('en-US')+'</td>' +
-            '<td class="td-num">'+totAlaCj.toLocaleString('en-US')+'</td>' +
-            '<td class="td-num">'+totLA25Cj.toLocaleString('en-US')+'</td>' +
-            '<td class="td-num">'+totEmpCj.toLocaleString('en-US')+'</td>' +
-            '<td class="td-num"><span class="badge badge-green">'+totPct1a+'%</span></td>' +
-            '<td class="td-num">'+totPct3a+'%</td>' +
-            '<td class="td-num"><span class="badge badge-green">'+totPct+'%</span></td>' +
-            '</tr>'
+            totCells +
+            '<td class="td-num"><span class="badge badge-green">'+totPct+'%</span></td></tr>'
           );
         }
       }
