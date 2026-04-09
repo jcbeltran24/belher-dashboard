@@ -419,10 +419,25 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 /* ═══════════════════════════════════════════════
    CHART CONTAINERS
 ══════════════════════════════════════════════ */
-.chart-box      { position: relative; height: 220px; }
-.chart-box-tall { position: relative; height: 300px; }
-.chart-box canvas      { max-height: 260px; }
-.chart-box-tall canvas { max-height: 340px; }
+.chart-box      { position: relative; height: 160px; }
+.chart-box-tall { position: relative; height: 200px; }
+.chart-box canvas      { max-height: 200px; }
+.chart-box-tall canvas { max-height: 240px; }
+
+/* ── Chart grids: 2 or 3 charts per row ── */
+.chart-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.chart-trio {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 720px) {
+  .chart-duo, .chart-trio { grid-template-columns: 1fr; }
+}
 
 /* ═══════════════════════════════════════════════
    BÁSCULA WIDGET
@@ -3262,11 +3277,16 @@ function checkPw(){
     <div class="section-title" style="margin-top:4px">Ventas &amp; Precio · Temporada 2025–2026 <span class="src-tag">Calavo Settlement</span></div>
     <div class="grid-4" id="ventasKpis"></div>
 
-    <div class="section-title">Volumen Semanal vs Precio FOB <span class="src-tag">Cajas liquidadas (barras) · FOB $/caja (línea)</span></div>
-    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartVentasVolFob"></canvas></div></div>
-
-    <div class="section-title">Análisis de Contrato · Escalador de Precio <span class="src-tag">Calavo 2025–2026 · base $16.95 · collar $4 activo desde $20.95</span></div>
-    <div id="ventasContrato"></div>
+    <div class="chart-duo" style="margin-top:4px">
+      <div>
+        <div class="section-title" style="margin-top:0">Volumen Semanal vs FOB <span class="src-tag">Cajas (barras) · $/caja (línea)</span></div>
+        <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartVentasVolFob"></canvas></div></div>
+      </div>
+      <div>
+        <div class="section-title" style="margin-top:0">Escalador de Precio <span class="src-tag">base $16.95 · collar $4</span></div>
+        <div id="ventasContrato"></div>
+      </div>
+    </div>
 
   </div>
 
@@ -3276,13 +3296,18 @@ function checkPw(){
     <div class="section-title" style="margin-top:4px">Ventas Nacional · Temporada 2025–2026 <span class="src-tag">canal independiente — sin relación con Calavo</span></div>
     <div class="grid-4" id="nacKpis"></div>
 
-    <div class="section-title">Distribución Roma vs Bola <span class="src-tag">jacruz@agbelher.com · datos de temporada</span></div>
-    <div id="nacCanales"></div>
+    <div class="chart-duo" style="margin-top:4px">
+      <div>
+        <div class="section-title" style="margin-top:0">Distribución Roma vs Bola <span class="src-tag">datos de temporada</span></div>
+        <div id="nacCanales"></div>
+      </div>
+      <div>
+        <div class="section-title" style="margin-top:0">Precio Promedio Nacional vs Exportación <span class="src-tag">revenue / cajas</span></div>
+        <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartNacPrecio"></canvas></div></div>
+      </div>
+    </div>
 
-    <div class="section-title">Precio Promedio Nacional vs Exportación <span class="src-tag">revenue / cajas por canal</span></div>
-    <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartNacPrecio"></canvas></div></div>
-
-    <div class="section-title">Notas Operativas Nacional</div>
+    <div class="section-title">Notas Operativas</div>
     <div id="nacNotas"></div>
 
   </div>
@@ -3347,7 +3372,7 @@ function checkPw(){
             </div>
             <div id="mi-stat-vine" class="mi-chart-stat"></div>
           </div>
-          <div class="chart-box" style="height:180px"><canvas id="chartMiVine"></canvas></div>
+          <div class="chart-box"><canvas id="chartMiVine"></canvas></div>
         </div>
         <!-- Roma XL -->
         <div class="card mi-chart-card">
@@ -3358,7 +3383,7 @@ function checkPw(){
             </div>
             <div id="mi-stat-roma" class="mi-chart-stat"></div>
           </div>
-          <div class="chart-box" style="height:180px"><canvas id="chartMiRoma"></canvas></div>
+          <div class="chart-box"><canvas id="chartMiRoma"></canvas></div>
         </div>
         <!-- Jalapeño -->
         <div class="card mi-chart-card">
@@ -3369,7 +3394,7 @@ function checkPw(){
             </div>
             <div id="mi-stat-jal" class="mi-chart-stat"></div>
           </div>
-          <div class="chart-box" style="height:180px"><canvas id="chartMiJal"></canvas></div>
+          <div class="chart-box"><canvas id="chartMiJal"></canvas></div>
         </div>
         <!-- Bell GH -->
         <div class="card mi-chart-card">
@@ -3380,7 +3405,7 @@ function checkPw(){
             </div>
             <div id="mi-stat-bell" class="mi-chart-stat"></div>
           </div>
-          <div class="chart-box" style="height:180px"><canvas id="chartMiBell"></canvas></div>
+          <div class="chart-box"><canvas id="chartMiBell"></canvas></div>
         </div>
       </div>
       <!-- Limón full-width -->
@@ -3422,16 +3447,21 @@ function checkPw(){
     <div class="section-title">Resumen Financiero · Temporada</div>
     <div class="fin-kpi-row" id="finKpis"><p class="empty-state">Cargando resumen financiero…</p></div>
 
-    <div class="section-title">Cash Flow Mensual <span class="src-tag" id="cfSrcTag">leima@agbelher.com</span></div>
-    <div class="card" id="cfCard" style="padding:22px 24px"></div>
-
-    <div class="section-title">EBITDA: Actual vs Budget vs Y/A <span class="src-tag">jacruz@agbelher.com · Estado Financiero Feb 2026</span></div>
-    <div class="card" style="padding:22px">
-      <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
+    <div class="chart-duo" style="margin-top:4px">
+      <div>
+        <div class="section-title" style="margin-top:0">Cash Flow Mensual <span class="src-tag" id="cfSrcTag">leima@agbelher.com</span></div>
+        <div class="card" id="cfCard" style="padding:18px 20px"></div>
+      </div>
+      <div>
+        <div class="section-title" style="margin-top:0">EBITDA: Actual vs Budget vs Y/A <span class="src-tag">Feb 2026</span></div>
+        <div class="card" style="padding:18px 20px">
+          <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
+        </div>
+      </div>
     </div>
 
     <div class="section-title">Proyección · Temporada Restante <span class="src-tag">estimado basado en ritmo actual</span></div>
-    <div class="card" id="finProyeccion" style="padding:22px"></div>
+    <div class="card" id="finProyeccion" style="padding:20px"></div>
 
     <!-- Deuda Total ABSA -->
     <div class="section-title" style="margin-top:4px">Posición de Deuda · ABSA <span class="src-tag">Cash Flow 22-Mar-2026 · leima@agbelher.com</span></div>
@@ -3441,11 +3471,16 @@ function checkPw(){
     <div class="section-title">Deuda Calavo · Camino a la Liquidación Real <span class="src-tag">$6M total · $5M anticipo + $1M puente</span></div>
     <div id="finAnticipo"></div>
 
-    <div class="section-title">Pagos Semanales Calavo <span class="src-tag">leima@agbelher.com · Settlement Calavo · <b>settle parcial — facturas pendientes en cada corte</b></span></div>
-    <div class="card">
-      <div class="chart-box"><canvas id="chartPagos"></canvas></div>
+    <div class="chart-duo" style="margin-top:4px">
+      <div>
+        <div class="section-title" style="margin-top:0">Pagos Semanales Calavo <span class="src-tag">settle parcial — facturas pendientes</span></div>
+        <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartPagos"></canvas></div></div>
+      </div>
+      <div>
+        <div class="section-title" style="margin-top:0">Variaciones de Pago</div>
+        <div class="card-table" id="pagosVariaciones" style="height:fit-content"></div>
+      </div>
     </div>
-    <div class="card-table" id="pagosVariaciones" style="margin-top:12px"></div>
 
     <!-- calavoDesglose y liquidTbl: detalle completo en tab CalavoWeekly — ocultos -->
     <div id="calavoDesglose" style="display:none"></div>
@@ -3469,11 +3504,20 @@ function checkPw(){
 
     <!-- ── SUB-PANEL: CALIDAD ── -->
     <div class="sub-panel active" data-group="ops" data-sub="calidad">
-      <div class="section-title" style="margin-top:4px">Calidad · Temporada <span class="src-tag">Outbound calidad@agbelher.com</span></div>
-      <div id="tomateCalidadSummary"></div>
-      <div class="card" style="margin-top:8px"><div class="chart-box" style="height:190px"><canvas id="chartTomateCalidad"></canvas></div></div>
+      <div id="tomateCalidadSummary" style="margin-top:4px"></div>
 
-      <details class="tom-variety-details">
+      <div class="chart-duo" style="margin-top:8px">
+        <div>
+          <div class="section-title" style="margin-top:0">Calidad · Temporada <span class="src-tag">Outbound</span></div>
+          <div class="card"><div class="chart-box"><canvas id="chartTomateCalidad"></canvas></div></div>
+        </div>
+        <div>
+          <div class="section-title" style="margin-top:0">Tendencia · 1ª Primera &amp; Merma <span class="src-tag">promedio por semana</span></div>
+          <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div></div>
+        </div>
+      </div>
+
+      <details class="tom-variety-details" style="margin-top:12px">
         <summary>
           <span class="tvd-label">Calidad por Variedad</span>
           <span id="tomateOutboundFecha" class="tvd-fecha"></span>
@@ -3488,12 +3532,7 @@ function checkPw(){
         <div class="view-panel" data-group="tomate-cal" data-view="semana" id="tomateVariedadesSemana"></div>
       </details>
 
-      <div class="section-title">Tendencia Semanal · 1ª Primera &amp; Merma <span class="src-tag">calidad@agbelher.com · promedio por semana</span></div>
-      <div class="card">
-        <div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div>
-      </div>
-
-      <div class="section-title">Báscula · Actividad de Pesaje <span class="src-tag">basculabelher@gmail.com</span></div>
+      <div class="section-title">Báscula <span class="src-tag">basculabelher@gmail.com</span></div>
       <div class="card">
         <div class="bascula-grid" id="bascWidget"><p class="empty-state">Cargando datos de báscula…</p></div>
       </div>
@@ -3521,37 +3560,42 @@ function checkPw(){
         </div>
       </div>
 
-      <div class="section-title">Volumen Diario de Embarques</div>
-      <div class="card">
-        <div class="chart-box"><canvas id="chartEmbarques"></canvas></div>
+      <div class="chart-duo" style="margin-top:4px">
+        <div>
+          <div class="section-title" style="margin-top:0">Vol. Diario de Embarques</div>
+          <div class="card"><div class="chart-box"><canvas id="chartEmbarques"></canvas></div></div>
+        </div>
+        <div>
+          <div class="section-title" style="margin-top:0">Vol. Semanal · Cajas Exportadas <span class="src-tag">WK01–WK12</span></div>
+          <div class="card"><div class="chart-box"><canvas id="chartTomateVolumen"></canvas></div></div>
+        </div>
       </div>
 
-      <div class="section-title">Volumen Semanal · Cajas Exportadas <span class="src-tag">Calavo Settlement WK01–WK12</span></div>
-      <div class="card">
-        <div class="chart-box" style="height:200px"><canvas id="chartTomateVolumen"></canvas></div>
-      </div>
-
-      <div class="section-title">Precio FOB Calavo vs Mercado USDA · Temporada 2025–2026 <span class="src-tag">Calavo Settlement + USDA Nogales · WK11–WK12 confirmado · resto estimado IA</span></div>
-      <div class="card">
-        <div class="chart-box" style="height:240px"><canvas id="chartTomatePrecio"></canvas></div>
-      </div>
-
-      <div class="section-title">Flota · Distribución por Transportista</div>
-      <div class="card" id="tomateFleetCard" style="padding:20px 24px">
-        <canvas id="chartTomateFlota"></canvas>
+      <div class="chart-duo" style="margin-top:12px">
+        <div>
+          <div class="section-title" style="margin-top:0">Precio FOB Calavo vs USDA <span class="src-tag">WK11–WK12 confirmado</span></div>
+          <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartTomatePrecio"></canvas></div></div>
+        </div>
+        <div>
+          <div class="section-title" style="margin-top:0">Flota · Distribución por Transportista</div>
+          <div class="card" id="tomateFleetCard" style="padding:20px 24px">
+            <canvas id="chartTomateFlota"></canvas>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- ── SUB-PANEL: PRODUCCIÓN ── -->
     <div class="sub-panel" data-group="ops" data-sub="produccion">
-      <div class="section-title" style="margin-top:4px">Producción · Cajas Empacadas por Etiqueta WK01–WK15 <span class="src-tag">vs báscula producida · cajas equiv. 25 lb</span></div>
-      <div class="card">
-        <div class="chart-box" style="height:220px"><canvas id="chartProdBascula"></canvas></div>
-      </div>
-
-      <div class="section-title" style="margin-top:8px">Eficiencia de Empaque · % por Etiqueta WK01–WK15</div>
-      <div class="card">
-        <div class="chart-box" style="height:220px"><canvas id="chartProdEmpaque"></canvas></div>
+      <div class="chart-duo" style="margin-top:4px">
+        <div>
+          <div class="section-title" style="margin-top:0">Cajas Empacadas por Etiqueta <span class="src-tag">vs báscula · 25 lb equiv.</span></div>
+          <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartProdBascula"></canvas></div></div>
+        </div>
+        <div>
+          <div class="section-title" style="margin-top:0">Eficiencia de Empaque · % por Etiqueta</div>
+          <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartProdEmpaque"></canvas></div></div>
+        </div>
       </div>
 
       <div class="section-title" style="margin-top:8px">Eficiencia Histórica · % Empacado vs Báscula <span class="src-tag">6 temporadas 2020–2026</span></div>
@@ -3634,15 +3678,21 @@ function checkPw(){
 
     <!-- ── SUB-PANEL: LIMÓN ── -->
     <div class="sub-panel active" data-group="cultivos" data-sub="limon">
-      <div class="section-title" style="margin-top:4px">Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
+      <div class="section-title" style="margin-top:4px">Limón Persa <span class="src-tag">P&amp;L Limón Feb 2026</span></div>
       <div class="grid-4" id="limonKpis"></div>
-      <div id="limonClienteRisk"></div>
-      <div class="section-title">Precio FOB Nogales &amp; LA Terminal Market <span class="src-tag">USDA Market News · FOB Shipping Point + Terminal</span></div>
-      <div id="limonUsdaPrice"></div>
-      <div class="section-title">Histórico 12 Meses + Tendencia 4 Semanas <span class="src-tag">USDA Market News · Limón Persa 40lb carton</span></div>
-      <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
-      <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
-      <div class="card" id="limonPnl" style="padding:24px"></div>
+
+      <div class="chart-duo" style="margin-top:12px">
+        <div>
+          <div class="section-title" style="margin-top:0">Precio FOB Nogales · Histórico 12 Meses <span class="src-tag">USDA</span></div>
+          <div id="limonUsdaPrice"></div>
+          <div class="card" style="margin-top:8px"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
+        </div>
+        <div>
+          <div class="section-title" style="margin-top:0">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh</span></div>
+          <div id="limonClienteRisk"></div>
+          <div class="card" id="limonPnl" style="padding:20px;margin-top:8px"></div>
+        </div>
+      </div>
     </div>
 
     <!-- ── SUB-PANEL: GRANOS ── -->
@@ -3679,13 +3729,20 @@ function checkPw(){
   <div class="tab-panel" id="tab-cdc" role="tabpanel" aria-labelledby="tab-cdc-btn">
     <div id="cdcHero"></div>
     <div class="cdc-grid" id="cdcCards"></div>
-    <div class="section-title">Tendencia Semanal · Personas Censadas <span class="src-tag">capitalhumano@agbelher.com · Censo 2026</span></div>
-    <div class="card"><div class="chart-box" style="height:260px"><canvas id="chartCdc"></canvas></div></div>
-    <div class="section-title">% Trabajadores por Semana</div>
-    <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartCdcPct"></canvas></div></div>
 
-    <div class="section-title">Varianza Total: Real vs Proyectado <span class="src-tag">Depto. Producción · Plan Inicial 2025–2026</span></div>
-    <div class="card"><div class="chart-box" style="height:240px"><canvas id="chartCdcVsProyeccion"></canvas></div></div>
+    <div class="chart-duo" style="margin-top:4px">
+      <div>
+        <div class="section-title" style="margin-top:0">Personas Censadas · Tendencia Semanal <span class="src-tag">Censo 2026</span></div>
+        <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartCdc"></canvas></div></div>
+      </div>
+      <div>
+        <div class="section-title" style="margin-top:0">% Trabajadores por Semana</div>
+        <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartCdcPct"></canvas></div></div>
+      </div>
+    </div>
+
+    <div class="section-title">Varianza: Real vs Proyectado <span class="src-tag">Plan Inicial 2025–2026</span></div>
+    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartCdcVsProyeccion"></canvas></div></div>
   </div>
 
 </main>
