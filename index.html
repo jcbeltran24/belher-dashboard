@@ -138,7 +138,7 @@ header::after {
    TICKER
 ══════════════════════════════════════════════ */
 .ticker-wrap {
-  background: var(--ticker-bg);
+  background: #060e09;
   border-bottom: 1px solid rgba(34,197,94,.08);
   overflow: hidden; white-space: nowrap; padding: 7px 0;
   position: relative; flex-shrink: 0;
@@ -146,8 +146,8 @@ header::after {
 .ticker-wrap::before, .ticker-wrap::after {
   content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
 }
-.ticker-wrap::before { left:  0; background: linear-gradient(90deg,  var(--ticker-bg) 40%, transparent); }
-.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, var(--ticker-bg) 40%, transparent); }
+.ticker-wrap::before { left:  0; background: linear-gradient(90deg,  #060e09 40%, transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, #060e09 40%, transparent); }
 .ticker-label {
   position: absolute; left: 0; top: 0; bottom: 0; z-index: 3;
   background: var(--accent); color: var(--dark);
@@ -188,7 +188,7 @@ nav.tabs button {
   color: rgba(255,255,255,.42);
   padding: 0 22px; height: 44px;
   font-family: 'Inter', sans-serif;
-  font-size: var(--text-base, .875rem); font-weight: 600; letter-spacing: .2px;
+  font-size: .82rem; font-weight: 600; letter-spacing: .2px;
   white-space: nowrap;
   position: relative;
   transition: color .2s;
@@ -233,7 +233,7 @@ main {
    SECTION TITLE
 ══════════════════════════════════════════════ */
 .section-title {
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 10px;
   font-size: .66rem; font-weight: 700; letter-spacing: 1.5px;
   text-transform: uppercase; color: var(--muted);
   margin: 28px 0 14px;
@@ -290,9 +290,9 @@ main {
 .kpi-card.accent-warn { --kpi-accent: var(--accent); }
 .kpi-card.accent-blue { --kpi-accent: var(--blue); }
 
-.kpi-label { font-size: var(--text-2xs, .63rem); font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.kpi-label { font-size: .63rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
 .kpi-value {
-  font-size: var(--text-2xl, 2rem); font-weight: 800; line-height: 1;
+  font-size: 2rem; font-weight: 800; line-height: 1;
   color: var(--text); letter-spacing: -.5px;
   margin-bottom: 5px;
 }
@@ -400,7 +400,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .badge {
   display: inline-flex; align-items: center;
   padding: 2px 9px; border-radius: 20px;
-  font-size: var(--text-xs, .67rem); font-weight: 700; letter-spacing: .2px; white-space: nowrap;
+  font-size: .67rem; font-weight: 700; letter-spacing: .2px; white-space: nowrap;
 }
 .badge-green  { background: #dcfce7; color: #15803d; }
 .badge-yellow { background: #fef3c7; color: #92400e; }
@@ -419,34 +419,19 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 /* ═══════════════════════════════════════════════
    CHART CONTAINERS
 ══════════════════════════════════════════════ */
-.chart-box      { position: relative; height: 160px; }
-.chart-box-tall { position: relative; height: 200px; }
-.chart-box canvas      { max-height: 200px; }
-.chart-box-tall canvas { max-height: 240px; }
-
-/* ── Chart grids: 2 or 3 charts per row ── */
-.chart-duo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.chart-trio {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-}
-@media (max-width: 720px) {
-  .chart-duo, .chart-trio { grid-template-columns: 1fr; }
-}
+.chart-box      { position: relative; height: 220px; }
+.chart-box-tall { position: relative; height: 300px; }
+.chart-box canvas      { max-height: 260px; }
+.chart-box-tall canvas { max-height: 340px; }
 
 /* ═══════════════════════════════════════════════
    BÁSCULA WIDGET
 ══════════════════════════════════════════════ */
 .bascula-grid { display: flex; flex-direction: column; gap: 6px; }
 .basc-row {
-  display: flex; align-items: center; gap: 16px;
-  padding: 8px 16px;
-  background: var(--surface-subtle);
+  display: flex; align-items: center; gap: 14px;
+  padding: 9px 14px;
+  background: #f8faf8;
   border: 1px solid var(--border); border-radius: var(--r-sm);
   transition: background .12s;
 }
@@ -455,7 +440,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .basc-chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .chip {
   display: inline-block; padding: 2px 10px; border-radius: 20px;
-  font-size: var(--text-xs, .67rem); font-weight: 600;
+  font-size: .69rem; font-weight: 600;
   background: #dcfce7; color: #15803d;
 }
 .chip.rezaga { background: #fef3c7; color: #92400e; }
@@ -467,7 +452,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 ══════════════════════════════════════════════ */
 .tipo-pill {
   display: inline-block; padding: 2px 10px; border-radius: 20px;
-  font-size: var(--text-xs, .67rem); font-weight: 700;
+  font-size: .69rem; font-weight: 700;
 }
 .tipo-tomate { background: #fee2e2; color: #9f1239; }
 .tipo-limon  { background: #dbeafe; color: #1e40af; }
@@ -1050,13 +1035,12 @@ details[open] .nac-chevron svg { transform: rotate(180deg); }
 .strat-desc        { font-size: .81rem; color: var(--muted); line-height: 1.6; margin-bottom: 9px; }
 .strat-action      { font-size: .77rem; color: var(--green); font-weight: 600; border-top: 1px dashed var(--border); padding-top: 8px; }
 
-/* Badge aliases — Sistema consolidado: usar badge-green/yellow/red/blue/orange/gray */
-.badge-success { background: #dcfce7; color: #15803d; }  /* = badge-green */
-.badge-info    { background: #dbeafe; color: #1d4ed8; }  /* = badge-blue */
-.badge-warning { background: #fef3c7; color: #92400e; }  /* = badge-yellow */
-.badge-danger  { background: #fee2e2; color: #dc2626; }  /* = badge-red */
-.badge-alta    { background: #fee2e2; color: #dc2626; }  /* = badge-red */
-.badge-media   { background: #fff7ed; color: #c2410c; }  /* = badge-orange */
+.badge-success  { background: #dcfce7; color: #15803d; }
+.badge-info     { background: #dbeafe; color: #1d4ed8; }
+.badge-warning  { background: #fef3c7; color: #92400e; }
+.badge-danger   { background: #fee2e2; color: #dc2626; }
+.badge-alta     { background: #fee2e2; color: #dc2626; }
+.badge-media    { background: #fff7ed; color: #c2410c; }
 
 .agenda-tbl      { width: 100%; border-collapse: collapse; font-size: .83rem; }
 .agenda-tbl th   { text-align: left; padding: 9px 14px; border-bottom: 2px solid var(--border); color: var(--muted); font-size: .64rem; text-transform: uppercase; letter-spacing: .9px; }
@@ -1110,14 +1094,6 @@ details[open] .nac-chevron svg { transform: rotate(180deg); }
   border: 1px solid var(--border);
   overflow: hidden;
 }
-
-/* ═══════════════════════════════════════════════
-   PRODUCCIÓN — table row hover
-══════════════════════════════════════════════ */
-#prodSemanalTbl tbody tr,
-#tblHistorico tbody tr { transition: background var(--transition, .2s); }
-#prodSemanalTbl tbody tr:hover,
-#tblHistorico tbody tr:hover { background: #f0fdf4; }
 
 /* ═══════════════════════════════════════════════
    FOOTER
@@ -1523,17 +1499,6 @@ footer span { color: var(--accent2); font-weight: 600; }
   --r-lg:  18px;
   --r-xl:  24px;
   --transition: .22s cubic-bezier(.25,.46,.45,.94);
-  /* Surface extras */
-  --surface-subtle: #f8faf8;
-  --ticker-bg:      #060e09;
-  /* Typography scale — 7 semantic steps */
-  --text-2xs:  0.60rem;
-  --text-xs:   0.67rem;
-  --text-sm:   0.75rem;
-  --text-base: 0.875rem;
-  --text-lg:   1.0rem;
-  --text-xl:   1.5rem;
-  --text-2xl:  2.0rem;
 }
 
 /* ── 2. Font Rendering ── */
@@ -1650,20 +1615,7 @@ tbody tr:hover { background: rgba(22,163,74,.025); }
 ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.22); }
 
 /* ── 16. Focus rings — accessibility ── */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible { outline: 2px solid var(--green2); outline-offset: 2px; border-radius: 4px; }
-
-/* ── 16b. Reduced motion ── */
-@media (prefers-reduced-motion: reduce) {
-  .ticker-track     { animation: none; }
-  .live-dot         { animation: none; opacity: 1; }
-  .cf-semaforo-dot  { animation: none; opacity: 1; }
-  .tab-panel.active { animation: none; }
-  *                 { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
-}
+button:focus-visible { outline: 2px solid var(--green2); outline-offset: 2px; border-radius: 4px; }
 
 /* ── 17. Footer ── */
 footer { letter-spacing: .3px; font-size: .67rem; }
@@ -1673,45 +1625,6 @@ footer { letter-spacing: .3px; font-size: .67rem; }
 
 /* ── 19. Alert badges (hoy) ── */
 .hoy-alert { border-radius: 13px; }
-
-/* ── Tab alert badge ── */
-.tab-alert-badge {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-width: 16px; height: 16px; padding: 0 4px;
-  background: var(--red2); color: #fff;
-  font-size: .55rem; font-weight: 800; letter-spacing: 0;
-  border-radius: 99px; margin-left: 5px; vertical-align: middle;
-  line-height: 1;
-}
-
-/* ── Sub-tabs (inner navigation dentro de un tab) ── */
-.sub-tabs {
-  display: flex; gap: 4px; flex-wrap: wrap;
-  margin: 8px 0 20px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 4px;
-}
-.sub-tab-btn {
-  background: none; border: none; cursor: pointer;
-  color: var(--muted); font-family: 'Inter', sans-serif;
-  font-size: var(--text-xs, .72rem); font-weight: 600;
-  padding: 6px 14px; border-radius: 7px;
-  transition: background var(--transition, .2s), color var(--transition, .2s);
-  white-space: nowrap; touch-action: manipulation;
-}
-.sub-tab-btn:hover  { background: var(--bg); color: var(--text2); }
-.sub-tab-btn.active { background: var(--card); color: var(--green); box-shadow: var(--shadow-xs); }
-.sub-panel          { display: none; }
-.sub-panel.active   { display: block; }
-
-/* ── Empty state ── */
-.empty-state {
-  color: var(--muted); font-size: var(--text-sm, .75rem);
-  text-align: center; padding: 24px 16px;
-  font-style: italic; letter-spacing: .2px;
-}
 
 /* ── 20. Header: underline gradient ── */
 header::after {
@@ -3215,24 +3128,22 @@ function checkPw(){
 </div>
 
 <!-- ══ TABS ══ -->
-<nav class="tabs" id="tabNav" role="tablist" aria-label="Secciones del dashboard">
-  <button class="active" data-tab="ejecutivo"   role="tab" aria-selected="true"  aria-controls="tab-ejecutivo">Ejecutivo <span class="tab-alert-badge" id="tabAlertBadge" style="display:none"></span></button>
-  <button data-tab="ventas"        role="tab" aria-selected="false" aria-controls="tab-ventas">Calavo Export</button>
-  <button data-tab="nacional"      role="tab" aria-selected="false" aria-controls="tab-nacional">Nacional</button>
-  <button data-tab="finanzas"      role="tab" aria-selected="false" aria-controls="tab-finanzas">Finanzas</button>
-  <button data-tab="optomate"      role="tab" aria-selected="false" aria-controls="tab-optomate">Operaciones</button>
-  <button data-tab="cdc"           role="tab" aria-selected="false" aria-controls="tab-cdc">Capital Humano</button>
-  <button data-tab="otros"         role="tab" aria-selected="false" aria-controls="tab-otros">Cultivos</button>
-  <button data-tab="calavoweekly"  role="tab" aria-selected="false" aria-controls="tab-calavoweekly">Calavo Weekly</button>
-  <button data-tab="market"        role="tab" aria-selected="false" aria-controls="tab-market">Mercado</button>
-  <button data-tab="estrategia"    role="tab" aria-selected="false" aria-controls="tab-estrategia">Hoy · Alertas</button>
-  <button data-tab="cert"          role="tab" aria-selected="false" aria-controls="tab-cert">Certificaciones</button>
+<nav class="tabs" id="tabNav">
+  <button class="active" data-tab="ejecutivo">Ejecutivo</button>
+  <button data-tab="ventas">Export Calavo</button>
+  <button data-tab="nacional">Nacional</button>
+  <button data-tab="finanzas">Finanzas</button>
+  <button data-tab="optomate">Ops Tomate</button>
+  <button data-tab="cdc">CDC · Personal</button>
+  <button data-tab="otros">Otros Cultivos</button>
+  <button data-tab="calavoweekly">Intel Calavo</button>
+  <button data-tab="estrategia">Estrategia</button>
 </nav>
 
 <main>
 
   <!-- ══════════ EJECUTIVO ══════════ -->
-  <div class="tab-panel active" id="tab-ejecutivo" role="tabpanel" aria-labelledby="tab-ejecutivo-btn">
+  <div class="tab-panel active" id="tab-ejecutivo">
 
     <!-- ROW 1: 3 KPI cards + FOB sparkline -->
     <div class="ej2-top" style="margin-top:6px">
@@ -3260,60 +3171,50 @@ function checkPw(){
     </div>
 
     <!-- ROW 2: 5 indicadores estratégicos compactos -->
-    <div id="ejStratPanel" style="margin-top:12px"><p class="empty-state">Cargando indicadores…</p></div>
+    <div id="ejStratPanel" style="margin-top:12px"></div>
 
     <!-- ROW 3: Señal mercado + Báscula + Alertas -->
     <div class="ej2-bottom" style="margin-top:12px">
-      <div id="ejSenal"><p class="empty-state">Sin señal de mercado</p></div>
-      <div id="ejBascula"><p class="empty-state">Sin datos de báscula</p></div>
-      <div class="ej2-alerts" id="ejAlertas"><p class="empty-state">Sin alertas activas</p></div>
+      <div id="ejSenal"></div>
+      <div id="ejBascula"></div>
+      <div class="ej2-alerts" id="ejAlertas"></div>
     </div>
 
   </div>
 
   <!-- ══════════ VENTAS & PRECIO ══════════ -->
-  <div class="tab-panel" id="tab-ventas" role="tabpanel" aria-labelledby="tab-ventas-btn">
+  <div class="tab-panel" id="tab-ventas">
 
     <div class="section-title" style="margin-top:4px">Ventas &amp; Precio · Temporada 2025–2026 <span class="src-tag">Calavo Settlement</span></div>
     <div class="grid-4" id="ventasKpis"></div>
 
-    <div class="chart-duo" style="margin-top:4px">
-      <div>
-        <div class="section-title" style="margin-top:0">Volumen Semanal vs FOB <span class="src-tag">Cajas (barras) · $/caja (línea)</span></div>
-        <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartVentasVolFob"></canvas></div></div>
-      </div>
-      <div>
-        <div class="section-title" style="margin-top:0">Escalador de Precio <span class="src-tag">base $16.95 · collar $4</span></div>
-        <div id="ventasContrato"></div>
-      </div>
-    </div>
+    <div class="section-title">Volumen Semanal vs Precio FOB <span class="src-tag">Cajas liquidadas (barras) · FOB $/caja (línea)</span></div>
+    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartVentasVolFob"></canvas></div></div>
+
+    <div class="section-title">Análisis de Contrato · Escalador de Precio <span class="src-tag">Calavo 2025–2026 · base $16.95 · collar $4 activo desde $20.95</span></div>
+    <div id="ventasContrato"></div>
 
   </div>
 
   <!-- ══════════ NACIONAL ══════════ -->
-  <div class="tab-panel" id="tab-nacional" role="tabpanel" aria-labelledby="tab-nacional-btn">
+  <div class="tab-panel" id="tab-nacional">
 
     <div class="section-title" style="margin-top:4px">Ventas Nacional · Temporada 2025–2026 <span class="src-tag">canal independiente — sin relación con Calavo</span></div>
     <div class="grid-4" id="nacKpis"></div>
 
-    <div class="chart-duo" style="margin-top:4px">
-      <div>
-        <div class="section-title" style="margin-top:0">Distribución Roma vs Bola <span class="src-tag">datos de temporada</span></div>
-        <div id="nacCanales"></div>
-      </div>
-      <div>
-        <div class="section-title" style="margin-top:0">Precio Promedio Nacional vs Exportación <span class="src-tag">revenue / cajas</span></div>
-        <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartNacPrecio"></canvas></div></div>
-      </div>
-    </div>
+    <div class="section-title">Distribución Roma vs Bola <span class="src-tag">jacruz@agbelher.com · datos de temporada</span></div>
+    <div id="nacCanales"></div>
 
-    <div class="section-title">Notas Operativas</div>
+    <div class="section-title">Precio Promedio Nacional vs Exportación <span class="src-tag">revenue / cajas por canal</span></div>
+    <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartNacPrecio"></canvas></div></div>
+
+    <div class="section-title">Notas Operativas Nacional</div>
     <div id="nacNotas"></div>
 
   </div>
 
   <!-- ══════════ ESTRATEGIA (ex-HOY) ══════════ -->
-  <div class="tab-panel" id="tab-estrategia" role="tabpanel" aria-labelledby="tab-estrategia-btn">
+  <div class="tab-panel" id="tab-estrategia">
 
     <!-- 1. Señales del día — lo que necesita atención AHORA -->
     <div class="section-title" style="margin-top:4px">Señales del Día</div>
@@ -3358,7 +3259,7 @@ function checkPw(){
   </div>
 
   <!-- ══════════ MARKET INTELLIGENCE ══════════ -->
-  <div class="tab-panel" id="tab-market" role="tabpanel" aria-labelledby="tab-market-btn">
+  <div class="tab-panel" id="tab-market">
 
     <div class="section-title">Evolución de Precios · Último Mes <span class="src-tag">USDA-AMS Phoenix via Corbel Seeds · Mar 9 – Abr 7, 2026</span></div>
     <div class="mi-price-charts" id="miPriceCharts">
@@ -3372,7 +3273,7 @@ function checkPw(){
             </div>
             <div id="mi-stat-vine" class="mi-chart-stat"></div>
           </div>
-          <div class="chart-box"><canvas id="chartMiVine"></canvas></div>
+          <div class="chart-box" style="height:180px"><canvas id="chartMiVine"></canvas></div>
         </div>
         <!-- Roma XL -->
         <div class="card mi-chart-card">
@@ -3383,7 +3284,7 @@ function checkPw(){
             </div>
             <div id="mi-stat-roma" class="mi-chart-stat"></div>
           </div>
-          <div class="chart-box"><canvas id="chartMiRoma"></canvas></div>
+          <div class="chart-box" style="height:180px"><canvas id="chartMiRoma"></canvas></div>
         </div>
         <!-- Jalapeño -->
         <div class="card mi-chart-card">
@@ -3394,7 +3295,7 @@ function checkPw(){
             </div>
             <div id="mi-stat-jal" class="mi-chart-stat"></div>
           </div>
-          <div class="chart-box"><canvas id="chartMiJal"></canvas></div>
+          <div class="chart-box" style="height:180px"><canvas id="chartMiJal"></canvas></div>
         </div>
         <!-- Bell GH -->
         <div class="card mi-chart-card">
@@ -3405,7 +3306,7 @@ function checkPw(){
             </div>
             <div id="mi-stat-bell" class="mi-chart-stat"></div>
           </div>
-          <div class="chart-box"><canvas id="chartMiBell"></canvas></div>
+          <div class="chart-box" style="height:180px"><canvas id="chartMiBell"></canvas></div>
         </div>
       </div>
       <!-- Limón full-width -->
@@ -3441,27 +3342,22 @@ function checkPw(){
   </div>
 
   <!-- ══════════ FINANZAS ══════════ -->
-  <div class="tab-panel" id="tab-finanzas" role="tabpanel" aria-labelledby="tab-finanzas-btn">
+  <div class="tab-panel" id="tab-finanzas">
 
     <!-- CEO KPIs first -->
     <div class="section-title">Resumen Financiero · Temporada</div>
-    <div class="fin-kpi-row" id="finKpis"><p class="empty-state">Cargando resumen financiero…</p></div>
+    <div class="fin-kpi-row" id="finKpis"></div>
 
-    <div class="chart-duo" style="margin-top:4px">
-      <div>
-        <div class="section-title" style="margin-top:0">Cash Flow Mensual <span class="src-tag" id="cfSrcTag">leima@agbelher.com</span></div>
-        <div class="card" id="cfCard" style="padding:18px 20px"></div>
-      </div>
-      <div>
-        <div class="section-title" style="margin-top:0">EBITDA: Actual vs Budget vs Y/A <span class="src-tag">Feb 2026</span></div>
-        <div class="card" style="padding:18px 20px">
-          <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
-        </div>
-      </div>
+    <div class="section-title">Cash Flow Mensual <span class="src-tag" id="cfSrcTag">leima@agbelher.com</span></div>
+    <div class="card" id="cfCard" style="padding:22px 24px"></div>
+
+    <div class="section-title">EBITDA: Actual vs Budget vs Y/A <span class="src-tag">jacruz@agbelher.com · Estado Financiero Feb 2026</span></div>
+    <div class="card" style="padding:22px">
+      <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
     </div>
 
     <div class="section-title">Proyección · Temporada Restante <span class="src-tag">estimado basado en ritmo actual</span></div>
-    <div class="card" id="finProyeccion" style="padding:20px"></div>
+    <div class="card" id="finProyeccion" style="padding:22px"></div>
 
     <!-- Deuda Total ABSA -->
     <div class="section-title" style="margin-top:4px">Posición de Deuda · ABSA <span class="src-tag">Cash Flow 22-Mar-2026 · leima@agbelher.com</span></div>
@@ -3471,16 +3367,11 @@ function checkPw(){
     <div class="section-title">Deuda Calavo · Camino a la Liquidación Real <span class="src-tag">$6M total · $5M anticipo + $1M puente</span></div>
     <div id="finAnticipo"></div>
 
-    <div class="chart-duo" style="margin-top:4px">
-      <div>
-        <div class="section-title" style="margin-top:0">Pagos Semanales Calavo <span class="src-tag">settle parcial — facturas pendientes</span></div>
-        <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartPagos"></canvas></div></div>
-      </div>
-      <div>
-        <div class="section-title" style="margin-top:0">Variaciones de Pago</div>
-        <div class="card-table" id="pagosVariaciones" style="height:fit-content"></div>
-      </div>
+    <div class="section-title">Pagos Semanales Calavo <span class="src-tag">leima@agbelher.com · Settlement Calavo · <b>settle parcial — facturas pendientes en cada corte</b></span></div>
+    <div class="card">
+      <div class="chart-box"><canvas id="chartPagos"></canvas></div>
     </div>
+    <div class="card-table" id="pagosVariaciones" style="margin-top:12px"></div>
 
     <!-- calavoDesglose y liquidTbl: detalle completo en tab CalavoWeekly — ocultos -->
     <div id="calavoDesglose" style="display:none"></div>
@@ -3489,164 +3380,104 @@ function checkPw(){
   </div>
 
   <!-- ══════════ OPS TOMATE ══════════ -->
-  <div class="tab-panel" id="tab-optomate" role="tabpanel" aria-labelledby="tab-optomate-btn">
+  <div class="tab-panel" id="tab-optomate">
 
-    <!-- Season Hero + Pace — siempre visibles, sobre los sub-tabs -->
+    <!-- Season Hero -->
     <div id="tomateHero"></div>
+
+    <!-- tomateChannels: datos ya en tomateHero — oculto -->
+    <div id="tomateChannels" style="display:none"></div>
+
+    <!-- Revenue Pace strip -->
     <div id="tomatePaceStrip"></div>
+    <!-- tomateCalavoStrip: Finanzas cubre esto — oculto -->
+    <div id="tomateCalavoStrip" style="display:none"></div>
 
-    <!-- Sub-tab nav -->
-    <div class="sub-tabs" role="tablist" aria-label="Secciones de Operaciones">
-      <button class="sub-tab-btn active" data-group="ops" data-sub="calidad" role="tab" aria-selected="true">Calidad</button>
-      <button class="sub-tab-btn"        data-group="ops" data-sub="embarques" role="tab" aria-selected="false">Embarques</button>
-      <button class="sub-tab-btn"        data-group="ops" data-sub="produccion" role="tab" aria-selected="false">Producción</button>
+    <!-- Quality (full width) -->
+    <div class="section-title" style="margin-top:4px">Calidad · Temporada <span class="src-tag">Outbound calidad@agbelher.com</span></div>
+    <div id="tomateCalidadSummary"></div>
+    <div class="card" style="margin-top:8px"><div class="chart-box" style="height:190px"><canvas id="chartTomateCalidad"></canvas></div></div>
+
+    <!-- Quality by Variety — collapsible detail -->
+    <details class="tom-variety-details">
+      <summary>
+        <span class="tvd-label">Calidad por Variedad</span>
+        <span id="tomateOutboundFecha" class="tvd-fecha"></span>
+        <span class="src-tag">Outbound</span>
+        <span class="tvd-chevron"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </summary>
+      <div class="view-toggle" data-group="tomate-cal" style="margin:12px 0 8px">
+        <button class="vt-btn active" data-view="ayer">Día Anterior</button>
+        <button class="vt-btn" data-view="semana">Últimos 7 días</button>
+      </div>
+      <div class="view-panel active" data-group="tomate-cal" data-view="ayer" id="tomateVariedadesAyer"></div>
+      <div class="view-panel" data-group="tomate-cal" data-view="semana" id="tomateVariedadesSemana"></div>
+    </details>
+
+    <!-- "Calidad Exportación" duplicado de "Calidad por Variedad" arriba — oculto -->
+    <div id="outboundTitle" style="display:none"></div>
+    <div id="calidadSummary" style="display:none"></div>
+    <div id="qualidadRows" style="display:none"></div>
+    <div id="calidadSemana" style="display:none"></div>
+
+    <div class="section-title">Tendencia Semanal · 1ª Primera &amp; Merma <span class="src-tag">calidad@agbelher.com · promedio por semana</span></div>
+    <div class="card">
+      <div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div>
     </div>
 
-    <!-- ── SUB-PANEL: CALIDAD ── -->
-    <div class="sub-panel active" data-group="ops" data-sub="calidad">
-      <div id="tomateCalidadSummary" style="margin-top:4px"></div>
-
-      <div class="chart-duo" style="margin-top:8px">
-        <div>
-          <div class="section-title" style="margin-top:0">Calidad · Temporada <span class="src-tag">Outbound</span></div>
-          <div class="card"><div class="chart-box"><canvas id="chartTomateCalidad"></canvas></div></div>
-        </div>
-        <div>
-          <div class="section-title" style="margin-top:0">Tendencia · 1ª Primera &amp; Merma <span class="src-tag">promedio por semana</span></div>
-          <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div></div>
-        </div>
-      </div>
-
-      <details class="tom-variety-details" style="margin-top:12px">
-        <summary>
-          <span class="tvd-label">Calidad por Variedad</span>
-          <span id="tomateOutboundFecha" class="tvd-fecha"></span>
-          <span class="src-tag">Outbound</span>
-          <span class="tvd-chevron"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </summary>
-        <div class="view-toggle" data-group="tomate-cal" style="margin:12px 0 8px">
-          <button class="vt-btn active" data-view="ayer">Día Anterior</button>
-          <button class="vt-btn" data-view="semana">Últimos 7 días</button>
-        </div>
-        <div class="view-panel active" data-group="tomate-cal" data-view="ayer" id="tomateVariedadesAyer"></div>
-        <div class="view-panel" data-group="tomate-cal" data-view="semana" id="tomateVariedadesSemana"></div>
-      </details>
-
-      <div class="section-title">Báscula <span class="src-tag">basculabelher@gmail.com</span></div>
-      <div class="card">
-        <div class="bascula-grid" id="bascWidget"><p class="empty-state">Cargando datos de báscula…</p></div>
-      </div>
+    <div class="section-title">Báscula · Actividad de Pesaje <span class="src-tag">basculabelher@gmail.com</span></div>
+    <div class="card">
+      <div class="bascula-grid" id="bascWidget"></div>
     </div>
 
-    <!-- ── SUB-PANEL: EMBARQUES ── -->
-    <div class="sub-panel" data-group="ops" data-sub="embarques">
-      <div class="section-title" style="margin-top:4px">Embarques · TX / AZ · Cargas por Día <span class="src-tag">embarquesbelher@agbelher.com</span></div>
-      <div class="card-table">
-        <div class="tbl-wrap">
-          <table id="embTbl">
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th class="td-center">Cargas</th>
-                <th>Producto</th>
-                <th>Destino</th>
-                <th>Unidad</th>
-                <th>Flota</th>
-                <th class="td-center">Estado</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="chart-duo" style="margin-top:4px">
-        <div>
-          <div class="section-title" style="margin-top:0">Vol. Diario de Embarques</div>
-          <div class="card"><div class="chart-box"><canvas id="chartEmbarques"></canvas></div></div>
-        </div>
-        <div>
-          <div class="section-title" style="margin-top:0">Vol. Semanal · Cajas Exportadas <span class="src-tag">WK01–WK12</span></div>
-          <div class="card"><div class="chart-box"><canvas id="chartTomateVolumen"></canvas></div></div>
-        </div>
-      </div>
-
-      <div class="chart-duo" style="margin-top:12px">
-        <div>
-          <div class="section-title" style="margin-top:0">Precio FOB Calavo vs USDA <span class="src-tag">WK11–WK12 confirmado</span></div>
-          <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartTomatePrecio"></canvas></div></div>
-        </div>
-        <div>
-          <div class="section-title" style="margin-top:0">Flota · Distribución por Transportista</div>
-          <div class="card" id="tomateFleetCard" style="padding:20px 24px">
-            <canvas id="chartTomateFlota"></canvas>
-          </div>
-        </div>
+    <!-- ── Embarques ── -->
+    <div class="section-title" style="margin-top:28px">Embarques · TX / AZ · Cargas por Día <span class="src-tag">embarquesbelher@agbelher.com</span></div>
+    <div class="card-table">
+      <div class="tbl-wrap">
+        <table id="embTbl">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th class="td-center">Cargas</th>
+              <th>Producto</th>
+              <th>Destino</th>
+              <th>Unidad</th>
+              <th>Flota</th>
+              <th class="td-center">Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
     </div>
 
-    <!-- ── SUB-PANEL: PRODUCCIÓN ── -->
-    <div class="sub-panel" data-group="ops" data-sub="produccion">
-      <div class="chart-duo" style="margin-top:4px">
-        <div>
-          <div class="section-title" style="margin-top:0">Cajas Empacadas por Etiqueta <span class="src-tag">vs báscula · 25 lb equiv.</span></div>
-          <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartProdBascula"></canvas></div></div>
-        </div>
-        <div>
-          <div class="section-title" style="margin-top:0">Eficiencia de Empaque · % por Etiqueta</div>
-          <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartProdEmpaque"></canvas></div></div>
-        </div>
-      </div>
+    <!-- flotaResumen: redundante con embTbl + chartTomateFlota — oculto -->
+    <div id="flotaResumen" style="display:none"></div>
 
-      <div class="section-title" style="margin-top:8px">Eficiencia Histórica · % Empacado vs Báscula <span class="src-tag">6 temporadas 2020–2026</span></div>
-      <div class="card-table">
-        <div class="tbl-wrap">
-          <table id="tblHistorico">
-            <thead>
-              <tr>
-                <th>Semana</th>
-                <th class="td-num">2020-21</th>
-                <th class="td-num">2021-22</th>
-                <th class="td-num">2022-23</th>
-                <th class="td-num">2023-24</th>
-                <th class="td-num">2024-25</th>
-                <th class="td-num">2025-26</th>
-                <th class="td-num">Prom. hist.</th>
-              </tr>
-            </thead>
-            <tbody id="tblHistoricoBody"></tbody>
-          </table>
-        </div>
-      </div>
+    <div class="section-title">Volumen Diario de Embarques</div>
+    <div class="card">
+      <div class="chart-box"><canvas id="chartEmbarques"></canvas></div>
+    </div>
 
-      <div class="section-title" style="margin-top:8px">Detalle Semanal · Báscula &amp; Empaque</div>
-      <div class="card-table">
-        <div class="tbl-wrap">
-          <table id="prodSemanalTbl">
-            <thead>
-              <tr>
-                <th>Semana</th>
-                <th class="td-num">Báscula (cj)</th>
-                <th class="td-num">CALAVO</th>
-                <th class="td-num">YAMETO</th>
-                <th class="td-num">TOLIN</th>
-                <th class="td-num">ZAZU</th>
-                <th class="td-num">URSON</th>
-                <th class="td-num">MILLENNIUM</th>
-                <th class="td-num">OTROS</th>
-                <th class="td-num">% Emp/Basc</th>
-              </tr>
-            </thead>
-            <tbody id="prodSemanalBody"></tbody>
-          </table>
-        </div>
-      </div>
+    <div class="section-title">Volumen Semanal · Cajas Exportadas <span class="src-tag">Calavo Settlement WK01–WK12</span></div>
+    <div class="card">
+      <div class="chart-box" style="height:200px"><canvas id="chartTomateVolumen"></canvas></div>
+    </div>
+
+    <div class="section-title">Precio FOB Calavo vs Mercado USDA · Temporada 2025–2026 <span class="src-tag">Calavo Settlement + USDA Nogales · WK11–WK12 confirmado · resto estimado IA</span></div>
+    <div class="card">
+      <div class="chart-box" style="height:240px"><canvas id="chartTomatePrecio"></canvas></div>
+    </div>
+
+    <div class="section-title" style="margin-top:0">Flota · Distribución por Transportista</div>
+    <div class="card" id="tomateFleetCard" style="padding:20px;max-width:340px">
+      <canvas id="chartTomateFlota" height="180"></canvas>
     </div>
 
   </div>
 
   <!-- ══════════ CALAVO WEEKLY ══════════ -->
-  <div class="tab-panel" id="tab-calavoweekly" role="tabpanel" aria-labelledby="tab-calavoweekly-btn">
+  <div class="tab-panel" id="tab-calavoweekly">
     <div id="cw-header"></div>
     <div id="cw-stocks"></div>
     <div id="cw-alertas"></div>
@@ -3666,83 +3497,57 @@ function checkPw(){
     <div id="cw-predicciones" style="display:none"></div>
   </div>
 
-  <!-- ══════════ CULTIVOS ══════════ -->
-  <div class="tab-panel" id="tab-otros" role="tabpanel" aria-labelledby="tab-otros-btn">
+  <!-- ══════════ OTROS ══════════ -->
+  <div class="tab-panel" id="tab-otros">
 
-    <!-- Sub-tab nav -->
-    <div class="sub-tabs" role="tablist" aria-label="Cultivos">
-      <button class="sub-tab-btn active" data-group="cultivos" data-sub="limon"  role="tab" aria-selected="true">Limón</button>
-      <button class="sub-tab-btn"        data-group="cultivos" data-sub="granos" role="tab" aria-selected="false">Granos</button>
-      <button class="sub-tab-btn"        data-group="cultivos" data-sub="chile"  role="tab" aria-selected="false">Chile</button>
-    </div>
+    <!-- ── LIMÓN ── -->
+    <div class="section-title">Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
+    <div class="grid-4" id="limonKpis"></div>
+    <div id="limonClienteRisk"></div>
+    <div class="section-title">Precio FOB Nogales &amp; LA Terminal Market <span class="src-tag">USDA Market News · FOB Shipping Point + Terminal</span></div>
+    <div id="limonUsdaPrice"></div>
+    <div class="section-title">Histórico 12 Meses + Tendencia 4 Semanas <span class="src-tag">USDA Market News · Limón Persa 40lb carton</span></div>
+    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
+    <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
+    <div class="card" id="limonPnl" style="padding:24px"></div>
 
-    <!-- ── SUB-PANEL: LIMÓN ── -->
-    <div class="sub-panel active" data-group="cultivos" data-sub="limon">
-      <div class="section-title" style="margin-top:4px">Limón Persa <span class="src-tag">P&amp;L Limón Feb 2026</span></div>
-      <div class="grid-4" id="limonKpis"></div>
+    <!-- ── CHILE ── -->
+    <div class="section-title" style="margin-top:28px">Chile <span class="src-tag">Corbel Seeds Daily · USDA</span></div>
+    <div class="grid-3" id="chileKpis"></div>
+    <div class="section-title">Análisis de Mercado · Oportunidad</div>
+    <div id="chileContext"></div>
 
-      <div class="chart-duo" style="margin-top:12px">
-        <div>
-          <div class="section-title" style="margin-top:0">Precio FOB Nogales · Histórico 12 Meses <span class="src-tag">USDA</span></div>
-          <div id="limonUsdaPrice"></div>
-          <div class="card" style="margin-top:8px"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
-        </div>
-        <div>
-          <div class="section-title" style="margin-top:0">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh</span></div>
-          <div id="limonClienteRisk"></div>
-          <div class="card" id="limonPnl" style="padding:20px;margin-top:8px"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── SUB-PANEL: GRANOS ── -->
-    <div class="sub-panel" data-group="cultivos" data-sub="granos">
-      <div class="section-title" style="margin-top:4px">Granos · Temporada <span class="src-tag">jacruz@agbelher.com · P&amp;L Granos Jul–Feb 2026</span></div>
-      <div class="grid-4" id="granosKpis"></div>
-      <div class="section-title">P&amp;L Temporada · Jul 2025 – Feb 2026</div>
-      <div class="card" id="granosPnl" style="padding:24px"></div>
-      <div class="section-title">Métricas por Hectárea <span class="src-tag">cálculo interno</span></div>
-      <div id="granosCostMetrics"></div>
-      <div class="section-title">Notas Operativas</div>
-      <div class="card" id="granosNotas" style="padding:20px"></div>
-    </div>
-
-    <!-- ── SUB-PANEL: CHILE ── -->
-    <div class="sub-panel" data-group="cultivos" data-sub="chile">
-      <div class="section-title" style="margin-top:4px">Chile <span class="src-tag">Corbel Seeds Daily · USDA</span></div>
-      <div class="grid-3" id="chileKpis"></div>
-      <div class="section-title">Análisis de Mercado · Oportunidad</div>
-      <div id="chileContext"></div>
-    </div>
+    <!-- ── GRANOS ── -->
+    <div class="section-title" style="margin-top:28px">Granos · Temporada <span class="src-tag">jacruz@agbelher.com · P&amp;L Granos Jul–Feb 2026</span></div>
+    <div class="grid-4" id="granosKpis"></div>
+    <div class="section-title">P&amp;L Temporada · Jul 2025 – Feb 2026</div>
+    <div class="card" id="granosPnl" style="padding:24px"></div>
+    <div class="section-title">Métricas por Hectárea <span class="src-tag">cálculo interno</span></div>
+    <div id="granosCostMetrics"></div>
+    <div class="section-title">Notas Operativas</div>
+    <div class="card" id="granosNotas" style="padding:20px"></div>
 
   </div>
 
   <!-- ══════════ CERTIFICACIONES ══════════ -->
-  <div class="tab-panel" id="tab-cert" role="tabpanel" aria-labelledby="tab-cert-btn">
+  <div class="tab-panel" id="tab-cert">
 
     <div class="section-title">Certificaciones &amp; Auditorías <span class="src-tag">c.marisol@agbelher.com · Calidad</span></div>
-    <div id="auditoriasContainer"><p class="empty-state">Sin certificaciones registradas en este período</p></div>
+    <div id="auditoriasContainer"></div>
 
   </div>
 
   <!-- ══════════ CDC ══════════ -->
-  <div class="tab-panel" id="tab-cdc" role="tabpanel" aria-labelledby="tab-cdc-btn">
+  <div class="tab-panel" id="tab-cdc">
     <div id="cdcHero"></div>
     <div class="cdc-grid" id="cdcCards"></div>
+    <div class="section-title">Tendencia Semanal · Personas Censadas <span class="src-tag">capitalhumano@agbelher.com · Censo 2026</span></div>
+    <div class="card"><div class="chart-box" style="height:260px"><canvas id="chartCdc"></canvas></div></div>
+    <div class="section-title">% Trabajadores por Semana</div>
+    <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartCdcPct"></canvas></div></div>
 
-    <div class="chart-duo" style="margin-top:4px">
-      <div>
-        <div class="section-title" style="margin-top:0">Personas Censadas · Tendencia Semanal <span class="src-tag">Censo 2026</span></div>
-        <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartCdc"></canvas></div></div>
-      </div>
-      <div>
-        <div class="section-title" style="margin-top:0">% Trabajadores por Semana</div>
-        <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartCdcPct"></canvas></div></div>
-      </div>
-    </div>
-
-    <div class="section-title">Varianza: Real vs Proyectado <span class="src-tag">Plan Inicial 2025–2026</span></div>
-    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartCdcVsProyeccion"></canvas></div></div>
+    <div class="section-title">Varianza Total: Real vs Proyectado <span class="src-tag">Depto. Producción · Plan Inicial 2025–2026</span></div>
+    <div class="card"><div class="chart-box" style="height:240px"><canvas id="chartCdcVsProyeccion"></canvas></div></div>
   </div>
 
 </main>
@@ -3935,12 +3740,11 @@ function checkPw(){
   var tabBtns   = document.querySelectorAll('#tabNav button');
   var tabPanels = document.querySelectorAll('.tab-panel');
   function activateTab(tabId) {
-    tabBtns.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    tabBtns.forEach(function (b) { b.classList.remove('active'); });
     tabPanels.forEach(function (p) { p.classList.remove('active'); });
     var btn = document.querySelector('#tabNav button[data-tab="' + tabId + '"]');
     if (!btn) return;
     btn.classList.add('active');
-    btn.setAttribute('aria-selected','true');
     btn.scrollIntoView({ inline:'center', block:'nearest', behavior:'smooth' });
     document.getElementById('tab-' + tabId).classList.add('active');
     /* setTimeout: ensure browser finishes painting before Chart.js measures canvas */
@@ -3950,32 +3754,6 @@ function checkPw(){
   tabBtns.forEach(function (btn) {
     btn.addEventListener('click', function () { activateTab(btn.dataset.tab); });
   });
-
-  /* ── Alert badge: count danger alertas en tab Ejecutivo ── */
-  (function renderAlertBadge() {
-    var badge = document.getElementById('tabAlertBadge');
-    if (!badge || !D.alertas) return;
-    var dangerCount = D.alertas.filter(function(a){ return a.nivel === 'danger'; }).length;
-    if (dangerCount > 0) {
-      badge.textContent = dangerCount;
-      badge.style.display = 'inline-flex';
-    }
-  })();
-
-  /* ── Sub-tab switcher (generic) ── */
-  document.querySelectorAll('.sub-tab-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var group = btn.dataset.group;
-      document.querySelectorAll('.sub-tab-btn[data-group="' + group + '"]')
-        .forEach(function(b){ b.classList.remove('active'); });
-      document.querySelectorAll('.sub-panel[data-group="' + group + '"]')
-        .forEach(function(p){ p.classList.remove('active'); });
-      btn.classList.add('active');
-      var panel = document.querySelector('.sub-panel[data-group="' + group + '"][data-sub="' + btn.dataset.sub + '"]');
-      if (panel) panel.classList.add('active');
-    });
-  });
-
   /* Restore last active tab on load/refresh */
   var savedTab = sessionStorage.getItem('belher_tab');
   if (savedTab && document.getElementById('tab-' + savedTab)) activateTab(savedTab);
@@ -6405,53 +6183,36 @@ function checkPw(){
       var fleetColors = ['rgba(22,163,74,.8)', 'rgba(29,78,216,.8)', 'rgba(217,119,6,.8)', 'rgba(107,114,128,.6)'];
       var ctxFleet = document.getElementById('chartTomateFlota');
       if (ctxFleet && fleetLabels.length) {
-        var fleetTotal = fleetData.reduce(function (a, b) { return a + b; }, 0);
         new Chart(ctxFleet.getContext('2d'), {
-          type: 'bar',
+          type: 'doughnut',
           data: {
             labels: fleetLabels,
             datasets: [{
-              label: 'Cargas',
               data: fleetData,
               backgroundColor: fleetColors.slice(0, fleetLabels.length),
-              borderRadius: 6,
-              borderSkipped: false,
-              barThickness: 28
+              borderWidth: 0,
+              hoverOffset: 6
             }]
           },
           options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
+            responsive: true, maintainAspectRatio: true,
+            cutout: '60%',
             plugins: {
-              legend: { display: false },
+              legend: {
+                display: true, position: 'bottom',
+                labels: { font: { size: 10 }, padding: 10, boxWidth: 8, boxHeight: 8 }
+              },
               tooltip: {
                 callbacks: {
                   label: function (ctx) {
-                    var pct = fleetTotal ? (ctx.parsed.x / fleetTotal * 100).toFixed(0) : 0;
-                    return ' ' + ctx.parsed.x + ' cargas · ' + pct + '%';
+                    var total = ctx.dataset.data.reduce(function (a, b) { return a + b; }, 0);
+                    return ctx.label + ': ' + ctx.parsed + ' cargas (' + (ctx.parsed / total * 100).toFixed(0) + '%)';
                   }
                 }
-              }
-            },
-            scales: {
-              x: {
-                beginAtZero: true,
-                grid: { color: 'rgba(0,0,0,.04)' },
-                ticks: {
-                  font: { size: 10 },
-                  callback: function (v) { return v + ' cg'; }
-                }
-              },
-              y: {
-                grid: { display: false },
-                ticks: { font: { size: 11, weight: '600' } }
               }
             }
           }
         });
-        /* Set canvas height proportional to number of carriers */
-        ctxFleet.style.height = (fleetLabels.length * 52 + 20) + 'px';
       } else if (ctxFleet) {
         document.getElementById('tomateFleetCard').style.display = 'none';
       }
@@ -6687,164 +6448,6 @@ function checkPw(){
       }
     }
 
-    /* ── Producción Semanal WK01-WK15 ── */
-    if (tab === 'tomate' && !chartsInit.prodSemanal) {
-      chartsInit.prodSemanal = true;
-      var pd = (D.operaciones && D.operaciones.produccionSemanal) || [];
-      if (pd.length) {
-        var pdLabels = pd.map(function(r){ return r.wk; });
-        var pdPct    = pd.map(function(r){ return r.pctEmp; });
-        var etiqCfg = [
-          { key:'Calavo',     label:'CALAVO',      color:'rgba(39,174,96,.85)'  },
-          { key:'Yameto',     label:'YAMETO',      color:'rgba(240,165,0,.85)'  },
-          { key:'Tolin',      label:'TOLIN',       color:'rgba(36,113,163,.85)' },
-          { key:'Zazu',       label:'ZAZU',        color:'rgba(155,89,182,.80)' },
-          { key:'Urson',      label:'URSON',       color:'rgba(231,76,60,.80)'  },
-          { key:'Millennium', label:'MILLENNIUM',  color:'rgba(26,188,156,.80)' },
-          { key:'Otros',      label:'OTROS',       color:'rgba(149,165,166,.70)'}
-        ];
-
-        /* Chart 1: cajas por etiqueta (stacked) + línea báscula */
-        var ctxB = document.getElementById('chartProdBascula');
-        if (ctxB) {
-          var datasets = etiqCfg.map(function(e){
-            return { label: e.label, data: pd.map(function(r){ return r['cj'+e.key]; }),
-              backgroundColor: e.color, borderRadius: 2, maxBarThickness: 26, stack: 'emp' };
-          });
-          datasets.push({
-            label: 'Báscula (cj equiv.)',
-            data: pd.map(function(r){ return r.bascCj; }),
-            type: 'line', borderColor: '#2c3e50', borderWidth: 2, borderDash: [4,3],
-            pointRadius: 3, pointBackgroundColor: '#2c3e50', fill: false, tension: 0.2
-          });
-          new Chart(ctxB.getContext('2d'), {
-            type: 'bar',
-            data: { labels: pdLabels, datasets: datasets },
-            options: {
-              responsive: true, maintainAspectRatio: false,
-              plugins: { legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 10, padding: 8 } } },
-              scales: {
-                x: { stacked: true, ticks: { font: { size: 9 } }, grid: { display: false } },
-                y: { stacked: true, ticks: { callback: function(v){ return (v/1000).toFixed(0)+'K'; }, font: { size: 9 } }, grid: { color: 'rgba(0,0,0,.045)' } }
-              }
-            }
-          });
-        }
-
-        /* Chart 2: % por etiqueta vs báscula (líneas) */
-        var ctxE = document.getElementById('chartProdEmpaque');
-        if (ctxE) {
-          var pctDatasets = etiqCfg.slice(0,5).map(function(e){
-            return { label: e.label, data: pd.map(function(r){ return r['pct'+e.key]; }),
-              borderColor: e.color.replace(/[\d.]+\)$/,'1)'), backgroundColor: 'transparent',
-              borderWidth: 2, pointRadius: 3, fill: false, tension: 0.3 };
-          });
-          pctDatasets.push({
-            label: 'Total %', data: pdPct,
-            borderColor: '#2c3e50', backgroundColor: 'transparent',
-            borderWidth: 2.5, borderDash: [5,3], pointRadius: 4, fill: false, tension: 0.3
-          });
-          new Chart(ctxE.getContext('2d'), {
-            type: 'line',
-            data: { labels: pdLabels, datasets: pctDatasets },
-            options: {
-              responsive: true, maintainAspectRatio: false,
-              plugins: {
-                legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 10, padding: 8 } },
-                tooltip: { callbacks: { label: function(c){ return ' '+c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'; } } }
-              },
-              scales: {
-                x: { ticks: { font: { size: 9 } }, grid: { display: false } },
-                y: { min: 0, max: 100, ticks: { callback: function(v){ return v+'%'; }, font: { size: 9 } }, grid: { color: 'rgba(0,0,0,.045)' } }
-              }
-            }
-          });
-        }
-
-        /* Tabla histórica 6 temporadas */
-        var hist = (D.operaciones && D.operaciones.produccionHistorica) || null;
-        var tbH = document.getElementById('tblHistoricoBody');
-        if (tbH && hist) {
-          var nTemps = hist.temporadas.length;
-          var colTotals = new Array(nTemps).fill(0);
-          var colCount  = new Array(nTemps).fill(0);
-
-          hist.semanas.forEach(function(wk, wi) {
-            var vals = hist.temporadas.map(function(t){ return t.data[wi]; });
-            var hist5avg = vals.slice(0, nTemps-1).reduce(function(s,v){ return s+v; }, 0) / (nTemps-1);
-            var cur = vals[nTemps-1];
-            var diff = cur - hist5avg;
-            var diffCls = diff >= 3 ? 'color:#27ae60;font-weight:700' : diff <= -3 ? 'color:#c0392b;font-weight:700' : '';
-
-            var cells = vals.map(function(v, i) {
-              var cls = v >= 90 ? 'badge-green' : v >= 75 ? 'badge-orange' : 'badge-red';
-              var isCur = i === nTemps-1;
-              colTotals[i] += v; colCount[i]++;
-              return '<td class="td-num">' +
-                (isCur
-                  ? '<span class="badge '+cls+'" style="font-size:.75rem">'+v.toFixed(1)+'%</span>'
-                  : '<span style="color:'+(v>=90?'#27ae60':v>=75?'#888':'#c0392b')+'">'+v.toFixed(1)+'%</span>'
-                ) + '</td>';
-            }).join('');
-
-            tbH.insertAdjacentHTML('beforeend',
-              '<tr>' +
-              '<td><strong>'+wk+'</strong></td>' +
-              cells +
-              '<td class="td-num" style="'+diffCls+'">'+hist5avg.toFixed(1)+'%' +
-              (diff !== 0 ? ' <small>('+( diff>0?'+':'')+diff.toFixed(1)+')</small>' : '') +
-              '</td>' +
-              '</tr>'
-            );
-          });
-
-          /* Totals row */
-          var avgCells = colTotals.map(function(t,i){
-            var avg = t/colCount[i];
-            var cls = avg>=90?'badge-green':avg>=75?'badge-orange':'badge-red';
-            return '<td class="td-num"><span class="badge '+cls+'" style="font-size:.75rem">'+avg.toFixed(1)+'%</span></td>';
-          }).join('');
-          var hist5mean = colTotals.slice(0,nTemps-1).reduce(function(s,v,i){ return s+v/colCount[i]; },0)/(nTemps-1);
-          tbH.insertAdjacentHTML('beforeend',
-            '<tr style="font-weight:700;background:#f0faf3"><td>Promedio</td>'+avgCells+
-            '<td class="td-num">'+hist5mean.toFixed(1)+'%</td></tr>'
-          );
-        }
-
-        /* Detail table */
-        var tbody = document.getElementById('prodSemanalBody');
-        if (tbody) {
-          var totBascCj=0, totEmpCj=0;
-          var totEtiq = {}; etiqCfg.forEach(function(e){ totEtiq[e.key]=0; });
-          pd.forEach(function(r){
-            var empTot = etiqCfg.reduce(function(s,e){ return s + r['cj'+e.key]; }, 0);
-            var clsT = r.pctEmp>=85?'badge-green':r.pctEmp>=75?'badge-orange':'badge-red';
-            var cells = etiqCfg.map(function(e){
-              var v=r['cj'+e.key]; totEtiq[e.key]+=v;
-              return '<td class="td-num">'+(v?v.toLocaleString('en-US'):'—')+'</td>';
-            }).join('');
-            tbody.insertAdjacentHTML('beforeend',
-              '<tr><td><strong>'+r.wk+'</strong></td>' +
-              '<td class="td-num">'+r.bascCj.toLocaleString('en-US')+'</td>' +
-              cells +
-              '<td class="td-num"><span class="badge '+clsT+'">'+r.pctEmp.toFixed(1)+'%</span></td></tr>'
-            );
-            totBascCj+=r.bascCj; totEmpCj+=empTot;
-          });
-          var totCells = etiqCfg.map(function(e){
-            return '<td class="td-num">'+totEtiq[e.key].toLocaleString('en-US')+'</td>';
-          }).join('');
-          var totPct = (totEmpCj/totBascCj*100).toFixed(1);
-          tbody.insertAdjacentHTML('beforeend',
-            '<tr style="font-weight:700;background:#f0faf3"><td>WK01–WK15</td>' +
-            '<td class="td-num">'+totBascCj.toLocaleString('en-US')+'</td>' +
-            totCells +
-            '<td class="td-num"><span class="badge badge-green">'+totPct+'%</span></td></tr>'
-          );
-        }
-      }
-    }
-
     /* ── CDC — lazy render on first visit ── */
     if (tab === 'cdc' && !chartsInit.cdcTab) {
       chartsInit.cdcTab = true;
@@ -6930,32 +6533,16 @@ function checkPw(){
 
   /* ── TICKER ── */
   function renderTicker() {
-    var accionLabels = ['CVGW', 'AVO'];
-    var operativo = D.ticker.filter(function(t){ return accionLabels.indexOf(t.label) === -1; });
-    var acciones  = D.ticker.filter(function(t){ return accionLabels.indexOf(t.label) !== -1; });
-
-    function tickerItem(t) {
+    var items = D.ticker.concat(D.ticker);
+    document.getElementById('tickerTrack').innerHTML = items.map(function (t) {
       var arrow = t.dir === 'up' ? '▲' : t.dir === 'down' ? '▼' : '●';
-      var cls   = t.dir === 'up' ? 't-up' : t.dir === 'down' ? 't-down' : t.dir === 'neutral' ? 't-neut' : 't-neut';
+      var cls   = t.dir === 'up' ? 't-up' : t.dir === 'down' ? 't-down' : 't-neut';
       return '<span class="ticker-item">' +
         '<span class="t-name">' + t.label + '</span>' +
         '<span class="t-val">'  + t.valor  + '</span>' +
         '<span class="t-chg '  + cls + '">' + arrow + ' ' + t.cambio + '</span>' +
       '</span><span class="t-sep">|</span>';
-    }
-    function zoneLabel(txt, color) {
-      return '<span class="ticker-item" style="opacity:.55">' +
-        '<span class="t-name" style="color:' + color + ';letter-spacing:1.5px">' + txt + '</span>' +
-      '</span><span class="t-sep" style="color:' + color + ';opacity:.4">▐</span>';
-    }
-
-    /* Build two-zone sequence duplicated for infinite scroll */
-    var seq = [zoneLabel('OPERATIVO', '#5a9e75')]
-              .concat(operativo.map(tickerItem))
-              .concat([zoneLabel('ACCIONES', '#fbbf24')])
-              .concat(acciones.map(tickerItem));
-    var html = seq.concat(seq).join('');
-    document.getElementById('tickerTrack').innerHTML = html;
+    }).join('');
   }
 
   /* ── ESTRATEGIA ── */

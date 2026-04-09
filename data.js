@@ -7,7 +7,8 @@ window.BELHER = {
 
   alertas: [
     { nivel: "success", texto: "Vine-ripe $57.95–59.95 (4×4/4×5 Nogales) — NUEVO MÁXIMO TEMPORADA. Corbel #0024 · 09-Abr: mercado US firm, tight supply en cruceros mexicanos. Jalapeño rebota a $50–53 (+$10 desde $40–42). EMBARCAR todo el volumen disponible." },
-    { nivel: "danger",  texto: "Bola ERGO outbound 08/04: merma 4.64% ⚠. Bola Yameto promedio WK15 (días 1-2): 4.71%. Merma elevada en Bolas WK15 — revisar manejo postcosecha, temperatura campo-empaque y clasificación urgente." },
+    { nivel: "danger",  texto: "Bola Tolin merma 30.18% (07/04) — CRÍTICO: primera 28.59%. Variedad posiblemente inviable para exportación en estado actual. Evaluar urgente manejo postcosecha, estrés de campo, o suspender empaque Tolin para exportación." },
+    { nivel: "danger",  texto: "Bola Calavo merma 6.20% (07/04) + Bola ERGO merma 4.64% (08/04) — deterioro calidad en Bolas WK15 (Calavo dias:2 prom 4.78%, Yameto 4.71%). Revisar manejo postcosecha, temperatura campo-empaque y protocolo de selección." },
     { nivel: "success", texto: "CVGW $27.97 (+1.2% 08-Abr) · AVO $15.36 (+3.2% 08-Abr) — sector produce en fuerte momentum. CVGW sigue acercándose a máximo 52s ($28.72). Señal de demanda institucional sostenida." },
     { nivel: "danger",   texto: "URGENTE: Solicitar a Calavo (Irene Amezaga / Carlos Valadez) el desglose 'Gross FOB by item' del Gass Sheet para verificar precio de referencia del contrato. Sin este dato no es posible auditar el escalador ($16.95 base + $4 collar desde $20.95). Escalar hoy mismo." },
     { nivel: "success",  texto: "WK14 REAL: 57,760 pkgs recibidos (676 pallets · 34 cargas) — Rounds +44% vs proyectado · Roma +121% vs proyectado · avg FOB mkt $39.34/cj · settle 30,592 pkgs · $762,704." },
@@ -195,11 +196,12 @@ window.BELHER = {
       desde: "06/04/2026",
       hasta:  "12/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:87.83, segunda:3.98,  tercera:4.85, merma:3.35, peso:26.84, dias:1, alerta:false },
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:83.17, segunda:4.94,  tercera:7.13, merma:4.78, peso:24.11, dias:2, alerta:true  },
         { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:82.39, segunda:7.12,  tercera:5.79, merma:4.71, peso:30.85, dias:2, alerta:true  },
+        { nombre:"Bola Tolin",      etiqueta:"Tolin",      canal:"exportacion", primera:28.59, segunda:9.96,  tercera:31.26, merma:30.18, peso:33.06, dias:1, alerta:true  },
         { nombre:"Bola ERGO",       etiqueta:"ERGO",       canal:"exportacion", primera:85.38, segunda:4.31,  tercera:5.68, merma:4.64, peso:26.34, dias:1, alerta:true  },
-        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:87.03, segunda:5.94,  tercera:4.71, merma:2.33, peso:26.58, dias:2, alerta:false },
-        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:90.84, segunda:4.66,  tercera:2.63, merma:1.89, peso:26.11, dias:2, alerta:false },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:88.18, segunda:5.57,  tercera:4.19, merma:2.05, peso:26.30, dias:3, alerta:false },
+        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:88.16, segunda:6.11,  tercera:3.22, merma:2.52, peso:26.51, dias:3, alerta:false },
         { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:86.67, segunda:6.00,  tercera:3.78, merma:3.56, peso:27.37, dias:1, alerta:false },
         { nombre:"Limón Persa",     etiqueta:"Limón",      canal:"exportacion", primera:15,    segunda:47,    tercera:13,   merma:1,    peso:40.35, dias:1, alerta:false },
         { nombre:"Chile Anaheim",   etiqueta:"Anaheim",    canal:"exportacion", primera:85.96, segunda:13.10, tercera:0,    merma:0.81, peso:22.47, dias:1, alerta:false }
@@ -212,7 +214,7 @@ window.BELHER = {
       { fecha:"WK12", primaPromedio:88.35, mermaPromedio:3.39 },
       { fecha:"WK13", primaPromedio:89.20, mermaPromedio:2.82 },
       { fecha:"WK14", primaPromedio:84.11, mermaPromedio:3.69 },
-      { fecha:"WK15", primaPromedio:86.38, mermaPromedio:3.61, nota:"Días 1-3 tomate: 04/04 (5 vars) + 06/04 (3 vars) + 08/04 Bola ERGO (merma 4.64%)" }
+      { fecha:"WK15", primaPromedio:82.24, mermaPromedio:5.31, nota:"Días 1-4: 04/04·5vars, 06/04·3vars, 07/04·4vars, 08/04·1var. Bola Tolin 07/04 merma 30.18% — outlier crítico." }
     ],
     ultimoOutbound: {
       fecha: "08/04/2026",
@@ -221,11 +223,12 @@ window.BELHER = {
         { nombre:"Chile Anaheim", etiqueta:"Anaheim",  canal:"exportacion", primera:85.96, segunda:13.10, tercera:0,    merma:0.81, peso:22.47, alerta:false }
       ],
       anterior: {
-        fecha: "06/04/2026",
+        fecha: "07/04/2026",
         variedades: [
-          { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:80.97, segunda:8.16, tercera:5.90, merma:4.97, peso:31.02, alerta:true  },
-          { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:91.13, segunda:5.13, tercera:2.13, merma:1.63, peso:25.06, alerta:false },
-          { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:86.47, segunda:6.82, tercera:4.24, merma:2.47, peso:25.66, alerta:false }
+          { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:78.50, segunda:5.90, tercera:9.40, merma:6.20, peso:21.38, alerta:true  },
+          { nombre:"Bola Tolin",      etiqueta:"Tolin",      canal:"exportacion", primera:28.59, segunda:9.96, tercera:31.26, merma:30.18, peso:33.06, alerta:true  },
+          { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:82.80, segunda:9.00, tercera:4.40, merma:3.80, peso:27.33, alerta:false },
+          { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:90.50, segunda:4.83, tercera:3.17, merma:1.50, peso:25.76, alerta:false }
         ]
       }
     }
@@ -582,7 +585,7 @@ window.BELHER = {
     { label:"P&P ACUM WK15",  valor:"$3.90M",        cambio:"780,257 cajas · 458 cont",   dir:"up"      },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",            dir:"up"      },
     { label:"GASS SHEET WK15", valor:"✓ Recibido",   cambio:"Irene + Carlos 07-Abr",      dir:"up"      },
-    { label:"1ª WK15 PROM",   valor:"86.38%",        cambio:"Días 1-3 · tomate",          dir:"up"      },
+    { label:"1ª WK15 PROM",   valor:"82.24%",        cambio:"Días 1-4 · Tolin CRÍTICO",   dir:"down"    },
     { label:"CVGW",           valor:"$27.97",        cambio:"+1.2% 08-Abr",               dir:"up"      },
     { label:"AVO",            valor:"$15.36",        cambio:"+3.2% 08-Abr",               dir:"up"      }
   ],
@@ -742,9 +745,15 @@ window.BELHER = {
     ],
     watchlist: [
       {
-        titulo: "Merma elevada en Bolas WK15 — Yameto 4.71% (días 1-2) y ERGO 4.64% (día 3)",
+        titulo: "Bola Tolin merma 30.18% (07/04) — CRÍTICO: variedad posiblemente inviable para exportación",
         nivel: "danger",
-        descripcion: "Bola Yameto WK15: 04/04 = 4.44%, 06/04 = 4.97%, promedio 4.71%. Bola ERGO 08/04: 4.64%. Tres días consecutivos con merma >4% en Bolas. El patrón es consistente y preocupante — no es un outlier aislado.",
+        descripcion: "Outbound 07/04: Bola Tolin primera 28.59%, tercera 31.26%, merma 30.18%, peso 33.06 kg. Outlier extremo — merma 6x la media de otras variedades en WK15. Posibles causas: estrés hídrico o calórico en campo, problema varietal de piel/firmeza, manejo postcosecha inadecuado, o madurez avanzada al momento de cosecha.",
+        accion: "Investigar urgente: (1) campos de origen de Tolin empacado el 07/04, (2) condición de fruta en campo vs empaque, (3) temperatura en almacén y línea, (4) comparar con partidas Tolin de WK13-14. Si merma se confirma estructural en Tolin, suspender empaque exportación y redirigir a mercado nacional o rezaga."
+      },
+      {
+        titulo: "Merma elevada en Bolas WK15 — Calavo 4.78% (días 1-2), Yameto 4.71% (días 1-2), ERGO 4.64% (día 1)",
+        nivel: "danger",
+        descripcion: "Patrón consistente: Bola Calavo 04/04=3.35% + 07/04=6.20% → prom 4.78%. Bola Yameto 04/04≈4.44% + 06/04=4.97% → prom 4.71%. Bola ERGO 08/04=4.64%. Cuatro días consecutivos con merma >4% en Bolas — no es outlier aislado.",
         accion: "Revisar causas de merma en Bolas con equipo de calidad urgente. Verificar manejo postcosecha, temperatura campo-empaque, condición de fruta en campo y clasificación. Con vine-ripe en máximos $57.95-59.95, cada punto de merma es pérdida directa de precio."
       },
       {
@@ -773,7 +782,6 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"08/04/2026", evento:"✓ Revisión Excel Gass Sheet WK15 con Leima — Leima modificó comisiones Calavo (enviado 23:46 adj). Wire WK15 $269,880 confirmado. OL 8+4 actualizado por jacruz (21:02).", tipo:"pago", participantes:"Leima Leyva · jacruz · Calavo" },
       { fecha:"13/04/2026", evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar)", tipo:"reunion", participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
       { fecha:"16/04/2026", evento:"BPSI F/S Marzo 2026 y Forecast Q2 2026 — revisión financiera y pipeline", tipo:"reunion", participantes:"JC · Armando Llanes · hildelisa@beautyjunkies.com" },
       { fecha:"21/04/2026", evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
