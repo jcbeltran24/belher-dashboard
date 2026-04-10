@@ -3051,6 +3051,207 @@ footer {
   .fin-bar-kpi { padding: 0 14px; }
   .fin-bar-kpi-val { font-size: .82rem; }
 }
+
+/* ╔══════════════════════════════════════════════════════════╗
+   ║   DRAMATIC VISUAL OVERHAUL — Ejecutivo Hero            ║
+   ╚══════════════════════════════════════════════════════════╝ */
+
+/* ── Page background: slightly richer ── */
+body { background: #e8efe8; }
+
+/* ── TAB NAV: bolder active state, taller ── */
+nav.tabs {
+  background: #0c2117;
+  border-bottom: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+nav.tabs button {
+  height: 48px;
+  font-size: .84rem;
+  color: rgba(255,255,255,.38);
+  padding: 0 20px;
+}
+nav.tabs button.active {
+  color: #fff;
+  font-weight: 800;
+}
+nav.tabs button.active::after {
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent2), var(--green3));
+}
+
+/* ── EJECUTIVO KPI HERO CARDS: dark, bold, impactful ── */
+.ej2-kpi {
+  padding: 24px 24px 20px;
+  min-height: 148px;
+  border: none !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Export card — dark green */
+#ejCardExport {
+  background: linear-gradient(145deg, #0a1f12 0%, #14382a 100%);
+  box-shadow: 0 8px 32px rgba(12,33,23,.45), 0 2px 8px rgba(0,0,0,.3);
+}
+#ejCardExport::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+}
+
+/* Nacional card — dark navy */
+#ejCardNac {
+  background: linear-gradient(145deg, #0d1a2e 0%, #1a2e54 100%);
+  box-shadow: 0 8px 32px rgba(13,26,46,.5), 0 2px 8px rgba(0,0,0,.3);
+}
+#ejCardNac::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #60a5fa, #93c5fd);
+}
+
+/* Precio card — dark amber */
+#ejCardPrecio {
+  background: linear-gradient(145deg, #1c1100 0%, #3d2800 100%);
+  box-shadow: 0 8px 32px rgba(28,17,0,.5), 0 2px 8px rgba(0,0,0,.3);
+}
+#ejCardPrecio::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #fbbf24, #fde68a);
+}
+
+/* Dark card labels */
+#ejCardExport .ej2-lbl,
+#ejCardNac    .ej2-lbl,
+#ejCardPrecio .ej2-lbl {
+  color: rgba(255,255,255,.45);
+  font-size: .6rem;
+  letter-spacing: 1.4px;
+}
+
+/* Dark card sub text */
+#ejCardExport .ej2-sub,
+#ejCardNac    .ej2-sub,
+#ejCardPrecio .ej2-sub {
+  color: rgba(255,255,255,.3);
+  font-size: .67rem;
+}
+
+/* Dark card foot */
+#ejCardExport .ej2-foot,
+#ejCardNac    .ej2-foot,
+#ejCardPrecio .ej2-foot { color: rgba(255,255,255,.35); }
+
+/* Hero numbers — MUCH bigger */
+.ej2-val {
+  font-size: 2.6rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  letter-spacing: -.06em !important;
+  margin: 4px 0 2px;
+}
+.ej2-val.green { color: #4ade80 !important; }
+.ej2-val.blue  { color: #7dd3fc !important; }
+.ej2-val.amber { color: #fde68a !important; }
+
+/* Chart card alongside — keep white but bigger */
+.ej2-chartcard {
+  background: var(--card);
+  border: 1px solid rgba(0,0,0,.07) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,.07);
+}
+.ej2-charthdr {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .8px;
+  color: var(--muted);
+}
+
+/* ── STRATEGIC PANEL: color-coded indicators ── */
+.strat-ind {
+  padding: 16px 16px 14px;
+  gap: 6px;
+  border-radius: 16px;
+}
+.strat-ind-lbl {
+  font-size: .57rem;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.strat-ind-val {
+  font-size: 1.45rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -.04em !important;
+  line-height: 1.1;
+}
+.strat-ind-sub {
+  font-size: .62rem;
+  color: var(--muted);
+}
+
+/* ── SECTION TITLES: more prominent ── */
+.section-title {
+  font-size: .67rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.2px !important;
+  margin: 32px 0 16px !important;
+  color: #374151 !important;
+}
+.section-title::before {
+  width: 4px !important;
+  height: 18px !important;
+  border-radius: 3px !important;
+  background: linear-gradient(to bottom, var(--accent2) 0%, var(--green3) 100%) !important;
+}
+
+/* ── CARDS: stronger shadow, slight lift ── */
+.card {
+  border-color: rgba(0,0,0,.07) !important;
+  box-shadow: 0 2px 1px rgba(0,0,0,.02), 0 6px 24px rgba(0,0,0,.08) !important;
+}
+.card:hover {
+  box-shadow: 0 4px 2px rgba(0,0,0,.02), 0 16px 48px rgba(0,0,0,.11) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* ── KPI CARDS: more visual weight ── */
+.kpi-value {
+  font-size: 2.3rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -.05em !important;
+}
+.kpi-label {
+  font-size: .6rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.2px !important;
+}
+
+/* ── HEADER: taller, more presence ── */
+header {
+  height: 68px;
+  background: linear-gradient(135deg, #080f0b 0%, #0c2117 60%, #0f2d1c 100%);
+}
+.header-text h1 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -.2px;
+}
+.header-logo {
+  width: 40px; height: 40px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 4px 16px rgba(22,163,74,.5);
+}
+
+/* ── HOVER STATES on dark EJ2 cards ── */
+#ejCardExport:hover,
+#ejCardNac:hover,
+#ejCardPrecio:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 48px rgba(0,0,0,.5), 0 4px 12px rgba(0,0,0,.3) !important;
+}
 </style>
 </head>
 <body>
