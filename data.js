@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Viernes 10 Abr 2026",
     semana: "WK 15",
-    actualizado: "10/04/2026 · 16:30"
+    actualizado: "10/04/2026 · 17:55"
   },
 
   alertas: [
@@ -528,7 +528,7 @@ window.BELHER = {
       { fecha:"09/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-119",   destino:"Arizona", estado:"OK", cajas:1704 },
       { fecha:"09/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-88",   destino:"Arizona", estado:"OK", cajas:1600 },
       { fecha:"09/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-91",   destino:"Arizona", estado:"OK", cajas:960  },
-      { fecha:"09/04/2026", tipo:"Chile",  cargas:1, unidad:"JL-118",   destino:"Texas",   estado:"OK" },
+      { fecha:"09/04/2026", tipo:"Chile",  cargas:1, unidad:"JL-118",   destino:"Arizona", estado:"OK" },
       { fecha:"09/04/2026", tipo:"Chile",  cargas:1, unidad:"CGG-92",   destino:"Arizona", estado:"OK" },
       { fecha:"07/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-108", destino:"Arizona", estado:"OK" },
       { fecha:"07/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-64",  destino:"Arizona", estado:"OK" },
@@ -596,7 +596,7 @@ window.BELHER = {
     { label:"TOMATE ROMA",    valor:"$32.95–38.95", cambio:"mezcla tallas",               dir:"neutral" },
     { label:"CHILE BELL GH",  valor:"$12–16",        cambio:"11-lb carton",               dir:"neutral" },
     { label:"GRAPE TOMATO",   valor:"$28.95–30.95", cambio:"↓ leve -$2",                 dir:"down"    },
-    { label:"CUCUMBER NOG",   valor:"$34.95–36.95", cambio:"↓ baja",                     dir:"down"    },
+    { label:"CUCUMBER NOG",   valor:"$32.95–34.95", cambio:"↓ baja Corbel #0025",        dir:"down"    },
     { label:"MERMA CALAVO",    valor:"6.78%",         cambio:"⚠ máx temporada · 09/04",   dir:"down"    },
     { label:"TRILLA SORGO",   valor:"87 ha",         cambio:"WK15 acum · 09-Abr",         dir:"up"      },
     { label:"P&P ACUM WK15",  valor:"$3.90M",        cambio:"780,257 cajas · 458 cont",   dir:"up"      },
@@ -807,7 +807,7 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "10/04/2026 · 16:30",
+    generado:  "10/04/2026 · 17:55",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
     nota:      "Síntesis de precios USDA Phoenix (Corbel Seeds #0025 · 10-Abr) + báscula + calidad outbound tomate 09/04 (Bola Calavo merma 6.78% CRÍTICO, Roma Urson primera 78.25%) + trilla sorgo 09/04 (Álamo 20 ha, acum 87 ha WK15) + noticias de industria. Se regenera automáticamente cada mañana.",
@@ -846,7 +846,7 @@ window.BELHER = {
         confianza: 68,
         precio_actual:     { min: 50.00, max: 53.00 },
         precio_proyectado: { min: 46.00, max: 56.00 },
-        razonamiento: "Jalapeño rebota fuertemente a $50-53 Nogales (Corbel #0024, 09-Abr) desde $40-42 de la semana previa — recuperación de +$10/bu (+24%) en una sesión. La peor crisis de oferta de chile en 3 décadas (Bailey Farms, FreshPlaza) sostiene el precio: daño por clima en México y Florida, alivio esperado solo cuando cosechas de primavera escalen en mayo. Habanero también recupera a $39-42 y serrano se mantiene en $52-56. La baja de la semana previa resultó temporal — el mercado de chiles sigue estructuralmente corto.",
+        razonamiento: "Jalapeño $50-53 Texas confirmado estable en Corbel #0025 (10-Abr) — segundo día consecutivo en este rango tras rebote de +$10 desde $40-42 la semana previa. La peor crisis de oferta de chile en 3 décadas (Bailey Farms, FreshPlaza) sostiene el precio: daño por clima en México y Florida, alivio esperado solo cuando cosechas de primavera escalen en mayo. Habanero también en $39-42 y serrano en $52-56. El mercado de chiles sigue estructuralmente corto.",
         factores: ["Jalapeño rebota +$10 a $50-53 — recuperación sectorial confirmada", "Peor crisis de oferta de chile en 3 décadas (Bailey Farms) — fundamentales alcistas", "Serrano $52-56 · habanero $39-42 · chiles calientes todos en recuperación", "Alivio de oferta esperado solo en mayo cuando cosechas de primavera escalen", "Alta volatilidad estructural: rango WK13-WK15 fue $40-60"],
         riesgo: "Si cosechas de primavera México/Sonora entran con más volumen del esperado en WK16, nueva corrección bajista posible. Volatilidad muy alta.",
         accion: "Si hay jalapeño o chiles calientes disponibles, el momento de embarcar es ahora — $50-53 con fundamentales de oferta ajustados. Rango probable WK16: $46-55. Cuarentena Mexfly Texas — disciplina fitosanitaria crítica para chiles."
@@ -857,10 +857,10 @@ window.BELHER = {
         unidad: "carton XL · Nogales AZ",
         tendencia: "alcista",
         confianza: 75,
-        precio_actual:     { min: 44.95, max: 46.95 },
-        precio_proyectado: { min: 44.00, max: 49.00 },
-        razonamiento: "Chile Bell GH (green XL Nogales) registra $44.95-46.95 (Corbel #0018, 01-Abr) — ligero upward desde el $44.95 plano de semanas previas. Quinta semana consecutiva de estabilidad/fortaleza. En un contexto donde vine-ripe bajó desde su pico y jalapeño corrigió duramente, bell pepper GH mantuvo su precio y ahora muestra tendencia alcista suave. Señal de equilibrio real de mercado sostenido por demanda retail premium inelástica.",
-        factores: ["Quinta semana consecutiva de fortaleza — equilibrio real, no coyuntural", "Leve upward breakout desde $44.95 plano — nuevo rango $44.95-46.95", "Corrección generalizada de otros productos no afectó bell → diferenciación confirmada", "México dominante en bell GH USMCA sin sustituto disponible en este período"],
+        precio_actual:     { min: 42.95, max: 44.95 },
+        precio_proyectado: { min: 42.00, max: 47.00 },
+        razonamiento: "Chile Bell verde Nogales en $42.95-44.95 por carton (Corbel #0025, 10-Abr) — sigue en rango de fortaleza, estable por quinta semana consecutiva. En un contexto donde vine-ripe alcanzó máximos y jalapeño recuperó +24%, bell pepper GH mantuvo su precio con equilibrio real. La presión de tariffs y la debilidad del peso refuerzan la demanda por variedad premium. Señal de mercado sostenida por demanda retail inelástica.",
+        factores: ["Quinta semana consecutiva de fortaleza — equilibrio real, no coyuntural", "Bell verde Nogales $42.95-44.95 (Corbel #0025) — rango confirmado", "Corrección generalizada de otros productos no afectó bell → diferenciación confirmada", "México dominante en bell GH USMCA sin sustituto disponible en este período"],
         riesgo: "Nueva producción en invernaderos norteños podría incrementar oferta en WK15-17.",
         accion: "Mantener programa bell GH a máxima capacidad. Considerar expansión seria en GC 2026-27 — señal de mercado más sólida y consistente que cualquier otro producto este ciclo."
       },
@@ -872,8 +872,8 @@ window.BELHER = {
         confianza: 65,
         precio_actual:     { min: 38.00, max: 66.00 },
         precio_proyectado: { min: 36.00, max: 66.00 },
-        razonamiento: "Corbel #0024 (09-Abr) reporta limón seeded Texas $38-40 por cartón 35-36 lb, seedless 175s $64-66. El reporte SNIIM para CDMX muestra limón #5 Michoacán en MXN 550 por caja 20 kg (~MXN 27.5/kg). Menos volumen mexicano sigue siendo el driver estructural — Colombia está entrando con +15-30% de exportaciones Tahiti lime para llenar el hueco. Outbound 06/04 Belher: merma 1%, calidad excelente.",
-        factores: ["Seeded Texas $38-40/cartón 35-36 lb (Corbel #0024 · USDA 08-Abr)", "Seedless 175s Texas $64-66 — premium por calibre y seedless", "Colombia incrementa +15-30% exportaciones para compensar escasez mexicana", "SNIIM CDMX: limón #5 Michoacán MXN 27.5/kg — mercado nacional firme", "Merma 1% outbound Belher 06-Abr — calidad excelente"],
+        razonamiento: "Corbel #0025 (10-Abr) confirma limón seeded Texas $38-40 por cartón 35-36 lb, seedless 175s $64-66 — sin cambio respecto al día anterior. El reporte SNIIM para CDMX muestra limón #5 Michoacán en MXN 550 por caja 20 kg (~MXN 27.5/kg). Menos volumen mexicano sigue siendo el driver estructural — Colombia está entrando con +15-30% de exportaciones Tahiti lime para llenar el hueco. Outbound 06/04 Belher: merma 1%, calidad excelente.",
+        factores: ["Seeded Texas $38-40/cartón 35-36 lb (Corbel #0025 · 10-Abr)", "Seedless 175s Texas $64-66 — premium por calibre y seedless", "Colombia incrementa +15-30% exportaciones para compensar escasez mexicana", "SNIIM CDMX: limón #5 Michoacán MXN 27.5/kg — mercado nacional firme", "Merma 1% outbound Belher 06-Abr — calidad excelente"],
         riesgo: "Mayor oferta estacional en abril-mayo (flush primaveral) puede presionar precios en WK16-17. Colombia ganando participación de mercado.",
         accion: "Maximizar embarques de limón mientras el precio está sostenido. Coordinar con Maui Fresh forecast para resto de abril. Monitorear USDA Nogales para confirmar FOB local por talla."
       }
