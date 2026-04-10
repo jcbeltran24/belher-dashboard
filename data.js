@@ -1263,5 +1263,54 @@ window.BELHER = {
         ]
       }
     ]
+  },
+
+  /* ══════════════════════════════════════════════════════
+     CAADES / CIDH — Resumen de Inventarios, Embarques y Pipeline
+     Fuente: mariajose@cidh.org.mx · diario (días hábiles)
+     Secciones del reporte:
+       1. Inventarios en Nogales (Bola + Roma + Chile)
+       2. Pipeline (en tránsito · Campo Abierto vs Invernadero)
+       3. Totales acumulados de temporada
+     ══════════════════════════════════════════════════════ */
+  caades: {
+    fuente:       "CAADES/CIDH · mariajose@cidh.org.mx",
+    temporada:    "2025-2026",
+    ultimoReporte: null,   /* "Reporte # XX: DD-mes-YYYY" */
+    actualizado:  null,
+
+    /* Últimos 5 días — orden cronológico ascendente (índice 0 = más antiguo, -1 = hoy) */
+    inventario: [
+      /* Ejemplo de estructura — el agente de update llena esto diario:
+      {
+        fecha: "DD/MM/YYYY",
+        bola:        { total: N, cincoySeis: N, pct: N },
+        roma:        { total: N, cincoySeis: N, pct: N },
+        totalTomate: { total: N, cincoySeis: N, pct: N },
+        chile:       { pallets: N, paquetes: N }
+      }
+      */
+    ],
+
+    /* Pipeline — en tránsito hacia Nogales */
+    pipeline: [
+      /* Ejemplo:
+      {
+        fecha: "DD/MM/YYYY",
+        bola:  { campoAbierto: N, invernadero: N, otros: N, total: N },
+        roma:  { campoAbierto: N, invernadero: N, otros: N, total: N },
+        chile: { total: N },
+        limon: { total: N },
+        totalGeneral: N
+      }
+      */
+    ],
+
+    /* Totales acumulados de temporada (cajas) */
+    totalesTemporada: [
+      /* Ejemplo:
+      { fecha: "DD/MM/YYYY", t1: N, t2: N, t3: N, totalGeneral: N }
+      */
+    ]
   }
 };
