@@ -3925,7 +3925,7 @@ function checkPw(){
 
     // Nacional cajas
     var cajasNac = 0;
-    var tc = (D.tomate && D.tomate.canales) || {};
+    var tc = (D.tomate && D.tomate.ventas) || {};
     if (tc.nacional) tc.nacional.forEach(function(s){ cajasNac += s.cajas || 0; });
 
     document.getElementById('fbWeek').textContent  = D.meta.semana + ' · HOY';
@@ -4405,7 +4405,7 @@ function checkPw(){
 
     /* Canal data */
     var rev = D.revenue || {};
-    var tc  = (D.tomate && D.tomate.canales) || {};
+    var tc  = (D.tomate && D.tomate.ventas) || {};
     var expCanal = (tc.exportacion && tc.exportacion[0]) || {};
     var nacCanal = (tc.nacional    && tc.nacional[0])    || {};
     var cajasExp = expCanal.cajas || totLiqCajas;
@@ -4639,7 +4639,7 @@ function checkPw(){
     /* KPIs — separado por canal */
     var cv    = D.calavo || {};
     var rev   = D.revenue || {};
-    var tc2   = (D.tomate && D.tomate.canales) || {};
+    var tc2   = (D.tomate && D.tomate.ventas) || {};
     var nacC  = (tc2.nacional && tc2.nacional[0]) || {};
     var revExp2 = rev.fob      || totRevenue;
     var revNac2 = rev.nacional || nacC.revenue || 0;
@@ -4742,7 +4742,7 @@ function checkPw(){
 
   /* ════════════════ NACIONAL ════════════════ */
   function renderNacional() {
-    var tc    = (D.tomate && D.tomate.canales) || {};
+    var tc    = (D.tomate && D.tomate.ventas) || {};
     var nacC  = (tc.nacional && tc.nacional[0])    || {};
     var expC  = (tc.exportacion && tc.exportacion[0]) || {};
     var rev   = D.revenue || {};
@@ -5690,7 +5690,7 @@ function checkPw(){
     var cvsaldo = cv.saldoActual;
     var saldoOK = cvsaldo != null && cvsaldo >= 0;
     var revF  = D.revenue || {};
-    var tc3   = (D.tomate && D.tomate.canales) || {};
+    var tc3   = (D.tomate && D.tomate.ventas) || {};
     var nacC3 = (tc3.nacional && tc3.nacional[0]) || {};
     document.getElementById('finKpis').innerHTML =
       kpiCard('Exportación Calavo · Cajas Fact.', fmt(cv.revenueTotal),
