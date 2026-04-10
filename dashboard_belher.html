@@ -43,6 +43,12 @@
   --r:    12px;
   --r-lg: 16px;
   --r-xl: 22px;
+
+  /* Aliases used across components — explicit to avoid silent fallbacks */
+  --bg2:      #e4ece4;
+  --surface:  #f3f7f3;
+  --radius:   12px;
+  --transition: .18s cubic-bezier(.25,.46,.45,.94);
 }
 
 /* ═══════════════════════════════════════════════
@@ -95,7 +101,7 @@ header::after {
   box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 3px 10px rgba(22,163,74,.4);
 }
 .header-text h1 { font-size: .98rem; font-weight: 700; color: #fff; white-space: nowrap; }
-.header-text p  { font-size: .67rem; color: rgba(255,255,255,.38); letter-spacing: .3px; }
+.header-text p  { font-size: .67rem; color: rgba(255,255,255,.50); letter-spacing: .3px; }
 
 .header-pills { display: flex; align-items: center; gap: 10px; }
 .h-pill {
@@ -107,7 +113,7 @@ header::after {
 }
 .h-pill:hover { background: rgba(255,255,255,.09); }
 .h-pill .hv { display: block; font-size: .88rem; font-weight: 700; color: var(--accent2); line-height: 1.1; }
-.h-pill .hl { display: block; font-size: .59rem; color: rgba(255,255,255,.38); letter-spacing: .7px; text-transform: uppercase; margin-top: 1px; }
+.h-pill .hl { display: block; font-size: .59rem; color: rgba(255,255,255,.50); letter-spacing: .7px; text-transform: uppercase; margin-top: 1px; }
 
 .live-badge {
   display: flex; align-items: center; gap: 6px;
@@ -181,8 +187,17 @@ nav.tabs {
   border-bottom: 1px solid rgba(255,255,255,.07);
   flex-shrink: 0;
   -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 nav.tabs::-webkit-scrollbar { display: none; }
+/* Fade-right overflow indicator */
+nav.tabs::after {
+  content: '';
+  position: sticky; right: 0; top: 0; bottom: 0;
+  width: 48px; min-width: 48px; height: 44px;
+  background: linear-gradient(-90deg, var(--dark2) 30%, transparent);
+  pointer-events: none; flex-shrink: 0; z-index: 2;
+}
 nav.tabs button {
   background: none; border: none; cursor: pointer;
   color: rgba(255,255,255,.42);
@@ -228,6 +243,8 @@ main {
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr;            gap: 16px; }
 .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr;        gap: 16px; }
 .grid-4 { display: grid; grid-template-columns: repeat(4,1fr);      gap: 14px; }
+@media (max-width: 960px) { .grid-4 { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px) { .grid-4 { grid-template-columns: 1fr; } }
 
 /* ═══════════════════════════════════════════════
    SECTION TITLE
@@ -3128,16 +3145,16 @@ function checkPw(){
 </div>
 
 <!-- ══ TABS ══ -->
-<nav class="tabs" id="tabNav">
-  <button class="active" data-tab="ejecutivo">Ejecutivo</button>
-  <button data-tab="ventas">Export Calavo</button>
-  <button data-tab="nacional">Nacional</button>
-  <button data-tab="finanzas">Finanzas</button>
-  <button data-tab="optomate">Ops Tomate</button>
-  <button data-tab="cdc">CDC · Personal</button>
-  <button data-tab="otros">Otros Cultivos</button>
-  <button data-tab="calavoweekly">Intel Calavo</button>
-  <button data-tab="estrategia">Estrategia</button>
+<nav class="tabs" id="tabNav" role="tablist" aria-label="Secciones del dashboard">
+  <button class="active" data-tab="ejecutivo" role="tab" aria-selected="true"  aria-controls="tab-ejecutivo">Ejecutivo</button>
+  <button data-tab="ventas"       role="tab" aria-selected="false" aria-controls="tab-ventas">Export Calavo</button>
+  <button data-tab="nacional"     role="tab" aria-selected="false" aria-controls="tab-nacional">Nacional</button>
+  <button data-tab="finanzas"     role="tab" aria-selected="false" aria-controls="tab-finanzas">Finanzas</button>
+  <button data-tab="optomate"     role="tab" aria-selected="false" aria-controls="tab-optomate">Ops Tomate</button>
+  <button data-tab="cdc"          role="tab" aria-selected="false" aria-controls="tab-cdc">CDC · Personal</button>
+  <button data-tab="otros"        role="tab" aria-selected="false" aria-controls="tab-otros">Otros Cultivos</button>
+  <button data-tab="calavoweekly" role="tab" aria-selected="false" aria-controls="tab-calavoweekly">Intel Calavo</button>
+  <button data-tab="estrategia"   role="tab" aria-selected="false" aria-controls="tab-estrategia">Estrategia</button>
 </nav>
 
 <main>
@@ -3740,11 +3757,12 @@ function checkPw(){
   var tabBtns   = document.querySelectorAll('#tabNav button');
   var tabPanels = document.querySelectorAll('.tab-panel');
   function activateTab(tabId) {
-    tabBtns.forEach(function (b) { b.classList.remove('active'); });
+    tabBtns.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
     tabPanels.forEach(function (p) { p.classList.remove('active'); });
     var btn = document.querySelector('#tabNav button[data-tab="' + tabId + '"]');
     if (!btn) return;
     btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
     btn.scrollIntoView({ inline:'center', block:'nearest', behavior:'smooth' });
     document.getElementById('tab-' + tabId).classList.add('active');
     /* setTimeout: ensure browser finishes painting before Chart.js measures canvas */
