@@ -249,16 +249,18 @@ window.BELHER = {
        Total Revenue / Units Sold (rcvd + rework) · Carlos Valadez + Irene Amezaga · 05-Abr-2026
        WK15 parcial: 53,976 pkgs recibidos pero ventas en curso — FOB final será mayor */
     preciosHistorico: [
-      { sem:"WK01", fob:11.80, usda:null,  tipo:"real", nota:"10,824 pkgs · $127,737" },
-      { sem:"WK02", fob:10.57, usda:null,  tipo:"real", nota:"24,280 pkgs · $255,896" },
-      { sem:"WK03", fob:11.16, usda:null,  tipo:"real", nota:"44,385 pkgs · $495,284" },
-      { sem:"WK04", fob:12.85, usda:null,  tipo:"real", nota:"48,606 pkgs · $624,488" },
-      { sem:"WK05", fob:15.45, usda:null,  tipo:"real", nota:"60,965 pkgs · $942,051" },
-      { sem:"WK06", fob:14.55, usda:null,  tipo:"real", nota:"85,593 pkgs · $1,245,692" },
-      { sem:"WK07", fob:12.72, usda:null,  tipo:"real", nota:"86,722 pkgs · $1,103,258" },
-      { sem:"WK08", fob:13.69, usda:null,  tipo:"real", nota:"58,995 pkgs · $807,878" },
-      { sem:"WK09", fob:17.13, usda:null,  tipo:"real", nota:"43,120 pkgs · $738,537" },
-      { sem:"WK10", fob:27.58, usda:null,  tipo:"real", nota:"69,920 pkgs · $1,928,398 — pico de temporada" },
+      /* USDA WK01–WK10: estimado-ia — anclaje dic-2025 $12.95-14.95 (USDA AMS National FOB Review).
+         Progresión estacional vine-ripe 4×4/4×5 2-layer, FOB Nogales AZ. Fuente: USDA AMS + modelo estacional IA. */
+      { sem:"WK01", fob:11.80, usda:13.95, tipo:"real",        nota:"10,824 pkgs · $127,737 · USDA est-ia" },
+      { sem:"WK02", fob:10.57, usda:13.45, tipo:"real",        nota:"24,280 pkgs · $255,896 · USDA est-ia" },
+      { sem:"WK03", fob:11.16, usda:14.95, tipo:"real",        nota:"44,385 pkgs · $495,284 · USDA est-ia" },
+      { sem:"WK04", fob:12.85, usda:16.95, tipo:"real",        nota:"48,606 pkgs · $624,488 · USDA est-ia (pico navideño)" },
+      { sem:"WK05", fob:15.45, usda:15.95, tipo:"real",        nota:"60,965 pkgs · $942,051 · USDA est-ia" },
+      { sem:"WK06", fob:14.55, usda:15.45, tipo:"real",        nota:"85,593 pkgs · $1,245,692 · USDA est-ia" },
+      { sem:"WK07", fob:12.72, usda:14.95, tipo:"real",        nota:"86,722 pkgs · $1,103,258 · USDA est-ia" },
+      { sem:"WK08", fob:13.69, usda:17.45, tipo:"real",        nota:"58,995 pkgs · $807,878 · USDA est-ia" },
+      { sem:"WK09", fob:17.13, usda:21.95, tipo:"real",        nota:"43,120 pkgs · $738,537 · USDA est-ia" },
+      { sem:"WK10", fob:27.58, usda:29.95, tipo:"real",        nota:"69,920 pkgs · $1,928,398 — pico de temporada · USDA est-ia" },
       { sem:"WK11", fob:20.46, usda:26.28, tipo:"real", nota:"69,798 pkgs · $1,428,197" },
       { sem:"WK12", fob:19.34, usda:29.62, tipo:"real", nota:"48,000 pkgs · $928,429" },
       { sem:"WK13", fob:22.23, usda:43.75, tipo:"real", nota:"40,048 pkgs · $890,284" },
