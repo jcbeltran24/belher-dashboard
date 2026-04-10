@@ -14,68 +14,35 @@
    DESIGN TOKENS
 ══════════════════════════════════════════════ */
 :root {
-  /* ── Colors ── */
   --dark:       #0c2117;
   --dark2:      #162d1f;
   --green:      #15803d;
   --green2:     #16a34a;
   --green3:     #22c55e;
-  --green4:     #4ade80;   /* light / ticker up */
   --green-glow: rgba(34,197,94,.18);
   --accent:     #d97706;
   --accent2:    #fbbf24;
   --red:        #dc2626;
   --red2:       #ef4444;
   --blue:       #1d4ed8;
-  --blue2:      #3b82f6;
   --purple:     #7c3aed;
-  --bg:         #ecf0ec;
-  --bg2:        #ffffff;
-  --border:     rgba(0,0,0,.08);
-  --border-s:   #cfe2d6;   /* solid border for legacy */
+  --bg:         #edf2ed;
+  --border:     #cfe2d6;
   --text:       #0f1f14;
   --text2:      #374151;
   --muted:      #6b7280;
   --card:       #ffffff;
 
-  /* ── Shadows ── */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,.04);
-  --shadow-sm: 0 2px 8px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.03);
-  --shadow:    0 4px 20px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.04);
-  --shadow-md: 0 8px 32px rgba(0,0,0,.09), 0 2px 8px rgba(0,0,0,.04);
-  --shadow-lg: 0 24px 64px rgba(0,0,0,.10), 0 6px 16px rgba(0,0,0,.05);
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow:    0 4px 16px rgba(12,33,23,.09), 0 1px 4px rgba(0,0,0,.05);
+  --shadow-md: 0 8px 28px rgba(12,33,23,.12), 0 3px 8px rgba(0,0,0,.06);
+  --shadow-lg: 0 20px 40px rgba(12,33,23,.14), 0 6px 12px rgba(0,0,0,.06);
 
-  /* ── Radii ── */
-  --r-xs: 6px;
-  --r-sm: 10px;
-  --r:    14px;
-  --r-lg: 18px;
-  --r-xl: 24px;
-  --radius: var(--r);      /* alias — fixes undefined var(--radius) bug */
-
-  /* ── Spacing scale (4px base) ── */
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 20px;
-  --sp-6: 24px;
-  --sp-8: 32px;
-
-  /* ── Type scale ── */
-  --text-xs:   .6rem;    /* 8.4px  — captions, tags */
-  --text-sm:   .72rem;   /* 10.1px — secondary labels */
-  --text-base: .84rem;   /* 11.8px — body, table rows */
-  --text-md:   1rem;     /* 14px   — section heads, nav */
-  --text-lg:   1.25rem;  /* 17.5px — sub-values */
-  --text-xl:   1.65rem;  /* 23.1px — KPI values */
-  --text-2xl:  2rem;     /* 28px   — hero numbers */
-  --text-3xl:  2.4rem;   /* 33.6px — mega KPI */
-
-  /* ── Transitions ── */
-  --ease: cubic-bezier(.25,.46,.45,.94);
-  --dur:  .2s;
-  --transition: var(--dur) var(--ease);
+  --r-sm: 8px;
+  --r:    12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
 }
 
 /* ═══════════════════════════════════════════════
@@ -132,7 +99,7 @@ header::after {
   box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 3px 10px rgba(22,163,74,.4);
 }
 .header-text h1 { font-size: .98rem; font-weight: 700; color: #fff; white-space: nowrap; }
-.header-text p  { font-size: .67rem; color: rgba(255,255,255,.55); letter-spacing: .3px; } /* was .38 — WCAG AA fail */
+.header-text p  { font-size: .67rem; color: rgba(255,255,255,.38); letter-spacing: .3px; }
 
 .header-pills { display: flex; align-items: center; gap: 10px; }
 .h-pill {
@@ -144,7 +111,7 @@ header::after {
 }
 .h-pill:hover { background: rgba(255,255,255,.09); }
 .h-pill .hv { display: block; font-size: .88rem; font-weight: 700; color: var(--accent2); line-height: 1.1; }
-.h-pill .hl { display: block; font-size: .59rem; color: rgba(255,255,255,.52); letter-spacing: .7px; text-transform: uppercase; margin-top: 1px; }
+.h-pill .hl { display: block; font-size: .59rem; color: rgba(255,255,255,.38); letter-spacing: .7px; text-transform: uppercase; margin-top: 1px; }
 
 .live-badge {
   display: flex; align-items: center; gap: 6px;
@@ -163,10 +130,10 @@ header::after {
 
 .logout-btn {
   display:flex; align-items:center; gap:6px;
-  padding:0 13px; height:36px; min-width:36px; border-radius:9px; border:1px solid rgba(255,255,255,.15); cursor:pointer;
-  background:rgba(255,255,255,.1); color:rgba(255,255,255,.8);
+  padding:0 13px; height:32px; border-radius:9px; border:1px solid rgba(255,255,255,.15); cursor:pointer;
+  background:rgba(255,255,255,.1); color:rgba(255,255,255,.75);
   font-size:.7rem; font-weight:600; font-family:inherit; letter-spacing:.3px;
-  transition:background var(--transition), color var(--transition), border-color var(--transition);
+  transition:background .18s, color .18s, border-color .18s;
   flex-shrink:0; white-space:nowrap;
 }
 .logout-btn:hover { background:rgba(255,69,58,.22); color:#ff6b60; border-color:rgba(255,69,58,.35); }
@@ -197,11 +164,11 @@ header::after {
 }
 .ticker-track:hover { animation-play-state: paused; }
 .ticker-item  { display: inline-flex; align-items: center; gap: 6px; margin-right: 32px; }
-.t-name  { color: var(--green3); font-size: .61rem; font-weight: 800; letter-spacing: .9px; font-family: 'SF Mono','Fira Code',monospace; }
-.t-val   { color: rgba(255,255,255,.88); font-size: .68rem; font-weight: 600; font-family: 'SF Mono','Fira Code',monospace; }
+.t-name  { color: #5a9e75; font-size: .61rem; font-weight: 800; letter-spacing: .9px; font-family: 'SF Mono','Fira Code',monospace; }
+.t-val   { color: #ddeee3; font-size: .68rem; font-weight: 600; font-family: 'SF Mono','Fira Code',monospace; }
 .t-chg   { font-size: .61rem; font-weight: 700; font-family: 'SF Mono','Fira Code',monospace; }
-.t-up    { color: var(--green4); }
-.t-down  { color: var(--red2); }
+.t-up    { color: #4ade80; }
+.t-down  { color: #f87171; }
 .t-neut  { color: var(--accent2); }
 .t-sep   { color: rgba(34,197,94,.2); margin-right: 32px; font-size: .7rem; }
 @keyframes ticker-scroll {
@@ -313,9 +280,9 @@ main {
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
   position: relative; overflow: hidden;
-  transition: box-shadow var(--transition), transform var(--transition);
+  transition: box-shadow .18s, transform .18s;
 }
-.kpi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.kpi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
 .kpi-card::before {
   content: ''; position: absolute;
   top: 0; left: 0; right: 0; height: 3px;
@@ -402,7 +369,7 @@ main {
   transition: background .13s;
 }
 .correo-item:last-child { border-bottom: none; }
-.correo-item:hover { background: rgba(22,163,74,.04); }
+.correo-item:hover { background: #f8faf8; }
 .correo-dot  { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
 .correo-dot.leido { background: #d1d5db; }
 .correo-asunto { flex: 1; font-weight: 600; font-size: .83rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -420,10 +387,10 @@ thead th {
   font-size: .64rem; font-weight: 600; letter-spacing: 1px;
   text-transform: uppercase; white-space: nowrap;
 }
-tbody tr { border-bottom: 1px solid var(--border); transition: background var(--transition); }
-tbody tr:nth-child(even) { background: rgba(0,0,0,.018); }
+tbody tr { border-bottom: 1px solid #f0f4f0; transition: background .12s; }
+tbody tr:nth-child(even) { background: #fafcfa; }
 tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--green-glow); }
+tbody tr:hover { background: #f0fdf4; }
 tbody td { padding: 10px 15px; vertical-align: middle; }
 tfoot td  { padding: 10px 15px; }
 .td-num    { text-align: right; font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
@@ -468,11 +435,11 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
 .basc-row {
   display: flex; align-items: center; gap: 14px;
   padding: 9px 14px;
-  background: rgba(0,0,0,.02);
+  background: #f8faf8;
   border: 1px solid var(--border); border-radius: var(--r-sm);
-  transition: background var(--transition);
+  transition: background .12s;
 }
-.basc-row:hover { background: var(--green-glow); }
+.basc-row:hover { background: #f0fdf4; }
 .basc-date { font-size: .74rem; font-weight: 700; color: var(--muted); width: 36px; flex-shrink: 0; }
 .basc-chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .chip {
@@ -509,7 +476,7 @@ tr.row-alerta td:first-child { border-left: 3px solid var(--red2); }
   box-shadow: var(--shadow);
   border: 1px solid transparent;
   position: relative; overflow: hidden;
-  transition: box-shadow var(--transition), transform var(--transition);
+  transition: box-shadow .18s, transform .18s;
 }
 .price-hero:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
 
@@ -1569,27 +1536,23 @@ body { text-rendering: optimizeLegibility; font-feature-settings: "kern" 1; }
 }
 .tab-panel.active { animation: tabFadeIn .24s cubic-bezier(.25,.46,.45,.94); }
 
-/* ── 6. Cards — unified ── */
-.card, .card-table, .kpi-card, .donut-card, .cdc-stat-card,
-.pc-card, .qual-card, .audit-card, .etiq-card, .etq-card-mini {
+/* ── 6. Cards ── */
+.card, .card-table, .kpi-card, .donut-card, .cdc-stat-card {
   border-color: rgba(0,0,0,.07);
 }
 .card {
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 1px rgba(0,0,0,.02), 0 4px 18px rgba(0,0,0,.06);
   transition: box-shadow var(--transition), transform var(--transition);
 }
 .card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 2px 2px rgba(0,0,0,.02), 0 12px 36px rgba(0,0,0,.09);
   transform: translateY(-2px);
 }
-/* unified KPI hover — consistent -2px lift */
-.kpi-card, .pc-card, .qual-card {
+.kpi-card {
+  border-color: rgba(0,0,0,.07);
   transition: box-shadow var(--transition), transform var(--transition);
 }
-.kpi-card:hover, .pc-card:hover, .qual-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
+.kpi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
 .kpi-value { letter-spacing: -.03em; }
 
 /* ── 7. Apple Segmented Control ── */
@@ -1655,14 +1618,8 @@ tbody tr:hover { background: rgba(22,163,74,.025); }
 ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.14); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.22); }
 
-/* ── 16. Focus rings — accessibility (WCAG 2.4.11) ── */
-:focus-visible {
-  outline: 2px solid var(--green2);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-/* Remove default outline only when focus-visible is supported */
-:focus:not(:focus-visible) { outline: none; }
+/* ── 16. Focus rings — accessibility ── */
+button:focus-visible { outline: 2px solid var(--green2); outline-offset: 2px; border-radius: 4px; }
 
 /* ── 17. Footer ── */
 footer { letter-spacing: .3px; font-size: .67rem; }
@@ -3172,15 +3129,15 @@ function checkPw(){
   </div>
 
   <div class="live-badge" style="margin-left:auto"><span class="live-dot"></span>LIVE</div>
-  <button class="refresh-btn" id="refreshBtn" onclick="refreshDashboard()" title="Actualizar datos" aria-label="Actualizar datos">
+  <button class="refresh-btn" id="refreshBtn" onclick="refreshDashboard()" title="Actualizar datos">
     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
     <span class="refresh-txt">Actualizar</span>
   </button>
-  <button class="edit-layout-btn" onclick="toggleEditMode()" title="Editar layout" aria-label="Editar layout del dashboard">
+  <button class="edit-layout-btn" onclick="toggleEditMode()" title="Editar layout">
     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
     Editar
   </button>
-  <button class="logout-btn" onclick="sessionStorage.removeItem('bih_auth_2026');document.getElementById('pw-gate').classList.remove('hidden');document.getElementById('pw-input').value='';document.getElementById('pw-err').textContent='';" title="Cerrar sesión" aria-label="Cerrar sesión">
+  <button class="logout-btn" onclick="sessionStorage.removeItem('bih_auth_2026');document.getElementById('pw-gate').classList.remove('hidden');document.getElementById('pw-input').value='';document.getElementById('pw-err').textContent='';" title="Cerrar sesión">
     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
     <span class="logout-txt">Salir</span>
   </button>
