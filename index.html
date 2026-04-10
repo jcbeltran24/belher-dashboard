@@ -3360,6 +3360,7 @@ function checkPw(){
   <button data-tab="cdc"          role="tab" aria-selected="false" aria-controls="tab-cdc">CDC · Personal</button>
   <button data-tab="otros"        role="tab" aria-selected="false" aria-controls="tab-otros">Otros Cultivos</button>
   <button data-tab="calavoweekly" role="tab" aria-selected="false" aria-controls="tab-calavoweekly">Intel Calavo</button>
+  <button data-tab="caades"       role="tab" aria-selected="false" aria-controls="tab-caades">Inventarios NOG</button>
   <button data-tab="estrategia"   role="tab" aria-selected="false" aria-controls="tab-estrategia">Estrategia</button>
 </nav>
 
@@ -3437,6 +3438,11 @@ function checkPw(){
   </div>
 
   <!-- ══════════ ESTRATEGIA (ex-HOY) ══════════ -->
+  <!-- ══════════ CAADES · INVENTARIOS NOGALES ══════════ -->
+  <div class="tab-panel" id="tab-caades">
+    <div id="caades-main"></div>
+  </div>
+
   <div class="tab-panel" id="tab-estrategia">
 
     <!-- 1. Señales del día — lo que necesita atención AHORA -->
@@ -3701,7 +3707,6 @@ function checkPw(){
 
   <!-- ══════════ CALAVO WEEKLY ══════════ -->
   <div class="tab-panel" id="tab-calavoweekly">
-    <div id="cw-caades"></div>
     <div id="cw-header"></div>
     <div id="cw-stocks"></div>
     <div id="cw-alertas"></div>
@@ -6683,6 +6688,12 @@ function checkPw(){
       renderCdc();
     }
 
+    /* ── CAADES — lazy render on first visit ── */
+    if (tab === 'caades' && !chartsInit.caades) {
+      chartsInit.caades = true;
+      renderCaades();
+    }
+
     if (tab === 'finanzas' && !chartsInit.finanzas) {
       chartsInit.finanzas = true;
       var cv  = D.calavo;
@@ -7260,7 +7271,7 @@ function checkPw(){
   /* ── Calavo Intelligence Center ── */
   /* ════════════════ CAADES / CIDH — Inventarios Nogales ════════════════ */
   function renderCaades() {
-    var el = document.getElementById('cw-caades');
+    var el = document.getElementById('caades-main');
     if (!el) return;
     var C = D.caades;
     if (!C || !C.inventario || C.inventario.length === 0) {
@@ -8894,7 +8905,6 @@ function checkPw(){
   renderMercado();
   renderFinanzas();
   renderTomate();
-  renderCaades();
   renderCalavoWeekly();
   renderLimon();
   renderChile();
