@@ -3563,6 +3563,10 @@ function checkPw(){
     <div class="section-title">% Trabajadores por Semana</div>
     <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartCdcPct"></canvas></div></div>
 
+    <div class="section-title">% Cumplimiento vs Proyección <span class="src-tag">Real ÷ Plan Inicial · Depto. Producción</span></div>
+    <div id="cdcCumplimientoKpis" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px"></div>
+    <div class="card"><div class="chart-box" style="height:220px"><canvas id="chartCdcCumplimiento"></canvas></div></div>
+
     <div class="section-title">Varianza Total: Real vs Proyectado <span class="src-tag">Depto. Producción · Plan Inicial 2025–2026</span></div>
     <div class="card"><div class="chart-box" style="height:240px"><canvas id="chartCdcVsProyeccion"></canvas></div></div>
   </div>
@@ -6770,6 +6774,86 @@ function checkPw(){
         scales:{ y:{ beginAtZero:false, min:30, max:80, ticks:{callback:function(v){return v+'%';}}, grid:{color:'rgba(0,0,0,.04)'} }, x:{ grid:{display:false} } }
       }
     });
+
+    /* ── % CUMPLIMIENTO vs PROYECCIÓN ── */
+    (function () {
+      var kpiEl = document.getElementById('cdcCumplimientoKpis');
+      var ctxC  = document.getElementById('chartCdcCumplimiento');
+      if (!kpiEl || !ctxC || !cdc.proyeccion) return;
+
+      /* Build % cumplimiento per week for each campo */
+      var cumplLabels = [];
+      var cumplBeltran = [];
+      var cumplDorita  = [];
+      var cumplTotal   = [];
+
+      allSems.forEach(function (s) {
+        var p = proyMap[s];
+        if (!p) return;
+        var bRow = b.historico.find(function (r) { return r.sem === s; });
+        var dRow = d.historico.find(function (r) { return r.sem === s; });
+        if (!bRow) return;
+        var realB = bRow.total;
+        var realD = dRow ? dRow.total : 0;
+        var realT = realB + realD;
+        cumplLabels.push(s);
+        cumplBeltran.push(p.beltran ? +(realB / p.beltran * 100).toFixed(1) : null);
+        cumplDorita.push(p.dorita && dRow ? +(realD / p.dorita * 100).toFixed(1) : null);
+        cumplTotal.push(p.total ? +(realT / p.total * 100).toFixed(1) : null);
+      });
+
+      /* KPI cards — last week values */
+      var lastB = cumplBeltran[cumplBeltran.length - 1];
+      var lastD = cumplDorita[cumplDorita.length - 1];
+      var lastT = cumplTotal[cumplTotal.length - 1];
+      function kpiCard(label, val, campo) {
+        var col  = val >= 95 ? '#4ade80' : val >= 85 ? '#fbbf24' : '#f87171';
+        var bg   = val >= 95 ? 'rgba(74,222,128,.08)' : val >= 85 ? 'rgba(251,191,36,.08)' : 'rgba(248,113,113,.08)';
+        var bdr  = val >= 95 ? 'rgba(74,222,128,.25)' : val >= 85 ? 'rgba(251,191,36,.25)' : 'rgba(248,113,113,.25)';
+        var icon = val >= 95 ? '✓' : val >= 85 ? '~' : '↓';
+        return '<div style="background:' + bg + ';border:1px solid ' + bdr + ';border-radius:12px;padding:16px 18px;">' +
+          '<div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px">' + label + '</div>' +
+          '<div style="font-size:2rem;font-weight:900;color:' + col + ';line-height:1;letter-spacing:-.5px">' + val + '<span style="font-size:1rem">%</span></div>' +
+          '<div style="font-size:.7rem;color:' + col + ';margin-top:5px;font-weight:700">' + icon + ' vs proyección</div>' +
+          '<div style="font-size:.65rem;color:var(--muted);margin-top:3px">' + cdc.semanaActual + '</div>' +
+        '</div>';
+      }
+      kpiEl.innerHTML =
+        kpiCard('Lo de Beltrán', lastB, 'beltran') +
+        kpiCard('Campo Dorita',  lastD, 'dorita') +
+        kpiCard('Combinado',     lastT, 'total');
+
+      /* Line chart */
+      if (chartsInit['chartCdcCumplimiento']) chartsInit['chartCdcCumplimiento'].destroy();
+      chartsInit['chartCdcCumplimiento'] = new Chart(ctxC, {
+        type: 'line',
+        data: {
+          labels: cumplLabels,
+          datasets: [
+            { label:'Beltrán %',  data: cumplBeltran, borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,.08)', borderWidth:2.5, tension:.4, pointRadius:2.5, pointHoverRadius:5, fill:true },
+            { label:'Dorita %',   data: cumplDorita,  borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,.08)', borderWidth:2.5, tension:.4, pointRadius:2.5, pointHoverRadius:5, fill:true },
+            { label:'Combinado %',data: cumplTotal,   borderColor:'#4ade80', backgroundColor:'rgba(74,222,128,.05)', borderWidth:2, tension:.4, pointRadius:2, pointHoverRadius:4, borderDash:[4,3], fill:false },
+            { label:'Meta 100%',  data: cumplLabels.map(function(){ return 100; }), borderColor:'rgba(0,0,0,.15)', borderWidth:1, borderDash:[6,4], pointRadius:0, fill:false }
+          ]
+        },
+        options: {
+          responsive:true, maintainAspectRatio:false,
+          interaction:{ mode:'index', intersect:false },
+          plugins:{
+            legend:{ position:'top' },
+            tooltip:{ callbacks:{ label:function(ctx){ return ctx.dataset.label + ': ' + ctx.parsed.y + '%'; } } }
+          },
+          scales:{
+            y:{
+              min:60, max:105,
+              ticks:{ callback:function(v){ return v + '%'; } },
+              grid:{ color:'rgba(0,0,0,.04)' }
+            },
+            x:{ grid:{ display:false }, ticks:{ font:{ size:9 } } }
+          }
+        }
+      });
+    })();
 
     /* ── VARIANCE CHART: Real vs Proyectado ── */
     var ctxV = document.getElementById('chartCdcVsProyeccion');
