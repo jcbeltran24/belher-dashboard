@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Viernes 10 Abr 2026",
     semana: "WK 15",
-    actualizado: "10/04/2026 · 17:55"
+    actualizado: "10/04/2026 · 20:30"
   },
 
   alertas: [
@@ -195,7 +195,7 @@ window.BELHER = {
       desde: "06/04/2026",
       hasta:  "12/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:82.02, segunda:4.71,  tercera:7.71, merma:5.44, peso:23.22, dias:3, alerta:true  },
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:81.45, segunda:4.69,  tercera:8.00, merma:5.78, peso:22.77, dias:4, alerta:true  },
         { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:82.39, segunda:7.12,  tercera:5.79, merma:4.71, peso:30.85, dias:2, alerta:true  },
         { nombre:"Bola Tolin",      etiqueta:"Tolin",      canal:"exportacion", primera:28.59, segunda:9.96,  tercera:31.26, merma:30.18, peso:33.06, dias:1, alerta:true  },
         { nombre:"Bola ERGO",       etiqueta:"ERGO",       canal:"exportacion", primera:85.38, segunda:4.31,  tercera:5.68, merma:4.64, peso:26.34, dias:1, alerta:true  },
@@ -213,7 +213,7 @@ window.BELHER = {
       { fecha:"WK12", primaPromedio:88.35, mermaPromedio:3.39 },
       { fecha:"WK13", primaPromedio:89.20, mermaPromedio:2.82 },
       { fecha:"WK14", primaPromedio:84.11, mermaPromedio:3.69 },
-      { fecha:"WK15", primaPromedio:81.77, mermaPromedio:5.21, nota:"Días 1-5: 04/04·5vars, 06/04·3vars, 07/04·4vars (incl Tolin), 08/04·1var, 09/04·3vars. Bola Calavo 09/04 merma 6.78% CRÍTICO. Tolin 07/04 merma 30.18% outlier." }
+      { fecha:"WK15", primaPromedio:81.77, mermaPromedio:5.21, nota:"Días 1-5: 04/04·5vars, 06/04·3vars, 07/04·4vars (incl Tolin), 08/04·1var, 09/04·3vars. Bola Calavo prom 4 días: primera 81.45%, merma 5.78%. Bola Calavo 09/04 merma 6.78% CRÍTICO. Tolin 07/04 merma 30.18% outlier." }
     ],
     ultimoOutbound: {
       fecha: "09/04/2026",
@@ -343,13 +343,13 @@ window.BELHER = {
       ebitda_yago:       -513373,
       ebitda_var_yago:   127522,
       periodo:           "Jul 2025 – Feb 2026",
-      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha) + El Dos+Álamo (08-Abr, 19 ha) + Álamo (09-Abr, 20 ha) = 87 ha cosechadas. El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
+      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) = 87 ha · 324.08t confirmadas báscula (días 07-09 Abr). El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
       trilla: [
         { fecha:"31/03/2026", campos:"Dorita + El 17",                       ha:18, cultivo:"Sorgo" },
         { fecha:"06/04/2026", campos:"Carrillo",                             ha:12, cultivo:"Sorgo" },
-        { fecha:"07/04/2026", campos:"Carrillo + Campo Beltrán + El Dos",    ha:18, cultivo:"Sorgo" },
-        { fecha:"08/04/2026", campos:"El Dos + Álamo",                       ha:19, cultivo:"Sorgo" },
-        { fecha:"09/04/2026", campos:"Álamo",                                ha:20, cultivo:"Sorgo" }
+        { fecha:"07/04/2026", campos:"Carrillo + Campo Beltrán + El Dos",    ha:18, cultivo:"Sorgo", ton:97.04, tolvas:16, fuente:"DIARIO BASCULA 07-Abr PDF" },
+        { fecha:"08/04/2026", campos:"El Dos + Álamo",                       ha:19, cultivo:"Sorgo", ton:98.51, tolvas:16, fuente:"DIARIO BASCULA 08-Abr PDF" },
+        { fecha:"09/04/2026", campos:"Álamo",                                ha:20, cultivo:"Sorgo", ton:128.53, tolvas:20, fuente:"DIARIO BASCULA 09-Abr PDF" }
       ]
     }
   },
@@ -480,8 +480,8 @@ window.BELHER = {
 
   operaciones: {
     bascula: [
-      { fecha:"09/04", productos:["Tomate","Trilla Sorgo"] },
-      { fecha:"08/04", productos:["Tomate","Rezaga Tomate","Trilla Sorgo"] },
+      { fecha:"09/04", productos:["Tomate","Chile Habanero","Chile Fresno","Trilla Sorgo"], tinas:14965, kgTomate:151110 },
+      { fecha:"08/04", productos:["Tomate","Rezaga Tomate","Chile Anaheim","Chile Habanero","Trilla Sorgo"], tinas:7219, kgTomate:96550 },
       { fecha:"07/04", productos:["Tomate","Rezaga Tomate","Trilla Sorgo"] },
       { fecha:"06/04", productos:["Tomate","Limón Persa","Trilla Sorgo"] },
       { fecha:"04/04", productos:["Tomate","Rezaga Tomate"] },
@@ -547,6 +547,7 @@ window.BELHER = {
 
   correos: [
     { hora:"10:15", asunto:"Corbel Seeds Daily Report #0025 — Vine-ripe $57.95-59.95 sostenido, Jalapeño $50-53 estable, Cucumber Nogales $32.95-34.95",  de:"Raymundo Elizalde · Corbel Seeds", leido:false, fecha:"10/04" },
+    { hora:"00:23", asunto:"Fwd: CONTRATO CALAVO 2026-2029 ⚠ — Antonio reenvía borrador multianual de Irene Amezaga; Armando Llanes revisando, comentarios hoy 10-Abr", de:"Antonio Beltrán · ABSA", leido:false, fecha:"10/04" },
     { hora:"21:30", asunto:"REPORTE DE OUTBOUND TOMATE Y CHILE 09/04/2026 — Bola Calavo merma 6.78% CRÍTICO (máx WK15), Roma Urson 1ª 78.25% ⚠",        de:"Calidad Belher",               leido:false, fecha:"09/04" },
     { hora:"21:00", asunto:"09-04-2026 REPORTES GENERALES TOMATE Y CHILE — 7 trailers Calavo (10,808 cajas) + 2 trailers Chile (JL-118, CGG-92)",        de:"EMBARQUES BELHER",             leido:false, fecha:"09/04" },
     { hora:"19:00", asunto:"REPORTE DE BASCULA 09/04/2026 (TOMATE)",                                                                                      de:"Bascula Belher",               leido:false, fecha:"09/04" },
@@ -597,8 +598,8 @@ window.BELHER = {
     { label:"CHILE BELL GH",  valor:"$12–16",        cambio:"11-lb carton",               dir:"neutral" },
     { label:"GRAPE TOMATO",   valor:"$28.95–30.95", cambio:"↓ leve -$2",                 dir:"down"    },
     { label:"CUCUMBER NOG",   valor:"$32.95–34.95", cambio:"↓ baja Corbel #0025",        dir:"down"    },
-    { label:"MERMA CALAVO",    valor:"6.78%",         cambio:"⚠ máx temporada · 09/04",   dir:"down"    },
-    { label:"TRILLA SORGO",   valor:"87 ha",         cambio:"WK15 acum · 09-Abr",         dir:"up"      },
+    { label:"MERMA CALAVO",    valor:"5.78%",         cambio:"⚠ prom 4 días · máx 6.78% 09/04", dir:"down" },
+    { label:"TRILLA SORGO",   valor:"87 ha · 324t",  cambio:"WK15 acum · 324.08t báscula 07-09 Abr", dir:"up" },
     { label:"P&P ACUM WK15",  valor:"$3.90M",        cambio:"780,257 cajas · 458 cont",   dir:"up"      },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",            dir:"up"      },
     { label:"GASS SHEET WK15", valor:"✓ Recibido",   cambio:"Irene + Carlos 07-Abr",      dir:"up"      },
@@ -727,6 +728,13 @@ window.BELHER = {
         accion: "Verificar corrección del P&P a $5 en contrato. Reunión de alineación con John Lindeman y James Snyder pendiente de confirmar fecha."
       },
       {
+        titulo: "Contrato Calavo 2026-2029 — NUEVO MULTIANUAL",
+        estado: "En Revisión",
+        nivel: "warning",
+        descripcion: "Irene Amezaga (Calavo) envió borrador del contrato 2026-2029 el 09-Abr-2026. Antonio lo reenvió a JC y Armando Llanes (CPA, San Antonio TX) para revisión. Armando confirmó: 'Te doy mis comentarios mañana por la tarde.' Contrato para próximas temporadas de Agrícola Belher — cubre ciclos 2026-27, 2027-28 y 2028-29.",
+        accion: "1) Esperar comentarios de Armando Llanes (debieron llegar hoy 10-Abr). 2) Revisar términos de precio base, escalonamiento y condiciones P&P para 3 temporadas. 3) Coordinar reunión de alineación con John Lindeman, James Snyder e Irene antes de firmar. 4) Notaría 97 Culiacán (notaria97culiacan@hotmail.com) ya está en copia — preparar documentación legal."
+      },
+      {
         titulo: "Inversión Corbel Seeds",
         estado: "Activo",
         nivel: "info",
@@ -802,7 +810,8 @@ window.BELHER = {
       { fecha:"13/04/2026", evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar)", tipo:"reunion", participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
       { fecha:"16/04/2026", evento:"BPSI F/S Marzo 2026 y Forecast Q2 2026 — revisión financiera y pipeline", tipo:"reunion", participantes:"JC · Armando Llanes · hildelisa@beautyjunkies.com" },
       { fecha:"21/04/2026", evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
-      { fecha:"Por confirmar (Abr 2026)", evento:"Reunión alineación Contrato 2026 — John Lindeman · James Snyder · Irene", tipo:"reunion", participantes:"Antonio, JC, Calavo" }
+      { fecha:"10/04/2026", evento:"Comentarios Armando Llanes sobre Contrato Calavo 2026-2029 — esperados hoy por la tarde (prometidos el 09-Abr)", tipo:"deadline", participantes:"Armando Llanes CPA · JC · Antonio" },
+      { fecha:"Por confirmar (Abr 2026)", evento:"Reunión alineación Contrato 2026-2029 — John Lindeman · James Snyder · Irene Amezaga · Armando Llanes", tipo:"reunion", participantes:"Antonio, JC, Calavo, Armando Llanes, Notaría 97" }
     ]
   },
 
