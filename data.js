@@ -2,17 +2,17 @@ window.BELHER = {
   meta: {
     fecha: "Viernes 10 Abr 2026",
     semana: "WK 15",
-    actualizado: "10/04/2026 · 21:30"
+    actualizado: "10/04/2026 · 22:40"
   },
 
   alertas: [
     { nivel: "success", texto: "Vine-ripe $57.95–59.95 (4×4/4×5 Nogales) — MÁXIMO SOSTENIDO. Corbel #0025 · 10-Abr: mercado US firm, tariffs + combustible presionan precios retail. Jalapeño Texas $50–53 estable. EMBARCAR todo el volumen disponible." },
     { nivel: "danger",  texto: "CRÍTICO: Bola Calavo outbound 09/04 merma 6.78% — máximo de la temporada en Bolas. Historial WK15: Calavo 07/04 6.20%, ERGO 08/04 4.64%, Calavo 09/04 6.78%. 4 días consecutivos >4% en Bolas. Revisar urgente: madurez cosecha, temperatura campo-empaque, protocolo postcosecha." },
     { nivel: "danger",  texto: "Roma Urson 09/04: primera 78.25% (bajo mínimo 80%) + merma 4.50% — alerta doble. Bola Tolin 07/04 primera 28.59% merma 30.18% (CRÍTICO — evaluar suspender empaque Tolin exportación)." },
-    { nivel: "success", texto: "CVGW $27.97 (+1.2% 08-Abr) · AVO $15.36 (+3.2% 08-Abr) — sector produce en fuerte momentum. CVGW sigue acercándose a máximo 52s ($28.72). Señal de demanda institucional sostenida." },
+    { nivel: "success", texto: "CVGW $27.63 (+2.9% 10-Abr) · AVO $14.81 (+2.6% 10-Abr) — sector produce en momentum sostenido." },
     { nivel: "danger",   texto: "URGENTE: Solicitar a Calavo (Irene Amezaga / Carlos Valadez) el desglose 'Gross FOB by item' del Gass Sheet para verificar precio de referencia del contrato. Sin este dato no es posible auditar el escalador ($16.95 base + $4 collar desde $20.95). Escalar hoy mismo." },
-    { nivel: "success",  texto: "09-Abr: 7 trailers (10,808 cajas) cruzaron Nogales — CHARLY-4, CGG-88/90/91, ST-109/110, JL-119. Chile: JL-118 (Anaheim + Habanero). WK15 settle parcial $597,772 + wire $269,880 confirmados." },
-    { nivel: "success", texto: "Trilla sorgo WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha) + El Dos+Álamo (08-Abr, 19 ha) + Álamo (09-Abr, 20 ha) = 87 ha cosechadas. El Panteón+San Blas pendientes." }
+    { nivel: "success",  texto: "10-Abr: 2 trailers → Nogales: ST-108 (1,600 cajas) + ST-64 (1,688 cajas). 09-Abr: 7 trailers (10,808 cajas) CHARLY-4, CGG-88/90/91, ST-109/110, JL-119. WK15 settle parcial $597,772 confirmado." },
+    { nivel: "success", texto: "Trilla sorgo WK15: 103 ha acumuladas. +16 ha 10-Abr (Álamo+El Punk+Quevedo 2+Lora+Caseta). Historial: Dorita+El 17 18 ha + Carrillo 12 ha + Carrillo+CB+El Dos 18 ha + El Dos+Álamo 19 ha + Álamo 20 ha. El Panteón+San Blas pendientes." }
   ],
 
   ebitda: {
@@ -345,13 +345,14 @@ window.BELHER = {
       ebitda_yago:       -513373,
       ebitda_var_yago:   127522,
       periodo:           "Jul 2025 – Feb 2026",
-      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) = 87 ha · 324.08t confirmadas báscula (días 07-09 Abr). El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
+      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) + Álamo+El Punk+Quevedo 2+Lora+Caseta (10-Abr, 16 ha) = 103 ha acumuladas. El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
       trilla: [
-        { fecha:"31/03/2026", campos:"Dorita + El 17",                       ha:18, cultivo:"Sorgo" },
-        { fecha:"06/04/2026", campos:"Carrillo",                             ha:12, cultivo:"Sorgo" },
-        { fecha:"07/04/2026", campos:"Carrillo + Campo Beltrán + El Dos",    ha:18, cultivo:"Sorgo", ton:97.04, tolvas:16, fuente:"DIARIO BASCULA 07-Abr PDF" },
-        { fecha:"08/04/2026", campos:"El Dos + Álamo",                       ha:19, cultivo:"Sorgo", ton:98.51, tolvas:16, fuente:"DIARIO BASCULA 08-Abr PDF" },
-        { fecha:"09/04/2026", campos:"Álamo",                                ha:20, cultivo:"Sorgo", ton:128.53, tolvas:20, fuente:"DIARIO BASCULA 09-Abr PDF" }
+        { fecha:"31/03/2026", campos:"Dorita + El 17",                                        ha:18, cultivo:"Sorgo" },
+        { fecha:"06/04/2026", campos:"Carrillo",                                              ha:12, cultivo:"Sorgo" },
+        { fecha:"07/04/2026", campos:"Carrillo + Campo Beltrán + El Dos",                     ha:18, cultivo:"Sorgo", ton:97.04, tolvas:16, fuente:"DIARIO BASCULA 07-Abr PDF" },
+        { fecha:"08/04/2026", campos:"El Dos + Álamo",                                        ha:19, cultivo:"Sorgo", ton:98.51, tolvas:16, fuente:"DIARIO BASCULA 08-Abr PDF" },
+        { fecha:"09/04/2026", campos:"Álamo",                                                 ha:20, cultivo:"Sorgo", ton:128.53, tolvas:20, fuente:"DIARIO BASCULA 09-Abr PDF" },
+        { fecha:"10/04/2026", campos:"Álamo + El Punk + Quevedo 2 + Lora + Caseta",          ha:16, cultivo:"Sorgo" }
       ]
     }
   },
@@ -482,15 +483,12 @@ window.BELHER = {
 
   operaciones: {
     bascula: [
+      { fecha:"10/04", productos:["Tomate","Limón Persa","Rezaga Tomate","Trilla Sorgo"] },
       { fecha:"09/04", productos:["Tomate","Chile Habanero","Chile Fresno","Trilla Sorgo"], tinas:14965, kgTomate:151110 },
       { fecha:"08/04", productos:["Tomate","Rezaga Tomate","Chile Anaheim","Chile Habanero","Trilla Sorgo"], tinas:7219, kgTomate:96550 },
       { fecha:"07/04", productos:["Tomate","Rezaga Tomate","Trilla Sorgo"] },
       { fecha:"06/04", productos:["Tomate","Limón Persa","Trilla Sorgo"] },
-      { fecha:"04/04", productos:["Tomate","Rezaga Tomate"] },
-      { fecha:"02/04", productos:["Tomate","Limón Persa","Rezaga Tomate"] },
-      { fecha:"01/04", productos:["Tomate","Limón Persa"] },
-      { fecha:"31/03", productos:["Tomate","Limón Persa","Rezaga Tomate"] },
-      { fecha:"29/03", productos:["Tomate","Rezaga Tomate"] }
+      { fecha:"04/04", productos:["Tomate","Rezaga Tomate"] }
     ],
     produccionHistorica: {
       /* % kg empacado / kg báscula por semana · 6 temporadas */
@@ -523,6 +521,8 @@ window.BELHER = {
       { wk:"WK15", bascKg:458030,  bascCj:40391,  pctEmp:65.6, cjCalavo:16056, cjYameto:3704,  cjTolin:1728,  cjZazu:0,     cjUrson:0,     cjMillennium:1600, cjOtros:2843, pctCalavo:38.4, pctYameto:10.1, pctTolin:5.1,  pctZazu:0.0,  pctUrson:0.0, pctMillennium:4.0, pctOtros:8.1 }
     ],
     embarques: [
+      { fecha:"10/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-108",   destino:"Arizona", estado:"OK", cajas:1600 },
+      { fecha:"10/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-64",    destino:"Arizona", estado:"OK", cajas:1688 },
       { fecha:"09/04/2026", tipo:"Tomate", cargas:1, unidad:"CHARLY-4", destino:"Arizona", estado:"OK", cajas:1600 },
       { fecha:"09/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-90",   destino:"Arizona", estado:"OK", cajas:1744 },
       { fecha:"09/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-110",   destino:"Arizona", estado:"OK", cajas:1600 },
@@ -548,6 +548,9 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"03:00", asunto:"AVANCE DE TRILLA 10/04/2026 SORGO — 16 ha trilladas (Álamo + El Punk + Quevedo 2 + Lora + Caseta) · WK15 acumulado 103 ha", de:"Bascula Belher", leido:false, fecha:"10/04" },
+    { hora:"02:30", asunto:"REPORTE DE BASCULA 10/04/2026 — Tomate · Limón Persa · Rezaga Tomate · Trilla Sorgo", de:"Bascula Belher", leido:false, fecha:"10/04" },
+    { hora:"23:45", asunto:"REPORTE DIARIO CALAVO 10-04-2026 — 2 trailers: ST-108 (1,600 cajas) + ST-64 (1,688 cajas) → Arizona", de:"EMBARQUES BELHER", leido:false, fecha:"10/04" },
     { hora:"10:53", asunto:"Corbel Seeds Daily Report #0025 — Vine-ripe $57.95-59.95 sostenido 2º día, Jalapeño $50-53 confirmado, tariffs presionan retail EE.UU., Mexfly TX activa",  de:"Raymundo Elizalde · Corbel Seeds", leido:false, fecha:"10/04" },
     { hora:"10:41", asunto:"REPORTE DE OUTBOUND TOMATE 09/04/2026 — Bola Calavo 1ª 79.74% merma 6.78% CRÍTICO, Roma Calavo merma 2.71%, Roma Urson 1ª 78.25% merma 4.50% ⚠", de:"Calidad Belher", leido:false, fecha:"10/04" },
     { hora:"00:23", asunto:"Fwd: CONTRATO CALAVO 2026-2029 ⚠ — Antonio reenvía borrador multianual de Irene Amezaga; Armando Llanes revisando, comentarios hoy 10-Abr", de:"Antonio Beltrán · ABSA", leido:false, fecha:"10/04" },
@@ -602,13 +605,13 @@ window.BELHER = {
     { label:"GRAPE TOMATO",   valor:"$28.95–30.95", cambio:"↓ leve -$2",                 dir:"down"    },
     { label:"CUCUMBER NOG",   valor:"$32.95–34.95", cambio:"↓ baja Corbel #0025",        dir:"down"    },
     { label:"MERMA CALAVO",    valor:"5.78%",         cambio:"⚠ prom 4 días · máx 6.78% 09/04", dir:"down" },
-    { label:"TRILLA SORGO",   valor:"87 ha · 324t",  cambio:"WK15 acum · 324.08t báscula 07-09 Abr", dir:"up" },
+    { label:"TRILLA SORGO",   valor:"103 ha",         cambio:"WK15 acum · +16 ha 10-Abr (Álamo+El Punk+Quevedo 2+Lora+Caseta)", dir:"up" },
     { label:"P&P ACUM WK15",  valor:"$3.90M",        cambio:"780,257 cajas · 458 cont",   dir:"up"      },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",            dir:"up"      },
     { label:"GASS SHEET WK15", valor:"✓ Recibido",   cambio:"Irene + Carlos 07-Abr",      dir:"up"      },
     { label:"1ª WK15 PROM",   valor:"81.77%",        cambio:"Días 1-5 · Tolin CRÍTICO",   dir:"down"    },
-    { label:"CVGW",           valor:"$27.97",        cambio:"+1.2% 08-Abr",               dir:"up"      },
-    { label:"AVO",            valor:"$15.36",        cambio:"+3.2% 08-Abr",               dir:"up"      }
+    { label:"CVGW",           valor:"$27.63",        cambio:"+2.9% 10-Abr",               dir:"up"      },
+    { label:"AVO",            valor:"$14.81",        cambio:"+2.6% 10-Abr",               dir:"up"      }
   ],
 
   auditorias: [
