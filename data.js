@@ -235,9 +235,9 @@ window.BELHER = {
   tomate: {
     ventas: {
       periodo: { desde:"01/12/2025", hasta:"05/04/2026", label:"WK01–WK15" },
-      total:   { cajas:1272957, cajasRoma:null, cajasBola:null, revenue:null },
+      total:   { cajas:1272957, cajasRoma:null, cajasBola:null, revenue:16732676 },
       exportacion: [
-        { etiqueta:"Calavo", cajas:826841, cajasRoma:null, cajasBola:null, revenue:null, nota:"WK01–WK15 al 05-Abr · P&P settle $3,901,285" }
+        { etiqueta:"Calavo", cajas:826841, cajasRoma:null, cajasBola:null, revenue:12876606, nota:"WK01–WK15 al 05-Abr · P&P settle $3,901,285" }
       ],
       nacional: [
         { etiqueta:"Nacional", cajas:446116, cajasRoma:311917, cajasBola:134199, revenue:3856070,
