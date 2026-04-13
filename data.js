@@ -1,18 +1,19 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 10 Abr 2026",
-    semana: "WK 15",
-    actualizado: "10/04/2026 · 22:40"
+    fecha: "Lunes 13 Abr 2026",
+    semana: "WK 16",
+    actualizado: "13/04/2026 · 14:20"
   },
 
   alertas: [
-    { nivel: "success", texto: "Vine-ripe $57.95–59.95 (4×4/4×5 Nogales) — MÁXIMO SOSTENIDO. Corbel #0025 · 10-Abr: mercado US firm, tariffs + combustible presionan precios retail. Jalapeño Texas $50–53 estable. EMBARCAR todo el volumen disponible." },
-    { nivel: "danger",  texto: "CRÍTICO: Bola Calavo outbound 09/04 merma 6.78% — máximo de la temporada en Bolas. Historial WK15: Calavo 07/04 6.20%, ERGO 08/04 4.64%, Calavo 09/04 6.78%. 4 días consecutivos >4% en Bolas. Revisar urgente: madurez cosecha, temperatura campo-empaque, protocolo postcosecha." },
+    { nivel: "success", texto: "Vine-ripe $57.95–59.95 (4×4/4×5 Nogales) — MÁXIMO SOSTENIDO WK16. Corbel #0026 · 13-Abr: mercado US firm. EMBARCAR todo el volumen disponible." },
+    { nivel: "danger",  texto: "CORRECCIÓN JALAPEÑO: Corbel #0026 (13-Abr) reporta jalapeño Texas $44–46 (vs $50–53 en #0025 del 10-Abr). Caída de ~$8/bu en 3 días — señal bajista. Revisar si cosechas de primavera están entrando antes de lo esperado. Rango proyectado WK16–17: $40–48." },
+    { nivel: "danger",  texto: "CRÍTICO: Roma Calavo outbound 11/04 merma 6.00% — primera vez que Roma Calavo supera 4% en la temporada. WK15 final (5 días): Calavo 1ª prom 87.54%, merma prom 3.26%. Bola Calavo 11/04 merma 5.87% (5 días WK15 prom 5.80%). Revisar urgente protocolo postcosecha." },
     { nivel: "danger",  texto: "Roma Urson 09/04: primera 78.25% (bajo mínimo 80%) + merma 4.50% — alerta doble. Bola Tolin 07/04 primera 28.59% merma 30.18% (CRÍTICO — evaluar suspender empaque Tolin exportación)." },
-    { nivel: "success", texto: "CVGW $27.63 (+2.9% 10-Abr) · AVO $14.81 (+2.6% 10-Abr) — sector produce en momentum sostenido." },
+    { nivel: "success", texto: "CVGW $27.46 (+0.8% 13-Abr) · AVO $14.72 (+1.9% 13-Abr) — sector produce sostenido." },
     { nivel: "danger",   texto: "URGENTE: Solicitar a Calavo (Irene Amezaga / Carlos Valadez) el desglose 'Gross FOB by item' del Gass Sheet para verificar precio de referencia del contrato. Sin este dato no es posible auditar el escalador ($16.95 base + $4 collar desde $20.95). Escalar hoy mismo." },
-    { nivel: "success",  texto: "10-Abr: 2 trailers → Nogales: ST-108 (1,600 cajas) + ST-64 (1,688 cajas). 09-Abr: 7 trailers (10,808 cajas) CHARLY-4, CGG-88/90/91, ST-109/110, JL-119. WK15 settle parcial $597,772 confirmado." },
-    { nivel: "success", texto: "Trilla sorgo WK15: 103 ha acumuladas. +16 ha 10-Abr (Álamo+El Punk+Quevedo 2+Lora+Caseta). Historial: Dorita+El 17 18 ha + Carrillo 12 ha + Carrillo+CB+El Dos 18 ha + El Dos+Álamo 19 ha + Álamo 20 ha. El Panteón+San Blas pendientes." }
+    { nivel: "success",  texto: "11-Abr: 5 trailers → CGG-129 (1,600) + CGG-1 (1,600) + JL-13 McAllen (1,651) + JL-42 (1,360) + JL-34 Limón/Chile Maui Fresh. 10-Abr: 2 trailers ST-108/ST-64. WK15 settle parcial $597,772 confirmado." },
+    { nivel: "success", texto: "Trilla sorgo WK15: 119 ha acumuladas. +16 ha 11-Abr (Quevedo 2+Composta+El Gringo). +16 ha 10-Abr (Álamo+El Punk+Quevedo 2+Lora+Caseta). El Panteón+San Blas pendientes." }
   ],
 
   ebitda: {
@@ -192,15 +193,15 @@ window.BELHER = {
 
   calidad: {
     semana: {
-      desde: "06/04/2026",
-      hasta:  "12/04/2026",
+      desde: "13/04/2026",
+      hasta:  "19/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:81.45, segunda:4.69,  tercera:8.00, merma:5.78, peso:22.77, dias:4, alerta:true  },
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:81.55, segunda:4.79,  tercera:7.80, merma:5.80, peso:23.32, dias:5, alerta:true  },
         { nombre:"Bola Yameto",     etiqueta:"Yameto",     canal:"exportacion", primera:82.39, segunda:7.12,  tercera:5.79, merma:4.71, peso:30.85, dias:2, alerta:true  },
         { nombre:"Bola Tolin",      etiqueta:"Tolin",      canal:"exportacion", primera:28.59, segunda:9.96,  tercera:31.26, merma:30.18, peso:33.06, dias:1, alerta:true  },
-        { nombre:"Bola ERGO",       etiqueta:"ERGO",       canal:"exportacion", primera:85.38, segunda:4.31,  tercera:5.68, merma:4.64, peso:26.34, dias:1, alerta:true  },
-        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:88.18, segunda:5.57,  tercera:4.19, merma:2.05, peso:26.30, dias:3, alerta:false },
-        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:88.22, segunda:6.09,  tercera:3.10, merma:2.57, peso:26.25, dias:4, alerta:false },
+        { nombre:"Bola ERGO",       etiqueta:"ERGO",       canal:"exportacion", primera:83.18, segunda:4.92,  tercera:6.76, merma:5.16, peso:26.41, dias:2, alerta:true  },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:87.39, segunda:5.93,  tercera:4.89, merma:1.79, peso:26.11, dias:4, alerta:false },
+        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:87.54, segunda:5.67,  tercera:3.52, merma:3.26, peso:26.08, dias:5, alerta:true  },
         { nombre:"Roma Urson",      etiqueta:"Urson",      canal:"exportacion", primera:82.46, segunda:7.63,  tercera:5.89, merma:4.03, peso:27.24, dias:2, alerta:true  },
         { nombre:"Limón Persa",     etiqueta:"Limón",      canal:"exportacion", primera:15,    segunda:47,    tercera:13,   merma:1,    peso:40.35, dias:1, alerta:false },
         { nombre:"Chile Anaheim",   etiqueta:"Anaheim",    canal:"exportacion", primera:85.96, segunda:13.10, tercera:0,    merma:0.81, peso:22.47, dias:1, alerta:false }
@@ -213,20 +214,22 @@ window.BELHER = {
       { fecha:"WK12", primaPromedio:88.35, mermaPromedio:3.39 },
       { fecha:"WK13", primaPromedio:89.20, mermaPromedio:2.82 },
       { fecha:"WK14", primaPromedio:84.11, mermaPromedio:3.69 },
-      { fecha:"WK15", primaPromedio:81.77, mermaPromedio:5.21, nota:"Días 1-5: 04/04·5vars, 06/04·3vars, 07/04·4vars (incl Tolin), 08/04·1var, 09/04·3vars. Bola Calavo prom 4 días: primera 81.45%, merma 5.78%. Bola Calavo 09/04 merma 6.78% CRÍTICO. Tolin 07/04 merma 30.18% outlier." }
+      { fecha:"WK15", primaPromedio:82.01, mermaPromedio:5.12, nota:"Días 1-6: 04/04·5vars, 06/04·3vars, 07/04·4vars (incl Tolin), 08/04·1var, 09/04·3vars, 11/04·4vars. Roma Calavo 11/04 merma 6.00% — PRIMERA VEZ >4% Roma Calavo en temporada. Bola Calavo 09/04 merma 6.78% CRÍTICO. Tolin 07/04 merma 30.18% outlier." }
     ],
     ultimoOutbound: {
-      fecha: "09/04/2026",
+      fecha: "11/04/2026",
       variedades: [
-        { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:79.74, segunda:4.61,  tercera:8.87, merma:6.78, peso:21.43, alerta:true  },
-        { nombre:"Roma Calavo", etiqueta:"Roma",   canal:"exportacion", primera:88.39, segunda:6.06,  tercera:2.84, merma:2.71, peso:25.45, alerta:false },
-        { nombre:"Roma Urson",  etiqueta:"Urson",  canal:"exportacion", primera:78.25, segunda:9.25,  tercera:8.00, merma:4.50, peso:27.11, alerta:true  }
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:81.93, segunda:5.21, tercera:6.99, merma:5.87, peso:25.52, alerta:true  },
+        { nombre:"Bola ERGO",       etiqueta:"ERGO",       canal:"exportacion", primera:80.97, segunda:5.52, tercera:7.84, merma:5.67, peso:26.48, alerta:true  },
+        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:84.80, segunda:4.00, tercera:5.20, merma:6.00, peso:25.38, alerta:true  },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:85.00, segunda:7.00, tercera:7.00, merma:1.00, peso:25.55, alerta:false }
       ],
       anterior: {
-        fecha: "08/04/2026",
+        fecha: "09/04/2026",
         variedades: [
-          { nombre:"Bola ERGO",     etiqueta:"ERGO",     canal:"exportacion", primera:85.38, segunda:4.31,  tercera:5.68, merma:4.64, peso:26.34, alerta:true  },
-          { nombre:"Chile Anaheim", etiqueta:"Anaheim",  canal:"exportacion", primera:85.96, segunda:13.10, tercera:0,    merma:0.81, peso:22.47, alerta:false }
+          { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:79.74, segunda:4.61, tercera:8.87, merma:6.78, peso:21.43, alerta:true  },
+          { nombre:"Roma Calavo", etiqueta:"Roma",   canal:"exportacion", primera:88.39, segunda:6.06, tercera:2.84, merma:2.71, peso:25.45, alerta:false },
+          { nombre:"Roma Urson",  etiqueta:"Urson",  canal:"exportacion", primera:78.25, segunda:9.25, tercera:8.00, merma:4.50, peso:27.11, alerta:true  }
         ]
       }
     }
@@ -345,14 +348,15 @@ window.BELHER = {
       ebitda_yago:       -513373,
       ebitda_var_yago:   127522,
       periodo:           "Jul 2025 – Feb 2026",
-      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) + Álamo+El Punk+Quevedo 2+Lora+Caseta (10-Abr, 16 ha) = 103 ha acumuladas. El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
+      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) + Álamo+El Punk+Quevedo 2+Lora+Caseta (10-Abr, 16 ha) + Quevedo 2+Composta+El Gringo (11-Abr, 16 ha) = 119 ha acumuladas. El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
       trilla: [
         { fecha:"31/03/2026", campos:"Dorita + El 17",                                        ha:18, cultivo:"Sorgo" },
         { fecha:"06/04/2026", campos:"Carrillo",                                              ha:12, cultivo:"Sorgo" },
         { fecha:"07/04/2026", campos:"Carrillo + Campo Beltrán + El Dos",                     ha:18, cultivo:"Sorgo", ton:97.04, tolvas:16, fuente:"DIARIO BASCULA 07-Abr PDF" },
         { fecha:"08/04/2026", campos:"El Dos + Álamo",                                        ha:19, cultivo:"Sorgo", ton:98.51, tolvas:16, fuente:"DIARIO BASCULA 08-Abr PDF" },
         { fecha:"09/04/2026", campos:"Álamo",                                                 ha:20, cultivo:"Sorgo", ton:128.53, tolvas:20, fuente:"DIARIO BASCULA 09-Abr PDF" },
-        { fecha:"10/04/2026", campos:"Álamo + El Punk + Quevedo 2 + Lora + Caseta",          ha:16, cultivo:"Sorgo" }
+        { fecha:"10/04/2026", campos:"Álamo + El Punk + Quevedo 2 + Lora + Caseta",          ha:16, cultivo:"Sorgo" },
+        { fecha:"11/04/2026", campos:"Quevedo 2 + Composta + El Gringo",                      ha:16, cultivo:"Sorgo" }
       ]
     }
   },
@@ -453,42 +457,42 @@ window.BELHER = {
   },
 
   mercado: {
-    reporte: "Corbel Seeds #0025",
-    fecha: "10/04/2026",
-    resumen: "Corbel #0025 (10-Abr): vine-ripe Nogales sostenido $57.95–59.95 (4×4/4×5). Roma Nogales large $36.95–38.95 / XL $38.95–40.95. Grape tomato $28.95–30.95. Cucumber Nogales baja a $32.95–34.95 (Texas $38.95–42.95 según talla). Green bell Nogales $42.95–44.95 (large/XL). Jalapeño Texas $50–53 confirmado estable. Limón seeded Texas $38–40/35-36lb, seedless 175s $64–66. Señal estratégica: tariffs y combustible presionan precios retail de tomate en EE.UU.; cuarentena Mexfly Texas activa.",
+    reporte: "Corbel Seeds #0026",
+    fecha: "13/04/2026",
+    resumen: "Corbel #0026 (13-Abr): vine-ripe Nogales sostenido $57.95–59.95 (4×4/4×5). Roma $36.95–40.95 (mayormente XL $38.95). Grape tomato softer $24.95–30.95. JALAPEÑO CORRECCIÓN: $44–46 (baja desde $50–53 de #0025). Habanero $38–43 (mayormente $39–42). Cucumber Nogales $31.95–33.95, Texas $40.95–42.95. Green bell large $40.95–42.95, XL $42.95–44.95. Limón seeded Texas $38–40, seedless 175s $64–66, 200s $58–62.",
     precios: [
       { producto:"Vine-ripe 4×4/4×5 25lb", min:57.95, max:59.95, anterior:57.95, via:"Nogales AZ",         alerta:false },
-      { producto:"Roma large 25lb",         min:36.95, max:38.95, anterior:32.95, via:"Nogales AZ",         alerta:false },
-      { producto:"Roma XL 25lb",            min:38.95, max:40.95, anterior:38.95, via:"SoCal/San Luis AZ",  alerta:false },
-      { producto:"Grape tomato flat",       min:28.95, max:30.95, anterior:28.95, via:"Nogales AZ",         alerta:false },
-      { producto:"Chile Bell verde Nogales",min:42.95, max:44.95, anterior:44.95, via:"Nogales AZ",         alerta:false },
-      { producto:"Chile Bell GH rojo 11-lb",min:14.00, max:16.00, anterior:16.00, via:"Texas",              alerta:false },
-      { producto:"Jalapeño",                min:50.00, max:53.00, anterior:50.00, via:"Texas",               alerta:false },
-      { producto:"Serrano",                 min:52.00, max:56.00, anterior:52.00, via:"Nogales/Texas",       alerta:false },
-      { producto:"Habanero 8lb",            min:39.00, max:42.00, anterior:39.00, via:"Nogales AZ",         alerta:false },
-      { producto:"Cucumber Nogales",        min:32.95, max:34.95, anterior:34.95, via:"Nogales AZ",         alerta:false },
-      { producto:"Cucumber Texas (med/lg)", min:38.95, max:42.95, anterior:40.95, via:"Texas",              alerta:false },
+      { producto:"Roma large 25lb",         min:36.95, max:38.95, anterior:36.95, via:"Nogales AZ",         alerta:false },
+      { producto:"Roma XL 25lb",            min:38.95, max:40.95, anterior:38.95, via:"Nogales AZ",         alerta:false },
+      { producto:"Grape tomato flat",       min:24.95, max:30.95, anterior:28.95, via:"Nogales AZ",         alerta:false },
+      { producto:"Chile Bell verde large",  min:40.95, max:42.95, anterior:42.95, via:"Nogales AZ",         alerta:false },
+      { producto:"Chile Bell verde XL",     min:42.95, max:44.95, anterior:44.95, via:"Nogales AZ",         alerta:false },
+      { producto:"Jalapeño",                min:44.00, max:48.00, anterior:50.00, via:"Texas",               alerta:true  },
+      { producto:"Habanero 8lb",            min:38.00, max:43.00, anterior:39.00, via:"Nogales AZ",         alerta:false },
+      { producto:"Cucumber Nogales",        min:31.95, max:33.95, anterior:32.95, via:"Nogales AZ",         alerta:false },
+      { producto:"Cucumber Texas (med/lg)", min:40.95, max:42.95, anterior:38.95, via:"Texas",              alerta:false },
       { producto:"Limón seeded 35-36lb",    min:38.00, max:40.00, anterior:38.00, via:"Texas",              alerta:false },
-      { producto:"Limón seedless 175s",     min:64.00, max:66.00, anterior:64.00, via:"Texas",              alerta:false }
+      { producto:"Limón seedless 175s",     min:64.00, max:68.00, anterior:64.00, via:"Texas",              alerta:false },
+      { producto:"Limón seedless 200s",     min:58.00, max:62.00, anterior:null,  via:"Texas",              alerta:false }
     ],
     noticias: [
-      { titulo:"Vine-ripe Nogales $57.95–59.95 — máximo sostenido; tariffs y combustible presionan precios retail de tomate en EE.UU.", impacto:"Alto", fuente:"Corbel Seeds #0025 · FreshPlaza 10-Abr" },
-      { titulo:"Jalapeño Texas $50–53 confirmado estable (día 2); serrano $52–56; habanero $39–42 — crisis de chile en chiles calientes sostenida", impacto:"Alto", fuente:"Corbel Seeds #0025 · USDA 09-Abr" },
-      { titulo:"Cuarentena Mexfly Zapata County Texas activa — mayor escrutinio en cargamentos mexicanos; vigilancia fitosanitaria crítica", impacto:"Alto", fuente:"Corbel Seeds #0025 · APHIS" },
-      { titulo:"México y EE.UU. fortalecen cooperación de inocuidad alimentaria — traceabilidad y controles preventivos son piso competitivo para acceso al mercado", impacto:"Alto", fuente:"Corbel Seeds #0025 · FreshPlaza" },
-      { titulo:"Perú exportaciones no-tradicionales enero $904M (+16.4% YoY) — EE.UU., Holanda, México como destinos top; señal de presión competitiva creciente", impacto:"Moderado", fuente:"Corbel Seeds #0025 · Midagri" },
-      { titulo:"Tarifas de contenedor Drewry sube 1% a $2,309 — costos logísticos frágiles; Suez suspende descuento del 15% para grandes embarcaciones", impacto:"Moderado", fuente:"Corbel Seeds #0025 · Drewry" }
+      { titulo:"JALAPEÑO CORRECCIÓN: $44–46/bu Texas (↓ de $50–53 en #0025) — señal bajista, cosechas primavera entrando", impacto:"Alto", fuente:"Corbel Seeds #0026 · 13-Abr" },
+      { titulo:"Vine-ripe Nogales $57.95–59.95 — máximo sostenido WK16; tariffs activos presionan precios retail EE.UU.", impacto:"Alto", fuente:"Corbel Seeds #0026 · 13-Abr" },
+      { titulo:"Aranceles tariff activos sobre produce mexicana — presión estructural en cadena de suministro, ajuste en márgenes", impacto:"Alto", fuente:"Corbel Seeds #0026 · 13-Abr" },
+      { titulo:"Cuarentena Mexfly Zapata County Texas activa — mayor escrutinio en cargamentos mexicanos; vigilancia fitosanitaria crítica", impacto:"Alto", fuente:"Corbel Seeds #0026 · APHIS" },
+      { titulo:"Riesgo hídrico Río Grande — niveles bajos afectan logística fronteriza en cruces Texas (Laredo/McAllen)", impacto:"Moderado", fuente:"Corbel Seeds #0026 · 13-Abr" },
+      { titulo:"Tormenta Marruecos disrumpe exportaciones hortícolas — impacto indirecto en demanda EE.UU. por tomate europeo", impacto:"Moderado", fuente:"Corbel Seeds #0026 · 13-Abr" }
     ]
   },
 
   operaciones: {
     bascula: [
+      { fecha:"11/04", productos:["Tomate","Limón Persa","Trilla Sorgo"] },
       { fecha:"10/04", productos:["Tomate","Limón Persa","Rezaga Tomate","Trilla Sorgo"] },
       { fecha:"09/04", productos:["Tomate","Chile Habanero","Chile Fresno","Trilla Sorgo"], tinas:14965, kgTomate:151110 },
       { fecha:"08/04", productos:["Tomate","Rezaga Tomate","Chile Anaheim","Chile Habanero","Trilla Sorgo"], tinas:7219, kgTomate:96550 },
       { fecha:"07/04", productos:["Tomate","Rezaga Tomate","Trilla Sorgo"] },
-      { fecha:"06/04", productos:["Tomate","Limón Persa","Trilla Sorgo"] },
-      { fecha:"04/04", productos:["Tomate","Rezaga Tomate"] }
+      { fecha:"06/04", productos:["Tomate","Limón Persa","Trilla Sorgo"] }
     ],
     produccionHistorica: {
       /* % kg empacado / kg báscula por semana · 6 temporadas */
@@ -521,6 +525,11 @@ window.BELHER = {
       { wk:"WK15", bascKg:458030,  bascCj:40391,  pctEmp:65.6, cjCalavo:16056, cjYameto:3704,  cjTolin:1728,  cjZazu:0,     cjUrson:0,     cjMillennium:1600, cjOtros:2843, pctCalavo:38.4, pctYameto:10.1, pctTolin:5.1,  pctZazu:0.0,  pctUrson:0.0, pctMillennium:4.0, pctOtros:8.1 }
     ],
     embarques: [
+      { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-129", destino:"Arizona",       estado:"OK", cajas:1600 },
+      { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-1",   destino:"Arizona",       estado:"OK", cajas:1600 },
+      { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"JL-13",   destino:"Texas (McAllen)", estado:"OK", cajas:1651 },
+      { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"JL-42",   destino:"Arizona",       estado:"OK", cajas:1360 },
+      { fecha:"11/04/2026", tipo:"Limón/Chile", cargas:1, unidad:"JL-34",   destino:"Arizona (Maui Fresh)", estado:"OK" },
       { fecha:"10/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-108",   destino:"Arizona", estado:"OK", cajas:1600 },
       { fecha:"10/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-64",    destino:"Arizona", estado:"OK", cajas:1688 },
       { fecha:"09/04/2026", tipo:"Tomate", cargas:1, unidad:"CHARLY-4", destino:"Arizona", estado:"OK", cajas:1600 },
@@ -548,6 +557,17 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"13:20", asunto:"Corbel Seeds Daily Report #0026 — Jalapeño corrige a $44-46/bu Texas (↓ -$8 vs #0025), Vine-ripe Nogales $57.95-59.95 sostenido, Roma softer, tarifas activas", de:"Raymundo Elizalde · Corbel Seeds", leido:false, fecha:"13/04" },
+    { hora:"11:42", asunto:"REPORTE DE OUTBOUND TOMATE 11/04/2026 — Bola Calavo 1ª 81.93% merma 5.87% ⚠, Bola ERGO 1ª 80.97% merma 5.67% ⚠, Roma Calavo 1ª 84.80% merma 6.00% CRÍTICO, Roma Millennium 1ª 85.00% merma 1.00%", de:"Calidad Belher", leido:false, fecha:"13/04" },
+    { hora:"11:27", asunto:"REPORTE DE OUTBOUND LIMON PERSA 11/04/2026 — calidad confirmada para embarque Maui Fresh (JL-34)", de:"Calidad Belher", leido:false, fecha:"13/04" },
+    { hora:"23:09", asunto:"REPORTE DIARIO CALAVO 11-04-2026 — 5 trailers: CGG-129 (1,600) + CGG-1 (1,600) + JL-13 McAllen (1,651) + JL-42 (1,360) + JL-34 Limón/Chile Maui Fresh", de:"EMBARQUES BELHER", leido:false, fecha:"11/04" },
+    { hora:"23:00", asunto:"11-04-2026 REPORTES GENERALES (empaque y embarque)", de:"EMBARQUES BELHER", leido:false, fecha:"11/04" },
+    { hora:"22:30", asunto:"BILL, MANIFIESTO MCALLEN · JL-13 (1,651 cajas tomate Texas)", de:"EMBARQUES BELHER", leido:false, fecha:"11/04" },
+    { hora:"22:15", asunto:"BILL, MANIFIESTO NOGALES CGG · CGG-129 · CGG-1", de:"EMBARQUES BELHER", leido:false, fecha:"11/04" },
+    { hora:"22:00", asunto:"BILL, MANIFIESTO NOGALES JL · JL-34 (Limón/Chile Maui Fresh) · JL-42 (Tomate Arizona 1,360 cajas)", de:"EMBARQUES BELHER", leido:false, fecha:"11/04" },
+    { hora:"20:48", asunto:"AVANCE DE TRILLA 11/04/2026 SORGO — 16 ha trilladas (Quevedo 2 + Composta + El Gringo) · WK15 acumulado 119 ha", de:"Bascula Belher", leido:false, fecha:"11/04" },
+    { hora:"20:06", asunto:"REPORTE DE BASCULA 11/04/2026 (LIMÓN PERSA)", de:"Bascula Belher", leido:false, fecha:"11/04" },
+    { hora:"19:57", asunto:"REPORTE DE BASCULA 11/04/2026 (TOMATE)", de:"Bascula Belher", leido:false, fecha:"11/04" },
     { hora:"03:00", asunto:"AVANCE DE TRILLA 10/04/2026 SORGO — 16 ha trilladas (Álamo + El Punk + Quevedo 2 + Lora + Caseta) · WK15 acumulado 103 ha", de:"Bascula Belher", leido:false, fecha:"10/04" },
     { hora:"02:30", asunto:"REPORTE DE BASCULA 10/04/2026 — Tomate · Limón Persa · Rezaga Tomate · Trilla Sorgo", de:"Bascula Belher", leido:false, fecha:"10/04" },
     { hora:"23:45", asunto:"REPORTE DIARIO CALAVO 10-04-2026 — 2 trailers: ST-108 (1,600 cajas) + ST-64 (1,688 cajas) → Arizona", de:"EMBARQUES BELHER", leido:false, fecha:"10/04" },
@@ -598,20 +618,19 @@ window.BELHER = {
   ],
 
   ticker: [
-    { label:"VINE RIPE 4×4", valor:"$57.95–59.95",  cambio:"↑ NUEVO MÁXIMO TEMPORADA",   dir:"up"      },
-    { label:"JALAPEÑO NOG",   valor:"$50–53",        cambio:"↑ +$10 rebote sorpresa",     dir:"up"      },
-    { label:"TOMATE ROMA",    valor:"$32.95–38.95", cambio:"mezcla tallas",               dir:"neutral" },
-    { label:"CHILE BELL GH",  valor:"$12–16",        cambio:"11-lb carton",               dir:"neutral" },
-    { label:"GRAPE TOMATO",   valor:"$28.95–30.95", cambio:"↓ leve -$2",                 dir:"down"    },
-    { label:"CUCUMBER NOG",   valor:"$32.95–34.95", cambio:"↓ baja Corbel #0025",        dir:"down"    },
-    { label:"MERMA CALAVO",    valor:"5.78%",         cambio:"⚠ prom 4 días · máx 6.78% 09/04", dir:"down" },
-    { label:"TRILLA SORGO",   valor:"103 ha",         cambio:"WK15 acum · +16 ha 10-Abr (Álamo+El Punk+Quevedo 2+Lora+Caseta)", dir:"up" },
+    { label:"VINE RIPE 4×4", valor:"$57.95–59.95",  cambio:"↑ MÁXIMO SOSTENIDO WK16",    dir:"up"      },
+    { label:"JALAPEÑO",       valor:"$44–46",        cambio:"↓ -$8 Corbel #0026 · bajista",dir:"down"    },
+    { label:"TOMATE ROMA",    valor:"$36.95–40.95", cambio:"XL $38.95 mostly",            dir:"neutral" },
+    { label:"GRAPE TOMATO",   valor:"$24.95–30.95", cambio:"↓ softer Corbel #0026",       dir:"down"    },
+    { label:"CUCUMBER NOG",   valor:"$31.95–33.95", cambio:"↓ baja Corbel #0026",         dir:"down"    },
+    { label:"MERMA CALAVO",   valor:"5.80%",         cambio:"⚠ prom 5 días WK15 · Roma Calavo 6.00% 11/04 NUEVO", dir:"down" },
+    { label:"TRILLA SORGO",   valor:"119 ha",        cambio:"WK15 acum · +16 ha 11-Abr (Quevedo 2+Composta+El Gringo)", dir:"up" },
     { label:"P&P ACUM WK15",  valor:"$3.90M",        cambio:"780,257 cajas · 458 cont",   dir:"up"      },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",            dir:"up"      },
     { label:"GASS SHEET WK15", valor:"✓ Recibido",   cambio:"Irene + Carlos 07-Abr",      dir:"up"      },
-    { label:"1ª WK15 PROM",   valor:"81.77%",        cambio:"Días 1-5 · Tolin CRÍTICO",   dir:"down"    },
-    { label:"CVGW",           valor:"$27.63",        cambio:"+2.9% 10-Abr",               dir:"up"      },
-    { label:"AVO",            valor:"$14.81",        cambio:"+2.6% 10-Abr",               dir:"up"      }
+    { label:"1ª WK15 PROM",   valor:"82.01%",        cambio:"Días 1-6 · Roma Calavo 6.00% 11/04", dir:"down" },
+    { label:"CVGW",           valor:"$27.46",        cambio:"+0.8% 13-Abr",               dir:"up"      },
+    { label:"AVO",            valor:"$14.72",        cambio:"+1.9% 13-Abr",               dir:"up"      }
   ],
 
   auditorias: [
@@ -813,32 +832,31 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"13/04/2026", evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar)", tipo:"reunion", participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
+      { fecha:"13/04/2026", evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar) · HOY", tipo:"reunion", participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
       { fecha:"16/04/2026", evento:"BPSI F/S Marzo 2026 y Forecast Q2 2026 — revisión financiera y pipeline", tipo:"reunion", participantes:"JC · Armando Llanes · hildelisa@beautyjunkies.com" },
       { fecha:"21/04/2026", evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
-      { fecha:"10/04/2026", evento:"Comentarios Armando Llanes sobre Contrato Calavo 2026-2029 — esperados hoy por la tarde (prometidos el 09-Abr)", tipo:"deadline", participantes:"Armando Llanes CPA · JC · Antonio" },
       { fecha:"Por confirmar (Abr 2026)", evento:"Reunión alineación Contrato 2026-2029 — John Lindeman · James Snyder · Irene Amezaga · Armando Llanes", tipo:"reunion", participantes:"Antonio, JC, Calavo, Armando Llanes, Notaría 97" }
     ]
   },
 
   predicciones: {
-    generado:  "10/04/2026 · 17:55",
+    generado:  "13/04/2026 · 14:20",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
-    nota:      "Síntesis de precios USDA Phoenix (Corbel Seeds #0025 · 10-Abr) + báscula + calidad outbound tomate 09/04 (Bola Calavo merma 6.78% CRÍTICO, Roma Urson primera 78.25%) + trilla sorgo 09/04 (Álamo 20 ha, acum 87 ha WK15) + noticias de industria. Se regenera automáticamente cada mañana.",
+    nota:      "Síntesis de precios USDA Phoenix (Corbel Seeds #0026 · 13-Abr) + báscula + calidad outbound tomate 11/04 (Roma Calavo merma 6.00% CRÍTICO primera vez, Bola Calavo/ERGO >5.5%) + trilla sorgo WK15 acumulado 119 ha + noticias de industria. Se regenera automáticamente cada mañana.",
     items: [
       {
         id: "vine-ripe",
         producto: "Tomate Vine-ripe",
         unidad: "carton 25lb · Nogales AZ",
-        tendencia: "alcista",
-        confianza: 75,
+        tendencia: "lateral",
+        confianza: 72,
         precio_actual:     { min: 57.95, max: 59.95 },
         precio_proyectado: { min: 54.00, max: 62.00 },
-        razonamiento: "Vine-ripe se mantiene en máximo de temporada: USDA Phoenix 08-Abr (Corbel #0025 · 10-Abr) confirma 4×4/4×5 en $57.95-59.95 por segunda sesión — fortaleza sostenida, no pico puntual. El mercado US sigue 'firm' con tight supply en cruceros mexicanos y freight constraints. Outbound 09/04 Bola Calavo: merma 6.78% (CRÍTICO — máximo de temporada). Priorizar Romas sobre Bolas mientras dure el problema de calidad. 7 trailers (10,808 cajas) cruzaron Nogales el 09-Abr.",
-        factores: ["USDA Phoenix 08-Abr (Corbel #0025) confirma $57.95-59.95 — sostenido segundo día", "Mercado US 'firm' — tight supply estructural, tariffs + combustible presionan retail", "Bola Calavo merma 6.78% outbound 09/04 — máximo WK15, cuatro días consecutivos >4%", "Cuarentena Mexfly Zapata County TX activa — escrutinio fitosanitario elevado", "Jalapeño Texas $50-53 estable (Corbel #0025) — señal de mercado consolidado"],
-        riesgo: "Si Salinas consolida oferta en WK16-17, corrección técnica a $52-55 posible. Merma elevada en Bolas (prom 5.44% WK15) puede erosionar precio neto. 09/04 10,808 cajas cruzaron — ritmo sostenible.",
-        accion: "EMBARCAR TODO el volumen disponible — vine-ripe en máximo histórico sostenido $57.95-59.95. Priorizar Romas (mejor merma). URGENTE: auditar calidad Bola Calavo antes de siguientes envíos. La ventana es corta."
+        razonamiento: "Vine-ripe se mantiene en máximo de temporada: Corbel #0026 (13-Abr) confirma 4×4/4×5 en $57.95-59.95 por tercera sesión consecutiva — fortaleza sostenida, no pico puntual. El mercado US sigue 'firm' con tight supply estructural, tariffs activos y freight constraints. Outbound 11/04: Roma Calavo merma 6.00% (CRÍTICO — primera vez en temporada), Bola Calavo merma 5.87%. Priorizar gestión de calidad para no perder valor neto en máximos.",
+        factores: ["Corbel #0026 (13-Abr) confirma $57.95-59.95 — tercera sesión sostenida", "Mercado US 'firm' — tight supply estructural, tariffs activos presionan retail", "Roma Calavo 11/04 merma 6.00% CRÍTICO — primera vez Roma supera 4% en temporada", "Jalapeño corrige a $44-46 (Corbel #0026) — señal de que cosechas primavera están llegando", "Cuarentena Mexfly Zapata County TX activa — escrutinio fitosanitario elevado"],
+        riesgo: "Si Salinas o competidores consolidan oferta en WK16-17, corrección técnica a $52-55 posible. Roma Calavo merma 6.00% el 11/04 — si persiste, erosiona precio neto. La corrección de jalapeño puede ser señal de inicio de temporada primavera general.",
+        accion: "EMBARCAR TODO el volumen disponible — vine-ripe en máximo histórico sostenido $57.95-59.95. URGENTE: investigar causa raíz Roma Calavo merma 6.00% (11/04) — primera vez en temporada. Priorizar Roma Millennium (merma 1.00% el 11/04, excelente)."
       },
       {
         id: "roma",
@@ -857,14 +875,14 @@ window.BELHER = {
         id: "jalap",
         producto: "Jalapeño",
         unidad: "bu · Texas",
-        tendencia: "alcista",
-        confianza: 68,
-        precio_actual:     { min: 50.00, max: 53.00 },
-        precio_proyectado: { min: 46.00, max: 56.00 },
-        razonamiento: "Jalapeño $50-53 Texas confirmado estable en Corbel #0025 (10-Abr) — segundo día consecutivo en este rango tras rebote de +$10 desde $40-42 la semana previa. La peor crisis de oferta de chile en 3 décadas (Bailey Farms, FreshPlaza) sostiene el precio: daño por clima en México y Florida, alivio esperado solo cuando cosechas de primavera escalen en mayo. Habanero también en $39-42 y serrano en $52-56. El mercado de chiles sigue estructuralmente corto.",
-        factores: ["Jalapeño rebota +$10 a $50-53 — recuperación sectorial confirmada", "Peor crisis de oferta de chile en 3 décadas (Bailey Farms) — fundamentales alcistas", "Serrano $52-56 · habanero $39-42 · chiles calientes todos en recuperación", "Alivio de oferta esperado solo en mayo cuando cosechas de primavera escalen", "Alta volatilidad estructural: rango WK13-WK15 fue $40-60"],
-        riesgo: "Si cosechas de primavera México/Sonora entran con más volumen del esperado en WK16, nueva corrección bajista posible. Volatilidad muy alta.",
-        accion: "Si hay jalapeño o chiles calientes disponibles, el momento de embarcar es ahora — $50-53 con fundamentales de oferta ajustados. Rango probable WK16: $46-55. Cuarentena Mexfly Texas — disciplina fitosanitaria crítica para chiles."
+        tendencia: "bajista",
+        confianza: 65,
+        precio_actual:     { min: 44.00, max: 48.00 },
+        precio_proyectado: { min: 40.00, max: 50.00 },
+        razonamiento: "Jalapeño Texas corrige a $44-46 en Corbel #0026 (13-Abr) — caída de ~$8/bu respecto al $50-53 del #0025 (10-Abr). Primera señal bajista desde el rebote de WK15. La corrección sugiere que cosechas de primavera (México/Sonora/Zacatecas) están entrando antes de lo esperado. La crisis estructural de 3 décadas no desaparece de un día para otro, pero el momentum alcista se debilitó. Habanero también levemente presionado ($38-43). Volatilidad muy alta — rango WK13-WK16 fue $40-53.",
+        factores: ["Corbel #0026 (13-Abr): jalapeño $44-46 (↓ -$8 vs #0025 del 10-Abr) — primera señal bajista", "Cosechas primavera México/Sonora aparentemente entrando antes de lo esperado", "Crisis estructural 3 décadas aún activa — el fondo no será $30-35 sino $40-45", "Habanero $38-43 (levemente presionado) · señal de corrección sectorial", "Alta volatilidad: rango WK13-WK16 fue $40-53"],
+        riesgo: "Si cosechas de primavera resultan menores de lo esperado o clima adverso afecta nuevamente, rebote técnico a $50+ posible. Alta incertidumbre.",
+        accion: "Con jalapeño en $44-46 y señal bajista, evaluar urgentemente si hay volumen disponible y embarcar pronto. El rango proyectado WK16-17 es $40-50. Cuarentena Mexfly Texas — disciplina fitosanitaria crítica."
       },
       {
         id: "bell",
@@ -896,16 +914,14 @@ window.BELHER = {
   },
 
   industria: [
-    { cat:"Mercado",      titulo:"Vine-ripe Nogales $57.95–59.95 sostenido 2º día — tariffs y combustible presionan precios retail tomate EE.UU.", impacto:"Alto", fuente:"Corbel Seeds #0025 · FreshPlaza 10-Abr", resumen:"Corbel #0025 (10-Abr) confirma vine-ripe 4×4/4×5 en $57.95-59.95 por segunda sesión consecutiva — fortaleza sostenida, no pico puntual. Roma large $36.95-38.95, XL SoCal $38.95-40.95. Tariffs sobre tomate mexicano y mayor costo combustible están trasladando precios al retail US. Para Belher: ventana en máximos, embarcar todo." },
-    { cat:"Mercado",      titulo:"Jalapeño Texas $50–53 confirmado día 2 — serrano $52–56, habanero $39–42; peor crisis de chile en 3 décadas sostenida", impacto:"Alto", fuente:"Corbel Seeds #0025 · USDA 09-Abr", resumen:"Jalapeño mantiene $50-53 en segundo día consecutivo. Serrano $52-56, habanero naranja $39-42/8lb. Bailey Farms: peor crisis de oferta de chiles en tres décadas post-daño climático México y Florida. Alivio solo cuando cosechas de primavera escalen en mayo. Para Belher: embarcar chiles ahora." },
-    { cat:"Fitosanitario", titulo:"Cuarentena Mexfly Zapata County Texas activa — vigilancia fitosanitaria crítica en cruces mexicanos Laredo/McAllen", impacto:"Alto", fuente:"Corbel Seeds #0025 · APHIS", resumen:"APHIS y Texas Dept. of Agriculture establecieron cuarentena Mexfly en Zapata County tras hembra silvestre fertilizada. Sin agricultura comercial en zona pero eleva sensibilidad fitosanitaria en cruces fronterizos. Mayor escrutinio de manifiestos y cargamentos mexicanos. Belher: disciplina fitosanitaria crítica especialmente en chiles." },
-    { cat:"Comercio",     titulo:"México y EE.UU. refuerzan cooperación de inocuidad alimentaria — trazabilidad y controles preventivos son piso competitivo", impacto:"Alto", fuente:"Corbel Seeds #0025 · FreshPlaza 10-Abr", resumen:"La agenda bilateral avanza hacia prevención más estricta, trazabilidad y controles de contaminación en produce fresco y mínimamente procesado. Para exportadores: el cumplimiento se convierte en requisito de acceso a mercado. Certificaciones PrimusGFS de Belher (SP-L25-1, SP-EMPAQUE-1, SP-ALAMO-1) — activo clave." },
-    { cat:"Logística",    titulo:"Drewry WCI +1% a $2,309 — Suez suspende descuento 15% para grandes embarcaciones; costos logísticos frágiles", impacto:"Moderado", fuente:"Corbel Seeds #0025 · Drewry · FreshPlaza", resumen:"El World Container Index sube 1% esta semana. Suez Canal Authority suspendió el descuento del 15% para incentivar retorno de buques. Freight rates siguen presionados. Para exportadores de perecederos como Belher: eleva el costo de entrega y complica márgenes en negociaciones de contratos." },
-    { cat:"Mercado",      titulo:"Precios retail tomate EE.UU. suben por aranceles y mayor combustible — señal de ajuste estructural en la cadena", impacto:"Moderado", fuente:"Corbel Seeds #0025 · FreshPlaza 10-Abr", resumen:"Aranceles sobre producto mexicano + alza de combustible se están trasladando al precio retail de tomate en EE.UU. Para proveedores: el costo adicional puede presionar márgenes en contratos pero sostiene precio spot en máximos. Vine-ripe en máximo histórico sostenido refleja este ajuste." },
-    { cat:"Sanidad",      titulo:"Escasez generalizada de brásicas en Europa — mercado global de vegetales frescos bajo presión estructural", impacto:"Moderado", fuente:"Corbel Seeds #0025 · FreshPlaza", resumen:"FreshPlaza reporta escasez amplia de brásicas en Europa con Southern Italy dependiendo de Basilicata. Este contexto global de tensión en vegetales premium refuerza el argumento de sostenibilidad de precios altos para tomate mexicano en las semanas próximas." },
-    { cat:"Competencia",  titulo:"Perú exportaciones no-tradicionales enero $904M (+16.4% YoY) — señal de presión competitiva creciente en Hemisferio Norte", impacto:"Moderado", fuente:"Corbel Seeds #0025 · Midagri", resumen:"Perú confirma momentum exportador sostenido. Destinos top: EE.UU., Holanda, México, España, Canadá. Aunque el valor viene principalmente de fruta, la señal es que América del Sur sigue siendo comercialmente agresiva en ventanas del Hemisferio Norte. Mayor competencia estructural para tomate mexicano en mercados premium." },
-    { cat:"Logística",    titulo:"Malaysia recorta producción de vegetales por sequia y diesel — India avanza en cold chain para perecederos", impacto:"Moderado", fuente:"Corbel Seeds #0025 · FreshPlaza", resumen:"Malaysia: productores reducen output por costos de diesel e irrigación bajo sequía, algunos cambian cultivos. India conecta infraestructura cold chain para perecederos frescos. Ambas señales refuerzan que agua y energía son las variables competitivas más críticas en horticultura global — ventaja estructural para Belher con acceso a agua en Sinaloa." },
-    { cat:"Innovación",   titulo:"Nueva instalación tomate UAE 150,000 kg/año — Mastronardi snack cucumbers en CPMA 2026; tendencia en protected agriculture", impacto:"Bajo", fuente:"Corbel Seeds #0025 · FreshPlaza · HortiDaily", resumen:"UAE inaugura instalación 10,000 m² con 150,000 kg/año de tomate — señal de inversión en sustitución de importaciones en regiones áridas. Mastronardi presenta snack cucumbers y nuevo concepto de merchandising de tomate en CPMA 2026. Formato y presentación ganan relevancia para captura de valor en categorías maduras." }
+    { cat:"Mercado",      titulo:"JALAPEÑO CORRECCIÓN: $44–46/bu Texas (↓ desde $50–53) — cosechas primavera entrando; señal bajista de corto plazo", impacto:"Alto", fuente:"Corbel Seeds #0026 · 13-Abr", resumen:"Corbel #0026 (13-Abr) reporta jalapeño Texas en $44-46/bu — caída de ~$8 respecto al #0025 del 10-Abr. La corrección sugiere que oferta de primavera (México/Sonora) está entrando más rápido de lo esperado. Habanero $38-43 (mayormente $39-42), también levemente presionado. Para Belher: rango probable WK16 $40-48. La crisis de 3 décadas aún está activa pero la primera señal bajista ya llegó." },
+    { cat:"Mercado",      titulo:"Vine-ripe Nogales $57.95–59.95 sostenido WK16 — tarifas arancelarias activas sobre tomate mexicano presionan retail EE.UU.", impacto:"Alto", fuente:"Corbel Seeds #0026 · 13-Abr", resumen:"Vine-ripe 4×4/4×5 se mantiene en máximo de temporada por tercera sesión consecutiva. Roma $36.95-40.95 (XL $38.95 mayormente). Grape tomato softer a $24.95-30.95. Los aranceles sobre produce mexicana siguen activos — presionan precios retail y sostienen la demanda por producto premium de exportación. Para Belher: ventana en máximos, priorizar embarques." },
+    { cat:"Comercio",     titulo:"Aranceles USMCA activos — revisión 1-Jul-2026 crítica; presión legislativa Florida sobre produce mexicana persiste", impacto:"Alto", fuente:"Corbel Seeds #0026 · 13-Abr", resumen:"Los aranceles sobre tomate mexicano siguen activos y se trasladan al retail EE.UU. La revisión formal del USMCA el 1-Jul-2026 es la ventana crítica para cambios estructurales. Florida mantiene presión por tarifas estacionales a tomate, pimiento, pepino y calabaza. Para Belher: el cumplimiento certificado (PrimusGFS) es diferenciador ante riesgo de mayor escrutinio." },
+    { cat:"Fitosanitario", titulo:"Cuarentena Mexfly Zapata County Texas activa — vigilancia crítica en cruces Laredo/McAllen", impacto:"Alto", fuente:"Corbel Seeds #0026 · APHIS", resumen:"APHIS y Texas Dept. of Agriculture mantienen cuarentena Mexfly en Zapata County. Eleva sensibilidad fitosanitaria en cruces fronterizos — mayor escrutinio de manifiestos y cargamentos mexicanos. Belher: disciplina fitosanitaria crítica especialmente en chiles y limón." },
+    { cat:"Hídrico",      titulo:"Riesgo Río Grande — niveles bajos afectan logística fronteriza en cruces Texas (Laredo/McAllen)", impacto:"Moderado", fuente:"Corbel Seeds #0026 · 13-Abr", resumen:"Niveles bajos en el Río Grande presionan operaciones logísticas en cruces fronterizos del Valle del Río Grande. Para exportadores via McAllen (como Belher con JL-13 el 11-Abr): monitorear condiciones y prever posibles retrasos en flujo de cruces." },
+    { cat:"Clima",        titulo:"Tormenta Marruecos disrumpe exportaciones hortícolas europeas — presión indirecta sobre demanda EE.UU.", impacto:"Moderado", fuente:"Corbel Seeds #0026 · 13-Abr", resumen:"Tormenta en Marruecos afecta exportaciones hortícolas hacia Europa, reduciendo disponibilidad de tomate europeo. Señal indirecta: menor competencia trans-Atlántica en el mercado de tomate. Refuerza la sostenibilidad de precios altos para tomate mexicano en las próximas semanas." },
+    { cat:"Clima",        titulo:"Riesgo El Niño en Ecuador — potencial impacto en exportaciones de banano y frutas tropicales al hemisferio norte", impacto:"Moderado", fuente:"Corbel Seeds #0026 · 13-Abr", resumen:"El Niño en desarrollo afecta producción de Ecuador con riesgo de disrupciones en exportaciones de frutas tropicales hacia EE.UU. Señal macroclimática relevante: ciclos de El Niño históricamente coinciden con volatilidad en precios de produce fresca en ventanas de Hemisferio Norte." },
+    { cat:"Logística",    titulo:"Freight terrestre presionado — diesel y demanda de temporada elevan costos de flete refrigerado Nogales/McAllen", impacto:"Moderado", fuente:"Corbel Seeds #0026 · 13-Abr", resumen:"Costos de flete refrigerado siguen presionados por precio del diesel y alta demanda de temporada en el corredor Nogales-Chicago y McAllen-distribuidores. Para Belher: impacto directo en negociaciones de flete con CGG, JL y transportistas spot." }
   ],
 
   cdc: {
@@ -1003,15 +1019,15 @@ window.BELHER = {
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 27.97, prevClose: 27.63, cambio: 0.34, cambioPct: 1.23,
+        precio: 27.46, prevClose: 27.24, cambio: 0.22, cambioPct: 0.81,
         h52: 28.72, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · 08-Abr-2026"
+        fuente: "Yahoo Finance · 13-Abr-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 15.36, prevClose: 14.89, cambio: 0.47, cambioPct: 3.16,
+        precio: 14.72, prevClose: 14.44, cambio: 0.28, cambioPct: 1.94,
         h52: 15.36, l52: 9.60, volumen: null,
-        fuente: "Yahoo Finance · 08-Abr-2026"
+        fuente: "Yahoo Finance · 13-Abr-2026"
       }
     ],
 
@@ -1223,23 +1239,23 @@ window.BELHER = {
     prediccionBolsa: [
       {
         simbolo: "CVGW", empresa: "Calavo Growers",
-        tendencia: "alcista",
-        precioActual: 27.97,
+        tendencia: "lateral",
+        precioActual: 27.46,
         precioObj90d: 29.50,
         riesgoBajo: 22.00,
-        confianza: 62,
-        razonamiento: "CVGW cierra $27.97 (+1.23% vs prev close $27.63, 08-Abr). Acción continúa probando zona de máximos de 52 semanas ($28.72). Momentum sectorial sostenido: AVO también sube +3.16% en la misma sesión. El riesgo arancelario USMCA 1-Jul-2026 y la renegociación del contrato Belher son factores de incertidumbre. Precio objetivo 90 días: $29.50 si mercado de hortalizas se estabiliza y aranceles no se materializan.",
-        factores: ["Vine-ripe en máximo temporada $55.95-57.95 — impulsa márgenes Q2 Calavo", "Riesgo arancelario USMCA podría reducir volumen exportado de socios mexicanos", "Acción en zona de resistencia técnica $28.72 (máximo 52s) — posible toma de utilidades", "Sector produce con momentum amplio: AVO +3.16% misma sesión"]
+        confianza: 60,
+        razonamiento: "CVGW $27.46 (+0.81% vs prev close $27.24, 13-Abr). Acción se mantiene cerca de máximos de 52 semanas ($28.72) pero con menor momentum que semanas previas. La corrección de jalapeño (Corbel #0026) puede ser señal de inicio de temporada primavera — impacto en márgenes Q2 Calavo si precios de chile bajan. Vine-ripe sostenido en máximos compensa parcialmente. Riesgo arancelario USMCA 1-Jul-2026 activo.",
+        factores: ["Vine-ripe sostenido $57.95-59.95 — impulsa márgenes Q2 Calavo", "Jalapeño corrige a $44-46 (Corbel #0026) — posible señal de normalización de precios", "Riesgo arancelario USMCA podría reducir volumen exportado de socios mexicanos", "Acción cerca de resistencia técnica $28.72 (máximo 52s)"]
       },
       {
         simbolo: "AVO", empresa: "Mission Produce",
         tendencia: "alcista",
-        precioActual: 15.36,
+        precioActual: 14.72,
         precioObj90d: 16.50,
         riesgoBajo: 11.50,
         confianza: 57,
-        razonamiento: "AVO alcanza nuevo máximo de 52 semanas $15.36 (+3.16% vs prev close $14.89, 08-Abr). La recuperación continúa sostenida desde mínimos de $9.60. Para Belher: Mission Produce puede servir como palanca de negociación en renovaciones contractuales con Calavo.",
-        factores: ["Nuevo máximo 52 semanas $15.36 — señal de momentum alcista sostenido", "Recuperación aguacate impulsa múltiplos del sector", "Potencial competidor/alternativa a Calavo — palanca de negociación Belher", "Alta concentración en aguacate, menor exposición al ciclo tomate"]
+        razonamiento: "AVO $14.72 (+1.94% vs prev close $14.44, 13-Abr). Consolida por debajo del máximo 52s $15.36. La recuperación desde mínimos $9.60 continúa sostenida. Para Belher: Mission Produce puede servir como palanca de negociación en renovaciones contractuales con Calavo.",
+        factores: ["Consolidación bajo máximo 52s $15.36 — momentum alcista sostenido", "Recuperación aguacate impulsa múltiplos del sector", "Potencial competidor/alternativa a Calavo — palanca de negociación Belher", "Alta concentración en aguacate, menor exposición al ciclo tomate"]
       }
     ]
   },
