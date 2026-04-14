@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 13 Abr 2026",
+    fecha: "Martes 14 Abr 2026",
     semana: "WK 16",
-    actualizado: "13/04/2026 · 14:20"
+    actualizado: "14/04/2026 · 14:30"
   },
 
   alertas: [
@@ -12,8 +12,9 @@ window.BELHER = {
     { nivel: "danger",  texto: "Roma Urson 09/04: primera 78.25% (bajo mínimo 80%) + merma 4.50% — alerta doble. Bola Tolin 07/04 primera 28.59% merma 30.18% (CRÍTICO — evaluar suspender empaque Tolin exportación)." },
     { nivel: "success", texto: "CVGW $27.46 (+0.8% 13-Abr) · AVO $14.72 (+1.9% 13-Abr) — sector produce sostenido." },
     { nivel: "danger",   texto: "URGENTE: Solicitar a Calavo (Irene Amezaga / Carlos Valadez) el desglose 'Gross FOB by item' del Gass Sheet para verificar precio de referencia del contrato. Sin este dato no es posible auditar el escalador ($16.95 base + $4 collar desde $20.95). Escalar hoy mismo." },
-    { nivel: "success",  texto: "11-Abr: 5 trailers → CGG-129 (1,600) + CGG-1 (1,600) + JL-13 McAllen (1,651) + JL-42 (1,360) + JL-34 Limón/Chile Maui Fresh. 10-Abr: 2 trailers ST-108/ST-64. WK15 settle parcial $597,772 confirmado." },
-    { nivel: "success", texto: "Trilla sorgo WK15: 119 ha acumuladas. +16 ha 11-Abr (Quevedo 2+Composta+El Gringo). +16 ha 10-Abr (Álamo+El Punk+Quevedo 2+Lora+Caseta). El Panteón+San Blas pendientes." }
+    { nivel: "success",  texto: "13-Abr WK16: 4 trailers → ST-111 (1,600) + ST-99 (1,760) + CGG-77 (1,600) + CGG-157 (1,600) = 6,560 cajas TOMATE NOGALES. 11-Abr: 5 trailers → CGG-129 (1,600) + CGG-1 (1,600) + JL-13 McAllen (1,651) + JL-42 (1,360) + JL-34 Limón/Chile Maui Fresh. WK15 settle parcial $597,772 confirmado." },
+    { nivel: "success",  texto: "CONTRATO CALAVO 2026-2029: Antonio revisó draft con Irene el 13-Abr — TODOS los puntos vistos bien. Calavo enviará draft final esta semana. Irene viaja a Viva Expo San Antonio — update fin de semana." },
+    { nivel: "success", texto: "Trilla sorgo: 131 ha acumuladas (WK15 119ha + WK16 inicio +12ha 13-Abr El Punk). El Panteón+San Blas pendientes." }
   ],
 
   ebitda: {
@@ -348,7 +349,7 @@ window.BELHER = {
       ebitda_yago:       -513373,
       ebitda_var_yago:   127522,
       periodo:           "Jul 2025 – Feb 2026",
-      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) + Álamo+El Punk+Quevedo 2+Lora+Caseta (10-Abr, 16 ha) + Quevedo 2+Composta+El Gringo (11-Abr, 16 ha) = 119 ha acumuladas. El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
+      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) + Álamo+El Punk+Quevedo 2+Lora+Caseta (10-Abr, 16 ha) + Quevedo 2+Composta+El Gringo (11-Abr, 16 ha) = 119 ha WK15. TRILLA WK16 inicio: El Punk (13-Abr, 12 ha) = 131 ha acumuladas total. El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
       trilla: [
         { fecha:"31/03/2026", campos:"Dorita + El 17",                                        ha:18, cultivo:"Sorgo" },
         { fecha:"06/04/2026", campos:"Carrillo",                                              ha:12, cultivo:"Sorgo" },
@@ -356,7 +357,8 @@ window.BELHER = {
         { fecha:"08/04/2026", campos:"El Dos + Álamo",                                        ha:19, cultivo:"Sorgo", ton:98.51, tolvas:16, fuente:"DIARIO BASCULA 08-Abr PDF" },
         { fecha:"09/04/2026", campos:"Álamo",                                                 ha:20, cultivo:"Sorgo", ton:128.53, tolvas:20, fuente:"DIARIO BASCULA 09-Abr PDF" },
         { fecha:"10/04/2026", campos:"Álamo + El Punk + Quevedo 2 + Lora + Caseta",          ha:16, cultivo:"Sorgo" },
-        { fecha:"11/04/2026", campos:"Quevedo 2 + Composta + El Gringo",                      ha:16, cultivo:"Sorgo" }
+        { fecha:"11/04/2026", campos:"Quevedo 2 + Composta + El Gringo",                      ha:16, cultivo:"Sorgo" },
+        { fecha:"13/04/2026", campos:"El Punk",                                                ha:12, cultivo:"Sorgo" }
       ]
     }
   },
@@ -487,6 +489,7 @@ window.BELHER = {
 
   operaciones: {
     bascula: [
+      { fecha:"13/04", productos:["Tomate","Rezaga Tomate"] },
       { fecha:"11/04", productos:["Tomate","Limón Persa","Trilla Sorgo"] },
       { fecha:"10/04", productos:["Tomate","Limón Persa","Rezaga Tomate","Trilla Sorgo"] },
       { fecha:"09/04", productos:["Tomate","Chile Habanero","Chile Fresno","Trilla Sorgo"], tinas:14965, kgTomate:151110 },
@@ -525,6 +528,10 @@ window.BELHER = {
       { wk:"WK15", bascKg:458030,  bascCj:40391,  pctEmp:65.6, cjCalavo:16056, cjYameto:3704,  cjTolin:1728,  cjZazu:0,     cjUrson:0,     cjMillennium:1600, cjOtros:2843, pctCalavo:38.4, pctYameto:10.1, pctTolin:5.1,  pctZazu:0.0,  pctUrson:0.0, pctMillennium:4.0, pctOtros:8.1 }
     ],
     embarques: [
+      { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-111",  destino:"Arizona (Nogales)", estado:"OK", cajas:1600 },
+      { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-99",   destino:"Arizona (Nogales)", estado:"OK", cajas:1760 },
+      { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-77",  destino:"Arizona (Nogales)", estado:"OK", cajas:1600 },
+      { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-157", destino:"Arizona (Nogales)", estado:"OK", cajas:1600 },
       { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-129", destino:"Arizona",       estado:"OK", cajas:1600 },
       { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-1",   destino:"Arizona",       estado:"OK", cajas:1600 },
       { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"JL-13",   destino:"Texas (McAllen)", estado:"OK", cajas:1651 },
@@ -557,6 +564,19 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"12:46", asunto:"RE: BILL,MANIFIESTO NOGALES CGG — nota arancel USMCA 25% productos México/Canadá sin USMCA (L.Pina Aduana)", de:"Erika · L.Pina (Aduana Nogales)", leido:false, fecha:"14/04" },
+    { hora:"12:45", asunto:"RE: BILL,MANIFIESTO NOGALES ST — nota arancel USMCA 25% productos México/Canadá sin USMCA (L.Pina Aduana)", de:"Erika · L.Pina (Aduana Nogales)", leido:false, fecha:"14/04" },
+    { hora:"03:29", asunto:"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG — CGG-77 + CGG-157 (cargas Tomate 13/04)", de:"EMBARQUES BELHER", leido:false, fecha:"14/04" },
+    { hora:"03:24", asunto:"13-04-2026 REPORTES GENERALES (empaque y embarque)", de:"EMBARQUES BELHER", leido:false, fecha:"14/04" },
+    { hora:"03:20", asunto:"REPORTE DIARIO CALAVO 13-04-2026 — 4 trailers: ST-111 (1,600) + ST-99 (1,760) + CGG-77 (1,600) + CGG-157 (1,600) = 6,560 cajas TOMATE NOGALES", de:"EMBARQUES BELHER", leido:false, fecha:"14/04" },
+    { hora:"02:40", asunto:"AVANCE DE TRILLA 13/04/2026 SORGO (EL PUNK) — 12 ha trilladas hoy · WK16 inicio acumulado 131 ha", de:"Bascula Belher", leido:false, fecha:"14/04" },
+    { hora:"01:39", asunto:"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES ST — ST-111 + ST-99 (cargas Tomate 13/04)", de:"EMBARQUES BELHER", leido:false, fecha:"14/04" },
+    { hora:"00:47", asunto:"REPORTE DE BASCULA 13/04/2026 (REZAGA DE TOMATE)", de:"Bascula Belher", leido:false, fecha:"14/04" },
+    { hora:"00:45", asunto:"REPORTE DE BASCULA 13/04/2026 (TOMATE)", de:"Bascula Belher", leido:false, fecha:"14/04" },
+    { hora:"22:17", asunto:"Re: Contract draft with comments April 13th — JC: 'Quedamos al pendiente del draft esta semana. Mucho éxito en tu visita a Jalisco.'", de:"Juan Carlos Beltrán · ABSA", leido:false, fecha:"13/04" },
+    { hora:"21:51", asunto:"RE: Contract draft with comments April 13th — Armando Llanes confirma recibo del update", de:"Armando Llanes · CFO", leido:false, fecha:"13/04" },
+    { hora:"20:49", asunto:"Fwd: Contract draft with comments April 13th — Antonio revisó con Irene TODOS los puntos, los vio bien; Calavo enviará draft completo esta semana", de:"Antonio Beltrán · ABSA", leido:false, fecha:"13/04" },
+    { hora:"18:55", asunto:"Canceled: Weekly Tomato Meeting — Irene viaja a Viva Expo San Antonio; enviará update fin de semana (cc: James Snyder)", de:"Irene Amezaga · Calavo VP Sales", leido:false, fecha:"13/04" },
     { hora:"13:20", asunto:"Corbel Seeds Daily Report #0026 — Jalapeño corrige a $44-46/bu Texas (↓ -$8 vs #0025), Vine-ripe Nogales $57.95-59.95 sostenido, Roma softer, tarifas activas", de:"Raymundo Elizalde · Corbel Seeds", leido:false, fecha:"13/04" },
     { hora:"11:42", asunto:"REPORTE DE OUTBOUND TOMATE 11/04/2026 — Bola Calavo 1ª 81.93% merma 5.87% ⚠, Bola ERGO 1ª 80.97% merma 5.67% ⚠, Roma Calavo 1ª 84.80% merma 6.00% CRÍTICO, Roma Millennium 1ª 85.00% merma 1.00%", de:"Calidad Belher", leido:false, fecha:"13/04" },
     { hora:"11:27", asunto:"REPORTE DE OUTBOUND LIMON PERSA 11/04/2026 — calidad confirmada para embarque Maui Fresh (JL-34)", de:"Calidad Belher", leido:false, fecha:"13/04" },
@@ -624,7 +644,7 @@ window.BELHER = {
     { label:"GRAPE TOMATO",   valor:"$24.95–30.95", cambio:"↓ softer Corbel #0026",       dir:"down"    },
     { label:"CUCUMBER NOG",   valor:"$31.95–33.95", cambio:"↓ baja Corbel #0026",         dir:"down"    },
     { label:"MERMA CALAVO",   valor:"5.80%",         cambio:"⚠ prom 5 días WK15 · Roma Calavo 6.00% 11/04 NUEVO", dir:"down" },
-    { label:"TRILLA SORGO",   valor:"119 ha",        cambio:"WK15 acum · +16 ha 11-Abr (Quevedo 2+Composta+El Gringo)", dir:"up" },
+    { label:"TRILLA SORGO",   valor:"131 ha",        cambio:"acum WK15+WK16 · +12 ha 13-Abr (El Punk)", dir:"up" },
     { label:"P&P ACUM WK15",  valor:"$3.90M",        cambio:"780,257 cajas · 458 cont",   dir:"up"      },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",            dir:"up"      },
     { label:"GASS SHEET WK15", valor:"✓ Recibido",   cambio:"Irene + Carlos 07-Abr",      dir:"up"      },
@@ -754,10 +774,10 @@ window.BELHER = {
       },
       {
         titulo: "Contrato Calavo 2026-2029 — NUEVO MULTIANUAL",
-        estado: "En Revisión",
-        nivel: "warning",
-        descripcion: "Irene Amezaga (Calavo) envió borrador del contrato 2026-2029 el 09-Abr-2026. Antonio lo reenvió a JC y Armando Llanes (CPA, San Antonio TX) para revisión. Armando confirmó: 'Te doy mis comentarios mañana por la tarde.' Contrato para próximas temporadas de Agrícola Belher — cubre ciclos 2026-27, 2027-28 y 2028-29.",
-        accion: "1) Esperar comentarios de Armando Llanes (debieron llegar hoy 10-Abr). 2) Revisar términos de precio base, escalonamiento y condiciones P&P para 3 temporadas. 3) Coordinar reunión de alineación con John Lindeman, James Snyder e Irene antes de firmar. 4) Notaría 97 Culiacán (notaria97culiacan@hotmail.com) ya está en copia — preparar documentación legal."
+        estado: "Progreso Positivo · Draft esta semana",
+        nivel: "info",
+        descripcion: "13-Abr-2026: Antonio revisó el draft del contrato con Irene Amezaga — TODOS los puntos adicionales vistos bien. Calavo enviará el draft incluyendo todos los cambios en el transcurso de la semana. Armando Llanes y JC confirmados al pendiente. Irene viaja a Viva Expo San Antonio — enviará update fin de semana. Notaría 97 Culiacán en copia. Antonio en visita a Jalisco. Contrato cubre ciclos 2026-27, 2027-28 y 2028-29.",
+        accion: "1) Esperar draft final de Calavo esta semana (comprometido por Irene/Antonio el 13-Abr). 2) Revisar términos con Armando Llanes antes de firmar. 3) Coordinar reunión de alineación con John Lindeman, James Snyder e Irene. 4) Notaría 97 Culiacán (notaria97culiacan@hotmail.com) lista para formalización."
       },
       {
         titulo: "Inversión Corbel Seeds",
@@ -832,7 +852,7 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"13/04/2026", evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar) · HOY", tipo:"reunion", participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
+      { fecha:"13/04/2026", evento:"Marzo '26 F/S Tomates/Limones/Granos — revisión estados de resultado (10am, jacruz convocó 27-Mar) · COMPLETADA", tipo:"reunion", participantes:"jacruz · Leima · Antonio · JC · Armando Llanes · Felipe Calderón CRyA" },
       { fecha:"16/04/2026", evento:"BPSI F/S Marzo 2026 y Forecast Q2 2026 — revisión financiera y pipeline", tipo:"reunion", participantes:"JC · Armando Llanes · hildelisa@beautyjunkies.com" },
       { fecha:"21/04/2026", evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
       { fecha:"Por confirmar (Abr 2026)", evento:"Reunión alineación Contrato 2026-2029 — John Lindeman · James Snyder · Irene Amezaga · Armando Llanes", tipo:"reunion", participantes:"Antonio, JC, Calavo, Armando Llanes, Notaría 97" }
@@ -840,10 +860,10 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "13/04/2026 · 14:20",
+    generado:  "14/04/2026 · 14:30",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
-    nota:      "Síntesis de precios USDA Phoenix (Corbel Seeds #0026 · 13-Abr) + báscula + calidad outbound tomate 11/04 (Roma Calavo merma 6.00% CRÍTICO primera vez, Bola Calavo/ERGO >5.5%) + trilla sorgo WK15 acumulado 119 ha + noticias de industria. Se regenera automáticamente cada mañana.",
+    nota:      "Síntesis de precios USDA Phoenix (Corbel Seeds #0026 · 13-Abr) + báscula + calidad outbound tomate 11/04 (Roma Calavo merma 6.00% CRÍTICO primera vez, Bola Calavo/ERGO >5.5%) + trilla sorgo 131 ha acum (WK15 119ha + WK16 inicio 12ha El Punk 13-Abr) + contrato 2026-2029 draft esta semana + noticias de industria. Se regenera automáticamente cada mañana.",
     items: [
       {
         id: "vine-ripe",
@@ -1033,6 +1053,18 @@ window.BELHER = {
 
     correos: [
       {
+        fecha: "13/04/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya · Calavo",
+        asunto: "Canceled: Weekly Tomato Meeting — viaja a Viva Expo San Antonio",
+        tipo: "fyi", nivel: "info",
+        resumen: "Irene cancela la reunión semanal de Teams del 13-Abr. Mensaje: 'Will be traveling -Viva Expo San Antonio @antonio & @Juan Carlos Beltran Will send update at the end of week.' CC: James Snyder. Enviará Tomato Weekly Update el viernes."
+      },
+      {
+        fecha: "13/04/2026", de: "Antonio Beltrán", cargo: "Gerente General · ABSA",
+        asunto: "Fwd: Contract draft with comments April 13th — TODOS los puntos vistos bien con Irene",
+        tipo: "contrato", nivel: "success",
+        resumen: "Antonio revisó el draft del contrato 2026-2029 con Irene Amezaga el 13-Abr (tarde). TODOS los puntos adicionales en verde los vio bien Irene. Calavo enviará el draft incluyendo todos los cambios en el transcurso de la semana. JC respondió: 'Quedamos al pendiente de recibir el draft. Mucho éxito en tu visita a Jalisco.' Armando Llanes confirmó el update. Notaría 97 en copia."
+      },
+      {
         fecha: "07/04/2026", de: "Leima Leyva", cargo: "Finance Manager · Agrícola Belher",
         asunto: "Re: Settle WK12 — confirmación recibo Gass Sheet WK15",
         tipo: "settlement", nivel: "success",
@@ -1089,6 +1121,7 @@ window.BELHER = {
     ],
 
     alertas: [
+      { nivel: "success", texto: "CONTRATO 2026-2029: Antonio revisó todos los puntos con Irene el 13-Abr — VISTOS BIEN. Draft final llega esta semana. Irene en Viva Expo San Antonio — update fin de semana (James Snyder cc)." },
       { nivel: "success", texto: "Liquidaciones WK01–WK15 actualizadas · FOB total $12.87M · 780,257 pkgs. WK15 settle parcial al 05-Abr ($597,772 · 53,976 pkgs) — precio por caja $11.07, settle final pendiente." },
       { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
       { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
