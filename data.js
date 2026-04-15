@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 14 Abr 2026",
+    fecha: "Miércoles 15 Abr 2026",
     semana: "WK 16",
-    actualizado: "14/04/2026 · 21:00"
+    actualizado: "15/04/2026 · 07:00"
   },
 
   alertas: [
@@ -337,7 +337,7 @@ window.BELHER = {
       ebitda_yago:       -513373,
       ebitda_var_yago:   127522,
       periodo:           "Jul 2025 – Feb 2026",
-      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) + Álamo+El Punk+Quevedo 2+Lora+Caseta (10-Abr, 16 ha) + Quevedo 2+Composta+El Gringo (11-Abr, 16 ha) = 119 ha WK15. TRILLA WK16: El Punk (13-Abr, 12 ha) = 12 ha WK16. ACUMULADO TOTAL: 131 ha. El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
+      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) + Álamo+El Punk+Quevedo 2+Lora+Caseta (10-Abr, 16 ha) + Quevedo 2+Composta+El Gringo (11-Abr, 16 ha) = 119 ha WK15. TRILLA WK16: El Punk (13-Abr, 12 ha) + El Punk+Viudas (14-Abr, 19 ha) = 31 ha WK16. ACUMULADO TOTAL: 150 ha. El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
       trilla: [
         { fecha:"31/03/2026", campos:"Dorita + El 17",                                        ha:18, cultivo:"Sorgo" },
         { fecha:"06/04/2026", campos:"Carrillo",                                              ha:12, cultivo:"Sorgo" },
@@ -346,7 +346,8 @@ window.BELHER = {
         { fecha:"09/04/2026", campos:"Álamo",                                                 ha:20, cultivo:"Sorgo", ton:128.53, tolvas:20, fuente:"DIARIO BASCULA 09-Abr PDF" },
         { fecha:"10/04/2026", campos:"Álamo + El Punk + Quevedo 2 + Lora + Caseta",          ha:16, cultivo:"Sorgo" },
         { fecha:"11/04/2026", campos:"Quevedo 2 + Composta + El Gringo",                      ha:16, cultivo:"Sorgo" },
-        { fecha:"13/04/2026", campos:"El Punk",                                               ha:12, cultivo:"Sorgo", fuente:"AVANCE TRILLA BASCULA 13-Abr" }
+        { fecha:"13/04/2026", campos:"El Punk",                                               ha:12, cultivo:"Sorgo", fuente:"AVANCE TRILLA BASCULA 13-Abr" },
+        { fecha:"14/04/2026", campos:"El Punk + Viudas",                                     ha:19, cultivo:"Sorgo", fuente:"AVANCE TRILLA BASCULA 14-Abr" }
       ]
     }
   },
@@ -478,6 +479,7 @@ window.BELHER = {
 
   operaciones: {
     bascula: [
+      { fecha:"14/04", productos:["Tomate","Trilla Sorgo"] },
       { fecha:"13/04", productos:["Tomate","Rezaga Tomate","Trilla Sorgo"] },
       { fecha:"11/04", productos:["Tomate","Limón Persa","Trilla Sorgo"] },
       { fecha:"10/04", productos:["Tomate","Limón Persa","Rezaga Tomate","Trilla Sorgo"] },
@@ -516,6 +518,7 @@ window.BELHER = {
       { wk:"WK15", bascKg:458030,  bascCj:40391,  pctEmp:65.6, cjCalavo:16056, cjYameto:3704,  cjTolin:1728,  cjZazu:0,     cjUrson:0,     cjMillennium:1600, cjOtros:2843, pctCalavo:38.4, pctYameto:10.1, pctTolin:5.1,  pctZazu:0.0,  pctUrson:0.0, pctMillennium:4.0, pctOtros:8.1 }
     ],
     embarques: [
+      { fecha:"14/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-148", destino:"Nogales AZ", estado:"OK", cajas:1920, po:"264058" },
       { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-111",  destino:"Arizona", estado:"OK", cajas:1600 },
       { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-99",   destino:"Arizona", estado:"OK", cajas:1760 },
       { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-77",  destino:"Arizona", estado:"OK", cajas:1600 },
@@ -532,6 +535,12 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"02:44", asunto:"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG · CGG-148 · 1,920 cajas tomate · P.O. 264058 · 14-Abr", de:"EMBARQUES BELHER",             leido:false, fecha:"15/04" },
+    { hora:"02:40", asunto:"REPORTE DIARIO CALAVO 14-04-2026 — 1 carga · CGG-148 · 1,920 cajas tomate · Nogales AZ · P.O. 264058",                             de:"EMBARQUES BELHER",             leido:false, fecha:"15/04" },
+    { hora:"02:30", asunto:"14-04-2026 REPORTES GENERALES — reportes empaque y embarque adjuntos",                                                              de:"EMBARQUES BELHER",             leido:false, fecha:"15/04" },
+    { hora:"00:54", asunto:"AVANCE DE TRILLA 14/04/2026 SORGO (EL PUNK Y VIUDAS) — 19 ha trilladas · WK16 acum 31 ha · total temporada 150 ha",                 de:"Bascula Belher",               leido:false, fecha:"15/04" },
+    { hora:"23:07", asunto:"REPORTE DE BASCULA 14/04/2026 (TOMATE) — reportes adjuntos",                                                                        de:"Bascula Belher",               leido:false, fecha:"14/04" },
+    { hora:"21:14", asunto:"Re: Datos cuenta 'SEMILLAS LATINOAMERICANAS ABC' — SLA confirmó transferencia USD $50,000 el 14-Abr · Swift pendiente mañana · protocolización notario aún no finalizada", de:"Raymundo Elizalde · Corbel Seeds", leido:false, fecha:"14/04" },
     { hora:"20:13", asunto:"REPORTE DE OUTBOUND TOMATE 13/04/2026 — Bola Calavo 1ª 88.34% merma 0.93% ✓ RECUPERACIÓN, Roma Millennium 1ª 89.80% merma 1.20% — calidad excelente WK16 Día 1", de:"Calidad Belher", leido:false, fecha:"14/04" },
     { hora:"10:22", asunto:"Corbel Seeds Daily Report #0027 — JALAPEÑO REBOTE $58–60 (+$14/bu), Vine-ripe NUEVO MÁX $58.95–60.95, FAO alerta Hormuz, USDA $275M specialty crop", de:"Raymundo Elizalde · Corbel Seeds", leido:false, fecha:"14/04" },
     { hora:"20:29", asunto:"BILL,MANIFIESTO,NOGALES CGG · CGG-77 (1,600) · CGG-157 (1,600) — DODAS adjuntos", de:"EMBARQUES BELHER", leido:false, fecha:"13/04" },
@@ -608,7 +617,7 @@ window.BELHER = {
     { label:"SERRANO TX",     valor:"$68–70",        cambio:"↑ máximo hot peppers hoy",               dir:"up"      },
     { label:"CUCUMBER NOG",   valor:"$30.95–32.95", cambio:"↓ baja leve #0027",                        dir:"down"    },
     { label:"MERMA CALAVO",   valor:"0.93%",         cambio:"↓ 13/04 WK16 D1 — desde 5.87% 11/04 ✓",  dir:"up"      },
-    { label:"TRILLA SORGO",   valor:"131 ha",        cambio:"WK16: +12 ha El Punk 13-Abr",             dir:"up"      },
+    { label:"TRILLA SORGO",   valor:"150 ha",        cambio:"WK16: +19 ha El Punk+Viudas 14-Abr",     dir:"up"      },
     { label:"P&P ACUM WK15",  valor:"$3.90M",        cambio:"780,257 cajas · 458 cont",                dir:"up"      },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",                         dir:"up"      },
     { label:"1ª WK16 D1",     valor:"89.07%",        cambio:"Bola 88.34% · Roma Millennium 89.80%",    dir:"up"      },
@@ -827,7 +836,7 @@ window.BELHER = {
     generado:  "14/04/2026 · 20:45",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
-    nota:      "Síntesis de precios USDA (Corbel Seeds #0027 · 14-Abr) + outbound tomate 13/04 (Bola Calavo merma 0.93% — recuperación dramática, Roma Millennium 1.20%) + embarques 13/04 (4 trailers 6,560 cajas Nogales) + trilla sorgo 131 ha acum + noticias FAO/Hormuz + USDA $275M specialty crop. Se regenera automáticamente cada mañana.",
+    nota:      "Síntesis de precios USDA (Corbel Seeds #0027 · 14-Abr) + outbound tomate 13/04 (Bola Calavo merma 0.93% — recuperación dramática, Roma Millennium 1.20%) + embarque 14/04 CGG-148 1,920 cajas + trilla sorgo El Punk+Viudas 14/04 19 ha (acum 150 ha) + noticias FAO/Hormuz + USDA $275M specialty crop. Se regenera automáticamente cada mañana.",
     items: [
       {
         id: "vine-ripe",
