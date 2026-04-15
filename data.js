@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 14 Abr 2026",
+    fecha: "Miércoles 15 Abr 2026",
     semana: "WK 16",
-    actualizado: "14/04/2026 · 21:00"
+    actualizado: "15/04/2026 · 08:00"
   },
 
   alertas: [
@@ -613,8 +613,8 @@ window.BELHER = {
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",                         dir:"up"      },
     { label:"1ª WK16 D1",     valor:"89.07%",        cambio:"Bola 88.34% · Roma Millennium 89.80%",    dir:"up"      },
     { label:"EMBARQUES 13/04",valor:"6,560 cajas",   cambio:"4 trailers Nogales AZ",                   dir:"up"      },
-    { label:"CVGW",           valor:"$27.63",        cambio:"-0.32% 14-Abr",                           dir:"down"    },
-    { label:"AVO",            valor:"$14.81",        cambio:"-1.46% 14-Abr",                           dir:"down"    }
+    { label:"CVGW",           valor:"$26.99",        cambio:"↓ -3.82% 15-Abr — caída significativa",   dir:"down"    },
+    { label:"AVO",            valor:"$14.18",        cambio:"↓ -7.56% 15-Abr — corrección fuerte",     dir:"down"    }
   ],
 
   auditorias: [
@@ -1005,15 +1005,15 @@ window.BELHER = {
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 27.63, prevClose: 27.72, cambio: -0.09, cambioPct: -0.32,
+        precio: 26.99, prevClose: 28.06, cambio: -1.07, cambioPct: -3.82,
         h52: 28.72, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · 14-Abr-2026"
+        fuente: "Yahoo Finance · 15-Abr-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 14.81, prevClose: 15.03, cambio: -0.22, cambioPct: -1.46,
-        h52: 15.36, l52: 9.60, volumen: null,
-        fuente: "Yahoo Finance · 14-Abr-2026"
+        precio: 14.18, prevClose: 15.34, cambio: -1.16, cambioPct: -7.56,
+        h52: 15.53, l52: 9.88, volumen: null,
+        fuente: "Yahoo Finance · 15-Abr-2026"
       }
     ],
 
@@ -1078,7 +1078,7 @@ window.BELHER = {
       { nivel: "success", texto: "Liquidaciones WK01–WK15 actualizadas · FOB total $12.87M · 780,257 pkgs. WK15 settle parcial al 05-Abr ($597,772 · 53,976 pkgs) — precio por caja $11.07, settle final pendiente." },
       { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
       { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
-      { nivel: "warning", texto: "CVGW $27.63 (-0.32%) · AVO $14.81 (-1.46%) — corrección leve 14-Abr. Sector produce consolida bajo máximos. CVGW resistencia $28.72 (52s). AVO retrocede desde máximo $15.36." }
+      { nivel: "danger", texto: "CVGW $26.99 (-3.82%) · AVO $14.18 (-7.56%) — caída pronunciada 15-Abr. AVO pierde -7.56% en una sesión, cierra bajo máximo anual $15.53. CVGW cede desde $28.06. Monitorear si es ajuste sectorial o señal de debilidad en cadena de valor produce." }
     ],
 
     kpi: {
@@ -1225,23 +1225,23 @@ window.BELHER = {
     prediccionBolsa: [
       {
         simbolo: "CVGW", empresa: "Calavo Growers",
-        tendencia: "lateral",
-        precioActual: 27.63,
+        tendencia: "bajista",
+        precioActual: 26.99,
         precioObj90d: 29.50,
         riesgoBajo: 22.00,
-        confianza: 60,
-        razonamiento: "CVGW $27.63 (-0.32% vs prev close $27.72, 14-Abr). Leve corrección tras máximos recientes. Vine-ripe en NUEVO MÁXIMO $58.95-60.95 y jalapeño REBOTA a $58-60/bu (Corbel #0027) — señales positivas para márgenes Q2 Calavo. Resistencia técnica clave $28.72 (máximo 52s). FAO alerta Hormuz podría impactar costos de socios mexicanos pero sigue siendo risk teórico. Perspectiva positiva para Q2.",
-        factores: ["Vine-ripe $58.95-60.95 NUEVO MÁXIMO (Corbel #0027) — impulsa márgenes Q2 Calavo", "Jalapeño rebota a $58-60 (+$14 en 24h) — recuperación de volúmenes chile esperada", "Resistencia técnica $28.72 (máximo 52s) — próxima prueba clave", "FAO Hormuz risk — impacto potencial en costos insumos socios mexicanos"]
+        confianza: 55,
+        razonamiento: "CVGW $26.99 (-3.82% vs prev close $28.06, 15-Abr). Caída pronunciada en una sesión — pierde zona de soporte $27-28. Corrección puede ser movimiento de mercado amplio (risk-off) dado que AVO cayó -7.56% el mismo día. Fundamentales de Calavo siguen positivos: vine-ripe en máximos $58.95-60.95 y jalapeño en $58-60 señalan márgenes Q2 sólidos. Soporte técnico en $25.50-26 (zona de acumulación previa).",
+        factores: ["Caída -3.82% el 15-Abr — movimiento sectorial, no aislado (AVO -7.56%)", "Vine-ripe $58.95-60.95 NUEVO MÁXIMO (Corbel #0027) — fundamentales Q2 positivos", "Soporte técnico $25.50-26 — zona de compra para horizonte 90 días", "FAO Hormuz risk — impacto potencial en costos insumos socios mexicanos"]
       },
       {
         simbolo: "AVO", empresa: "Mission Produce",
-        tendencia: "lateral",
-        precioActual: 14.81,
+        tendencia: "bajista",
+        precioActual: 14.18,
         precioObj90d: 16.50,
         riesgoBajo: 11.50,
-        confianza: 57,
-        razonamiento: "AVO $14.81 (-1.46% vs prev close $15.03, 14-Abr). Corrección técnica tras cerrar en máximos recientes. Consolida por debajo del máximo 52s $15.36. La recuperación desde mínimos $9.60 sigue intacta. Para Belher: Mission Produce mantiene su función como palanca de negociación en renovaciones contractuales con Calavo.",
-        factores: ["Corrección técnica (-1.46%) tras sesiones de fortaleza — natural en acumulación", "Acumulación bajo máximo 52s $15.36 — próxima prueba de resistencia", "Recuperación aguacate impulsa múltiplos del sector produce", "Potencial alternativa a Calavo — palanca de negociación Belher"]
+        confianza: 50,
+        razonamiento: "AVO $14.18 (-7.56% vs prev close $15.34, 15-Abr). Corrección severa en una sesión — pierde niveles de cierre reciente y retrocede bajo máximo 52s $15.53. Magnitud del movimiento sugiere venta institucional o evento macro que presiona el sector. Soporte clave en $13.50. Para Belher: Mission Produce sigue activo como palanca de negociación ante Calavo, pero señal negativa de corto plazo.",
+        factores: ["Corrección -7.56% severa el 15-Abr — mayor movimiento diario negativo reciente", "Cierra bajo máximo 52s $15.53 — falla de ruptura alcista", "Soporte $13.50 — nivel clave a monitorear", "Recuperación desde mínimos $9.88 sigue intacta en perspectiva anual"]
       }
     ]
   },
