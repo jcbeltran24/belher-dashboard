@@ -4,6 +4,8 @@
   "type": "module",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
+    "@notionhq/client": "^2.2.15",
+    "@tryfabric/martian": "^1.2.4",
     "googleapis": "^140.0.0"
   }
 }
