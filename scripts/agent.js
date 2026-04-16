@@ -191,7 +191,6 @@ async function main() {
   const auth   = makeAuth();
   const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-  // Read only the Task 1 section from agent_prompt.md
   const agentPrompt = fs.readFileSync(path.join(ROOT, 'agent_prompt.md'), 'utf-8');
 
   const now = new Date();
@@ -232,6 +231,17 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 1:
       const text = resp.content.filter(b => b.type === 'text').map(b => b.text).join('\n');
       console.log('\n✅ Finished:\n', text);
       break;
+    }
+
+    if (resp.stop_reason === 'max_tokens') {
+      const pending = resp.content.filter(b => b.type === 'tool_use');
+      if (pending.length > 0) {
+        messages.push({ role: 'user', content: pending.map(c => ({
+          type: 'tool_result', tool_use_id: c.id,
+          content: 'Truncated — please continue.', is_error: true
+        }))});
+      }
+      continue;
     }
 
     if (resp.stop_reason === 'tool_use') {
