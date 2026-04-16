@@ -218,7 +218,7 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 1:
     console.log(`\n── iter ${iter} ──`);
 
     const resp = await callClaude(claude, {
-      model: 'claude-opus-4-7',
+      model: 'claude-sonnet-4-6',
       max_tokens: 16000,
       system: systemPrompt,
       messages,
