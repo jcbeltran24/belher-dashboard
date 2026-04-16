@@ -91,7 +91,7 @@ async function runTool(name, input, { auth, notion }) {
 
   if (name === 'gmail_search_threads') {
     const res = await gmail.users.threads.list({
-      userId: 'me', q: input.query, maxResults: input.maxResults || 15
+      userId: 'me', q: input.query, maxResults: Math.min(input.maxResults || 8, 8)
     });
     const threads = res.data.threads || [];
     const results = await Promise.all(threads.map(async (t) => {
@@ -126,7 +126,7 @@ async function runTool(name, input, { auth, notion }) {
         subject: h('Subject'),
         from: h('From'),
         date: h('Date'),
-        body: body.replace(/\r\n/g, '\n').slice(0, 3000)
+        body: body.replace(/\r\n/g, '\n').slice(0, 1200)
       };
     });
   }
