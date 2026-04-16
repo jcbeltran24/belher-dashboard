@@ -39,7 +39,7 @@ const TOOLS = [
       type: 'object',
       properties: {
         query: { type: 'string', description: 'Gmail search query (same syntax as Gmail search bar)' },
-        maxResults: { type: 'number', description: 'Max threads to return (default 15)' }
+        maxResults: { type: 'number', description: 'Max threads to return (default 8, max 8)' }
       },
       required: ['query']
     }
@@ -91,7 +91,7 @@ async function runTool(name, input, { auth, notion }) {
 
   if (name === 'gmail_search_threads') {
     const res = await gmail.users.threads.list({
-      userId: 'me', q: input.query, maxResults: input.maxResults || 15
+      userId: 'me', q: input.query, maxResults: Math.min(input.maxResults || 8, 8)
     });
     const threads = res.data.threads || [];
     const results = await Promise.all(threads.map(async (t) => {
@@ -126,7 +126,7 @@ async function runTool(name, input, { auth, notion }) {
         subject: h('Subject'),
         from: h('From'),
         date: h('Date'),
-        body: body.replace(/\r\n/g, '\n').slice(0, 3000)
+        body: body.replace(/\r\n/g, '\n').slice(0, 1200)
       };
     });
   }
@@ -195,13 +195,11 @@ async function main() {
 
   const agentPrompt = fs.readFileSync(path.join(ROOT, 'agent_prompt.md'), 'utf-8');
 
-  // Get Mexico City date components
   const now     = new Date();
   const mxParts = now.toLocaleDateString('en-CA', { timeZone: 'America/Mexico_City' }).split('-');
   const year    = +mxParts[0];
-  const month   = +mxParts[1];   // 1-12
+  const month   = +mxParts[1];
   const day     = +mxParts[2];
-  // Day of week in MX timezone
   const wk      = new Date(Date.UTC(year, month - 1, day)).getUTCDay();
 
   const titleDate = `${DAYS_SHORT[wk]} ${String(day).padStart(2,'0')} ${MONTHS_SHORT[month-1]} ${year}`;
@@ -217,7 +215,7 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 2 (Morning Briefing en Notion):
 - Herramientas disponibles en este script (NO uses MCP): gmail_search_threads, gmail_get_thread, gcal_list_events, create_briefing_page.
 - Para el briefing:
   1. Busca Gmail (newer_than:1d) con queries separadas para ABSA, ADM, Firma Norte.
-  2. Lee cuerpos de correos relevantes con gmail_get_thread.
+  2. Lee cuerpos de correos relevantes con gmail_get_thread (máximo 4 threads).
   3. Lista eventos de calendario con gcal_list_events (hoy + próximos 3 días).
   4. Al final, llama create_briefing_page EXACTAMENTE UNA VEZ con el briefing completo en markdown.
 - Estructura obligatoria del markdown (en español):

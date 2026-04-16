@@ -32,7 +32,7 @@ const TOOLS = [
       type: 'object',
       properties: {
         query: { type: 'string', description: 'Gmail search query (same syntax as Gmail search bar)' },
-        maxResults: { type: 'number', description: 'Max threads to return (default 15)' }
+        maxResults: { type: 'number', description: 'Max threads to return (default 8, max 8)' }
       },
       required: ['query']
     }
@@ -92,7 +92,7 @@ async function runTool(name, input, auth) {
     const res = await gmail.users.threads.list({
       userId: 'me',
       q: input.query,
-      maxResults: input.maxResults || 15
+      maxResults: Math.min(input.maxResults || 8, 8)
     });
     const threads = res.data.threads || [];
     const results = await Promise.all(threads.map(async (t) => {
@@ -127,7 +127,7 @@ async function runTool(name, input, auth) {
         subject: h('Subject'),
         from: h('From'),
         date: h('Date'),
-        body: body.replace(/\r\n/g, '\n').slice(0, 3000)
+        body: body.replace(/\r\n/g, '\n').slice(0, 1200)
       };
     });
   }
@@ -205,7 +205,8 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 1:
 - Ejecuta ÚNICAMENTE el Task 1 (actualizar data.js y hacer commit/push a main).
 - NO ejecutes Task 2 (briefing Notion) — lo maneja otra rutina.
 - Herramientas disponibles: gmail_search_threads, gmail_get_thread, read_file, write_file, git_commit_push.
-- Reglas críticas: solo modifica data.js, escríbelo COMPLETO, nunca toques index.html ni dashboard_belher.html.`;
+- Reglas críticas: solo modifica data.js, escríbelo COMPLETO, nunca toques index.html ni dashboard_belher.html.
+- IMPORTANTE: Lee máximo 4 threads de email completos (gmail_get_thread) para no exceder límites de API.`;
 
   const messages = [
     { role: 'user', content: 'Ejecuta Task 1: actualiza data.js con los emails de las últimas 24h y haz commit/push a main.' }
