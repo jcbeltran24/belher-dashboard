@@ -2,7 +2,7 @@ name: Dashboard Auto-Update
 
 on:
   schedule:
-    - cron: '0 12 * * 1-5'   # 7am Mexico City (CDT) · lun–vie
+    - cron: '0 12 * * *'   # 7am Mexico City (CDT) · todos los días
   workflow_dispatch:
 
 concurrency:
