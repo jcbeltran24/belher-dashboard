@@ -5,6 +5,10 @@ on:
     - cron: '0 12 * * 1-5'   # 7am Mexico City (CDT) · lun–vie
   workflow_dispatch:
 
+concurrency:
+  group: dashboard-update
+  cancel-in-progress: false
+
 jobs:
   update:
     name: Update data.js
@@ -14,12 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: main
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: scripts/package.json
       - run: npm install
         working-directory: scripts
       - run: node scripts/agent.js
