@@ -149,7 +149,10 @@ async function runTool(name, input, auth) {
     run('git config user.email "bot@agbelher.com"');
     run('git config user.name "Belher-Dashboard-Bot"');
     run(`git remote set-url origin "https://g${process.env.GH_PAT}@github.com/jcbeltran24/belher-dashboard.git"`);
+    // stash local changes, pull latest main, then restore
+    run('git stash');
     run('git pull --rebase origin main');
+    run('git stash pop');
     run('git add data.js');
     try {
       run(`git commit -m "${input.message.replace(/"/g, "'")}"`);
@@ -198,7 +201,7 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 1:
     console.log(`\n── iter ${iter} ──`);
 
     const resp = await claude.messages.create({
-      model: 'claude-opus-4-5',
+      model: 'claude-opus-4-7',
       max_tokens: 16000,
       system: systemPrompt,
       messages,
