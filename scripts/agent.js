@@ -149,7 +149,6 @@ async function runTool(name, input, auth) {
     run('git config user.email "bot@agbelher.com"');
     run('git config user.name "Belher-Dashboard-Bot"');
     run(`git remote set-url origin "https://${process.env.GH_PAT}@github.com/jcbeltran24/belher-dashboard.git"`);
-    // stash local changes, pull latest main, then restore
     run('git stash');
     run('git pull --rebase origin main');
     run('git stash pop');
@@ -234,14 +233,8 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 1:
     }
 
     if (resp.stop_reason === 'max_tokens') {
-      const pending = resp.content.filter(b => b.type === 'tool_use');
-      if (pending.length > 0) {
-        messages.push({ role: 'user', content: pending.map(c => ({
-          type: 'tool_result', tool_use_id: c.id,
-          content: 'Truncated — please continue.', is_error: true
-        }))});
-      }
-      continue;
+      console.error('⚠️ max_tokens reached — output too large. Aborting.');
+      break;
     }
 
     if (resp.stop_reason === 'tool_use') {
