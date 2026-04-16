@@ -148,7 +148,7 @@ async function runTool(name, input, auth) {
     const run = (cmd) => execSync(cmd, { cwd: ROOT, stdio: 'pipe' }).toString().trim();
     run('git config user.email "bot@agbelher.com"');
     run('git config user.name "Belher-Dashboard-Bot"');
-    run(`git remote set-url origin "https://g${process.env.GH_PAT}@github.com/jcbeltran24/belher-dashboard.git"`);
+    run(`git remote set-url origin "https://${process.env.GH_PAT}@github.com/jcbeltran24/belher-dashboard.git"`);
     // stash local changes, pull latest main, then restore
     run('git stash');
     run('git pull --rebase origin main');
@@ -218,7 +218,7 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 1:
     console.log(`\n── iter ${iter} ──`);
 
     const resp = await callClaude(claude, {
-      model: 'claude-opus-4-7',
+      model: 'claude-sonnet-4-6',
       max_tokens: 16000,
       system: systemPrompt,
       messages,
