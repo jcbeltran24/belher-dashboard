@@ -2,15 +2,15 @@ window.BELHER = {
   meta: {
     fecha: "Jueves 16 Abr 2026",
     semana: "WK 16",
-    actualizado: "16/04/2026 · 06:00"
+    actualizado: "16/04/2026 · 11:45"
   },
 
   alertas: [
-    { nivel: "warning", texto: "MERMA BOLA CALAVO 4.75% el 14/04 — reversión en 24h desde el excelente 0.93% del 13/04. Patrón inestable WK16 D1-2: merma oscila 0.93%↔4.75%. Promedio WK16 Bola: 2.84%. Vigilancia activa antes de próximo embarque." },
-    { nivel: "danger",  texto: "CVGW -5.05% ($26.64 close oficial 15-Abr) + AVO -10.35% ($13.75) — corrección sectorial pronunciada. AVO pierde -10.35% en una sesión vs max 52s $15.53. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
-    { nivel: "success", texto: "CAPE TARIFF-REFUND PORTAL: CBP lanza el 20-Abr-2026 sistema de devolución de aranceles IEEPA invalidados (IFPA · Corbel #0028 15-Abr). Verificar facturas elegibles de importaciones Belher. Acción urgente: contactar broker aduanal (Barrenechea/L.Piña) antes del 20-Abr." },
-    { nivel: "success", texto: "Vine-ripe sostenido Corbel #0028 (15-Abr): $55.95–60.95 (depending on size) — mercado firme. USDA retail OTV +43% semanal confirmado. 15-Abr: 2 trailers Nogales (JL-30 · 1,760 + JL-50 · 1,776 = 3,536 cajas). 14-Abr: CGG-148 (1,920 cajas)." },
-    { nivel: "success", texto: "Trilla WK16: +44 ha nuevas — 14-Abr El Punk+Las Viudas (19 ha) + 15-Abr Las Viudas (25 ha). Acumulado total temporada: 175 ha. El Panteón y San Blas aún pendientes." }
+    { nivel: "success", texto: "MERMA BOLA WK16 D3 RECUPERACIÓN: 2.56% el 15/04 (vs 4.75% el 14/04 · 0.93% el 13/04). Promedio WK16 Bola (3 días): 2.75%. Tendencia de mejora — calidad estabilizándose. Continuar monitoreo antes del próximo embarque." },
+    { nivel: "success", texto: "CAPE TARIFF-REFUND PORTAL: CBP lanza el 20-Abr-2026 (en 4 días) sistema de devolución de aranceles IEEPA invalidados. Acción urgente: contactar broker aduanal (Barrenechea/L.Piña) ESTA SEMANA para identificar facturas elegibles." },
+    { nivel: "warning",  texto: "Irene Amezaga (Calavo VP Sales) viajando a Viva Expo San Antonio — reunión semanal Tomato Meeting cancelada esta semana. Prometió 'update at end of week'. Sin Tomato Weekly Update disponible para WK16 aún." },
+    { nivel: "warning",  texto: "CVGW -5.05% ($26.64 close oficial 15-Abr) + AVO -10.35% ($13.75) — corrección sectorial pronunciada. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
+    { nivel: "info",    texto: "BPSI F/S Marzo '26: reunión de revisión financiera realizada hoy 16-Abr (JC · Armando Llanes · hildelisa). Estados financieros al 31-Mar compartidos por Leima. Pendiente plan de acción y forecast Q2." }
   ],
 
   ebitda: {
@@ -193,7 +193,7 @@ window.BELHER = {
       desde: "13/04/2026",
       hasta:  "19/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:84.55, segunda:7.97, tercera:4.65, merma:2.84, peso:24.74, dias:2, alerta:false },
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:85.90, segunda:6.70, tercera:4.65, merma:2.75, peso:25.37, dias:3, alerta:false },
         { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:89.80, segunda:5.80, tercera:3.20, merma:1.20, peso:25.12, dias:1, alerta:false },
         { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:86.21, segunda:8.63, tercera:3.58, merma:1.58, peso:25.89, dias:1, alerta:false }
       ]
@@ -205,19 +205,18 @@ window.BELHER = {
       { fecha:"WK13", primaPromedio:89.20, mermaPromedio:2.82 },
       { fecha:"WK14", primaPromedio:84.11, mermaPromedio:3.69 },
       { fecha:"WK15", primaPromedio:82.01, mermaPromedio:5.12, nota:"Días 1-6: 04/04·5vars, 06/04·3vars, 07/04·4vars (incl Tolin), 08/04·1var, 09/04·3vars, 11/04·4vars. Roma Calavo 11/04 merma 6.00% — PRIMERA VEZ >4% Roma Calavo en temporada. Bola Calavo 09/04 merma 6.78% CRÍTICO. Tolin 07/04 merma 30.18% outlier." },
-      { fecha:"WK16", primaPromedio:86.28, mermaPromedio:2.12, nota:"Días 1-2 (13/04-14/04): Bola Calavo (0.93%→4.75%), Roma Millennium (1.20%), Roma Calavo (1.58%). Merma bola inestable — recuperación 13/04 no se sostuvo 14/04. Prom Bola 2.84%, prom general 2.12%." }
+      { fecha:"WK16", primaPromedio:86.74, mermaPromedio:2.20, nota:"Días 1-3 (13/04-15/04): Bola Calavo (0.93%→4.75%→2.56%), Roma Millennium 13/04 (1.20%), Roma Calavo 14/04 (1.58%). Prom Bola 3 días: 2.75%. Recuperación D3 confirma estabilización tras pico 4.75% en D2." }
     ],
     ultimoOutbound: {
-      fecha: "14/04/2026",
+      fecha: "15/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:80.75, segunda:8.25, tercera:6.25, merma:4.75, peso:26.07, alerta:true  },
-        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:86.21, segunda:8.63, tercera:3.58, merma:1.58, peso:25.89, alerta:false }
+        { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:88.61, segunda:4.18, tercera:4.65, merma:2.56, peso:26.62, alerta:false }
       ],
       anterior: {
-        fecha: "13/04/2026",
+        fecha: "14/04/2026",
         variedades: [
-          { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:88.34, segunda:7.68, tercera:3.05, merma:0.93, peso:23.42, alerta:false },
-          { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:89.80, segunda:5.80, tercera:3.20, merma:1.20, peso:25.12, alerta:false }
+          { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:80.75, segunda:8.25, tercera:6.25, merma:4.75, peso:26.07, alerta:true  },
+          { nombre:"Roma Calavo", etiqueta:"Roma",   canal:"exportacion", primera:86.21, segunda:8.63, tercera:3.58, merma:1.58, peso:25.89, alerta:false }
         ]
       }
     }
@@ -532,6 +531,8 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"22:46", asunto:"REPORTE DE OUTBOUND TOMATE 15/04/2026 — Bola Calavo 1ª 88.61% merma 2.56% ✓ RECUPERACIÓN · mejora notable vs 4.75% del 14/04", de:"Calidad Belher", leido:false, fecha:"16/04" },
+    { hora:"10:48", asunto:"F/S BPSI Marzo '26 — Estados financieros BPSI al 31-Mar-2026 adjuntos · reunión revisión 10am hoy (JC · Armando · hildelisa)", de:"Leima Leyva · Administración", leido:false, fecha:"16/04" },
     { hora:"20:52", asunto:"REPORTE DE OUTBOUND TOMATE 14/04/2026 — Bola Calavo 1ª 80.75% merma 4.75% ⚠ ALERTA, Roma Calavo 1ª 86.21% merma 1.58%", de:"Calidad Belher", leido:false, fecha:"15/04" },
     { hora:"20:02", asunto:"AVANCE DE TRILLA 15/04/2026 SORGO (LAS VIUDAS) — 25 ha trilladas · acumulado temporada 175 ha total", de:"Bascula Belher", leido:false, fecha:"15/04" },
     { hora:"19:48", asunto:"15-04-2026 REPORTES GENERALES (empaque y embarque)", de:"EMBARQUES BELHER", leido:false, fecha:"15/04" },
@@ -617,11 +618,11 @@ window.BELHER = {
     { label:"JALAPEÑO",       valor:"$58–60",        cambio:"↑ #0027 sostenido (sin cotización #0028)",  dir:"up"      },
     { label:"TOMATE ROMA XL", valor:"$36.95–40.95", cambio:"sostenida Nogales · #0028 15-Abr",          dir:"neutral" },
     { label:"BELL VERDE XL",  valor:"$40.95–42.95", cambio:"↓ leve vs $42.95–44.95 #0027",              dir:"down"    },
-    { label:"MERMA BOLA",     valor:"4.75%",         cambio:"↑ 14/04 WK16 D2 ⚠ alerta",                dir:"down"    },
+    { label:"MERMA BOLA",     valor:"2.56%",         cambio:"↓ 15/04 recuperación · prom WK16 2.75%",   dir:"up"      },
     { label:"TRILLA SORGO",   valor:"175 ha",        cambio:"WK16: +44 ha (14-Abr 19ha + 15-Abr 25ha)", dir:"up"      },
     { label:"P&P ACUM WK15",  valor:"$3.90M",        cambio:"780,257 cajas · 458 cont",                  dir:"up"      },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",                           dir:"up"      },
-    { label:"1ª WK16 D1-2",   valor:"86.28%",        cambio:"Bola 84.55% · Roma Calavo 86.21%",          dir:"neutral" },
+    { label:"1ª WK16 D1-3",   valor:"86.74%",        cambio:"Bola 85.90% · Roma Mill 89.80% · Roma Cal 86.21%", dir:"up" },
     { label:"EMBARQUES 15/04",valor:"3,536 cajas",   cambio:"2 trailers JL-30+JL-50 · Nogales AZ",       dir:"up"      },
     { label:"CVGW",           valor:"$26.64",        cambio:"↓ -5.05% close oficial 15-Abr",             dir:"down"    },
     { label:"AVO",            valor:"$13.75",        cambio:"↓ -10.35% close oficial 15-Abr — fuerte",   dir:"down"    }
@@ -819,14 +820,14 @@ window.BELHER = {
         accion: "Monitorear semanalmente. Contactar a Calavo para posición estratégica ante posibles cambios de anti-dumping."
       },
       {
-        titulo: "BPSI: sin ingresos enero 2026, gastos ~$95K MXN/mes",
+        titulo: "BPSI: F/S Marzo 2026 revisados hoy — pendiente plan de acción Q2",
         nivel: "warning",
-        descripcion: "Blondie Producciones reportó $0 ingresos en enero 2026. Gastos operativos continuos. Pendiente resolución por cancelación de cliente.",
-        accion: "Definir plan de acción post-reunión BPSI del 16-Abr (F/S Marzo 2026 y Forecast Q2)."
+        descripcion: "Reunión BPSI realizada hoy 16-Abr. Leima compartió estados financieros al 31-Mar-2026 (BPSI). Blondie Producciones sin ingresos operativos significativos — gastos continuos. Resultado reunión con Armando Llanes y hildelisa pendiente de síntesis.",
+        accion: "Esperar síntesis de la reunión de hoy. Definir plan de acción Q2 para BPSI: opciones son recuperar cliente, conseguir nuevos contratos, o plan de cierre/suspensión ordenada."
       }
     ],
     proximos: [
-      { fecha:"16/04/2026", evento:"BPSI F/S Marzo 2026 y Forecast Q2 2026 — revisión financiera y pipeline (mañana)", tipo:"reunion", participantes:"JC · Armando Llanes · hildelisa@beautyjunkies.com" },
+      { fecha:"20/04/2026", evento:"CAPE Tariff-Refund Portal CBP Phase 1 abre — verificar facturas importaciones Belher elegibles para reembolso aranceles IEEPA invalidados (4 días)", tipo:"regulatorio", participantes:"Barrenechea/L.Piña broker aduanal · JC" },
       { fecha:"21/04/2026", evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
       { fecha:"28/04/2026", evento:"WK18 — cruce estimado deuda Calavo $0 (amortización completa $6M) — inicio de liquidación real a Belher", tipo:"financiero", participantes:"Leima · Antonio · JC" },
       { fecha:"Por confirmar (Abr 2026)", evento:"Reunión alineación Contrato 2026-2029 — John Lindeman · James Snyder · Irene Amezaga · Armando Llanes", tipo:"reunion", participantes:"Antonio, JC, Calavo, Armando Llanes, Notaría 97" }
@@ -834,7 +835,7 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "16/04/2026 · 06:00",
+    generado:  "16/04/2026 · 11:45",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
     nota:      "Síntesis de precios USDA (Corbel Seeds #0028 · 15-Abr) + outbound tomate 14/04 (Bola Calavo merma 4.75% ALERTA, Roma Calavo 1.58%) + embarques 15/04 (JL-30 1,760 + JL-50 1,776 = 3,536 cajas Nogales) + trilla sorgo 175 ha acum + CAPE tariff-refund portal 20-Abr + EU packaging rules Ago-2026. Se regenera automáticamente cada mañana.",
@@ -1028,6 +1029,12 @@ window.BELHER = {
     ],
 
     correos: [
+      {
+        fecha: "13/04/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya · Calavo",
+        asunto: "Canceled: Weekly Tomato Meeting — viajando Viva Expo San Antonio · update al final de semana",
+        tipo: "fyi", nivel: "warning",
+        resumen: "Irene cancela reunión semanal Teams del 13/04 (viajando a Viva Expo San Antonio). Mensaje a Antonio & JC: 'Will be traveling - Viva Expo San Antonio. Will send update at the end of week.' Sin Tomato Weekly Update WK15/WK16 disponible. Pendiente recibir el viernes 17-Abr o lunes 20-Abr."
+      },
       {
         fecha: "07/04/2026", de: "Leima Leyva", cargo: "Finance Manager · Agrícola Belher",
         asunto: "Re: Settle WK12 — confirmación recibo Gass Sheet WK15",
