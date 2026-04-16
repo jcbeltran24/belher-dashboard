@@ -168,6 +168,23 @@ async function runTool(name, input, { auth, notion }) {
   throw new Error(`Unknown tool: ${name}`);
 }
 
+// ─── Rate-limit aware Claude call ────────────────────────────────────────────
+async function callClaude(claude, params) {
+  while (true) {
+    try {
+      return await claude.messages.create(params);
+    } catch (err) {
+      if (err.status === 429) {
+        const wait = (parseInt(err.headers?.['retry-after'] || '60', 10) + 5) * 1000;
+        console.log(`  ⏳ Rate limit — waiting ${Math.round(wait/1000)}s...`);
+        await new Promise(r => setTimeout(r, wait));
+        continue;
+      }
+      throw err;
+    }
+  }
+}
+
 // ─── Main agent loop ──────────────────────────────────────────────────────────
 async function main() {
   console.log('☀️ Belher Morning Briefing Agent (Task 2 — Notion)');
@@ -221,7 +238,7 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 2 (Morning Briefing en Notion):
   while (iter++ < 40) {
     console.log(`\n── iter ${iter} ──`);
 
-    const resp = await claude.messages.create({
+    const resp = await callClaude(claude, {
       model: 'claude-opus-4-7',
       max_tokens: 16000,
       system: systemPrompt,
