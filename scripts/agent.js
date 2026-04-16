@@ -234,6 +234,17 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 1:
       break;
     }
 
+    if (resp.stop_reason === 'max_tokens') {
+      const pending = resp.content.filter(b => b.type === 'tool_use');
+      if (pending.length > 0) {
+        messages.push({ role: 'user', content: pending.map(c => ({
+          type: 'tool_result', tool_use_id: c.id,
+          content: 'Truncated — please continue.', is_error: true
+        }))});
+      }
+      continue;
+    }
+
     if (resp.stop_reason === 'tool_use') {
       const calls = resp.content.filter(b => b.type === 'tool_use');
       const results = [];
