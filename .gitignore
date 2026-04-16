@@ -1,3 +1,5 @@
 update.log
 *.sh
 update_prompt.md
+node_modules/
+scripts/node_modules/
