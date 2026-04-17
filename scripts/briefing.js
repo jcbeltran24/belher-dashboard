@@ -233,12 +233,12 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 2 (Morning Briefing en Notion):
   ];
 
   let iter = 0;
-  while (iter++ < 40) {
+  while (iter++ < 10) {
     console.log(`\n── iter ${iter} ──`);
 
     const resp = await callClaude(claude, {
-      model: 'claude-sonnet-4-6',
-      max_tokens: 16000,
+      model: 'claude-haiku-4-5',
+      max_tokens: 4000,
       system: systemPrompt,
       messages,
       tools: TOOLS
