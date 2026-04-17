@@ -2,14 +2,14 @@ window.BELHER = {
   meta: {
     fecha: "Viernes 17 Abr 2026",
     semana: "WK 16",
-    actualizado: "17/04/2026 · 00:14"
+    actualizado: "17/04/2026 · 14:30"
   },
 
   alertas: [
-    { nivel: "success", texto: "MERMA BOLA WK16 D3 RECUPERACIÓN: 2.56% el 15/04 (vs 4.75% el 14/04 · 0.93% el 13/04). Promedio WK16 Bola (3 días): 2.75%. Tendencia de mejora — calidad estabilizándose. Continuar monitoreo antes del próximo embarque." },
-    { nivel: "success", texto: "CAPE TARIFF-REFUND PORTAL: CBP lanza el 20-Abr-2026 (en 3 días) sistema de devolución de aranceles IEEPA invalidados. Acción urgente: contactar broker aduanal (Barrenechea/L.Piña) ESTE FIN DE SEMANA/LUNES para identificar facturas elegibles." },
-    { nivel: "warning",  texto: "Irene Amezaga (Calavo VP Sales) viajando a Viva Expo San Antonio — reunión semanal Tomato Meeting cancelada esta semana. Prometió 'update at end of week'. Sin Tomato Weekly Update disponible para WK16 — esperado hoy viernes 17-Abr." },
-    { nivel: "warning",  texto: "CVGW -3.65% ($26.67 close 16-Abr, desde $27.68) + AVO -6.26% ($13.78, desde $14.70) — presión sectorial continúa segundo día. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
+    { nivel: "success", texto: "🎯 CRUCE DEUDA CALAVO — WK16 CONFIRMADO: Amortización acumulada $6,679,418 supera deuda total $5,959,027. Calavo ahora le DEBE a Belher $720,391. Wire WK16: $190,335 (38,067 cajas · 24 cont · 15-Abr-2026). Fuente: Settle WK16 Calavo." },
+    { nivel: "success", texto: "WK15 ACTUAL CONFIRMADO: Revenue $2,144,379 / 53,976 cajas = FOB $39.72/caja (vs proyección $28.50). Acumulado WK01–WK16: $15,992,424 revenue · 818,324 cajas · $19.54 FOB promedio temporada." },
+    { nivel: "success", texto: "CAPE TARIFF-REFUND PORTAL: CBP lanzó el 20-Abr-2026 sistema de devolución de aranceles IEEPA. Acción urgente: contactar broker aduanal (Barrenechea/L.Piña) para identificar facturas elegibles." },
+    { nivel: "warning",  texto: "CVGW -3.65% ($26.67 close 16-Abr, desde $27.68) + AVO -6.26% ($13.78, desde $14.70) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
     { nivel: "info",    texto: "BPSI F/S Marzo '26: reunión de revisión financiera realizada 16-Abr (JC · Armando Llanes · hildelisa). Estados financieros al 31-Mar compartidos por Leima. Pendiente plan de acción y forecast Q2." }
   ],
 
@@ -19,8 +19,8 @@ window.BELHER = {
   },
 
   revenue: {
-    total:    16732676,
-    fob:      12876606,
+    total:    19848494,   /* FOB $15,992,424 + Nacional $3,856,070 — WK01–WK16 */
+    fob:      15992424,
     nacional:  3856070
   },
 
@@ -34,8 +34,9 @@ window.BELHER = {
     totalSinAnticipos: 15568498,
 
     calavo: {
-      saldo: 2873787,
-      nota: "Incluye anticipo capital ($6M), intereses, balance temporada anterior. Wire semanal = amortización — liquidación real inicia ~WK18."
+      saldo: 0,
+      creditoBelher: 720391,
+      nota: "✅ CRUCE CONFIRMADO WK16 (15-Abr-2026). Calavo amortizó $6,679,418 vs deuda total $5,959,027. Calavo le debe a Belher $720,391. Liquidación real en curso."
     },
 
     bancos: [
@@ -97,28 +98,28 @@ window.BELHER = {
     anticiposNacional: 561938,   /* anticipos recibidos de clientes nacionales — pasivo */
 
     resumen: {
-      calavo:        2873787,
-      bancos:        4340000,
-      proveedores:   7160000,
-      impuestos:     1144712,
-      subtotal:     15518499,
-      anticiposNac:   561938,
-      total:        16080437
+      calavo:               0,   /* deuda liquidada WK16 — Calavo ahora debe $720K a Belher */
+      bancos:         4340000,
+      proveedores:    7160000,
+      impuestos:      1144712,
+      subtotal:      12644712,
+      anticiposNac:    561938,
+      total:         13206650
     }
   },
 
   calavo: {
-    revenueTotal:  12876606,
+    revenueTotal:  15992424,   /* WK01–WK16 settle 15-Abr-2026 · 818,324 cajas */
     /* ESTRUCTURA DE COMISIÓN — ACTUALIZADO:
        Calavo cobra 22% de comisión total sobre el FOB.
        De ese 22%, ~10% son gastos reales (flete, inspecciones frontera, Z-code, etc.)
        y el ~12% restante es la ganancia neta de Calavo.
        NO hay anti-dumping reembolsable — el 22% es comisión definitiva. */
-    comision:            2832853,   /* 22% total — comisión Calavo (incluye gastos logísticos) */
+    comision:            3518333,   /* 22% total — comisión Calavo (incluye gastos logísticos) */
     comisionPct:             0.22,
-    zCode:           1248911,
-    ventaNeta:      8794842,
-    pickPack:       3901285,
+    zCode:           1321118,   /* gastos: In&Out, logística, expenses · WK01–WK16 */
+    ventaNeta:      11152973,   /* revenueTotal - comision - zCode */
+    pickPack:       4091620,    /* = total wire payments WK01–WK16 (P&P $5/caja) */
     intereses:        32128,
 
     /* ══════════════════════════════════════════════════════
@@ -136,32 +137,34 @@ window.BELHER = {
          ──────────
          $6,000,000 — Total a recuperar antes de liquidación real
 
-       Estado WK15 (08-Abr-2026):
-         Amortizado: $4,535,768  (75.6%)
-         Pendiente:  $1,464,232  (~3.2 semanas al ritmo WK11-WK14)
-         Estimado cruce a $0: WK18 (semana del 28-Abr-2026)               */
+       ✅ CRUCE CONFIRMADO WK16 (15-Abr-2026):
+         Amortizado acum: $6,679,418 (>100% de deuda total $5,959,027)
+         Crédito a favor de Belher: $720,391 — Calavo le debe a Belher
+         WK16 liq: $607,793 fue la última amortización — ya pasó el cruce  */
     deudaCalavo: {
-      total:           6000000,
+      total:           5959027,   /* deuda total real = anticipos + balance 2025 + etiquetas + interés */
       anticipo:        5000000,   /* 4 × $1.25M — May 15, Jun 15, Jul 15, Ago 15 de 2025 */
-      prestamoPuente:  1000000,   /* préstamo puente temporada anterior */
+      prestamoPuente:   931527,   /* balance 2025 season + etiquetas + interés 2021 loan */
       pagosAnticipo: [
-        { fecha:"15-May-2025", monto:1250000, tipo:"Anticipo", estado:"Recibido" },
-        { fecha:"15-Jun-2025", monto:1250000, tipo:"Anticipo", estado:"Recibido" },
-        { fecha:"15-Jul-2025", monto:1250000, tipo:"Anticipo", estado:"Recibido" },
-        { fecha:"15-Ago-2025", monto:1250000, tipo:"Anticipo", estado:"Recibido" },
-        { fecha:"Temp. 2025",  monto:1000000, tipo:"Puente",   estado:"Recibido" }
+        { fecha:"15-May-2025", monto:1250000, tipo:"Anticipo",         estado:"Recibido" },
+        { fecha:"15-Jun-2025", monto:1250000, tipo:"Anticipo",         estado:"Recibido" },
+        { fecha:"15-Jul-2025", monto:1250000, tipo:"Anticipo",         estado:"Recibido" },
+        { fecha:"15-Ago-2025", monto:1250000, tipo:"Anticipo",         estado:"Recibido" },
+        { fecha:"Temp. 2025",  monto: 931527, tipo:"Balance 2025+int", estado:"Recibido" }
       ],
-      amortizadoWk15:  4535768,   /* suma columna "liq" WK01–WK15 — actualizar con cada settle */
-      pendiente:       1464232,   /* 6,000,000 - amortizado — actualizar con cada settle */
-      avgLiq_wk11_14:   455647,   /* promedio semanal WK11-WK14 para proyección */
-      semanasEstimadas:      3,   /* semanas estimadas para cruzar $0 al ritmo actual */
-      cruceEstimado:  "WK18",     /* semana donde Belher empieza a recibir efectivo real */
-      cruceEstimadoFecha: "28-Abr-2026"
+      amortizadoWk16:  6679418,   /* suma columna "liq" WK01–WK16 — CRUCE SUPERADO */
+      pendiente:             0,   /* deuda liquidada — cruce ocurrió en WK16 */
+      creditoBelher:    720391,   /* Calavo le debe a Belher este saldo positivo */
+      avgLiq_wk11_14:   455647,   /* referencia histórica */
+      cruceEstimado:   "WK16",    /* cruce confirmado */
+      cruceEstimadoFecha: "15-Abr-2026",
+      cruceFecha:      "15-Abr-2026",   /* fecha REAL del cruce */
+      cruceConfirmado: true
     },
-    capitalTrabajo: 6000000,      /* = deudaCalavo.total */
+    capitalTrabajo: 5959027,      /* = deudaCalavo.total (real) */
     prestamo:        472037,
     saldoAnterior:   655867,
-    saldoActual:   -2873787,
+    saldoActual:     720391,    /* POSITIVO — Calavo le debe a Belher $720,391 */
     neto:           6564451,
 
     /* NOTA GENERAL SOBRE SETTLEMENTS:
@@ -184,7 +187,8 @@ window.BELHER = {
       { sem:"WK12", wire:"15-Mar", pago:240000,  cajas:48000, cont:29, estado:"Pagado"   },
       { sem:"WK13", wire:"25-Mar", pago:200240,  cajas:40048, cont:24, estado:"Pagado"   },
       { sem:"WK14", wire:"25-Mar", pago:152960,  cajas:30592, cont:18, estado:"Pagado"   },
-      { sem:"WK15", wire:"08-Abr", pago:269880,  cajas:53976, cont:33, estado:"Actual"   }
+      { sem:"WK15", wire:"08-Abr", pago:269880,  cajas:53976, cont:33, estado:"Pagado",  fob:39.72, nota:"FOB REAL confirmado WK16 settle: $2,144,379 / 53,976 = $39.72/cj (vs proyección $28.50)" },
+      { sem:"WK16", wire:"15-Abr", pago:190335,  cajas:38067, cont:24, estado:"Actual",  fob:28.95, nota:"Revenue $1,101,951 / 38,067 cajas · rework -3 · liq $607,793 · cruce superado" }
     ]
   },
 
@@ -224,10 +228,11 @@ window.BELHER = {
 
   tomate: {
     ventas: {
-      periodo: { desde:"01/12/2025", hasta:"05/04/2026", label:"WK01–WK15" },
-      total:   { cajas:1272957, cajasRoma:null, cajasBola:null, revenue:16732676 },
+      periodo: { desde:"01/12/2025", hasta:"15/04/2026", label:"WK01–WK16" },
+      total:   { cajas:1264440, cajasRoma:null, cajasBola:null, revenue:19848494 },
       exportacion: [
-        { etiqueta:"Calavo", cajas:826841, cajasRoma:null, cajasBola:null, revenue:12876606, nota:"WK01–WK15 al 05-Abr · P&P settle $3,901,285" }
+        { etiqueta:"Calavo", cajas:818324, cajasRoma:null, cajasBola:null, revenue:15992424,
+          nota:"WK01–WK16 al 15-Abr · P&P total $4,091,620 · FOB prom $19.54/cj · CRUCE DEUDA CONFIRMADO" }
       ],
       nacional: [
         { etiqueta:"Nacional", cajas:446116, cajasRoma:311917, cajasBola:134199, revenue:3856070,
@@ -255,7 +260,8 @@ window.BELHER = {
       { sem:"WK12", fob:19.34, usda:29.62, tipo:"real", nota:"48,000 pkgs · $928,429" },
       { sem:"WK13", fob:22.23, usda:43.75, tipo:"real", nota:"40,048 pkgs · $890,284" },
       { sem:"WK14", fob:24.93, usda:47.95, tipo:"real", nota:"Settle: 30,592 pkgs · $762,704 · Recibido total semana: 57,760 pkgs (676 pallets · 34 cargas) · Rounds +44% vs proy · Roma +121% vs proy · avg FOB mkt $39.34/cj · size mix 20% 45+ / 80% 55 & smaller" },
-      { sem:"WK15", fob:28.50, usda:58.95, tipo:"proyectado", nota:"FOB proyectado por IA — settle parcial al 05-Abr ($11.07/caja preliminar, no representativo). Mkt WK15: vine-ripe $57.95–59.95, Roma $32.95–38.95 (Nogales 08-Abr). Ratio FOB/mkt WK13–14 ≈ 50–52% → proyección $28.50. Se actualizará con liquidación final Calavo." }
+      { sem:"WK15", fob:39.72, usda:58.95, tipo:"real", nota:"CONFIRMADO WK16 settle: $2,144,379 / 53,976 cajas = $39.72/cj real. Superó proyección $28.50 por +39.7% — ratio FOB/mkt fue 67% (vs 50-52% WK13-14). Vine-ripe Nogales $57.95-59.95 sostenido." },
+      { sem:"WK16", fob:28.95, usda:58.45, tipo:"real", nota:"Settle 15-Abr: $1,101,951 / 38,067 cajas = $28.95/cj. Rework -3 cajas. Vine-ripe Nogales $55.95-60.95 (Corbel #0028). Ratio FOB/mkt ~49%." }
     ]
   },
 
@@ -620,10 +626,11 @@ window.BELHER = {
     { label:"BELL VERDE XL",  valor:"$40.95–42.95", cambio:"↓ leve vs $42.95–44.95 #0027",              dir:"down"    },
     { label:"MERMA BOLA",     valor:"2.56%",         cambio:"↓ 15/04 recuperación · prom WK16 2.75%",   dir:"up"      },
     { label:"TRILLA SORGO",   valor:"175 ha",        cambio:"WK16: +44 ha (14-Abr 19ha + 15-Abr 25ha)", dir:"up"      },
-    { label:"P&P ACUM WK15",  valor:"$3.90M",        cambio:"780,257 cajas · 458 cont",                  dir:"up"      },
+    { label:"P&P ACUM WK16",  valor:"$4.09M",        cambio:"818,324 cajas · 482 cont · cruce ✓",        dir:"up"      },
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",                           dir:"up"      },
     { label:"1ª WK16 D1-3",   valor:"86.74%",        cambio:"Bola 85.90% · Roma Mill 89.80% · Roma Cal 86.21%", dir:"up" },
     { label:"EMBARQUES 15/04",valor:"3,536 cajas",   cambio:"2 trailers JL-30+JL-50 · Nogales AZ",       dir:"up"      },
+    { label:"CRÉDITO CALAVO",  valor:"$720,391",      cambio:"↑ CRUCE WK16 — Calavo debe a Belher",       dir:"up"      },
     { label:"CVGW",           valor:"$26.67",        cambio:"↓ -3.65% close 16-Abr (desde $27.68)",      dir:"down"    },
     { label:"AVO",            valor:"$13.78",        cambio:"↓ -6.26% close 16-Abr (desde $14.70)",      dir:"down"    }
   ],
