@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 16 Abr 2026",
+    fecha: "Viernes 17 Abr 2026",
     semana: "WK 16",
-    actualizado: "16/04/2026 · 11:45"
+    actualizado: "17/04/2026 · 00:14"
   },
 
   alertas: [
     { nivel: "success", texto: "MERMA BOLA WK16 D3 RECUPERACIÓN: 2.56% el 15/04 (vs 4.75% el 14/04 · 0.93% el 13/04). Promedio WK16 Bola (3 días): 2.75%. Tendencia de mejora — calidad estabilizándose. Continuar monitoreo antes del próximo embarque." },
-    { nivel: "success", texto: "CAPE TARIFF-REFUND PORTAL: CBP lanza el 20-Abr-2026 (en 4 días) sistema de devolución de aranceles IEEPA invalidados. Acción urgente: contactar broker aduanal (Barrenechea/L.Piña) ESTA SEMANA para identificar facturas elegibles." },
-    { nivel: "warning",  texto: "Irene Amezaga (Calavo VP Sales) viajando a Viva Expo San Antonio — reunión semanal Tomato Meeting cancelada esta semana. Prometió 'update at end of week'. Sin Tomato Weekly Update disponible para WK16 aún." },
-    { nivel: "warning",  texto: "CVGW -5.05% ($26.64 close oficial 15-Abr) + AVO -10.35% ($13.75) — corrección sectorial pronunciada. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
-    { nivel: "info",    texto: "BPSI F/S Marzo '26: reunión de revisión financiera realizada hoy 16-Abr (JC · Armando Llanes · hildelisa). Estados financieros al 31-Mar compartidos por Leima. Pendiente plan de acción y forecast Q2." }
+    { nivel: "success", texto: "CAPE TARIFF-REFUND PORTAL: CBP lanza el 20-Abr-2026 (en 3 días) sistema de devolución de aranceles IEEPA invalidados. Acción urgente: contactar broker aduanal (Barrenechea/L.Piña) ESTE FIN DE SEMANA/LUNES para identificar facturas elegibles." },
+    { nivel: "warning",  texto: "Irene Amezaga (Calavo VP Sales) viajando a Viva Expo San Antonio — reunión semanal Tomato Meeting cancelada esta semana. Prometió 'update at end of week'. Sin Tomato Weekly Update disponible para WK16 — esperado hoy viernes 17-Abr." },
+    { nivel: "warning",  texto: "CVGW -3.65% ($26.67 close 16-Abr, desde $27.68) + AVO -6.26% ($13.78, desde $14.70) — presión sectorial continúa segundo día. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
+    { nivel: "info",    texto: "BPSI F/S Marzo '26: reunión de revisión financiera realizada 16-Abr (JC · Armando Llanes · hildelisa). Estados financieros al 31-Mar compartidos por Leima. Pendiente plan de acción y forecast Q2." }
   ],
 
   ebitda: {
@@ -624,8 +624,8 @@ window.BELHER = {
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",                           dir:"up"      },
     { label:"1ª WK16 D1-3",   valor:"86.74%",        cambio:"Bola 85.90% · Roma Mill 89.80% · Roma Cal 86.21%", dir:"up" },
     { label:"EMBARQUES 15/04",valor:"3,536 cajas",   cambio:"2 trailers JL-30+JL-50 · Nogales AZ",       dir:"up"      },
-    { label:"CVGW",           valor:"$26.64",        cambio:"↓ -5.05% close oficial 15-Abr",             dir:"down"    },
-    { label:"AVO",            valor:"$13.75",        cambio:"↓ -10.35% close oficial 15-Abr — fuerte",   dir:"down"    }
+    { label:"CVGW",           valor:"$26.67",        cambio:"↓ -3.65% close 16-Abr (desde $27.68)",      dir:"down"    },
+    { label:"AVO",            valor:"$13.78",        cambio:"↓ -6.26% close 16-Abr (desde $14.70)",      dir:"down"    }
   ],
 
   auditorias: [
@@ -835,10 +835,10 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "16/04/2026 · 11:45",
+    generado:  "17/04/2026 · 00:14",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
-    nota:      "Síntesis de precios USDA (Corbel Seeds #0028 · 15-Abr) + outbound tomate 14/04 (Bola Calavo merma 4.75% ALERTA, Roma Calavo 1.58%) + embarques 15/04 (JL-30 1,760 + JL-50 1,776 = 3,536 cajas Nogales) + trilla sorgo 175 ha acum + CAPE tariff-refund portal 20-Abr + EU packaging rules Ago-2026. Se regenera automáticamente cada mañana.",
+    nota:      "Síntesis de precios USDA (Corbel Seeds #0028 · 15-Abr) + outbound tomate 15/04 (Bola Calavo merma 2.56% recuperación) + embarques 15/04 (JL-30 + JL-50 = 3,536 cajas Nogales) + trilla sorgo 175 ha acum + CVGW $26.67 / AVO $13.78 (close 16-Abr) + CAPE tariff-refund portal abre el 20-Abr (en 3 días). Sin nuevas fuentes email disponibles 17-Abr.",
     items: [
       {
         id: "vine-ripe",
@@ -1016,15 +1016,15 @@ window.BELHER = {
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 26.64, prevClose: 28.06, cambio: -1.42, cambioPct: -5.05,
+        precio: 26.67, prevClose: 27.68, cambio: -1.01, cambioPct: -3.65,
         h52: 28.72, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · close oficial 15-Abr-2026"
+        fuente: "Yahoo Finance · close 16-Abr-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 13.75, prevClose: 15.34, cambio: -1.59, cambioPct: -10.35,
+        precio: 13.78, prevClose: 14.70, cambio: -0.92, cambioPct: -6.26,
         h52: 15.53, l52: 9.88, volumen: null,
-        fuente: "Yahoo Finance · close oficial 15-Abr-2026"
+        fuente: "Yahoo Finance · close 16-Abr-2026"
       }
     ],
 
@@ -1243,22 +1243,22 @@ window.BELHER = {
       {
         simbolo: "CVGW", empresa: "Calavo Growers",
         tendencia: "bajista",
-        precioActual: 26.64,
+        precioActual: 26.67,
         precioObj90d: 29.00,
         riesgoBajo: 22.00,
         confianza: 52,
-        razonamiento: "CVGW $26.64 (-5.05% vs prev close $28.06, close oficial 15-Abr). Caída de dos sesiones consecutivas: -3.82% (intraday 15-Abr) → -5.05% (close oficial). Rompe zona de soporte $27 que había mantenido en sesiones previas. AVO cayó -10.35% el mismo día — confirma movimiento sectorial, no específico de Calavo. Fundamentales siguen positivos: vine-ripe firm $55.95-60.95 (#0028) y jalapeño $58-60 señalan márgenes Q2 razonables. Soporte técnico en $25.50 (zona de acumulación previa). Si el sector se estabiliza, CVGW puede recuperar $28-29 en 60-90 días.",
-        factores: ["Caída -5.05% close oficial 15-Abr — dos sesiones consecutivas negativas", "AVO -10.35% mismo día — movimiento sectorial produce amplio", "Vine-ripe firm $55.95-60.95 (#0028) — fundamentales Q2 no deteriorados", "Soporte $25.50-26 — zona técnica clave, sin ruptura catastrófica", "Contrato Calavo 2026-2029 en revisión — riesgo/oportunidad de largo plazo"]
+        razonamiento: "CVGW $26.67 (-3.65% vs prev close $27.68, close 16-Abr). Tercera sesión consecutiva bajista: desde $28.06 el 15-Abr, $26.64 el 15-Abr, $27.68 cierre intermedio, $26.67 el 16-Abr. La acción permanece bajo zona de soporte $27. AVO también cae -6.26% el mismo día — presión sectorial persistente. Sin catalizador positivo inmediato visible; CAPE portal 20-Abr podría ser neutral o marginalmente positivo. Fundamentales de temporada siguen sólidos con vine-ripe firme.",
+        factores: ["CVGW $26.67 (-3.65% close 16-Abr) — tercera sesión de presión consecutiva", "AVO -6.26% mismo día $13.78 — movimiento sectorial produce amplio continúa", "Vine-ripe Nogales $55.95-60.95 (#0028) — fundamentales Q2 siguen positivos", "Soporte técnico $25.50-26 — zona clave no quebrada aún", "CAPE tariff-refund portal abre 20-Abr — posible catalizador sectorial menor"]
       },
       {
         simbolo: "AVO", empresa: "Mission Produce",
         tendencia: "bajista",
-        precioActual: 13.75,
+        precioActual: 13.78,
         precioObj90d: 16.00,
         riesgoBajo: 11.50,
         confianza: 48,
-        razonamiento: "AVO $13.75 (-10.35% vs prev close $15.34, close oficial 15-Abr). Corrección severa de -10.35% en una sesión — cierra $1.59 bajo el cierre del día anterior y muy por debajo del máximo 52s $15.53 alcanzado hace apenas días. La magnitud del movimiento sugiere venta institucional o evento específico de la compañía que el mercado procesó. Soporte inmediato en $13.50. Para Belher: Mission Produce sigue siendo palanca de negociación ante Calavo, pero la debilidad del precio señala que el sector aguacate/produce está bajo presión de margen o valuación.",
-        factores: ["Corrección -10.35% en una sesión — mayor movimiento negativo reciente de AVO", "Cierra bajo zona de ruptura $14 — señal técnica bajista de corto plazo", "Soporte clave $13.50 — ruptura activaría caída hacia $12", "Recuperación desde mínimos $9.88 sigue válida en perspectiva de año completo", "Sector produce bajo presión: CVGW -5.05% mismo día — movimiento correlacionado"]
+        razonamiento: "AVO $13.78 (-6.26% vs prev close $14.70, close 16-Abr). La recuperación parcial desde el mínimo del 15-Abr ($13.75) resultó efímera — volvió a caer el 16-Abr. Patrón de distribución activo cerca de zona $14. Soporte inmediato en $13.50 crítico. Para Belher: debilidad sostenida de AVO refuerza la posición relativa de Calavo en el sector. Si AVO rompe $13.50, podría testear $12.50.",
+        factores: ["AVO $13.78 (-6.26% close 16-Abr) — sin recuperación sostenida tras mínimo del 15-Abr", "Soporte $13.50 siendo testeado — ruptura activaría caída hacia $12.50", "Recuperación desde mínimos $9.88 válida en perspectiva de año completo", "Sector produce bajo presión: CVGW -3.65% mismo día — correlación activa", "Fundamentales aguacate estacionales: Q2/Q3 usualmente fuertes para AVO"]
       }
     ]
   },
