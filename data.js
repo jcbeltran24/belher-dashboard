@@ -1015,10 +1015,10 @@ window.BELHER = {
   },
 
   calavoWeekly: {
-    semana:      "WK14",
-    fechas:      "23–29 Mar 2026",
-    fuente:      "Carlos Valadez + Irene Amezaga · Calavo Growers · Gass Sheet WK15",
-    actualizado: "08/04/2026",
+    semana:      "WK16",
+    fechas:      "12–18 Abr 2026",
+    fuente:      "Carlos Valadez · Calavo Growers · Settle WK16 · 15-Abr-2026",
+    actualizado: "17/04/2026",
 
     acciones: [
       {
@@ -1099,23 +1099,24 @@ window.BELHER = {
     ],
 
     alertas: [
-      { nivel: "success", texto: "Liquidaciones WK01–WK15 actualizadas · FOB total $12.87M · 780,257 pkgs. WK15 settle parcial al 05-Abr ($597,772 · 53,976 pkgs) — precio por caja $11.07, settle final pendiente." },
-      { nivel: "warning", texto: "Contrato 2026 pendiente — borrador recibido 13-Mar con cambios. Reunión de alineación con John Lindeman y James Snyder por confirmar." },
-      { nivel: "success", texto: "WK12 sobre proyección: Rounds +7% · Roma +20%. FOB promedio $20.07 vs $18.06 WK11 (+11%)." },
-      { nivel: "danger", texto: "CVGW $26.64 (-5.05% close oficial 15-Abr) · AVO $13.75 (-10.35%) — corrección sectorial pronunciada. AVO pierde -10.35% en una sesión (prev close $15.34 → cierre $13.75). Ambas acciones bajo máximos 52s. Señal de debilidad en produce sector o ajuste macro generalizado." }
+      { nivel: "success", texto: "WK16 SETTLE RECIBIDO 15-Abr: $1,101,951 · 38,067 pkgs · 24 cargas · FOB $28.95/cj. CRUCE DEUDA CONFIRMADO — Calavo le debe $720,391 a Belher." },
+      { nivel: "success", texto: "WK15 CONFIRMADO: $2,144,379 · 53,976 pkgs · FOB $39.72/cj real (proyección $28.50 superada +39.7%). WK01–WK16 acumulado: $15,992,424 · 818,324 pkgs." },
+      { nivel: "warning", texto: "Tomato Weekly Update WK15/WK16 pendiente — Irene viajó a Viva Expo San Antonio. Desglose rounds/roma WK16 no disponible todavía." },
+      { nivel: "danger", texto: "CVGW $26.67 (-3.65%) · AVO $13.78 (-6.26%) close 16-Abr — corrección sectorial segundo día. Monitorear señal de debilidad en cadena de valor." }
     ],
 
     kpi: {
-      pallets: null, loads: 18, pkgs: 30592,
-      fobPromedio: 24.93, fobAnterior: 22.23, pkgsAnterior: 40048,
-      nota: "WK14 — loads/pkgs de settle WK15 (Carlos+Irene 07-Abr). FOB = rev/pkgs ($762,704/30,592). Pallets pendiente en Tomato Weekly Update."
+      pallets: null, loads: 24, pkgs: 38067,
+      fobPromedio: 28.95, fobAnterior: 39.72, pkgsAnterior: 53976,
+      revenueWk: 1101951, revenueAnt: 2144379,
+      nota: "WK16 — Settle 15-Abr: $1,101,951 / 38,067 pkgs = $28.95/cj. WK15 anterior: $2,144,379 / 53,976 = $39.72/cj (confirmado). Pallets pendiente Tomato Weekly Update."
     },
 
     belher: {
       rounds: { proyectado: null, actual: null, loads: null, pkgs: null, diffPct: null },
       roma:   { proyectado: null, actual: null, loads: null, pkgs: null, diffPct: null },
-      total:  { proyectado: null, actual: null, loads: 18, pkgs: 30592,
-                nota: "WK14 desde settle WK15 — desglose rounds/roma pendiente Tomato Weekly Update" }
+      total:  { proyectado: null, actual: null, loads: 24, pkgs: 38067,
+                nota: "WK16 desde Settle 15-Abr — desglose rounds/roma pendiente Tomato Weekly Update Irene" }
     },
 
     adm: {
@@ -1126,8 +1127,9 @@ window.BELHER = {
     },
 
     ventas: [
-      { variedad: "Rounds / Vine Ripe", avg: 21.37, recibido: 28806 },
-      { variedad: "Roma 25lb",          avg: 18.41, recibido: 16727 }
+      { variedad: "Rounds / Vine Ripe", avg: null,  recibido: null,  nota: "Desglose pendiente Tomato Weekly Update" },
+      { variedad: "Roma 25lb",          avg: null,  recibido: null,  nota: "Desglose pendiente Tomato Weekly Update" },
+      { variedad: "TOTAL WK16",         avg: 28.95, recibido: 38067, nota: "Settle 15-Abr: $1,101,951 / 38,067 pkgs" }
     ],
 
     usdaRef: {
@@ -1243,7 +1245,8 @@ window.BELHER = {
       { sem:"WK12", pkgs:48000,  fob:928429,   comision:204254, pp:240000,  gastos:70394, loan:23280, liq:390501 },
       { sem:"WK13", pkgs:40048,  fob:890284,   comision:195862, pp:200240,  gastos:59152, loan:17836, liq:417193 },
       { sem:"WK14", pkgs:30592,  fob:762704,   comision:167795, pp:152960,  gastos:43649, loan:10360, liq:387940 },
-      { sem:"WK15", pkgs:53976,  fob:597772,   comision:131510, pp:269880,  gastos:71079, loan:7104,  liq:118199 }
+      { sem:"WK15", pkgs:53976,  fob:2144379,  comision:471763, pp:269880,  gastos:81313, loan:18832, liq:1302591, nota:"CONFIRMADO WK16 settle — anterior era parcial" },
+      { sem:"WK16", pkgs:38067,  fob:1101951,  comision:242429, pp:190335,  gastos:55614, loan:5780,  liq:607793,  nota:"CRUCE DEUDA — amort acum $6,679,418 > deuda $5,959,027" }
     ],
 
     prediccionBolsa: [
