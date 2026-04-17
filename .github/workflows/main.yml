@@ -2,30 +2,45 @@ name: Dashboard Auto-Update
 
 on:
   schedule:
-    - cron: '0 12 * * 1-5'   # 7am Mexico City (CDT) · lun–vie
+    - cron: '0 12 * * *'   # 7am Mexico City (CDT) · todos los días
   workflow_dispatch:
+
+concurrency:
+  group: dashboard-update
+  cancel-in-progress: false
 
 jobs:
   update:
-    name: Update data.js
+    name: Update data.js & Morning Briefing
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: main
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: scripts/package.json
       - run: npm install
         working-directory: scripts
-      - run: node scripts/agent.js
+
+      - name: Task 1 — Update data.js
+        run: node scripts/agent.js
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
+
+      - name: Task 2 — Morning Briefing (Notion)
+        if: always()
+        run: node scripts/briefing.js
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}

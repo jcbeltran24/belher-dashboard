@@ -1,6 +1,6 @@
 /**
  * Belher Dashboard Agent — Task 1 only (data.js update + commit/push)
- * Runs daily via GitHub Actions. Briefing is handled by a separate routine.
+ * Lean architecture: reads only dynamic sections, patches only what changed.
  */
 
 import Anthropic from '@anthropic-ai/sdk';
@@ -13,7 +13,6 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
-// ─── Google OAuth2 ────────────────────────────────────────────────────────────
 function makeAuth() {
   const auth = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
@@ -23,92 +22,119 @@ function makeAuth() {
   return auth;
 }
 
-// ─── Tool definitions ─────────────────────────────────────────────────────────
+// ─── Array section replacer (preserves all comments & formatting outside) ────
+function replaceArraySection(content, keyword, newArray) {
+  const marker = `${keyword}: [`;
+  const start = content.indexOf(marker);
+  if (start === -1) throw new Error(`Section "${keyword}" not found in data.js`);
+  const arrOpen = start + marker.length - 1;
+  let depth = 0, i = arrOpen;
+  while (i < content.length) {
+    if (content[i] === '[') depth++;
+    else if (content[i] === ']') { depth--; if (depth === 0) break; }
+    i++;
+  }
+  const arrClose = i;
+  const indent = '    ';
+  const inner = newArray.map(item => indent + JSON.stringify(item)).join(',\n');
+  const newSection = `[\n${inner}\n  ]`;
+  return content.slice(0, arrOpen) + newSection + content.slice(arrClose + 1);
+}
+
+function prependToArray(content, keyword, newItems) {
+  const marker = `${keyword}: [`;
+  const idx = content.indexOf(marker);
+  if (idx === -1) throw new Error(`Section "${keyword}" not found`);
+  const insertAt = idx + marker.length;
+  const indent = '    ';
+  const newStr = newItems.map(item => `\n${indent}${JSON.stringify(item)},`).join('');
+  return content.slice(0, insertAt) + newStr + content.slice(insertAt);
+}
+
+// ─── Tool definitions ──────────────────────────────────────────────────────────
 const TOOLS = [
   {
     name: 'gmail_search_threads',
-    description: 'Search Gmail threads. Returns subject, from, date, snippet for each thread.',
+    description: 'Search Gmail threads. Returns subject, from, date, snippet.',
     input_schema: {
       type: 'object',
       properties: {
-        query: { type: 'string', description: 'Gmail search query (same syntax as Gmail search bar)' },
-        maxResults: { type: 'number', description: 'Max threads to return (default 15)' }
+        query: { type: 'string' },
+        maxResults: { type: 'number', description: 'Max 6' }
       },
       required: ['query']
     }
   },
   {
     name: 'gmail_get_thread',
-    description: 'Get the full text body of a Gmail thread by threadId.',
+    description: 'Get body of a Gmail thread (first 800 chars).',
     input_schema: {
       type: 'object',
-      properties: {
-        threadId: { type: 'string', description: 'The Gmail thread ID' }
-      },
+      properties: { threadId: { type: 'string' } },
       required: ['threadId']
     }
   },
   {
-    name: 'read_file',
-    description: 'Read a file from the repo root.',
-    input_schema: {
-      type: 'object',
-      properties: {
-        path: { type: 'string', description: 'File path relative to repo root (e.g. "data.js")' }
-      },
-      required: ['path']
-    }
+    name: 'read_data_summary',
+    description: 'Get current meta, alertas, and recent correos from data.js. Use BEFORE calling patch_data.',
+    input_schema: { type: 'object', properties: {} }
   },
   {
-    name: 'write_file',
-    description: 'Write content to a file in the repo. Only data.js — never touch index.html or dashboard_belher.html.',
+    name: 'patch_data',
+    description: 'Apply targeted updates to data.js. Only include fields that actually changed. Preserves all other content.',
     input_schema: {
       type: 'object',
       properties: {
-        path: { type: 'string', description: 'File path relative to repo root' },
-        content: { type: 'string', description: 'Complete file content' }
-      },
-      required: ['path', 'content']
+        meta: {
+          type: 'object',
+          description: 'Update meta fields. Only include changed ones.',
+          properties: {
+            fecha:       { type: 'string', description: 'e.g. "Viernes 17 Abr 2026"' },
+            semana:      { type: 'string', description: 'e.g. "WK 17"' },
+            actualizado: { type: 'string', description: 'e.g. "17/04/2026 · 07:00"' }
+          }
+        },
+        alertas: {
+          type: 'array',
+          description: 'Replace entire alertas array. Each item: {nivel: "success"|"warning"|"danger"|"info", texto: string}',
+          items: { type: 'object' }
+        },
+        correos_add: {
+          type: 'array',
+          description: 'New correos to prepend (today\'s only, skip duplicates). Each: {hora, asunto, de, leido:false, fecha}',
+          items: { type: 'object' }
+        }
+      }
     }
   },
   {
     name: 'git_commit_push',
-    description: 'Stage data.js, commit, and push to the main branch.',
+    description: 'Commit and push data.js to main.',
     input_schema: {
       type: 'object',
-      properties: {
-        message: { type: 'string', description: 'Commit message' }
-      },
+      properties: { message: { type: 'string' } },
       required: ['message']
     }
   }
 ];
 
-// ─── Tool implementations ─────────────────────────────────────────────────────
+// ─── Tool implementations ──────────────────────────────────────────────────────
 async function runTool(name, input, auth) {
   const gmail = google.gmail({ version: 'v1', auth });
 
   if (name === 'gmail_search_threads') {
     const res = await gmail.users.threads.list({
-      userId: 'me',
-      q: input.query,
-      maxResults: input.maxResults || 15
+      userId: 'me', q: input.query, maxResults: Math.min(input.maxResults || 6, 6)
     });
     const threads = res.data.threads || [];
     const results = await Promise.all(threads.map(async (t) => {
       const th = await gmail.users.threads.get({
         userId: 'me', id: t.id, format: 'metadata',
-        metadataHeaders: ['Subject', 'From', 'Date', 'To']
+        metadataHeaders: ['Subject', 'From', 'Date']
       });
       const msg = th.data.messages?.[0];
       const h = (n) => msg?.payload?.headers?.find(x => x.name.toLowerCase() === n.toLowerCase())?.value || '';
-      return {
-        threadId: t.id,
-        subject: h('Subject'),
-        from: h('From'),
-        date: h('Date'),
-        snippet: msg?.snippet || ''
-      };
+      return { threadId: t.id, subject: h('Subject'), from: h('From'), date: h('Date'), snippet: msg?.snippet || '' };
     }));
     return results;
   }
@@ -123,33 +149,50 @@ async function runTool(name, input, auth) {
         (part?.parts || []).forEach(extract);
       };
       extract(msg.payload || {});
-      return {
-        subject: h('Subject'),
-        from: h('From'),
-        date: h('Date'),
-        body: body.replace(/\r\n/g, '\n').slice(0, 3000)
-      };
+      return { subject: h('Subject'), from: h('From'), date: h('Date'), body: body.replace(/\r\n/g, '\n').slice(0, 800) };
     });
   }
 
-  if (name === 'read_file') {
-    return fs.readFileSync(path.join(ROOT, input.path), 'utf-8');
+  if (name === 'read_data_summary') {
+    const content = fs.readFileSync(path.join(ROOT, 'data.js'), 'utf-8');
+    const lines = content.split('\n');
+    const metaEnd = lines.findIndex((l, i) => i > 1 && /^\s*\},/.test(l));
+    const metaLines = lines.slice(0, metaEnd + 1).join('\n');
+    const alIdx = lines.findIndex(l => l.includes('alertas: ['));
+    const alertasLines = lines.slice(alIdx, alIdx + 22).join('\n');
+    const coIdx = lines.findIndex(l => l.includes('correos: ['));
+    const correosLines = lines.slice(coIdx, coIdx + 12).join('\n');
+    return `${metaLines}\n\n  // ...static financial data...\n\n  ${alertasLines}\n  // ...\n\n  ${correosLines}\n  // ...`;
   }
 
-  if (name === 'write_file') {
-    if (input.path === 'index.html' || input.path === 'dashboard_belher.html') {
-      throw new Error('NOT ALLOWED: cannot modify HTML files');
+  if (name === 'patch_data') {
+    const filePath = path.join(ROOT, 'data.js');
+    let content = fs.readFileSync(filePath, 'utf-8');
+
+    if (input.meta) {
+      if (input.meta.fecha)       content = content.replace(/fecha:\s*"[^"]*"/, `fecha: "${input.meta.fecha}"`);
+      if (input.meta.semana)      content = content.replace(/semana:\s*"[^"]*"/, `semana: "${input.meta.semana}"`);
+      if (input.meta.actualizado) content = content.replace(/actualizado:\s*"[^"]*"/, `actualizado: "${input.meta.actualizado}"`);
     }
-    fs.writeFileSync(path.join(ROOT, input.path), input.content, 'utf-8');
-    return `OK: wrote ${input.path} (${input.content.length} chars)`;
+    if (input.alertas) {
+      content = replaceArraySection(content, 'alertas', input.alertas);
+    }
+    if (input.correos_add && input.correos_add.length > 0) {
+      content = prependToArray(content, 'correos', input.correos_add);
+    }
+
+    fs.writeFileSync(filePath, content, 'utf-8');
+    return `OK: patched data.js (meta=${!!input.meta}, alertas=${!!input.alertas}, correos_add=${input.correos_add?.length || 0})`;
   }
 
   if (name === 'git_commit_push') {
     const run = (cmd) => execSync(cmd, { cwd: ROOT, stdio: 'pipe' }).toString().trim();
     run('git config user.email "bot@agbelher.com"');
     run('git config user.name "Belher-Dashboard-Bot"');
-    run(`git remote set-url origin "https://g${process.env.GH_PAT}@github.com/jcbeltran24/belher-dashboard.git"`);
+    run(`git remote set-url origin "https://${process.env.GH_PAT}@github.com/jcbeltran24/belher-dashboard.git"`);
+    try { run('git stash'); } catch (_) {}
     run('git pull --rebase origin main');
+    try { run('git stash pop'); } catch (_) {}
     run('git add data.js');
     try {
       run(`git commit -m "${input.message.replace(/"/g, "'")}"`);
@@ -164,14 +207,29 @@ async function runTool(name, input, auth) {
   throw new Error(`Unknown tool: ${name}`);
 }
 
-// ─── Main agent loop ──────────────────────────────────────────────────────────
+// ─── Rate-limit aware Claude call ─────────────────────────────────────────────
+async function callClaude(claude, params) {
+  while (true) {
+    try {
+      return await claude.messages.create(params);
+    } catch (err) {
+      if (err.status === 429) {
+        const wait = (parseInt(err.headers?.['retry-after'] || '60', 10) + 5) * 1000;
+        console.log(`  ⏳ Rate limit — waiting ${Math.round(wait / 1000)}s...`);
+        await new Promise(r => setTimeout(r, wait));
+        continue;
+      }
+      throw err;
+    }
+  }
+}
+
+// ─── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
   console.log('🚀 Belher Dashboard Agent (Task 1 — data.js update)');
 
   const auth   = makeAuth();
   const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
-  // Read only the Task 1 section from agent_prompt.md
   const agentPrompt = fs.readFileSync(path.join(ROOT, 'agent_prompt.md'), 'utf-8');
 
   const now = new Date();
@@ -180,26 +238,18 @@ async function main() {
     timeZone: 'America/Mexico_City'
   }).format(now);
 
-  const systemPrompt = `${agentPrompt}
-
-EJECUCIÓN AUTOMÁTICA — SOLO TASK 1:
-- Fecha y hora actuales: ${dtMX} (${now.toISOString()})
-- Ejecuta ÚNICAMENTE el Task 1 (actualizar data.js y hacer commit/push a main).
-- NO ejecutes Task 2 (briefing Notion) — lo maneja otra rutina.
-- Herramientas disponibles: gmail_search_threads, gmail_get_thread, read_file, write_file, git_commit_push.
-- Reglas críticas: solo modifica data.js, escríbelo COMPLETO, nunca toques index.html ni dashboard_belher.html.`;
+  const systemPrompt = `${agentPrompt}\n\nEJECUCIÓN AUTOMÁTICA — SOLO TASK 1:\n- Fecha y hora: ${dtMX} (${now.toISOString()})\n- Herramientas: gmail_search_threads, gmail_get_thread, read_data_summary, patch_data, git_commit_push.\n- Flujo obligatorio:\n  1. Busca Gmail últimas 24h (máx 2 búsquedas, 6 resultados c/u).\n  2. Lee máximo 3 threads relevantes con gmail_get_thread.\n  3. Llama read_data_summary para ver estado actual.\n  4. Llama patch_data UNA VEZ con todos los cambios.\n  5. Llama git_commit_push.\n- NO uses write_file ni read_file — solo patch_data modifica data.js.\n- patch_data preserva todo el archivo excepto los campos que indiques.`;
 
   const messages = [
     { role: 'user', content: 'Ejecuta Task 1: actualiza data.js con los emails de las últimas 24h y haz commit/push a main.' }
   ];
 
   let iter = 0;
-  while (iter++ < 50) {
+  while (iter++ < 20) {
     console.log(`\n── iter ${iter} ──`);
-
-    const resp = await claude.messages.create({
-      model: 'claude-opus-4-5',
-      max_tokens: 16000,
+    const resp = await callClaude(claude, {
+      model: 'claude-sonnet-4-6',
+      max_tokens: 4000,
       system: systemPrompt,
       messages,
       tools: TOOLS
@@ -214,15 +264,20 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 1:
       break;
     }
 
+    if (resp.stop_reason === 'max_tokens') {
+      console.error('⚠️ max_tokens hit — aborting.');
+      break;
+    }
+
     if (resp.stop_reason === 'tool_use') {
       const calls = resp.content.filter(b => b.type === 'tool_use');
       const results = [];
       for (const call of calls) {
-        console.log(`  🔧 ${call.name}(${JSON.stringify(call.input).slice(0, 120)})`);
+        console.log(`  🔧 ${call.name}(${JSON.stringify(call.input).slice(0, 100)})`);
         try {
           const out = await runTool(call.name, call.input, auth);
           const str = typeof out === 'string' ? out : JSON.stringify(out);
-          console.log(`  ✓ ${str.slice(0, 200)}`);
+          console.log(`  ✓ ${str.slice(0, 150)}`);
           results.push({ type: 'tool_result', tool_use_id: call.id, content: str });
         } catch (err) {
           console.error(`  ✗ ${err.message}`);
