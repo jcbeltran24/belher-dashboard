@@ -6,7 +6,7 @@ window.BELHER = {
   },
 
   alertas: [
-    { nivel: "success", texto: "🎯 CRUCE DEUDA CALAVO — WK16 CONFIRMADO: Amortización acumulada $6,679,418 supera deuda total $5,959,027. Calavo ahora le DEBE a Belher $720,391. Wire WK16: $190,335 (38,067 cajas · 24 cont · 15-Abr-2026). Fuente: Settle WK16 Calavo." },
+    { nivel: "success", texto: "💰 POR LIQUIDAR CALAVO — $720,391 acumulado WK01–WK16. La deuda de $5,959,027 quedó cubierta; este saldo crece semana a semana con cada nuevo settle. WK16: $190,335 wire + $607,793 recuperación final de deuda (15-Abr-2026)." },
     { nivel: "success", texto: "WK15 ACTUAL CONFIRMADO: Revenue $2,144,379 / 53,976 cajas = FOB $39.72/caja (vs proyección $28.50). Acumulado WK01–WK16: $15,992,424 revenue · 818,324 cajas · $19.54 FOB promedio temporada." },
     { nivel: "success", texto: "CAPE TARIFF-REFUND PORTAL: CBP lanzó el 20-Abr-2026 sistema de devolución de aranceles IEEPA. Acción urgente: contactar broker aduanal (Barrenechea/L.Piña) para identificar facturas elegibles." },
     { nivel: "warning",  texto: "CVGW -3.65% ($26.67 close 16-Abr, desde $27.68) + AVO -6.26% ($13.78, desde $14.70) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
@@ -36,7 +36,7 @@ window.BELHER = {
     calavo: {
       saldo: 0,
       creditoBelher: 720391,
-      nota: "✅ CRUCE CONFIRMADO WK16 (15-Abr-2026). Calavo amortizó $6,679,418 vs deuda total $5,959,027. Calavo le debe a Belher $720,391. Liquidación real en curso."
+      nota: "Deuda liquidada WK16. Por liquidar acumulado: $720,391 — crece con cada settle semanal. Calavo emitirá wires de liquidación neta hasta fin de temporada."
     },
 
     bancos: [
@@ -164,7 +164,15 @@ window.BELHER = {
     capitalTrabajo: 5959027,      /* = deudaCalavo.total (real) */
     prestamo:        472037,
     saldoAnterior:   655867,
-    saldoActual:     720391,    /* POSITIVO — Calavo le debe a Belher $720,391 */
+
+    /* ══════════════════════════════════════════════════════
+       POR LIQUIDAR — saldo acumulado que Calavo debe pagar a Belher en efectivo.
+       Fórmula: Revenue - Comisión - Gastos - Loan Amort - P&P Wire ya enviado.
+       WK16 base: liq acum $6,679,418 - deuda total $5,959,027 = $720,391
+       Crece cada semana: += (Revenue_wk × 0.78) - Gastos_wk - Wire_wk
+       Se resetea a 0 cuando Calavo emite wire de liquidación final.          */
+    porLiquidar:     720391,    /* actualizar con cada settle — suma acumulada WK01–WK16 */
+    saldoActual:     720391,    /* alias legacy — igual a porLiquidar */
     neto:           6564451,
 
     /* NOTA GENERAL SOBRE SETTLEMENTS:
@@ -630,7 +638,7 @@ window.BELHER = {
     { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",                           dir:"up"      },
     { label:"1ª WK16 D1-3",   valor:"86.74%",        cambio:"Bola 85.90% · Roma Mill 89.80% · Roma Cal 86.21%", dir:"up" },
     { label:"EMBARQUES 15/04",valor:"3,536 cajas",   cambio:"2 trailers JL-30+JL-50 · Nogales AZ",       dir:"up"      },
-    { label:"CRÉDITO CALAVO",  valor:"$720,391",      cambio:"↑ CRUCE WK16 — Calavo debe a Belher",       dir:"up"      },
+    { label:"POR LIQUIDAR",    valor:"$720,391",      cambio:"↑ WK16 acum — crece cada settle",           dir:"up"      },
     { label:"CVGW",           valor:"$26.67",        cambio:"↓ -3.65% close 16-Abr (desde $27.68)",      dir:"down"    },
     { label:"AVO",            valor:"$13.78",        cambio:"↓ -6.26% close 16-Abr (desde $14.70)",      dir:"down"    }
   ],
@@ -1099,7 +1107,7 @@ window.BELHER = {
     ],
 
     alertas: [
-      { nivel: "success", texto: "WK16 SETTLE RECIBIDO 15-Abr: $1,101,951 · 38,067 pkgs · 24 cargas · FOB $28.95/cj. CRUCE DEUDA CONFIRMADO — Calavo le debe $720,391 a Belher." },
+      { nivel: "success", texto: "WK16 SETTLE RECIBIDO 15-Abr: $1,101,951 · 38,067 pkgs · 24 cargas · FOB $28.95/cj. POR LIQUIDAR acumulado: $720,391 — crece cada semana." },
       { nivel: "success", texto: "WK15 CONFIRMADO: $2,144,379 · 53,976 pkgs · FOB $39.72/cj real (proyección $28.50 superada +39.7%). WK01–WK16 acumulado: $15,992,424 · 818,324 pkgs." },
       { nivel: "warning", texto: "Tomato Weekly Update WK15/WK16 pendiente — Irene viajó a Viva Expo San Antonio. Desglose rounds/roma WK16 no disponible todavía." },
       { nivel: "danger", texto: "CVGW $26.67 (-3.65%) · AVO $13.78 (-6.26%) close 16-Abr — corrección sectorial segundo día. Monitorear señal de debilidad en cadena de valor." }
