@@ -15,8 +15,8 @@ window.BELHER = {
   ],
 
   ebitda: {
-    mes:  { nombre: "Febrero 2026", actual: 2891480, budget: 2305940, yago: 488398 },
-    ytd:  { nombre: "Jul–Feb 2026", actual: -3761987, budget: -4124108, yago: -7496875 }
+    mes:  { nombre: "Marzo 2026",   actual: 2864510, budget: 2483483,  yago: 2530188  },
+    ytd:  { nombre: "Jul–Mar 2026", actual: -1217116, budget: -1640625, yago: -4966686 }
   },
 
   revenue: {
@@ -492,6 +492,7 @@ window.BELHER = {
 
   operaciones: {
     bascula: [
+      { fecha:"17/04", productos:["Tomate","Rezaga Tomate"] },
       { fecha:"15/04", productos:["Tomate","Trilla Sorgo"] },
       { fecha:"14/04", productos:["Tomate","Trilla Sorgo"] },
       { fecha:"13/04", productos:["Tomate","Rezaga Tomate","Trilla Sorgo"] },
@@ -530,6 +531,9 @@ window.BELHER = {
       { wk:"WK15", bascKg:458030,  bascCj:40391,  pctEmp:65.6, cjCalavo:16056, cjYameto:3704,  cjTolin:1728,  cjZazu:0,     cjUrson:0,     cjMillennium:1600, cjOtros:2843, pctCalavo:38.4, pctYameto:10.1, pctTolin:5.1,  pctZazu:0.0,  pctUrson:0.0, pctMillennium:4.0, pctOtros:8.1 }
     ],
     embarques: [
+      { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"BON-01", destino:"Arizona", estado:"OK", cajas:1600 },
+      { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"BON-02", destino:"Arizona", estado:"OK", cajas:1632 },
+      { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-65", destino:"Arizona", estado:"OK", cajas:1920 },
       { fecha:"15/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-30",   destino:"Arizona", estado:"OK", cajas:1760 },
       { fecha:"15/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-50",   destino:"Arizona", estado:"OK", cajas:1776 },
       { fecha:"14/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-148", destino:"Arizona", estado:"OK", cajas:1920 },
@@ -546,10 +550,16 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"23:09","asunto":"CFDI Recibo Electrónico — Período 16 Semanal 2026 · BELTRAN OCHOA JUAN CARLOS · RFC: ABE180411CB8","de":"anajar@agbelher.com · Nómina","leido":false,"fecha":"17/04"},
+    {"hora":"22:30","asunto":"Transferencia Interbancaria SPEI — depósito registrado a cuenta BanBajío · 17-Abr-2026","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"17/04"},
     {"hora":"21:50","asunto":"17-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"17/04"},
     {"hora":"21:46","asunto":"REPORTE DIARIO CALAVO 17-04-2026 — 3 trailers: BON-01 (1,600) + BON-02 (1,632) + CGG-65 (1,920) = 5,152 cajas · Tomate · Nogales","de":"EMBARQUES BELHER","leido":false,"fecha":"17/04"},
     {"hora":"21:46","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES CGG — carga Tomate 17/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"17/04"},
+    {"hora":"19:49","asunto":"REPORTES DE RESULTADOS Nutrición Foliar — Campo LA 25 Naves 1, 3, 7, 8, 10-12, 17, 18. Fechas muestreo: 14/Abr/2026","de":"conagrosc@gmail.com · Conagro","leido":false,"fecha":"17/04"},
+    {"hora":"17:26","asunto":"REPORTE DE BASCULA 17/04/2026 (REZAGA DE TOMATE) — Adjunto","de":"Bascula Belher","leido":false,"fecha":"17/04"},
+    {"hora":"17:22","asunto":"REPORTE DE BASCULA 17/04/2026 (TOMATE) — Adjunto","de":"Bascula Belher","leido":false,"fecha":"17/04"},
     {"hora":"15:26","asunto":"⚠️ AUDITORÍA CALAVO 18-19 MAY 2026 CONFIRMADA — Auditor: Javier Martínez (Buyers Edge). Sitios: Unidades de producción y empaque. Revisar inventarios, insumos críticos y servicios pendientes.","de":"C. Marisol Castro · Calidad","leido":false,"fecha":"17/04"},
+    {"hora":"03:00","asunto":"Estados Financieros Marzo 2026 — EBITDA Tomate $2,864,510 vs BUD $2,483,483 (+$381K) · YTD Jul-Mar EBITDA -$1,217,116 vs BUD -$1,640,625 (+$423K)","de":"jacruz@agbelher.com · Contabilidad","leido":false,"fecha":"17/04"},
     { hora:"22:46", asunto:"REPORTE DE OUTBOUND TOMATE 15/04/2026 — Bola Calavo 1ª 88.61% merma 2.56% ✓ RECUPERACIÓN · mejora notable vs 4.75% del 14/04", de:"Calidad Belher", leido:false, fecha:"16/04" },
     { hora:"10:48", asunto:"F/S BPSI Marzo '26 — Estados financieros BPSI al 31-Mar-2026 adjuntos · reunión revisión 10am hoy (JC · Armando · hildelisa)", de:"Leima Leyva · Administración", leido:false, fecha:"16/04" },
     { hora:"20:52", asunto:"REPORTE DE OUTBOUND TOMATE 14/04/2026 — Bola Calavo 1ª 80.75% merma 4.75% ⚠ ALERTA, Roma Calavo 1ª 86.21% merma 1.58%", de:"Calidad Belher", leido:false, fecha:"15/04" },
@@ -640,9 +650,9 @@ window.BELHER = {
     { label:"MERMA BOLA",     valor:"2.56%",         cambio:"↓ 15/04 recuperación · prom WK16 2.75%",   dir:"up"      },
     { label:"TRILLA SORGO",   valor:"175 ha",        cambio:"WK16: +44 ha (14-Abr 19ha + 15-Abr 25ha)", dir:"up"      },
     { label:"P&P ACUM WK16",  valor:"$4.09M",        cambio:"818,324 cajas · 482 cont · cruce ✓",        dir:"up"      },
-    { label:"EBITDA FEB",     valor:"$2.89M",        cambio:"vs BUD $2.31M ✓",                           dir:"up"      },
+    { label:"EBITDA MAR",     valor:"$2.86M",        cambio:"vs BUD $2.48M ✓ · YTD -$1.22M vs BUD -$1.64M",  dir:"up"      },
     { label:"1ª WK16 D1-3",   valor:"86.74%",        cambio:"Bola 85.90% · Roma Mill 89.80% · Roma Cal 86.21%", dir:"up" },
-    { label:"EMBARQUES 15/04",valor:"3,536 cajas",   cambio:"2 trailers JL-30+JL-50 · Nogales AZ",       dir:"up"      },
+    { label:"EMBARQUES 17/04",valor:"5,152 cajas",   cambio:"3 trailers BON-01+BON-02+CGG-65 · Nogales AZ", dir:"up"    },
     { label:"POR LIQUIDAR",    valor:"$720,391",      cambio:"↑ WK16 acum — crece cada settle",           dir:"up"      },
     { label:"CVGW",           valor:"$26.67",        cambio:"↓ -3.65% close 16-Abr (desde $27.68)",      dir:"down"    },
     { label:"AVO",            valor:"$13.78",        cambio:"↓ -6.26% close 16-Abr (desde $14.70)",      dir:"down"    }
@@ -755,6 +765,22 @@ window.BELHER = {
         }
       ],
       fuente: "c.marisol@agbelher.com"
+    },
+    {
+      nombre:    "Auditoría Cliente Calavo — Buyers Edge",
+      tipo:      "Visita de Cliente",
+      organismo: "Buyers Edge",
+      auditor:   "Javier Martínez",
+      alcance:   "Unidades de producción y empaque — todas las instalaciones",
+      fechaAuditoria: "18-19/05/2026",
+      estado:    "Confirmada — preparación en curso",
+      nivel:     "warning",
+      ncTotal:   null,
+      ncMayor:   null,
+      ncMenor:   null,
+      notas:     "Confirmada el 17-Apr-2026 por Chrysthian Marisol Castro. Criterios: Buenas Prácticas de Manufactura y Agrícolas. Día 1: itinerario a definir in situ con auditor. Acción: revisar inventarios de materiales e insumos críticos y gestionar servicios pendientes con tiempo.",
+      observaciones: [],
+      fuente: "c.marisol@agbelher.com · 17-Abr-2026"
     }
   ],
 
@@ -850,6 +876,7 @@ window.BELHER = {
       { fecha:"20/04/2026", evento:"CAPE Tariff-Refund Portal CBP Phase 1 abre — verificar facturas importaciones Belher elegibles para reembolso aranceles IEEPA invalidados (4 días)", tipo:"regulatorio", participantes:"Barrenechea/L.Piña broker aduanal · JC" },
       { fecha:"21/04/2026", evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
       { fecha:"28/04/2026", evento:"WK18 — cruce estimado deuda Calavo $0 (amortización completa $6M) — inicio de liquidación real a Belher", tipo:"financiero", participantes:"Leima · Antonio · JC" },
+      { fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque. Preparar inventarios y gestionar servicios pendientes.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
       { fecha:"Por confirmar (Abr 2026)", evento:"Reunión alineación Contrato 2026-2029 — John Lindeman · James Snyder · Irene Amezaga · Armando Llanes", tipo:"reunion", participantes:"Antonio, JC, Calavo, Armando Llanes, Notaría 97" }
     ]
   },
