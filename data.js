@@ -1,16 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 17 Abr 2026",
+    fecha: "Sábado 18 Abr 2026",
     semana: "WK 16",
-    actualizado: "17/04/2026 · 14:30"
+    actualizado: "18/04/2026 · 07:17"
   },
 
   alertas: [
-    { nivel: "success", texto: "💰 POR LIQUIDAR CALAVO — $720,391 acumulado WK01–WK16. La deuda de $5,959,027 quedó cubierta; este saldo crece semana a semana con cada nuevo settle. WK16: $190,335 wire + $607,793 recuperación final de deuda (15-Abr-2026)." },
-    { nivel: "success", texto: "WK15 ACTUAL CONFIRMADO: Revenue $2,144,379 / 53,976 cajas = FOB $39.72/caja (vs proyección $28.50). Acumulado WK01–WK16: $15,992,424 revenue · 818,324 cajas · $19.54 FOB promedio temporada." },
-    { nivel: "success", texto: "CAPE TARIFF-REFUND PORTAL: CBP lanzó el 20-Abr-2026 sistema de devolución de aranceles IEEPA. Acción urgente: contactar broker aduanal (Barrenechea/L.Piña) para identificar facturas elegibles." },
-    { nivel: "warning",  texto: "CVGW -3.65% ($26.67 close 16-Abr, desde $27.68) + AVO -6.26% ($13.78, desde $14.70) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
-    { nivel: "info",    texto: "BPSI F/S Marzo '26: reunión de revisión financiera realizada 16-Abr (JC · Armando Llanes · hildelisa). Estados financieros al 31-Mar compartidos por Leima. Pendiente plan de acción y forecast Q2." }
+    {"nivel":"warning","texto":"⚠️ AUDITORÍA CALAVO — 18 y 19 de Mayo 2026. Auditor: Javier Martínez (Buyers Edge). Inspeccionará unidades de producción y empaque. Acción: revisar inventarios de materiales e insumos críticos, gestionar servicios pendientes."},
+    {"nivel":"success","texto":"CALAVO 17-ABR: 3 trailers despachados — BON-01 (1,600 cajas) + BON-02 (1,632) + CGG-65 (1,920) = 5,152 cajas totales · Tomate Nogales AZ · Set point 50°F ✓"},
+    {"nivel":"success","texto":"💰 POR LIQUIDAR CALAVO — $720,391 acumulado WK01–WK16. La deuda de $5,959,027 quedó cubierta; este saldo crece semana a semana con cada nuevo settle. WK16: $190,335 wire + $607,793 recuperación final de deuda (15-Abr-2026)."},
+    {"nivel":"success","texto":"WK15 ACTUAL CONFIRMADO: Revenue $2,144,379 / 53,976 cajas = FOB $39.72/caja (vs proyección $28.50). Acumulado WK01–WK16: $15,992,424 revenue · 818,324 cajas · $19.54 FOB promedio temporada."},
+    {"nivel":"warning","texto":"CVGW -3.65% ($26.67 close 16-Abr, desde $27.68) + AVO -6.26% ($13.78, desde $14.70) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce."},
+    {"nivel":"info","texto":"ESTADOS FINANCIEROS MARZO '26: EBITDA positivo $2,864,510 vs Budget $2,483,483 (+$381,027). Departamento Tomate lidera resultado mensual. Pendiente formato gerencial para revisión con Antonio la semana siguiente."}
   ],
 
   ebitda: {
@@ -545,6 +546,10 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"21:50","asunto":"17-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"17/04"},
+    {"hora":"21:46","asunto":"REPORTE DIARIO CALAVO 17-04-2026 — 3 trailers: BON-01 (1,600) + BON-02 (1,632) + CGG-65 (1,920) = 5,152 cajas · Tomate · Nogales","de":"EMBARQUES BELHER","leido":false,"fecha":"17/04"},
+    {"hora":"21:46","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES CGG — carga Tomate 17/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"17/04"},
+    {"hora":"15:26","asunto":"⚠️ AUDITORÍA CALAVO 18-19 MAY 2026 CONFIRMADA — Auditor: Javier Martínez (Buyers Edge). Sitios: Unidades de producción y empaque. Revisar inventarios, insumos críticos y servicios pendientes.","de":"C. Marisol Castro · Calidad","leido":false,"fecha":"17/04"},
     { hora:"22:46", asunto:"REPORTE DE OUTBOUND TOMATE 15/04/2026 — Bola Calavo 1ª 88.61% merma 2.56% ✓ RECUPERACIÓN · mejora notable vs 4.75% del 14/04", de:"Calidad Belher", leido:false, fecha:"16/04" },
     { hora:"10:48", asunto:"F/S BPSI Marzo '26 — Estados financieros BPSI al 31-Mar-2026 adjuntos · reunión revisión 10am hoy (JC · Armando · hildelisa)", de:"Leima Leyva · Administración", leido:false, fecha:"16/04" },
     { hora:"20:52", asunto:"REPORTE DE OUTBOUND TOMATE 14/04/2026 — Bola Calavo 1ª 80.75% merma 4.75% ⚠ ALERTA, Roma Calavo 1ª 86.21% merma 1.58%", de:"Calidad Belher", leido:false, fecha:"15/04" },
