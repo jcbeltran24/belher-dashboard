@@ -1352,5 +1352,110 @@ window.BELHER = {
       { fecha: "DD/MM/YYYY", t1: N, t2: N, t3: N, totalGeneral: N }
       */
     ]
+  },
+
+  /* ══════════════════════════════════════════════════════
+     ESTRATEGIA — Contratos, Oportunidades, Watchlist, Agenda
+     Fuente: JC Beltrán · revisión manual semanal
+     ══════════════════════════════════════════════════════ */
+  estrategia: {
+
+    contratos: [
+      {
+        titulo:      "Contrato Calavo 2026 — Temporada Exportación",
+        descripcion: "Contrato de suministro y comercialización con Calavo Growers Inc. El addendum de P&P $5/caja está confirmado (WK12); el contrato marco 2026 está en borrador pendiente de firma.",
+        accion:      "Solicitar borrador final a Carlos Valadez / Irene Amezaga. Revisar cláusulas FOB base y tasa comisión 22%. Firmar antes del cierre de temporada.",
+        nivel:       "warning",
+        estado:      "En negociación"
+      },
+      {
+        titulo:      "BanBajío — 4 Líneas de Crédito",
+        descripcion: "Cuatro disposiciones activas: $1M (Ago-25), $750K (Ago-25), $1M (Sep-25), $1.1M (Oct-25). Vencimientos en cascada: $1.1M mayo · $1.45M junio · $1.3M julio 2026. Total: $3.85M.",
+        accion:      "Iniciar gestión de renovación con BanBajío antes de fin de abril. Usar liquidaciones Calavo WK17+ para amortización parcial o garantía de renovación.",
+        nivel:       "danger",
+        estado:      "Vence May–Jul 2026"
+      },
+      {
+        titulo:      "Santander — 2 Créditos USD",
+        descripcion: "Dos créditos activos: $115K (saldo $63K) y $775K (saldo $427K). Amortización mensual combinada ~$25K/mes. Liquidan marzo 2027.",
+        accion:      "Confirmar domiciliación pagos mensuales. Monitorear saldo con cada estado de cuenta.",
+        nivel:       "success",
+        estado:      "Al corriente"
+      },
+      {
+        titulo:      "Convenio IMSS 2026–2027",
+        descripcion: "Convenio de pago vigente por ~$12.17M MXP. Pagos mensuales según calendario acordado. Multas IMSS pendientes de resolución.",
+        accion:      "Verificar cumplimiento mensual. Gestionar resolución de multas con área legal / Antonio.",
+        nivel:       "warning",
+        estado:      "Vigente — pagos mensuales"
+      }
+    ],
+
+    oportunidades: [
+      {
+        titulo:      "CAPE Tariff-Refund Portal — CBP IEEPA",
+        descripcion: "CBP lanzó el 20-Abr-2026 el sistema de devolución de aranceles IEEPA. Las facturas de exportación con arancel pagado son elegibles para reembolso.",
+        accion:      "Contactar broker aduanal (Barrenechea / L. Piña) esta semana. Identificar facturas WK01–WK16 elegibles. Presentar solicitud antes del deadline del portal.",
+        prioridad:   "Alta",
+        nivel:       "success"
+      },
+      {
+        titulo:      "Liquidación Acumulada Calavo — $720,391",
+        descripcion: "Cruce de deuda confirmado WK16 (15-Abr-2026). Calavo debe a Belher $720,391 en efectivo neto. El saldo crece con cada settle semanal WK17+.",
+        accion:      "Confirmar cronograma de wires de liquidación con Irene Amezaga. Registrar en cash-flow como entrada confirmada WK17–WK20.",
+        prioridad:   "Alta",
+        nivel:       "success"
+      },
+      {
+        titulo:      "Limón — Temporada Alta Jun–Ago 2026",
+        descripcion: "Históricamente jul-ago son los meses de mejor FOB para Limón Persa (FOB Nogales $22 mid en Jul-25). Temporada alta Arizona coincide con demanda de restaurantes.",
+        accion:      "Planificar volumen de siembra y logística. Confirmar canal de venta (Calavo o broker alternativo). Revisar precios USDA AMS semanalmente.",
+        prioridad:   "Media",
+        nivel:       "info"
+      },
+      {
+        titulo:      "SAT IVA — Saldo a Favor Potencial",
+        descripcion: "Las exportaciones FOB generan IVA acreditable. Con $15.9M FOB en WK01–WK16 y tasa 0%, puede existir saldo a favor considerable en declaraciones pendientes.",
+        accion:      "Solicitar a Leima / contador revisión de declaraciones IVA WK01–WK16. Estimar monto a recuperar y calendario de devolución SAT.",
+        prioridad:   "Media",
+        nivel:       "info"
+      }
+    ],
+
+    watchlist: [
+      {
+        titulo:      "BanBajío — Vencimiento en Cascada $3.85M",
+        descripcion: "Tres meses consecutivos de vencimientos: mayo $1.1M · junio $1.45M · julio $1.3M. Sin renovación confirmada, el flujo de caja de Q2 queda en riesgo severo.",
+        accion:      "Iniciar gestión bancaria esta semana. Preparar proyección de cash-flow Q2 con liquidaciones Calavo como garantía.",
+        nivel:       "danger"
+      },
+      {
+        titulo:      "CVGW & AVO — Presión Bursátil Sostenida",
+        descripcion: "CVGW $26.67 (-3.65% cierre 16-Abr). AVO $13.78 (-6.26%). Tercera sesión bajista consecutiva en CVGW. Presión sectorial puede afectar poder de negociación de Calavo.",
+        accion:      "Monitorear cotizaciones diario. Si CVGW rompe soporte $25.50, escalar análisis de riesgo comercial con Calavo.",
+        nivel:       "warning"
+      },
+      {
+        titulo:      "IMSS / SAT — Obligaciones Vencidas",
+        descripcion: "IMSS-Infonavit vencido Dic25–Feb26: ~$296K USD (MXP 5.03M). SAT IVA+ISR vencido: ~$178K USD (MXP 3.02M). Total ~$474K USD en obligaciones fiscales vencidas.",
+        accion:      "Confirmar calendario de pagos del convenio IMSS vigente. Gestionar plan de pago con SAT antes de que genere recargo adicional.",
+        nivel:       "warning"
+      },
+      {
+        titulo:      "Proveedores — Cuentas por Pagar $7.16M",
+        descripcion: "Celulosa y Corrugados de Sonora encabeza con $2.82M. 12 proveedores principales concentran el 81% del saldo. Corte 12-Mar-2026.",
+        accion:      "Confirmar plan de pagos con los 5 proveedores top usando liquidaciones Calavo WK17+. Priorizar Celulosa y Corrugados para no comprometer suministro de empaque.",
+        nivel:       "warning"
+      }
+    ],
+
+    proximos: [
+      { fecha: "17–18 Abr",  evento: "BPSI · Revisión Estados Financieros Mar-2026 — Plan de acción y forecast Q2",       tipo: "finanzas",   participantes: "JC · Armando Llanes · Hildelisa · Leima" },
+      { fecha: "20 Abr",     evento: "CAPE Portal CBP — Apertura solicitudes tariff-refund IEEPA",                         tipo: "regulatorio", participantes: "Broker Barrenechea / L. Piña" },
+      { fecha: "22 Abr",     evento: "Settle Calavo WK17 — Wire esperado (primera liquidación post-cruce de deuda)",       tipo: "calavo",     participantes: "Irene Amezaga · Leima Leyva" },
+      { fecha: "Abr 2026",   evento: "BanBajío — Inicio gestión renovación líneas de crédito (vto. mayo)",                tipo: "financiero",  participantes: "JC · Raymundo (finanzas)" },
+      { fecha: "01 May",     evento: "BanBajío — Vencimiento primera disposición $1.1M USD",                              tipo: "deuda",      participantes: "Dirección · BanBajío" },
+      { fecha: "May 2026",   evento: "Cierre temporada tomate — análisis final temporada 2025-2026",                      tipo: "operaciones", participantes: "JC · Antonio · Leima" }
+    ]
   }
 };
