@@ -1,11 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 19 Abr 2026",
-    semana: "WK 16",
-    actualizado: "19/04/2026 · 13:17"
+    fecha: "Lunes 20 Abr 2026",
+    semana: "WK 17",
+    actualizado: "20/04/2026 · 09:30"
   },
 
   alertas: [
+    {"nivel":"info","texto":"📋 JUNTA CONSEJO ABSA — HOY 20-Abr-2026 · 10:00 AM vía Zoom. Reunión de Consejo. Verificar agenda y documentación previa."},
+    {"nivel":"warning","texto":"🚨 CAPE TARIFF-REFUND PORTAL IEEPA — ABRE HOY 20-Abr-2026 (CBP Phase 1). Revisar facturas elegibles con Barrenechea / L.Piña para reembolso aranceles invalidados. Acción urgente."},
+    {"nivel":"success","texto":"CALAVO 19-ABR (2 despachos): Tomate Nogales CGG + Tomate Nogales JL — docs BILL/MANIFIESTO enviados por EMBARQUES BELHER. USMCA nota de L.Piña: productos sin USMCA sujetos a 25% + arancel general."},
     {"nivel":"warning","texto":"⚠️ AUDITORÍA CALAVO — 18 y 19 de Mayo 2026. Auditor: Javier Martínez (Buyers Edge). Inspeccionará unidades de producción y empaque. Acción: revisar inventarios de materiales e insumos críticos, gestionar servicios pendientes."},
     {"nivel":"success","texto":"CALAVO 18-ABR: 3 trailers despachados — JL-101 (1,600 cajas) + CGG-138 (1,760) + CGG-21 (1,680) = 5,040 cajas totales · Tomate Nogales AZ · Set point 50°F ✓"},
     {"nivel":"info","texto":"OUTBOUND 17-ABR: Bola Calavo 1ª 77.68% / merma 4.46% · Bola Ergo 1ª 87.07% / merma 3.53% · Bola Tolín 1ª 68.40% / merma 6.40% · Roma Tolín 1ª 69.00% / merma 3.80%"},
@@ -493,6 +496,7 @@ window.BELHER = {
 
   operaciones: {
     bascula: [
+      { fecha:"18/04", productos:["Tomate"] },
       { fecha:"17/04", productos:["Tomate","Rezaga Tomate"] },
       { fecha:"15/04", productos:["Tomate","Trilla Sorgo"] },
       { fecha:"14/04", productos:["Tomate","Trilla Sorgo"] },
@@ -532,6 +536,9 @@ window.BELHER = {
       { wk:"WK15", bascKg:458030,  bascCj:40391,  pctEmp:65.6, cjCalavo:16056, cjYameto:3704,  cjTolin:1728,  cjZazu:0,     cjUrson:0,     cjMillennium:1600, cjOtros:2843, pctCalavo:38.4, pctYameto:10.1, pctTolin:5.1,  pctZazu:0.0,  pctUrson:0.0, pctMillennium:4.0, pctOtros:8.1 }
     ],
     embarques: [
+      { fecha:"18/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-101",  destino:"Arizona (Nogales)", estado:"OK", cajas:1600 },
+      { fecha:"18/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-138", destino:"Arizona (Nogales)", estado:"OK", cajas:1760 },
+      { fecha:"18/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-21",  destino:"Arizona (Nogales)", estado:"OK", cajas:1680 },
       { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"BON-01", destino:"Arizona", estado:"OK", cajas:1600 },
       { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"BON-02", destino:"Arizona", estado:"OK", cajas:1632 },
       { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-65", destino:"Arizona", estado:"OK", cajas:1920 },
@@ -551,6 +558,10 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"09:18","asunto":"Quick setup before your Zoom meeting tomorrow — Junta Consejo ABSA 10:00AM vía Zoom (Read AI)","de":"support@e.read.ai","leido":false,"fecha":"19/04"},
+    {"hora":"08:02","asunto":"RE: BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG — NOTA USMCA: productos sin USMCA sujetos a 25%+arancel general; acero no-USA 50% desde Jun-2025","de":"astrid@lpina.com · L.Piña","leido":false,"fecha":"19/04"},
+    {"hora":"08:01","asunto":"RE: BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES JL — NOTA USMCA: productos sin USMCA sujetos a 25%+arancel general","de":"astrid@lpina.com · L.Piña","leido":false,"fecha":"19/04"},
+    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 4 archivos (19-Apr-2026 07:53) · Bascula 18-04-2026 Tomate (DIARIO + LISTADO) + CGG + JL docs","de":"juancarlos@agbelher.com · Dash-bot","leido":false,"fecha":"19/04"},
     {"hora":"21:06","asunto":"REPORTE DIARIO CALAVO 18-04-2026 — 3 trailers: JL-101 (1,600) + CGG-138 (1,760) + CGG-21 (1,680) = 5,040 cajas · Tomate · Nogales · Set point 50°F","de":"EMBARQUES BELHER","leido":false,"fecha":"18/04"},
     {"hora":"20:58","asunto":"18-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"18/04"},
     {"hora":"21:19","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES CGG — carga Tomate 18/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"18/04"},
@@ -659,7 +670,7 @@ window.BELHER = {
     { label:"P&P ACUM WK16",  valor:"$4.09M",        cambio:"818,324 cajas · 482 cont · cruce ✓",        dir:"up"      },
     { label:"EBITDA MAR",     valor:"$2.86M",        cambio:"vs BUD $2.48M ✓ · YTD -$1.22M vs BUD -$1.64M",  dir:"up"      },
     { label:"1ª WK16 D1-3",   valor:"86.74%",        cambio:"Bola 85.90% · Roma Mill 89.80% · Roma Cal 86.21%", dir:"up" },
-    { label:"EMBARQUES 17/04",valor:"5,152 cajas",   cambio:"3 trailers BON-01+BON-02+CGG-65 · Nogales AZ", dir:"up"    },
+    { label:"EMBARQUES 18/04",valor:"5,040 cajas",   cambio:"3 trailers JL-101+CGG-138+CGG-21 · Nogales AZ", dir:"up"    },
     { label:"POR LIQUIDAR",    valor:"$720,391",      cambio:"↑ WK16 acum — crece cada settle",           dir:"up"      },
     { label:"CVGW",           valor:"$26.67",        cambio:"↓ -3.65% close 16-Abr (desde $27.68)",      dir:"down"    },
     { label:"AVO",            valor:"$13.78",        cambio:"↓ -6.26% close 16-Abr (desde $14.70)",      dir:"down"    }
@@ -889,7 +900,7 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "17/04/2026 · 00:14",
+    generado:  "20/04/2026 · 09:30",
     modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
     nota:      "Síntesis de precios USDA (Corbel Seeds #0028 · 15-Abr) + outbound tomate 15/04 (Bola Calavo merma 2.56% recuperación) + embarques 15/04 (JL-30 + JL-50 = 3,536 cajas Nogales) + trilla sorgo 175 ha acum + CVGW $26.67 / AVO $13.78 (close 16-Abr) + CAPE tariff-refund portal abre el 20-Abr (en 3 días). Sin nuevas fuentes email disponibles 17-Abr.",
