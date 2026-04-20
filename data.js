@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 19 Abr 2026",
-    semana: "WK 16",
-    actualizado: "19/04/2026 · 13:17"
+    fecha: "Lunes 20 Abr 2026",
+    semana: "WK 17",
+    actualizado: "20/04/2026 · 09:01"
   },
 
   alertas: [
@@ -12,7 +12,8 @@ window.BELHER = {
     {"nivel":"success","texto":"💰 POR LIQUIDAR CALAVO — $720,391 acumulado WK01–WK16. La deuda de $5,959,027 quedó cubierta; este saldo crece semana a semana con cada nuevo settle. WK16: $190,335 wire + $607,793 recuperación final de deuda (15-Abr-2026)."},
     {"nivel":"success","texto":"WK15 ACTUAL CONFIRMADO: Revenue $2,144,379 / 53,976 cajas = FOB $39.72/caja (vs proyección $28.50). Acumulado WK01–WK16: $15,992,424 revenue · 818,324 cajas · $19.54 FOB promedio temporada."},
     {"nivel":"warning","texto":"CVGW -3.65% ($26.67 close 16-Abr, desde $27.68) + AVO -6.26% ($13.78, desde $14.70) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce."},
-    {"nivel":"info","texto":"ESTADOS FINANCIEROS MARZO '26: EBITDA positivo $2,864,510 vs Budget $2,483,483 (+$381,027). Departamento Tomate lidera resultado mensual. Pendiente formato gerencial para revisión con Antonio la semana siguiente."}
+    {"nivel":"info","texto":"ESTADOS FINANCIEROS MARZO '26: EBITDA positivo $2,864,510 vs Budget $2,483,483 (+$381,027). Departamento Tomate lidera resultado mensual. Pendiente formato gerencial para revisión con Antonio la semana siguiente."},
+    {"nivel":"info","texto":"📅 Lunes 20 Abr 2026 — Semana Santa. Sin despachos operativos reportados. Próxima actividad operativa esperada: martes 21 de abril."}
   ],
 
   ebitda: {
