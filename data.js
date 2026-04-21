@@ -2,17 +2,17 @@ window.BELHER = {
   meta: {
     fecha: "Martes 21 Abr 2026",
     semana: "WK 17",
-    actualizado: "21/04/2026 · 14:00"
+    actualizado: "21/04/2026 · 10:00"
   },
 
   alertas: [
-    {"nivel":"success","texto":"🚛 CALAVO 20-ABR: 7 trailers despachados — ST-65 (1,600) + ST-64 (1,600) + T-1 (1,648) + JL-119 (1,600) + JL-103 (1,656) + CGG-116 (1,600) + CGG-153 (1,440) = 11,144 cajas totales · Tomate Nogales AZ · Set point 50°F ✓"},
-    {"nivel":"success","texto":"OUTBOUND 18-ABR: Bola Calavo 1ª 86.00% / merma 2.91% · Bola Ergo 1ª 82.00% / merma 3.67% · Roma Millennium 1ª 87.20% / merma 2.97% — calidad sólida, mermas bajas en todas las líneas"},
-    {"nivel":"warning","texto":"⚠️ AUDITORÍA CALAVO — 18 y 19 de Mayo 2026. Auditor: Javier Martínez (Buyers Edge). Inspeccionará unidades de producción y empaque. Acción: revisar inventarios de materiales e insumos críticos, gestionar servicios pendientes."},
-    {"nivel":"success","texto":"💰 POR LIQUIDAR CALAVO — $720,391 acumulado WK01–WK16. La deuda de $5,959,027 quedó cubierta; este saldo crece semana a semana con cada nuevo settle. WK16: $190,335 wire + $607,793 recuperación final de deuda (15-Abr-2026)."},
-    {"nivel":"success","texto":"WK15 ACTUAL CONFIRMADO: Revenue $2,144,379 / 53,976 cajas = FOB $39.72/caja (vs proyección $28.50). Acumulado WK01–WK16: $15,992,424 revenue · 818,324 cajas · $19.54 FOB promedio temporada."},
-    {"nivel":"warning","texto":"CVGW -3.65% ($26.67 close 16-Abr, desde $27.68) + AVO -6.26% ($13.78, desde $14.70) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce."},
-    {"nivel":"info","texto":"ESTADOS FINANCIEROS MARZO '26: EBITDA positivo $2,864,510 vs Budget $2,483,483 (+$381,027). Departamento Tomate lidera resultado mensual. Pendiente formato gerencial para revisión con Antonio."}
+    { nivel:"warning",  texto:"⚠️ AUDITORÍA CALAVO — 18 y 19 de Mayo 2026. Auditor: Javier Martínez (Buyers Edge). Inspeccionará unidades de producción y empaque. Acción: revisar inventarios de materiales e insumos críticos, gestionar servicios pendientes." },
+    { nivel:"warning",  texto:"OUTBOUND WK17 D1 (20-Abr): Bola Calavo merma 4.10% ⚠ — segundo día seguido >4%. Bola Ergo 3.00%, Roma Calavo 1.39%, Roma Mill 1.08%, Roma Zazu 2.00%. Bola continúa bajo presión al inicio de WK17." },
+    { nivel:"success",  texto:"EMBARQUES 20-ABR: 6 trailers → Nogales AZ — ST-65 (1,600) + ST-64 (1,600) + JL-119 (1,600) + JL-103 (1,656) + CGG-116 (1,600) + CGG-153 (1,440) = 9,496 cajas totales. Set point 50°F ✓" },
+    { nivel:"success",  texto:"TRILLA 20-ABR: Sifón 1 — 12 ha trilladas hoy · Acumulado temporada: 194 ha totales. El Panteón + San Blas pendientes." },
+    { nivel:"success",  texto:"💰 POR LIQUIDAR CALAVO — $720,391 acumulado WK01–WK16. Deuda $5,959,027 liquidada. Saldo crece semana a semana con cada nuevo settle." },
+    { nivel:"warning",  texto:"CVGW -3.65% ($26.67 close 16-Abr) + AVO -6.26% ($13.78) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
+    { nivel:"info",     texto:"ESTADOS FINANCIEROS MARZO '26: EBITDA positivo $2,864,510 vs Budget $2,483,483 (+$381,027). Pendiente formato gerencial para revisión con Antonio." }
   ],
 
   ebitda: {
@@ -204,33 +204,38 @@ window.BELHER = {
 
   calidad: {
     semana: {
-      desde: "13/04/2026",
-      hasta:  "19/04/2026",
+      desde: "20/04/2026",
+      hasta:  "26/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:85.90, segunda:6.70, tercera:4.65, merma:2.75, peso:25.37, dias:3, alerta:false },
-        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:89.80, segunda:5.80, tercera:3.20, merma:1.20, peso:25.12, dias:1, alerta:false },
-        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:86.21, segunda:8.63, tercera:3.58, merma:1.58, peso:25.89, dias:1, alerta:false }
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:80.71, segunda:9.89,  tercera:5.29, merma:4.10, peso:25.45, dias:1, alerta:true  },
+        { nombre:"Bola Ergo",       etiqueta:"Ergo",       canal:"exportacion", primera:80.50, segunda:15.00, tercera:1.50, merma:3.00, peso:25.18, dias:1, alerta:false },
+        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:91.76, segunda:4.58,  tercera:2.26, merma:1.39, peso:25.25, dias:1, alerta:false },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:86.88, segunda:9.32,  tercera:2.73, merma:1.08, peso:26.25, dias:1, alerta:false },
+        { nombre:"Roma Zazu",       etiqueta:"Zazu",       canal:"exportacion", primera:84.00, segunda:8.40,  tercera:5.60, merma:2.00, peso:27.05, dias:1, alerta:false }
       ]
     },
     historico: [
-      { fecha:"WK10", primaPromedio:87.45, mermaPromedio:3.80 },
-      { fecha:"WK11", primaPromedio:88.10, mermaPromedio:3.55 },
-      { fecha:"WK12", primaPromedio:88.35, mermaPromedio:3.39 },
       { fecha:"WK13", primaPromedio:89.20, mermaPromedio:2.82 },
       { fecha:"WK14", primaPromedio:84.11, mermaPromedio:3.69 },
-      { fecha:"WK15", primaPromedio:82.01, mermaPromedio:5.12, nota:"Días 1-6: 04/04·5vars, 06/04·3vars, 07/04·4vars (incl Tolin), 08/04·1var, 09/04·3vars, 11/04·4vars. Roma Calavo 11/04 merma 6.00% — PRIMERA VEZ >4% Roma Calavo en temporada. Bola Calavo 09/04 merma 6.78% CRÍTICO. Tolin 07/04 merma 30.18% outlier." },
-      { fecha:"WK16", primaPromedio:86.74, mermaPromedio:2.20, nota:"Días 1-3 (13/04-15/04): Bola Calavo (0.93%→4.75%→2.56%), Roma Millennium 13/04 (1.20%), Roma Calavo 14/04 (1.58%). Prom Bola 3 días: 2.75%. Recuperación D3 confirma estabilización tras pico 4.75% en D2." }
+      { fecha:"WK15", primaPromedio:82.01, mermaPromedio:5.12, nota:"Días 1-6: 04/04·5vars, 06/04·3vars, 07/04·4vars (incl Tolin), 08/04·1var, 09/04·3vars, 11/04·4vars. Roma Calavo 11/04 merma 6.00% PRIMERA VEZ >4%. Bola Calavo 09/04 merma 6.78% CRÍTICO. Tolin 07/04 merma 30.18% outlier." },
+      { fecha:"WK16", primaPromedio:82.70, mermaPromedio:3.06, nota:"Días 1-6 (13/04-18/04): D1 BC 0.93%+RMill 1.20%, D2 BC 4.75%+RCal 1.58%, D3 BC 2.56%, D4 RZazu 1.59%, D5 BC 4.46%⚠+Ergo 3.53%+BTolin 6.40%⚠+RTolin 3.80%, D6 BC 2.91%+Ergo 3.67%+RMill 2.97%." },
+      { fecha:"WK17", primaPromedio:84.97, mermaPromedio:2.31, nota:"D1 (20/04): BC 4.10%⚠ · Ergo 3.00% · Roma Cal 1.39% · Roma Mill 1.08% · Roma Zazu 2.00%. Bola Calavo >4% primer día WK17; Roma variedades excelentes <2%." }
     ],
     ultimoOutbound: {
-      fecha: "15/04/2026",
+      fecha: "20/04/2026",
       variedades: [
-        { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:88.61, segunda:4.18, tercera:4.65, merma:2.56, peso:26.62, alerta:false }
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:80.71, segunda:9.89,  tercera:5.29, merma:4.10, peso:25.45, alerta:true  },
+        { nombre:"Bola Ergo",       etiqueta:"Ergo",       canal:"exportacion", primera:80.50, segunda:15.00, tercera:1.50, merma:3.00, peso:25.18, alerta:false },
+        { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:91.76, segunda:4.58,  tercera:2.26, merma:1.39, peso:25.25, alerta:false },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:86.88, segunda:9.32,  tercera:2.73, merma:1.08, peso:26.25, alerta:false },
+        { nombre:"Roma Zazu",       etiqueta:"Zazu",       canal:"exportacion", primera:84.00, segunda:8.40,  tercera:5.60, merma:2.00, peso:27.05, alerta:false }
       ],
       anterior: {
-        fecha: "14/04/2026",
+        fecha: "18/04/2026",
         variedades: [
-          { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:80.75, segunda:8.25, tercera:6.25, merma:4.75, peso:26.07, alerta:true  },
-          { nombre:"Roma Calavo", etiqueta:"Roma",   canal:"exportacion", primera:86.21, segunda:8.63, tercera:3.58, merma:1.58, peso:25.89, alerta:false }
+          { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:86.00, segunda:6.73, tercera:4.36, merma:2.91, peso:25.85, alerta:false },
+          { nombre:"Bola Ergo",       etiqueta:"Ergo",       canal:"exportacion", primera:82.00, segunda:7.67, tercera:6.67, merma:3.67, peso:27.59, alerta:false },
+          { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:87.20, segunda:6.47, tercera:3.35, merma:2.97, peso:27.54, alerta:false }
         ]
       }
     }
@@ -351,7 +356,7 @@ window.BELHER = {
       ebitda_yago:       -513373,
       ebitda_var_yago:   127522,
       periodo:           "Jul 2025 – Feb 2026",
-      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) + Álamo+El Punk+Quevedo 2+Lora+Caseta (10-Abr, 16 ha) + Quevedo 2+Composta+El Gringo (11-Abr, 16 ha) = 119 ha WK15. TRILLA WK16: El Punk (13-Abr, 12 ha) + El Punk+Las Viudas (14-Abr, 19 ha) + Las Viudas (15-Abr, 25 ha) = 56 ha WK16. ACUMULADO TOTAL: 175 ha. El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
+      nota:              "Temporada de granos en curso. TRILLA WK15: Dorita+El 17 (31-Mar, 18 ha) + Carrillo (06-Abr, 12 ha) + Carrillo+Campo Beltrán+El Dos (07-Abr, 18 ha, 97.04t) + El Dos+Álamo (08-Abr, 19 ha, 98.51t) + Álamo (09-Abr, 20 ha, 128.53t) + Álamo+El Punk+Quevedo 2+Lora+Caseta (10-Abr, 16 ha) + Quevedo 2+Composta+El Gringo (11-Abr, 16 ha) = 119 ha WK15. TRILLA WK16: El Punk (13-Abr, 12 ha) + El Punk+Las Viudas (14-Abr, 19 ha) + Las Viudas (15-Abr, 25 ha) + Quevedo 1+Gringo+Composta (17-Abr, 7 ha) = 63 ha WK16. TRILLA WK17: Sifón 1 (20-Abr, 12 ha) = 12 ha WK17. ACUMULADO TOTAL: 194 ha. El Panteón+San Blas pendientes. Sin ventas registradas a febrero — producción en cosecha activa. Costos WIP incluyen fertilizantes, semilla, agroquímicos y mano de obra de campo.",
       trilla: [
         { fecha:"31/03/2026", campos:"Dorita + El 17",                                        ha:18, cultivo:"Sorgo" },
         { fecha:"06/04/2026", campos:"Carrillo",                                              ha:12, cultivo:"Sorgo" },
@@ -362,7 +367,9 @@ window.BELHER = {
         { fecha:"11/04/2026", campos:"Quevedo 2 + Composta + El Gringo",                      ha:16, cultivo:"Sorgo" },
         { fecha:"13/04/2026", campos:"El Punk",                                               ha:12, cultivo:"Sorgo", fuente:"AVANCE TRILLA BASCULA 13-Abr" },
         { fecha:"14/04/2026", campos:"El Punk + Las Viudas",                                  ha:19, cultivo:"Sorgo", fuente:"AVANCE TRILLA BASCULA 14-Abr" },
-        { fecha:"15/04/2026", campos:"Las Viudas",                                            ha:25, cultivo:"Sorgo", fuente:"AVANCE TRILLA BASCULA 15-Abr" }
+        { fecha:"15/04/2026", campos:"Las Viudas",                                            ha:25, cultivo:"Sorgo", fuente:"AVANCE TRILLA BASCULA 15-Abr" },
+        { fecha:"17/04/2026", campos:"Quevedo 1 + Gringo + Composta",                         ha:7,  cultivo:"Sorgo", fuente:"AVANCE TRILLA BASCULA 17-Abr" },
+        { fecha:"20/04/2026", campos:"Sifón 1",                                               ha:12, cultivo:"Sorgo", fuente:"AVANCE TRILLA BASCULA 20-Abr" }
       ]
     }
   },
@@ -493,13 +500,13 @@ window.BELHER = {
 
   operaciones: {
     bascula: [
-      { fecha:"17/04", productos:["Tomate","Rezaga Tomate"] },
+      { fecha:"20/04", productos:["Tomate","Rezaga Tomate","Trilla Sorgo"] },
+      { fecha:"18/04", productos:["Tomate"] },
+      { fecha:"17/04", productos:["Tomate","Rezaga Tomate","Trilla Sorgo"] },
       { fecha:"15/04", productos:["Tomate","Trilla Sorgo"] },
       { fecha:"14/04", productos:["Tomate","Trilla Sorgo"] },
       { fecha:"13/04", productos:["Tomate","Rezaga Tomate","Trilla Sorgo"] },
-      { fecha:"11/04", productos:["Tomate","Limón Persa","Trilla Sorgo"] },
-      { fecha:"10/04", productos:["Tomate","Limón Persa","Rezaga Tomate","Trilla Sorgo"] },
-      { fecha:"09/04", productos:["Tomate","Chile Habanero","Chile Fresno","Trilla Sorgo"], tinas:14965, kgTomate:151110 }
+      { fecha:"11/04", productos:["Tomate","Limón Persa","Trilla Sorgo"] }
     ],
     produccionHistorica: {
       /* % kg empacado / kg báscula por semana · 6 temporadas */
@@ -532,48 +539,43 @@ window.BELHER = {
       { wk:"WK15", bascKg:458030,  bascCj:40391,  pctEmp:65.6, cjCalavo:16056, cjYameto:3704,  cjTolin:1728,  cjZazu:0,     cjUrson:0,     cjMillennium:1600, cjOtros:2843, pctCalavo:38.4, pctYameto:10.1, pctTolin:5.1,  pctZazu:0.0,  pctUrson:0.0, pctMillennium:4.0, pctOtros:8.1 }
     ],
     embarques: [
-      { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"BON-01", destino:"Arizona", estado:"OK", cajas:1600 },
-      { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"BON-02", destino:"Arizona", estado:"OK", cajas:1632 },
-      { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-65", destino:"Arizona", estado:"OK", cajas:1920 },
-      { fecha:"15/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-30",   destino:"Arizona", estado:"OK", cajas:1760 },
-      { fecha:"15/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-50",   destino:"Arizona", estado:"OK", cajas:1776 },
-      { fecha:"14/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-148", destino:"Arizona", estado:"OK", cajas:1920 },
-      { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-111",  destino:"Arizona", estado:"OK", cajas:1600 },
-      { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-99",   destino:"Arizona", estado:"OK", cajas:1760 },
-      { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-77",  destino:"Arizona", estado:"OK", cajas:1600 },
-      { fecha:"13/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-157", destino:"Arizona", estado:"OK", cajas:1600 },
-      { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-129", destino:"Arizona",              estado:"OK", cajas:1600 },
-      { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"CGG-1",   destino:"Arizona",              estado:"OK", cajas:1600 },
-      { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"JL-13",   destino:"Texas (McAllen)",      estado:"OK", cajas:1651 },
-      { fecha:"11/04/2026", tipo:"Tomate",      cargas:1, unidad:"JL-42",   destino:"Arizona",              estado:"OK", cajas:1360 },
-      { fecha:"11/04/2026", tipo:"Limón/Chile", cargas:1, unidad:"JL-34",   destino:"Arizona (Maui Fresh)", estado:"OK" }
+      { fecha:"20/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-65",   destino:"Arizona", estado:"OK", cajas:1600 },
+      { fecha:"20/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-64",   destino:"Arizona", estado:"OK", cajas:1600 },
+      { fecha:"20/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-119",  destino:"Arizona", estado:"OK", cajas:1600 },
+      { fecha:"20/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-103",  destino:"Arizona", estado:"OK", cajas:1656 },
+      { fecha:"20/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-116", destino:"Arizona", estado:"OK", cajas:1600 },
+      { fecha:"20/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-153", destino:"Arizona", estado:"OK", cajas:1440 },
+      { fecha:"18/04/2026", tipo:"Tomate", cargas:1, unidad:"JL-101",  destino:"Arizona", estado:"OK", cajas:1600 },
+      { fecha:"18/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-138", destino:"Arizona", estado:"OK", cajas:1760 },
+      { fecha:"18/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-21",  destino:"Arizona", estado:"OK", cajas:1680 },
+      { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"BON-01",  destino:"Arizona", estado:"OK", cajas:1600 },
+      { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"BON-02",  destino:"Arizona", estado:"OK", cajas:1632 },
+      { fecha:"17/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-65",  destino:"Arizona", estado:"OK", cajas:1920 }
     ]
   },
 
   correos: [
-    {"hora":"23:01","asunto":"20-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"20/04"},
-    {"hora":"22:44","asunto":"REPORTE DIARIO CALAVO 20-04-2026 — 7 trailers: ST-65+ST-64+JL-119+JL-103+CGG-116+CGG-153+T-1 = 11,144 cajas · Tomate · Nogales · Set point 50°F","de":"EMBARQUES BELHER","leido":false,"fecha":"20/04"},
-    {"hora":"22:44","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES CGG — carga Tomate 20/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"20/04"},
-    {"hora":"21:35","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES JL — carga Tomate 20/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"20/04"},
-    {"hora":"19:51","asunto":"REPORTE DE BASCULA 20/04/2026 (TOMATE) — Adjunto","de":"Bascula Belher","leido":false,"fecha":"20/04"},
-    {"hora":"19:50","asunto":"REPORTE DE BASCULA 20/04/2026 (REZAGA DE TOMATE) — Adjunto","de":"Bascula Belher","leido":false,"fecha":"20/04"},
-    {"hora":"09:22","asunto":"REPORTE DE OUTBOUND TOMATE 18/04/2026 — Bola Calavo 1ª 86.00% merma 2.91% · Ergo 1ª 82.00% · Roma Millennium 1ª 87.20%","de":"Calidad Belher","leido":false,"fecha":"20/04"},
-    {"hora":"21:06","asunto":"REPORTE DIARIO CALAVO 18-04-2026 — 3 trailers: JL-101 (1,600) + CGG-138 (1,760) + CGG-21 (1,680) = 5,040 cajas · Tomate · Nogales · Set point 50°F","de":"EMBARQUES BELHER","leido":false,"fecha":"18/04"},
-    {"hora":"20:58","asunto":"18-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"18/04"},
-    {"hora":"21:19","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES CGG — carga Tomate 18/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"18/04"},
-    {"hora":"19:50","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES JL — carga Tomate 18/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"18/04"},
-    {"hora":"17:26","asunto":"REPORTE DE BASCULA 18/04/2026 (TOMATE) — Adjunto","de":"Bascula Belher","leido":false,"fecha":"18/04"},
-    {"hora":"09:47","asunto":"REPORTE DE OUTBOUND TOMATE 17/04/2026 — Bola Calavo 1ª 77.68% merma 4.46% · Ergo 1ª 87.07% · Tolín 1ª 68.40% · Roma Tolín 1ª 69.00%","de":"Calidad Belher","leido":false,"fecha":"18/04"},
-    {"hora":"23:09","asunto":"CFDI Recibo Electrónico — Período 16 Semanal 2026 · BELTRAN OCHOA JUAN CARLOS · RFC: ABE180411CB8","de":"anajar@agbelher.com · Nómina","leido":false,"fecha":"17/04"},
-    {"hora":"22:30","asunto":"Transferencia Interbancaria SPEI — depósito registrado a cuenta BanBajío · 17-Abr-2026","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"17/04"},
-    {"hora":"21:50","asunto":"17-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"17/04"},
-    {"hora":"21:46","asunto":"REPORTE DIARIO CALAVO 17-04-2026 — 3 trailers: BON-01 (1,600) + BON-02 (1,632) + CGG-65 (1,920) = 5,152 cajas · Tomate · Nogales","de":"EMBARQUES BELHER","leido":false,"fecha":"17/04"},
-    {"hora":"21:46","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES CGG — carga Tomate 17/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"17/04"},
-    {"hora":"19:49","asunto":"REPORTES DE RESULTADOS Nutrición Foliar — Campo LA 25 Naves 1, 3, 7, 8, 10-12, 17, 18. Fechas muestreo: 14/Abr/2026","de":"conagrosc@gmail.com · Conagro","leido":false,"fecha":"17/04"},
-    {"hora":"17:26","asunto":"REPORTE DE BASCULA 17/04/2026 (REZAGA DE TOMATE) — Adjunto","de":"Bascula Belher","leido":false,"fecha":"17/04"},
-    {"hora":"17:22","asunto":"REPORTE DE BASCULA 17/04/2026 (TOMATE) — Adjunto","de":"Bascula Belher","leido":false,"fecha":"17/04"},
-    {"hora":"15:26","asunto":"⚠️ AUDITORÍA CALAVO 18-19 MAY 2026 CONFIRMADA — Auditor: Javier Martínez (Buyers Edge). Sitios: Unidades de producción y empaque. Revisar inventarios, insumos críticos y servicios pendientes.","de":"C. Marisol Castro · Calidad","leido":false,"fecha":"17/04"},
-    {"hora":"03:00","asunto":"Estados Financieros Marzo 2026 — EBITDA Tomate $2,864,510 vs BUD $2,483,483 (+$381K) · YTD Jul-Mar EBITDA -$1,217,116 vs BUD -$1,640,625 (+$423K)","de":"jacruz@agbelher.com · Contabilidad","leido":false,"fecha":"17/04"},
+    { hora:"15:48", asunto:"REPORTE DE OUTBOUND TOMATE 20/04/2026 — Bola Calavo 1ª 80.71% merma 4.10% ⚠ · Ergo 1ª 80.50% merma 3.00% · Roma Cal 1ª 91.76% merma 1.39% · Roma Mill 1ª 86.88% merma 1.08% · Roma Zazu 1ª 84.00% merma 2.00%", de:"Calidad Belher", leido:false, fecha:"20/04" },
+    { hora:"21:45", asunto:"REPORTE DIARIO CALAVO 20-04-2026 — 7 trailers: ST-65 (1,600) + ST-64 (1,600) + JL-119 (1,600) + JL-103 (1,656) + CGG-116 (1,600) + CGG-153 (1,440) + 1 KF (1,648) = 11,144 cajas totales · Nogales AZ · Set point 50°F", de:"EMBARQUES BELHER", leido:false, fecha:"20/04" },
+    { hora:"20:44", asunto:"20-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos", de:"EMBARQUES BELHER", leido:false, fecha:"20/04" },
+    { hora:"02:51", asunto:"REPORTE DE BASCULA 20/04/2026 (TOMATE) — Adjunto", de:"Bascula Belher", leido:false, fecha:"20/04" },
+    { hora:"02:50", asunto:"REPORTE DE BASCULA 20/04/2026 (REZAGA DE TOMATE) — Adjunto", de:"Bascula Belher", leido:false, fecha:"20/04" },
+    { hora:"02:42", asunto:"AVANCE DE TRILLA 20/04/2026 SORGO (SIFON 1) — 12 ha trilladas hoy · acumulado temporada 194 ha total", de:"Bascula Belher", leido:false, fecha:"20/04" },
+    { hora:"22:09", asunto:"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES CGG — CGG-116 + CGG-153 · carga Tomate 20/04/2026", de:"EMBARQUES BELHER", leido:false, fecha:"20/04" },
+    { hora:"21:35", asunto:"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES JL — JL-103 + JL-119 · carga Tomate 20/04/2026", de:"EMBARQUES BELHER", leido:false, fecha:"20/04" },
+    { hora:"20:34", asunto:"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES ST — ST-64 + ST-65 · carga Tomate 20/04/2026", de:"EMBARQUES BELHER", leido:false, fecha:"20/04" },
+    { hora:"15:22", asunto:"REPORTE DE OUTBOUND TOMATE 18/04/2026 — Bola Calavo 1ª 86.00% merma 2.91% ✓ · Bola Ergo 1ª 82.00% merma 3.67% · Roma Millennium 1ª 87.20% merma 2.97%", de:"Calidad Belher", leido:false, fecha:"20/04" },
+    { hora:"21:06", asunto:"REPORTE DIARIO CALAVO 18-04-2026 — 3 trailers: JL-101 (1,600) + CGG-138 (1,760) + CGG-21 (1,680) = 5,040 cajas · Tomate · Nogales · Set point 50°F", de:"EMBARQUES BELHER", leido:false, fecha:"18/04" },
+    { hora:"20:58", asunto:"18-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos", de:"EMBARQUES BELHER", leido:false, fecha:"18/04" },
+    { hora:"17:26", asunto:"REPORTE DE BASCULA 18/04/2026 (TOMATE) — Adjunto", de:"Bascula Belher", leido:false, fecha:"18/04" },
+    { hora:"21:46", asunto:"REPORTE DIARIO CALAVO 17-04-2026 — 3 trailers: BON-01 (1,600) + BON-02 (1,632) + CGG-65 (1,920) = 5,152 cajas · Tomate · Nogales", de:"EMBARQUES BELHER", leido:false, fecha:"17/04" },
+    { hora:"21:50", asunto:"17-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos", de:"EMBARQUES BELHER", leido:false, fecha:"17/04" },
+    { hora:"20:45", asunto:"AVANCE DE TRILLA 17/04/2026 SORGO (QUEVEDO 1 + GRINGO + COMPOSTA) — 7 ha trilladas · acumulado temporada 182 ha total", de:"Bascula Belher", leido:false, fecha:"17/04" },
+    { hora:"17:26", asunto:"REPORTE DE BASCULA 17/04/2026 (REZAGA DE TOMATE) — Adjunto", de:"Bascula Belher", leido:false, fecha:"17/04" },
+    { hora:"17:22", asunto:"REPORTE DE BASCULA 17/04/2026 (TOMATE) — Adjunto", de:"Bascula Belher", leido:false, fecha:"17/04" },
+    { hora:"15:26", asunto:"⚠️ AUDITORÍA CALAVO 18-19 MAY 2026 CONFIRMADA — Auditor: Javier Martínez (Buyers Edge). Revisar inventarios, insumos críticos y servicios pendientes.", de:"C. Marisol Castro · Calidad", leido:false, fecha:"17/04" },
+    { hora:"09:47", asunto:"REPORTE DE OUTBOUND TOMATE 17/04/2026 — Bola Calavo 1ª 83.17% merma 4.46% ⚠ REBOTE · Ergo 3.53% · Tolin 6.40% CRÍTICO · Roma Tolin 3.80%", de:"Calidad Belher", leido:false, fecha:"17/04" },
+    { hora:"03:00", asunto:"Estados Financieros Marzo 2026 — EBITDA Tomate $2,864,510 vs BUD $2,483,483 (+$381K) · YTD Jul-Mar EBITDA -$1,217,116 vs BUD -$1,640,625 (+$423K)", de:"jacruz@agbelher.com · Contabilidad", leido:false, fecha:"17/04" },
     { hora:"22:46", asunto:"REPORTE DE OUTBOUND TOMATE 15/04/2026 — Bola Calavo 1ª 88.61% merma 2.56% ✓ RECUPERACIÓN · mejora notable vs 4.75% del 14/04", de:"Calidad Belher", leido:false, fecha:"16/04" },
     { hora:"10:48", asunto:"F/S BPSI Marzo '26 — Estados financieros BPSI al 31-Mar-2026 adjuntos · reunión revisión 10am hoy (JC · Armando · hildelisa)", de:"Leima Leyva · Administración", leido:false, fecha:"16/04" },
     { hora:"20:52", asunto:"REPORTE DE OUTBOUND TOMATE 14/04/2026 — Bola Calavo 1ª 80.75% merma 4.75% ⚠ ALERTA, Roma Calavo 1ª 86.21% merma 1.58%", de:"Calidad Belher", leido:false, fecha:"15/04" },
@@ -661,12 +663,12 @@ window.BELHER = {
     { label:"JALAPEÑO",       valor:"$58–60",        cambio:"↑ #0027 sostenido (sin cotización #0028)",  dir:"up"      },
     { label:"TOMATE ROMA XL", valor:"$36.95–40.95", cambio:"sostenida Nogales · #0028 15-Abr",          dir:"neutral" },
     { label:"BELL VERDE XL",  valor:"$40.95–42.95", cambio:"↓ leve vs $42.95–44.95 #0027",              dir:"down"    },
-    { label:"MERMA BOLA",     valor:"2.56%",         cambio:"↓ 15/04 recuperación · prom WK16 2.75%",   dir:"up"      },
-    { label:"TRILLA SORGO",   valor:"175 ha",        cambio:"WK16: +44 ha (14-Abr 19ha + 15-Abr 25ha)", dir:"up"      },
+    { label:"MERMA BOLA",     valor:"4.46%",         cambio:"⚠ 17/04 rebote · prom WK16 D1-5: 3.18%",  dir:"down"    },
+    { label:"TRILLA SORGO",   valor:"194 ha",        cambio:"WK17: +12 ha 20-Abr Sifón 1 · WK16 acum 182 ha", dir:"up" },
     { label:"P&P ACUM WK16",  valor:"$4.09M",        cambio:"818,324 cajas · 482 cont · cruce ✓",        dir:"up"      },
     { label:"EBITDA MAR",     valor:"$2.86M",        cambio:"vs BUD $2.48M ✓ · YTD -$1.22M vs BUD -$1.64M",  dir:"up"      },
-    { label:"1ª WK16 D1-3",   valor:"86.74%",        cambio:"Bola 85.90% · Roma Mill 89.80% · Roma Cal 86.21%", dir:"up" },
-    { label:"EMBARQUES 17/04",valor:"5,152 cajas",   cambio:"3 trailers BON-01+BON-02+CGG-65 · Nogales AZ", dir:"up"    },
+    { label:"MERMA BOLA",     valor:"4.10%",         cambio:"⚠ 20/04 WK17 D1 · Ergo 3.00% · Roma <2%",  dir:"down"    },
+    { label:"EMBARQUES 20/04",valor:"9,496 cajas",   cambio:"6 trailers ST-65+ST-64+JL-119+JL-103+CGG-116+CGG-153 · Nogales AZ", dir:"up" },
     { label:"POR LIQUIDAR",    valor:"$720,391",      cambio:"↑ WK16 acum — crece cada settle",           dir:"up"      },
     { label:"CVGW",           valor:"$26.67",        cambio:"↓ -3.65% close 16-Abr (desde $27.68)",      dir:"down"    },
     { label:"AVO",            valor:"$13.78",        cambio:"↓ -6.26% close 16-Abr (desde $14.70)",      dir:"down"    }
@@ -887,7 +889,6 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"20/04/2026", evento:"CAPE Tariff-Refund Portal CBP Phase 1 abre — verificar facturas importaciones Belher elegibles para reembolso aranceles IEEPA invalidados (4 días)", tipo:"regulatorio", participantes:"Barrenechea/L.Piña broker aduanal · JC" },
       { fecha:"21/04/2026", evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
       { fecha:"28/04/2026", evento:"WK18 — cruce estimado deuda Calavo $0 (amortización completa $6M) — inicio de liquidación real a Belher", tipo:"financiero", participantes:"Leima · Antonio · JC" },
       { fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque. Preparar inventarios y gestionar servicios pendientes.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
