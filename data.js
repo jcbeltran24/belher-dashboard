@@ -1,19 +1,18 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 20 Abr 2026",
+    fecha: "Martes 21 Abr 2026",
     semana: "WK 17",
-    actualizado: "20/04/2026 · 09:01"
+    actualizado: "21/04/2026 · 14:00"
   },
 
   alertas: [
+    {"nivel":"success","texto":"🚛 CALAVO 20-ABR: 7 trailers despachados — ST-65 (1,600) + ST-64 (1,600) + T-1 (1,648) + JL-119 (1,600) + JL-103 (1,656) + CGG-116 (1,600) + CGG-153 (1,440) = 11,144 cajas totales · Tomate Nogales AZ · Set point 50°F ✓"},
+    {"nivel":"success","texto":"OUTBOUND 18-ABR: Bola Calavo 1ª 86.00% / merma 2.91% · Bola Ergo 1ª 82.00% / merma 3.67% · Roma Millennium 1ª 87.20% / merma 2.97% — calidad sólida, mermas bajas en todas las líneas"},
     {"nivel":"warning","texto":"⚠️ AUDITORÍA CALAVO — 18 y 19 de Mayo 2026. Auditor: Javier Martínez (Buyers Edge). Inspeccionará unidades de producción y empaque. Acción: revisar inventarios de materiales e insumos críticos, gestionar servicios pendientes."},
-    {"nivel":"success","texto":"CALAVO 18-ABR: 3 trailers despachados — JL-101 (1,600 cajas) + CGG-138 (1,760) + CGG-21 (1,680) = 5,040 cajas totales · Tomate Nogales AZ · Set point 50°F ✓"},
-    {"nivel":"info","texto":"OUTBOUND 17-ABR: Bola Calavo 1ª 77.68% / merma 4.46% · Bola Ergo 1ª 87.07% / merma 3.53% · Bola Tolín 1ª 68.40% / merma 6.40% · Roma Tolín 1ª 69.00% / merma 3.80%"},
     {"nivel":"success","texto":"💰 POR LIQUIDAR CALAVO — $720,391 acumulado WK01–WK16. La deuda de $5,959,027 quedó cubierta; este saldo crece semana a semana con cada nuevo settle. WK16: $190,335 wire + $607,793 recuperación final de deuda (15-Abr-2026)."},
     {"nivel":"success","texto":"WK15 ACTUAL CONFIRMADO: Revenue $2,144,379 / 53,976 cajas = FOB $39.72/caja (vs proyección $28.50). Acumulado WK01–WK16: $15,992,424 revenue · 818,324 cajas · $19.54 FOB promedio temporada."},
     {"nivel":"warning","texto":"CVGW -3.65% ($26.67 close 16-Abr, desde $27.68) + AVO -6.26% ($13.78, desde $14.70) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce."},
-    {"nivel":"info","texto":"ESTADOS FINANCIEROS MARZO '26: EBITDA positivo $2,864,510 vs Budget $2,483,483 (+$381,027). Departamento Tomate lidera resultado mensual. Pendiente formato gerencial para revisión con Antonio la semana siguiente."},
-    {"nivel":"info","texto":"📅 Lunes 20 Abr 2026 — Semana Santa. Sin despachos operativos reportados. Próxima actividad operativa esperada: martes 21 de abril."}
+    {"nivel":"info","texto":"ESTADOS FINANCIEROS MARZO '26: EBITDA positivo $2,864,510 vs Budget $2,483,483 (+$381,027). Departamento Tomate lidera resultado mensual. Pendiente formato gerencial para revisión con Antonio."}
   ],
 
   ebitda: {
@@ -552,6 +551,13 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"23:01","asunto":"20-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"20/04"},
+    {"hora":"22:44","asunto":"REPORTE DIARIO CALAVO 20-04-2026 — 7 trailers: ST-65+ST-64+JL-119+JL-103+CGG-116+CGG-153+T-1 = 11,144 cajas · Tomate · Nogales · Set point 50°F","de":"EMBARQUES BELHER","leido":false,"fecha":"20/04"},
+    {"hora":"22:44","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES CGG — carga Tomate 20/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"20/04"},
+    {"hora":"21:35","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES JL — carga Tomate 20/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"20/04"},
+    {"hora":"19:51","asunto":"REPORTE DE BASCULA 20/04/2026 (TOMATE) — Adjunto","de":"Bascula Belher","leido":false,"fecha":"20/04"},
+    {"hora":"19:50","asunto":"REPORTE DE BASCULA 20/04/2026 (REZAGA DE TOMATE) — Adjunto","de":"Bascula Belher","leido":false,"fecha":"20/04"},
+    {"hora":"09:22","asunto":"REPORTE DE OUTBOUND TOMATE 18/04/2026 — Bola Calavo 1ª 86.00% merma 2.91% · Ergo 1ª 82.00% · Roma Millennium 1ª 87.20%","de":"Calidad Belher","leido":false,"fecha":"20/04"},
     {"hora":"21:06","asunto":"REPORTE DIARIO CALAVO 18-04-2026 — 3 trailers: JL-101 (1,600) + CGG-138 (1,760) + CGG-21 (1,680) = 5,040 cajas · Tomate · Nogales · Set point 50°F","de":"EMBARQUES BELHER","leido":false,"fecha":"18/04"},
     {"hora":"20:58","asunto":"18-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"18/04"},
     {"hora":"21:19","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES CGG — carga Tomate 18/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"18/04"},
