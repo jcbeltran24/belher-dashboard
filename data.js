@@ -386,10 +386,10 @@ window.BELHER = {
     saldo_inicial:       9278,
     fecha_ultimo_actual: "19/04/2026",
     saldo_forecast:      -3989357,
-    saldo_ajustado:      -1482092,
+    saldo_ajustado:      606643,
 
-    anticipos_recibidos: 6792043,
-    anticipos_aplicados: 4661061,
+    anticipos_recibidos: 7509531,
+    anticipos_aplicados: 5710567,
     anticipos_por_pagar: 1798964,
 
     breakeven_escenarios: [
@@ -423,10 +423,10 @@ window.BELHER = {
     ],
 
     bridge: [
-      { concepto:"Calavo settlement escenario base (FOB $40 Abr / $20 May-Jun)", monto:3549526,  tipo:"calavo"  },
+      { concepto:"10 USD × 170k cajas exportación neto comisión (OL)",           monto:1496000,  tipo:"precio"  },
       { concepto:"WK Calavo 4 de 4 — agosto 2026",                               monto:1250000,  tipo:"calavo"  },
-      { concepto:"Diferencial escenario optimista ($45/$45/$20 vs base)",         monto:4018865,  tipo:"precio"  },
-      { concepto:"Anticipos de venta nacional por pagar",                         monto:-1798964, tipo:"pasivo"  }
+      { concepto:"Ingreso estimado sorgo GC 2025–2026",                           monto:100000,   tipo:"otro"    },
+      { concepto:"Posible primer avance Bajío GC 2026–2027",                      monto:1750000,  tipo:"credito" }
     ],
 
     entradas: [
