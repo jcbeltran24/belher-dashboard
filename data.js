@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 21 Abr 2026",
+    fecha: "Miércoles 22 Abr 2026",
     semana: "WK 17",
-    actualizado: "21/04/2026 · 10:00"
+    actualizado: "22/04/2026 · 09:15"
   },
 
   alertas: [
@@ -11,7 +11,7 @@ window.BELHER = {
     { nivel:"success",  texto:"EMBARQUES 20-ABR: 6 trailers → Nogales AZ — ST-65 (1,600) + ST-64 (1,600) + JL-119 (1,600) + JL-103 (1,656) + CGG-116 (1,600) + CGG-153 (1,440) = 9,496 cajas totales. Set point 50°F ✓" },
     { nivel:"success",  texto:"TRILLA 20-ABR: Sifón 1 — 12 ha trilladas hoy · Acumulado temporada: 194 ha totales. El Panteón + San Blas pendientes." },
     { nivel:"success",  texto:"💰 POR LIQUIDAR CALAVO — $720,391 acumulado WK01–WK16. Deuda $5,959,027 liquidada. Saldo crece semana a semana con cada nuevo settle." },
-    { nivel:"warning",  texto:"CVGW -3.65% ($26.67 close 16-Abr) + AVO -6.26% ($13.78) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
+    { nivel:"danger",   texto:"AVO -11.0% ($13.22 close 22-Abr desde $14.85 ayer) — caída agresiva; CVGW -0.83% ($27.37 desde $27.60). AVO acumula -4.1% vs 16-Abr ($13.78). Monitorear si ruptura AVO es señal sectorial o evento específico de Mission Produce." },
     { nivel:"info",     texto:"ESTADOS FINANCIEROS MARZO '26: EBITDA positivo $2,864,510 vs Budget $2,483,483 (+$381,027). Pendiente formato gerencial para revisión con Antonio." }
   ],
 
@@ -679,8 +679,8 @@ window.BELHER = {
     { label:"MERMA BOLA",     valor:"4.10%",         cambio:"⚠ 20/04 WK17 D1 · Ergo 3.00% · Roma <2%",  dir:"down"    },
     { label:"EMBARQUES 20/04",valor:"9,496 cajas",   cambio:"6 trailers ST-65+ST-64+JL-119+JL-103+CGG-116+CGG-153 · Nogales AZ", dir:"up" },
     { label:"POR LIQUIDAR",    valor:"$720,391",      cambio:"↑ WK16 acum — crece cada settle",           dir:"up"      },
-    { label:"CVGW",           valor:"$26.67",        cambio:"↓ -3.65% close 16-Abr (desde $27.68)",      dir:"down"    },
-    { label:"AVO",            valor:"$13.78",        cambio:"↓ -6.26% close 16-Abr (desde $14.70)",      dir:"down"    }
+    { label:"CVGW",           valor:"$27.37",        cambio:"↓ -0.83% close 22-Abr (desde $27.60) · ↑ vs mín $26.67 16-Abr", dir:"down" },
+    { label:"AVO",            valor:"$13.22",        cambio:"↓ -11.0% close 22-Abr (desde $14.85) ⚠ CAÍDA AGRESIVA",          dir:"down" }
   ],
 
   auditorias: [
@@ -898,7 +898,6 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"21/04/2026", evento:"ABSA CF GC 2025-2026 OL 9+3 actualizado — revisión forecast ciclo cierre (Leima Zoom invitación 30-Mar)", tipo:"reunion", participantes:"Leima Leyva · Armando Llanes · Antonio · JC · jacruz" },
       { fecha:"28/04/2026", evento:"WK18 — cruce estimado deuda Calavo $0 (amortización completa $6M) — inicio de liquidación real a Belher", tipo:"financiero", participantes:"Leima · Antonio · JC" },
       { fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque. Preparar inventarios y gestionar servicios pendientes.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
       { fecha:"Por confirmar (Abr 2026)", evento:"Reunión alineación Contrato 2026-2029 — John Lindeman · James Snyder · Irene Amezaga · Armando Llanes", tipo:"reunion", participantes:"Antonio, JC, Calavo, Armando Llanes, Notaría 97" }
@@ -1087,15 +1086,15 @@ window.BELHER = {
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 26.67, prevClose: 27.68, cambio: -1.01, cambioPct: -3.65,
-        h52: 28.72, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · close 16-Abr-2026"
+        precio: 27.37, prevClose: 27.60, cambio: -0.23, cambioPct: -0.83,
+        h52: 28.72, l52: 18.40, volumen: 620800,
+        fuente: "Yahoo Finance · close 22-Abr-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 13.78, prevClose: 14.70, cambio: -0.92, cambioPct: -6.26,
-        h52: 15.53, l52: 9.88, volumen: null,
-        fuente: "Yahoo Finance · close 16-Abr-2026"
+        precio: 13.22, prevClose: 14.85, cambio: -1.63, cambioPct: -11.0,
+        h52: 15.53, l52: 9.88, volumen: 1505600,
+        fuente: "Yahoo Finance · close 22-Abr-2026"
       }
     ],
 
@@ -1166,7 +1165,7 @@ window.BELHER = {
       { nivel: "success", texto: "WK16 SETTLE RECIBIDO 15-Abr: $1,101,951 · 38,067 pkgs · 24 cargas · FOB $28.95/cj. POR LIQUIDAR acumulado: $720,391 — crece cada semana." },
       { nivel: "success", texto: "WK15 CONFIRMADO: $2,144,379 · 53,976 pkgs · FOB $39.72/cj real (proyección $28.50 superada +39.7%). WK01–WK16 acumulado: $15,992,424 · 818,324 pkgs." },
       { nivel: "warning", texto: "Tomato Weekly Update WK15/WK16 pendiente — Irene viajó a Viva Expo San Antonio. Desglose rounds/roma WK16 no disponible todavía." },
-      { nivel: "danger", texto: "CVGW $26.67 (-3.65%) · AVO $13.78 (-6.26%) close 16-Abr — corrección sectorial segundo día. Monitorear señal de debilidad en cadena de valor." }
+      { nivel: "danger", texto: "AVO $13.22 (-11.0% close 22-Abr desde $14.85 ayer) · CVGW $27.37 (-0.83%). AVO acumula -4.1% vs 16-Abr. Caída agresiva — monitorear señal sectorial vs evento específico AVO." }
     ],
 
     kpi: {
