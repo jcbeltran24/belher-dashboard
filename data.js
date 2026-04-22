@@ -1,18 +1,18 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 21 Abr 2026",
+    fecha: "Miércoles 22 Abr 2026",
     semana: "WK 17",
-    actualizado: "21/04/2026 · 10:00"
+    actualizado: "22/04/2026 · 08:00"
   },
 
   alertas: [
-    { nivel:"warning",  texto:"⚠️ AUDITORÍA CALAVO — 18 y 19 de Mayo 2026. Auditor: Javier Martínez (Buyers Edge). Inspeccionará unidades de producción y empaque. Acción: revisar inventarios de materiales e insumos críticos, gestionar servicios pendientes." },
-    { nivel:"warning",  texto:"OUTBOUND WK17 D1 (20-Abr): Bola Calavo merma 4.10% ⚠ — segundo día seguido >4%. Bola Ergo 3.00%, Roma Calavo 1.39%, Roma Mill 1.08%, Roma Zazu 2.00%. Bola continúa bajo presión al inicio de WK17." },
-    { nivel:"success",  texto:"EMBARQUES 20-ABR: 6 trailers → Nogales AZ — ST-65 (1,600) + ST-64 (1,600) + JL-119 (1,600) + JL-103 (1,656) + CGG-116 (1,600) + CGG-153 (1,440) = 9,496 cajas totales. Set point 50°F ✓" },
-    { nivel:"success",  texto:"TRILLA 20-ABR: Sifón 1 — 12 ha trilladas hoy · Acumulado temporada: 194 ha totales. El Panteón + San Blas pendientes." },
-    { nivel:"success",  texto:"💰 POR LIQUIDAR CALAVO — $720,391 acumulado WK01–WK16. Deuda $5,959,027 liquidada. Saldo crece semana a semana con cada nuevo settle." },
-    { nivel:"warning",  texto:"CVGW -3.65% ($26.67 close 16-Abr) + AVO -6.26% ($13.78) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce." },
-    { nivel:"info",     texto:"ESTADOS FINANCIEROS MARZO '26: EBITDA positivo $2,864,510 vs Budget $2,483,483 (+$381,027). Pendiente formato gerencial para revisión con Antonio." }
+    {"nivel":"warning","texto":"⚠️ AUDITORÍA CALAVO — 18 y 19 de Mayo 2026. Auditor: Javier Martínez (Buyers Edge). Inspeccionará unidades de producción y empaque. Acción: revisar inventarios de materiales e insumos críticos, gestionar servicios pendientes."},
+    {"nivel":"success","texto":"EMBARQUES 21-ABR: 5 trailers → Nogales — ST-94 (1,600) + ST-95 (1,656) + CGG-88 (1,600) + CGG-91 (1,600) + ST-90 (1,960) = 8,416 cajas totales. Set point 50°F ✓ · Carrier: Transfríos Santa Teresa + Refrigerados CGG"},
+    {"nivel":"success","texto":"TRILLA 21-ABR: Sifón 1 — 25 ha trilladas hoy (sorgo). Acumulado temporada en curso."},
+    {"nivel":"warning","texto":"OUTBOUND WK17 D1 (20-Abr): Bola Calavo merma 4.10% ⚠ — segundo día seguido >4%. Bola Ergo 3.00%, Roma Calavo 1.39%, Roma Mill 1.08%, Roma Zazu 2.00%. Bola continúa bajo presión al inicio de WK17."},
+    {"nivel":"success","texto":"💰 POR LIQUIDAR CALAVO — $720,391 acumulado WK01–WK16. Deuda $5,959,027 liquidada. Saldo crece semana a semana con cada nuevo settle."},
+    {"nivel":"warning","texto":"CVGW -3.65% ($26.67 close 16-Abr) + AVO -6.26% ($13.78) — presión sectorial continúa. Monitorear si es ajuste macro o señal de debilidad en cadena de valor produce."},
+    {"nivel":"info","texto":"ESTADOS FINANCIEROS MARZO '26: EBITDA positivo $2,864,510 vs Budget $2,483,483 (+$381,027). Pendiente formato gerencial para revisión con Antonio."}
   ],
 
   ebitda: {
@@ -563,6 +563,12 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"20:34","asunto":"REPORTE DIARIO CALAVO 21-04-2026 — 5 trailers: ST-94 (1,600) + ST-95 (1,656) + CGG-88 (1,600) + CGG-91 (1,600) + ST-90 (1,960) = 8,416 cajas · Tomate · Nogales · Set point 50°F","de":"EMBARQUES BELHER","leido":false,"fecha":"21/04"},
+    {"hora":"20:33","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES ST — carga Tomate 21/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"21/04"},
+    {"hora":"20:32","asunto":"21-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"21/04"},
+    {"hora":"20:32","asunto":"BILL, MANIFIESTO, DATOS TRANSPORTISTA, FACTURAS XML, PROFORMAS NOGALES CGG — carga Tomate 21/04/2026","de":"EMBARQUES BELHER","leido":false,"fecha":"21/04"},
+    {"hora":"19:49","asunto":"REPORTE DE BASCULA 21/04/2026 (REZAGA DE TOMATE) — Adjunto","de":"Bascula Belher","leido":false,"fecha":"21/04"},
+    {"hora":"19:32","asunto":"AVANCE DE TRILLA 21/04/2026 SORGO (SIFON 1) — 25 ha trilladas hoy","de":"Bascula Belher","leido":false,"fecha":"21/04"},
     { hora:"15:48", asunto:"REPORTE DE OUTBOUND TOMATE 20/04/2026 — Bola Calavo 1ª 80.71% merma 4.10% ⚠ · Ergo 1ª 80.50% merma 3.00% · Roma Cal 1ª 91.76% merma 1.39% · Roma Mill 1ª 86.88% merma 1.08% · Roma Zazu 1ª 84.00% merma 2.00%", de:"Calidad Belher", leido:false, fecha:"20/04" },
     { hora:"21:45", asunto:"REPORTE DIARIO CALAVO 20-04-2026 — 7 trailers: ST-65 (1,600) + ST-64 (1,600) + JL-119 (1,600) + JL-103 (1,656) + CGG-116 (1,600) + CGG-153 (1,440) + 1 KF (1,648) = 11,144 cajas totales · Nogales AZ · Set point 50°F", de:"EMBARQUES BELHER", leido:false, fecha:"20/04" },
     { hora:"20:44", asunto:"20-04-2026 REPORTES GENERALES — Reportes de embarque y empaque adjuntos", de:"EMBARQUES BELHER", leido:false, fecha:"20/04" },
