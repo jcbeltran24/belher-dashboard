@@ -2,15 +2,16 @@ window.BELHER = {
   meta: {
     fecha: "Jueves 23 Abr 2026",
     semana: "WK 17",
-    actualizado: "23/04/2026 · 06:17"
+    actualizado: "23/04/2026 · 14:02"
   },
 
   alertas: [
-    { nivel:"warning",  texto:"ROMA TOLIN 21/04 — merma 8.33% CRÍTICO ⚠ · Patrón repetido (Bola Tolin 07/04: 30.18%). Primera 73.33%, peso 34.08 kg. Tolin muestra calidad estructuralmente deficiente para exportación. Evaluar suspensión empaque Tolin exportación." },
-    { nivel:"success",  texto:"VINE-RIPE NUEVO MÁXIMO — Corbel #0030 (17-Abr): $58.95–62.95 Nogales 2-layer 4×4/4×5 · Roma XL sube a $40.95–44.95. Mercado tomate alcista sostenido: tariffs + suministro ajustado GH + demanda retail fuerte." },
-    { nivel:"danger",   texto:"BELL VERDE XL -24% — Corbel #0030 (17-Abr): $30.95–32.95 vs $40.95–42.95 (#0028) · caída de $10/caja en 2 días. Evaluar si es corrección técnica o quiebre de tendencia." },
-    { nivel:"success",  texto:"TRILLA 21-ABR: Sifón 1 +25 ha → acumulado 219 ha totales (WK17: 37 ha en 2 días). El Panteón y San Blas pendientes de trillar." },
-    { nivel:"warning",  texto:"AUDITORÍA CALAVO — 18 y 19 de Mayo 2026. Auditor: Javier Martínez (Buyers Edge). Inspeccionará unidades de producción y empaque. Acción: revisar inventarios de materiales e insumos críticos, gestionar servicios pendientes." }
+    {"nivel":"warning","texto":"ROMA TOLIN 21/04 — merma 8.33% CRÍTICO ⚠ · Patrón repetido (Bola Tolin 07/04: 30.18%). Primera 73.33%, peso 34.08 kg. Tolin muestra calidad estructuralmente deficiente para exportación. Evaluar suspensión empaque Tolin exportación."},
+    {"nivel":"success","texto":"VINE-RIPE NUEVO MÁXIMO — Corbel #0030 (17-Abr): $58.95–62.95 Nogales 2-layer 4×4/4×5 · Roma XL sube a $40.95–44.95. Mercado tomate alcista sostenido: tariffs + suministro ajustado GH + demanda retail fuerte."},
+    {"nivel":"danger","texto":"BELL VERDE XL -24% — Corbel #0030 (17-Abr): $30.95–32.95 vs $40.95–42.95 (#0028) · caída de $10/caja en 2 días. Evaluar si es corrección técnica o quiebre de tendencia."},
+    {"nivel":"success","texto":"EMBARQUES 22-ABR: 2 trailers Calavo (JL-03 + JL-04) · 3,200 cajas Tomate · Transportes Elogistica · Nogales AZ · Set point 50°F."},
+    {"nivel":"success","texto":"TRILLA 21-ABR: Sifón 1 +25 ha → acumulado 219 ha totales (WK17: 37 ha en 2 días). El Panteón y San Blas pendientes de trillar."},
+    {"nivel":"warning","texto":"AUDITORÍA CALAVO — 18 y 19 de Mayo 2026. Auditor: Javier Martínez (Buyers Edge). Inspeccionará unidades de producción y empaque. Acción: revisar inventarios de materiales e insumos críticos, gestionar servicios pendientes."}
   ],
 
   ebitda: {
@@ -564,6 +565,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"20:23","asunto":"22-04-2026 REPORTES GENERALES — Reportes generales de embarque y empaque adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"22/04"},
+    {"hora":"20:04","asunto":"REPORTE DIARIO CALAVO 22-04-2026 — 2 trailers: JL-03 (1,600) + JL-04 (1,600) = 3,200 cajas · Tomate · Transportes Elogistica · Set point 50°F · Nogales","de":"EMBARQUES BELHER","leido":false,"fecha":"22/04"},
     { hora:"17:22", asunto:"Weekly Tomato Meeting — Irene Amezaga convoca reunión Teams semanal. Participantes: Jonathan Barbarine, Dora Castro, Elizabeth Bravo, James Snyder, John Lindeman, Antonio, JC", de:"Irene Amezaga · Calavo VP Sales", leido:false, fecha:"22/04" },
     { hora:"09:58", asunto:"REPORTE DE OUTBOUND TOMATE 21/04/2026 — Bola Calavo 1ª 82.11% merma 3.27% ↓ · Ergo 1ª 84.83% merma 3.18% · Roma Cal 1ª 88.81% merma 3.24% · Roma Tolin 1ª 73.33% merma 8.33% ⚠ CRÍTICO", de:"Calidad Belher", leido:false, fecha:"22/04" },
     { hora:"23:59", asunto:"Re: CF ABSA GC 2025-2026 actualizado al 19 de abril '26 — Leima reenvía CF revisado post-reunión con pequeños cambios (Armando Llanes · Antonio · JC · jacruz)", de:"Leima Leyva · Administración", leido:false, fecha:"21/04" },
