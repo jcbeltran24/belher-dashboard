@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 22 Abr 2026",
+    fecha: "Jueves 23 Abr 2026",
     semana: "WK 17",
-    actualizado: "22/04/2026 · 11:45"
+    actualizado: "23/04/2026 · 06:17"
   },
 
   alertas: [
@@ -1335,7 +1335,7 @@ window.BELHER = {
       {
         simbolo: "CVGW", empresa: "Calavo Growers",
         tendencia: "alcista",
-        precioActual: 27.89,
+        precioActual: 27.86,
         precioObj90d: 31.00,
         riesgoBajo: 24.00,
         confianza: 60,
@@ -1345,7 +1345,7 @@ window.BELHER = {
       {
         simbolo: "AVO", empresa: "Mission Produce",
         tendencia: "lateral",
-        precioActual: 13.64,
+        precioActual: 13.66,
         precioObj90d: 15.50,
         riesgoBajo: 12.00,
         confianza: 50,
