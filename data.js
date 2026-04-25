@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 24 Abr 2026",
+    fecha: "Sábado 25 Abr 2026",
     semana: "WK 17",
-    actualizado: "24/04/2026 · 13:55"
+    actualizado: "25/04/2026 · 13:20"
   },
 
   alertas: [
-    {"nivel":"success","texto":"EMBARQUES 23-ABR: 4 trailers · 6,640 cajas Tomate · ST-110 (1,600) + ST-109 (1,600) Transfrios Santa Teresa + JL-34 (1,760) + JL-42 (1,680) Elogistica · Set point 50°F · Nogales AZ."},
+    {"nivel":"success","texto":"EMBARQUES 24-ABR: 6 trailers · 9,632 cajas Tomate · CGG-114 (1,600) + CGG-100 (1,600) + CGG-105 (1,600) + CHARLY-6 (1,600) Refrigerados CGG + JL-03 (1,600) + JL-04 (1,632) Elogistica · Set point 50°F · Nogales AZ."},
+    {"nivel":"success","texto":"CHILES 24-ABR: Manifiesto carga Chile Anaheim · CGG-142 · Chofer: Jesús López Duarte · Placa 58VG5Q · Nogales AZ. Reportes generales chiles adjuntos."},
     {"nivel":"warning","texto":"ROMA TOLIN 21/04 — merma 8.33% CRÍTICO ⚠ · Patrón repetido (Bola Tolin 07/04: 30.18%). Primera 73.33%, peso 34.08 kg. Tolin muestra calidad estructuralmente deficiente para exportación. Evaluar suspensión empaque Tolin exportación."},
     {"nivel":"success","texto":"VINE-RIPE NUEVO MÁXIMO — Corbel #0030 (17-Abr): $58.95–62.95 Nogales 2-layer 4×4/4×5 · Roma XL sube a $40.95–44.95. Mercado tomate alcista sostenido: tariffs + suministro ajustado GH + demanda retail fuerte."},
     {"nivel":"danger","texto":"BELL VERDE XL -24% — Corbel #0030 (17-Abr): $30.95–32.95 vs $40.95–42.95 (#0028) · caída de $10/caja en 2 días. Evaluar si es corrección técnica o quiebre de tendencia."},
-    {"nivel":"success","texto":"TRILLA 21-ABR: Sifón 1 +25 ha → acumulado 219 ha totales (WK17: 37 ha en 2 días). El Panteón y San Blas pendientes de trillar."},
     {"nivel":"warning","texto":"AUDITORÍA CALAVO — 18 y 19 de Mayo 2026. Auditor: Javier Martínez (Buyers Edge). Inspeccionará unidades de producción y empaque. Acción: revisar inventarios de materiales e insumos críticos, gestionar servicios pendientes."}
   ],
 
@@ -565,6 +565,11 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"19:44","asunto":"24-04-2026 REPORTES GENERALES DE TOMATE — Reportes generales de embarque y empaque de tomate adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"24/04"},
+    {"hora":"19:44","asunto":"REPORTE DIARIO CALAVO 24-04-2026 — 6 trailers: CGG-114 (1,600) + CGG-100 (1,600) + CGG-105 (1,600) + CHARLY-6 (1,600) Refrigerados CGG + JL-03 (1,600) + JL-04 (1,632) Elogistica = 9,632 cajas · Tomate · Set point 50°F · Nogales AZ","de":"EMBARQUES BELHER","leido":false,"fecha":"24/04"},
+    {"hora":"19:41","asunto":"24-04-2026 REPORTES GENERALES CHILES — Reportes generales de embarque y empaque de chiles adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"24/04"},
+    {"hora":"19:04","asunto":"MANIFIESTO DE CARGA DE CHILE ANAHEIM — CGG-142 · Chofer: Jesús López Duarte · Celular 667-341-0322 · Placa 58VG5Q · Nogales AZ","de":"EMBARQUES BELHER","leido":false,"fecha":"24/04"},
+    {"hora":"19:50","asunto":"BILL, MANIFIESTO, DATOS DEL TRANSPORTISTA, FACTURAS Y XML, PROFORMAS NOGALES JL — Archivos carga Tomate 24/04/2026 · Transportes Elogistica JL-03 + JL-04","de":"EMBARQUES BELHER","leido":false,"fecha":"24/04"},
     {"hora":"21:59","asunto":"23-04-2026 REPORTES GENERALES TOMATE — Reporte general de embarque y empaque adjunto","de":"EMBARQUES BELHER","leido":false,"fecha":"23/04"},
     {"hora":"21:40","asunto":"REPORTE DIARIO CALAVO 23-04-2026 — 4 trailers: ST-110 (1,600) + ST-109 (1,600) + JL-34 (1,760) + JL-42 (1,680) = 6,640 cajas · Tomate · Transfrios + Elogistica · Nogales · Set point 50°F","de":"EMBARQUES BELHER","leido":false,"fecha":"23/04"},
     {"hora":"21:40","asunto":"BILL, MANIFIESTO, DATOS DEL TRANSPORTISTA, FACTURAS Y XML, PROFORMAS NOGALES JL — Archivos carga Tomate 23/04/2026 · Transportes Elogistica JL-34 + JL-42","de":"EMBARQUES BELHER","leido":false,"fecha":"23/04"},
