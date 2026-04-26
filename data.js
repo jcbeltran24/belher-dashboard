@@ -1,13 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 25 Abr 2026",
+    fecha: "Domingo 26 Abr 2026",
     semana: "WK 17",
-    actualizado: "25/04/2026 · 13:20"
+    actualizado: "26/04/2026 · 13:21"
   },
 
   alertas: [
-    {"nivel":"success","texto":"EMBARQUES 24-ABR: 6 trailers · 9,632 cajas Tomate · CGG-114 (1,600) + CGG-100 (1,600) + CGG-105 (1,600) + CHARLY-6 (1,600) Refrigerados CGG + JL-03 (1,600) + JL-04 (1,632) Elogistica · Set point 50°F · Nogales AZ."},
-    {"nivel":"success","texto":"CHILES 24-ABR: Manifiesto carga Chile Anaheim · CGG-142 · Chofer: Jesús López Duarte · Placa 58VG5Q · Nogales AZ. Reportes generales chiles adjuntos."},
+    {"nivel":"success","texto":"EMBARQUES 25-ABR: 4 trailers · 6,400 cajas Tomate · ST-106 (1,600) + ST-105 (1,600) Transfrios Santa Teresa + CGG-18 (1,600) + CGG-69 (1,600) Refrigerados CGG · Set point 50°F · Nogales AZ. P.O. 264654/264655/264668/264670."},
+    {"nivel":"success","texto":"CHILES 25-ABR: Reportes generales de empaque de chile adjuntos. Operación normal."},
+    {"nivel":"warning","texto":"BROKER L. PIÑA (25-ABR): Productos México/Canadá sin USMCA sujetos a arancel 25% + general. Verificar cobertura USMCA en todos los embarques activos."},
     {"nivel":"warning","texto":"ROMA TOLIN 21/04 — merma 8.33% CRÍTICO ⚠ · Patrón repetido (Bola Tolin 07/04: 30.18%). Primera 73.33%, peso 34.08 kg. Tolin muestra calidad estructuralmente deficiente para exportación. Evaluar suspensión empaque Tolin exportación."},
     {"nivel":"success","texto":"VINE-RIPE NUEVO MÁXIMO — Corbel #0030 (17-Abr): $58.95–62.95 Nogales 2-layer 4×4/4×5 · Roma XL sube a $40.95–44.95. Mercado tomate alcista sostenido: tariffs + suministro ajustado GH + demanda retail fuerte."},
     {"nivel":"danger","texto":"BELL VERDE XL -24% — Corbel #0030 (17-Abr): $30.95–32.95 vs $40.95–42.95 (#0028) · caída de $10/caja en 2 días. Evaluar si es corrección técnica o quiebre de tendencia."},
@@ -565,6 +566,10 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"21:51","asunto":"25-04-2026 REPORTES GENERALES DE CHILE — Reportes generales de empaque de chile adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"25/04"},
+    {"hora":"21:50","asunto":"25-04-2026 REPORTES GENERALES TOMATE — Reportes generales de embarque y empaque de tomate adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"25/04"},
+    {"hora":"21:23","asunto":"REPORTE DIARIO CALAVO 25-04-2026 — 4 trailers: ST-106 (1,600) + ST-105 (1,600) Transfrios Santa Teresa + CGG-18 (1,600) + CGG-69 (1,600) Refrigerados CGG = 6,400 cajas · Tomate · Set point 50°F · Nogales AZ","de":"EMBARQUES BELHER","leido":false,"fecha":"25/04"},
+    {"hora":"20:46","asunto":"BILL, MANIFIESTO, DATOS DEL TRANSPORTISTA, FACTURAS Y XML, PROFORMAS NOGALES CGG — Archivos carga Tomate 25/04/2026 · Refrigerados CGG. Nota broker L. Piña: sin USMCA = arancel 25%+","de":"EMBARQUES BELHER","leido":false,"fecha":"25/04"},
     {"hora":"19:44","asunto":"24-04-2026 REPORTES GENERALES DE TOMATE — Reportes generales de embarque y empaque de tomate adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"24/04"},
     {"hora":"19:44","asunto":"REPORTE DIARIO CALAVO 24-04-2026 — 6 trailers: CGG-114 (1,600) + CGG-100 (1,600) + CGG-105 (1,600) + CHARLY-6 (1,600) Refrigerados CGG + JL-03 (1,600) + JL-04 (1,632) Elogistica = 9,632 cajas · Tomate · Set point 50°F · Nogales AZ","de":"EMBARQUES BELHER","leido":false,"fecha":"24/04"},
     {"hora":"19:41","asunto":"24-04-2026 REPORTES GENERALES CHILES — Reportes generales de embarque y empaque de chiles adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"24/04"},
