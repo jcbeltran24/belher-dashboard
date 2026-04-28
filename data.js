@@ -1,13 +1,13 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 27 Abr 2026",
+    fecha: "Martes 28 Abr 2026",
     semana: "WK 17",
-    actualizado: "27/04/2026 · 14:12"
+    actualizado: "28/04/2026 · 14:31"
   },
 
   alertas: [
-    {"nivel":"success","texto":"EMBARQUES 25-ABR: 4 trailers · 6,400 cajas Tomate · ST-106 (1,600) + ST-105 (1,600) Transfrios Santa Teresa + CGG-18 (1,600) + CGG-69 (1,600) Refrigerados CGG · Set point 50°F · Nogales AZ. P.O. 264654/264655/264668/264670."},
-    {"nivel":"success","texto":"CHILES 25-ABR: Reportes generales de empaque de chile adjuntos. Operación normal."},
+    {"nivel":"info","texto":"REPORTES GENERALES 27-ABR: Embarques Belher reporta operación de embarque y empaque del 27 de abril. Reportes adjuntos recibidos 21:01h. Revisar archivos para detalles de trailers y cajas."},
+    {"nivel":"warning","texto":"CALAVO — Weekly Tomato Meeting CANCELADA (28-Abr): Irene Amezaga (Calavo) canceló la reunión semanal de tomate. Sin nueva fecha confirmada. Contactar para reagendar."},
     {"nivel":"warning","texto":"BROKER L. PIÑA (25-ABR): Productos México/Canadá sin USMCA sujetos a arancel 25% + general. Verificar cobertura USMCA en todos los embarques activos."},
     {"nivel":"warning","texto":"ROMA TOLIN 21/04 — merma 8.33% CRÍTICO ⚠ · Patrón repetido (Bola Tolin 07/04: 30.18%). Primera 73.33%, peso 34.08 kg. Tolin muestra calidad estructuralmente deficiente para exportación. Evaluar suspensión empaque Tolin exportación."},
     {"nivel":"success","texto":"VINE-RIPE NUEVO MÁXIMO — Corbel #0030 (17-Abr): $58.95–62.95 Nogales 2-layer 4×4/4×5 · Roma XL sube a $40.95–44.95. Mercado tomate alcista sostenido: tariffs + suministro ajustado GH + demanda retail fuerte."},
@@ -566,6 +566,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"21:01","asunto":"27-04-2026 REPORTES GENERALES — Reportes generales de embarque y empaque adjuntos. Operación del 27 de abril.","de":"EMBARQUES BELHER","leido":false,"fecha":"27/04"},
+    {"hora":"11:55","asunto":"Canceled: Weekly Tomato Meeting — Reunión semanal de tomate cancelada por Irene Amezaga (Calavo). Sin nueva fecha.","de":"Irene Amezaga (Calavo)","leido":false,"fecha":"28/04"},
     {"hora":"21:51","asunto":"25-04-2026 REPORTES GENERALES DE CHILE — Reportes generales de empaque de chile adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"25/04"},
     {"hora":"21:50","asunto":"25-04-2026 REPORTES GENERALES TOMATE — Reportes generales de embarque y empaque de tomate adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"25/04"},
     {"hora":"21:23","asunto":"REPORTE DIARIO CALAVO 25-04-2026 — 4 trailers: ST-106 (1,600) + ST-105 (1,600) Transfrios Santa Teresa + CGG-18 (1,600) + CGG-69 (1,600) Refrigerados CGG = 6,400 cajas · Tomate · Set point 50°F · Nogales AZ","de":"EMBARQUES BELHER","leido":false,"fecha":"25/04"},
