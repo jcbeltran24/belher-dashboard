@@ -1,13 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 28 Abr 2026",
-    semana: "WK 17",
-    actualizado: "28/04/2026 · 14:31"
+    fecha: "Miércoles 29 Abr 2026",
+    semana: "WK 18",
+    actualizado: "29/04/2026 · 14:20"
   },
 
   alertas: [
-    {"nivel":"info","texto":"REPORTES GENERALES 27-ABR: Embarques Belher reporta operación de embarque y empaque del 27 de abril. Reportes adjuntos recibidos 21:01h. Revisar archivos para detalles de trailers y cajas."},
-    {"nivel":"warning","texto":"CALAVO — Weekly Tomato Meeting CANCELADA (28-Abr): Irene Amezaga (Calavo) canceló la reunión semanal de tomate. Sin nueva fecha confirmada. Contactar para reagendar."},
+    {"nivel":"info","texto":"REPORTES GENERALES 28-ABR: Embarques Belher reporta operación de embarque y empaque del 28 de abril. Reportes adjuntos recibidos 20:47h."},
+    {"nivel":"success","texto":"CALAVO 28-ABR — 2 trailers (ST-86 + ST-85, Transfrios Santa Teresa): 3,200 cajas Tomate · Set point 50°F · Nogales. Salidas a las 19:31 y 19:43h."},
+    {"nivel":"info","texto":"TRILLA SORGO SIFÓN I — 28/04/2026: Superficie trillada del día: 7 ha. Reporte acumulado de avance recibido."},
     {"nivel":"warning","texto":"BROKER L. PIÑA (25-ABR): Productos México/Canadá sin USMCA sujetos a arancel 25% + general. Verificar cobertura USMCA en todos los embarques activos."},
     {"nivel":"warning","texto":"ROMA TOLIN 21/04 — merma 8.33% CRÍTICO ⚠ · Patrón repetido (Bola Tolin 07/04: 30.18%). Primera 73.33%, peso 34.08 kg. Tolin muestra calidad estructuralmente deficiente para exportación. Evaluar suspensión empaque Tolin exportación."},
     {"nivel":"success","texto":"VINE-RIPE NUEVO MÁXIMO — Corbel #0030 (17-Abr): $58.95–62.95 Nogales 2-layer 4×4/4×5 · Roma XL sube a $40.95–44.95. Mercado tomate alcista sostenido: tariffs + suministro ajustado GH + demanda retail fuerte."},
@@ -566,6 +567,12 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"20:47","asunto":"28-04-2026 REPORTES GENERALES — Reportes generales de embarque y empaque adjuntos. Operación del 28 de abril.","de":"EMBARQUES BELHER","leido":false,"fecha":"28/04"},
+    {"hora":"20:11","asunto":"REPORTE DIARIO CALAVO 28-04-2026 — 2 trailers: ST-86 (1,600) + ST-85 (1,600) Transfrios Santa Teresa = 3,200 cajas · Tomate · Set point 50°F · Nogales AZ","de":"EMBARQUES BELHER","leido":false,"fecha":"28/04"},
+    {"hora":"20:09","asunto":"BILL, MANIFIESTO, DATOS DEL TRANSPORTISTA, FACTURAS Y XML, PROFORMAS NOGALES ST — Archivos carga Tomate 28/04/2026 · Transfrios Santa Teresa","de":"EMBARQUES BELHER","leido":false,"fecha":"28/04"},
+    {"hora":"19:53","asunto":"AVANCE DE TRILLA 28/04/2026 SORGO (SIFON I) — Superficie trillada del día: 7 ha. Reporte acumulado adjunto.","de":"Bascula Belher","leido":false,"fecha":"28/04"},
+    {"hora":"18:38","asunto":"REPORTE DE BASCULA 28/04/2026 (REZAGA DE TOMATE) — Reporte de rezaga de tomate del día 28/04/2026 adjunto.","de":"Bascula Belher","leido":false,"fecha":"28/04"},
+    {"hora":"17:34","asunto":"REPORTE DE BASCULA 28/04/2026 (TOMATE) — Reportes de tomate del día 28/04/2026 adjuntos.","de":"Bascula Belher","leido":false,"fecha":"28/04"},
     {"hora":"21:01","asunto":"27-04-2026 REPORTES GENERALES — Reportes generales de embarque y empaque adjuntos. Operación del 27 de abril.","de":"EMBARQUES BELHER","leido":false,"fecha":"27/04"},
     {"hora":"11:55","asunto":"Canceled: Weekly Tomato Meeting — Reunión semanal de tomate cancelada por Irene Amezaga (Calavo). Sin nueva fecha.","de":"Irene Amezaga (Calavo)","leido":false,"fecha":"28/04"},
     {"hora":"21:51","asunto":"25-04-2026 REPORTES GENERALES DE CHILE — Reportes generales de empaque de chile adjuntos","de":"EMBARQUES BELHER","leido":false,"fecha":"25/04"},
