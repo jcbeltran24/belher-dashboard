@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 29 Abr 2026",
+    fecha: "Miércoles 29 Abr 2026",
     semana: "WK 18",
-    actualizado: "29/04/2026 · 08:15"
+    actualizado: "29/04/2026 · 10:06"
   },
 
   alertas: [
-    { nivel:"success",  texto:"CORBEL #0037 (28-Abr) — ROMA TOMATO IMPULSO ALCISTA: $52.95–54.95 XL 25lb Texas, +15% vs #0034 hace 5 días. Demanda strong, mercado ligeramente más alto. Ventana WK18-19 crítica antes de entrada California/Salinas." },
-    { nivel:"warning",  texto:"BOLA CALAVO OUTBOUND 27/04 — merma 3.28% controlada, primera 81.50%, peso 25.32 kg. Mejora vs 5.62% (25/04) pero patrón de volatilidad sigue siendo preocupación. Continuar auditoría." },
-    { nivel:"success",  texto:"ROMA ZAZU OUTBOUND 27/04 — merma 2.91%, primera 89.64%, peso 26.03 kg. Calidad sólida. Roma mantiene premios de calidad consistentes — estrategia de priorización validada." },
-    { nivel:"info",     texto:"EMBARQUES 28/04 — 2 cargas tomate (ST-86, ST-85) Transfríos hacia Nogales. 3,200 cajas, 40 pallets totales. Operación activa WK18." },
-    { nivel:"success",  texto:"MERCADOS ACCIONARIOS — CVGW $27.99 (+2.27% desde $27.37) · AVO $13.73 (+3.86% desde $13.22). Recuperación sostenida en Calavo; Mission Produce ganancia sectorial." }
+    { nivel:"success",  texto:"IVA FEBRERO 2026 AUTORIZADO $1,752,440 — jacruz (29-Abr): importe histórico aprobado, depósito en breve. Impacto directo en flujo de caja mayo." },
+    { nivel:"success",  texto:"OUTBOUND 28/04 — TENDENCIA MEJORA: Bola Calavo merma 3.16% (D1: 3.28%), Roma Millennium 2.52%, Roma Zazu 2.03%. Las 3 variedades <4%. WK18 avg merma 2.78%." },
+    { nivel:"success",  texto:"ROMA TOMATO XL Texas $52.95–54.95 (Corbel #0037 28-Abr) — +15% en 5 días. Morocco exports halted. Ventana premium WK18-19 activa. Embarcar volumen máximo." },
+    { nivel:"info",     texto:"5 REUNIONES FINANCIERAS MAYO agendadas: 19-May BPSI F/S Abril · 25-May F/S Tomates+Limones+Granos · 25-May ISR 2025+PTU · 25-May Contrato Calavo · 26-May OL 10+2 P&L." },
+    { nivel:"success",  texto:"CVGW $28.09 (+0.36% desde $27.99) · AVO $13.81 (+0.58% desde $13.73). Recuperación sectorial sostenida. CVGW acercándose a máximo 52s de $28.72." }
   ],
 
   ebitda: {
@@ -167,8 +167,9 @@ window.BELHER = {
       desde: "27/04/2026",
       hasta:  "03/05/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:81.50, segunda:9.35,  tercera:5.86, merma:3.28, peso:25.32, dias:1, alerta:false },
-        { nombre:"Roma Zazu",       etiqueta:"Zazu",       canal:"exportacion", primera:89.64, segunda:4.55,  tercera:2.91, merma:2.91, peso:26.03, dias:1, alerta:false }
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:77.44, segunda:10.96, tercera:8.38,  merma:3.22, peso:24.97, dias:2, alerta:false },
+        { nombre:"Roma Zazu",       etiqueta:"Zazu",       canal:"exportacion", primera:88.11, segunda:5.81,  tercera:3.62,  merma:2.47, peso:26.09, dias:2, alerta:false },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:89.13, segunda:5.40,  tercera:2.94,  merma:2.52, peso:26.30, dias:1, alerta:false }
       ]
     },
     historico: [
@@ -177,21 +178,20 @@ window.BELHER = {
       { fecha:"WK15", primaPromedio:82.01, mermaPromedio:5.12, nota:"Días 1-6: 04/04·5vars, 06/04·3vars, 07/04·4vars (incl Tolin), 08/04·1var, 09/04·3vars, 11/04·4vars. Roma Calavo 11/04 merma 6.00%. Bola Calavo 09/04 merma 6.78% CRÍTICO. Tolin 07/04 merma 30.18% outlier." },
       { fecha:"WK16", primaPromedio:82.70, mermaPromedio:3.06, nota:"Días 1-6 (13/04-18/04): D1 BC 0.93%+RMill 1.20%, D2 BC 4.75%+RCal 1.58%, D3 BC 2.56%, D4 RZazu 1.59%, D5 BC 4.46%+Ergo 3.53%+BTolin 6.40%+RTolin 3.80%, D6 BC 2.91%+Ergo 3.67%+RMill 2.97%." },
       { fecha:"WK17", primaPromedio:82.50, mermaPromedio:3.67, nota:"D1(20/04): BC 4.10% · Ergo 3.00% · Roma Cal 1.39% · Roma Mill 1.08% · Roma Zazu 2.00%. D2(21/04): BC 3.27% · Ergo 3.18% · Roma Cal 3.24% · Roma Tolin 8.33%. D3(23/04): Bola Calavo 73.36% P, Merma 5.24% · Bola Ergo 76.32% P, Merma 2.34% · Roma Calavo 88.35% P, Merma 1.75%. D4(25/04): Bola Calavo 71.53% P, Merma 5.62% · Bola Ergo 79.13% P, Merma 3.23% · Roma Calavo 88.79% P, Merma 2.47%." },
-      { fecha:"WK18", primaPromedio:85.57, mermaPromedio:3.10, nota:"D1(27/04): Bola Calavo 81.50% P, Merma 3.28%, peso 25.32 kg · Roma Zazu 89.64% P, Merma 2.91%, peso 26.03 kg — mejora vs WK17." }
+      { fecha:"WK18", primaPromedio:84.04, mermaPromedio:2.78, nota:"D1(27/04): BC 81.50%P merma 3.28% · Zazu 89.64%P merma 2.91%. D2(28/04): BC 73.37%P merma 3.16% · RMill 89.13%P merma 2.52% · RZazu 86.58%P merma 2.03%. Tendencia bajista merma — mejora consistente WK18." }
     ],
     ultimoOutbound: {
-      fecha: "27/04/2026",
+      fecha: "28/04/2026",
       variedades: [
-        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:81.50, segunda:9.35, tercera:5.86, merma:3.28, peso:25.32, alerta:false },
-        { nombre:"Roma Zazu",       etiqueta:"Zazu",       canal:"exportacion", primera:89.64, segunda:4.55, tercera:2.91, merma:2.91, peso:26.03, alerta:false }
+        { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:73.37, segunda:12.57, tercera:10.90, merma:3.16, peso:24.61, alerta:false },
+        { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:89.13, segunda:5.40,  tercera:2.94,  merma:2.52, peso:26.30, alerta:false },
+        { nombre:"Roma Zazu",       etiqueta:"Zazu",       canal:"exportacion", primera:86.58, segunda:7.07,  tercera:4.32,  merma:2.03, peso:26.14, alerta:false }
       ],
       anterior: {
-        fecha: "25/04/2026",
+        fecha: "27/04/2026",
         variedades: [
-          { nombre:"Bola Calavo",     etiqueta:"Calavo",     canal:"exportacion", primera:71.53, segunda:11.17, tercera:11.68, merma:5.62, peso:24.77, alerta:true  },
-          { nombre:"Bola Ergo",       etiqueta:"Ergo",       canal:"exportacion", primera:79.13, segunda:10.76, tercera:9.07, merma:3.23, peso:25.62, alerta:false },
-          { nombre:"Roma Calavo",     etiqueta:"Roma",       canal:"exportacion", primera:88.79, segunda:5.81, tercera:2.93, merma:2.47, peso:26.03, alerta:false },
-          { nombre:"Roma Millennium", etiqueta:"Millennium", canal:"exportacion", primera:89.32, segunda:6.07, tercera:2.66, merma:1.95, peso:26.09, alerta:false }
+          { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:81.50, segunda:9.35, tercera:5.86, merma:3.28, peso:25.32, alerta:false },
+          { nombre:"Roma Zazu",   etiqueta:"Zazu",   canal:"exportacion", primera:89.64, segunda:4.55, tercera:2.91, merma:2.91, peso:26.03, alerta:false }
         ]
       }
     }
@@ -472,180 +472,35 @@ window.BELHER = {
       { fecha:"28/04", productos:["Tomate Bola","Tomate Roma","Rezaga Tomate"] }
     ],
     embarques: [
-      { fecha:"28/04/2026", tipo:"Tomate", cargas:2, unidad:"ST-86, ST-85", destino:"Nogales", estado:"OK" },
-      { fecha:"27/04/2026", tipo:"Tomate", cargas:1, unidad:"ST-106", destino:"Arizona", estado:"OK" },
-      { fecha:"26/04/2026", tipo:"Tomate", cargas:1, unidad:"MCALLEN", destino:"Texas", estado:"OK" },
-      { fecha:"26/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-1", destino:"Arizona", estado:"OK" }
+      { fecha:"28/04/2026", tipo:"Tomate", cargas:2, unidad:"ST-86, ST-85",                                      destino:"Arizona", estado:"OK" },
+      { fecha:"27/04/2026", tipo:"Tomate", cargas:6, unidad:"CGG-114, CGG-100, CGG-105, CHARLY-6, JL-32, JL-11", destino:"Arizona", estado:"OK" },
+      { fecha:"26/04/2026", tipo:"Tomate", cargas:1, unidad:"MCALLEN",                                            destino:"Texas",   estado:"OK" },
+      { fecha:"26/04/2026", tipo:"Tomate", cargas:1, unidad:"CGG-1",                                              destino:"Arizona", estado:"OK" }
     ]
   },
 
-  estrategia: {
-    contratos: [
-      {
-        titulo: "Contrato Calavo 2026",
-        estado: "Activo",
-        nivel: "success",
-        descripcion: "Pick & Pack @$5.00/caja — addendum firmado 2024. WK01–WK12: 655,641 cajas · $3.28M liquidado. Pendiente corrección en contrato formal.",
-        accion: "Verificar corrección del P&P a $5 en contrato. Reunión de alineación pendiente de confirmar fecha."
-      },
-      {
-        titulo: "Contrato Calavo 2026-2029 — NUEVO MULTIANUAL",
-        estado: "En Revisión",
-        nivel: "warning",
-        descripcion: "Irene Amezaga envió borrador 09-Abr-2026. Antonio lo reenvió a JC y Armando Llanes para revisión. Contrato para ciclos 2026-27, 2027-28 y 2028-29.",
-        accion: "Esperar comentarios de Armando Llanes. Revisar términos de precio base y P&P para 3 temporadas. Coordinar reunión de alineación antes de firmar."
-      },
-      {
-        titulo: "Inversión Corbel Seeds",
-        estado: "Activo",
-        nivel: "info",
-        descripcion: "Participación como CB1 en Corbel Seeds. Reunión Zoom 17-Mar sobre ensayos de tomate y chile.",
-        accion: "Revisar presentación 'Situación Actual de Corbel Seeds' enviada por Raymundo 23-Mar."
-      }
-    ],
-    oportunidades: [
-      {
-        titulo: "Roma tomato WK18-19 — aprovechar impulso alcista hasta fin ciclo",
-        prioridad: "Alta",
-        descripcion: "Corbel #0037 (28-Abr): Roma XL Texas $52.95–54.95 (+15% vs #0034 hace 5 días). Outbound 27/04: Roma Zazu merma 2.91%, primera 89.64% — calidad consistentemente sólida. Demanda retail OTV + descontinuación oferta Marruecos. Ventana cierra WK19.",
-        accion: "MAXIMIZAR VOLUMEN ROMA — merma y calidad validadas. Coordinar embarques máximos WK18. Esta es la variedad más estable y premium."
-      },
-      {
-        titulo: "Bola Calavo — mejora confirmada WK18 vs WK17",
-        prioridad: "Alta",
-        descripcion: "Outbound 27/04: Bola Calavo merma 3.28%, primera 81.50%, peso 25.32 kg — MEJORA vs merma 5.62% (25/04). Patrón de volatilidad continúa pero tendencia al alza sugiere investigación post-auditoría está siendo efectiva.",
-        accion: "Continuar auditoría manejo postcosecha línea empaque. Próximo outbound 29/04+ determinará si corrección es sostenida. Monitorear."
-      },
-      {
-        titulo: "Limes market softening — ventana de volumen antes de corrección adicional",
-        prioridad: "Media",
-        descripcion: "Corbel #0037 (28-Abr): limes Texas 7/10-bu ~$36 avg (suavizándose). Peru -30% volumen por lluvia; Colombia/Brasil presionando. Flush primaveral Abr-May-Jun típico.",
-        accion: "Coordinar con Maui Fresh volumen limón disponible ESTA SEMANA. Calibres 110s-150s pueden mantener $35+ por poco tiempo."
-      }
-    ],
-    watchlist: [
-      {
-        titulo: "Bola Calavo volatilidad continuada — patrón no totalmente resuelto",
-        nivel: "warning",
-        descripcion: "Outbound 27/04: merma 3.28% (mejora vs 5.62% 25/04). Sexta semana consecutiva con merma >3%. Mejora es positiva pero no es resolución definitiva.",
-        accion: "Continuar auditoría. Próximas lecturas outbound (29/04+) dirán si corrección es sostenida. Si vuelven a >4%, suspensión temporal empaque Bola Calavo warranted."
-      },
-      {
-        titulo: "Declaración Anual 2025 — resultado a pagar pendiente",
-        nivel: "danger",
-        descripcion: "Auditoría Belher pendiente revisión. Presentada con resultado a pagar en acuerdo con Despacho Terrazas.",
-        accion: "Esperar confirmación jacruz con fecha y monto del pago. Prever impacto en flujo de caja."
-      },
-      {
-        titulo: "Aranceles USMCA: revisión 1-Jul-2026 — presión legisladores Florida activa",
-        nivel: "danger",
-        descripcion: "Legisladores Florida mantienen presión por tarifas estacionales. Suprema Corte falló sobre aranceles. Corbel monitorea.",
-        accion: "Monitorear semanalmente. Contactar Calavo para posición estratégica ante cambios anti-dumping."
-      }
-    ],
-    proximos: [
-      { fecha:"29/04/2026", evento:"WK18 operativo — monitorear outbound Bola Calavo (tendencia mejora?)", tipo:"operacion", participantes:"Calidad · Operaciones" },
-      { fecha:"30/04/2026", evento:"Cierre mes Abril — preparar financials para reunión 25-May", tipo:"financiero", participantes:"Leima · Jacruz · Armando" },
-      { fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque. Preparar inventarios y gestionar servicios pendientes.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
-      { fecha:"25/05/2026", evento:"Reunión alineación Contrato 2026-2029 — John Lindeman · James Snyder · Irene Amezaga · Armando Llanes", tipo:"reunion", participantes:"Antonio, JC, Calavo, Armando Llanes, Notaría 97" }
-    ]
-  },
-
-  predicciones: {
-    generado:  "29/04/2026 · 08:15",
-    modelo:    "Claude claude-opus-4-6",
-    horizonte: "7 días",
-    nota:      "Síntesis de Corbel Seeds #0037 (28-Abr) + outbound 27/04 + embarques 28/04 + trilla sorgo WK18 + mercado limes. Regresión en vine-ripe (no reportado #0037) pero Roma ascenso sostenido +15%. Calidad Bola mejora confirmada.",
-    items: [
-      {
-        id: "roma",
-        producto: "Tomate Roma XL",
-        unidad: "carton 25lb · Texas",
-        tendencia: "alcista",
-        confianza: 85,
-        precio_actual:     { min: 52.95, max: 54.95 },
-        precio_proyectado: { min: 51.00, max: 58.00 },
-        razonamiento: "Corbel #0037 (28-Abr) confirma Roma XL Texas $52.95-54.95 — impulso sostenido +15% en 5 días vs #0034 ($44.95-46.95). Outbound 27/04: Roma Zazu merma 2.91%, primera 89.64% — calidad consistente. Marruecos halted exports sostiene demanda NA. Foodservice/pizzería demand constante en primavera. Ventana de precios altos cierra WK19-20 con entrada California.",
-        factores: ["Roma XL Texas $52.95-54.95 (#0037) — impulso +15% confirmado, demand strong", "Roma Zazu outbound 27/04: merma 2.91%, primera 89.64% — calidad premium sostenida", "Morocco tomato exports HALTED — oportunidad NA mantener retail share", "Foodservice/pizzerías demand constante primavera", "California entrada WK19+ presionará corrección. Ventana estrecha."],
-        riesgo: "Si California rompe en WK19, corrección rápida a $48-50. Monitorear Corbel #0038 (29-Abr+).",
-        accion: "MÁXIMA PRIORIDAD — embarcar volumen máximo Roma WK18-19 en $52+. Merma y calidad validadas. Acuerdo ejecutivo para acelerar pick & pack si es necesario."
-      },
-      {
-        id: "jalap",
-        producto: "Jalapeño",
-        unidad: "bu · Texas",
-        tendencia: "lateral",
-        confianza: 55,
-        precio_actual:     { min: 52.00, max: 55.00 },
-        precio_proyectado: { min: 48.00, max: 62.00 },
-        razonamiento: "Corbel #0037 (28-Abr) jalapeño Texas $52–55/bu — rango más acotado vs volatilidad #0034. Serrano $56–60 refleja fortaleza sector hot pepper. Zacatecas/Sonora oferta ajustada pero volatilidad continúa. No Corbel Mexico jalapeño SNIIM extractable en #0037 (datos incompletos). Riesgo: flush localizado Sinaloa/Sonora puede presionar $45-48 en horas.",
-        factores: ["#0037 $52-55/bu mantenida vs #0034; rango más estrecho típico", "Serrano $56-60 — sector hot pepper en pico primaveral", "Oferta Zacatecas/Sonora still ajustada", "Volatilidad extrema histórica: $40→$58 posible en días", "SNIIM Mexico datos no disponibles — señal de incertidumbre"],
-        riesgo: "Volatilidad extrema continúa. Swing -$8/bu posible si hay flush regional. Confianza baja (55%).",
-        accion: "Si Belher tiene jalapeño disponible, venta en $52-55 es prudente. Monitorear Corbel #0038 urgentemente antes de Hold."
-      },
-      {
-        id: "limon",
-        producto: "Limón Persa 40lb",
-        unidad: "7/10-bu FOB Texas",
-        tendencia: "bajista",
-        confianza: 72,
-        precio_actual:     { min: 32.00, max: 36.00 },
-        precio_proyectado: { min: 28.00, max: 40.00 },
-        razonamiento: "Corbel #0037 (28-Abr) confirma limes Texas suavizándose: 110s $40–42, 150s $34–36, 175s $32–34, 200s $30–32. Equivalente FOB Nogales 7/10-bu ~$36 avg. Corrección vs máximos $62-68 (hace 3 semanas) es patrón seasonal pero magnitud agresiva. Flush primaveral Peru (oferta -30% lluvia), Colombia/Brasil presionando. Corbel report signals transición peak→descenso ya activa.",
-        factores: ["Limes Texas 7/10-bu ~$36 avg (#0037) — suavizándose pero aún soportado", "Peru -30% volumen por lluvia — ventana de oportunidad NA cerrándose", "Colombia/Brasil incrementando presión en calibres menores", "Flush primaveral Abr-May-Jun típico — descenso acelerado WK19+", "Retail restocking post-Easter completado — demanda puede frenar"],
-        riesgo: "Flush primaveral May-Jun puede presionar a $24-28 calibres menores. WK19-20 crítico. Descenso acelerado probable.",
-        accion: "EMBARCAR VOLUMEN MÁXIMO LIMÓN ESTA SEMANA (29-30 Abr) — ventana de $32-36 cierra en 5 días. Coordinar Maui Fresh disponibilidad total. 110s-150s mantienen premium."
-      },
-      {
-        id: "cucumber",
-        producto: "Cucumber Nogales",
-        unidad: "carton medium 1 1/9 bu",
-        tendencia: "bajista",
-        confianza: 60,
-        precio_actual:     { min: 16.95, max: 16.95 },
-        precio_proyectado: { min: 14.00, max: 20.00 },
-        razonamiento: "Corbel #0037 (28-Abr): Cucumber Nogales $16.95 (steady pero baja que Texas regional $20.95-22.95). Corbel reporta cucumbers 'steadier but lower than Texas'. Supply insuficiente para mercado Nogales vs Texas. Volatilidad histórica en cucumbers extrema. Presión regional de oferta Sinaloa/Sonora. Patrón: cuando Nogales premia sobre Texas desaparece, corrección está en marcha.",
-        factores: ["Cucumber Nogales $16.95 — premia sobre Texas $20.95-22.95 desapareciendo (regional spread)", "USDA reporta supply insuficiente para mercado Nogales completo", "Texas regional $20.95-22.95 sugiere oferta Sinaloa entrando en volumen", "Volatilidad histórica extrema: $30→$12 posible en semanas"],
-        riesgo: "Nueva oferta GH Sinaloa/Sonora WK18-19 puede presionar a $12-14. Ruptura de precio."
-      },
-      {
-        id: "bola",
-        producto: "Tomate Bola Calavo (local quality)",
-        unidad: "producción WK18",
-        tendencia: "lateral",
-        confianza: 62,
-        precio_actual:     { min: null, max: null },
-        precio_proyectado: { min: null, max: null },
-        razonamiento: "Outbound 27/04: Bola Calavo merma 3.28%, primera 81.50%, peso 25.32 kg — MEJORA vs merma 5.62% (25/04). Sexta semana consecutiva con merma >3% pero TREND al alza sugiere investigación postcosecha (temperatura, línea empaque) está siendo efectiva. Próximas lecturas (29/04+) determinan si corrección es sostenida vs anomalía temporal. Si merma regresa a >4%, auditoría urgente warranted.",
-        factores: ["Outbound 27/04 merma 3.28% — mejora confirmada vs 5.62% hace 2 días", "Sexta semana consecutiva merma >3% pero trending down (positive signal)", "Roma Zazu paralelo: merma 2.91%, primera 89.64% — apunta a manejo mejora", "Investigación postcosecha aún en curso — efecto de correcciones visible"],
-        riesgo: "Si outbound 29/04+ regresa a merma >4%, patrón no es resuelto. Suspensión temporal empaque Bola Calavo considerar.",
-        accion: "Monitorear urgentemente próximo outbound (29/04+). Si merma <3.5% confirmada, auditoría progresando. Si >4%, escalar a operaciones."
-      }
-    ]
-  },
-
-  industria: [
-    { cat:"Mercado",      titulo:"Roma tomato impulso +15% en 5 días: $52.95–54.95 XL Texas — Corbel #0037 confirma alcista sostenido WK18", impacto:"Alto", fuente:"Corbel Seeds #0037 · 28-Abr", resumen:"Corbel #0037 reporta Roma XL Texas $52.95-54.95 — ascenso +15% vs #0034 hace 5 días. Demanda strong, mercado slightly higher. Factores: Marruecos halted exports (NA advantage), retail OTV active, foodservice constante primavera. Para Belher: MÁXIMA PRIORIDAD embarcar Roma WK18-19, merma+calidad validadas." },
-    { cat:"Mercado",      titulo:"Limes market suavizándose — 7/10-bu Texas ~$36 avg. Peru -30% volumen. Flush primaveral en marcha.", impacto:"Alto", fuente:"Corbel Seeds #0037 · 28-Abr", resumen:"Corbel #0037 (28-Abr): limes Texas 110s $40–42, 150s $34–36, 175s $32–34, 200s $30–32 — suavizándose desde máximos $50-68. Peru flush -30% volumen por lluvia. Colombia/Brasil presionando. Ventana premium cierra WK19-20. Para Belher (70 ha): EMBARCAR VOLUMEN MÁXIMO ESTA SEMANA." },
-    { cat:"Fitosanitario", titulo:"Texas cuarentena Mosca Fruta Mexicana Condado Zapata — sensibilidad frontera elevada continuada", impacto:"Medio", fuente:"Corbel Seeds #0037", resumen:"Corbel reporta autoridades Texas establecen cuarentena Mosca de Fruta Mexicana (Anastrepha ludens) Condado Zapata. Sensibilidad fitosanitaria frontera México-Texas elevada. Para Belher: asegurar certificados fitosanitarios actualizados en embarques TX/AZ." },
-    { cat:"Mercado",      titulo:"Morocco tomato exports HALTED — oportunidad para Mexico mantener shelf space NA", impacto:"Medio", fuente:"Corbel Seeds #0037 · Hortidaily", resumen:"Corbel #0037 reporta strike + supply pressure haltan exportaciones tomate Marruecos. Impacto: Europa presión supply, NA retailers consolidando sourcing México. Roma y vine-ripe precios firmes. Corbel: 'reinforces importance of reliable NA supply programs'." },
-    { cat:"Costos/Inversión", titulo:"Pure Flavor Canada expansion + Mexico + Georgia 25-acre — supply consistency year-round strategy visible", impacto:"Medio", fuente:"Corbel Seeds #0037 · FreshPlaza", resumen:"Pure Flavor reporta inversiones Canada, continuación Mexico, 25-acre Georgia. Estrategia: retail programs cada vez más built around año-round reliability + controlled production. Presión competitiva para GH independientes." },
-    { cat:"Mercado",      titulo:"UK £150M Essex greenhouse project 30,000 tonnes/año — strategy NA futuro competitividad", impacto:"Bajo", fuente:"Corbel Seeds #0037 · FarmingUK", resumen:"UK aprobó Rivenhall Greenhouse project 30,000 tonnes tomate annually (fase completa). Industrial heat + electricity + CO2 integration. Señal: future estrategia reducir importaciones GH NA. Monitor long-term." }
+  correos: [
+    { hora:"15:15", asunto:"IVA AUTORIZADO FEBRERO 2026 — $1,752,440", de:"jacruz@agbelher.com", leido:false },
+    { hora:"15:11", asunto:"REPORTE DE OUTBOUND TOMATE 28/04/2026",    de:"calidad@agbelher.com", leido:false },
+    { hora:"03:47", asunto:"28-04-2026 REPORTES GENERALES",            de:"embarquesbelher@agbelher.com", leido:false },
+    { hora:"03:11", asunto:"REPORTE DIARIO CALAVO 28-04-2026",         de:"embarquesbelher@agbelher.com", leido:false },
+    { hora:"02:53", asunto:"AVANCE DE TRILLA 28/04/2026 SORGO (SIFON I)", de:"basculabelher@gmail.com", leido:false },
+    { hora:"00:34", asunto:"REPORTE DE BASCULA 28/04/2026 (TOMATE)",   de:"basculabelher@gmail.com", leido:false }
   ],
 
   ticker: [
-    { label:"Roma XL Texas", valor:"$52.95–54.95/cj", cambio:"+15%", dir:"up" },
-    { label:"Jalapeño Texas", valor:"$52–55/bu", cambio:"±0%", dir:"neutral" },
-    { label:"Limes 7/10-bu Texas", valor:"$36 avg", cambio:"-44% vs pico", dir:"down" },
-    { label:"Cucumber Nogales", valor:"$16.95/cj", cambio:"-45%", dir:"down" },
-    { label:"CVGW (Calavo)", valor:"$27.99", cambio:"+2.27%", dir:"up" },
-    { label:"AVO (Mission)", valor:"$13.73", cambio:"+3.86%", dir:"up" },
-    { label:"Tomate Bola Calavo merma", valor:"3.28%", cambio:"-2.34 pcts vs 25/04", dir:"up" },
-    { label:"Roma Zazu merma", valor:"2.91%", cambio:"estable", dir:"neutral" },
-    { label:"Corbel Seeds último reporte", valor:"#0037", cambio:"28-Abr", dir:"neutral" },
-    { label:"Sorgo trilla acumulada", valor:"226+ ha", cambio:"continuación WK18", dir:"up" },
-    { label:"Embarques 28/04", valor:"2 cargas tomate", cambio:"3,200 cajas Nogales", dir:"neutral" },
-    { label:"Deuda Calavo (crédito Belher)", valor:"$720,391", cambio:"pendiente liquidación", dir:"up" }
+    { label:"Roma XL Texas",            valor:"$52.95–54.95/cj",         cambio:"+15%",                dir:"up"      },
+    { label:"Jalapeño Texas",            valor:"$52–55/bu",               cambio:"±0%",                 dir:"neutral" },
+    { label:"Limes 7/10-bu Texas",       valor:"$36 avg",                 cambio:"-44% vs pico",        dir:"down"    },
+    { label:"Cucumber Nogales",          valor:"$16.95/cj",               cambio:"-45%",                dir:"down"    },
+    { label:"CVGW (Calavo)",             valor:"$28.09",                  cambio:"+0.36%",              dir:"up"      },
+    { label:"AVO (Mission)",             valor:"$13.81",                  cambio:"+0.58%",              dir:"up"      },
+    { label:"Bola Calavo merma 28/04",   valor:"3.16%",                   cambio:"-2.46 pcts vs 25/04", dir:"up"      },
+    { label:"Roma Zazu merma 28/04",     valor:"2.03%",                   cambio:"mínimo WK18",         dir:"up"      },
+    { label:"Corbel Seeds último",       valor:"#0037",                   cambio:"28-Abr",              dir:"neutral" },
+    { label:"IVA Feb 2026 autorizado",   valor:"$1,752,440",              cambio:"depósito en breve",   dir:"up"      },
+    { label:"Sorgo trilla acumulada",    valor:"226+ ha",                 cambio:"continuación WK18",   dir:"up"      },
+    { label:"Deuda Calavo (crédito)",    valor:"$720,391",                cambio:"pendiente liquidación",dir:"up"     }
   ],
 
   auditorias: [
@@ -690,6 +545,157 @@ window.BELHER = {
       observaciones: [],
       fuente: "c.marisol@agbelher.com · 17-Abr-2026"
     }
+  ],
+
+  estrategia: {
+    contratos: [
+      {
+        titulo: "Contrato Calavo 2026",
+        estado: "Activo",
+        nivel: "success",
+        descripcion: "Pick & Pack @$5.00/caja — addendum firmado 2024. WK01–WK12: 655,641 cajas · $3.28M liquidado. Pendiente corrección en contrato formal.",
+        accion: "Verificar corrección del P&P a $5 en contrato. Reunión de alineación pendiente de confirmar fecha."
+      },
+      {
+        titulo: "Contrato Calavo 2026-2029 — NUEVO MULTIANUAL",
+        estado: "En Revisión",
+        nivel: "warning",
+        descripcion: "Irene Amezaga envió borrador 09-Abr-2026. Antonio lo reenvió a JC y Armando Llanes para revisión. Contrato para ciclos 2026-27, 2027-28 y 2028-29.",
+        accion: "Reunión alineación 25-May-2026 con John Lindeman · James Snyder · Irene Amezaga · Armando Llanes."
+      },
+      {
+        titulo: "Inversión Corbel Seeds",
+        estado: "Activo",
+        nivel: "info",
+        descripcion: "Participación como CB1 en Corbel Seeds. Reunión Zoom 17-Mar sobre ensayos de tomate y chile.",
+        accion: "Revisar presentación 'Situación Actual de Corbel Seeds' enviada por Raymundo 23-Mar."
+      }
+    ],
+    oportunidades: [
+      {
+        titulo: "Roma tomato WK18-19 — aprovechar impulso alcista hasta fin ciclo",
+        prioridad: "Alta",
+        descripcion: "Corbel #0037 (28-Abr): Roma XL Texas $52.95–54.95 (+15% vs #0034 hace 5 días). Outbound 28/04: Roma Zazu merma 2.03%, primera 86.58%. Roma Millennium merma 2.52%. Calidad consistente. Ventana cierra WK19.",
+        accion: "MAXIMIZAR VOLUMEN ROMA — merma y calidad validadas (2 días, 2 variedades). Embarques máximos WK18-19."
+      },
+      {
+        titulo: "Bola Calavo — tendencia mejora confirmada D1+D2 WK18",
+        prioridad: "Alta",
+        descripcion: "Outbound D1(27/04): merma 3.28%. D2(28/04): merma 3.16%. Tendencia bajista confirmada. Prima cae (73.37% vs 81.50%) pero merma sigue mejorando. WK18 promedio merma 2.78% vs WK17 3.67%.",
+        accion: "Monitorear outbound WK18 D3+. Si merma <3% confirmada, auditoría postcosecha efectiva. Si >4%, escalar."
+      },
+      {
+        titulo: "IVA $1,752,440 — liquidez inmediata para flujo de caja Mayo",
+        prioridad: "Alta",
+        descripcion: "jacruz confirma 29-Abr: IVA Febrero 2026 autorizado por importe histórico de $1,752,440. Depósito en breve. Reduce presión de caja Mayo significativamente.",
+        accion: "Confirmar cuenta destino con jacruz. Aplicar a amortizaciones BanBajío o proveedores prioritarios."
+      }
+    ],
+    watchlist: [
+      {
+        titulo: "Declaración Anual ISR 2025 — reunión de revisión agendada 25-May",
+        nivel: "warning",
+        descripcion: "ISR 2025 y PTU: revisión final con jacruz, Antonio, Armando, Despacho Terrazas (Calderon) el 25-May-2026 11am-12pm. Presentada con resultado a pagar — monto aún por confirmar.",
+        accion: "Preparar materiales. Anticipar monto ISR a pagar para incluir en flujo de caja Mayo-Junio."
+      },
+      {
+        titulo: "Aranceles USMCA: revisión 1-Jul-2026 — presión legisladores Florida activa",
+        nivel: "danger",
+        descripcion: "Legisladores Florida mantienen presión por tarifas estacionales. Suprema Corte falló sobre aranceles. Corbel monitorea.",
+        accion: "Monitorear semanalmente. Contactar Calavo para posición estratégica ante cambios anti-dumping."
+      }
+    ],
+    proximos: [
+      { fecha:"30/04/2026",   evento:"Cierre mes Abril — preparar financials para reuniones 25-May", tipo:"financiero", participantes:"Leima · Jacruz · Armando" },
+      { fecha:"18-19/05/2026",evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque. Preparar inventarios y gestionar servicios pendientes.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
+      { fecha:"19/05/2026",   evento:"BPSI F/S Abril 2026 y forecast Q2 2026 — Zoom 11am-12pm (GMT-7)", tipo:"financiero", participantes:"Leima · Jacruz · JC · Armando Llanes" },
+      { fecha:"25/05/2026",   evento:"Abril '26 F/S (Tomates/Limones/Granos) — Revisión final con Beltran · 9:30-10:30am", tipo:"financiero", participantes:"JC · Antonio · Leima · Armando · Jacruz · Despacho Terrazas" },
+      { fecha:"25/05/2026",   evento:"ABSA Revisión declaración final ISR 2025 y PTU · 11am-12pm", tipo:"financiero", participantes:"JC · Antonio · Armando · Jacruz · fcalderon@cryasociados.com" },
+      { fecha:"25/05/2026",   evento:"Reunión alineación Contrato 2026-2029 — John Lindeman · James Snyder · Irene Amezaga · Armando Llanes", tipo:"reunion", participantes:"Antonio, JC, Calavo, Armando Llanes, Notaría 97" },
+      { fecha:"26/05/2026",   evento:"Revisión final OL 10+2 P&L y Cash Flow · 10am-11am", tipo:"financiero", participantes:"Antonio · JC · Flavio · Leima · Juan · Armando · Jacruz" }
+    ]
+  },
+
+  predicciones: {
+    generado:  "29/04/2026 · 08:15",
+    modelo:    "Claude claude-opus-4-6",
+    horizonte: "7 días",
+    nota:      "Síntesis de Corbel Seeds #0037 (28-Abr) + outbound 27-28/04 + embarques 28/04 + trilla sorgo WK18 + mercado limes. Roma ascenso sostenido +15%. Calidad Bola mejora confirmada D1+D2 WK18.",
+    items: [
+      {
+        id: "roma",
+        producto: "Tomate Roma XL",
+        unidad: "carton 25lb · Texas",
+        tendencia: "alcista",
+        confianza: 85,
+        precio_actual:     { min: 52.95, max: 54.95 },
+        precio_proyectado: { min: 51.00, max: 58.00 },
+        razonamiento: "Corbel #0037 (28-Abr) confirma Roma XL Texas $52.95-54.95 — impulso sostenido +15% en 5 días vs #0034 ($44.95-46.95). Outbound 28/04: Roma Zazu merma 2.03%, primera 86.58%; Roma Millennium merma 2.52%, primera 89.13% — calidad consistente 2 días consecutivos. Marruecos halted exports sostiene demanda NA. Foodservice/pizzería demand constante en primavera. Ventana de precios altos cierra WK19-20 con entrada California.",
+        factores: ["Roma XL Texas $52.95-54.95 (#0037) — impulso +15% confirmado, demand strong", "Roma Zazu outbound 28/04: merma 2.03%, primera 86.58% — calidad WK18 sostenida", "Roma Millennium outbound 28/04: merma 2.52%, primera 89.13% — segunda variedad confirmada", "Morocco tomato exports HALTED — oportunidad NA mantener retail share", "California entrada WK19+ presionará corrección. Ventana estrecha."],
+        riesgo: "Si California rompe en WK19, corrección rápida a $48-50. Monitorear Corbel #0038.",
+        accion: "MÁXIMA PRIORIDAD — embarcar volumen máximo Roma WK18-19 en $52+. Merma y calidad validadas 2 días. Acuerdo ejecutivo para acelerar pick & pack si es necesario."
+      },
+      {
+        id: "jalap",
+        producto: "Jalapeño",
+        unidad: "bu · Texas",
+        tendencia: "lateral",
+        confianza: 55,
+        precio_actual:     { min: 52.00, max: 55.00 },
+        precio_proyectado: { min: 48.00, max: 62.00 },
+        razonamiento: "Corbel #0037 (28-Abr) jalapeño Texas $52–55/bu — rango más acotado vs volatilidad #0034. Serrano $56–60 refleja fortaleza sector hot pepper. Zacatecas/Sonora oferta ajustada pero volatilidad continúa. No Corbel Mexico jalapeño SNIIM extractable en #0037 (datos incompletos). Riesgo: flush localizado Sinaloa/Sonora puede presionar $45-48 en horas.",
+        factores: ["#0037 $52-55/bu mantenida vs #0034; rango más estrecho típico", "Serrano $56-60 — sector hot pepper en pico primaveral", "Oferta Zacatecas/Sonora still ajustada", "Volatilidad extrema histórica: $40→$58 posible en días", "SNIIM Mexico datos no disponibles — señal de incertidumbre"],
+        riesgo: "Volatilidad extrema continúa. Swing -$8/bu posible si hay flush regional. Confianza baja (55%).",
+        accion: "Si Belher tiene jalapeño disponible, venta en $52-55 es prudente. Monitorear Corbel #0038 urgentemente antes de Hold."
+      },
+      {
+        id: "limon",
+        producto: "Limón Persa 40lb",
+        unidad: "7/10-bu FOB Texas",
+        tendencia: "bajista",
+        confianza: 72,
+        precio_actual:     { min: 32.00, max: 36.00 },
+        precio_proyectado: { min: 28.00, max: 40.00 },
+        razonamiento: "Corbel #0037 (28-Abr) confirma limes Texas suavizándose: 110s $40–42, 150s $34–36, 175s $32–34, 200s $30–32. Equivalente FOB Nogales 7/10-bu ~$36 avg. Corrección vs máximos $62-68 (hace 3 semanas) es patrón seasonal pero magnitud agresiva. Flush primaveral Peru (oferta -30% lluvia), Colombia/Brasil presionando. Corbel report signals transición peak→descenso ya activa.",
+        factores: ["Limes Texas 7/10-bu ~$36 avg (#0037) — suavizándose pero aún soportado", "Peru -30% volumen por lluvia — ventana de oportunidad NA cerrándose", "Colombia/Brasil incrementando presión en calibres menores", "Flush primaveral Abr-May-Jun típico — descenso acelerado WK19+", "Retail restocking post-Easter completado — demanda puede frenar"],
+        riesgo: "Flush primaveral May-Jun puede presionar a $24-28 calibres menores. WK19-20 crítico. Descenso acelerado probable.",
+        accion: "EMBARCAR VOLUMEN MÁXIMO LIMÓN ESTA SEMANA — ventana de $32-36 cierra en 5 días. Coordinar Maui Fresh disponibilidad total. 110s-150s mantienen premium."
+      },
+      {
+        id: "cucumber",
+        producto: "Cucumber Nogales",
+        unidad: "carton medium 1 1/9 bu",
+        tendencia: "bajista",
+        confianza: 60,
+        precio_actual:     { min: 16.95, max: 16.95 },
+        precio_proyectado: { min: 14.00, max: 20.00 },
+        razonamiento: "Corbel #0037 (28-Abr): Cucumber Nogales $16.95 (steady pero baja que Texas regional $20.95-22.95). Corbel reporta cucumbers 'steadier but lower than Texas'. Supply insuficiente para mercado Nogales vs Texas. Volatilidad histórica en cucumbers extrema. Presión regional de oferta Sinaloa/Sonora. Patrón: cuando Nogales premia sobre Texas desaparece, corrección está en marcha.",
+        factores: ["Cucumber Nogales $16.95 — premia sobre Texas $20.95-22.95 desapareciendo (regional spread)", "USDA reporta supply insuficiente para mercado Nogales completo", "Texas regional $20.95-22.95 sugiere oferta Sinaloa entrando en volumen", "Volatilidad histórica extrema: $30→$12 posible en semanas"],
+        riesgo: "Nueva oferta GH Sinaloa/Sonora WK18-19 puede presionar a $12-14. Ruptura de precio."
+      },
+      {
+        id: "bola",
+        producto: "Tomate Bola Calavo (local quality)",
+        unidad: "producción WK18",
+        tendencia: "lateral",
+        confianza: 65,
+        precio_actual:     { min: null, max: null },
+        precio_proyectado: { min: null, max: null },
+        razonamiento: "Outbound D1(27/04): merma 3.28%, primera 81.50%. D2(28/04): merma 3.16%, primera 73.37%. Merma en tendencia bajista consistente: 5.62% (25/04) → 3.28% → 3.16%. WK18 avg merma 2.78% vs WK17 3.67% — mejora de 0.89 puntos porcentuales. Prima bajando (81.50→73.37) podría indicar selección más estricta o cambio de lotes. El patrón de corrección postcosecha está siendo efectivo.",
+        factores: ["D1 merma 3.28%, D2 merma 3.16% — tendencia bajista consecutiva confirmada", "WK18 avg merma 2.78% — mejora -0.89pts vs WK17 3.67%", "Primera: D1 81.50% → D2 73.37% (variación por lote/campo, no necesariamente deterioro)", "Roma paralela (Zazu+Mill) merma 2.03-2.52% — contexto de línea en buen estado", "6 semanas consecutivas pero con tendencia claramente correctiva"],
+        riesgo: "Si outbound D3+ regresa a merma >4%, el patrón no está totalmente resuelto. Posible variabilidad por campo.",
+        accion: "Monitorear urgentemente próximo outbound. Si merma <3% confirmada, corrección postcosecha exitosa. Si >4%, escalar a operaciones."
+      }
+    ]
+  },
+
+  industria: [
+    { cat:"Mercado",      titulo:"Roma tomato impulso +15% en 5 días: $52.95–54.95 XL Texas — Corbel #0037 confirma alcista sostenido WK18", impacto:"Alto", fuente:"Corbel Seeds #0037 · 28-Abr", resumen:"Corbel #0037 reporta Roma XL Texas $52.95-54.95 — ascenso +15% vs #0034 hace 5 días. Demanda strong, mercado slightly higher. Factores: Marruecos halted exports (NA advantage), retail OTV active, foodservice constante primavera. Para Belher: MÁXIMA PRIORIDAD embarcar Roma WK18-19, merma+calidad validadas." },
+    { cat:"Mercado",      titulo:"Limes market suavizándose — 7/10-bu Texas ~$36 avg. Peru -30% volumen. Flush primaveral en marcha.", impacto:"Alto", fuente:"Corbel Seeds #0037 · 28-Abr", resumen:"Corbel #0037 (28-Abr): limes Texas 110s $40–42, 150s $34–36, 175s $32–34, 200s $30–32 — suavizándose desde máximos $50-68. Peru flush -30% volumen por lluvia. Colombia/Brasil presionando. Ventana premium cierra WK19-20. Para Belher (70 ha): EMBARCAR VOLUMEN MÁXIMO ESTA SEMANA." },
+    { cat:"Fitosanitario", titulo:"Texas cuarentena Mosca Fruta Mexicana Condado Zapata — sensibilidad frontera elevada continuada", impacto:"Medio", fuente:"Corbel Seeds #0037", resumen:"Corbel reporta autoridades Texas establecen cuarentena Mosca de Fruta Mexicana (Anastrepha ludens) Condado Zapata. Sensibilidad fitosanitaria frontera México-Texas elevada. Para Belher: asegurar certificados fitosanitarios actualizados en embarques TX/AZ." },
+    { cat:"Mercado",      titulo:"Morocco tomato exports HALTED — oportunidad para Mexico mantener shelf space NA", impacto:"Medio", fuente:"Corbel Seeds #0037 · Hortidaily", resumen:"Corbel #0037 reporta strike + supply pressure haltan exportaciones tomate Marruecos. Impacto: Europa presión supply, NA retailers consolidando sourcing México. Roma y vine-ripe precios firmes. Corbel: 'reinforces importance of reliable NA supply programs'." },
+    { cat:"Costos/Inversión", titulo:"Pure Flavor Canada expansion + Mexico + Georgia 25-acre — supply consistency year-round strategy visible", impacto:"Medio", fuente:"Corbel Seeds #0037 · FreshPlaza", resumen:"Pure Flavor reporta inversiones Canada, continuación Mexico, 25-acre Georgia. Estrategia: retail programs cada vez más built around año-round reliability + controlled production. Presión competitiva para GH independientes." },
+    { cat:"Mercado",      titulo:"UK £150M Essex greenhouse project 30,000 tonnes/año — strategy NA futuro competitividad", impacto:"Bajo", fuente:"Corbel Seeds #0037 · FarmingUK", resumen:"UK aprobó Rivenhall Greenhouse project 30,000 tonnes tomate annually (fase completa). Industrial heat + electricity + CO2 integration. Señal: future estrategia reducir importaciones GH NA. Monitor long-term." }
   ],
 
   cdc: {
@@ -782,24 +788,30 @@ window.BELHER = {
     semana:      "WK16",
     fechas:      "12–18 Abr 2026",
     fuente:      "Carlos Valadez · Calavo Growers · Settle WK16 · 15-Abr-2026",
-    actualizado: "17/04/2026",
+    actualizado: "29/04/2026",
 
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 27.99, prevClose: 27.37, cambio: 0.62, cambioPct: 2.27,
+        precio: 28.09, prevClose: 27.99, cambio: 0.10, cambioPct: 0.36,
         h52: 28.72, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · close 28/29-Abr-2026"
+        fuente: "Yahoo Finance · close 29-Abr-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 13.73, prevClose: 13.22, cambio: 0.51, cambioPct: 3.86,
+        precio: 13.81, prevClose: 13.73, cambio: 0.08, cambioPct: 0.58,
         h52: 15.53, l52: 9.88, volumen: null,
-        fuente: "Yahoo Finance · close 28/29-Abr-2026"
+        fuente: "Yahoo Finance · close 29-Abr-2026"
       }
     ],
 
     correos: [
+      {
+        fecha: "28/04/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya · Calavo",
+        asunto: "Canceled: Weekly Tomato Meeting — sin Tomato Weekly Update WK18",
+        tipo: "fyi", nivel: "warning",
+        resumen: "Irene cancela reunión semanal Teams del 28/04. Sin adjunto Tomato Weekly Update WK17/18. Reunión efectiva anterior: 22-Abr-2026. Próxima actualización esperada WK19."
+      },
       {
         fecha: "22/04/2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya · Calavo",
         asunto: "Weekly Tomato Meeting — convoca reunión Teams semanal",
@@ -821,9 +833,9 @@ window.BELHER = {
     ],
 
     alertas: [
-      { nivel: "success", texto: "WK16 SETTLE RECIBIDO 15-Abr: $1,101,951 · 38,067 pkgs · 24 cargas · FOB $28.95/cj. POR LIQUIDAR acumulado: $720,391 — crece cada semana." },
-      { nivel: "success", texto: "CVGW $27.99 (+2.27% close 28-Abr desde $27.37) · AVO $13.73 (+3.86% desde $13.22) — recuperación sectorial sostenida." },
-      { nivel: "warning", texto: "Tomato Weekly Update WK17/WK18 pendiente — Irene reunión Teams 22-Abr sin adjunto. Próxima actualización esperada." }
+      { nivel: "success", texto: "WK16 SETTLE RECIBIDO 15-Abr: $1,101,951 · 38,067 pkgs · 24 cargas · FOB $28.95/cj. POR LIQUIDAR acumulado: $720,391." },
+      { nivel: "success", texto: "CVGW $28.09 (+0.36% desde $27.99) · AVO $13.81 (+0.58% desde $13.73) — cierre 29-Abr-2026. CVGW a $0.63 del máximo 52s $28.72." },
+      { nivel: "warning", texto: "Tomato Weekly Update WK17/WK18 pendiente — Irene canceló reunión 28/04 sin adjunto. 3 semanas sin reporte formal." }
     ],
 
     kpi: {
