@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Centro de Inteligencia Belher</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0c2117">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Belher">
+<link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -3352,16 +3358,16 @@ function checkPw(){
 
 <!-- ══ TABS ══ -->
 <nav class="tabs" id="tabNav" role="tablist" aria-label="Secciones del dashboard">
-  <button class="active" data-tab="ejecutivo" role="tab" aria-selected="true"  aria-controls="tab-ejecutivo">Ejecutivo</button>
+  <button class="active" data-tab="ejecutivo"   role="tab" aria-selected="true"  aria-controls="tab-ejecutivo">Ejecutivo</button>
+  <button data-tab="optomate"     role="tab" aria-selected="false" aria-controls="tab-optomate">Ops Tomate</button>
+  <button data-tab="calavoweekly" role="tab" aria-selected="false" aria-controls="tab-calavoweekly">Intel Calavo</button>
+  <button data-tab="estrategia"   role="tab" aria-selected="false" aria-controls="tab-estrategia">Estrategia</button>
+  <button data-tab="finanzas"     role="tab" aria-selected="false" aria-controls="tab-finanzas">Finanzas</button>
   <button data-tab="ventas"       role="tab" aria-selected="false" aria-controls="tab-ventas">Export Calavo</button>
   <button data-tab="nacional"     role="tab" aria-selected="false" aria-controls="tab-nacional">Nacional</button>
-  <button data-tab="finanzas"     role="tab" aria-selected="false" aria-controls="tab-finanzas">Finanzas</button>
-  <button data-tab="optomate"     role="tab" aria-selected="false" aria-controls="tab-optomate">Ops Tomate</button>
-  <button data-tab="cdc"          role="tab" aria-selected="false" aria-controls="tab-cdc">CDC · Personal</button>
   <button data-tab="otros"        role="tab" aria-selected="false" aria-controls="tab-otros">Otros Cultivos</button>
-  <button data-tab="calavoweekly" role="tab" aria-selected="false" aria-controls="tab-calavoweekly">Intel Calavo</button>
+  <button data-tab="cdc"          role="tab" aria-selected="false" aria-controls="tab-cdc">CDC · Personal</button>
   <button data-tab="caades"       role="tab" aria-selected="false" aria-controls="tab-caades">Inventarios NOG</button>
-  <button data-tab="estrategia"   role="tab" aria-selected="false" aria-controls="tab-estrategia">Estrategia</button>
 </nav>
 
 <main>
@@ -3988,9 +3994,33 @@ function checkPw(){
   tabBtns.forEach(function (btn) {
     btn.addEventListener('click', function () { activateTab(btn.dataset.tab); });
   });
+  /* Hide tabs with no data */
+  function hideEmptyTabs() {
+    var D = window.BELHER;
+
+    // caades: hide if all arrays empty
+    if (!D.caades || (!D.caades.inventario.length && !D.caades.pipeline.length && !D.caades.totalesTemporada.length)) {
+      var btn = document.querySelector('[data-tab="caades"]');
+      if (btn) btn.style.display = 'none';
+    }
+
+    // cdc: hide if semanaActual is from a previous cycle (WK > 40 means past tomato season)
+    if (!D.cdc || !D.cdc.historico || !D.cdc.historico.length) {
+      var btn2 = document.querySelector('[data-tab="cdc"]');
+      if (btn2) btn2.style.display = 'none';
+    } else {
+      var lastWk = parseInt((D.cdc.semanaActual || 'WK1').replace('WK',''), 10);
+      if (lastWk > 40) {
+        var btn3 = document.querySelector('[data-tab="cdc"]');
+        if (btn3) btn3.style.display = 'none';
+      }
+    }
+  }
+  hideEmptyTabs();
+
   /* Restore last active tab on load/refresh */
   var savedTab = sessionStorage.getItem('belher_tab');
-  if (savedTab && document.getElementById('tab-' + savedTab)) activateTab(savedTab);
+  if (savedTab && document.getElementById('tab-' + savedTab) && document.querySelector('[data-tab="' + savedTab + '"]:not([style*="none"])')) activateTab(savedTab);
   else setTimeout(function(){ initChartsForTab('ejecutivo'); }, 60);
 
   /* ════════════════ HOY ════════════════ */
@@ -9110,6 +9140,11 @@ function checkPw(){
 })();
 
 /* ── Refresh Dashboard ──────────────────────────────── */
+/* ── PWA Service Worker ─────────────────────────────── */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(function(){});
+}
+
 window.refreshDashboard = function () {
   var btn = document.getElementById('refreshBtn');
   btn.classList.add('spinning');
