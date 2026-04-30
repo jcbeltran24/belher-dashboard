@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Jueves 30 Abr 2026",
     semana: "WK 18",
-    actualizado: "30/04/2026 · 08:07"
+    actualizado: "30/04/2026 · 09:21"
   },
 
   alertas: [
@@ -801,15 +801,15 @@ window.BELHER = {
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 28.09, prevClose: 27.99, cambio: 0.10, cambioPct: 0.36,
+        precio: 28.20, prevClose: 28.09, cambio: 0.11, cambioPct: 0.39,
         h52: 28.72, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · close 29-Abr-2026"
+        fuente: "Yahoo Finance · close 30-Abr-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 13.81, prevClose: 13.73, cambio: 0.08, cambioPct: 0.58,
+        precio: 13.90, prevClose: 13.81, cambio: 0.09, cambioPct: 0.65,
         h52: 15.53, l52: 9.88, volumen: null,
-        fuente: "Yahoo Finance · close 29-Abr-2026"
+        fuente: "Yahoo Finance · close 30-Abr-2026"
       }
     ],
 
