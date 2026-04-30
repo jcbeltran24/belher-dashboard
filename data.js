@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 29 Abr 2026",
+    fecha: "Jueves 30 Abr 2026",
     semana: "WK 18",
-    actualizado: "29/04/2026 · 10:06"
+    actualizado: "30/04/2026 · 09:14"
   },
 
   alertas: [
-    { nivel:"success",  texto:"IVA FEBRERO 2026 AUTORIZADO $1,752,440 — jacruz (29-Abr): importe histórico aprobado, depósito en breve. Impacto directo en flujo de caja mayo." },
-    { nivel:"success",  texto:"OUTBOUND 28/04 — TENDENCIA MEJORA: Bola Calavo merma 3.16% (D1: 3.28%), Roma Millennium 2.52%, Roma Zazu 2.03%. Las 3 variedades <4%. WK18 avg merma 2.78%." },
-    { nivel:"success",  texto:"ROMA TOMATO XL Texas $52.95–54.95 (Corbel #0037 28-Abr) — +15% en 5 días. Morocco exports halted. Ventana premium WK18-19 activa. Embarcar volumen máximo." },
-    { nivel:"info",     texto:"5 REUNIONES FINANCIERAS MAYO agendadas: 19-May BPSI F/S Abril · 25-May F/S Tomates+Limones+Granos · 25-May ISR 2025+PTU · 25-May Contrato Calavo · 26-May OL 10+2 P&L." },
-    { nivel:"success",  texto:"CVGW $28.09 (+0.36% desde $27.99) · AVO $13.81 (+0.58% desde $13.73). Recuperación sectorial sostenida. CVGW acercándose a máximo 52s de $28.72." }
+    {"nivel":"success","texto":"IVA FEBRERO 2026 AUTORIZADO $1,752,440 — jacruz (29-Abr): importe histórico aprobado, depósito en breve. Impacto directo en flujo de caja mayo."},
+    {"nivel":"warning","texto":"INBOUND TOMATE 29/04 — MERMA ALTA: 1ST 64% · 2ND 18% · 3RD 3% · MERMA 15%. Merma inbound supera umbral de 10%. Revisar calidad recepción WK18."},
+    {"nivel":"success","texto":"OUTBOUND 28/04 — CALIDAD SÓLIDA: Bola Calavo merma 3.16% · Roma Millennium merma 2.52% · Roma Zazu merma 2.03%. Las 3 variedades <4%. WK18 avg merma outbound 2.57%."},
+    {"nivel":"info","texto":"5 REUNIONES FINANCIERAS MAYO agendadas: 19-May BPSI F/S Abril · 25-May F/S Tomates+Limones+Granos · 25-May ISR 2025+PTU · 25-May Contrato Calavo · 26-May OL 10+2 P&L."},
+    {"nivel":"success","texto":"CVGW $28.09 (+0.36% desde $27.99) · AVO $13.81 (+0.58% desde $13.73). Recuperación sectorial sostenida. CVGW acercándose a máximo 52s de $28.72."}
   ],
 
   ebitda: {
@@ -480,6 +480,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:05","asunto":"REPORTE DE INBOUND TOMATE DIA 29-04-2026","de":"calidad@agbelher.com","leido":false,"fecha":"2026-04-29"},
+    {"hora":"14:36","asunto":"REPORTE DE BASCULA 29/04/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-04-29"},
     { hora:"15:15", asunto:"IVA AUTORIZADO FEBRERO 2026 — $1,752,440", de:"jacruz@agbelher.com", leido:false },
     { hora:"15:11", asunto:"REPORTE DE OUTBOUND TOMATE 28/04/2026",    de:"calidad@agbelher.com", leido:false },
     { hora:"03:47", asunto:"28-04-2026 REPORTES GENERALES",            de:"embarquesbelher@agbelher.com", leido:false },
