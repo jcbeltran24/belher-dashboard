@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="data.js"></script>
 <style>
 /* ═══════════════════════════════════════════════
@@ -3254,6 +3255,281 @@ header {
   transform: translateY(-3px);
   box-shadow: 0 12px 48px rgba(0,0,0,.5), 0 4px 12px rgba(0,0,0,.3) !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK NATIVE — Executive Dark Design System
+   Apache ECharts · glass-card language · green-earth palette
+   Rehaul 2026-04-30
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Dark token overrides ── */
+[data-theme="dark"] {
+  --bg:       #060d08;
+  --bg2:      #091209;
+  --surface:  #0d1a10;
+  --card:     #111e13;
+  --border:   rgba(34,197,94,.09);
+  --text:     #dff0e3;
+  --text2:    rgba(223,240,227,.70);
+  --muted:    rgba(223,240,227,.42);
+  --shadow-xs: 0 1px 3px rgba(0,0,0,.6);
+  --shadow-sm: 0 2px 10px rgba(0,0,0,.65), 0 1px 3px rgba(0,0,0,.4);
+  --shadow:    0 4px 24px rgba(0,0,0,.6),  0 1px 6px rgba(0,0,0,.35);
+  --shadow-md: 0 8px 36px rgba(0,0,0,.7),  0 3px 10px rgba(0,0,0,.45);
+  --shadow-lg: 0 20px 56px rgba(0,0,0,.8), 0 6px 16px rgba(0,0,0,.5);
+}
+
+/* ── Body & base ── */
+[data-theme="dark"] body {
+  background: #060d08;
+  color: #dff0e3;
+}
+
+/* ── Cards — glass effect with green micro-border ── */
+[data-theme="dark"] .card,
+[data-theme="dark"] .kpi-card,
+[data-theme="dark"] .donut-card,
+[data-theme="dark"] .cdc-stat-card,
+[data-theme="dark"] .card-table {
+  background: #111e13;
+  border-color: rgba(34,197,94,.1);
+  box-shadow: 0 1px 1px rgba(0,0,0,.5), 0 4px 20px rgba(0,0,0,.55);
+}
+[data-theme="dark"] .card:hover {
+  border-color: rgba(34,197,94,.22);
+  box-shadow: 0 0 0 1px rgba(34,197,94,.12), 0 8px 36px rgba(0,0,0,.7);
+  transform: translateY(-2px);
+}
+[data-theme="dark"] .kpi-card:hover {
+  border-color: rgba(34,197,94,.22);
+  box-shadow: 0 0 0 1px rgba(34,197,94,.12), 0 12px 40px rgba(0,0,0,.7);
+  transform: translateY(-3px);
+}
+
+/* ── Navbar tabs ── */
+[data-theme="dark"] nav.tabs {
+  background: #060d08;
+  border-bottom-color: rgba(34,197,94,.1);
+}
+[data-theme="dark"] nav.tabs button {
+  color: rgba(223,240,227,.45);
+}
+[data-theme="dark"] nav.tabs button:hover {
+  color: rgba(223,240,227,.8);
+  background: rgba(34,197,94,.06);
+}
+[data-theme="dark"] nav.tabs button.active {
+  color: #34c759;
+  background: rgba(34,197,94,.08);
+}
+[data-theme="dark"] nav.tabs button.active::after {
+  background: #34c759;
+}
+
+/* ── Fin bar ── */
+[data-theme="dark"] .fin-bar {
+  background: #0a1409;
+  border-bottom-color: rgba(34,197,94,.1);
+}
+[data-theme="dark"] .fin-bar-kpi {
+  border-right-color: rgba(34,197,94,.1);
+}
+
+/* ── Section titles ── */
+[data-theme="dark"] .section-title {
+  color: rgba(223,240,227,.5);
+}
+[data-theme="dark"] .section-title::after {
+  background: linear-gradient(to right, rgba(34,197,94,.15), transparent);
+}
+
+/* ── Tables ── */
+[data-theme="dark"] thead {
+  background: #0a1409;
+}
+[data-theme="dark"] tbody tr:nth-child(even) {
+  background: rgba(34,197,94,.03);
+}
+[data-theme="dark"] tbody tr:hover {
+  background: rgba(34,197,94,.06);
+}
+[data-theme="dark"] td, [data-theme="dark"] th {
+  border-color: rgba(34,197,94,.08);
+  color: rgba(223,240,227,.85);
+}
+[data-theme="dark"] th {
+  color: rgba(223,240,227,.5);
+}
+
+/* ── Alerts ── */
+[data-theme="dark"] .alert {
+  background: rgba(34,197,94,.06);
+  border-color: rgba(34,197,94,.2);
+  color: rgba(223,240,227,.85);
+}
+[data-theme="dark"] .alert.alert-warn {
+  background: rgba(251,191,36,.06);
+  border-color: rgba(251,191,36,.25);
+}
+[data-theme="dark"] .alert.alert-danger {
+  background: rgba(239,68,68,.07);
+  border-color: rgba(239,68,68,.3);
+}
+
+/* ── Badges ── */
+[data-theme="dark"] .badge {
+  background: rgba(34,197,94,.12);
+  color: #34c759;
+  border: 1px solid rgba(34,197,94,.2);
+}
+
+/* ── KPI values ── */
+[data-theme="dark"] .kpi-value { color: #dff0e3; }
+[data-theme="dark"] .kpi-label { color: rgba(223,240,227,.42); }
+[data-theme="dark"] .kpi-sub   { color: rgba(223,240,227,.42); }
+
+/* ── Rev split, metrics ── */
+[data-theme="dark"] .rev-split-name { color: rgba(223,240,227,.7); }
+[data-theme="dark"] .rev-split-pct  { color: rgba(223,240,227,.4); }
+
+/* ── Chart.js canvas: transparent bg ── */
+[data-theme="dark"] canvas { background: transparent; }
+
+/* ── Ticker ── */
+[data-theme="dark"] .ticker-wrap { background: #030807; }
+
+/* ── Footer ── */
+[data-theme="dark"] footer {
+  background: #030807;
+  border-top: 1px solid rgba(34,197,94,.08);
+  color: rgba(223,240,227,.3);
+}
+
+/* ── Hoy alerts ── */
+[data-theme="dark"] .hoy-alert {
+  background: rgba(34,197,94,.06);
+  border-color: rgba(34,197,94,.18);
+  color: rgba(223,240,227,.85);
+}
+[data-theme="dark"] .hoy-alert.warn {
+  background: rgba(251,191,36,.06);
+  border-color: rgba(251,191,36,.22);
+}
+[data-theme="dark"] .hoy-alert.danger {
+  background: rgba(239,68,68,.07);
+  border-color: rgba(239,68,68,.28);
+}
+
+/* ── Correo cards ── */
+[data-theme="dark"] .correo-card {
+  background: rgba(34,197,94,.04);
+  border-color: rgba(34,197,94,.1);
+}
+[data-theme="dark"] .correo-card:hover {
+  background: rgba(34,197,94,.08);
+  border-color: rgba(34,197,94,.18);
+}
+[data-theme="dark"] .correo-de   { color: rgba(223,240,227,.45); }
+[data-theme="dark"] .correo-hora { color: rgba(223,240,227,.35); }
+[data-theme="dark"] .correo-asunto { color: rgba(223,240,227,.9); }
+
+/* ── ECharts divs ── */
+[data-theme="dark"] .echarts-div {
+  background: transparent;
+}
+
+/* ── Dark-mode toggle button ── */
+.theme-toggle-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.09);
+  color: rgba(255,255,255,.6);
+  cursor: pointer; font-size: 14px;
+  transition: background .15s, color .15s;
+  flex-shrink: 0;
+}
+.theme-toggle-btn:hover {
+  background: rgba(255,255,255,.1);
+  color: rgba(255,255,255,.9);
+}
+
+/* ── New header gradient accent ── */
+[data-theme="dark"] header {
+  background: linear-gradient(180deg, #0a1a0d 0%, #060d08 100%);
+  border-bottom: 1px solid rgba(34,197,94,.12);
+}
+[data-theme="dark"] header::after {
+  opacity: .7;
+}
+
+/* ── Grid chart areas in dark ── */
+[data-theme="dark"] .chart-box { background: transparent; }
+
+/* ── EJ2 hero cards in dark ── */
+[data-theme="dark"] #ejCardExport,
+[data-theme="dark"] #ejCardNac,
+[data-theme="dark"] #ejCardPrecio {
+  background: linear-gradient(145deg, #0e1d10 0%, #111e13 100%);
+  border: 1px solid rgba(34,197,94,.14);
+  box-shadow: 0 4px 24px rgba(0,0,0,.6);
+}
+
+/* ── Scrollbar in dark ── */
+[data-theme="dark"] ::-webkit-scrollbar-track { background: #060d08; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: rgba(34,197,94,.2); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: rgba(34,197,94,.35); }
+
+/* ── Password gate in dark ── */
+[data-theme="dark"] #pw-gate {
+  background: rgba(6,13,8,.97);
+  backdrop-filter: blur(20px);
+}
+[data-theme="dark"] #pw-gate .pw-card {
+  background: #111e13;
+  border-color: rgba(34,197,94,.15);
+}
+[data-theme="dark"] #pw-input {
+  background: rgba(34,197,94,.05);
+  border-color: rgba(34,197,94,.15);
+  color: #dff0e3;
+}
+
+/* ── Strat cards in dark ── */
+[data-theme="dark"] .strat-card {
+  background: rgba(34,197,94,.04);
+  border-color: rgba(34,197,94,.12);
+}
+[data-theme="dark"] .strat-card:hover {
+  background: rgba(34,197,94,.08);
+  border-color: rgba(34,197,94,.2);
+}
+
+/* ── Fin-bar kpi values in dark ── */
+[data-theme="dark"] .fin-bar-kpi-lbl { color: rgba(223,240,227,.42); }
+[data-theme="dark"] .fin-bar-today-week { color: rgba(223,240,227,.9); }
+[data-theme="dark"] .fin-bar-today-date { color: rgba(223,240,227,.5); }
+
+/* ── Pred / market cards in dark ── */
+[data-theme="dark"] .pred-card {
+  background: #111e13;
+  border-color: rgba(34,197,94,.1);
+}
+[data-theme="dark"] .news-card {
+  background: rgba(34,197,94,.04);
+  border-color: rgba(34,197,94,.1);
+}
+[data-theme="dark"] .news-card:hover {
+  background: rgba(34,197,94,.08);
+}
+
+/* ── PC / ops cards in dark ── */
+[data-theme="dark"] .pc-card { background: #111e13; border-color: rgba(34,197,94,.1); }
+[data-theme="dark"] .qual-card { background: #111e13; border-color: rgba(34,197,94,.1); }
+
+/* ── Light mode toggle ── */
+:root:not([data-theme="dark"]) .theme-toggle-btn::before { content: '🌙'; }
+[data-theme="dark"] .theme-toggle-btn::before { content: '☀'; }
 </style>
 </head>
 <body>
@@ -3300,6 +3576,7 @@ function checkPw(){
   </div>
 
   <div class="live-badge" style="margin-left:auto"><span class="live-dot"></span>LIVE</div>
+  <button class="theme-toggle-btn" id="themeToggle" title="Cambiar tema" onclick="(function(){var h=document.documentElement;var d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');localStorage.setItem('belher_theme',d?'light':'dark');})()"></button>
   <button class="refresh-btn" id="refreshBtn" onclick="refreshDashboard()" title="Actualizar datos">
     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
     <span class="refresh-txt">Actualizar</span>
@@ -3396,7 +3673,7 @@ function checkPw(){
       </div>
       <div class="card ej2-chartcard">
         <div class="ej2-charthdr">Cajas &amp; FOB $/caja <span class="src-tag">Calavo WK01–WK15</span></div>
-        <div class="chart-box" style="height:145px"><canvas id="chartEjVolFob"></canvas></div>
+        <div class="chart-box echarts-div" style="height:145px" id="chartEjVolFob"></div>
       </div>
     </div>
 
@@ -3588,7 +3865,7 @@ function checkPw(){
 
     <div class="section-title">EBITDA: Actual vs Budget vs Y/A <span class="src-tag">jacruz@agbelher.com · Estado Financiero Feb 2026</span></div>
     <div class="card" style="padding:22px">
-      <div class="chart-box chart-box-tall"><canvas id="chartEbitda"></canvas></div>
+      <div class="chart-box chart-box-tall echarts-div" id="chartEbitda"></div>
     </div>
 
     <div class="section-title">Proyección · Temporada Restante <span class="src-tag">estimado basado en ritmo actual</span></div>
@@ -3835,10 +4112,17 @@ function checkPw(){
     D.meta.actualizado = dd + '/' + mo + '/' + anio + ' · ' + hh + ':' + mm;
   })();
 
-  /* ── Chart.js global defaults ── */
+  /* ── Theme persistence ── */
+  (function() {
+    var saved = localStorage.getItem('belher_theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+    /* default is already 'dark' on html tag */
+  })();
+
+  /* ── Chart.js global defaults (dark-optimized) ── */
   Chart.defaults.font.family = "'Inter', -apple-system, sans-serif";
   Chart.defaults.font.size   = 11;
-  Chart.defaults.color       = '#9ca3af';
+  Chart.defaults.color       = 'rgba(223,240,227,.5)';
   Chart.defaults.animation   = { duration: 700, easing: 'easeInOutQuart' };
 
   Chart.defaults.plugins.legend.labels.boxWidth       = 8;
@@ -3849,10 +4133,10 @@ function checkPw(){
   Chart.defaults.plugins.legend.labels.color          = '#6b7280';
   Chart.defaults.plugins.legend.labels.font           = { size: 11, weight: '600' };
 
-  Chart.defaults.plugins.tooltip.backgroundColor  = 'rgba(12,33,23,.92)';
-  Chart.defaults.plugins.tooltip.titleColor       = 'rgba(255,255,255,.65)';
-  Chart.defaults.plugins.tooltip.bodyColor        = '#fff';
-  Chart.defaults.plugins.tooltip.borderColor      = 'rgba(255,255,255,.1)';
+  Chart.defaults.plugins.tooltip.backgroundColor  = 'rgba(10,20,12,.93)';
+  Chart.defaults.plugins.tooltip.titleColor       = 'rgba(223,240,227,.7)';
+  Chart.defaults.plugins.tooltip.bodyColor        = '#dff0e3';
+  Chart.defaults.plugins.tooltip.borderColor      = 'rgba(34,197,94,.25)';
   Chart.defaults.plugins.tooltip.borderWidth      = 1;
   Chart.defaults.plugins.tooltip.padding          = { x: 13, y: 10 };
   Chart.defaults.plugins.tooltip.cornerRadius     = 12;
@@ -3863,7 +4147,7 @@ function checkPw(){
   Chart.defaults.interaction.mode        = 'index';
   Chart.defaults.interaction.intersect   = false;
 
-  Chart.defaults.scale.grid.color        = 'rgba(0,0,0,.045)';
+  Chart.defaults.scale.grid.color        = 'rgba(34,197,94,.07)';
   Chart.defaults.scale.grid.drawBorder   = false;
   Chart.defaults.scale.ticks.padding     = 6;
   Chart.defaults.scale.ticks.font        = { size: 10.5 };
@@ -6154,44 +6438,49 @@ function checkPw(){
       })();
     }
 
-    /* ── Ejecutivo — Cajas & FOB dual-axis ── */
+    /* ── Ejecutivo — Cajas & FOB dual-axis (ECharts) ── */
     if (tab === 'ejecutivo' && !chartsInit.ejVolFob) {
       chartsInit.ejVolFob = true;
       (function() {
-        var cvs = document.getElementById('chartEjVolFob');
-        if (!cvs) return;
+        var el = document.getElementById('chartEjVolFob');
+        if (!el || typeof echarts === 'undefined') return;
         var pag = D.calavo.pagos || [];
         var ph  = (D.tomate && D.tomate.preciosHistorico) || [];
-        var labels   = pag.map(function(p){ return p.sem; });
-        var cajas    = pag.map(function(p){ return p.cajas || 0; });
-        var fobMap   = {};
+        var labels = pag.map(function(p){ return p.sem; });
+        var cajas  = pag.map(function(p){ return p.cajas || 0; });
+        var fobMap = {};
         ph.forEach(function(p){ fobMap[p.sem] = p.fob; });
-        var fobLine  = pag.map(function(p){ return fobMap[p.sem] != null ? fobMap[p.sem] : null; });
-        var c2d = cvs.getContext('2d');
-        if (!c2d) return;
-        var grad = c2d.createLinearGradient(0,0,0,160);
-        grad.addColorStop(0,'rgba(52,199,89,.28)');
-        grad.addColorStop(1,'rgba(52,199,89,.0)');
-        new Chart(c2d, {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [
-              { type:'bar',  label:'Cajas', data:cajas,   backgroundColor:'rgba(52,199,89,.55)', borderColor:'rgba(52,199,89,.85)', borderWidth:1, borderRadius:4, yAxisID:'y' },
-              { type:'line', label:'FOB $/caja', data:fobLine, borderColor:'#d97706', backgroundColor:'rgba(217,119,6,.0)', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#d97706', tension:.35, yAxisID:'y2', spanGaps:false }
-            ]
-          },
-          options: {
-            responsive:true, maintainAspectRatio:false, interaction:{ mode:'index', intersect:false },
-            plugins:{ legend:{ labels:{ boxWidth:10, font:{ size:10 } } }, tooltip:{ callbacks:{
-              label: function(ctx){ return ctx.dataset.yAxisID==='y2' ? ' FOB $'+ctx.parsed.y.toFixed(2) : ' '+fmtN(ctx.parsed.y)+' cajas'; }
-            }}},
-            scales:{
-              y:  { beginAtZero:true, ticks:{ callback:function(v){ return fmtN(v/1000)+'K'; }, font:{size:9} } },
-              y2: { position:'right', beginAtZero:false, grid:{ drawOnChartArea:false }, ticks:{ callback:function(v){ return '$'+v.toFixed(0); }, font:{size:9} } }
+        var fobLine = pag.map(function(p){ return fobMap[p.sem] != null ? fobMap[p.sem] : null; });
+        var chart = echarts.init(el, 'dark');
+        chart.setOption({
+          backgroundColor: 'transparent',
+          grid: { top:24, right:48, bottom:20, left:44, containLabel:false },
+          legend: { show:true, top:2, right:0, itemWidth:10, itemHeight:10, textStyle:{ color:'rgba(223,240,227,.55)', fontSize:10 } },
+          tooltip: {
+            trigger:'axis', axisPointer:{ type:'cross', crossStyle:{ color:'rgba(34,197,94,.3)' } },
+            backgroundColor:'rgba(10,20,12,.92)', borderColor:'rgba(34,197,94,.25)', borderWidth:1,
+            textStyle:{ color:'#dff0e3', fontSize:11 },
+            formatter: function(p) {
+              var out = '<b style="color:#dff0e3">' + (p[0]&&p[0].axisValue||'') + '</b><br>';
+              p.forEach(function(s){ out += s.marker + ' ' + s.seriesName + ': <b>' + (s.seriesIndex===0 ? fmtN(s.value)+'&nbsp;cajas' : s.value!=null?'$'+Number(s.value).toFixed(2):'—') + '</b><br>'; });
+              return out;
             }
-          }
+          },
+          xAxis: { type:'category', data:labels, axisLabel:{ color:'rgba(223,240,227,.45)', fontSize:9, interval:0 }, axisLine:{ lineStyle:{ color:'rgba(34,197,94,.15)' } }, splitLine:{ show:false } },
+          yAxis: [
+            { type:'value', name:'Cajas', nameTextStyle:{ color:'rgba(223,240,227,.35)', fontSize:9 }, axisLabel:{ color:'rgba(223,240,227,.45)', fontSize:9, formatter:function(v){ return fmtN(v/1000)+'K'; } }, splitLine:{ lineStyle:{ color:'rgba(34,197,94,.08)' } }, axisLine:{ show:false } },
+            { type:'value', name:'FOB', nameTextStyle:{ color:'rgba(217,119,6,.7)', fontSize:9 }, position:'right', axisLabel:{ color:'rgba(217,119,6,.7)', fontSize:9, formatter:function(v){ return '$'+v.toFixed(0); } }, splitLine:{ show:false }, axisLine:{ show:false } }
+          ],
+          series: [
+            { name:'Cajas', type:'bar', data:cajas, yAxisIndex:0, barMaxWidth:18,
+              itemStyle:{ color:{ type:'linear', x:0,y:0,x2:0,y2:1, colorStops:[{offset:0,color:'rgba(52,199,89,.85)'},{offset:1,color:'rgba(22,163,74,.55)'}] }, borderRadius:[4,4,0,0] } },
+            { name:'FOB $/caja', type:'line', data:fobLine, yAxisIndex:1, smooth:true, connectNulls:false,
+              lineStyle:{ color:'#d97706', width:2.5 }, symbol:'circle', symbolSize:5,
+              itemStyle:{ color:'#d97706' },
+              areaStyle:{ color:{ type:'linear', x:0,y:0,x2:0,y2:1, colorStops:[{offset:0,color:'rgba(217,119,6,.15)'},{offset:1,color:'rgba(217,119,6,.0)'}] } } }
+          ]
         });
+        window.addEventListener('resize', function(){ chart.resize(); });
       })();
     }
 
@@ -6758,22 +7047,43 @@ function checkPw(){
           '</div>' +
         '</div>';
 
-      new Chart(document.getElementById('chartEbitda').getContext('2d'), {
-        type: 'bar',
-        data: {
-          labels: [ebd.mes.nombre, ebd.ytd.nombre],
-          datasets: [
-            { label:'Actual',       data:[ebd.mes.actual,  ebd.ytd.actual],  backgroundColor:'rgba(22,163,74,.85)',  borderRadius:6 },
-            { label:'Budget',       data:[ebd.mes.budget,  ebd.ytd.budget],  backgroundColor:'rgba(217,119,6,.75)',  borderRadius:6 },
-            { label:'Año Anterior', data:[ebd.mes.yago,    ebd.ytd.yago],    backgroundColor:'rgba(29,78,216,.55)',  borderRadius:6 }
-          ]
-        },
-        options: {
-          responsive: true,
-          plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: function (c) { return ' ' + c.dataset.label + ': $' + Number(c.parsed.y).toLocaleString('en-US'); } } } },
-          scales: { y: { ticks: { callback: function (v) { return '$' + (v/1e6).toFixed(1) + 'M'; } }, grid: { color:'rgba(0,0,0,.05)' } } }
+      /* EBITDA — ECharts grouped bar */
+      (function() {
+        var el = document.getElementById('chartEbitda');
+        if (!el || typeof echarts === 'undefined') return;
+        var ec = echarts.init(el, 'dark');
+        var seriesColor = [
+          { from:'rgba(34,197,89,.9)', to:'rgba(22,163,74,.7)' },
+          { from:'rgba(251,191,36,.9)', to:'rgba(217,119,6,.7)' },
+          { from:'rgba(96,165,250,.8)', to:'rgba(29,78,216,.6)' }
+        ];
+        function gradient(c) {
+          return { type:'linear', x:0,y:0,x2:0,y2:1, colorStops:[{offset:0,color:c.from},{offset:1,color:c.to}] };
         }
-      });
+        ec.setOption({
+          backgroundColor:'transparent',
+          grid:{ top:36, right:12, bottom:28, left:56, containLabel:false },
+          legend:{ top:4, right:4, itemWidth:10, itemHeight:10, textStyle:{ color:'rgba(223,240,227,.6)', fontSize:10 } },
+          tooltip:{
+            trigger:'axis', axisPointer:{ type:'shadow' },
+            backgroundColor:'rgba(10,20,12,.92)', borderColor:'rgba(34,197,94,.25)', borderWidth:1,
+            textStyle:{ color:'#dff0e3', fontSize:11 },
+            formatter: function(p){
+              var out = '<b style="color:#dff0e3">' + (p[0]&&p[0].axisValue||'') + '</b><br>';
+              p.forEach(function(s){ out += s.marker + ' ' + s.seriesName + ': <b>$' + Number(s.value).toLocaleString('en-US') + '</b><br>'; });
+              return out;
+            }
+          },
+          xAxis:{ type:'category', data:[ebd.mes.nombre, ebd.ytd.nombre], axisLabel:{ color:'rgba(223,240,227,.55)', fontSize:11, fontWeight:'600' }, axisLine:{ lineStyle:{ color:'rgba(34,197,94,.15)' } }, splitLine:{ show:false } },
+          yAxis:{ type:'value', axisLabel:{ color:'rgba(223,240,227,.45)', fontSize:9, formatter:function(v){ return '$'+(v/1e6).toFixed(1)+'M'; } }, splitLine:{ lineStyle:{ color:'rgba(34,197,94,.07)' } }, axisLine:{ show:false } },
+          series:[
+            { name:'Actual',       type:'bar', data:[ebd.mes.actual, ebd.ytd.actual], itemStyle:{ color:gradient(seriesColor[0]), borderRadius:[4,4,0,0] }, barGap:'10%', barMaxWidth:32 },
+            { name:'Budget',       type:'bar', data:[ebd.mes.budget, ebd.ytd.budget], itemStyle:{ color:gradient(seriesColor[1]), borderRadius:[4,4,0,0] }, barMaxWidth:32 },
+            { name:'Año Anterior', type:'bar', data:[ebd.mes.yago,   ebd.ytd.yago],   itemStyle:{ color:gradient(seriesColor[2]), borderRadius:[4,4,0,0] }, barMaxWidth:32 }
+          ]
+        });
+        window.addEventListener('resize', function(){ ec.resize(); });
+      })();
 
       var pagosConf = cv.pagos.filter(function (p) { return p.pago != null; });
       new Chart(document.getElementById('chartPagos').getContext('2d'), {
