@@ -117,7 +117,7 @@
   --border:  rgba(34,197,94,.1);
   --text:    #d4edda;
   --text2:   rgba(212,237,218,.75);
-  --muted:   rgba(212,237,218,.42);
+  --muted:   rgba(212,237,218,.62);
   --shadow:    0 4px 20px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.35);
   --shadow-md: 0 8px 32px rgba(0,0,0,.6), 0 2px 8px rgba(0,0,0,.4);
   --shadow-lg: 0 24px 64px rgba(0,0,0,.7), 0 6px 16px rgba(0,0,0,.4);
@@ -3990,6 +3990,16 @@ function checkPw(){
 </div>
 
 <script>
+/* ── Design token palette — use _c.X in all JS-generated inline styles ─── */
+var _c = {
+  green:   '#16a34a',  green3:  '#22c55e',  apple:   '#34c759',
+  lime:    '#4ade80',  teal:    '#0ea5e9',
+  amber:   '#d97706',  yellow:  '#fbbf24',  orange:  '#ff9f0a',
+  red:     '#ef4444',  rose:    '#f87171',  bright:  '#ff453a',
+  blue:    '#3b82f6',  sky:     '#60a5fa',  indigo:  '#6366f1',
+  purple:  '#8b5cf6',  violet:  '#a78bfa'
+};
+
 (function () {
   'use strict';
 
@@ -4159,7 +4169,7 @@ function checkPw(){
   /* ── Footer ── */
   document.getElementById('footerEl').innerHTML =
     '<span>Agrícola Belher</span> · Centro de Inteligencia · GC 2025–2026 · ' +
-    D.meta.fecha + ' · Act: ' + D.meta.actualizado +
+    D.meta.fecha + ' · Act: <span id="metaActualizado">' + D.meta.actualizado + '</span>' +
     ' · Fuentes: Gmail · Calavo · Báscula · Calidad · Corbel Seeds';
 
   /* ── Tabs ── */
@@ -4425,6 +4435,27 @@ function checkPw(){
         '</div>';
       }).join('');
 
+
+    /* ── Data freshness indicator ── */
+    (function() {
+      var actEl = document.getElementById('metaActualizado');
+      if (!actEl || !D.meta.actualizado) return;
+      var parts = D.meta.actualizado.split(' · ');
+      var datePart = parts[0]; // DD/MM/YYYY
+      var timePart = parts[1] || '00:00';
+      var dp = datePart.split('/');
+      var tp = timePart.split(':');
+      if (dp.length < 3) return;
+      var updated = new Date(parseInt(dp[2]), parseInt(dp[1])-1, parseInt(dp[0]),
+                             parseInt(tp[0])||0, parseInt(tp[1])||0);
+      var hoursAgo = (Date.now() - updated.getTime()) / 3600000;
+      var dotClass = hoursAgo < 12 ? 'freshness-fresh' : hoursAgo < 36 ? 'freshness-stale' : 'freshness-old';
+      var dotLabel = hoursAgo < 12 ? 'Datos frescos' : hoursAgo < 36 ? 'Actualizado ayer' : 'Datos desactualizados';
+      actEl.innerHTML =
+        '<span class="freshness-dot ' + dotClass + '" title="' + dotLabel + '"></span>' +
+        D.meta.actualizado;
+    })();
+
     /* ── WATCHLIST RISKS ── */
     var wl = (D.estrategia && D.estrategia.watchlist) ? D.estrategia.watchlist : [];
     document.getElementById('hoyWatchlist').innerHTML =
@@ -4502,11 +4533,11 @@ function checkPw(){
       cdcWrap.innerHTML =
         '<div class="card" style="margin-bottom:14px;cursor:pointer" data-nav-tab="cdc" data-nav-target="chartCdcVsProyeccion">' +
           '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">' +
-            '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Gente en CDC · ' + lastSem + ' <span style="font-weight:400;color:var(--muted)">· ver detalle →</span></div>' +
+            '<div style="font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Gente en CDC · ' + lastSem + ' <span style="font-weight:400;color:var(--muted)">· ver detalle →</span></div>' +
             '<div style="display:flex;gap:12px;flex-wrap:wrap">' +
-              '<span style="font-size:.68rem;color:var(--muted)"><span style="font-size:.8rem;font-weight:800;color:#60a5fa">' + lastTot.toLocaleString() + '</span> total</span>' +
-              '<span style="font-size:.68rem;color:var(--muted)"><span style="font-size:.8rem;font-weight:800;color:#4ade80">' + lastTrab.toLocaleString() + '</span> trabajan</span>' +
-              '<span style="font-size:.68rem;color:var(--muted)"><span style="font-size:.8rem;font-weight:800;color:#fbbf24">' + lastAco.toLocaleString() + '</span> no trabajan</span>' +
+              '<span style="font-size:0.72rem;color:var(--muted)"><span style="font-size:0.80rem;font-weight:800;color:#60a5fa">' + lastTot.toLocaleString() + '</span> total</span>' +
+              '<span style="font-size:0.72rem;color:var(--muted)"><span style="font-size:0.80rem;font-weight:800;color:#4ade80">' + lastTrab.toLocaleString() + '</span> trabajan</span>' +
+              '<span style="font-size:0.72rem;color:var(--muted)"><span style="font-size:0.80rem;font-weight:800;color:#fbbf24">' + lastAco.toLocaleString() + '</span> no trabajan</span>' +
             '</div>' +
           '</div>' +
           '<div style="height:200px"><canvas id="chartHoyCdc"></canvas></div>' +
@@ -4811,7 +4842,7 @@ function checkPw(){
         '<div class="ej-bas-today">Último día registrado'+(todayBasFecha ? ' · '+todayBasFecha : '')+'</div>' +
         (todayCargas > 0
           ? '<div class="ej-bas-carga-num">'+todayCargas+'</div><div class="ej-bas-carga-lbl">camiones exportados'+(destList?' · '+destList:'')+'</div>'
-          : '<div style="color:var(--muted);font-size:.75rem;margin-top:6px">Sin embarques registrados</div>') +
+          : '<div style="color:var(--muted);font-size:0.72rem;margin-top:6px">Sin embarques registrados</div>') +
         (todayProds.length
           ? '<div class="ej-bas-productos">'+todayProds.map(function(p){ return '<span class="ej-bas-pill">'+p+'</span>'; }).join('')+'</div>'
           : '') +
@@ -4863,31 +4894,31 @@ function checkPw(){
       vKpis.innerHTML =
         /* Exportación */
         '<div class="card" style="padding:18px 16px;border-left:3px solid #34c759">' +
-          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Exportación · Calavo</div>' +
+          '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Exportación · Calavo</div>' +
           '<div style="font-size:1.35rem;font-weight:700;color:var(--green2);line-height:1">'+fmtN(totCajas)+'</div>' +
-          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">cajas facturadas</div>' +
-          '<div style="font-size:.67rem;color:var(--green2);margin-top:2px;font-weight:600">'+fmt(revExp2)+' bruto · $'+avgFob.toFixed(2)+'/caja</div>' +
+          '<div style="font-size:0.65rem;color:var(--muted);margin-top:4px">cajas facturadas</div>' +
+          '<div style="font-size:0.65rem;color:var(--green2);margin-top:2px;font-weight:600">'+fmt(revExp2)+' bruto · $'+avgFob.toFixed(2)+'/caja</div>' +
         '</div>' +
         /* Nacional */
         '<div class="card" style="padding:18px 16px;border-left:3px solid #60a5fa">' +
-          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Nacional</div>' +
+          '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Nacional</div>' +
           '<div style="font-size:1.35rem;font-weight:700;color:#60a5fa;line-height:1">'+fmtN(cajasNac2)+'</div>' +
-          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">cajas vendidas</div>' +
-          '<div style="font-size:.67rem;color:#60a5fa;margin-top:2px;font-weight:600">'+fmt(revNac2)+' · $'+precNac.toFixed(2)+'/caja</div>' +
+          '<div style="font-size:0.65rem;color:var(--muted);margin-top:4px">cajas vendidas</div>' +
+          '<div style="font-size:0.65rem;color:#60a5fa;margin-top:2px;font-weight:600">'+fmt(revNac2)+' · $'+precNac.toFixed(2)+'/caja</div>' +
         '</div>' +
         /* Amortizado deuda Calavo */
         '<div class="card" style="padding:18px 16px;border-left:3px solid #f59e0b">' +
-          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Amortizado Deuda Calavo</div>' +
+          '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Amortizado Deuda Calavo</div>' +
           '<div style="font-size:1.35rem;font-weight:700;color:#f59e0b;line-height:1">'+fmt(amort2)+'</div>' +
-          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">de $6M total</div>' +
-          '<div style="font-size:.67rem;color:#f59e0b;margin-top:2px;font-weight:600">'+fmt(pend2)+' pendiente</div>' +
+          '<div style="font-size:0.65rem;color:var(--muted);margin-top:4px">de $6M total</div>' +
+          '<div style="font-size:0.65rem;color:#f59e0b;margin-top:2px;font-weight:600">'+fmt(pend2)+' pendiente</div>' +
         '</div>' +
         /* Cruce a liquidación real */
         '<div class="card" style="padding:18px 16px;border-left:3px solid #34c759;background:rgba(52,199,89,.04)">' +
-          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Inicio Liquidación Real</div>' +
+          '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Inicio Liquidación Real</div>' +
           '<div style="font-size:1.35rem;font-weight:700;color:#34c759;line-height:1">'+cruce2+'</div>' +
-          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">~28-Abr-2026 estimado</div>' +
-          '<div style="font-size:.67rem;color:#34c759;margin-top:2px;font-weight:600">Wire = neto real a Belher desde '+cruce2+'</div>' +
+          '<div style="font-size:0.65rem;color:var(--muted);margin-top:4px">~28-Abr-2026 estimado</div>' +
+          '<div style="font-size:0.65rem;color:#34c759;margin-top:2px;font-weight:600">Wire = neto real a Belher desde '+cruce2+'</div>' +
         '</div>';
     }
 
@@ -4903,8 +4934,8 @@ function checkPw(){
         html += '<div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:18px">';
         cont.forEach(function(c){
           html += '<div style="flex:1;min-width:190px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px">' +
-            '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">'+c.mes+' · '+c.tipo+'</div>' +
-            '<div style="font-size:.78rem;color:var(--fg);line-height:1.9">' +
+            '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">'+c.mes+' · '+c.tipo+'</div>' +
+            '<div style="font-size:0.80rem;color:var(--fg);line-height:1.9">' +
               '<div><span style="color:var(--muted)">Base: </span><b style="color:var(--accent2)">$'+(c.precio_contrato||0).toFixed(2)+'/caja</b></div>' +
               '<div><span style="color:var(--muted)">Escalador activo desde: </span><b style="color:#34c759">$'+(c.escalador_desde||0).toFixed(2)+'</b></div>' +
               '<div><span style="color:var(--muted)">Cajas contrato: </span>'+fmtN(c.cajas_contrato)+'</div>' +
@@ -4916,8 +4947,8 @@ function checkPw(){
       }
 
       /* FOB vs escalador per-week table */
-      html += '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">FOB Real vs Umbrales de Contrato · Por Semana</div>';
-      html += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.73rem">';
+      html += '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">FOB Real vs Umbrales de Contrato · Por Semana</div>';
+      html += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:0.72rem">';
       html += '<thead><tr style="border-bottom:1px solid var(--border)">' +
         '<th style="text-align:left;padding:6px 8px;color:var(--muted);font-weight:600">Sem</th>' +
         '<th style="text-align:right;padding:6px 8px;color:var(--muted);font-weight:600">Cajas</th>' +
@@ -4934,12 +4965,12 @@ function checkPw(){
         var escColor  = escActive ? '#34c759' : 'var(--muted)';
         var rowBg     = p.tipo==='est' ? 'rgba(59,130,246,.04)' : '';
         html += '<tr style="border-bottom:1px solid rgba(0,0,0,.05);background:'+rowBg+'">' +
-          '<td style="padding:5px 8px;font-weight:700">'+p.sem+(p.tipo==='est'?' <span style="font-size:.58rem;color:var(--muted);font-weight:400">est</span>':'')+'</td>' +
+          '<td style="padding:5px 8px;font-weight:700">'+p.sem+(p.tipo==='est'?' <span style="font-size:0.60rem;color:var(--muted);font-weight:400">est</span>':'')+'</td>' +
           '<td style="text-align:right;padding:5px 8px;color:var(--muted)">'+(pkgs!=null?fmtN(pkgs):'—')+'</td>' +
           '<td style="text-align:right;padding:5px 8px;color:'+fobColor+';font-weight:700">$'+p.fob.toFixed(2)+'</td>' +
           '<td style="text-align:right;padding:5px 8px;color:var(--muted)">'+(p.usda!=null?'$'+p.usda.toFixed(2):'—')+'</td>' +
           '<td style="text-align:right;padding:5px 8px;color:'+escColor+';font-weight:600">'+(escActive?'✓ +$'+(p.usda-20.95).toFixed(2):'—')+'</td>' +
-          '<td style="padding:5px 8px;font-size:.65rem;color:var(--muted)">'+( p.nota||'')+'</td>' +
+          '<td style="padding:5px 8px;font-size:0.65rem;color:var(--muted)">'+( p.nota||'')+'</td>' +
         '</tr>';
       });
       html += '</tbody></table></div>';
@@ -4976,9 +5007,9 @@ function checkPw(){
         { lbl:'vs Export Calavo',    val: '$'+(precNac-precExp).toFixed(2), sub: precNac>precExp?'↑ sobre export':'↓ bajo export', color: precNac>precExp?'#34c759':'#ef4444' }
       ].map(function(k){
         return '<div class="card" style="padding:18px 16px;border-left:3px solid #60a5fa">' +
-          '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">'+k.lbl+'</div>' +
+          '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">'+k.lbl+'</div>' +
           '<div style="font-size:1.35rem;font-weight:700;color:'+k.color+';line-height:1">'+k.val+'</div>' +
-          '<div style="font-size:.67rem;color:var(--muted);margin-top:4px">'+k.sub+'</div>' +
+          '<div style="font-size:0.65rem;color:var(--muted);margin-top:4px">'+k.sub+'</div>' +
         '</div>';
       }).join('');
     }
@@ -4989,17 +5020,17 @@ function checkPw(){
       canEl.innerHTML =
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">' +
           '<div class="card" style="padding:18px 20px">' +
-            '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Roma</div>' +
+            '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Roma</div>' +
             '<div style="font-size:1.6rem;font-weight:800;color:#60a5fa;line-height:1">'+fmtN(cajasRoma)+'</div>' +
-            '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">cajas · '+romaPct.toFixed(1)+'% del total nacional</div>' +
+            '<div style="font-size:0.72rem;color:var(--muted);margin-top:4px">cajas · '+romaPct.toFixed(1)+'% del total nacional</div>' +
             '<div style="background:rgba(0,0,0,.07);border-radius:4px;height:6px;margin-top:8px;overflow:hidden">' +
               '<div style="height:100%;width:'+romaPct.toFixed(0)+'%;background:#60a5fa;border-radius:4px"></div>' +
             '</div>' +
           '</div>' +
           '<div class="card" style="padding:18px 20px">' +
-            '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Bola</div>' +
+            '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Bola</div>' +
             '<div style="font-size:1.6rem;font-weight:800;color:#818cf8;line-height:1">'+fmtN(cajasBola)+'</div>' +
-            '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">cajas · '+bolaPct.toFixed(1)+'% del total nacional</div>' +
+            '<div style="font-size:0.72rem;color:var(--muted);margin-top:4px">cajas · '+bolaPct.toFixed(1)+'% del total nacional</div>' +
             '<div style="background:rgba(0,0,0,.07);border-radius:4px;height:6px;margin-top:8px;overflow:hidden">' +
               '<div style="height:100%;width:'+bolaPct.toFixed(0)+'%;background:#818cf8;border-radius:4px"></div>' +
             '</div>' +
@@ -5052,11 +5083,11 @@ function checkPw(){
         : '<span class="badge badge-blue">Arizona</span>';
       return '<tr>' +
         '<td><strong>' + e.fecha + '</strong></td>' +
-        '<td class="td-center" style="font-weight:700;font-size:.9rem">' + (e.cargas || 1) + '</td>' +
+        '<td class="td-center" style="font-weight:700;font-size:0.875rem">' + (e.cargas || 1) + '</td>' +
         '<td><span class="tipo-pill ' + tipoCls + '">' + e.tipo + '</span></td>' +
         '<td>' + destBadge + '</td>' +
-        '<td style="font-family:\'SF Mono\',monospace;font-size:.79rem;font-weight:600">' + (e.unidad || '—') + '</td>' +
-        '<td style="font-size:.79rem;color:var(--muted)">' + clasificarUnidad(e.unidad) + '</td>' +
+        '<td style="font-family:\'SF Mono\',monospace;font-size:0.80rem;font-weight:600">' + (e.unidad || '—') + '</td>' +
+        '<td style="font-size:0.80rem;color:var(--muted)">' + clasificarUnidad(e.unidad) + '</td>' +
         '<td class="td-center"><span class="badge badge-green">' + e.estado + '</span></td>' +
       '</tr>';
     }).join('');
@@ -5088,13 +5119,13 @@ function checkPw(){
     var totalViajes = week.length;
     var totalCargas = week.reduce(function (s, e) { return s + (e.cargas || 1); }, 0);
     document.getElementById('flotaResumen').innerHTML =
-      '<table style="width:100%;border-collapse:collapse;font-size:.81rem">' +
+      '<table style="width:100%;border-collapse:collapse;font-size:0.80rem">' +
         '<thead style="background:var(--dark);color:#fff">' +
           '<tr>' +
-            '<th style="padding:8px 14px;text-align:left;font-size:.63rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">Flota</th>' +
-            '<th style="padding:8px 14px;text-align:center;font-size:.63rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">Viajes</th>' +
-            '<th style="padding:8px 14px;text-align:center;font-size:.63rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">Cargas</th>' +
-            '<th style="padding:8px 14px;text-align:right;font-size:.63rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">% del Total</th>' +
+            '<th style="padding:8px 14px;text-align:left;font-size:0.65rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">Flota</th>' +
+            '<th style="padding:8px 14px;text-align:center;font-size:0.65rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">Viajes</th>' +
+            '<th style="padding:8px 14px;text-align:center;font-size:0.65rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">Cargas</th>' +
+            '<th style="padding:8px 14px;text-align:right;font-size:0.65rem;letter-spacing:.9px;text-transform:uppercase;font-weight:600">% del Total</th>' +
           '</tr>' +
         '</thead>' +
         '<tbody>' +
@@ -5103,7 +5134,7 @@ function checkPw(){
           if (!row || (f === 'Otros' && row.cargas === 0)) return '';
           var pctVal = totalCargas ? (row.cargas / totalCargas * 100).toFixed(0) : 0;
           var nameCell = f === 'Otros' && row.unidades && row.unidades.length
-            ? f + ' <span style="font-size:.69rem;font-weight:400;color:var(--muted)">· unidades: ' + row.unidades.join(', ') + '</span>'
+            ? f + ' <span style="font-size:0.72rem;font-weight:400;color:var(--muted)">· unidades: ' + row.unidades.join(', ') + '</span>'
             : f;
           return '<tr style="border-bottom:1px solid var(--border)">' +
             '<td style="padding:9px 14px;font-weight:600">' + nameCell + '</td>' +
@@ -5120,7 +5151,7 @@ function checkPw(){
           '</tr>';
         }).join('') +
         '<tr style="background:#f8faf8;font-weight:700">' +
-          '<td style="padding:9px 14px;color:var(--muted);font-size:.75rem;letter-spacing:.5px;text-transform:uppercase">Total</td>' +
+          '<td style="padding:9px 14px;color:var(--muted);font-size:0.72rem;letter-spacing:.5px;text-transform:uppercase">Total</td>' +
           '<td style="padding:9px 14px;text-align:center">' + totalViajes + '</td>' +
           '<td style="padding:9px 14px;text-align:center">' + totalCargas + '</td>' +
           '<td style="padding:9px 14px;text-align:right">100%</td>' +
@@ -5159,13 +5190,13 @@ function checkPw(){
     document.getElementById('calidadSummary').innerHTML =
       '<div class="cal-summary">' +
         '<span class="cal-sum-item good">1ª Primera prom: <strong>' + pct(avgPrima) + '</strong>' +
-          (primaDiff != null ? ' <span style="font-size:.72rem">' + primaDir + ' ' + (primaDiff > 0 ? '+' : '') + primaDiff + 'pp</span>' : '') + '</span>' +
+          (primaDiff != null ? ' <span style="font-size:0.72rem">' + primaDir + ' ' + (primaDiff > 0 ? '+' : '') + primaDiff + 'pp</span>' : '') + '</span>' +
         '<span class="cal-sum-sep">·</span>' +
         '<span class="cal-sum-item ' + (avgMerma > 4 ? 'bad' : avgMerma > 3 ? 'warn' : 'good') + '">Merma prom: <strong>' + pct(avgMerma) + '</strong></span>' +
         '<span class="cal-sum-sep">·</span>' +
         '<span class="cal-sum-item ' + (alertas > 0 ? 'bad' : 'good') + '">' + alertas + ' / ' + ub.variedades.length + ' alertas</span>' +
         '<span class="cal-sum-sep">·</span>' +
-        '<span class="cal-sum-item" style="font-size:.72rem;color:var(--muted)">' + ub.variedades.length + ' variedades · ' + ub.fecha + '</span>' +
+        '<span class="cal-sum-item" style="font-size:0.72rem;color:var(--muted)">' + ub.variedades.length + ' variedades · ' + ub.fecha + '</span>' +
       '</div>';
 
     /* ── Compact variety rows (shared renderer) ── */
@@ -5209,7 +5240,7 @@ function checkPw(){
           '<span class="cal-sum-sep">·</span>' +
           '<span class="cal-sum-item ' + (avgM7 > 4 ? 'bad' : avgM7 > 3 ? 'warn' : 'good') + '">Merma prom: <strong>' + pct(avgM7) + '</strong></span>' +
           '<span class="cal-sum-sep">·</span>' +
-          '<span class="cal-sum-item" style="font-size:.72rem;color:var(--muted)">' + sw.variedades.length + ' variedades · ' + sw.desde + ' – ' + sw.hasta + '</span>' +
+          '<span class="cal-sum-item" style="font-size:0.72rem;color:var(--muted)">' + sw.variedades.length + ' variedades · ' + sw.desde + ' – ' + sw.hasta + '</span>' +
         '</div>' +
         '<div class="card" style="padding:0">' +
           sw.variedades.map(function (v) {
@@ -5219,7 +5250,7 @@ function checkPw(){
         '</div>';
     } else {
       document.getElementById('calidadSemana').innerHTML =
-        '<div class="card" style="padding:16px;color:var(--muted);font-size:.84rem">Sin datos de la semana disponibles.</div>';
+        '<div class="card" style="padding:16px;color:var(--muted);font-size:0.875rem">Sin datos de la semana disponibles.</div>';
     }
   }
 
@@ -5275,7 +5306,7 @@ function checkPw(){
             '<div class="pred-p-proj" style="text-align:right">' +
               '<div class="pred-p-lbl">Proyectado 7 días</div>' +
               '<div class="pred-p-val" style="color:' + projColor + '">' + (hasPrices ? '$' + p.precio_proyectado.min + '–' + p.precio_proyectado.max : '—') + '</div>' +
-              '<div style="font-size:.65rem;color:' + projColor + ';font-weight:700;margin-top:3px">' +
+              '<div style="font-size:0.65rem;color:' + projColor + ';font-weight:700;margin-top:3px">' +
                 (hasPrices && nowMid ? (function(){
                   var chg = ((projMid - nowMid) / nowMid * 100);
                   return (chg >= 0 ? '+' : '') + chg.toFixed(1) + '% mid estimado';
@@ -5390,15 +5421,15 @@ function checkPw(){
 
     /* Executive summary */
     document.getElementById('mercadoResumenBox').innerHTML =
-      '<p style="font-size:.86rem;line-height:1.7;color:var(--text2)">' + D.mercado.resumen + '</p>';
+      '<p style="font-size:0.875rem;line-height:1.7;color:var(--text2)">' + D.mercado.resumen + '</p>';
 
     /* News list */
     document.getElementById('noticiasList').innerHTML = D.mercado.noticias.map(function (n) {
       var bc = n.impacto === 'Alto' ? 'badge-red' : n.impacto === 'Moderado' ? 'badge-yellow' : 'badge-gray';
       return '<div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">' +
         '<span class="badge ' + bc + '" style="flex-shrink:0;margin-top:1px">' + n.impacto + '</span>' +
-        '<div><div style="font-size:.84rem;font-weight:600;color:var(--text)">' + n.titulo + '</div>' +
-        '<div style="font-size:.71rem;color:var(--muted);margin-top:2px">Fuente: ' + n.fuente + '</div></div>' +
+        '<div><div style="font-size:0.875rem;font-weight:600;color:var(--text)">' + n.titulo + '</div>' +
+        '<div style="font-size:0.72rem;color:var(--muted);margin-top:2px">Fuente: ' + n.fuente + '</div></div>' +
       '</div>';
     }).join('');
   }
@@ -5421,9 +5452,9 @@ function checkPw(){
 
       var sigItems = (cf.pagos_ciclo_siguiente || []).map(function(p) {
         return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.06)">' +
-          '<span style="color:var(--accent2);font-size:.8rem">›</span>' +
-          '<span style="font-size:.78rem;color:var(--text)">' + p.concepto + '</span>' +
-          '<span style="margin-left:auto;font-size:.66rem;color:var(--muted)">' + p.nota + '</span>' +
+          '<span style="color:var(--accent2);font-size:0.80rem">›</span>' +
+          '<span style="font-size:0.80rem;color:var(--text)">' + p.concepto + '</span>' +
+          '<span style="margin-left:auto;font-size:0.65rem;color:var(--muted)">' + p.nota + '</span>' +
         '</div>';
       }).join('');
 
@@ -5432,16 +5463,16 @@ function checkPw(){
         '<div class="cf-header">' +
           '<div style="flex:1">' +
             '<div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;color:var(--text)">' + cf.periodo + '</div>' +
-            '<div style="font-size:.71rem;color:var(--muted);margin-top:2px">Modelo ' + (cf.modelo||'OL 8+4') + ' · Cierre al ' + cf.fecha_cierre + ' · ' + cf.moneda + '</div>' +
+            '<div style="font-size:0.72rem;color:var(--muted);margin-top:2px">Modelo ' + (cf.modelo||'OL 8+4') + ' · Cierre al ' + cf.fecha_cierre + ' · ' + cf.moneda + '</div>' +
           '</div>' +
           '<div class="cf-semaforo yellow"><span class="cf-semaforo-dot"></span>⚠ PENDIENTE EXCEL</div>' +
         '</div>' +
 
         /* Hero: saldo requerido */
         '<div style="background:rgba(239,68,68,.07);border:1.5px solid rgba(239,68,68,.25);border-radius:12px;padding:22px 24px;margin-bottom:18px">' +
-          '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#f87171;margin-bottom:8px">Saldo Requerido para Cerrar la Temporada</div>' +
+          '<div style="font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#f87171;margin-bottom:8px">Saldo Requerido para Cerrar la Temporada</div>' +
           '<div style="font-size:2.4rem;font-weight:900;letter-spacing:-1px;color:#f87171">' + fmt(req) + '</div>' +
-          '<div style="font-size:.77rem;color:var(--muted);margin-top:6px;line-height:1.5">' +
+          '<div style="font-size:0.80rem;color:var(--muted);margin-top:6px;line-height:1.5">' +
             'Necesario para cubrir todos los compromisos hasta el cierre del ciclo GC 2025–2026,<br>' +
             'incluyendo pagos de arranque del ciclo 2026–2027 ya incorporados en el forecast.' +
           '</div>' +
@@ -5450,33 +5481,33 @@ function checkPw(){
         /* 2-col: modelo + pagos ciclo siguiente */
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">' +
           '<div style="background:var(--bg);border-radius:var(--r);padding:18px 20px">' +
-            '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:14px">Modelo Forecast · OL 8+4</div>' +
+            '<div style="font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:14px">Modelo Forecast · OL 8+4</div>' +
             '<div style="display:flex;gap:10px;margin-bottom:14px">' +
               '<div style="flex:1;background:rgba(22,163,74,.08);border:1px solid rgba(22,163,74,.2);border-radius:8px;padding:12px;text-align:center">' +
                 '<div style="font-size:1.5rem;font-weight:900;color:var(--green2)">8</div>' +
-                '<div style="font-size:.65rem;color:var(--muted);margin-top:2px">meses reales<br>Jul 25 – Feb 26</div>' +
+                '<div style="font-size:0.65rem;color:var(--muted);margin-top:2px">meses reales<br>Jul 25 – Feb 26</div>' +
               '</div>' +
               '<div style="flex:1;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.2);border-radius:8px;padding:12px;text-align:center">' +
                 '<div style="font-size:1.5rem;font-weight:900;color:#facc15">4</div>' +
-                '<div style="font-size:.65rem;color:var(--muted);margin-top:2px">meses forecast<br>Mar – Jun 26</div>' +
+                '<div style="font-size:0.65rem;color:var(--muted);margin-top:2px">meses forecast<br>Mar – Jun 26</div>' +
               '</div>' +
             '</div>' +
-            '<div style="font-size:.72rem;color:var(--muted);line-height:1.6">' +
+            '<div style="font-size:0.72rem;color:var(--muted);line-height:1.6">' +
               'Los números de línea detallados están en el Excel adjunto<br>' +
               '<span style="color:var(--accent2);font-weight:600">"Cash Flow ABSA GC 2025-2026 Update 22 Marzo 2026.xlsx"</span><br>' +
               'Captúralos para activar el análisis completo.' +
             '</div>' +
           '</div>' +
           '<div style="background:var(--bg);border-radius:var(--r);padding:18px 20px">' +
-            '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:12px">Pagos Incluidos · Ciclo 2026–2027</div>' +
+            '<div style="font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:12px">Pagos Incluidos · Ciclo 2026–2027</div>' +
             sigItems +
           '</div>' +
         '</div>' +
 
         /* Calavo settlements as proxy context */
         '<div style="background:var(--bg);border-radius:var(--r);padding:16px 20px">' +
-          '<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:10px">Contexto · Cobros Calavo Confirmados en Temporada</div>' +
-          '<div style="font-size:.78rem;color:var(--muted)">Pick &amp; Pack WK01–WK12 confirmado: <strong style="color:var(--green2)">' + fmt(D.calavo ? D.calavo.pickPack : 0) + '</strong> · ' +
+          '<div style="font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:10px">Contexto · Cobros Calavo Confirmados en Temporada</div>' +
+          '<div style="font-size:0.80rem;color:var(--muted)">Pick &amp; Pack WK01–WK12 confirmado: <strong style="color:var(--green2)">' + fmt(D.calavo ? D.calavo.pickPack : 0) + '</strong> · ' +
           'Revenue FOB bruto: <strong style="color:var(--green2)">' + fmt(D.calavo ? D.calavo.revenueTotal : 0) + '</strong> · ' +
           'Saldo Due from Calavo: <strong style="color:' + ((D.calavo&&D.calavo.saldoActual||0)<0?'var(--red2)':'var(--green2)') + '">' + fmt(D.calavo ? D.calavo.saldoActual : 0) + '</strong></div>' +
         '</div>';
@@ -5612,7 +5643,7 @@ function checkPw(){
       '<div class="cf-header">' +
         '<div style="flex:1">' +
           '<div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;color:var(--text)">' + cf.periodo + '</div>' +
-          '<div style="font-size:.71rem;color:var(--muted);margin-top:2px">Último real ' + cf.fecha_cierre + ' · Forecast Jul 31, 2026 · ' + cf.moneda + '</div>' +
+          '<div style="font-size:0.72rem;color:var(--muted);margin-top:2px">Último real ' + cf.fecha_cierre + ' · Forecast Jul 31, 2026 · ' + cf.moneda + '</div>' +
         '</div>' +
         '<div class="cf-semaforo ' + semColor + '"><span class="cf-semaforo-dot"></span>' + semIcon + ' ' + semLabel + '</div>' +
       '</div>' +
@@ -5689,7 +5720,7 @@ function checkPw(){
 
       /* Saldo chart */
       '<div class="cf-chart-card">' +
-        '<div class="cf-chart-title">Saldo de Caja · Evolución Mensual <span style="font-size:.6rem;font-weight:400;color:var(--muted)">real ▬  forecast ╌</span></div>' +
+        '<div class="cf-chart-title">Saldo de Caja · Evolución Mensual <span style="font-size:0.60rem;font-weight:400;color:var(--muted)">real ▬  forecast ╌</span></div>' +
         '<div class="chart-box"><canvas id="chartCFTendencia"></canvas></div>' +
       '</div>' +
 
@@ -5706,65 +5737,65 @@ function checkPw(){
             var beLblColor = atMeta ? '#4ade80' : '#f87171';
             var actualBlock = actual != null
               ? '<div style="text-align:center">' +
-                  '<div style="font-size:.6rem;color:' + beLblColor + '">ACTUAL</div>' +
+                  '<div style="font-size:0.60rem;color:' + beLblColor + '">ACTUAL</div>' +
                   '<div style="font-size:1.4rem;font-weight:900;color:' + beLblColor + '">$' + actual.toFixed(2) + '</div>' +
                   (atMeta ? '<div style="font-size:0.60rem;font-weight:800;color:#4ade80;background:rgba(34,197,94,.15);border-radius:4px;padding:1px 5px;margin-top:2px">EN META ✓</div>' : '') +
                 '</div>' +
-                '<div style="font-size:.9rem;color:var(--muted)">↔</div>'
+                '<div style="font-size:0.875rem;color:var(--muted)">↔</div>'
               : '';
             return '<div style="background:' + beColor + ';border:1px solid ' + beBorder + ';border-radius:12px;padding:16px 18px">' +
-              '<div style="font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:' + beLblColor + ';margin-bottom:10px">Break-Even Price · Escenario Total</div>' +
+              '<div style="font-size:0.60rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:' + beLblColor + ';margin-bottom:10px">Break-Even Price · Escenario Total</div>' +
               '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px">' +
                 '<div style="text-align:center">' +
-                  '<div style="font-size:.6rem;color:var(--muted)">OL Base</div>' +
+                  '<div style="font-size:0.60rem;color:var(--muted)">OL Base</div>' +
                   '<div style="font-size:1.4rem;font-weight:900;color:var(--muted)">$' + cf.breakeven_precio_base + '</div>' +
                 '</div>' +
                 '<div style="font-size:1.1rem;color:var(--muted)">→</div>' +
                 '<div style="text-align:center">' +
-                  '<div style="font-size:.6rem;color:' + beLblColor + '">Break-Even</div>' +
+                  '<div style="font-size:0.60rem;color:' + beLblColor + '">Break-Even</div>' +
                   '<div style="font-size:1.4rem;font-weight:900;color:' + beLblColor + '">$' + cf.breakeven_precio_target + '</div>' +
                 '</div>' +
                 '<div style="font-size:1.1rem;color:var(--muted)">→</div>' +
                 actualBlock +
                 '<div style="text-align:center;margin-left:auto;background:rgba(239,68,68,.1);border-radius:8px;padding:6px 10px">' +
-                  '<div style="font-size:.6rem;color:#f87171">Δ requerido</div>' +
+                  '<div style="font-size:0.60rem;color:#f87171">Δ requerido</div>' +
                   '<div style="font-size:1.1rem;font-weight:900;color:#f87171">+$' + cf.breakeven_precio_por_caja + '/caja</div>' +
-                  '<div style="font-size:.6rem;color:var(--muted)">' + Number(cf.breakeven_volumen).toLocaleString('en-US') + ' cajas</div>' +
+                  '<div style="font-size:0.60rem;color:var(--muted)">' + Number(cf.breakeven_volumen).toLocaleString('en-US') + ' cajas</div>' +
                 '</div>' +
               '</div>' +
               (pm.rango_tipico_min != null
                 ? '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">' +
-                    '<span style="font-size:.65rem;color:var(--muted);background:var(--bg);border-radius:6px;padding:3px 8px">Rango típico: <strong style="color:var(--text)">$' + pm.rango_tipico_min + '–$' + pm.rango_tipico_max + '</strong></span>' +
-                    '<span style="font-size:.65rem;color:var(--muted);background:var(--bg);border-radius:6px;padding:3px 8px">Sweet spot: <strong style="color:#fbbf24">$' + pm.sweet_spot + '</strong></span>' +
-                    '<span style="font-size:.65rem;color:var(--muted);background:var(--bg);border-radius:6px;padding:3px 8px">Pico histórico: <strong style="color:#f87171">$' + pm.pico_historico + '</strong> (3 días)</span>' +
+                    '<span style="font-size:0.65rem;color:var(--muted);background:var(--bg);border-radius:6px;padding:3px 8px">Rango típico: <strong style="color:var(--text)">$' + pm.rango_tipico_min + '–$' + pm.rango_tipico_max + '</strong></span>' +
+                    '<span style="font-size:0.65rem;color:var(--muted);background:var(--bg);border-radius:6px;padding:3px 8px">Sweet spot: <strong style="color:#fbbf24">$' + pm.sweet_spot + '</strong></span>' +
+                    '<span style="font-size:0.65rem;color:var(--muted);background:var(--bg);border-radius:6px;padding:3px 8px">Pico histórico: <strong style="color:#f87171">$' + pm.pico_historico + '</strong> (3 días)</span>' +
                   '</div>'
                 : '') +
-              '<div style="font-size:.68rem;color:var(--muted)">Cubre el déficit completo de <strong style="color:#f87171">' + fmt(Math.abs(cf.saldo_forecast||0)) + '</strong>.' +
+              '<div style="font-size:0.72rem;color:var(--muted)">Cubre el déficit completo de <strong style="color:#f87171">' + fmt(Math.abs(cf.saldo_forecast||0)) + '</strong>.' +
                 (actual != null ? ' FOB avg sem 12 · Calavo · al 24-Mar: <strong style="color:' + (atMeta ? '#4ade80' : '#f87171') + '">$' + actual.toFixed(2) + '</strong>' + (pm.precio_requerido_ol ? ' · Precio promedio requerido OL: $' + pm.precio_requerido_ol.toFixed(2) : '') + '.' : '') + '</div>' +
             '</div>';
           })() : '') +
           /* Bridge */
           (cf.bridge && cf.bridge.length ? '<div style="background:rgba(234,179,8,.06);border:1px solid rgba(234,179,8,.2);border-radius:12px;padding:16px 18px">' +
-            '<div style="font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#fbbf24;margin-bottom:10px">Bridge · Escenario Realista (+$3/caja)</div>' +
+            '<div style="font-size:0.60rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#fbbf24;margin-bottom:10px">Bridge · Escenario Realista (+$3/caja)</div>' +
             cf.bridge.map(function(b) {
               return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.05)">' +
-                '<span style="font-size:.72rem;color:var(--text)">' + b.concepto + '</span>' +
-                '<span style="font-size:.78rem;font-weight:700;color:#4ade80;flex-shrink:0;margin-left:8px">+' + fmt(b.monto) + '</span>' +
+                '<span style="font-size:0.72rem;color:var(--text)">' + b.concepto + '</span>' +
+                '<span style="font-size:0.80rem;font-weight:700;color:#4ade80;flex-shrink:0;margin-left:8px">+' + fmt(b.monto) + '</span>' +
               '</div>';
             }).join('') +
             '<div style="display:flex;justify-content:space-between;margin-top:8px;padding-top:6px;border-top:1px solid rgba(234,179,8,.25)">' +
-              '<span style="font-size:.7rem;font-weight:700;color:var(--muted)">Saldo ajustado</span>' +
-              '<span style="font-size:.85rem;font-weight:900;color:#fbbf24">' + fmt(cf.saldo_ajustado||0) + '</span>' +
+              '<span style="font-size:0.72rem;font-weight:700;color:var(--muted)">Saldo ajustado</span>' +
+              '<span style="font-size:0.875rem;font-weight:900;color:#fbbf24">' + fmt(cf.saldo_ajustado||0) + '</span>' +
             '</div>' +
           '</div>' : '') +
           (cf.contratos && cf.contratos.length ? '<div style="background:rgba(99,102,241,.05);border:1px solid rgba(99,102,241,.18);border-radius:12px;padding:16px 18px">' +
-            '<div style="font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#a5b4fc;margin-bottom:10px">Contratos vs Spot · Volumen por Mes</div>' +
-            '<table style="width:100%;border-collapse:collapse;font-size:.72rem">' +
+            '<div style="font-size:0.60rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#a5b4fc;margin-bottom:10px">Contratos vs Spot · Volumen por Mes</div>' +
+            '<table style="width:100%;border-collapse:collapse;font-size:0.72rem">' +
               '<thead><tr style="border-bottom:1px solid rgba(0,0,0,.07)">' +
-                '<th style="padding:4px 6px;text-align:left;font-size:.6rem;color:var(--muted);font-weight:700">Mes</th>' +
-                '<th style="padding:4px 6px;text-align:right;font-size:.6rem;color:var(--muted);font-weight:700">Contrato</th>' +
-                '<th style="padding:4px 6px;text-align:right;font-size:.6rem;color:var(--muted);font-weight:700">Spot</th>' +
-                '<th style="padding:4px 6px;text-align:right;font-size:.6rem;color:var(--muted);font-weight:700">$/caja</th>' +
+                '<th style="padding:4px 6px;text-align:left;font-size:0.60rem;color:var(--muted);font-weight:700">Mes</th>' +
+                '<th style="padding:4px 6px;text-align:right;font-size:0.60rem;color:var(--muted);font-weight:700">Contrato</th>' +
+                '<th style="padding:4px 6px;text-align:right;font-size:0.60rem;color:var(--muted);font-weight:700">Spot</th>' +
+                '<th style="padding:4px 6px;text-align:right;font-size:0.60rem;color:var(--muted);font-weight:700">$/caja</th>' +
               '</tr></thead><tbody>' +
             cf.contratos.map(function(c) {
               return '<tr style="border-bottom:1px solid rgba(0,0,0,.05)">' +
@@ -5775,24 +5806,24 @@ function checkPw(){
               '</tr>';
             }).join('') +
             '</tbody></table>' +
-            '<div style="font-size:.62rem;color:var(--muted);margin-top:8px">Escalador: participación adicional por caja cuando mercado supera $' + cf.contratos[0].escalador_desde + '/caja. Ej: mercado $30 → +$10/caja.</div>' +
+            '<div style="font-size:0.65rem;color:var(--muted);margin-top:8px">Escalador: participación adicional por caja cuando mercado supera $' + cf.contratos[0].escalador_desde + '/caja. Ej: mercado $30 → +$10/caja.</div>' +
           '</div>' : '') +
         '</div>' +
         /* Pagos ciclo siguiente */
         (cf.pagos_ciclo_siguiente && cf.pagos_ciclo_siguiente.length ? '<div style="background:var(--bg);border-radius:12px;padding:18px 20px">' +
-          '<div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:10px">Inversiones Arranque GC 2026–2027</div>' +
+          '<div style="font-size:0.60rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:10px">Inversiones Arranque GC 2026–2027</div>' +
           cf.pagos_ciclo_siguiente.map(function(p) {
             return '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">' +
-              '<span style="font-size:.73rem;color:var(--text)">' + p.concepto + '</span>' +
+              '<span style="font-size:0.72rem;color:var(--text)">' + p.concepto + '</span>' +
               '<div style="text-align:right;flex-shrink:0;margin-left:8px">' +
-                '<div style="font-size:.78rem;font-weight:700;color:var(--accent2)">' + fmt(p.monto) + '</div>' +
-                '<div style="font-size:.6rem;color:var(--muted)">' + p.fecha + '</div>' +
+                '<div style="font-size:0.80rem;font-weight:700;color:var(--accent2)">' + fmt(p.monto) + '</div>' +
+                '<div style="font-size:0.60rem;color:var(--muted)">' + p.fecha + '</div>' +
               '</div>' +
             '</div>';
           }).join('') +
           '<div style="display:flex;justify-content:space-between;margin-top:8px;padding-top:6px">' +
-            '<span style="font-size:.7rem;font-weight:700;color:var(--muted)">Total inversiones</span>' +
-            '<span style="font-size:.82rem;font-weight:900;color:var(--accent2)">' + fmt(cf.pagos_ciclo_siguiente.reduce(function(s,p){ return s+(p.monto||0); },0)) + '</span>' +
+            '<span style="font-size:0.72rem;font-weight:700;color:var(--muted)">Total inversiones</span>' +
+            '<span style="font-size:0.80rem;font-weight:900;color:var(--accent2)">' + fmt(cf.pagos_ciclo_siguiente.reduce(function(s,p){ return s+(p.monto||0); },0)) + '</span>' +
           '</div>' +
         '</div>' : '<div></div>') +
       '</div>';
@@ -5802,17 +5833,17 @@ function checkPw(){
     var fcstEl = document.getElementById('cfCard');
     if (fcstMonths.length) {
       var fcstHTML = '<div style="background:var(--bg);border-radius:var(--r);overflow:hidden;margin-bottom:18px">' +
-        '<div style="padding:12px 16px;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);border-bottom:1px solid var(--border);display:flex;justify-content:space-between">' +
+        '<div style="padding:12px 16px;font-size:0.60rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);border-bottom:1px solid var(--border);display:flex;justify-content:space-between">' +
           '<span>Detalle Forecast · Mes a Mes</span>' +
           '<span style="color:#fbbf24">Mar 26 – Jul 31, 2026</span>' +
         '</div>' +
-        '<table style="width:100%;border-collapse:collapse;font-size:.75rem">' +
+        '<table style="width:100%;border-collapse:collapse;font-size:0.72rem">' +
           '<thead><tr style="border-bottom:1px solid var(--border)">' +
-            '<th style="padding:8px 14px;text-align:left;font-size:.62rem;color:var(--muted);font-weight:700">Mes</th>' +
-            '<th style="padding:8px 14px;text-align:right;font-size:.62rem;color:var(--muted);font-weight:700">Entradas</th>' +
-            '<th style="padding:8px 14px;text-align:right;font-size:.62rem;color:var(--muted);font-weight:700">Salidas</th>' +
-            '<th style="padding:8px 14px;text-align:right;font-size:.62rem;color:var(--muted);font-weight:700">Neto</th>' +
-            '<th style="padding:8px 14px;text-align:right;font-size:.62rem;color:var(--muted);font-weight:700">Saldo</th>' +
+            '<th style="padding:8px 14px;text-align:left;font-size:0.65rem;color:var(--muted);font-weight:700">Mes</th>' +
+            '<th style="padding:8px 14px;text-align:right;font-size:0.65rem;color:var(--muted);font-weight:700">Entradas</th>' +
+            '<th style="padding:8px 14px;text-align:right;font-size:0.65rem;color:var(--muted);font-weight:700">Salidas</th>' +
+            '<th style="padding:8px 14px;text-align:right;font-size:0.65rem;color:var(--muted);font-weight:700">Neto</th>' +
+            '<th style="padding:8px 14px;text-align:right;font-size:0.65rem;color:var(--muted);font-weight:700">Saldo</th>' +
           '</tr></thead><tbody>' +
         fcstMonths.map(function(h) {
           var tipoBadge = h.tipo === 'mixto'
@@ -5820,7 +5851,7 @@ function checkPw(){
             : '<span style="font-size:0.60rem;font-weight:700;padding:1px 5px;border-radius:4px;background:rgba(234,179,8,.12);color:#fbbf24;margin-left:5px">FCST</span>';
           var netColor = h.neto >= 0 ? 'var(--green2)' : '#f87171';
           var saldoColor = h.saldo >= 0 ? 'var(--text)' : '#f87171';
-          var notaHtml = h.nota ? '<div style="font-size:.6rem;color:var(--muted);margin-top:2px">' + h.nota + '</div>' : '';
+          var notaHtml = h.nota ? '<div style="font-size:0.60rem;color:var(--muted);margin-top:2px">' + h.nota + '</div>' : '';
           return '<tr style="border-bottom:1px solid rgba(255,255,255,.04)">' +
             '<td style="padding:9px 14px;color:var(--text);font-weight:600">' + h.mes + tipoBadge + notaHtml + '</td>' +
             '<td style="padding:9px 14px;text-align:right;color:var(--green2);font-weight:600;font-variant-numeric:tabular-nums">' + (h.entradas != null ? fmt(h.entradas) : '—') + '</td>' +
@@ -5947,13 +5978,13 @@ function checkPw(){
         var pct = totalMostrado > 0 ? (it.val / totalMostrado * 100) : 0;
         return '<div style="margin-bottom:10px">' +
           '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px">' +
-            '<span style="font-size:.73rem;font-weight:600;color:var(--fg)">'+it.lbl+'</span>' +
-            '<span style="font-size:.78rem;font-weight:700;color:'+it.color+'">'+fmt(it.val)+'</span>' +
+            '<span style="font-size:0.72rem;font-weight:600;color:var(--fg)">'+it.lbl+'</span>' +
+            '<span style="font-size:0.80rem;font-weight:700;color:'+it.color+'">'+fmt(it.val)+'</span>' +
           '</div>' +
           '<div style="background:rgba(255,255,255,.06);border-radius:4px;height:6px;overflow:hidden;margin-bottom:3px">' +
             '<div style="height:100%;width:'+pct.toFixed(1)+'%;background:'+it.color+';border-radius:4px"></div>' +
           '</div>' +
-          '<div style="font-size:.62rem;color:var(--muted)">'+it.nota+'</div>' +
+          '<div style="font-size:0.65rem;color:var(--muted)">'+it.nota+'</div>' +
         '</div>';
       }).join('');
 
@@ -5961,10 +5992,10 @@ function checkPw(){
       var bb = bancos.find(function(b){ return b.banco === 'BanBajío'; }) || {};
       var venc = bb.vencimientos || {};
       var vencHtml =
-        '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Vencimientos BanBajío</div>' +
+        '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Vencimientos BanBajío</div>' +
         ['mayo2026','junio2026','julio2026'].map(function(k){
           var mes = k.replace('2026','').replace('mayo','May').replace('junio','Jun').replace('julio','Jul');
-          return '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.73rem">' +
+          return '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:0.72rem">' +
             '<span style="color:var(--muted)">'+mes+' 2026</span>' +
             '<span style="font-weight:700;color:#ef4444">'+fmt(venc[k]||0)+'</span>' +
           '</div>';
@@ -5973,9 +6004,9 @@ function checkPw(){
       // Top proveedores
       var tops = (prov.principales||[]).slice(0,6);
       var topHtml =
-        '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Top Proveedores</div>' +
+        '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Top Proveedores</div>' +
         tops.map(function(p){
-          return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.7rem">' +
+          return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:0.72rem">' +
             '<span style="color:var(--muted);max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+p.nombre+'</span>' +
             '<span style="font-weight:600;color:#ff9f0a">'+fmt(p.saldo)+'</span>' +
           '</div>';
@@ -5985,15 +6016,15 @@ function checkPw(){
         /* Total banner */
         '<div style="display:flex;align-items:center;gap:16px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);border-radius:14px;padding:16px 20px;margin-bottom:14px">' +
           '<div style="flex:1">' +
-            '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Deuda Total ABSA · Corte '+( dd.corte||'Mar-2026')+'</div>' +
+            '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Deuda Total ABSA · Corte '+( dd.corte||'Mar-2026')+'</div>' +
             '<div style="font-size:2rem;font-weight:900;color:#ef4444;line-height:1">'+fmt(rs.total||dd.totalGeneral||0)+'</div>' +
-            '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">Calavo + Bancos + Proveedores + SAT/IMSS</div>' +
+            '<div style="font-size:0.72rem;color:var(--muted);margin-top:4px">Calavo + Bancos + Proveedores + SAT/IMSS</div>' +
           '</div>' +
           '<div style="text-align:right">' +
-            '<div style="font-size:.65rem;color:var(--muted)">Sin anticipos</div>' +
+            '<div style="font-size:0.65rem;color:var(--muted)">Sin anticipos</div>' +
             '<div style="font-size:1.1rem;font-weight:700;color:#ef4444">'+fmt(rs.subtotal||0)+'</div>' +
-            '<div style="font-size:.65rem;color:var(--muted);margin-top:6px">Anticipos Nacional</div>' +
-            '<div style="font-size:.85rem;font-weight:600;color:#60a5fa">'+fmt(rs.anticiposNac||0)+'</div>' +
+            '<div style="font-size:0.65rem;color:var(--muted);margin-top:6px">Anticipos Nacional</div>' +
+            '<div style="font-size:0.875rem;font-weight:600;color:#60a5fa">'+fmt(rs.anticiposNac||0)+'</div>' +
           '</div>' +
         '</div>' +
 
@@ -6001,14 +6032,14 @@ function checkPw(){
 
           /* Left: bars */
           '<div class="card" style="padding:18px 20px">' +
-            '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Composición</div>' +
+            '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Composición</div>' +
             barsHtml +
           '</div>' +
 
           /* Center: BanBajío vencimientos */
           '<div class="card" style="padding:18px 20px">' +
             vencHtml +
-            '<div style="margin-top:14px;background:rgba(239,68,68,.06);border-radius:8px;padding:10px 12px;font-size:.7rem;line-height:1.55;color:var(--muted)">' +
+            '<div style="margin-top:14px;background:rgba(239,68,68,.06);border-radius:8px;padding:10px 12px;font-size:0.72rem;line-height:1.55;color:var(--muted)">' +
               '<b style="color:#ef4444">Urgente:</b> $1.1M vence May-2026 · $1.45M Jun · $1.3M Jul. Requiere liquidaciones Calavo o refinanciamiento.' +
             '</div>' +
           '</div>' +
@@ -6016,7 +6047,7 @@ function checkPw(){
           /* Right: top proveedores */
           '<div class="card" style="padding:18px 20px">' +
             topHtml +
-            '<div style="margin-top:10px;font-size:.65rem;color:var(--muted)">'+fmt(prov.total||0)+' total · corte '+(prov.corte||'Mar-2026')+'</div>' +
+            '<div style="margin-top:10px;font-size:0.65rem;color:var(--muted)">'+fmt(prov.total||0)+' total · corte '+(prov.corte||'Mar-2026')+'</div>' +
           '</div>' +
 
         '</div>';
@@ -6040,10 +6071,10 @@ function checkPw(){
       var pagosHtml = pagos.map(function(p){
         var bgColor = p.tipo === 'Puente' ? 'rgba(96,165,250,.12)' : 'rgba(52,199,89,.10)';
         var txtColor = p.tipo === 'Puente' ? '#60a5fa' : '#34c759';
-        return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.73rem">' +
+        return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:0.72rem">' +
           '<span style="color:var(--muted)">'+p.fecha+'</span>' +
           '<span style="font-weight:600">'+fmt(p.monto)+'</span>' +
-          '<span style="font-size:.62rem;padding:2px 8px;border-radius:8px;background:'+bgColor+';color:'+txtColor+';font-weight:700">'+p.tipo+'</span>' +
+          '<span style="font-size:0.65rem;padding:2px 8px;border-radius:8px;background:'+bgColor+';color:'+txtColor+';font-weight:700">'+p.tipo+'</span>' +
         '</div>';
       }).join('');
 
@@ -6064,49 +6095,49 @@ function checkPw(){
             /* Left: progress + projection */
             '<div>' +
               /* Progress bar */
-              '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Amortización · WK01–WK15</div>' +
+              '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Amortización · WK01–WK15</div>' +
               '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px">' +
                 '<span style="font-size:1.5rem;font-weight:800;color:var(--accent2)">'+fmt(rec)+'</span>' +
-                '<span style="font-size:.75rem;color:var(--muted)">de <b style="color:var(--fg)">'+fmt(total)+'</b> total</span>' +
+                '<span style="font-size:0.72rem;color:var(--muted)">de <b style="color:var(--fg)">'+fmt(total)+'</b> total</span>' +
               '</div>' +
               '<div style="background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;margin-bottom:6px">' +
                 '<div style="height:100%;width:'+pct.toFixed(1)+'%;background:linear-gradient(90deg,#fbbf24 0%,#f59e0b 60%,#34c759 100%);border-radius:8px"></div>' +
               '</div>' +
-              '<div style="display:flex;justify-content:space-between;font-size:.69rem;margin-bottom:18px">' +
+              '<div style="display:flex;justify-content:space-between;font-size:0.72rem;margin-bottom:18px">' +
                 '<span style="color:#34c759;font-weight:700">'+pct.toFixed(1)+'% amortizado</span>' +
                 '<span style="color:#f59e0b;font-weight:700">'+fmt(pend)+' pendiente</span>' +
               '</div>' +
 
               /* Projection box */
               '<div style="background:rgba(52,199,89,.06);border:1.5px solid rgba(52,199,89,.2);border-radius:12px;padding:14px 16px">' +
-                '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#34c759;margin-bottom:10px">Proyección — Inicio Liquidación Real</div>' +
+                '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#34c759;margin-bottom:10px">Proyección — Inicio Liquidación Real</div>' +
                 '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">' +
-                  '<div><div style="font-size:.65rem;color:var(--muted)">Semana estimada</div><div style="font-size:1.3rem;font-weight:800;color:#34c759">'+cruceSem+'</div></div>' +
-                  '<div><div style="font-size:.65rem;color:var(--muted)">Fecha aprox.</div><div style="font-size:.85rem;font-weight:700;color:var(--fg);margin-top:2px">'+cruce+'</div></div>' +
-                  '<div><div style="font-size:.65rem;color:var(--muted)">Pendiente por cruzar</div><div style="font-size:.85rem;font-weight:700;color:#f59e0b;margin-top:2px">'+fmt(pend)+'</div></div>' +
-                  '<div><div style="font-size:.65rem;color:var(--muted)">Ritmo WK11–WK14</div><div style="font-size:.85rem;font-weight:700;color:var(--muted);margin-top:2px">'+fmt(avg)+'/sem</div></div>' +
+                  '<div><div style="font-size:0.65rem;color:var(--muted)">Semana estimada</div><div style="font-size:1.3rem;font-weight:800;color:#34c759">'+cruceSem+'</div></div>' +
+                  '<div><div style="font-size:0.65rem;color:var(--muted)">Fecha aprox.</div><div style="font-size:0.875rem;font-weight:700;color:var(--fg);margin-top:2px">'+cruce+'</div></div>' +
+                  '<div><div style="font-size:0.65rem;color:var(--muted)">Pendiente por cruzar</div><div style="font-size:0.875rem;font-weight:700;color:#f59e0b;margin-top:2px">'+fmt(pend)+'</div></div>' +
+                  '<div><div style="font-size:0.65rem;color:var(--muted)">Ritmo WK11–WK14</div><div style="font-size:0.875rem;font-weight:700;color:var(--muted);margin-top:2px">'+fmt(avg)+'/sem</div></div>' +
                 '</div>' +
-                '<div style="margin-top:10px;font-size:.7rem;color:var(--muted);line-height:1.5">A partir de '+cruceSem+', cada wire semanal es <b style="color:var(--fg)">ganancia neta real</b> para Belher.</div>' +
+                '<div style="margin-top:10px;font-size:0.72rem;color:var(--muted);line-height:1.5">A partir de '+cruceSem+', cada wire semanal es <b style="color:var(--fg)">ganancia neta real</b> para Belher.</div>' +
               '</div>' +
             '</div>' +
 
             /* Right: payment breakdown */
             '<div>' +
-              '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Composición de la Deuda ($6M)</div>' +
+              '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Composición de la Deuda ($6M)</div>' +
               '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">' +
                 '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px">' +
-                  '<div style="font-size:.62rem;color:var(--muted)">Anticipo capital</div>' +
+                  '<div style="font-size:0.65rem;color:var(--muted)">Anticipo capital</div>' +
                   '<div style="font-size:1.1rem;font-weight:800;color:#34c759">'+fmt(dc.anticipo||5000000)+'</div>' +
-                  '<div style="font-size:.62rem;color:var(--muted)">4 × $1.25M · May–Ago 2025</div>' +
+                  '<div style="font-size:0.65rem;color:var(--muted)">4 × $1.25M · May–Ago 2025</div>' +
                 '</div>' +
                 '<div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px">' +
-                  '<div style="font-size:.62rem;color:var(--muted)">Préstamo puente</div>' +
+                  '<div style="font-size:0.65rem;color:var(--muted)">Préstamo puente</div>' +
                   '<div style="font-size:1.1rem;font-weight:800;color:#60a5fa">'+fmt(dc.prestamoPuente||1000000)+'</div>' +
-                  '<div style="font-size:.62rem;color:var(--muted)">Temporada anterior</div>' +
+                  '<div style="font-size:0.65rem;color:var(--muted)">Temporada anterior</div>' +
                 '</div>' +
               '</div>' +
               pagosHtml +
-              '<div style="margin-top:12px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:.71rem;line-height:1.6;color:var(--muted)">' +
+              '<div style="margin-top:12px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:0.72rem;line-height:1.6;color:var(--muted)">' +
                 '<b style="color:var(--fg)">Pick &amp; Pack $5/caja</b> — Se liquida en paralelo, independiente de la deuda. ' +
                 'WK01–WK15: <b style="color:var(--fg)">'+fmt(cv.pickPack)+'</b> recibido.' +
               '</div>' +
@@ -6132,32 +6163,32 @@ function checkPw(){
     document.getElementById('calavoDesglose').innerHTML =
       '<div class="resp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:32px">' +
         '<div>' +
-          '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Settlement Calavo · WK01–WK12 · 15 Mar 2026</div>' +
+          '<div style="font-size:0.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Settlement Calavo · WK01–WK12 · 15 Mar 2026</div>' +
           cfRows.map(function(r) {
             return '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;' +
               (r.sep ? 'border-top:2px solid var(--dark);margin-top:4px;' : 'border-bottom:1px solid var(--border)') + '">' +
-              '<span style="font-size:.84rem' + (r.bold?';font-weight:700':'') + '">' + r.label + (r.nota ? ' <span style="font-size:.63rem;color:#34c759;font-weight:600">['+r.nota+']</span>' : '') + '</span>' +
+              '<span style="font-size:0.875rem' + (r.bold?';font-weight:700':'') + '">' + r.label + (r.nota ? ' <span style="font-size:0.65rem;color:#34c759;font-weight:600">['+r.nota+']</span>' : '') + '</span>' +
               '<span style="font-weight:' + (r.bold?'800':'600') + ';color:' + r.color + '">' + fmt(Math.abs(r.val)) +
-                (r.val < 0 ? ' <span style="opacity:.4;font-size:.72rem">(salida)</span>' : '') +
+                (r.val < 0 ? ' <span style="opacity:.4;font-size:0.72rem">(salida)</span>' : '') +
               '</span></div>';
           }).join('') +
         '</div>' +
         '<div>' +
-          '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Resumen de Flujo</div>' +
+          '<div style="font-size:0.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Resumen de Flujo</div>' +
           '<div style="background:var(--bg);border-radius:10px;padding:18px;margin-bottom:12px">' +
-            '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Ventas Brutas Calavo</div>' +
+            '<div style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Ventas Brutas Calavo</div>' +
             '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:var(--green2)">' + fmt(cv.revenueTotal) + '</div>' +
-            '<div style="font-size:.8rem;color:var(--muted)">Comisión 22%: ' + fmt(cv.comision) + ' · Z-code: ' + fmt(cv.zCode||0) + '</div>' +
+            '<div style="font-size:0.80rem;color:var(--muted)">Comisión 22%: ' + fmt(cv.comision) + ' · Z-code: ' + fmt(cv.zCode||0) + '</div>' +
           '</div>' +
           '<div style="background:var(--bg);border-radius:10px;padding:18px;margin-bottom:12px">' +
-            '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Venta Neta</div>' +
+            '<div style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Venta Neta</div>' +
             '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:var(--green2)">' + fmt(cv.ventaNeta||cv.neto) + '</div>' +
-            '<div style="font-size:.8rem;color:var(--muted)">Después de comisión 22% y Z-code expenses</div>' +
+            '<div style="font-size:0.80rem;color:var(--muted)">Después de comisión 22% y Z-code expenses</div>' +
           '</div>' +
           '<div style="background:' + ((cv.saldoActual||0)<0?'rgba(220,38,38,.08)':'rgba(22,163,74,.08)') + ';border:1.5px solid ' + ((cv.saldoActual||0)<0?'var(--red2)':'var(--green2)') + ';border-radius:10px;padding:18px">' +
-            '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Due from (to) Beltran</div>' +
+            '<div style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Due from (to) Beltran</div>' +
             '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:' + ((cv.saldoActual||0)<0?'var(--red)':'var(--green2)') + '">' + fmt(cv.saldoActual||0) + '</div>' +
-            '<div style="font-size:.8rem;color:var(--muted)">' + ((cv.saldoActual||0)<0?'Calavo ha adelantado más del valor cosechado · Se liquida al cierre de temporada':'Balance a favor de Belher') + '</div>' +
+            '<div style="font-size:0.80rem;color:var(--muted)">' + ((cv.saldoActual||0)<0?'Calavo ha adelantado más del valor cosechado · Se liquida al cierre de temporada':'Balance a favor de Belher') + '</div>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -6178,7 +6209,7 @@ function checkPw(){
 
     document.getElementById('liquidFoot').innerHTML =
       '<tr style="background:var(--dark);color:#fff;font-weight:700">' +
-        '<td colspan="2" style="padding:11px 15px;font-size:.75rem;letter-spacing:.8px">TOTAL CONFIRMADO</td>' +
+        '<td colspan="2" style="padding:11px 15px;font-size:0.72rem;letter-spacing:.8px">TOTAL CONFIRMADO</td>' +
         '<td class="td-num" style="padding:11px 15px">' + fmt(totalPago) + '</td>' +
         '<td class="td-num" style="padding:11px 15px">' + fmtN(totalCajas) + '</td>' +
         '<td class="td-num" style="padding:11px 15px">' + totalCont + '</td>' +
@@ -6196,17 +6227,17 @@ function checkPw(){
         var sign = d >= 0 ? '+' : '';
         var col  = d >= 0 ? 'var(--green)' : 'var(--red)';
         var arrow = d >= 0 ? '▲' : '▼';
-        return '<span style="color:' + col + ';font-size:.78rem;font-weight:600">' + arrow + ' ' + sign + d.toFixed(1) + '%</span>';
+        return '<span style="color:' + col + ';font-size:0.80rem;font-weight:600">' + arrow + ' ' + sign + d.toFixed(1) + '%</span>';
       };
       var pp = p.cajas ? (p.pago / p.cajas).toFixed(2) : null;
       return '<tr>' +
         '<td><strong>' + p.sem + '</strong></td>' +
-        '<td style="color:var(--muted);font-size:.78rem">' + p.wire + '</td>' +
+        '<td style="color:var(--muted);font-size:0.80rem">' + p.wire + '</td>' +
         '<td class="td-num">' + fmt(p.pago) + '</td>' +
         '<td class="td-num">' + fmtDelta(deltaPago) + '</td>' +
         '<td class="td-num">' + (p.cajas != null ? fmtN(p.cajas) : '—') + '</td>' +
         '<td class="td-num">' + fmtDelta(deltaCajas) + '</td>' +
-        '<td class="td-num" style="color:var(--muted);font-size:.78rem">' + (pp ? '$' + pp : '—') + '</td>' +
+        '<td class="td-num" style="color:var(--muted);font-size:0.80rem">' + (pp ? '$' + pp : '—') + '</td>' +
         '<td class="td-center"><span class="badge ' + ({'Pagado':'badge-green','Actual':'badge-yellow','Pendiente':'badge-gray'}[p.estado]||'badge-gray') + '">' + p.estado + '</span></td>' +
       '</tr>';
     }).join('');
@@ -6225,12 +6256,12 @@ function checkPw(){
         '</tr></thead>' +
         '<tbody>' + varRows + '</tbody>' +
         '<tfoot><tr style="background:var(--dark);color:#fff;font-weight:700">' +
-          '<td colspan="2" style="padding:10px 15px;font-size:.73rem;letter-spacing:.8px">TOTAL WK01–WK15</td>' +
+          '<td colspan="2" style="padding:10px 15px;font-size:0.72rem;letter-spacing:.8px">TOTAL WK01–WK15</td>' +
           '<td class="td-num" style="padding:10px 15px">' + fmt(totalPago) + '</td>' +
           '<td></td>' +
           '<td class="td-num" style="padding:10px 15px">' + fmtN(totalCajas) + '</td>' +
           '<td></td>' +
-          '<td class="td-num" style="padding:10px 15px;font-size:.78rem;color:#ccc">' + (totalCajas ? '$' + (totalPago/totalCajas).toFixed(2) : '—') + '</td>' +
+          '<td class="td-num" style="padding:10px 15px;font-size:0.80rem;color:#ccc">' + (totalCajas ? '$' + (totalPago/totalCajas).toFixed(2) : '—') + '</td>' +
           '<td></td>' +
         '</tr></tfoot>' +
       '</table></div>';
@@ -6877,7 +6908,7 @@ function checkPw(){
         if (lastReal && lastReal.usda) {
           var spread = (lastReal.usda - lastReal.fob).toFixed(2);
           var lbl = document.createElement('div');
-          lbl.style.cssText = 'position:absolute;bottom:10px;right:12px;font-size:.6rem;font-weight:700;letter-spacing:.5px;background:rgba(217,119,6,.12);color:#92400e;padding:3px 8px;border-radius:6px;border:1px solid rgba(217,119,6,.3)';
+          lbl.style.cssText = 'position:absolute;bottom:10px;right:12px;font-size:0.60rem;font-weight:700;letter-spacing:.5px;background:rgba(217,119,6,.12);color:#92400e;padding:3px 8px;border-radius:6px;border:1px solid rgba(217,119,6,.3)';
           lbl.textContent = 'Spread USDA − Calavo: $' + spread + '/caja (' + lastReal.sem + ')';
           ctxTP.parentElement.style.position = 'relative';
           ctxTP.parentElement.appendChild(lbl);
@@ -6914,7 +6945,7 @@ function checkPw(){
           '<div class="rev-bar-fob" style="width:' + fobPct + '%"></div>' +
           '<div class="rev-bar-nac" style="width:' + nacPct + '%"></div>' +
         '</div>' +
-        '<div style="display:flex;gap:6px;font-size:.65rem;color:var(--muted);margin-bottom:18px">' +
+        '<div style="display:flex;gap:6px;font-size:0.65rem;color:var(--muted);margin-bottom:18px">' +
           '<span style="color:var(--green2);font-weight:700">█</span> FOB Export ' + fobPct + '% &nbsp;' +
           '<span style="color:#1d4ed8;font-weight:700">█</span> Nacional ' + nacPct + '%' +
         '</div>' +
@@ -7024,7 +7055,7 @@ function checkPw(){
         return '<tr><td><span class="agenda-fecha">' + p.fecha + '</span></td>' +
           '<td>' + p.evento + '</td>' +
           '<td><span class="agenda-tipo tipo-' + p.tipo + '">' + p.tipo + '</span></td>' +
-          '<td style="color:var(--muted);font-size:.76rem">' + p.participantes + '</td></tr>';
+          '<td style="color:var(--muted);font-size:0.80rem">' + p.participantes + '</td></tr>';
       }).join('');
   }
 
@@ -7048,7 +7079,7 @@ function checkPw(){
         '<div class="cdc-bar-wrap" style="margin-bottom:6px">' +
           '<div class="cdc-bar-fill" style="width:' + pctPico + '%;background:' + accentColor + '"></div>' +
         '</div>' +
-        '<div style="font-size:.65rem;color:rgba(255,255,255,.35);margin-bottom:14px">' + pctPico + '% del pico de temporada</div>' +
+        '<div style="font-size:0.65rem;color:rgba(255,255,255,.35);margin-bottom:14px">' + pctPico + '% del pico de temporada</div>' +
         '<div class="cdc-pct-row">' +
           '<div class="cdc-pct-big" style="color:' + accentColor + '">' + trabPct + '%</div>' +
           '<div class="cdc-pct-lbl">trabajan<br>de los censados</div>' +
@@ -7099,8 +7130,8 @@ function checkPw(){
       var pct  = proy ? (diff / proy * 100).toFixed(1) : '0.0';
       var col  = diff >= 0 ? 'var(--green2)' : 'var(--red2)';
       return '<span style="font-weight:700;color:' + col + '">' + actual.toLocaleString() + '</span>' +
-             ' <span style="font-size:.72rem;color:' + col + '">(' + (diff >= 0 ? '+' : '') + diff + ' / ' + (diff >= 0 ? '+' : '') + pct + '%)</span>' +
-             '<span style="font-size:.68rem;color:var(--muted);margin-left:4px">proy: ' + proy.toLocaleString() + '</span>';
+             ' <span style="font-size:0.72rem;color:' + col + '">(' + (diff >= 0 ? '+' : '') + diff + ' / ' + (diff >= 0 ? '+' : '') + pct + '%)</span>' +
+             '<span style="font-size:0.72rem;color:var(--muted);margin-left:4px">proy: ' + proy.toLocaleString() + '</span>';
     }
 
     document.getElementById('cdcCards').innerHTML =
@@ -7110,7 +7141,7 @@ function checkPw(){
         '<div class="cdc-stat-row"><span class="lbl">Trabajadores activos</span><span class="val" style="color:var(--green2)">' + totalTrab.toLocaleString() + '</span></div>' +
         '<div class="cdc-stat-row"><span class="lbl">Acompañantes (familia)</span><span class="val">' + totalAcomp.toLocaleString() + '</span></div>' +
         '<div class="cdc-stat-row"><span class="lbl">% que trabajan (global)</span><span class="val" style="color:var(--green2)">' + pctGlobal + '%</span></div>' +
-        '<div class="cdc-stat-row"><span class="lbl">Fuente</span><span class="val" style="font-size:.7rem;font-weight:400;color:var(--muted)">Censo 2026 · Aldo Ávila</span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl">Fuente</span><span class="val" style="font-size:0.72rem;font-weight:400;color:var(--muted)">Censo 2026 · Aldo Ávila</span></div>' +
       '</div>' +
       '<div class="cdc-stat-card">' +
         '<div class="cdc-stat-title">Comparativo vs Pico de Temporada</div>' +
@@ -7125,7 +7156,7 @@ function checkPw(){
         '<div class="cdc-stat-row"><span class="lbl">Lo de Beltrán</span><span class="val">' + varCell(bActual39, bProy39) + '</span></div>' +
         '<div class="cdc-stat-row"><span class="lbl">Campo Dorita</span><span class="val">' + varCell(dActual39, dProy39) + '</span></div>' +
         '<div class="cdc-stat-row"><span class="lbl">Combinado</span><span class="val">' + varCell(combActual39, combProy39) + '</span></div>' +
-        '<div class="cdc-stat-row"><span class="lbl" style="font-size:.62rem;color:var(--muted)">Fuente proyección: Depto. Producción · Plan Inicial 2025–2026</span><span class="val"></span></div>' +
+        '<div class="cdc-stat-row"><span class="lbl" style="font-size:0.65rem;color:var(--muted)">Fuente proyección: Depto. Producción · Plan Inicial 2025–2026</span><span class="val"></span></div>' +
       '</div>';
 
     /* ── TREND CHART: total personas ── */
@@ -7233,10 +7264,10 @@ function checkPw(){
         var bdr  = val >= 95 ? 'rgba(74,222,128,.25)' : val >= 85 ? 'rgba(251,191,36,.25)' : 'rgba(248,113,113,.25)';
         var icon = val >= 95 ? '✓' : val >= 85 ? '~' : '↓';
         return '<div style="background:' + bg + ';border:1px solid ' + bdr + ';border-radius:12px;padding:16px 18px;">' +
-          '<div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px">' + label + '</div>' +
+          '<div style="font-size:0.60rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px">' + label + '</div>' +
           '<div style="font-size:2rem;font-weight:900;color:' + col + ';line-height:1;letter-spacing:-.5px">' + val + '<span style="font-size:1rem">%</span></div>' +
-          '<div style="font-size:.7rem;color:' + col + ';margin-top:5px;font-weight:700">' + icon + ' vs proyección</div>' +
-          '<div style="font-size:.65rem;color:var(--muted);margin-top:3px">' + cdc.semanaActual + '</div>' +
+          '<div style="font-size:0.72rem;color:' + col + ';margin-top:5px;font-weight:700">' + icon + ' vs proyección</div>' +
+          '<div style="font-size:0.65rem;color:var(--muted);margin-top:3px">' + cdc.semanaActual + '</div>' +
         '</div>';
       }
       kpiEl.innerHTML =
@@ -7413,12 +7444,12 @@ function checkPw(){
         var pBar = function (val, color) { return '<div style="height:100%;width:' + (val/tot*100).toFixed(1) + '%;background:' + color + ';border-radius:2px"></div>'; };
         return '<div class="qual-card">' +
           '<div class="qual-name">' + v.nombre + '</div>' +
-          '<div class="qual-prima">' + pct(v.primera) + '<span style="font-size:.7rem;font-weight:500;opacity:.7"> 1ª Prima</span></div>' +
+          '<div class="qual-prima">' + pct(v.primera) + '<span style="font-size:0.72rem;font-weight:500;opacity:.7"> 1ª Prima</span></div>' +
           '<div class="qual-merma-badge ' + mCls + '">Merma ' + pct(v.merma) + '</div>' +
           '<div class="qual-stack" style="display:flex;height:8px;gap:2px;margin:10px 0 6px;border-radius:4px;overflow:hidden">' +
             pBar(v.primera,'var(--green2)') + pBar(v.segunda,'var(--accent2)') + pBar(v.tercera,'#6366f1') + pBar(v.merma, v.merma>4?'var(--red2)':'rgba(220,38,38,.4)') +
           '</div>' +
-          '<div style="display:flex;gap:10px;font-size:.68rem;color:var(--muted)">' +
+          '<div style="display:flex;gap:10px;font-size:0.72rem;color:var(--muted)">' +
             '<span>1ª&nbsp;' + pct(v.primera) + '</span><span>2ª&nbsp;' + pct(v.segunda) + '</span>' +
             (v.tercera > 0 ? '<span>3ª&nbsp;' + pct(v.tercera) + '</span>' : '') +
             (v.merma   > 0 ? '<span>Merma&nbsp;' + pct(v.merma) + '</span>' : '') +
@@ -7450,7 +7481,7 @@ function checkPw(){
         '</div>';
       }).join('');
     } else if (preciosIdEl) {
-      preciosIdEl.innerHTML = '<div class="card" style="padding:20px;color:var(--muted);font-size:.85rem">Sin precios de mercado disponibles para ' + tipo + ' en el último reporte.</div>';
+      preciosIdEl.innerHTML = '<div class="card" style="padding:20px;color:var(--muted);font-size:0.875rem">Sin precios de mercado disponibles para ' + tipo + ' en el último reporte.</div>';
     }
 
     /* Shipments table */
@@ -7480,7 +7511,7 @@ function checkPw(){
     if (!C || !C.inventario || C.inventario.length === 0) {
       el.innerHTML =
         '<div class="section-title" style="margin-top:4px">Inventarios Nogales · CAADES <span class="src-tag">CIDH · mariajose@cidh.org.mx · diario</span></div>' +
-        '<div class="card" style="padding:18px 20px;color:var(--muted);font-size:.84rem">Sin datos cargados — se actualizan con el próximo /update-belher</div>';
+        '<div class="card" style="padding:18px 20px;color:var(--muted);font-size:0.875rem">Sin datos cargados — se actualizan con el próximo /update-belher</div>';
       return;
     }
 
@@ -7495,7 +7526,7 @@ function checkPw(){
       var d = ((a - b) / b * 100);
       var col = d < 0 ? '#34c759' : '#ef4444'; /* menos inventario = bueno para precio */
       var arrow = d < 0 ? '↓' : '↑';
-      return '<span style="font-size:.65rem;color:' + col + ';font-weight:700;margin-left:4px">' + arrow + Math.abs(d).toFixed(1) + '%</span>';
+      return '<span style="font-size:0.65rem;color:' + col + ';font-weight:700;margin-left:4px">' + arrow + Math.abs(d).toFixed(1) + '%</span>';
     }
 
     var pipHoy = pip.length > 0 ? pip[pip.length - 1] : null;
@@ -7541,9 +7572,9 @@ function checkPw(){
 
     var kpiHtml = kpis.map(function(k) {
       return '<div style="background:' + k.color + ';border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:4px">' +
-        '<div style="font-size:.58rem;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted)">' + k.lbl + '</div>' +
+        '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted)">' + k.lbl + '</div>' +
         '<div style="font-size:1.35rem;font-weight:800;color:var(--text);line-height:1;letter-spacing:-.02em">' + k.val + k.delta + '</div>' +
-        '<div style="font-size:.67rem;color:var(--muted)">' + k.sub + '</div>' +
+        '<div style="font-size:0.65rem;color:var(--muted)">' + k.sub + '</div>' +
       '</div>';
     }).join('');
 
@@ -7557,16 +7588,16 @@ function checkPw(){
       var bolaPct = tot > 0 ? Math.round(bola / tot * 100) : 0;
       var isHoy = i === inv.length - 1;
       return '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">' +
-        '<div style="font-size:.6rem;font-weight:' + (isHoy ? '800' : '500') + ';color:' + (isHoy ? 'var(--text)' : 'var(--muted)') + '">' + (isHoy ? 'HOY' : d.fecha.slice(0,5)) + '</div>' +
+        '<div style="font-size:0.60rem;font-weight:' + (isHoy ? '800' : '500') + ';color:' + (isHoy ? 'var(--text)' : 'var(--muted)') + '">' + (isHoy ? 'HOY' : d.fecha.slice(0,5)) + '</div>' +
         '<div style="width:100%;height:80px;display:flex;align-items:flex-end;gap:2px">' +
           '<div style="flex:1;background:#22c55e;border-radius:3px 3px 0 0;height:' + bolaPct + '%" title="Bola ' + fmtN(bola) + '"></div>' +
           '<div style="flex:1;background:#60a5fa;border-radius:3px 3px 0 0;height:' + (100 - bolaPct) + '%" title="Roma ' + fmtN(roma) + '"></div>' +
         '</div>' +
-        '<div style="font-size:.62rem;font-weight:700;color:var(--text)">' + fmtN(tot) + '</div>' +
+        '<div style="font-size:0.65rem;font-weight:700;color:var(--text)">' + fmtN(tot) + '</div>' +
       '</div>';
     }).join('');
 
-    var nota = inv.length < 5 ? '<div style="font-size:.67rem;color:var(--muted);margin-top:8px">● Verde = Bola &nbsp;● Azul = Roma &nbsp;· &nbsp;↓ inventario = señal alcista de precio</div>' : '';
+    var nota = inv.length < 5 ? '<div style="font-size:0.65rem;color:var(--muted);margin-top:8px">● Verde = Bola &nbsp;● Azul = Roma &nbsp;· &nbsp;↓ inventario = señal alcista de precio</div>' : '';
 
     el.innerHTML =
       '<div class="section-title" style="margin-top:4px">Inventarios Nogales · CAADES' +
@@ -7574,7 +7605,7 @@ function checkPw(){
       '</div>' +
       '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px">' + kpiHtml + '</div>' +
       '<div class="card" style="padding:18px 20px">' +
-        '<div style="font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Tendencia 5 Días · Cajas Totales en Nogales</div>' +
+        '<div style="font-size:0.60rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Tendencia 5 Días · Cajas Totales en Nogales</div>' +
         '<div style="display:flex;gap:8px;align-items:flex-end">' + barsHtml + '</div>' +
         nota +
       '</div>';
@@ -7821,13 +7852,13 @@ function checkPw(){
         secHdr('Evolución Precio FOB por Semana · PO History', 'Calavo Settle WK11–WK14 confirmado · WK01–WK10 + WK15 estimado IA') +
         '<div class="card" style="padding:20px 20px 14px">' +
           '<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px">' +
-            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
+            '<span style="font-size:0.65rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
               '<span style="width:22px;height:2.5px;background:#34c759;border-radius:2px;display:inline-block"></span>FOB Real (settle confirmado)</span>' +
-            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
+            '<span style="font-size:0.65rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
               '<span style="width:22px;height:2px;background:#3b82f6;border-radius:2px;display:inline-block;opacity:.7"></span>FOB Estimado (IA)</span>' +
-            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
+            '<span style="font-size:0.65rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
               '<span style="width:22px;height:1.5px;background:rgba(250,204,21,.7);border-radius:2px;display:inline-block"></span>Contrato $16.95</span>' +
-            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
+            '<span style="font-size:0.65rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px">' +
               '<span style="width:22px;height:1.5px;background:rgba(255,149,0,.75);border-radius:2px;display:inline-block"></span>Escalador desde $20.95</span>' +
           '</div>' +
           '<div style="height:240px"><canvas id="chartPOPrices"></canvas></div>' +
@@ -7960,28 +7991,28 @@ function checkPw(){
         '</div>' +
         '<div class="card" style="padding:20px 20px 14px">' +
           '<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px">' +
-            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#34c759;border-radius:3px;display:inline-block"></span>Liquidación neta</span>' +
-            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#ff9f0a;border-radius:3px;display:inline-block"></span>Gastos (Z-code+otros)</span>' +
-            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#ff453a;border-radius:3px;display:inline-block"></span>Comisión settle (22% = 12% real + ~10% AD reembolsable)</span>' +
-            '<span style="font-size:.63rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#3b82f6;border-radius:3px;display:inline-block"></span>Pick &amp; Pack ($5/caja)</span>' +
+            '<span style="font-size:0.65rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#34c759;border-radius:3px;display:inline-block"></span>Liquidación neta</span>' +
+            '<span style="font-size:0.65rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#ff9f0a;border-radius:3px;display:inline-block"></span>Gastos (Z-code+otros)</span>' +
+            '<span style="font-size:0.65rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#ff453a;border-radius:3px;display:inline-block"></span>Comisión settle (22% = 12% real + ~10% AD reembolsable)</span>' +
+            '<span style="font-size:0.65rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#3b82f6;border-radius:3px;display:inline-block"></span>Pick &amp; Pack ($5/caja)</span>' +
           '</div>' +
           '<div style="height:240px"><canvas id="chartLiquidaciones"></canvas></div>' +
         '</div>' +
         /* ── Detail table ── */
         secHdr('Tabla de Liquidaciones WK01–WK15', 'Fuente: Weekly Liquidations · en USD') +
         '<div class="card" style="padding:0;overflow:hidden">' +
-          '<div class="tbl-wrap"><table class="liq-tbl" style="width:100%;border-collapse:collapse;font-size:.72rem;font-variant-numeric:tabular-nums">' +
+          '<div class="tbl-wrap"><table class="liq-tbl" style="width:100%;border-collapse:collapse;font-size:0.72rem;font-variant-numeric:tabular-nums">' +
             '<thead><tr>' +
-              '<th style="padding:10px 14px;text-align:left;color:var(--muted);font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">WK</th>' +
-              '<th style="padding:10px 14px;text-align:right;color:var(--muted);font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Pkgs</th>' +
-              '<th style="padding:10px 14px;text-align:right;color:#34c759;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">FOB Total</th>' +
-              '<th style="padding:10px 14px;text-align:right;color:#34c759;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">FOB $/caja</th>' +
-              '<th style="padding:10px 14px;text-align:right;color:#ff453a;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Comisión</th>' +
-              '<th style="padding:10px 14px;text-align:right;color:#3b82f6;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">P&P</th>' +
-              '<th style="padding:10px 14px;text-align:right;color:#ff9f0a;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Gastos</th>' +
-              '<th style="padding:10px 14px;text-align:right;color:var(--muted);font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Loan</th>' +
-              '<th style="padding:10px 14px;text-align:right;color:#fff;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Liquidación</th>' +
-              '<th style="padding:10px 14px;text-align:right;color:#fff;font-weight:700;font-size:.6rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Liq $/caja</th>' +
+              '<th style="padding:10px 14px;text-align:left;color:var(--muted);font-weight:700;font-size:0.60rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">WK</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:var(--muted);font-weight:700;font-size:0.60rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Pkgs</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#34c759;font-weight:700;font-size:0.60rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">FOB Total</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#34c759;font-weight:700;font-size:0.60rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">FOB $/caja</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#ff453a;font-weight:700;font-size:0.60rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Comisión</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#3b82f6;font-weight:700;font-size:0.60rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">P&P</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#ff9f0a;font-weight:700;font-size:0.60rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Gastos</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:var(--muted);font-weight:700;font-size:0.60rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Loan</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#fff;font-weight:700;font-size:0.60rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Liquidación</th>' +
+              '<th style="padding:10px 14px;text-align:right;color:#fff;font-weight:700;font-size:0.60rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.07)">Liq $/caja</th>' +
             '</tr></thead><tbody>' +
             (function() {
               var rows = '';
@@ -8137,9 +8168,9 @@ function checkPw(){
             '<div class="cw-pred-row"><span class="cw-pred-lbl">Objetivo 90d</span><span class="cw-pred-val">' + cFmt(p.precioObj90d) + '</span></div>' +
             '<div class="cw-pred-row"><span class="cw-pred-lbl">Riesgo bajista</span><span class="cw-pred-val">' + cFmt(p.riesgoBajo) + '</span></div>' +
             '<div class="cw-pred-row"><span class="cw-pred-lbl">Tendencia</span><span class="cw-pred-trend ' + p.tendencia + '">' + (p.tendencia === 'alcista' ? '▲' : p.tendencia === 'bajista' ? '▼' : '→') + ' ' + p.tendencia.toUpperCase() + '</span></div>' +
-            '<div class="cw-pred-conf"><span style="font-size:.6rem;color:var(--muted)">Confianza</span><div class="cw-pred-conf-bar"><div class="cw-pred-conf-fill" style="width:' + p.confianza + '%"></div></div><span class="cw-pred-conf-lbl">' + p.confianza + '%</span></div>' +
+            '<div class="cw-pred-conf"><span style="font-size:0.60rem;color:var(--muted)">Confianza</span><div class="cw-pred-conf-bar"><div class="cw-pred-conf-fill" style="width:' + p.confianza + '%"></div></div><span class="cw-pred-conf-lbl">' + p.confianza + '%</span></div>' +
             '<div class="cw-pred-reason">' + p.razonamiento.substring(0, 220) + '…</div>' +
-            (p.factores ? '<ul style="margin:8px 0 0;padding-left:14px">' + p.factores.map(function(f){ return '<li style="font-size:.65rem;color:var(--muted);margin-bottom:3px">' + f + '</li>'; }).join('') + '</ul>' : '') +
+            (p.factores ? '<ul style="margin:8px 0 0;padding-left:14px">' + p.factores.map(function(f){ return '<li style="font-size:0.65rem;color:var(--muted);margin-bottom:3px">' + f + '</li>'; }).join('') + '</ul>' : '') +
           '</div>';
         }).join('') + '</div>';
     }
@@ -8307,7 +8338,7 @@ function checkPw(){
           '<div class="tcs-lbl">Saldo Due from (to) Beltran</div>' +
         '</div>' +
         '<div class="tcs-item" style="justify-content:center">' +
-          '<button onclick="document.querySelector(\'[data-tab=finanzas]\').click()" style="background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:8px;padding:7px 14px;color:var(--muted);font-size:.68rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px">Ver desglose completo →</button>' +
+          '<button onclick="document.querySelector(\'[data-tab=finanzas]\').click()" style="background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:8px;padding:7px 14px;color:var(--muted);font-size:0.72rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.3px">Ver desglose completo →</button>' +
         '</div>' +
       '</div>';
 
@@ -8369,7 +8400,7 @@ function checkPw(){
         (antPct != null ? '<div class="pc-bar-tick" style="left:' + antPct + '%"></div>' : '') + '</div>' +
         '<div class="pc-footer"><span>' + (p.anterior != null ? 'Ant: ' + fmt(p.anterior,2) : '—') + '</span><span>Mid: ' + fmt(mid,2) + '</span></div>' +
       '</div>';
-    }).join('') || '<div class="card" style="padding:16px;color:var(--muted);font-size:.84rem">Sin precios de tomate en el último reporte.</div>';
+    }).join('') || '<div class="card" style="padding:16px;color:var(--muted);font-size:0.875rem">Sin precios de tomate en el último reporte.</div>';
 
     /* ── Variety quality (collapsible) ── */
     document.getElementById('tomateOutboundFecha').textContent = ub && ub.fecha ? '· ' + ub.fecha : '';
@@ -8431,9 +8462,9 @@ function checkPw(){
           '<div><div class="g-val" style="color:var(--green2)">' + pct(v.primera)+'</div><div class="g-lbl">1ª</div></div>' +
           '<div><div class="g-val" style="color:#fbbf24">'        + pct(v.segunda)+'</div><div class="g-lbl">2ª</div></div>' +
           '<div><div class="g-val" style="color:#6366f1">'        + pct(v.tercera)+'</div><div class="g-lbl">3ª</div></div>' +
-          '<div><div class="qual-merma-badge '+mCls+'" style="font-size:.7rem;padding:1px 5px;display:inline-block">'+pct(v.merma)+'</div><div class="g-lbl">Merma</div></div>' +
+          '<div><div class="qual-merma-badge '+mCls+'" style="font-size:0.72rem;padding:1px 5px;display:inline-block">'+pct(v.merma)+'</div><div class="g-lbl">Merma</div></div>' +
         '</div>' +
-        '<div style="font-size:.64rem;color:var(--muted);margin-top:5px">Peso: ' + fmtN(v.peso,2) + ' lb' +
+        '<div style="font-size:0.65rem;color:var(--muted);margin-top:5px">Peso: ' + fmtN(v.peso,2) + ' lb' +
           (v.alerta ? '&nbsp;<span class="badge badge-red" style="font-size:0.60rem">⚠</span>' : '') +
         '</div></div>';
     };
@@ -8561,26 +8592,26 @@ function checkPw(){
           '<div class="resp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:0">' +
             /* FOB Nogales */
             '<div style="padding:20px 24px;border-right:1px solid var(--border)">' +
-              '<div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px">FOB Nogales, AZ</div>' +
+              '<div style="font-size:0.60rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px">FOB Nogales, AZ</div>' +
               '<div style="font-size:1.9rem;font-weight:900;letter-spacing:-.5px;line-height:1">' + fmt(lu.precio_min,2) + '&thinsp;–&thinsp;' + fmt(lu.precio_max,2) + '</div>' +
-              '<div style="font-size:.72rem;color:var(--muted);margin-top:2px">/' + lu.unidad + ' · 40lb</div>' +
-              (chgStr ? '<div class="pc-chg ' + chgCls + '" style="margin-top:6px;font-size:.72rem">' + chgStr + '</div>' : '') +
-              '<div style="font-size:.68rem;color:var(--muted);margin-top:8px">' + (lu.anterior != null ? 'Sem. anterior: ' + fmt(lu.anterior,2) : '') + '&nbsp;&nbsp;Act: ' + (lu.fecha||'—') + '</div>' +
+              '<div style="font-size:0.72rem;color:var(--muted);margin-top:2px">/' + lu.unidad + ' · 40lb</div>' +
+              (chgStr ? '<div class="pc-chg ' + chgCls + '" style="margin-top:6px;font-size:0.72rem">' + chgStr + '</div>' : '') +
+              '<div style="font-size:0.72rem;color:var(--muted);margin-top:8px">' + (lu.anterior != null ? 'Sem. anterior: ' + fmt(lu.anterior,2) : '') + '&nbsp;&nbsp;Act: ' + (lu.fecha||'—') + '</div>' +
             '</div>' +
             /* LA Terminal */
             (la ?
             '<div style="padding:20px 24px;background:rgba(29,78,216,.03)">' +
-              '<div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px">LA Terminal Market</div>' +
+              '<div style="font-size:0.60rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px">LA Terminal Market</div>' +
               '<div style="font-size:1.9rem;font-weight:900;letter-spacing:-.5px;line-height:1;color:var(--blue)">' + fmt(la.precio_min,2) + '&thinsp;–&thinsp;' + fmt(la.precio_max,2) + '</div>' +
-              '<div style="font-size:.72rem;color:var(--muted);margin-top:2px">/' + (la.unidad || lu.unidad) + '</div>' +
-              (laChgPct != null ? '<div class="pc-chg ' + laChgCls + '" style="margin-top:6px;font-size:.72rem">' + (laChgPct >= .5 ? '▲ +' : laChgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(laChgPct).toFixed(1) + '% vs sem. ant.</div>' : '') +
-              (la.nota ? '<div style="font-size:.63rem;color:var(--muted);margin-top:8px;line-height:1.4;border-top:1px solid var(--border);padding-top:7px">' + la.nota + '</div>' : '') +
-            '</div>' : '<div style="padding:20px 24px;color:var(--muted);font-size:.8rem;display:flex;align-items:center">Sin datos LA Terminal</div>') +
+              '<div style="font-size:0.72rem;color:var(--muted);margin-top:2px">/' + (la.unidad || lu.unidad) + '</div>' +
+              (laChgPct != null ? '<div class="pc-chg ' + laChgCls + '" style="margin-top:6px;font-size:0.72rem">' + (laChgPct >= .5 ? '▲ +' : laChgPct <= -.5 ? '▼ ' : '→ ') + Math.abs(laChgPct).toFixed(1) + '% vs sem. ant.</div>' : '') +
+              (la.nota ? '<div style="font-size:0.65rem;color:var(--muted);margin-top:8px;line-height:1.4;border-top:1px solid var(--border);padding-top:7px">' + la.nota + '</div>' : '') +
+            '</div>' : '<div style="padding:20px 24px;color:var(--muted);font-size:0.80rem;display:flex;align-items:center">Sin datos LA Terminal</div>') +
           '</div>' +
         '</div>';
     } else {
       usdaEl.innerHTML =
-        '<div class="card" style="padding:18px 24px;color:var(--muted);font-size:.84rem">' +
+        '<div class="card" style="padding:18px 24px;color:var(--muted);font-size:0.875rem">' +
           'Precio USDA FOB pendiente · Se actualiza automáticamente desde ' +
           '<a href="https://www.ams.usda.gov/market-news/fruits-vegetables" target="_blank" style="color:var(--accent)">USDA Market News</a>' +
         '</div>';
@@ -8634,7 +8665,7 @@ function checkPw(){
       if (fcast.length && ctxLim.parentElement) {
         ctxLim.parentElement.style.position = 'relative';
         var lbl = document.createElement('div');
-        lbl.style.cssText = 'position:absolute;top:8px;right:8px;font-size:.6rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);background:var(--card);padding:2px 8px;border-radius:5px;border:1px solid var(--border)';
+        lbl.style.cssText = 'position:absolute;top:8px;right:8px;font-size:0.60rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);background:var(--card);padding:2px 8px;border-radius:5px;border:1px solid var(--border)';
         lbl.textContent = '--- Pronóstico 4 sem.';
         ctxLim.parentElement.appendChild(lbl);
       }
@@ -8660,41 +8691,41 @@ function checkPw(){
       pnlEl.innerHTML =
         '<div class="resp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:28px">' +
           '<div>' +
-            '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Detalle · Febrero 2026 · Maui Fresh</div>' +
+            '<div style="font-size:0.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Detalle · Febrero 2026 · Maui Fresh</div>' +
             rows.map(function(r) {
               if (!r.label || r.label === '—') return '<div style="height:10px"></div>';
               var rowStyle = r.ebitda
                 ? 'display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:8px;margin-top:4px;background:' + (r.val < 0 ? 'rgba(220,38,38,.07)' : 'rgba(34,197,94,.07)') + ';border:1px solid ' + (r.val < 0 ? 'rgba(220,38,38,.2)' : 'rgba(34,197,94,.2)')
                 : 'display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)';
               return '<div style="' + rowStyle + '">' +
-                '<span style="font-size:.84rem' + (r.bold ? ';font-weight:700' : '') + '">' + r.label +
-                  (r.note ? '<br><span style="font-size:.68rem;font-weight:400;color:var(--muted)">' + r.note + '</span>' : '') +
+                '<span style="font-size:0.875rem' + (r.bold ? ';font-weight:700' : '') + '">' + r.label +
+                  (r.note ? '<br><span style="font-size:0.72rem;font-weight:400;color:var(--muted)">' + r.note + '</span>' : '') +
                 '</span>' +
                 '<span style="font-weight:' + (r.bold ? '800' : '600') + ';color:' + (r.color || 'var(--text)') + (r.ebitda ? ';font-size:1.05rem' : '') + '">' +
                   (r.val < 0 ? '−' : '') + fmt(Math.abs(r.val), 0) +
-                  (r.val < 0 && !r.ebitda ? ' <span style="opacity:.5;font-size:.75rem">(gasto)</span>' : '') +
-                  (r.pct != null ? ' <span style="font-size:.75rem;color:var(--muted)">(' + r.pct.toFixed(1) + '%)</span>' : '') +
+                  (r.val < 0 && !r.ebitda ? ' <span style="opacity:.5;font-size:0.72rem">(gasto)</span>' : '') +
+                  (r.pct != null ? ' <span style="font-size:0.72rem;color:var(--muted)">(' + r.pct.toFixed(1) + '%)</span>' : '') +
                 '</span>' +
               '</div>';
             }).join('') +
           '</div>' +
           '<div>' +
-            '<div style="font-size:.63rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Resumen Operativo</div>' +
+            '<div style="font-size:0.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Resumen Operativo</div>' +
             '<div style="background:var(--bg);border-radius:10px;padding:18px;margin-bottom:12px">' +
-              '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Cajas exportadas (40 lb)</div>' +
+              '<div style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Cajas exportadas (40 lb)</div>' +
               '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px">' + lt.cajas_feb.toLocaleString('en-US') + '</div>' +
-              '<div style="font-size:.8rem;color:var(--muted)">' + lt.libras_feb.toLocaleString('en-US') + ' libras · ' + lt.hectareas + ' ha</div>' +
+              '<div style="font-size:0.80rem;color:var(--muted)">' + lt.libras_feb.toLocaleString('en-US') + ' libras · ' + lt.hectareas + ' ha</div>' +
             '</div>' +
             '<div style="background:var(--bg);border-radius:10px;padding:18px;margin-bottom:12px">' +
-              '<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">FOB / Caja (40 lb)</div>' +
+              '<div style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">FOB / Caja (40 lb)</div>' +
               '<div style="font-size:2rem;font-weight:900;letter-spacing:-.5px;color:var(--green2)">' + fmt(lt.fob_caja_feb,2) + '</div>' +
-              '<div style="font-size:.8rem;color:var(--muted)">Neto liquidado: ' + fmt(lt.liquidacion_feb / lt.cajas_feb, 2) + '/caja</div>' +
+              '<div style="font-size:0.80rem;color:var(--muted)">Neto liquidado: ' + fmt(lt.liquidacion_feb / lt.cajas_feb, 2) + '/caja</div>' +
             '</div>' +
             '<div style="background:' + (ebitda < 0 ? 'rgba(220,38,38,.07)' : 'rgba(34,197,94,.07)') + ';border:1.5px solid ' + (ebitda < 0 ? 'rgba(220,38,38,.25)' : 'rgba(34,197,94,.25)') + ';border-radius:10px;padding:18px">' +
-              '<div style="font-size:.7rem;font-weight:700;color:' + (ebitda < 0 ? 'var(--red)' : 'var(--green2)') + ';text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">EBITDA · Feb 2026</div>' +
+              '<div style="font-size:0.72rem;font-weight:700;color:' + (ebitda < 0 ? 'var(--red)' : 'var(--green2)') + ';text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">EBITDA · Feb 2026</div>' +
               '<div style="font-size:2.2rem;font-weight:900;letter-spacing:-.5px;color:' + (ebitda < 0 ? 'var(--red)' : 'var(--green2)') + ';line-height:1">' + (ebitda < 0 ? '−' : '+') + fmt(Math.abs(ebitda), 0) + '</div>' +
-              '<div style="font-size:.78rem;color:var(--muted);margin-top:5px">Resultado final · incluye costos de campo</div>' +
-              '<div style="font-size:.72rem;margin-top:6px;color:' + (ebitda < 0 ? 'var(--red2)' : 'var(--green2)') + ';font-weight:600">' + (ebitda < 0 ? '⚠ Operación en pérdida' : '✓ Operación rentable') + '</div>' +
+              '<div style="font-size:0.80rem;color:var(--muted);margin-top:5px">Resultado final · incluye costos de campo</div>' +
+              '<div style="font-size:0.72rem;margin-top:6px;color:' + (ebitda < 0 ? 'var(--red2)' : 'var(--green2)') + ';font-weight:600">' + (ebitda < 0 ? '⚠ Operación en pérdida' : '✓ Operación rentable') + '</div>' +
             '</div>' +
           '</div>' +
         '</div>';
@@ -8727,7 +8758,7 @@ function checkPw(){
         '</div>';
       }).join('');
     } else if (preciosEl) {
-      preciosEl.innerHTML = '<div class="card" style="padding:16px;color:var(--muted);font-size:.84rem">Sin precios de Limón en el último reporte de mercado.</div>';
+      preciosEl.innerHTML = '<div class="card" style="padding:16px;color:var(--muted);font-size:0.875rem">Sin precios de Limón en el último reporte de mercado.</div>';
     }
 
     var limonTbody = document.querySelector('#limonEmbarquesTbl tbody');
@@ -8832,35 +8863,35 @@ function checkPw(){
     document.getElementById('granosPnl').innerHTML =
       '<div class="resp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex-wrap:wrap">' +
         '<div>' +
-          '<div style="font-size:.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">INGRESOS</div>' +
+          '<div style="font-size:0.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">INGRESOS</div>' +
           '<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">' +
-            '<span style="font-size:.85rem">Ventas Nacionales YTD</span>' +
+            '<span style="font-size:0.875rem">Ventas Nacionales YTD</span>' +
             '<span style="font-weight:700;color:var(--muted)">' + revText + '</span>' +
           '</div>' +
           '<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:2px solid var(--dark);margin-top:4px">' +
-            '<span style="font-size:.85rem;font-weight:700">Revenue Total YTD</span>' +
+            '<span style="font-size:0.875rem;font-weight:700">Revenue Total YTD</span>' +
             '<span style="font-weight:800;font-size:1.1rem;color:var(--muted)">' + revText + '</span>' +
           '</div>' +
         '</div>' +
         '<div>' +
-          '<div style="font-size:.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">COSTOS</div>' +
+          '<div style="font-size:0.65rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">COSTOS</div>' +
           '<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">' +
-            '<span style="font-size:.85rem">WIP · Producción en proceso</span>' +
+            '<span style="font-size:0.875rem">WIP · Producción en proceso</span>' +
             '<span style="font-weight:700;color:var(--red)">' + fmt(costoProd) + '</span>' +
           '</div>' +
           '<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">' +
-            '<span style="font-size:.85rem">Gastos Administrativos</span>' +
+            '<span style="font-size:0.875rem">Gastos Administrativos</span>' +
             '<span style="font-weight:700;color:var(--red)">' + fmt(costoAdmin) + '</span>' +
           '</div>' +
           '<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:2px solid var(--dark);margin-top:4px">' +
-            '<span style="font-size:.85rem;font-weight:700">Total Costos YTD</span>' +
+            '<span style="font-size:0.875rem;font-weight:700">Total Costos YTD</span>' +
             '<span style="font-weight:800;font-size:1.1rem;color:var(--red)">' + fmt(totalCostos) + '</span>' +
           '</div>' +
           '<div style="display:flex;justify-content:space-between;padding:14px 0 0">' +
-            '<span style="font-size:.95rem;font-weight:800">EBITDA YTD</span>' +
+            '<span style="font-size:1.0rem;font-weight:800">EBITDA YTD</span>' +
             '<div style="text-align:right">' +
               '<div style="font-weight:900;font-size:1.35rem;color:var(--red)">' + fmt(G.ebitda_ytd) + '</div>' +
-              '<div style="font-size:.74rem;color:var(--green2);font-weight:600;margin-top:2px">' +
+              '<div style="font-size:0.72rem;color:var(--green2);font-weight:600;margin-top:2px">' +
                 '▲ ' + fmt(G.ebitda_var_yago) + ' mejor que Y/A (' + fmt(G.ebitda_yago) + ')' +
               '</div>' +
             '</div>' +
@@ -8894,25 +8925,25 @@ function checkPw(){
             '<div class="granos-cost-lbl">Mejora vs Y/A por ha</div>' +
           '</div>' +
         '</div>' +
-        '<div style="font-size:.75rem;color:var(--muted);margin-top:6px">Nota: costos WIP se activan como inventario — EBITDA negativo refleja inversión en temporada activa, no pérdida operativa real. El revenue se realizará en cosecha.</div>';
+        '<div style="font-size:0.72rem;color:var(--muted);margin-top:6px">Nota: costos WIP se activan como inventario — EBITDA negativo refleja inversión en temporada activa, no pérdida operativa real. El revenue se realizará en cosecha.</div>';
     }
 
     document.getElementById('granosNotas').innerHTML =
       '<div style="display:flex;align-items:flex-start;gap:10px">' +
         '<div style="flex-shrink:0;width:3px;height:100%;background:var(--accent2);border-radius:2px;align-self:stretch"></div>' +
-        '<p style="font-size:.84rem;line-height:1.75;color:var(--text2)">' + G.nota + '</p>' +
+        '<p style="font-size:0.875rem;line-height:1.75;color:var(--text2)">' + G.nota + '</p>' +
       '</div>' +
       '<div style="margin-top:14px;display:flex;gap:20px;flex-wrap:wrap">' +
-        '<div style="background:var(--bg);border-radius:8px;padding:10px 16px;font-size:.78rem">' +
-          '<span style="color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-size:.62rem;font-weight:700">Hectáreas</span><br>' +
+        '<div style="background:var(--bg);border-radius:8px;padding:10px 16px;font-size:0.80rem">' +
+          '<span style="color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-size:0.65rem;font-weight:700">Hectáreas</span><br>' +
           '<strong style="font-size:1.1rem">' + G.hectareas + ' ha</strong> actuales · ' + G.hectareas_yago + ' ha Y/A · ' + G.hectareas_budget + ' ha budget' +
         '</div>' +
-        '<div style="background:var(--bg);border-radius:8px;padding:10px 16px;font-size:.78rem">' +
-          '<span style="color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-size:.62rem;font-weight:700">Período</span><br>' +
+        '<div style="background:var(--bg);border-radius:8px;padding:10px 16px;font-size:0.80rem">' +
+          '<span style="color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-size:0.65rem;font-weight:700">Período</span><br>' +
           '<strong>' + G.periodo + '</strong>' +
         '</div>' +
-        '<div style="background:var(--bg);border-radius:8px;padding:10px 16px;font-size:.78rem">' +
-          '<span style="color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-size:.62rem;font-weight:700">Vs Año Anterior</span><br>' +
+        '<div style="background:var(--bg);border-radius:8px;padding:10px 16px;font-size:0.80rem">' +
+          '<span style="color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-size:0.65rem;font-weight:700">Vs Año Anterior</span><br>' +
           '<strong style="color:var(--green2)">▲ +' + fmt(G.ebitda_var_yago) + '</strong> mejor EBITDA' +
         '</div>' +
       '</div>';
@@ -8942,7 +8973,7 @@ function checkPw(){
               var cls = s.done ? 'done' : s.active ? 'active' : '';
               return '<div class="audit-step '+cls+'">' +
                 '<div class="audit-dot"></div>' +
-                '<div class="audit-step-lbl">' + s.lbl + '<br><span style="font-size:.6rem;opacity:.7">' + s.fecha + '</span></div>' +
+                '<div class="audit-step-lbl">' + s.lbl + '<br><span style="font-size:0.60rem;opacity:.7">' + s.fecha + '</span></div>' +
               '</div>';
             }).join('') +
           '</div>';
@@ -8954,7 +8985,7 @@ function checkPw(){
               '<span style="min-width:90px">' + ar.area + '</span>' +
               '<div class="audit-bar-wrap"><div class="audit-bar-fill" style="width:' + ar.porcentaje + '%;background:' + c + '"></div></div>' +
               '<span style="min-width:36px;text-align:right;font-weight:700">' + ar.porcentaje + '%</span>' +
-              '<span style="color:var(--muted);font-size:.7rem">' + ar.completadas + '/' + ar.total + '</span>' +
+              '<span style="color:var(--muted);font-size:0.72rem">' + ar.completadas + '/' + ar.total + '</span>' +
             '</div>';
           }).join('');
 
@@ -9024,7 +9055,7 @@ function checkPw(){
               '<div class="audit-stat"><div class="audit-stat-val" style="color:' + (a.ncMenor > 0 ? 'var(--accent2)' : 'var(--green2)') + '">' + (a.ncMenor > 0 ? a.ncMenor : '✓') + '</div><div class="audit-stat-lbl">NCs Menor</div></div>' +
               '<div class="audit-stat"><div class="audit-stat-val" style="color:' + barColor + '">' + pct100 + '%</div><div class="audit-stat-lbl">Acciones Correctivas</div></div>' +
             '</div>' +
-            (areasHtml ? '<div style="font-size:.74rem;font-weight:700;margin-bottom:6px;color:var(--muted)">PROGRESO POR ÁREA · Actualizado ' + (ac.ultimoUpdate||'') + '</div>' + areasHtml : '') +
+            (areasHtml ? '<div style="font-size:0.72rem;font-weight:700;margin-bottom:6px;color:var(--muted)">PROGRESO POR ÁREA · Actualizado ' + (ac.ultimoUpdate||'') + '</div>' + areasHtml : '') +
             ncHtml +
             '<div class="audit-notas">📋 ' + a.notas + '<br><span class="src-tag" style="margin-top:4px;display:inline-block">' + a.fuente + '</span></div>' +
           '</div>';
@@ -9083,7 +9114,7 @@ function checkPw(){
           '<div class="pronostico-badges">' +
             '<span class="pronostico-conf ' + confCls + '">' + p.confianza + '% conf.</span>' +
             '<span class="pronostico-tend ' + tendCls + '">' + tendLabel + '</span>' +
-            '<span style="font-size:.6rem;color:var(--muted)">' + p.hectareas + ' ha</span>' +
+            '<span style="font-size:0.60rem;color:var(--muted)">' + p.hectareas + ' ha</span>' +
           '</div>' +
           '<div class="pronostico-nota">' + p.nota + '</div>' +
         '</div>';
