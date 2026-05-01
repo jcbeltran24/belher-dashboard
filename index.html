@@ -6172,6 +6172,16 @@ function checkPw(){
         var cvs = document.getElementById('chartVentasVolFob');
         if (!cvs) return;
         var liq = (D.calavoWeekly && D.calavoWeekly.liquidaciones) || [];
+        /* Use preciosHistorico as fallback data source when liquidaciones is empty */
+        if (!liq.length && D.calavo && D.calavo.pagos) {
+          liq = D.calavo.pagos.filter(function(p){ return p.cajas != null; }).map(function(p){
+            return { sem: p.sem, pkgs: p.cajas, fob: p.pago };
+          });
+        }
+        if (!liq.length) {
+          cvs.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:.78rem">Sin datos de liquidación disponibles</div>';
+          return;
+        }
         var ph  = (D.tomate && D.tomate.preciosHistorico) || [];
         var phMap = {};
         ph.forEach(function(p){ phMap[p.sem] = p; });
@@ -7546,47 +7556,54 @@ function checkPw(){
       secHdr('Matriz de Desempeño · WK' + CW.semana.replace('WK',''), 'Proyectado vs Real') +
       '<div class="cw-growers-grid">' +
         growerCard(bel, 'belher-hdr', '#34c759') +
-        growerCard(CW.adm, 'adm-hdr', '#007aff') +
+        (CW.adm ? growerCard(CW.adm, 'adm-hdr', '#007aff') : '') +
       '</div>';
 
     /* ── FOB VENTAS ── */
     document.getElementById('cw-ventas').innerHTML =
-      secHdr('FOB Promedio por Variedad · ' + CW.semana, 'Belher Sales Summary') +
-      '<div class="cw-ventas-grid">' +
-      CW.ventas.map(function(v) {
-        return '<div class="card cw-venta-card">' +
-          '<div class="cw-venta-name">' + v.variedad + '</div>' +
-          '<div class="cw-venta-price">' + cFmt(v.avg) + '</div>' +
-          '<div class="cw-venta-sub">FOB promedio por caja</div>' +
-          '<div class="cw-venta-pkgs">' + v.recibido.toLocaleString() + ' <span class="cw-venta-pkgs-lbl">pkgs recibidos</span></div>' +
-        '</div>';
-      }).join('') + '</div>';
+      CW.ventas && CW.ventas.length ?
+        secHdr('FOB Promedio por Variedad · ' + CW.semana, 'Belher Sales Summary') +
+        '<div class="cw-ventas-grid">' +
+        CW.ventas.map(function(v) {
+          return '<div class="card cw-venta-card">' +
+            '<div class="cw-venta-name">' + v.variedad + '</div>' +
+            '<div class="cw-venta-price">' + cFmt(v.avg) + '</div>' +
+            '<div class="cw-venta-sub">FOB promedio por caja</div>' +
+            '<div class="cw-venta-pkgs">' + v.recibido.toLocaleString() + ' <span class="cw-venta-pkgs-lbl">pkgs recibidos</span></div>' +
+          '</div>';
+        }).join('') + '</div>'
+      : '';
 
     /* ── USDA REFERENCE ── */
-    var byZone = {};
-    CW.usdaRef.precios.forEach(function(p) {
-      if (!byZone[p.zona]) byZone[p.zona] = [];
-      byZone[p.zona].push(p);
-    });
-    var uHtml = secHdr('Referencia USDA FOB', 'USDA Tomato Fax Report · ' + CW.usdaRef.fecha) +
-      '<div class="cw-usda-grid">';
-    Object.keys(byZone).forEach(function(zona) {
-      uHtml += '<div class="card" style="padding:16px 20px">' +
-        '<div class="cw-usda-zona">' + zona + '</div>' +
-        '<table class="cw-usda-tbl"><tbody>';
-      byZone[zona].forEach(function(p) {
-        uHtml += '<tr>' +
-          '<td class="cw-usda-prod">' + p.producto + '</td>' +
-          '<td class="cw-usda-range">' + cFmt(p.min) + '–' + cFmt(p.max) + '</td>' +
-          '<td class="cw-usda-usual">' + (p.usual ? 'usual ' + cFmt(p.usual) : '') + '</td>' +
-        '</tr>';
+    if (CW.usdaRef && CW.usdaRef.precios) {
+      var byZone = {};
+      CW.usdaRef.precios.forEach(function(p) {
+        if (!byZone[p.zona]) byZone[p.zona] = [];
+        byZone[p.zona].push(p);
       });
-      uHtml += '</tbody></table></div>';
-    });
-    uHtml += '</div>';
-    document.getElementById('cw-usda').innerHTML = uHtml;
+      var uHtml = secHdr('Referencia USDA FOB', 'USDA Tomato Fax Report · ' + CW.usdaRef.fecha) +
+        '<div class="cw-usda-grid">';
+      Object.keys(byZone).forEach(function(zona) {
+        uHtml += '<div class="card" style="padding:16px 20px">' +
+          '<div class="cw-usda-zona">' + zona + '</div>' +
+          '<table class="cw-usda-tbl"><tbody>';
+        byZone[zona].forEach(function(p) {
+          uHtml += '<tr>' +
+            '<td class="cw-usda-prod">' + p.producto + '</td>' +
+            '<td class="cw-usda-range">' + cFmt(p.min) + '–' + cFmt(p.max) + '</td>' +
+            '<td class="cw-usda-usual">' + (p.usual ? 'usual ' + cFmt(p.usual) : '') + '</td>' +
+          '</tr>';
+        });
+        uHtml += '</tbody></table></div>';
+      });
+      uHtml += '</div>';
+      document.getElementById('cw-usda').innerHTML = uHtml;
+    } else {
+      document.getElementById('cw-usda').innerHTML = '';
+    }
 
     /* ── TOY COMPARISON ── */
+    if (CW.toy && CW.toy.recibido) {
     document.getElementById('cw-toy').innerHTML =
       secHdr('Comparativo Año Anterior', 'Belher Sales Summary') +
       '<div class="cw-toy-grid">' +
@@ -7607,6 +7624,9 @@ function checkPw(){
             return '<tr><td>' + p.mes + '</td><td>' + cFmt(p.yPrev) + ' <small style="color:var(--muted)">(' + p.prevLabel + ')</small></td><td>' + cFmt(p.yCurr) + '</td><td class="' + c + '">' + (d!=null?(d>=0?'+':'')+d+'%':'—') + '</td></tr>';
           }).join('') + '</tbody></table></div>' +
       '</div>';
+    } else {
+      document.getElementById('cw-toy').innerHTML = '';
+    }
 
     /* ── PO PRICE HISTORY CHART ── */
     (function() {
@@ -8894,24 +8914,26 @@ function checkPw(){
   }
 
   /* ── INIT ── */
-  renderTicker();
-  renderEjecutivo();
-  renderVentas();
-  renderNacional();
-  renderHoy();
-  renderOperaciones();
-
-  renderCalidad();
-  renderMercado();
-  renderFinanzas();
-  renderTomate();
-  renderCalavoWeekly();
-  renderLimon();
-  renderChile();
-  renderGranos();
-  renderEstrategia();
-  renderIndustria();
-  renderAuditorias();
+  function safeRender(fn, name) {
+    try { fn(); } catch(e) { console.warn('render error [' + name + ']:', e); }
+  }
+  safeRender(renderTicker,       'ticker');
+  safeRender(renderEjecutivo,    'ejecutivo');
+  safeRender(renderVentas,       'ventas');
+  safeRender(renderNacional,     'nacional');
+  safeRender(renderHoy,          'hoy');
+  safeRender(renderOperaciones,  'operaciones');
+  safeRender(renderCalidad,      'calidad');
+  safeRender(renderMercado,      'mercado');
+  safeRender(renderFinanzas,     'finanzas');
+  safeRender(renderTomate,       'tomate');
+  safeRender(renderCalavoWeekly, 'calavoWeekly');
+  safeRender(renderLimon,        'limon');
+  safeRender(renderChile,        'chile');
+  safeRender(renderGranos,       'granos');
+  safeRender(renderEstrategia,   'estrategia');
+  safeRender(renderIndustria,    'industria');
+  safeRender(renderAuditorias,   'auditorias');
   /* renderCdc() is called lazily inside initChartsForTab('cdc') */
 
   /* ════════════════════════════════════════════════
