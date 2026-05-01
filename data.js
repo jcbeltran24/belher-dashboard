@@ -1,16 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 01 May 2026",
+    fecha: "Viernes 01 May 2026",
     semana: "WK 18",
-    actualizado: "01/05/2026 · 01:15"
+    actualizado: "01/05/2026 · 13:42"
   },
 
   alertas: [
-    { nivel:"danger",  texto:"VINE RIPE 4x4 CONTRACCIÓN — Corbel #0039 (30-Abr): USDA AMS $66.95–68.95 mayormente, down desde $68.95–70.95. Mercado en transición post-peak. WK18 es última ventana fuerte." },
-    { nivel:"warning", texto:"ROMA PRESIÓN BAJISTA — Corbel #0039: $50.95–52.95 (down desde $52.95–54.95). Tightness NA sigue sosteniendo pero nuevas fuentes Coachella y Georgia (early May) presionarán." },
-    { nivel:"success", texto:"EMBARQUES 30/04 — 5 cargas tomate, 8,304 cajas a Nogales. Volumen WK18 sostenido: 29/04 8,384 + 30/04 8,304 = 16,688 cajas en 3 días." },
-    { nivel:"info",    texto:"LIMES TEXAS FIRMEZA — Corbel #0039: Seedless 110s $42.00, 150s $36-40 (+3% vs #0037). Peru supply -30% mantiene ventana. Belher decisión de báscula 29/04 confirmada." },
-    { nivel:"info",    texto:"SNIIM CDMX VIGENTE — Corbel #0039 integra SNIIM: Jalapeño Jalisco $28-35/kg ($30 freq), Tomate Bola wholesale $50-54/kg, Aguacate Hass $40-50/kg. Mercado doméstico activo." }
+    {"nivel":"danger","texto":"VINE RIPE 4x4 CONTRACCIÓN — Corbel #0039 (30-Abr): USDA AMS $66.95–68.95 mayormente, down desde $68.95–70.95. Mercado en transición post-peak. WK18 es última ventana fuerte."},
+    {"nivel":"warning","texto":"ROMA PRESIÓN BAJISTA — Corbel #0039: $50.95–52.95 (down desde $52.95–54.95). Tightness NA sigue sosteniendo pero nuevas fuentes Coachella y Georgia (early May) presionarán."},
+    {"nivel":"success","texto":"EMBARQUES 30/04 CERRADO — 5 cargas tomate CALAVO, 8,304 cajas a Nogales (JL: 2 trailers, ST: 3 trailers). Acum. WK18 (29+30 Abr): 16,688 cajas. Docs Bills/Manifiestos/Facturas XML entregados."},
+    {"nivel":"success","texto":"TRILLA SORGO SIFÓN 2 (30-Abr) — 15 ha trilladas hoy. Avance de campo activo. Báscula Belher reporta rezaga de tomate del 30/04 sin incidencias."},
+    {"nivel":"info","texto":"LIMES TEXAS FIRMEZA — Corbel #0039: Seedless 110s $42.00, 150s $36-40 (+3% vs #0037). Peru supply -30% mantiene ventana. Belher decisión de báscula 29/04 confirmada."},
+    {"nivel":"info","texto":"HORTIDAILY 01-May — Growers canadienses muestran fuerza en CPMA 2026. Mercado toronja/vegetales NA activo. Seguimiento a dinámicas de oferta post-CPMA relevantes para WK19."}
   ],
 
   ebitda: {
@@ -481,6 +482,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"15:01","asunto":"HortiDaily Newsletter | Friday, May 1, 2026 — CPMA 2026 growers","de":"mail@hortidaily.com","leido":false,"fecha":"2026-05-01"},
     { hora:"17:01", asunto:"Corbel Seeds Daily Report #0039 — Vine Ripe $66.95–68.95",        de:"ray@agbelher.com",           leido:false },
     { hora:"15:49", asunto:"REPORTE DE OUTBOUND TOMATE 29/04/2026",                           de:"calidad@agbelher.com",       leido:false },
     { hora:"03:27", asunto:"BILL, MANIFIESTO — NOGALES JL · Embarque 30-04-2026",             de:"embarquesbelher@agbelher.com", leido:false },
