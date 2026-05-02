@@ -1,7 +1,9 @@
-const CACHE = 'belher-v2';
+const CACHE = 'belher-v3';
 const STATIC = [
   '/',
   '/index.html',
+  '/css/dashboard.css',
+  '/js/app-bundle.js',
   '/logo.svg',
   '/icon-192.png',
   '/icon-512.png',
