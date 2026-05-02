@@ -3352,16 +3352,12 @@ function checkPw(){
 
 <!-- ══ TABS ══ -->
 <nav class="tabs" id="tabNav" role="tablist" aria-label="Secciones del dashboard">
-  <button class="active" data-tab="ejecutivo" role="tab" aria-selected="true"  aria-controls="tab-ejecutivo">Ejecutivo</button>
-  <button data-tab="ventas"       role="tab" aria-selected="false" aria-controls="tab-ventas">Export Calavo</button>
-  <button data-tab="nacional"     role="tab" aria-selected="false" aria-controls="tab-nacional">Nacional</button>
-  <button data-tab="finanzas"     role="tab" aria-selected="false" aria-controls="tab-finanzas">Finanzas</button>
-  <button data-tab="optomate"     role="tab" aria-selected="false" aria-controls="tab-optomate">Ops Tomate</button>
-  <button data-tab="cdc"          role="tab" aria-selected="false" aria-controls="tab-cdc">CDC · Personal</button>
-  <button data-tab="otros"        role="tab" aria-selected="false" aria-controls="tab-otros">Otros Cultivos</button>
-  <button data-tab="calavoweekly" role="tab" aria-selected="false" aria-controls="tab-calavoweekly">Intel Calavo</button>
-  <button data-tab="caades"       role="tab" aria-selected="false" aria-controls="tab-caades">Inventarios NOG</button>
-  <button data-tab="estrategia"   role="tab" aria-selected="false" aria-controls="tab-estrategia">Estrategia</button>
+  <button class="active" data-tab="ejecutivo"   role="tab" aria-selected="true"  aria-controls="tab-ejecutivo">Hoy</button>
+  <button data-tab="ventas"                     role="tab" aria-selected="false" aria-controls="tab-ventas">Exportación</button>
+  <button data-tab="finanzas"                   role="tab" aria-selected="false" aria-controls="tab-finanzas">Finanzas</button>
+  <button data-tab="optomate"                   role="tab" aria-selected="false" aria-controls="tab-optomate">Campo</button>
+  <button data-tab="calavoweekly"               role="tab" aria-selected="false" aria-controls="tab-calavoweekly">Mercado</button>
+  <button data-tab="estrategia"                 role="tab" aria-selected="false" aria-controls="tab-estrategia">Estrategia</button>
 </nav>
 
 <main>
@@ -3418,10 +3414,17 @@ function checkPw(){
     <div class="section-title">Análisis de Contrato · Escalador de Precio <span class="src-tag">Calavo 2025–2026 · base $16.95 · collar $4 activo desde $20.95</span></div>
     <div id="ventasContrato"></div>
 
+    <!-- ── NACIONAL (integrado) ── -->
+    <div class="section-title" style="margin-top:28px">Canal Nacional · Temporada 2025–2026 <span class="src-tag">canal independiente</span></div>
+    <div class="grid-4" id="nacKpis"></div>
+    <div id="nacCanales"></div>
+    <div class="card" style="margin-top:12px"><div class="chart-box" style="height:200px"><canvas id="chartNacPrecio"></canvas></div></div>
+    <div id="nacNotas"></div>
+
   </div>
 
-  <!-- ══════════ NACIONAL ══════════ -->
-  <div class="tab-panel" id="tab-nacional">
+  <!-- NACIONAL panel oculto (contenido migrado a tab-ventas) -->
+  <div class="tab-panel" id="tab-nacional" style="display:none!important">
 
     <div class="section-title" style="margin-top:4px">Ventas Nacional · Temporada 2025–2026 <span class="src-tag">canal independiente — sin relación con Calavo</span></div>
     <div class="grid-4" id="nacKpis"></div>
@@ -3438,10 +3441,8 @@ function checkPw(){
   </div>
 
   <!-- ══════════ ESTRATEGIA (ex-HOY) ══════════ -->
-  <!-- ══════════ CAADES · INVENTARIOS NOGALES ══════════ -->
-  <div class="tab-panel" id="tab-caades">
-    <div id="caades-main"></div>
-  </div>
+  <!-- CAADES eliminado — siempre vacío, sin fuente de datos activa -->
+  <div id="tab-caades" style="display:none!important"><div id="caades-main"></div></div>
 
   <div class="tab-panel" id="tab-estrategia">
 
@@ -3703,6 +3704,47 @@ function checkPw(){
       <canvas id="chartTomateFlota" height="180"></canvas>
     </div>
 
+    <!-- ── LIMÓN (integrado) ── -->
+    <div class="section-title" style="margin-top:28px">Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
+    <div class="grid-4" id="limonKpis"></div>
+    <div id="limonClienteRisk"></div>
+    <div class="section-title">Precio FOB Nogales &amp; LA Terminal <span class="src-tag">USDA Market News</span></div>
+    <div id="limonUsdaPrice"></div>
+    <div class="section-title">Histórico 12 Meses + Tendencia 4 Semanas</div>
+    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
+    <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
+    <div class="card" id="limonPnl" style="padding:24px"></div>
+
+    <!-- ── CHILE (integrado) ── -->
+    <div class="section-title" style="margin-top:28px">Chile <span class="src-tag">Corbel Seeds Daily · USDA</span></div>
+    <div class="grid-3" id="chileKpis"></div>
+    <div class="section-title">Análisis de Mercado · Oportunidad</div>
+    <div id="chileContext"></div>
+
+    <!-- ── GRANOS (integrado) ── -->
+    <div class="section-title" style="margin-top:28px">Granos · Temporada <span class="src-tag">jacruz@agbelher.com · P&amp;L Granos Jul–Feb 2026</span></div>
+    <div class="grid-4" id="granosKpis"></div>
+    <div class="section-title">P&amp;L Temporada · Jul 2025 – Feb 2026</div>
+    <div class="card" id="granosPnl" style="padding:24px"></div>
+    <div class="section-title">Métricas por Hectárea <span class="src-tag">cálculo interno</span></div>
+    <div id="granosCostMetrics"></div>
+    <div class="section-title">Notas Operativas</div>
+    <div class="card" id="granosNotas" style="padding:20px"></div>
+
+    <!-- ── PERSONAL · CDC (integrado) ── -->
+    <div class="section-title" style="margin-top:28px">Personal · CDC <span class="src-tag">capitalhumano@agbelher.com</span></div>
+    <div id="cdcHero"></div>
+    <div class="cdc-grid" id="cdcCards"></div>
+    <div class="section-title">Tendencia Semanal · Personas Censadas</div>
+    <div class="card"><div class="chart-box" style="height:260px"><canvas id="chartCdc"></canvas></div></div>
+    <div class="section-title">% Trabajadores por Semana</div>
+    <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartCdcPct"></canvas></div></div>
+    <div class="section-title">% Cumplimiento vs Proyección <span class="src-tag">Real ÷ Plan Inicial</span></div>
+    <div id="cdcCumplimientoKpis" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px"></div>
+    <div class="card"><div class="chart-box" style="height:220px"><canvas id="chartCdcCumplimiento"></canvas></div></div>
+    <div class="section-title">Varianza Total: Real vs Proyectado</div>
+    <div class="card"><div class="chart-box" style="height:240px"><canvas id="chartCdcVsProyeccion"></canvas></div></div>
+
   </div>
 
   <!-- ══════════ CALAVO WEEKLY ══════════ -->
@@ -3726,62 +3768,17 @@ function checkPw(){
     <div id="cw-predicciones" style="display:none"></div>
   </div>
 
-  <!-- ══════════ OTROS ══════════ -->
-  <div class="tab-panel" id="tab-otros">
-
-    <!-- ── LIMÓN ── -->
-    <div class="section-title">Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
-    <div class="grid-4" id="limonKpis"></div>
-    <div id="limonClienteRisk"></div>
-    <div class="section-title">Precio FOB Nogales &amp; LA Terminal Market <span class="src-tag">USDA Market News · FOB Shipping Point + Terminal</span></div>
-    <div id="limonUsdaPrice"></div>
-    <div class="section-title">Histórico 12 Meses + Tendencia 4 Semanas <span class="src-tag">USDA Market News · Limón Persa 40lb carton</span></div>
-    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
-    <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
-    <div class="card" id="limonPnl" style="padding:24px"></div>
-
-    <!-- ── CHILE ── -->
-    <div class="section-title" style="margin-top:28px">Chile <span class="src-tag">Corbel Seeds Daily · USDA</span></div>
-    <div class="grid-3" id="chileKpis"></div>
-    <div class="section-title">Análisis de Mercado · Oportunidad</div>
-    <div id="chileContext"></div>
-
-    <!-- ── GRANOS ── -->
-    <div class="section-title" style="margin-top:28px">Granos · Temporada <span class="src-tag">jacruz@agbelher.com · P&amp;L Granos Jul–Feb 2026</span></div>
-    <div class="grid-4" id="granosKpis"></div>
-    <div class="section-title">P&amp;L Temporada · Jul 2025 – Feb 2026</div>
-    <div class="card" id="granosPnl" style="padding:24px"></div>
-    <div class="section-title">Métricas por Hectárea <span class="src-tag">cálculo interno</span></div>
-    <div id="granosCostMetrics"></div>
-    <div class="section-title">Notas Operativas</div>
-    <div class="card" id="granosNotas" style="padding:20px"></div>
-
-  </div>
+  <!-- OTROS panel oculto — contenido migrado a tab-optomate -->
+  <div id="tab-otros" style="display:none!important"></div>
 
   <!-- ══════════ CERTIFICACIONES ══════════ -->
   <div class="tab-panel" id="tab-cert">
-
     <div class="section-title">Certificaciones &amp; Auditorías <span class="src-tag">c.marisol@agbelher.com · Calidad</span></div>
     <div id="auditoriasContainer"></div>
-
   </div>
 
-  <!-- ══════════ CDC ══════════ -->
-  <div class="tab-panel" id="tab-cdc">
-    <div id="cdcHero"></div>
-    <div class="cdc-grid" id="cdcCards"></div>
-    <div class="section-title">Tendencia Semanal · Personas Censadas <span class="src-tag">capitalhumano@agbelher.com · Censo 2026</span></div>
-    <div class="card"><div class="chart-box" style="height:260px"><canvas id="chartCdc"></canvas></div></div>
-    <div class="section-title">% Trabajadores por Semana</div>
-    <div class="card"><div class="chart-box" style="height:200px"><canvas id="chartCdcPct"></canvas></div></div>
-
-    <div class="section-title">% Cumplimiento vs Proyección <span class="src-tag">Real ÷ Plan Inicial · Depto. Producción</span></div>
-    <div id="cdcCumplimientoKpis" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px"></div>
-    <div class="card"><div class="chart-box" style="height:220px"><canvas id="chartCdcCumplimiento"></canvas></div></div>
-
-    <div class="section-title">Varianza Total: Real vs Proyectado <span class="src-tag">Depto. Producción · Plan Inicial 2025–2026</span></div>
-    <div class="card"><div class="chart-box" style="height:240px"><canvas id="chartCdcVsProyeccion"></canvas></div></div>
-  </div>
+  <!-- CDC panel oculto — contenido migrado a tab-optomate -->
+  <div id="tab-cdc" style="display:none!important"></div>
 
 </main>
 
@@ -6085,8 +6082,14 @@ function checkPw(){
     if (tab === 'optomate') tab = 'tomate';
     if (typeof Chart === 'undefined') return;
 
-    /* ── Nacional — Precio comparativo ── */
-    if (tab === 'nacional' && !chartsInit.nacPrecio) {
+    /* ── When Campo tab loads, also initialize CDC (lazy render) ── */
+    if (tab === 'tomate' && !chartsInit.cdcTab) {
+      chartsInit.cdcTab = true;
+      safeRender(renderCdc, 'cdc');
+    }
+
+    /* ── Nacional — Precio comparativo (now also rendered in Exportación & Campo tabs) ── */
+    if ((tab === 'nacional' || tab === 'ventas' || tab === 'tomate') && !chartsInit.nacPrecio) {
       chartsInit.nacPrecio = true;
       (function() {
         var cvs = document.getElementById('chartNacPrecio');
