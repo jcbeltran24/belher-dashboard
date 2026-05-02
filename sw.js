@@ -1,4 +1,4 @@
-const CACHE = 'belher-v1';
+const CACHE = 'belher-v2';
 const STATIC = [
   '/',
   '/index.html',
