@@ -1,16 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 01 May 2026",
+    fecha: "Sábado 02 May 2026",
     semana: "WK 18",
-    actualizado: "01/05/2026 · 21:30"
+    actualizado: "02/05/2026 · 13:27"
   },
 
   alertas: [
-    { nivel:"success", texto:"LIQUIDACIÓN CALAVO WK18 — Leima 30-Abr: saldo a favor $1,206,806 (S/Calavo reconciliado). Revenue acumulado sube a $17,746,742. Quedan 48k cajas + 7k en piso por facturar." },
-    { nivel:"success", texto:"IVA FEBRERO 2026 AUTORIZADO — jacruz 29-Abr: $1,752,440 MXN importe histórico autorizado por SAT. En proceso de depósito a cuenta Belher. Mejora flujo mayo." },
-    { nivel:"warning", texto:"INBOUND CALIDAD 30/04 ALTA MERMA — calidad@agbelher.com: 1ST 54% · 2ND 20% · 3RD 2% · MERMA 24%. Revisar si es rezaga o lote con problema. Outbound previo (29/04) sin alerta." },
-    { nivel:"info",    texto:"1 DE MAYO — Descanso obligatorio (Art. 74 Frac IV LFT). Sin báscula hoy. Cruces 30/04 confirmados: JL-101 11:33, JL-104 11:34, JL-114 13:54, ST-99 12:07 — todos desaduanamiento libre." },
-    { nivel:"warning", texto:"VINE RIPE CORRECCIÓN ACTIVA — Corbel #0039: $66.95–68.95 (down desde $68.95–70.95). WK19 esperado con presión Coachella + Georgia. Última ventana precio alto fue esta semana." }
+    {"nivel":"success","texto":"CRUCES 01-MAY CONFIRMADOS — JL-101 cruzó 11:33 · JL-104 cruzó 11:34 · JL-114 cruzó 13:54 — todos desaduanamiento libre Nogales. 8,304 cajas tomate (5 trailers) entregadas a Calavo. XML embarque 613 corregido y confirmado por Barrenechea."},
+    {"nivel":"success","texto":"LIQUIDACIÓN CALAVO WK18 — Leima 30-Abr: saldo a favor $1,206,806 (S/Calavo reconciliado). Revenue acumulado FOB $17,746,742. Quedan 48k cajas + 7k en piso por facturar."},
+    {"nivel":"success","texto":"IVA FEBRERO 2026 AUTORIZADO — jacruz 29-Abr: $1,752,440 MXN importe histórico autorizado por SAT. En proceso de depósito a cuenta Belher. Mejora flujo mayo."},
+    {"nivel":"warning","texto":"ALERTA ARANCELARIA USMCA — L.Piña 01-May: Productos México sin USMCA sujetos a 25% + arancel general vigente. Verificar cobertura USMCA en todos los embarques activos para evitar cargos extra en destino USA."},
+    {"nivel":"warning","texto":"INBOUND CALIDAD 30/04 ALTA MERMA — calidad@agbelher.com: 1ST 54% · 2ND 20% · 3RD 2% · MERMA 24%. Revisar si es rezaga o lote con problema. Outbound previo (29/04) sin alerta."},
+    {"nivel":"warning","texto":"VINE RIPE CORRECCIÓN ACTIVA — Corbel #0039: $66.95–68.95 (down desde $68.95–70.95). WK19 esperado con presión Coachella + Georgia. Última ventana precio alto fue esta semana."}
   ],
 
   ebitda: {
@@ -481,6 +482,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"10:53","asunto":"Re: BILL,MANIFIESTO,FACTURAS,PROFORMAS NOGALES JL — XML embarque 613 corregido","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-01"},
+    {"hora":"11:57","asunto":"Cruces confirmados JL-101 11:33 · JL-104 11:34 desaduanamiento libre","de":"auxiliarnogales@barrenecheasoc.com","leido":false,"fecha":"2026-05-01"},
+    {"hora":"13:57","asunto":"Cruce confirmado JL-114 13:54 desaduanamiento libre","de":"auxiliarnogales@barrenecheasoc.com","leido":false,"fecha":"2026-05-01"},
     { hora:"00:02", asunto:"Liquidación Calavo al 26 abril '26 — saldo a favor $1,206,806",    de:"leima@agbelher.com",           leido:false },
     { hora:"03:27", asunto:"BILL,MANIFIESTO,FACTURAS,PROFORMAS NOGALES JL — 30/04/2026",       de:"embarquesbelher@agbelher.com", leido:false },
     { hora:"02:32", asunto:"BILL,MANIFIESTO,FACTURAS,PROFORMAS NOGALES ST — 30/04/2026",       de:"embarquesbelher@agbelher.com", leido:false },
