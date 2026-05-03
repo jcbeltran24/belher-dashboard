@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 02 May 2026",
+    fecha: "Domingo 03 May 2026",
     semana: "WK 18",
-    actualizado: "02/05/2026 · 13:27"
+    actualizado: "03/05/2026 · 13:27"
   },
 
   alertas: [
-    {"nivel":"success","texto":"CRUCES 01-MAY CONFIRMADOS — JL-101 cruzó 11:33 · JL-104 cruzó 11:34 · JL-114 cruzó 13:54 — todos desaduanamiento libre Nogales. 8,304 cajas tomate (5 trailers) entregadas a Calavo. XML embarque 613 corregido y confirmado por Barrenechea."},
+    {"nivel":"success","texto":"EMBARQUES 02-MAY CALAVO — 7 trailers despachados: ST-110, ST-109, CGG-105, JL-13, CHARLY-6, CGG-5, CGG-91. Total 11,696 cajas tomate. Carreras: Transfríos Santa Teresa, Refrigerados CGG, Transportes eLogística. Destinos NO y KF. Reportes generales de embarque y empaque adjuntos."},
+    {"nivel":"warning","texto":"INBOUND CALIDAD 02/05 — MERMA ALTA 31% — calidad@agbelher.com: 1ST 62% · 2ND 7% · 3RD 0% · MERMA 31%. Merma supera umbral crítico. Revisar lote y origen para determinar causa."},
     {"nivel":"success","texto":"LIQUIDACIÓN CALAVO WK18 — Leima 30-Abr: saldo a favor $1,206,806 (S/Calavo reconciliado). Revenue acumulado FOB $17,746,742. Quedan 48k cajas + 7k en piso por facturar."},
     {"nivel":"success","texto":"IVA FEBRERO 2026 AUTORIZADO — jacruz 29-Abr: $1,752,440 MXN importe histórico autorizado por SAT. En proceso de depósito a cuenta Belher. Mejora flujo mayo."},
     {"nivel":"warning","texto":"ALERTA ARANCELARIA USMCA — L.Piña 01-May: Productos México sin USMCA sujetos a 25% + arancel general vigente. Verificar cobertura USMCA en todos los embarques activos para evitar cargos extra en destino USA."},
-    {"nivel":"warning","texto":"INBOUND CALIDAD 30/04 ALTA MERMA — calidad@agbelher.com: 1ST 54% · 2ND 20% · 3RD 2% · MERMA 24%. Revisar si es rezaga o lote con problema. Outbound previo (29/04) sin alerta."},
     {"nivel":"warning","texto":"VINE RIPE CORRECCIÓN ACTIVA — Corbel #0039: $66.95–68.95 (down desde $68.95–70.95). WK19 esperado con presión Coachella + Georgia. Última ventana precio alto fue esta semana."}
   ],
 
@@ -482,6 +482,14 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"20:55","asunto":"02-05-2026 REPORTES GENERALES — embarque y empaque","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-02"},
+    {"hora":"20:38","asunto":"REPORTE DIARIO CALAVO 02-05-2026 — 7 trailers · 11,696 cajas tomate","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-02"},
+    {"hora":"20:43","asunto":"BILL,MANIFIESTO,DATOS TRANSPORTISTA,FACTURAS,PROFORMAS NOGALES CGG — Tomate","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-02"},
+    {"hora":"20:06","asunto":"AVANCE DE TRILLA 02/05/2026 SORGO (SIFON 2) — 10 ha","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-02"},
+    {"hora":"18:54","asunto":"BILL,MANIFIESTO,DATOS TRANSPORTISTA,FACTURAS,PROFORMAS MCALLEN — Tomate","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-02"},
+    {"hora":"18:38","asunto":"REPORTE DE BASCULA 02/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-02"},
+    {"hora":"16:57","asunto":"REPORTE DE INBOUND TOMATE DIA 02-05-2026 — 1ST 62% · MERMA 31%","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-02"},
+    {"hora":"15:59","asunto":"REPORTE DE BASCULA 02/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-02"},
     {"hora":"10:53","asunto":"Re: BILL,MANIFIESTO,FACTURAS,PROFORMAS NOGALES JL — XML embarque 613 corregido","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-01"},
     {"hora":"11:57","asunto":"Cruces confirmados JL-101 11:33 · JL-104 11:34 desaduanamiento libre","de":"auxiliarnogales@barrenecheasoc.com","leido":false,"fecha":"2026-05-01"},
     {"hora":"13:57","asunto":"Cruce confirmado JL-114 13:54 desaduanamiento libre","de":"auxiliarnogales@barrenecheasoc.com","leido":false,"fecha":"2026-05-01"},
