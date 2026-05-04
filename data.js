@@ -1,17 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 03 May 2026",
-    semana: "WK 18",
-    actualizado: "03/05/2026 · 13:27"
+    fecha: "Lunes 04 May 2026",
+    semana: "WK 19",
+    actualizado: "04/05/2026 · 14:20"
   },
 
   alertas: [
-    {"nivel":"success","texto":"EMBARQUES 02-MAY CALAVO — 7 trailers despachados: ST-110, ST-109, CGG-105, JL-13, CHARLY-6, CGG-5, CGG-91. Total 11,696 cajas tomate. Carreras: Transfríos Santa Teresa, Refrigerados CGG, Transportes eLogística. Destinos NO y KF. Reportes generales de embarque y empaque adjuntos."},
-    {"nivel":"warning","texto":"INBOUND CALIDAD 02/05 — MERMA ALTA 31% — calidad@agbelher.com: 1ST 62% · 2ND 7% · 3RD 0% · MERMA 31%. Merma supera umbral crítico. Revisar lote y origen para determinar causa."},
-    {"nivel":"success","texto":"LIQUIDACIÓN CALAVO WK18 — Leima 30-Abr: saldo a favor $1,206,806 (S/Calavo reconciliado). Revenue acumulado FOB $17,746,742. Quedan 48k cajas + 7k en piso por facturar."},
-    {"nivel":"success","texto":"IVA FEBRERO 2026 AUTORIZADO — jacruz 29-Abr: $1,752,440 MXN importe histórico autorizado por SAT. En proceso de depósito a cuenta Belher. Mejora flujo mayo."},
+    {"nivel":"success","texto":"EMBARQUES 03-MAY — Reporte general de empaque adjunto. Operación activa en planta. Saludos desde embarques."},
+    {"nivel":"success","texto":"INBOUND CALIDAD 03/05 — Mejora vs ayer: 1ST 63% · 2ND 10% · 3RD 2% · MERMA 25% (era 31% el 02-May). Merma baja del umbral crítico. Calidad estable en línea de empaque."},
     {"nivel":"warning","texto":"ALERTA ARANCELARIA USMCA — L.Piña 01-May: Productos México sin USMCA sujetos a 25% + arancel general vigente. Verificar cobertura USMCA en todos los embarques activos para evitar cargos extra en destino USA."},
-    {"nivel":"warning","texto":"VINE RIPE CORRECCIÓN ACTIVA — Corbel #0039: $66.95–68.95 (down desde $68.95–70.95). WK19 esperado con presión Coachella + Georgia. Última ventana precio alto fue esta semana."}
+    {"nivel":"success","texto":"IVA FEBRERO 2026 AUTORIZADO — jacruz 29-Abr: $1,752,440 MXN importe histórico autorizado por SAT. En proceso de depósito a cuenta Belher. Mejora flujo mayo."},
+    {"nivel":"success","texto":"LIQUIDACIÓN CALAVO WK18 — Leima 30-Abr: saldo a favor $1,206,806 (S/Calavo reconciliado). Revenue acumulado FOB $17,746,742. Quedan 48k cajas + 7k en piso por facturar."},
+    {"nivel":"warning","texto":"VINE RIPE CORRECCIÓN ACTIVA — Corbel #0039: $66.95–68.95 (down desde $68.95–70.95). WK19 esperado con presión Coachella + Georgia. Última ventana precio alto fue WK18."}
   ],
 
   ebitda: {
@@ -482,6 +482,11 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"19:58","asunto":"03-05-2026 REPORTES GENERALES — empaque del día","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-03"},
+    {"hora":"19:40","asunto":"REPORTE DE INBOUND TOMATE DIA 03-05-2026 — 1ST 63% · MERMA 25%","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-03"},
+    {"hora":"19:01","asunto":"REPORTE DE BASCULA 03/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-03"},
+    {"hora":"16:53","asunto":"REPORTE DE OUTBOUND TOMATE 02/05/2026 — Bola Calavo 1ST 84.92% · Roma 1ST 86.55%","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-03"},
+    {"hora":"14:53","asunto":"✅ Belher Adjuntos — 9 archivos (03-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-03"},
     {"hora":"20:55","asunto":"02-05-2026 REPORTES GENERALES — embarque y empaque","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-02"},
     {"hora":"20:38","asunto":"REPORTE DIARIO CALAVO 02-05-2026 — 7 trailers · 11,696 cajas tomate","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-02"},
     {"hora":"20:43","asunto":"BILL,MANIFIESTO,DATOS TRANSPORTISTA,FACTURAS,PROFORMAS NOGALES CGG — Tomate","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-02"},
