@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="data.js"></script>
+<script src="js/api-eye.js"></script>
 <style>
 /* ═══════════════════════════════════════════════
    DESIGN TOKENS
@@ -2458,6 +2459,24 @@ body.edit-mode .edit-layout-btn { background:rgba(99,102,241,.3); color:#a5b4fc;
 .refresh-btn.spinning svg { animation: spin360 .6s cubic-bezier(.4,0,.2,1) forwards; }
 @keyframes spin360 { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
 
+/* EYE Live button */
+.eye-btn {
+  display:flex; align-items:center; gap:5px;
+  padding:0 11px; height:32px; border-radius:9px;
+  border:1px solid rgba(99,179,237,.35); cursor:pointer;
+  background:rgba(99,179,237,.12); color:rgba(190,227,248,.85);
+  font-size:.7rem; font-weight:700; font-family:inherit; letter-spacing:.5px;
+  transition:background .18s, color .18s, border-color .18s, opacity .18s; flex-shrink:0;
+  margin-right:6px;
+}
+.eye-btn:hover  { background:rgba(99,179,237,.25); color:#90cdf4; border-color:rgba(99,179,237,.6); }
+.eye-btn:disabled { opacity:.5; cursor:wait; }
+.eye-btn .eye-spin { animation: spin360 .8s linear infinite; }
+/* Active (data loaded today) */
+body.eye-live .eye-btn {
+  border-color:rgba(99,179,237,.55); background:rgba(99,179,237,.2); color:#90cdf4;
+}
+
 /* Block wrapper */
 .db-block { position:relative; transition:outline .15s, opacity .2s; }
 body.edit-mode .db-block {
@@ -3294,6 +3313,11 @@ function checkPw(){
   </div>
 
   <div class="live-badge" style="margin-left:auto"><span class="live-dot"></span>LIVE</div>
+  <button class="eye-btn" id="eyeBtn" onclick="refreshFromEYE()" title="Cargar datos en vivo desde EYE (báscula + empaque)">
+    <svg class="eye-spin" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    <span class="eye-txt">EYE</span>
+  </button>
   <button class="refresh-btn" id="refreshBtn" onclick="refreshDashboard()" title="Actualizar datos">
     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
     <span class="refresh-txt">Actualizar</span>
@@ -9114,7 +9138,6 @@ window.refreshDashboard = function () {
   var btn = document.getElementById('refreshBtn');
   btn.classList.add('spinning');
   btn.disabled = true;
-  // Remove spin class after animation completes so it can spin again next click
   btn.querySelector('svg').addEventListener('animationend', function handler() {
     btn.querySelector('svg').removeEventListener('animationend', handler);
     btn.classList.remove('spinning');
@@ -9122,6 +9145,21 @@ window.refreshDashboard = function () {
   });
   location.reload();
 };
+
+/* ── EYE Live badge on body ──────────────────────────── */
+(function () {
+  if (window.BELHER && window.BELHER._eyeLive) {
+    document.body.classList.add('eye-live');
+    var eyeBtn = document.getElementById('eyeBtn');
+    if (eyeBtn) {
+      var s = window.EYE && window.EYE.status();
+      var tooltip = s
+        ? 'EYE Live · ' + s.fi + ' → ' + s.ff + ' · ' + s.fetched.slice(11,16) + ' UTC'
+        : 'EYE Live data activa';
+      eyeBtn.title = tooltip;
+    }
+  }
+})();
 </script>
 </body>
 </html>
