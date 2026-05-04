@@ -23,7 +23,12 @@ export default {
     const target = EYE_BASE + url.pathname + url.search;
 
     const resp = await fetch(target, {
-      headers: { "Authorization": "Bearer " + TOKEN }
+      headers: {
+        "Authorization": "Bearer " + TOKEN,
+        "Origin": "https://jcbeltran24.github.io",
+        "Referer": "https://jcbeltran24.github.io/",
+        "Content-Type": "application/json"
+      }
     });
 
     return new Response(await resp.text(), {
