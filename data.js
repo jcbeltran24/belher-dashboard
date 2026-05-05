@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 04 May 2026",
+    fecha: "Martes 05 May 2026",
     semana: "WK 19",
-    actualizado: "04/05/2026 · 12:30"
+    actualizado: "05/05/2026 · 03:30"
   },
 
   alertas: [
@@ -332,7 +332,8 @@ window.BELHER = {
         { fecha:"28/04/2026", campos:"Sifón 1",                                               ha:7,  cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 28/04/2026 SORGO (SIFON I)" },
         { fecha:"29/04/2026", campos:"Sifón 1 y Sifón 2",                                    ha:13, cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 29/04/2026 SORGO (SIFON I Y SIFON 2)" },
         { fecha:"30/04/2026", campos:"Sifón 2",                                               ha:15, cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 30/04/2026 SORGO (SIFON 2)" },
-        { fecha:"02/05/2026", campos:"Sifón 2",                                               ha:10, cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 02/05/2026 SORGO (SIFON 2)" }
+        { fecha:"02/05/2026", campos:"Sifón 2",                                               ha:10, cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 02/05/2026 SORGO (SIFON 2)" },
+        { fecha:"04/05/2026", campos:"Sifón 1 y Sifón 2",                                    ha:5,  cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 04/05/2026 SORGO (SIFON 1 Y SIFON 2)" }
       ]
     }
   },
@@ -472,9 +473,11 @@ window.BELHER = {
       { fecha:"29/04", productos:["Tomate Bola","Tomate Roma","Limón Persa"] },
       { fecha:"30/04", productos:["Tomate Bola","Tomate Roma","Rezaga Tomate"] },
       { fecha:"02/05", productos:["Tomate Bola","Tomate Roma"] },
-      { fecha:"03/05", productos:["Tomate Bola","Tomate Roma"] }
+      { fecha:"03/05", productos:["Tomate Bola","Tomate Roma"] },
+      { fecha:"04/05", productos:["Tomate Bola","Tomate Roma","Rezaga Tomate"] }
     ],
     embarques: [
+      { fecha:"04/05/2026", tipo:"Tomate", cargas:3, unidad:"ST-95, ST-101, JL-32",          destino:"Arizona", estado:"OK" },
       { fecha:"03/05/2026", tipo:"Tomate", cargas:4, unidad:"CHARLY-6, CGG-5, CGG-91, CGG-105",              destino:"Arizona", estado:"OK" },
       { fecha:"03/05/2026", tipo:"Tomate", cargas:1, unidad:"JL-13",                                          destino:"Texas",   estado:"OK" },
       { fecha:"02/05/2026", tipo:"Tomate", cargas:6, unidad:"ST-110, ST-109, CGG-105, CHARLY-6, CGG-5, CGG-91", destino:"Arizona", estado:"OK" },
@@ -489,15 +492,11 @@ window.BELHER = {
   },
 
   correos: [
+    { hora:"02:18", asunto:"04-05-2026 REPORTES GENERAELS TOMATE",        de:"embarquesbelher@agbelher.com",   leido:false, fecha:"2026-05-05" },
+    { hora:"22:15", asunto:"REPORTE DE BASCULA 04/05/2026 (TOMATE)",      de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-04" },
     { hora:"16:13", asunto:"REPORTE DE OUTBOUND TOMATE 03/05/2026",       de:"calidad@agbelher.com",           leido:false, fecha:"2026-05-04" },
-    { hora:"19:58", asunto:"03-05-2026 REPORTES GENERALES",               de:"embarquesbelher@agbelher.com",   leido:false, fecha:"2026-05-03" },
-    { hora:"19:40", asunto:"REPORTE DE INBOUND TOMATE DIA 03-05-2026",    de:"calidad@agbelher.com",           leido:false, fecha:"2026-05-03" },
-    { hora:"19:01", asunto:"REPORTE DE BASCULA 03/05/2026 (TOMATE)",      de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-03" },
-    { hora:"16:28", asunto:"REPORTE DE OUTBOUND TOMATE 02/05/2026",       de:"calidad@agbelher.com",           leido:false, fecha:"2026-05-03" },
-    { hora:"03:06", asunto:"AVANCE DE TRILLA 02/05/2026 SORGO (SIFON 2)", de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-03" },
-    { hora:"00:02", asunto:"Liquidación Calavo al 26 abril '26 — saldo a favor $1,206,806", de:"leima@agbelher.com", leido:false, fecha:"2026-05-01" },
-    { hora:"03:55", asunto:"02-05-2026 REPORTES GENERALES",               de:"embarquesbelher@agbelher.com",   leido:false, fecha:"2026-05-03" },
-    { hora:"03:43", asunto:"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG", de:"embarquesbelher@agbelher.com", leido:false, fecha:"2026-05-03" }
+    { hora:"22:20", asunto:"AVANCE DE TRILLA 04/05/2026 SORGO",           de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-04" },
+    { hora:"01:35", asunto:"REPORTE DE BASCULA 04/05/2026 (REZAGA)",      de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-05" }
   ],
 
   ticker: [
@@ -508,10 +507,10 @@ window.BELHER = {
     { label:"Vine Ripe 4x4 USDA",          valor:"$66.95–68.95/cj",             cambio:"corrección WK19 en curso",       dir:"down"    },
     { label:"Roma XL Texas",               valor:"$50.95–52.95/cj",             cambio:"presión Coachella WK19",         dir:"down"    },
     { label:"Limes seedless 110s",         valor:"$42/bu",                       cambio:"Peru -30% sostiene",             dir:"up"      },
-    { label:"CVGW (Calavo)",               valor:"$27.64",                       cambio:"-1.67% vs 01-May",               dir:"down"    },
-    { label:"AVO (Mission)",               valor:"$13.33",                       cambio:"-3.47% vs 01-May",               dir:"down"    },
+    { label:"CVGW (Calavo)",               valor:"$27.64",                       cambio:"-3.1% vs 02-May",                dir:"down"    },
+    { label:"AVO (Mission)",               valor:"$13.33",                       cambio:"-6.5% vs prev close",            dir:"down"    },
     { label:"IVA Feb-26 autorizado",       valor:"$1,752,440 MXN",               cambio:"en proceso depósito SAT",        dir:"up"      },
-    { label:"Sorgo trilla acumulada",      valor:"264 ha",                       cambio:"17 jornadas completadas",        dir:"up"      },
+    { label:"Sorgo trilla acumulada",      valor:"279 ha",                       cambio:"19 jornadas completadas",        dir:"up"      },
     { label:"Corbel Seeds última",         valor:"#0039",                        cambio:"30-Abr",                         dir:"neutral" }
   ],
 
@@ -624,7 +623,7 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"05/05/2026",    evento:"WK19 inicio — embarques máximos vine-ripe (última ventana), roma y limes antes de corrección esperada.", tipo:"operativo", participantes:"Embarques · Calidad" },
+      { fecha:"05/05/2026",    evento:"WK19 continuación — embarques máximos de tomate (Roma + Vine-ripe cierre de ventana) y limón 110s antes corrección esperada.", tipo:"operativo", participantes:"Embarques · Calidad" },
       { fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
       { fecha:"19/05/2026",    evento:"BPSI F/S Abril 2026 y forecast Q2 2026 — Zoom 11am-12pm (GMT-7)", tipo:"financiero", participantes:"Leima · Jacruz · JC · Armando Llanes" },
       { fecha:"25/05/2026",    evento:"Abril '26 F/S (Tomates/Limones/Granos) — Revisión final · 9:30-10:30am", tipo:"financiero", participantes:"JC · Antonio · Leima · Armando · Jacruz · Despacho Terrazas" },
@@ -635,10 +634,10 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "04/05/2026 · 01:45",
+    generado:  "05/05/2026 · 03:30",
     modelo:    "Claude claude-haiku-4-5-20251001",
     horizonte: "7 días",
-    nota:      "Síntesis Corbel Seeds #0039 (30-Abr) + Outbound 02/05 + Inbound 03/05 (CRÍTICO). Vine ripe en corrección clara post-peak. Roma firme pero presión Coachella/Georgia WK19+. Limes Peru -30% sustain pero ventana cierra WK19-20.",
+    nota:      "Síntesis Corbel Seeds #0039 (30-Abr) + Outbound 02/05-03/05. Vine ripe en corrección clara post-peak. Roma firme pero presión Coachella/Georgia WK19+. Limes Peru -30% sustain pero ventana cierra WK19-20. Bola Calavo CRÍTICO — investigación urgente.",
     items: [
       {
         id: "vine-ripe",
@@ -796,20 +795,20 @@ window.BELHER = {
     semana:      "WK18",
     fechas:      "28 Abr – 03 May 2026",
     fuente:      "Leima Leyva · Liquidación Calavo al 26-Abr-2026 · 01-May-2026",
-    actualizado: "04/05/2026",
+    actualizado: "05/05/2026",
 
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 27.64, prevClose: 28.11, cambio: -0.47, cambioPct: -1.67,
+        precio: 27.64, prevClose: 28.52, cambio: -0.88, cambioPct: -3.1,
         h52: 28.98, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · close 04-May-2026"
+        fuente: "Yahoo Finance · close 02-May-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 13.33, prevClose: 13.81, cambio: -0.48, cambioPct: -3.47,
+        precio: 13.33, prevClose: 14.26, cambio: -0.93, cambioPct: -6.5,
         h52: 15.53, l52: 10.00, volumen: null,
-        fuente: "Yahoo Finance · close 04-May-2026"
+        fuente: "Yahoo Finance · 05-May-2026"
       }
     ],
 
@@ -836,7 +835,7 @@ window.BELHER = {
 
     alertas: [
       { nivel: "success", texto: "LIQUIDACIÓN WK18 AL 26-ABR: Revenue $17,746,742 · Saldo a favor $1,206,806 (S/Calavo). Quedan 48k cajas + 7k piso por facturar." },
-      { nivel: "warning", texto: "CVGW $27.64 (-1.67% vs 01-May) · AVO $13.33 (-3.47% vs 01-May) — cierre 04-May-2026. CVGW cae $0.47 en 3 días desde $28.11." },
+      { nivel: "warning", texto: "CVGW $27.64 (-3.1% vs 02-May) · AVO $13.33 (-6.5% vs prev close) — ambos en corrección. CVGW cae $0.88 en 3 días, AVO -0.93." },
       { nivel: "warning", texto: "Tomato Weekly Update WK19 pendiente — Irene canceló reunión 28/04 sin adjunto. 3+ semanas sin reporte formal Calavo." }
     ],
 
