@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Martes 05 May 2026",
     semana: "WK 19",
-    actualizado: "05/05/2026 · 03:30"
+    actualizado: "05/05/2026 · 16:13"
   },
 
   alertas: [
@@ -492,6 +492,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:10","asunto":"HortiDaily Newsletter | martes, 5 de mayo de 2026","de":"mail@hortidaily.es","leido":false,"fecha":"2026-05-05"},
+    {"hora":"15:05","asunto":"HortiDaily Newsletter | Tuesday, May 5, 2026","de":"mail@hortidaily.com","leido":false,"fecha":"2026-05-05"},
     { hora:"02:18", asunto:"04-05-2026 REPORTES GENERAELS TOMATE",        de:"embarquesbelher@agbelher.com",   leido:false, fecha:"2026-05-05" },
     { hora:"22:15", asunto:"REPORTE DE BASCULA 04/05/2026 (TOMATE)",      de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-04" },
     { hora:"16:13", asunto:"REPORTE DE OUTBOUND TOMATE 03/05/2026",       de:"calidad@agbelher.com",           leido:false, fecha:"2026-05-04" },
