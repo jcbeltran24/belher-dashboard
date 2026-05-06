@@ -1,16 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 05 May 2026",
+    fecha: "Miércoles 06 May 2026",
     semana: "WK 19",
-    actualizado: "05/05/2026 · 16:13"
+    actualizado: "06/05/2026 · 08:35"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"OUTBOUND 03/05 BOLA CALAVO 60.96% primera, merma 14.31% CRÍTICO — 2do día consecutivo deterioro. Roma Calavo estable 87.88%, merma 2.57%. Causa TBD: investigar campo/lote urgente."},
+    {"nivel":"danger","texto":"INBOUND TOMATE 05/05 — Calidad CRÍTICA: 1ST 56%, 2ND 11%, 3RD 8%, MERMA 25%. Deterioro sostenido — investigar lote/campo urgente."},
+    {"nivel":"warning","texto":"CALAVO EMBARQUE 05/05 — 2 trailers (JL-114, JL-111) · 3,440 cajas tomate NOG · Transportes eLogistica · Set 50°F. Documentación completa enviada."},
     {"nivel":"warning","texto":"VINE RIPE CORRECCIÓN WK19 — Corbel #0039: USDA AMS $66.95–68.95 post-peak. Coachella + Georgia supply entrando. Presión esperada sostenida WK19-20."},
     {"nivel":"success","texto":"LIMES 110s $42 — Peru -30% supply sustain ventana NA. Maximizar embarques WK19 antes flush Colombia/Brasil esperado WK19-20."},
     {"nivel":"info","texto":"SETTLEMENT WK18 AL 26-ABR CONFIRMADO — Revenue $17,746,742 · Saldo a favor $1,206,806 (S/Calavo). Quedan 48k cajas + 7k piso por facturar."},
-    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 14 días. Javier Martínez inspeccionará todas las unidades de producción y empaque. Revisar inventarios materiales e insumos críticos."}
+    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 12 días. Javier Martínez inspeccionará todas las unidades de producción y empaque. Revisar inventarios materiales e insumos críticos."}
   ],
 
   ebitda: {
@@ -492,6 +493,12 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"20:00","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES JL","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-05"},
+    {"hora":"19:56","asunto":"05-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-05"},
+    {"hora":"19:55","asunto":"REPORTE DIARIO CALAVO 05-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-05"},
+    {"hora":"19:54","asunto":"05-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-05"},
+    {"hora":"19:40","asunto":"AVANCE DE TRILLA 05/05/2026 SORGO (QUEVEDO 1)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-05"},
+    {"hora":"16:11","asunto":"REPORTE DE INBOUND TOMATE DIA 05-05-2026","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-05"},
     {"hora":"16:10","asunto":"HortiDaily Newsletter | martes, 5 de mayo de 2026","de":"mail@hortidaily.es","leido":false,"fecha":"2026-05-05"},
     {"hora":"15:05","asunto":"HortiDaily Newsletter | Tuesday, May 5, 2026","de":"mail@hortidaily.com","leido":false,"fecha":"2026-05-05"},
     { hora:"02:18", asunto:"04-05-2026 REPORTES GENERAELS TOMATE",        de:"embarquesbelher@agbelher.com",   leido:false, fecha:"2026-05-05" },
