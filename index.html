@@ -3356,9 +3356,8 @@ function checkPw(){
   <button data-tab="ventas"       role="tab" aria-selected="false" aria-controls="tab-ventas">Export Calavo</button>
   <button data-tab="nacional"     role="tab" aria-selected="false" aria-controls="tab-nacional">Nacional</button>
   <button data-tab="finanzas"     role="tab" aria-selected="false" aria-controls="tab-finanzas">Finanzas</button>
-  <button data-tab="optomate"     role="tab" aria-selected="false" aria-controls="tab-optomate">Ops Tomate</button>
+  <button data-tab="optomate"     role="tab" aria-selected="false" aria-controls="tab-optomate">Calidad &amp; Ops</button>
   <button data-tab="cdc"          role="tab" aria-selected="false" aria-controls="tab-cdc">CDC · Personal</button>
-  <button data-tab="otros"        role="tab" aria-selected="false" aria-controls="tab-otros">Otros Cultivos</button>
   <button data-tab="calavoweekly" role="tab" aria-selected="false" aria-controls="tab-calavoweekly">Intel Calavo</button>
   <button data-tab="caades"       role="tab" aria-selected="false" aria-controls="tab-caades">Inventarios NOG</button>
   <button data-tab="estrategia"   role="tab" aria-selected="false" aria-controls="tab-estrategia">Estrategia</button>
@@ -3608,102 +3607,39 @@ function checkPw(){
 
   </div>
 
-  <!-- ══════════ OPS TOMATE ══════════ -->
-  <div class="tab-panel" id="tab-optomate">
-
-    <!-- Season Hero -->
-    <div id="tomateHero"></div>
-
-    <!-- tomateChannels: datos ya en tomateHero — oculto -->
-    <div id="tomateChannels" style="display:none"></div>
-
-    <!-- Revenue Pace strip -->
-    <div id="tomatePaceStrip"></div>
-    <!-- tomateCalavoStrip: Finanzas cubre esto — oculto -->
-    <div id="tomateCalavoStrip" style="display:none"></div>
-
-    <!-- Quality (full width) -->
-    <div class="section-title" style="margin-top:4px">Calidad · Temporada <span class="src-tag">Outbound calidad@agbelher.com</span></div>
-    <div id="tomateCalidadSummary"></div>
-    <div class="card" style="margin-top:8px"><div class="chart-box" style="height:190px"><canvas id="chartTomateCalidad"></canvas></div></div>
-
-    <!-- Quality by Variety — collapsible detail -->
-    <details class="tom-variety-details">
-      <summary>
-        <span class="tvd-label">Calidad por Variedad</span>
-        <span id="tomateOutboundFecha" class="tvd-fecha"></span>
-        <span class="src-tag">Outbound</span>
-        <span class="tvd-chevron"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-      </summary>
-      <div class="view-toggle" data-group="tomate-cal" style="margin:12px 0 8px">
-        <button class="vt-btn active" data-view="ayer">Día Anterior</button>
-        <button class="vt-btn" data-view="semana">Últimos 7 días</button>
-      </div>
-      <div class="view-panel active" data-group="tomate-cal" data-view="ayer" id="tomateVariedadesAyer"></div>
-      <div class="view-panel" data-group="tomate-cal" data-view="semana" id="tomateVariedadesSemana"></div>
-    </details>
-
-    <!-- "Calidad Exportación" duplicado de "Calidad por Variedad" arriba — oculto -->
-    <div id="outboundTitle" style="display:none"></div>
-    <div id="calidadSummary" style="display:none"></div>
-    <div id="qualidadRows" style="display:none"></div>
-    <div id="calidadSemana" style="display:none"></div>
-
-    <div class="section-title">Tendencia Semanal · 1ª Primera &amp; Merma <span class="src-tag">calidad@agbelher.com · promedio por semana</span></div>
-    <div class="card">
-      <div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div>
-    </div>
-
-    <div class="section-title">Báscula · Actividad de Pesaje <span class="src-tag">basculabelher@gmail.com</span></div>
-    <div class="card">
-      <div class="bascula-grid" id="bascWidget"></div>
-    </div>
-
-    <!-- ── Embarques ── -->
-    <div class="section-title" style="margin-top:28px">Embarques · TX / AZ · Cargas por Día <span class="src-tag">embarquesbelher@agbelher.com</span></div>
-    <div class="card-table">
-      <div class="tbl-wrap">
-        <table id="embTbl">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th class="td-center">Cargas</th>
-              <th>Producto</th>
-              <th>Destino</th>
-              <th>Unidad</th>
-              <th>Flota</th>
-              <th class="td-center">Estado</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- flotaResumen: redundante con embTbl + chartTomateFlota — oculto -->
-    <div id="flotaResumen" style="display:none"></div>
-
-    <div class="section-title">Volumen Diario de Embarques</div>
-    <div class="card">
-      <div class="chart-box"><canvas id="chartEmbarques"></canvas></div>
-    </div>
-
-    <div class="section-title">Volumen Semanal · Cajas Exportadas <span class="src-tag">Calavo Settlement WK01–WK12</span></div>
-    <div class="card">
-      <div class="chart-box" style="height:200px"><canvas id="chartTomateVolumen"></canvas></div>
-    </div>
-
-    <div class="section-title">Precio FOB Calavo vs Mercado USDA · Temporada 2025–2026 <span class="src-tag">Calavo Settlement + USDA Nogales · WK11–WK14 confirmado · WK01–WK10 estimado IA (USDA seasonal)</span></div>
-    <div class="card">
-      <div class="chart-box" style="height:240px"><canvas id="chartTomatePrecio"></canvas></div>
-    </div>
-
-    <div class="section-title" style="margin-top:0">Flota · Distribución por Transportista</div>
-    <div class="card" id="tomateFleetCard" style="padding:20px;max-width:340px">
-      <canvas id="chartTomateFlota" height="180"></canvas>
-    </div>
-
+  <!-- ══════════ CALIDAD & OPS (iframe → calidad-pesos.html) ══════════ -->
+  <div class="tab-panel" id="tab-optomate" style="padding:0;height:calc(100vh - 120px)">
+    <iframe
+      src="calidad-pesos.html?frame=1"
+      id="calidad-frame"
+      title="Calidad &amp; Operaciones"
+      style="width:100%;height:100%;border:none;display:block"
+      loading="lazy">
+    </iframe>
   </div>
+
+  <!-- Hidden stubs so existing JS references don't error -->
+  <div id="tomateHero"          style="display:none"></div>
+  <div id="tomateChannels"      style="display:none"></div>
+  <div id="tomatePaceStrip"     style="display:none"></div>
+  <div id="tomateCalavoStrip"   style="display:none"></div>
+  <div id="tomateCalidadSummary" style="display:none"></div>
+  <div id="outboundTitle"       style="display:none"></div>
+  <div id="calidadSummary"      style="display:none"></div>
+  <div id="qualidadRows"        style="display:none"></div>
+  <div id="calidadSemana"       style="display:none"></div>
+  <div id="bascWidget"          style="display:none"></div>
+  <div id="flotaResumen"        style="display:none"></div>
+  <div id="tomateOutboundFecha" style="display:none"></div>
+  <div id="tomateVariedadesAyer"   style="display:none"></div>
+  <div id="tomateVariedadesSemana" style="display:none"></div>
+  <canvas id="chartTomateCalidad" style="display:none"></canvas>
+  <canvas id="chartCalidad"       style="display:none"></canvas>
+  <canvas id="chartEmbarques"     style="display:none"></canvas>
+  <canvas id="chartTomateVolumen" style="display:none"></canvas>
+  <canvas id="chartTomatePrecio"  style="display:none"></canvas>
+  <canvas id="chartTomateFlota"   style="display:none"></canvas>
+  <table id="embTbl" style="display:none"><thead><tr></tr></thead><tbody></tbody></table>
 
   <!-- ══════════ CALAVO WEEKLY ══════════ -->
   <div class="tab-panel" id="tab-calavoweekly">
@@ -3726,37 +3662,18 @@ function checkPw(){
     <div id="cw-predicciones" style="display:none"></div>
   </div>
 
-  <!-- ══════════ OTROS ══════════ -->
-  <div class="tab-panel" id="tab-otros">
-
-    <!-- ── LIMÓN ── -->
-    <div class="section-title">Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
-    <div class="grid-4" id="limonKpis"></div>
-    <div id="limonClienteRisk"></div>
-    <div class="section-title">Precio FOB Nogales &amp; LA Terminal Market <span class="src-tag">USDA Market News · FOB Shipping Point + Terminal</span></div>
-    <div id="limonUsdaPrice"></div>
-    <div class="section-title">Histórico 12 Meses + Tendencia 4 Semanas <span class="src-tag">USDA Market News · Limón Persa 40lb carton</span></div>
-    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
-    <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
-    <div class="card" id="limonPnl" style="padding:24px"></div>
-
-    <!-- ── CHILE ── -->
-    <div class="section-title" style="margin-top:28px">Chile <span class="src-tag">Corbel Seeds Daily · USDA</span></div>
-    <div class="grid-3" id="chileKpis"></div>
-    <div class="section-title">Análisis de Mercado · Oportunidad</div>
-    <div id="chileContext"></div>
-
-    <!-- ── GRANOS ── -->
-    <div class="section-title" style="margin-top:28px">Granos · Temporada <span class="src-tag">jacruz@agbelher.com · P&amp;L Granos Jul–Feb 2026</span></div>
-    <div class="grid-4" id="granosKpis"></div>
-    <div class="section-title">P&amp;L Temporada · Jul 2025 – Feb 2026</div>
-    <div class="card" id="granosPnl" style="padding:24px"></div>
-    <div class="section-title">Métricas por Hectárea <span class="src-tag">cálculo interno</span></div>
-    <div id="granosCostMetrics"></div>
-    <div class="section-title">Notas Operativas</div>
-    <div class="card" id="granosNotas" style="padding:20px"></div>
-
-  </div>
+  <!-- Hidden stubs for ex-tab-otros JS references -->
+  <div id="limonKpis"        style="display:none"></div>
+  <div id="limonClienteRisk" style="display:none"></div>
+  <div id="limonUsdaPrice"   style="display:none"></div>
+  <div id="limonPnl"         style="display:none"></div>
+  <div id="chileKpis"        style="display:none"></div>
+  <div id="chileContext"     style="display:none"></div>
+  <div id="granosKpis"       style="display:none"></div>
+  <div id="granosPnl"        style="display:none"></div>
+  <div id="granosCostMetrics" style="display:none"></div>
+  <div id="granosNotas"      style="display:none"></div>
+  <canvas id="chartLimonPrecio" style="display:none"></canvas>
 
   <!-- ══════════ CERTIFICACIONES ══════════ -->
   <div class="tab-panel" id="tab-cert">

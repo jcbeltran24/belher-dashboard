@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calidad & Pesos — Belher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<style>
+:root{
+  --dark:#0c2117;--dark2:#162d1f;--green:#15803d;--green2:#16a34a;--green3:#22c55e;
+  --accent:#d97706;--accent2:#fbbf24;--red:#dc2626;--red2:#ef4444;--blue:#1d4ed8;
+  --purple:#7c3aed;--bg:#e6eee6;--bg2:#dbe6db;--border:#c5d9c5;
+  --text:#0f1f14;--muted:#6b7280;--card:#fff;--r:12px;--r-sm:8px;--r-lg:16px;
+  --shadow:0 1px 3px rgba(12,33,23,.06),0 4px 16px rgba(12,33,23,.08);
+  --shadow-md:0 4px 8px rgba(12,33,23,.08),0 12px 32px rgba(12,33,23,.12);
+  --font-num:'JetBrains Mono','Courier New',monospace;
+  /* ── Type scale (7 stops) ── */
+  --t-nano:.65rem;   /* 10.4px — minimum for uppercase/muted labels */
+  --t-xs:  .72rem;   /* 11.5px — secondary labels, table headers */
+  --t-sm:  .78rem;   /* 12.5px — table data, body */
+  --t-base:.875rem;  /* 14px   — default text */
+  --t-lg:  1.1rem;   /* 17.6px — overview metric values */
+  --t-xl:  1.2rem;   /* 19.2px — comparison big values */
+  --t-2xl: 1.45rem;  /* 23.2px — KPI stat-val */
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;font-size:14px}
+/* ── FRAME MODE (embedded via iframe ?frame=1) ── */
+body.frame{background:transparent;min-height:0}
+body.frame header{display:none}
+body.frame .filters{position:sticky;top:0;z-index:200}
+body.frame main{padding-top:8px}
+
+/* ── HEADER ── */
+header{background:var(--dark);height:46px;display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:100}
+header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,var(--accent2),var(--green3) 38%,rgba(34,197,94,0))}
+.h-logo{width:28px;height:28px;border-radius:7px;background:linear-gradient(140deg,var(--green2),var(--green3));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;color:#fff;flex-shrink:0}
+.h-title{font-size:.82rem;font-weight:700;color:#fff}
+.h-sub{font-size:var(--t-nano);color:rgba(255,255,255,.5);letter-spacing:.3px}
+.h-spacer{flex:1}
+.h-live{display:flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);font-size:var(--t-nano);font-weight:700;letter-spacing:.8px;color:#4ade80}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.8)}}
+#btn-refresh{display:flex;align-items:center;gap:5px;padding:0 10px;height:26px;border-radius:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.7);font-size:.65rem;font-weight:600;font-family:inherit;cursor:pointer;transition:.15s}
+#btn-refresh:hover{background:rgba(255,255,255,.14);color:#fff}
+#btn-refresh.spin svg{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── FILTERS BAR ── */
+.filters{background:var(--dark2);padding:5px 20px;display:flex;flex-direction:column;gap:5px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
+.f-row{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.f-label{font-size:var(--t-nano);font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.f-group{display:flex;flex-direction:column;gap:2px}
+/* Period pill group */
+.period-btns{display:flex;gap:1px;padding:2px;background:rgba(0,0,0,.18);border-radius:8px;flex-shrink:0}
+.p-btn{height:22px;padding:0 10px;border-radius:6px;background:transparent;border:none;color:rgba(255,255,255,.5);font-size:var(--t-nano);font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;transition:background .12s,color .12s}
+.p-btn:hover{background:rgba(255,255,255,.09);color:rgba(255,255,255,.85)}
+.p-btn.active{background:var(--accent2);color:var(--dark);font-weight:800;box-shadow:0 1px 4px rgba(251,191,36,.3)}
+.p-sep{width:1px;height:16px;background:rgba(255,255,255,.12);align-self:center;margin:0 1px;flex-shrink:0}
+
+/* Month picker */
+.mpicker-wrap{position:relative}
+.mpicker-btn{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.6);font-size:.65rem;font-weight:600;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap;transition:.14s}
+.mpicker-btn:hover{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.24);color:#fff}
+.mpicker-btn.mpactive{background:rgba(251,191,36,.16);border-color:rgba(251,191,36,.42);color:#fbbf24}
+.mpicker-pop{display:none;position:absolute;top:calc(100% + 7px);left:0;z-index:300;background:#fff;border:1px solid #d1fae5;border-radius:14px;box-shadow:0 16px 48px rgba(12,33,23,.22),0 3px 10px rgba(12,33,23,.1);width:248px;padding:14px;animation:mpfade .13s ease-out}
+@keyframes mpfade{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.mpicker-pop.mpopen{display:block}
+.mp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.mp-year-lbl{font-size:.9rem;font-weight:800;color:#0f1f14;letter-spacing:-.3px}
+.mp-nav{width:28px;height:28px;border-radius:7px;border:1px solid #e4ece4;background:#f8faf8;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:1rem;font-family:inherit;line-height:1;transition:.12s}
+.mp-nav:hover{background:#dcfce7;color:#15803d;border-color:#86efac}
+.mp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.mp-m{padding:8px 3px;border-radius:8px;border:none;background:none;font-family:inherit;font-size:.71rem;font-weight:600;color:#374151;cursor:pointer;transition:.1s;text-align:center;letter-spacing:0}
+.mp-m:hover:not(.mpfut){background:#f0fdf4;color:#15803d}
+.mp-m.mpsel{background:#fbbf24;color:#0c2117;font-weight:800;box-shadow:0 1px 4px rgba(251,191,36,.35)}
+.mp-m.mpfut{opacity:.25;pointer-events:none}
+.mp-today-hint{text-align:center;margin-top:11px;padding-top:10px;border-top:1px solid #f0f4f0;font-size:.6rem;color:#9ca3af;font-weight:500}
+
+/* Comparison button */
+.cmp-btn{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:.65rem;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:4px;transition:.14s}
+.cmp-btn:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.22)}
+.cmp-btn.active{background:rgba(124,58,237,.18);border-color:rgba(167,139,250,.4);color:#c4b5fd;font-weight:700}
+
+.f-select{height:24px;padding:0 8px;border-radius:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);color:#fff;font-size:.67rem;font-family:inherit;outline:none;transition:.15s;min-width:110px;cursor:pointer}
+.f-select:focus{border-color:rgba(251,191,36,.5);background:rgba(255,255,255,.1)}
+.f-select option{background:#162d1f;color:#fff}
+.f-reset{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);font-size:.63rem;font-weight:600;font-family:inherit;cursor:pointer;transition:.14s}
+.f-reset:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8)}
+.f-count{margin-left:auto;font-size:.6rem;color:rgba(255,255,255,.28);white-space:nowrap;font-variant-numeric:tabular-nums}
+.f-divider{width:1px;height:14px;background:rgba(255,255,255,.08);align-self:center;flex-shrink:0}
+
+/* ── TABS ── */
+.view-tabs{background:var(--dark2);display:flex;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;overflow-x:auto;scrollbar-width:none}
+.view-tabs::-webkit-scrollbar{display:none}
+.view-tab{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.36);padding:0 16px;height:34px;font-family:inherit;font-size:.73rem;font-weight:600;position:relative;transition:color .18s;white-space:nowrap;flex-shrink:0}
+.view-tab::after{content:'';position:absolute;bottom:0;left:10px;right:10px;height:2px;background:var(--accent2);border-radius:2px 2px 0 0;transform:scaleX(0);transition:transform .2s cubic-bezier(.4,0,.2,1)}
+.view-tab:hover{color:rgba(255,255,255,.7)}
+.view-tab.active{color:var(--accent2)}
+.view-tab.active::after{transform:scaleX(1)}
+
+/* ── MAIN ── */
+main{flex:1;padding:14px 20px 32px;max-width:1400px;width:100%;margin:0 auto}
+.panel{display:none}
+.panel.active{display:block}
+
+/* ── SECTION ── */
+.sec{display:flex;align-items:center;gap:8px;font-size:var(--t-nano);font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin:14px 0 9px}
+.sec:first-child{margin-top:0}
+.sec::before{content:'';width:3px;height:10px;border-radius:2px;background:linear-gradient(to bottom,var(--accent2),var(--green3));flex-shrink:0}
+.sec::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent)}
+
+/* ── STAT STRIP ── */
+.stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:12px}
+.stat{background:var(--card);border-radius:var(--r);padding:12px 14px;border:1px solid var(--border);box-shadow:var(--shadow);position:relative;overflow:hidden;transition:box-shadow .15s,transform .15s}
+.stat:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:var(--sc,var(--green2));border-radius:var(--r) var(--r) 0 0}
+.stat.cg{--sc:var(--green2)}.stat.ca{--sc:var(--accent)}.stat.cb{--sc:var(--blue)}.stat.cp{--sc:var(--purple)}.stat.cr{--sc:var(--red2)}
+.stat-lbl{font-size:var(--t-nano);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.stat-val{font-size:var(--t-2xl);font-weight:700;line-height:1;letter-spacing:-.5px;font-family:var(--font-num)}
+.stat.cg .stat-val{color:var(--green)}.stat.ca .stat-val{color:var(--accent)}.stat.cb .stat-val{color:var(--blue)}.stat.cp .stat-val{color:var(--purple)}.stat.cr .stat-val{color:var(--red)}
+.stat-unit{font-size:var(--t-xs);opacity:.55;margin-left:2px;font-weight:600;font-family:var(--font-num)}
+.stat-sub{font-size:var(--t-nano);color:var(--muted);margin-top:3px}
+
+/* ── GRID LAYOUTS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.g12{display:grid;grid-template-columns:1fr 2fr;gap:10px}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:10px}
+/* g3 / g12 / g21 → 2-col on iPad, g2 stays */
+@media(max-width:1023px){.g3{grid-template-columns:1fr 1fr}.g12,.g21{grid-template-columns:1fr 1fr}}
+/* all grids → 1-col on mobile */
+@media(max-width:640px){.g2,.g3,.g12,.g21{grid-template-columns:1fr;gap:10px}}
+
+/* ── CARD ── */
+.card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow)}
+.card-pad{padding:13px 15px}
+.card-title{font-size:var(--t-nano);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.chart-h{position:relative;height:190px}
+.chart-h canvas{max-height:220px}
+.chart-md{position:relative;height:220px}
+.chart-md canvas{max-height:260px}
+
+/* ── CALIDAD BADGES ── */
+.q1{background:#dcfce7;color:#15803d}.q2{background:#fef3c7;color:#92400e}.q3{background:#fee2e2;color:#dc2626}
+.badge{display:inline-flex;padding:2px 9px;border-radius:20px;font-size:var(--t-nano);font-weight:700;white-space:nowrap}
+
+/* ── TABLE ── */
+.tbl-wrap{overflow-x:auto;max-height:360px;overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:.74rem}
+thead{position:sticky;top:0;z-index:2}
+thead tr{background:var(--dark)}
+thead th{padding:7px 11px;text-align:left;font-size:var(--t-nano);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.6);white-space:nowrap}
+thead th.r{text-align:right}
+tbody tr{border-bottom:1px solid #f0f4f0;transition:background .1s}
+tbody tr:nth-child(even){background:#fafcfa}
+tbody tr:hover{background:#f0fdf4}
+tbody td{padding:6px 11px;vertical-align:middle}
+.td-n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;font-family:var(--font-num)}
+.td-m{font-family:monospace;font-size:.72rem;color:var(--muted)}
+
+/* ── PROGRESS ROWS ── */
+.prog-row{margin-bottom:7px}
+.prog-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px}
+.prog-name{font-size:.72rem;font-weight:600;color:var(--text)}
+.prog-qty{font-size:.72rem;font-weight:800;font-variant-numeric:tabular-nums}
+.prog-track{height:5px;background:var(--bg2);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+/* ── FILTER CONTEXT VISIBILITY ── */
+.f-palets-only { transition: opacity .2s; }
+.f-palets-only.dimmed { opacity: .28; pointer-events: none; }
+
+/* ── SEC TAG / SOURCE ── */
+.sec-tag{font-size:var(--t-xs);font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0}
+.sec-source{font-size:var(--t-nano);font-weight:600;letter-spacing:.6px;padding:2px 7px;border-radius:4px;background:rgba(22,163,74,.1);color:var(--green);margin-left:2px}
+
+/* ── INBOUND TEMP ALERT ── */
+.temp-ok  {color:var(--green)}
+.temp-warn{color:var(--accent)}
+.temp-hot {color:var(--red)}
+
+/* ── DELTA CHIPS ── */
+.delta{display:inline-flex;align-items:center;gap:1px;font-size:var(--t-nano);font-weight:700;padding:1px 5px;border-radius:8px;margin-top:3px;letter-spacing:.1px}
+.delta.up{background:#dcfce7;color:#15803d}
+.delta.dn{background:#fee2e2;color:#dc2626}
+.delta.neu{background:#f3f4f6;color:#6b7280}
+.stat-delta{min-height:16px}
+/* ── SEMAPHORE LEFT BAR ── */
+.stat::after{content:'';position:absolute;top:10%;left:0;bottom:10%;width:3px;border-radius:0 2px 2px 0;background:var(--sc,var(--green2));opacity:.7;transition:opacity .2s}
+.stat:hover::after{opacity:1}
+.s-good{--sc:var(--green2)}.s-warn{--sc:var(--accent)}.s-bad{--sc:var(--red2)}
+.s-warn{background:rgba(217,119,6,.03)}.s-bad{background:rgba(220,38,38,.03)}
+
+/* ── PANEL ENTER ANIMATION ── */
+@keyframes panelIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.panel.active{animation:panelIn .22s ease-out}
+.panel.active .stat{animation:panelIn .28s ease-out both}
+.panel.active .stat:nth-child(1){animation-delay:0ms}
+.panel.active .stat:nth-child(2){animation-delay:45ms}
+.panel.active .stat:nth-child(3){animation-delay:90ms}
+.panel.active .stat:nth-child(4){animation-delay:135ms}
+.panel.active .stat:nth-child(5){animation-delay:180ms}
+.panel.active .stat:nth-child(6){animation-delay:225ms}
+.panel.active .stat:nth-child(7){animation-delay:270ms}
+.panel.active .stat:nth-child(8){animation-delay:315ms}
+.panel.active .card{animation:panelIn .32s ease-out both;animation-delay:60ms}
+
+/* ── @media print ── */
+@media print{
+  header,.filters,.view-tabs,footer,#btn-refresh,.cmp-btn,.mpicker-wrap,#mp-backdrop{display:none!important}
+  body{background:#fff!important;font-size:11px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  main{padding:0!important;max-width:none}
+  .panel{display:block!important}
+  .panel:not(.active){display:none!important}
+  .stat,.card{break-inside:avoid;box-shadow:none!important;border:1px solid #ddd!important}
+  .g2,.g3,.g12,.g21{display:grid!important}
+  .tbl-wrap{max-height:none!important;overflow:visible!important}
+  table{font-size:9px}
+  thead tr{background:#333!important}
+}
+
+
+/* ── RESUMEN PANEL ── */
+.ov-card{background:var(--card);border-radius:var(--r);padding:13px 15px;border:1px solid var(--border);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+.ov-dept{font-size:var(--t-nano);font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px}
+.ov-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ov-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ov-m{display:flex;flex-direction:column;gap:1px}
+.ov-m-lbl{font-size:var(--t-nano);font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.ov-m-val{font-size:var(--t-lg);font-weight:700;letter-spacing:-.3px;line-height:1.1;font-family:var(--font-num)}
+.ov-m-sub{font-size:.57rem;color:var(--muted)}
+.ov-divider{height:1px;background:var(--border)}
+
+/* mini spark bars inside ov-card */
+.spark{display:flex;align-items:flex-end;gap:2px;height:26px}
+.spark-bar{flex:1;border-radius:2px 2px 0 0;min-height:2px;transition:height .3s}
+
+/* Alert banner inside cards */
+.ov-alert{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:6px;font-size:var(--t-nano);font-weight:600}
+.ov-alert.ok{background:#dcfce7;color:#15803d}
+.ov-alert.warn{background:#fef3c7;color:#92400e}
+.ov-alert.bad{background:#fee2e2;color:#dc2626}
+
+/* KPI comparison row */
+.cmp-row{display:grid;grid-template-columns:1fr auto 1fr;gap:0;background:var(--card);border-radius:var(--r);border:1px solid var(--border);overflow:hidden}
+.cmp-col{padding:10px 13px;display:flex;flex-direction:column;gap:2px}
+.cmp-col.act{background:rgba(22,163,74,.04)}
+.cmp-col.ant{background:rgba(217,119,6,.04)}
+.cmp-sep{width:1px;background:var(--border);align-self:stretch}
+.cmp-lbl-head{font-size:var(--t-nano);font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.cmp-big{font-size:var(--t-xl);font-weight:700;line-height:1;letter-spacing:-.4px;font-family:var(--font-num)}
+.cmp-act-val{color:var(--green)}
+.cmp-ant-val{color:var(--accent)}
+.cmp-small{font-size:.65rem;color:var(--muted)}
+
+/* ── ERROR / EMPTY ── */
+.err{display:none;align-items:center;gap:8px;padding:10px 14px;background:#fff5f5;border:1px solid #fecaca;border-radius:var(--r-sm);font-size:.78rem;color:#7f1d1d;margin-bottom:14px}
+.err.show{display:flex}
+.empty{text-align:center;padding:32px;color:var(--muted);font-size:.82rem}
+
+/* ── PESO ALERTA ── */
+.stat.peso-ok   { --sc: var(--green2); }
+.stat.peso-alto { --sc: var(--red2); border: 1px solid #fecaca; background: #fff5f5; }
+.stat.peso-bajo { --sc: var(--accent); border: 1px solid #fde68a; background: #fffbeb; }
+.stat.peso-alto .stat-val { color: var(--red); }
+.stat.peso-bajo .stat-val { color: var(--accent); }
+.peso-alert-icon { display: inline-flex; align-items: center; gap: 5px; font-size: .7rem; font-weight: 700; margin-top: 6px; padding: 3px 9px; border-radius: 20px; }
+.peso-alert-icon.alto { background: #fee2e2; color: #dc2626; }
+.peso-alert-icon.bajo { background: #fef3c7; color: #92400e; }
+.peso-alert-icon.ok   { background: #dcfce7; color: #15803d; }
+
+/* ── SKELETON ── */
+.skel{background:linear-gradient(90deg,var(--bg2) 25%,var(--border) 50%,var(--bg2) 75%);background-size:200% 100%;animation:shim 1.4s infinite;border-radius:4px;height:1.4em;display:inline-block;min-width:60px}
+@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding:7px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:10px}
+.ft-l{font-size:.62rem;color:rgba(255,255,255,.28);white-space:nowrap}
+.ft-r{font-size:.62rem;color:rgba(255,255,255,.28)}
+.ft-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0;overflow:hidden}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ─────────────────────────────────────────────────────────── */
+
+/* ── iPad / Tablet 641–1023px ───────────────────────────── */
+@media(min-width:641px) and (max-width:1023px){
+  header{padding:0 20px;gap:12px}
+  .h-sub{display:none}
+  .filters{padding:8px 20px}
+  main{padding:16px 20px 32px}
+  footer{padding:10px 20px}
+  .stat{padding:14px 16px}
+  .stat-val{font-size:1.48rem}
+  .chart-h{height:200px}
+  .chart-md{height:230px}
+}
+
+/* ── Mobile ≤640px ──────────────────────────────────────── */
+@media(max-width:640px){
+  /* Header */
+  header{padding:0 14px;gap:9px;height:50px}
+  .h-live{display:none}
+  .h-sub{display:none}
+  #btn-refresh{padding:0 10px;height:26px;gap:0;font-size:0}
+  #btn-refresh svg{width:13px;height:13px}
+
+  /* Filter bar — rows scroll horizontally so popup isn't clipped */
+  .filters{padding:6px 12px;gap:4px}
+  .f-row{flex-wrap:nowrap;overflow-x:auto;overflow-y:visible;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+  .f-row::-webkit-scrollbar{display:none}
+  .f-count{display:none}
+  .f-label{font-size:.48rem}
+  .f-select{min-width:96px;height:26px;font-size:.66rem;padding:0 8px}
+  .f-reset{height:26px;padding:0 9px;font-size:.65rem}
+  .period-btns{flex-shrink:0}
+  .p-btn{padding:0 9px;font-size:.63rem;height:23px}
+  .mpicker-btn,.cmp-btn{height:26px;padding:0 9px;font-size:.63rem;flex-shrink:0;gap:4px}
+  .f-divider{height:16px;margin:0 1px}
+
+  /* Month picker → bottom sheet */
+  .mpicker-pop{
+    position:fixed;bottom:0;left:0;right:0;top:auto;
+    width:100%;border-radius:18px 18px 0 0;
+    padding:16px 16px calc(20px + env(safe-area-inset-bottom));
+    box-shadow:0 -6px 40px rgba(12,33,23,.25);
+    animation:mpslide .22s cubic-bezier(.32,.72,0,1);
+    z-index:400;
+  }
+  @keyframes mpslide{from{transform:translateY(100%);opacity:.5}to{transform:none;opacity:1}}
+  .mpicker-pop::before{
+    content:'';display:block;width:36px;height:4px;border-radius:2px;
+    background:#d1d5db;margin:0 auto 14px;
+  }
+  .mp-grid{gap:6px}
+  .mp-m{padding:10px 4px;font-size:.75rem}
+  .mp-today-hint{font-size:.62rem;margin-top:12px;padding-top:12px}
+
+  /* Tabs */
+  .view-tab{padding:0 13px;height:36px;font-size:.7rem}
+  .view-tabs{padding:0}
+
+  /* Main */
+  main{padding:12px 12px 24px}
+
+  /* Stats: 2-col */
+  .stat-strip{grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+  .stat{padding:12px 13px}
+  .stat::before{border-radius:var(--r) var(--r) 0 0}
+  .stat-val{font-size:1.28rem;letter-spacing:-.3px}
+  .stat-lbl{font-size:.5rem;margin-bottom:5px;letter-spacing:.8px}
+  .stat-sub{font-size:.58rem;margin-top:3px}
+  .stat-unit{font-size:.65rem}
+
+  /* Charts */
+  .chart-h{height:165px}
+  .chart-md{height:180px}
+
+  /* Cards */
+  .card-pad{padding:13px 13px}
+  .card-title{font-size:.52rem;margin-bottom:9px;gap:5px}
+
+  /* Tables */
+  .tbl-wrap{max-height:300px}
+  table{font-size:.69rem}
+  thead th{padding:7px 9px;font-size:.5rem;letter-spacing:.5px}
+  tbody td{padding:7px 9px}
+
+  /* Section headers */
+  .sec{font-size:.5rem;letter-spacing:1.1px;margin:14px 0 10px;gap:7px}
+  .sec::before{height:10px}
+
+  /* Progress bars */
+  .prog-name,.prog-qty{font-size:.7rem}
+
+  /* Footer */
+  footer{padding:9px 14px;flex-direction:column;align-items:flex-start;gap:3px}
+  .ft-meta{display:none}
+}
+
+/* ── Very small phones ≤380px ───────────────────────────── */
+@media(max-width:380px){
+  .h-title{font-size:.78rem}
+  .h-logo{width:28px;height:28px;font-size:10px;border-radius:7px}
+  header{gap:7px;padding:0 11px}
+  .filters{padding:5px 10px}
+  main{padding:10px 10px 20px}
+  .stat-val{font-size:1.14rem}
+  .stat{padding:10px 11px}
+  .p-btn{padding:0 8px;font-size:.6rem}
+  table{font-size:.65rem}
+}
+
+/* Overview card metrics on small screens */
+@media(max-width:480px){
+  .ov-metrics{grid-template-columns:repeat(3,1fr);gap:8px}
+  .ov-m-val{font-size:1rem}
+  .cmp-row{grid-template-columns:1fr auto 1fr}
+  .cmp-big{font-size:1.1rem}
+}
+
+/* ── Touch: remove hover lift on touch devices ──────────── */
+@media(hover:none){
+  .stat:hover{box-shadow:var(--shadow);transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="h-logo">AB</div>
+  <div>
+    <div class="h-title">Calidad &amp; Pesos</div>
+    <div class="h-sub">ABSA · EYE Live · vw_acarreos + vw_palets</div>
+  </div>
+  <div class="h-spacer"></div>
+  <div class="h-live"><div class="live-dot"></div>EN VIVO</div>
+  <button id="btn-refresh" onclick="loadData(true)" aria-label="Actualizar datos">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+    Actualizar
+  </button>
+</header>
+
+<!-- FILTERS -->
+<div class="filters">
+  <!-- Row 1: period pills + month picker + comparison -->
+  <div class="f-row">
+    <div class="period-btns">
+      <button class="p-btn" data-period="hoy">Hoy</button>
+      <button class="p-btn" data-period="semana">Semana</button>
+      <button class="p-btn" data-period="mes">Mes actual</button>
+      <div class="p-sep"></div>
+      <button class="p-btn" data-period="ciclo">Ciclo</button>
+      <button class="p-btn" data-period="dos-ciclos">2 Ciclos</button>
+    </div>
+
+    <!-- Month picker popover -->
+    <div class="mpicker-wrap" id="mpicker-wrap">
+      <button class="mpicker-btn" id="mpicker-btn" onclick="openMPicker(event)" aria-label="Seleccionar mes">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span id="mpicker-lbl">Por mes</span>
+        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mpicker-pop" id="mpicker-pop" role="dialog" aria-modal="true" aria-label="Selector de mes">
+        <div class="mp-header">
+          <button class="mp-nav" onclick="mpNavYear(-1)" aria-label="Año anterior">&#8249;</button>
+          <span class="mp-year-lbl" id="mp-year-lbl">2026</span>
+          <button class="mp-nav" onclick="mpNavYear(1)" aria-label="Año siguiente">&#8250;</button>
+        </div>
+        <div class="mp-grid" id="mp-grid"></div>
+        <div class="mp-today-hint">Selecciona un mes para cargarlo completo</div>
+      </div>
+    </div>
+
+    <div class="f-divider"></div>
+
+    <!-- Comparison toggle -->
+    <button class="cmp-btn" id="btn-cmp" onclick="toggleComparison()" aria-label="Comparar con ciclo anterior">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      <span id="cmp-lbl">vs anterior</span>
+    </button>
+  </div>
+
+  <!-- Row 2: dimension filters -->
+  <div class="f-row">
+    <div class="f-group">
+      <div class="f-label">Cultivo</div>
+      <select class="f-select" id="f-cultivo"><option value="">Todos</option></select>
+    </div>
+    <div class="f-group f-palets-only">
+      <div class="f-label">Etiqueta</div>
+      <select class="f-select" id="f-etiqueta"><option value="">Todas</option></select>
+    </div>
+    <div class="f-group f-palets-only">
+      <div class="f-label">Calidad</div>
+      <select class="f-select" id="f-calidad">
+        <option value="">Todas</option>
+        <option>PRIMERA</option>
+        <option>SEGUNDA</option>
+        <option>TERCERA</option>
+      </select>
+    </div>
+    <div class="f-group f-palets-only">
+      <div class="f-label">Tamaño</div>
+      <select class="f-select" id="f-tamano"><option value="">Todos</option></select>
+    </div>
+    <button class="f-reset" onclick="resetDimFilters()">Limpiar</button>
+    <div class="f-count" id="f-count"></div>
+  </div>
+</div>
+
+<!-- VIEW TABS -->
+<div class="view-tabs">
+  <button class="view-tab" data-panel="panel-resumen">Resumen</button>
+  <button class="view-tab active" data-panel="panel-calidad">Calidades · Empaque</button>
+  <button class="view-tab" data-panel="panel-pesos">Pesos · Báscula</button>
+  <button class="view-tab" data-panel="panel-tomate">Tomate</button>
+  <button class="view-tab" data-panel="panel-limon">Limón</button>
+  <button class="view-tab" data-panel="panel-chile">Chile</button>
+  <button class="view-tab" data-panel="panel-inbound">Inbound · Campo</button>
+</div>
+
+<main>
+  <div class="err" id="err-banner">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span id="err-text">Error al cargar.</span>
+  </div>
+
+  <!-- ══ PANEL: RESUMEN ════════════════════════════════════ -->
+  <div class="panel" id="panel-resumen">
+
+    <div class="sec">Vista General <span class="sec-tag" id="res-rng">—</span></div>
+
+    <!-- 3 department overview cards -->
+    <div class="g3" style="margin-bottom:10px">
+
+      <!-- Empaque -->
+      <div class="ov-card">
+        <div class="ov-dept"><div class="ov-dot" style="background:var(--green2)"></div>Calidad · Empaque</div>
+        <div class="ov-metrics">
+          <div class="ov-m">
+            <div class="ov-m-lbl">% Primera</div>
+            <div class="ov-m-val" id="rv-p1" style="color:var(--green)"><span class="skel"></span></div>
+            <div id="rv-p1-delta"></div>
+          </div>
+          <div class="ov-m">
+            <div class="ov-m-lbl">Cajas</div>
+            <div class="ov-m-val" id="rv-cajas"><span class="skel"></span></div>
+            <div id="rv-cajas-delta"></div>
+          </div>
+          <div class="ov-m">
+            <div class="ov-m-lbl">% Merma</div>
+            <div class="ov-m-val" id="rv-merma-emp" style="color:var(--red)"><span class="skel"></span></div>
+            <div id="rv-merma-emp-delta"></div>
+          </div>
+        </div>
+        <div class="ov-divider"></div>
+        <div id="rv-emp-alert" class="ov-alert ok" style="display:none"></div>
+        <!-- Spark bars -->
+        <div>
+          <div style="font-size:.52rem;color:var(--muted);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">% Primera — últimas semanas</div>
+          <div class="spark" id="rv-emp-spark"></div>
+        </div>
+      </div>
+
+      <!-- Báscula -->
+      <div class="ov-card">
+        <div class="ov-dept"><div class="ov-dot" style="background:var(--blue)"></div>Báscula · Pesos</div>
+        <div class="ov-metrics">
+          <div class="ov-m">
+            <div class="ov-m-lbl">Neto Total</div>
+            <div class="ov-m-val" id="rv-neto" style="color:var(--green)"><span class="skel"></span></div>
+            <div id="rv-neto-delta"></div>
+          </div>
+          <div class="ov-m">
+            <div class="ov-m-lbl">Remisiones</div>
+            <div class="ov-m-val" id="rv-rems"><span class="skel"></span></div>
+          </div>
+          <div class="ov-m">
+            <div class="ov-m-lbl">Prom/Rem.</div>
+            <div class="ov-m-val" id="rv-avg-rem"><span class="skel"></span></div>
+            <div id="rv-avg-delta"></div>
+          </div>
+        </div>
+        <div class="ov-divider"></div>
+        <div>
+          <div style="font-size:.52rem;color:var(--muted);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">Neto diario — t</div>
+          <div class="spark" id="rv-bas-spark"></div>
+        </div>
+      </div>
+
+      <!-- Inbound -->
+      <div class="ov-card">
+        <div class="ov-dept"><div class="ov-dot" style="background:var(--purple)"></div>Inbound · Campo</div>
+        <div class="ov-metrics">
+          <div class="ov-m">
+            <div class="ov-m-lbl">% Primera</div>
+            <div class="ov-m-val" id="rv-inb-p1"><span class="skel"></span></div>
+          </div>
+          <div class="ov-m">
+            <div class="ov-m-lbl">% Merma</div>
+            <div class="ov-m-val" id="rv-inb-merma" style="color:var(--accent)"><span class="skel"></span></div>
+          </div>
+          <div class="ov-m">
+            <div class="ov-m-lbl">Temp. Prom</div>
+            <div class="ov-m-val" id="rv-inb-temp"><span class="skel"></span></div>
+          </div>
+        </div>
+        <div class="ov-divider"></div>
+        <div id="rv-inb-alert" class="ov-alert ok" style="display:none"></div>
+        <div>
+          <div style="font-size:.52rem;color:var(--muted);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">% Primera campo — diario</div>
+          <div class="spark" id="rv-inb-spark"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Comparativo ciclo anterior -->
+    <div class="sec">Comparativo vs Ciclo Anterior</div>
+    <div class="g2" style="margin-bottom:10px">
+      <div class="cmp-row">
+        <div class="cmp-col act">
+          <div class="cmp-lbl-head" id="res-lbl-act">Ciclo Actual</div>
+          <div class="cmp-big cmp-act-val" id="res-neto-act"><span class="skel"></span></div>
+          <div class="cmp-small">toneladas neto báscula</div>
+          <div style="margin-top:8px" class="cmp-lbl-head">% Primera empaque</div>
+          <div class="cmp-big cmp-act-val" id="res-p1-act">—</div>
+        </div>
+        <div class="cmp-sep"></div>
+        <div class="cmp-col ant">
+          <div class="cmp-lbl-head" id="res-lbl-ant">Ciclo Anterior</div>
+          <div class="cmp-big cmp-ant-val" id="res-neto-ant"><span class="skel"></span></div>
+          <div class="cmp-small">toneladas neto báscula</div>
+          <div style="margin-top:8px" class="cmp-lbl-head">% Primera empaque</div>
+          <div class="cmp-big cmp-ant-val" id="res-p1-ant">—</div>
+        </div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-col act">
+          <div class="cmp-lbl-head">Cajas Empacadas</div>
+          <div class="cmp-big cmp-act-val" id="res-cajas-act"><span class="skel"></span></div>
+          <div class="cmp-small">cajas totales empaque</div>
+          <div style="margin-top:8px" class="cmp-lbl-head">Jornadas con cosecha</div>
+          <div class="cmp-big cmp-act-val" id="res-dias-act">—</div>
+        </div>
+        <div class="cmp-sep"></div>
+        <div class="cmp-col ant">
+          <div class="cmp-lbl-head">Cajas Empacadas</div>
+          <div class="cmp-big cmp-ant-val" id="res-cajas-ant"><span class="skel"></span></div>
+          <div class="cmp-small">cajas totales empaque</div>
+          <div style="margin-top:8px" class="cmp-lbl-head">Jornadas con cosecha</div>
+          <div class="cmp-big cmp-ant-val" id="res-dias-ant">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tendencia semanal combinada -->
+    <div class="card card-pad" style="margin-bottom:10px">
+      <div class="card-title">Tendencia Semanal · Neto Báscula (toneladas)
+        <span style="display:inline-flex;align-items:center;gap:12px;margin-left:8px">
+          <span style="display:inline-flex;align-items:center;gap:4px;font-weight:700;color:#16a34a">
+            <span style="width:18px;height:3px;background:#16a34a;border-radius:2px;display:inline-block"></span>Ciclo actual
+          </span>
+          <span style="display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#d97706;opacity:.8">
+            <span style="width:18px;height:3px;background:#d97706;border-radius:2px;border-bottom:2px dashed #d97706;display:inline-block"></span>Ciclo anterior
+          </span>
+        </span>
+      </div>
+      <div style="position:relative;height:240px"><canvas id="chart-res-trend"></canvas></div>
+    </div>
+
+  </div><!-- /panel-resumen -->
+
+  <!-- ══ PANEL: CALIDADES ══════════════════════════════════ -->
+  <div class="panel active" id="panel-calidad">
+
+    <div class="sec">Resumen de Calidad <span id="cal-rng" style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.7rem;color:var(--muted)"></span></div>
+    <div class="stat-strip">
+      <div class="stat cg"><div class="stat-lbl">Cajas Totales</div><div class="stat-val" id="s-bultos"><span class="skel"></span></div><div class="stat-sub" id="s-palets">— palets</div><div class="stat-delta" id="d-bultos"></div></div>
+      <div class="stat cg"><div class="stat-lbl">% Primera</div><div class="stat-val" id="s-p1"><span class="skel"></span></div><div class="stat-sub">del empaque</div><div class="stat-delta" id="d-p1"></div></div>
+      <div class="stat ca"><div class="stat-lbl">% Segunda</div><div class="stat-val" id="s-p2"><span class="skel"></span></div><div class="stat-sub">del empaque</div><div class="stat-delta" id="d-p2"></div></div>
+      <div class="stat cr"><div class="stat-lbl">% Tercera</div><div class="stat-val" id="s-p3"><span class="skel"></span></div><div class="stat-sub">del empaque</div><div class="stat-delta" id="d-p3"></div></div>
+      <div class="stat" id="stat-peso-prom"><div class="stat-lbl">Peso Prom/Bulto <span style="font-size:.6rem;font-weight:500;opacity:.7">obj. 11.8 kg</span></div><div class="stat-val" id="s-peso-prom"><span class="skel"></span></div><div class="stat-sub" id="s-peso-prom-sub">kg promedio</div><div class="stat-delta" id="d-peso-prom"></div></div>
+    </div>
+
+    <!-- Tendencia semanal % Primera + volumen -->
+    <div class="card card-pad" style="margin-bottom:10px">
+      <div class="card-title">Tendencia Semanal
+        <span style="display:inline-flex;align-items:center;gap:12px;margin-left:8px">
+          <span style="display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#16a34a"><span style="width:14px;height:3px;background:#16a34a;border-radius:2px;display:inline-block"></span>% Primera</span>
+          <span style="display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#1d4ed8"><span style="width:14px;height:10px;background:rgba(29,78,216,.25);border-radius:2px;display:inline-block"></span>Cajas</span>
+        </span>
+      </div>
+      <div style="position:relative;height:200px"><canvas id="chart-cal-trend"></canvas></div>
+    </div>
+
+    <div class="g12" style="margin-bottom:10px">
+      <!-- Donut calidad -->
+      <div class="card card-pad">
+        <div class="card-title">Distribución de Calidad</div>
+        <div class="chart-h"><canvas id="chart-donut"></canvas></div>
+      </div>
+      <!-- Calidad por cultivo -->
+      <div class="card card-pad">
+        <div class="card-title">Calidad por Cultivo · Cajas</div>
+        <div class="chart-md"><canvas id="chart-cal-cultivo"></canvas></div>
+      </div>
+    </div>
+
+    <div class="g2" style="margin-bottom:10px">
+      <!-- Bultos por tamaño -->
+      <div class="card card-pad">
+        <div class="card-title">Bultos por Tamaño</div>
+        <div id="tamano-bars" style="display:flex;flex-direction:column;gap:10px;padding-top:4px"></div>
+      </div>
+      <!-- Bultos por etiqueta -->
+      <div class="card card-pad">
+        <div class="card-title">Bultos por Etiqueta / Canal</div>
+        <div class="chart-h"><canvas id="chart-etiqueta"></canvas></div>
+      </div>
+    </div>
+
+    <div class="sec">Detalle de Palets</div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Fecha</th><th>Cultivo</th><th>Etiqueta</th>
+            <th>Calidad</th><th>Tamaño</th><th>Color</th>
+            <th class="r">Bultos</th><th class="r">Peso kg</th><th class="r">Precio</th>
+          </tr></thead>
+          <tbody id="cal-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /panel-calidad -->
+
+  <!-- ══ PANEL: PESOS ═════════════════════════════════════ -->
+  <div class="panel" id="panel-pesos">
+
+    <div class="sec">Resumen de Acarreo / Báscula</div>
+    <div class="stat-strip">
+      <div class="stat cg"><div class="stat-lbl">Neto Total</div><div class="stat-val" id="ps-neto"><span class="skel"></span></div><div class="stat-sub" id="ps-remisiones">— remisiones</div><div class="stat-delta" id="d-neto"></div></div>
+      <div class="stat cb"><div class="stat-lbl">Bruto Total</div><div class="stat-val" id="ps-bruto"><span class="skel"></span></div><div class="stat-sub">kg brutos</div></div>
+      <div class="stat ca"><div class="stat-lbl">Tara Total</div><div class="stat-val" id="ps-tara"><span class="skel"></span></div><div class="stat-sub">kg descontados</div></div>
+      <div class="stat cp"><div class="stat-lbl">Neto Prom/Rem.</div><div class="stat-val" id="ps-avg"><span class="skel"></span></div><div class="stat-sub">kg por remisión</div><div class="stat-delta" id="d-avg"></div></div>
+      <div class="stat cg"><div class="stat-lbl">Mejor Día</div><div class="stat-val" id="ps-peak"><span class="skel"></span></div><div class="stat-sub" id="ps-peak-date">—</div></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:10px">
+      <div class="card card-pad">
+        <div class="card-title">Neto Diario · Toneladas</div>
+        <div class="chart-md"><canvas id="chart-pesos-dia"></canvas></div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title">Neto por Cultivo · kg</div>
+        <div id="cultivo-bars" style="display:flex;flex-direction:column;gap:10px;padding-top:4px"></div>
+      </div>
+    </div>
+
+    <div class="sec">Remisiones · Báscula</div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Fecha</th><th>Cultivo</th><th>Caseta</th>
+            <th class="r">Bruto kg</th><th class="r">Tara kg</th><th class="r">Neto kg</th><th class="r">Neto t</th>
+          </tr></thead>
+          <tbody id="pesos-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /panel-pesos -->
+
+  <!-- ══ PANEL: PRODUCCIÓN TOMATE ══════════════════════════ -->
+  <div class="panel" id="panel-tomate">
+
+    <!-- KPI strip -->
+    <div class="sec">Resumen de Producción
+      <span class="sec-tag" id="tom-range-lbl">—</span>
+      <span class="sec-source">vw_acarreos · detalles</span>
+    </div>
+    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+      <div class="stat cg"><div class="stat-lbl">Producción Total</div><div class="stat-val" id="tom-total"><span class="skel"></span></div><div class="stat-sub" id="tom-total-sub">—</div></div>
+      <div class="stat cr"><div class="stat-lbl">Tomate Roma</div><div class="stat-val" id="tom-roma"><span class="skel"></span></div><div class="stat-sub" id="tom-roma-pct">—</div></div>
+      <div class="stat cg"><div class="stat-lbl">Tomate Bola</div><div class="stat-val" id="tom-bola"><span class="skel"></span></div><div class="stat-sub" id="tom-bola-pct">—</div></div>
+      <div class="stat cb"><div class="stat-lbl">Jornadas</div><div class="stat-val" id="tom-dias"><span class="skel"></span></div><div class="stat-sub">días con cosecha</div></div>
+      <div class="stat" id="tom-prom-card"><div class="stat-lbl">Peso Prom Roma <span style="opacity:.6;font-weight:400">obj. 8 kg</span></div><div class="stat-val" id="tom-prom-roma"><span class="skel"></span></div><div class="stat-sub" id="tom-prom-roma-sub">kg/balde</div></div>
+      <div class="stat" id="tom-prom-bola-card"><div class="stat-lbl">Peso Prom Bola <span style="opacity:.6;font-weight:400">obj. 16 kg</span></div><div class="stat-val" id="tom-prom-bola"><span class="skel"></span></div><div class="stat-sub" id="tom-prom-bola-sub">kg/caja</div></div>
+      <div class="stat cg"><div class="stat-lbl">Greenhouse <span style="font-size:.55rem;padding:1px 5px;border-radius:4px;background:rgba(22,163,74,.15);color:#15803d;font-weight:700">GH</span></div><div class="stat-val" id="tom-gh"><span class="skel"></span></div><div class="stat-sub" id="tom-gh-pct">—</div></div>
+      <div class="stat ca"><div class="stat-lbl">Open Field <span style="font-size:.55rem;padding:1px 5px;border-radius:4px;background:rgba(217,119,6,.15);color:#92400e;font-weight:700">OF</span></div><div class="stat-val" id="tom-of"><span class="skel"></span></div><div class="stat-sub" id="tom-of-pct">—</div></div>
+    </div>
+
+    <!-- Row 1: weekly bars + lote split -->
+    <div class="g21" style="margin-bottom:10px">
+      <div class="card card-pad">
+        <div class="card-title">Producción Semanal por Cultivo · Toneladas
+          <span style="display:inline-flex;align-items:center;gap:10px;margin-left:8px">
+            <span style="display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#dc2626"><span style="width:12px;height:12px;background:#dc2626;border-radius:3px;display:inline-block"></span>Roma</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#16a34a"><span style="width:12px;height:12px;background:#16a34a;border-radius:3px;display:inline-block"></span>Bola</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#d97706"><span style="width:12px;height:12px;background:#d97706;border-radius:3px;display:inline-block"></span>Otros</span>
+          </span>
+        </div>
+        <div style="position:relative;height:240px"><canvas id="chart-tom-semana"></canvas></div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title">Por Lote</div>
+        <div id="tom-lote-bars" style="display:flex;flex-direction:column;gap:10px"></div>
+        <div class="card-title" style="margin-top:20px">Por Color</div>
+        <div style="position:relative;height:130px"><canvas id="chart-tom-color"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Row 2: peso promedio trend + caseta ranking -->
+    <div class="g2" style="margin-bottom:10px">
+      <div class="card card-pad">
+        <div class="card-title">Peso Promedio / Unidad · Semanal
+          <span style="display:inline-flex;align-items:center;gap:10px;margin-left:8px">
+            <span style="font-weight:600;color:#dc2626">— Roma</span>
+            <span style="font-weight:600;color:#16a34a">— Bola</span>
+          </span>
+        </div>
+        <div style="position:relative;height:220px"><canvas id="chart-tom-prom"></canvas></div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title">Top Casetas · kg Total</div>
+        <div id="tom-caseta-bars" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto"></div>
+      </div>
+    </div>
+
+    <!-- Detail table -->
+    <div class="sec">Detalle de Acarreo · Tomate</div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Fecha</th><th>Sem</th><th>Lote</th><th>Caseta</th>
+            <th>Cultivo</th><th>Color</th><th>Tipo</th>
+            <th class="r">Cantidad</th><th class="r">Kg Total</th>
+            <th class="r">Prom kg</th><th class="r">Dif. target</th>
+          </tr></thead>
+          <tbody id="tom-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /panel-tomate -->
+
+  <!-- ══ PANEL: LIMÓN ═══════════════════════════════════════ -->
+  <div class="panel" id="panel-limon">
+    <div class="sec">Producción Limón
+      <span class="sec-tag" id="lim-range-lbl">—</span>
+      <span class="sec-source">vw_acarreos · detalles</span>
+    </div>
+    <div class="stat-strip">
+      <div class="stat cg"><div class="stat-lbl">Total Limón</div><div class="stat-val" id="lim-total"><span class="skel"></span></div><div class="stat-sub" id="lim-total-sub">—</div></div>
+      <div class="stat cb"><div class="stat-lbl">Jornadas</div><div class="stat-val" id="lim-dias"><span class="skel"></span></div><div class="stat-sub">días con cosecha</div></div>
+      <div class="stat ca"><div class="stat-lbl">Prom kg/unidad</div><div class="stat-val" id="lim-prom"><span class="skel"></span></div><div class="stat-sub">kg promedio</div></div>
+    </div>
+    <div class="g2" style="margin-bottom:10px">
+      <div class="card card-pad">
+        <div class="card-title">Producción Semanal · Toneladas</div>
+        <div style="position:relative;height:220px"><canvas id="chart-lim-sem"></canvas></div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title">Por Caseta</div>
+        <div id="lim-caseta-bars" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+    </div>
+    <div class="sec">Detalle</div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Fecha</th><th>Sem</th><th>Lote</th><th>Caseta</th><th>Cultivo</th><th>Color</th><th class="r">Cantidad</th><th class="r">Kg</th><th class="r">Prom kg</th></tr></thead>
+          <tbody id="lim-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /panel-limon -->
+
+  <!-- ══ PANEL: CHILE ════════════════════════════════════════ -->
+  <div class="panel" id="panel-chile">
+    <div class="sec">Producción Chile
+      <span class="sec-tag" id="chi-range-lbl">—</span>
+      <span class="sec-source">vw_acarreos · detalles</span>
+    </div>
+    <div class="stat-strip">
+      <div class="stat ca"><div class="stat-lbl">Total Chile</div><div class="stat-val" id="chi-total"><span class="skel"></span></div><div class="stat-sub" id="chi-total-sub">—</div></div>
+      <div class="stat cb"><div class="stat-lbl">Jornadas</div><div class="stat-val" id="chi-dias"><span class="skel"></span></div><div class="stat-sub">días con cosecha</div></div>
+      <div class="stat cp"><div class="stat-lbl">Variedades</div><div class="stat-val" id="chi-vars"><span class="skel"></span></div><div class="stat-sub">tipos distintos</div></div>
+    </div>
+    <div class="g2" style="margin-bottom:10px">
+      <div class="card card-pad">
+        <div class="card-title">Producción Semanal · Toneladas</div>
+        <div style="position:relative;height:220px"><canvas id="chart-chi-sem"></canvas></div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title">Por Variedad · kg</div>
+        <div id="chi-var-bars" style="display:flex;flex-direction:column;gap:9px"></div>
+      </div>
+    </div>
+    <div class="sec">Detalle</div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Fecha</th><th>Sem</th><th>Lote</th><th>Caseta</th><th>Variedad</th><th>Color</th><th class="r">Cantidad</th><th class="r">Kg</th><th class="r">Prom kg</th></tr></thead>
+          <tbody id="chi-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /panel-chile -->
+
+  <!-- ══ PANEL: INBOUND · CAMPO ═══════════════════════════ -->
+  <div class="panel" id="panel-inbound">
+
+    <div class="sec">Calidad Inbound · Campo
+      <span class="sec-tag" id="inb-range-lbl">—</span>
+      <span class="sec-source">vw_inbound</span>
+    </div>
+
+    <!-- KPI strip -->
+    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(155px,1fr))">
+      <div class="stat cg">
+        <div class="stat-lbl">% Primera <span style="opacity:.55;font-weight:400;font-size:.58rem">obj. ≥ 65%</span></div>
+        <div class="stat-val" id="inb-primera"><span class="skel"></span></div>
+        <div class="stat-sub" id="inb-primera-sub">—</div>
+      </div>
+      <div class="stat ca" id="inb-merma-card">
+        <div class="stat-lbl">% Merma <span style="opacity:.55;font-weight:400;font-size:.58rem">obj. &lt; 8%</span></div>
+        <div class="stat-val" id="inb-merma"><span class="skel"></span></div>
+        <div class="stat-sub">promedio</div>
+      </div>
+      <div class="stat cb">
+        <div class="stat-lbl">Temperatura Fruto <span style="opacity:.55;font-weight:400;font-size:.58rem">obj. &lt; 28°C</span></div>
+        <div class="stat-val" id="inb-temp"><span class="skel"></span></div>
+        <div class="stat-sub">°C promedio</div>
+      </div>
+      <div class="stat cp">
+        <div class="stat-lbl">Frutos Inspeccionados</div>
+        <div class="stat-val" id="inb-frutos"><span class="skel"></span></div>
+        <div class="stat-sub" id="inb-registros">— registros</div>
+      </div>
+      <div class="stat">
+        <div class="stat-lbl">% Fuera Color</div>
+        <div class="stat-val" id="inb-fcolor"><span class="skel"></span></div>
+        <div class="stat-sub" id="inb-ftamano">—% fuera tamaño</div>
+      </div>
+    </div>
+
+    <!-- Row 1: trend % primera + top daños -->
+    <div class="g2" style="margin-bottom:10px">
+      <div class="card card-pad">
+        <div class="card-title">Tendencia % Primera · Diario</div>
+        <div style="position:relative;height:220px"><canvas id="chart-inb-primera"></canvas></div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title">Top Daños · Acumulado</div>
+        <div id="inb-danos-bars" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto"></div>
+      </div>
+    </div>
+
+    <!-- Row 2: colores donut + casetas -->
+    <div class="g2" style="margin-bottom:10px">
+      <div class="card card-pad">
+        <div class="card-title">Distribución de Colores</div>
+        <div style="position:relative;height:220px"><canvas id="chart-inb-colores"></canvas></div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title">% Primera por Caseta</div>
+        <div id="inb-caseta-bars" style="display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto"></div>
+      </div>
+    </div>
+
+    <!-- Detail table -->
+    <div class="sec">Detalle de Inspecciones</div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Fecha</th><th>Caseta</th><th>Variedad</th>
+            <th class="r">Frutos</th>
+            <th class="r">Primera %</th><th class="r">Segunda %</th>
+            <th class="r">Merma %</th>
+            <th class="r">Temp °C</th>
+            <th class="r">F.Color %</th>
+          </tr></thead>
+          <tbody id="inb-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /panel-inbound -->
+
+</main>
+
+<!-- Mobile month picker backdrop -->
+<div id="mp-backdrop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:399;backdrop-filter:blur(2px)" onclick="closeMPicker()"></div>
+
+<footer>
+  <div class="ft-l">Agrícola Belher S.A. de C.V.</div>
+  <div class="ft-meta">
+    <div style="font-size:.58rem;color:rgba(255,255,255,.22);font-family:monospace;max-width:500px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="ft-urls">—</div>
+    <div class="ft-r" id="ft-updated">—</div>
+  </div>
+</footer>
+
+<script>
+/* ── API ──────────────────────────────────────────────── */
+const API = {
+  url:     'https://ygobydonbyxzlazbzzgf.supabase.co/rest/v1',
+  key:     'sb_publishable_w2UseCBv5L-yVkEorDmSSg_L66wISwn',
+  profile: 'eye'
+};
+const H = {
+  'apikey': API.key,
+  'Authorization': 'Bearer ' + API.key,
+  'Accept-Profile': API.profile,
+  'Accept': 'application/json'
+};
+function get(path){ return fetch(API.url + path, {headers:H}).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }); }
+
+/* Trae TODAS las filas paginando en paralelo.
+   Estrategia:
+   1) HEAD con limit=1&Prefer:count=exact para obtener el total sin bajar datos.
+      Si CORS no expone content-range → fallback a sequential hasta página corta.
+   2) Con total conocido: lanza TODAS las páginas en paralelo (lotes de 10). */
+async function getAll(basePath){
+  const PAGE = 1000;
+  const sep  = basePath.includes('?') ? '&' : '?';
+  const base = API.url + basePath;
+
+  // 1 — Obtener total con limit=1 (mínimo payload) + count=exact
+  let total = null;
+  try {
+    const rc = await fetch(base + sep + `limit=1&offset=0`,
+                 { headers: { ...H, 'Prefer': 'count=exact' } });
+    const cr = rc.headers.get('content-range');  // "0-0/72825"
+    if(cr) total = parseInt(cr.split('/')[1]);
+  } catch(_){}
+
+  // 2a — Total conocido → todas las páginas en paralelo
+  if(total && total > 0){
+    const offsets = [];
+    for(let o = 0; o < total; o += PAGE) offsets.push(o);
+    const BATCH = 10;
+    const all   = [];
+    for(let i = 0; i < offsets.length; i += BATCH){
+      const chunk = offsets.slice(i, i + BATCH).map(o =>
+        fetch(base + sep + `limit=${PAGE}&offset=${o}`, { headers: H })
+          .then(r => r.ok ? r.json() : [])
+      );
+      (await Promise.all(chunk)).forEach(d => all.push(...d));
+    }
+    return all;
+  }
+
+  // 2b — Fallback secuencial (CORS bloqueó content-range)
+  const all = [];
+  let offset = 0;
+  while(true){
+    const r    = await fetch(base + sep + `limit=${PAGE}&offset=${offset}`, { headers: H });
+    const rows = r.ok ? await r.json() : [];
+    all.push(...rows);
+    if(rows.length < PAGE) break;
+    offset += PAGE;
+  }
+  return all;
+}
+
+/* ── CACHE ────────────────────────────────────────────── */
+const CACHE_KEY = 'belher_eye_cache_v3';
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour — background refresh if stale
+
+function saveCache(from, to, palets, acarreos){
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({
+      from, to, palets, acarreos, savedAt: Date.now()
+    }));
+  } catch(e){ console.warn('Cache write failed', e); }
+}
+
+function loadCache(){
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch(e){ return null; }
+}
+
+/* ── RAW DATA ─────────────────────────────────────────── */
+let rawPalets   = [];
+let rawAcarreos = [];
+let loadSeq     = 0;   // increments on every loadData call — stale responses are dropped
+
+/* ── PERIOD HELPERS ────────────────────────────────────── */
+function iso(d){ return d.toISOString().split('T')[0]; }
+
+function periodRange(p){
+  const now   = new Date();
+  const today = iso(now);
+  const dow   = now.getDay(); // 0=Sun
+  const monday = n => { const d = new Date(now); d.setDate(d.getDate() - ((dow+6)%7) + n); return d; };
+
+  switch(p){
+    case 'hoy':
+      return { from: today, to: today };
+    case 'semana': {
+      const mon = monday(0);
+      return { from: iso(mon), to: today };
+    }
+    case 'semana-ant': {
+      const mon  = monday(-7);
+      const sun  = monday(-1); sun.setDate(sun.getDate() - 1);
+      return { from: iso(mon), to: iso(sun) };
+    }
+    case 'mes': {
+      const first = new Date(now.getFullYear(), now.getMonth(), 1);
+      return { from: iso(first), to: today };
+    }
+    case 'ciclo': {
+      // Ciclo Belher: diciembre → junio
+      const y = now.getMonth() < 6 ? now.getFullYear() - 1 : now.getFullYear();
+      return { from: `${y}-12-01`, to: today };
+    }
+    case 'ciclo-ant': {
+      const y = now.getMonth() < 6 ? now.getFullYear() - 1 : now.getFullYear();
+      return { from: `${y - 1}-12-01`, to: `${y}-06-30` };
+    }
+    case 'dos-ciclos':
+      return { from: '2024-12-01', to: today };
+    default:
+      return null;
+  }
+}
+
+// Returns {from, to} for current and previous cycle
+function bothCycles(){
+  const now = new Date();
+  const y   = now.getMonth() < 6 ? now.getFullYear() - 1 : now.getFullYear();
+  return {
+    actual:   { from: `${y}-12-01`,     to: iso(now) },
+    anterior: { from: `${y-1}-12-01`,   to: `${y}-06-30` },
+    labelAct: `Dic ${y} – Jun ${y+1}`,
+    labelAnt: `Dic ${y-1} – Jun ${y}`,
+  };
+}
+
+/* ── FILTERS STATE ─────────────────────────────────────── */
+let fPalets   = [];
+let fAcarreos = [];
+let activePeriod = 'ciclo';
+let activeRange  = periodRange('ciclo');
+
+function getDimFilters(){
+  return {
+    cultivo:  document.getElementById('f-cultivo').value,
+    etiqueta: document.getElementById('f-etiqueta').value,
+    calidad:  document.getElementById('f-calidad').value,
+    tamano:   document.getElementById('f-tamano').value,
+  };
+}
+
+function applyFilters(){
+  const r = activeRange;
+  const d = getDimFilters();
+
+  fPalets = rawPalets.filter(p => {
+    const dd = (p.fecha_empaque||'').split('T')[0];
+    if(r.from && dd < r.from) return false;
+    if(r.to   && dd > r.to)   return false;
+    if(d.cultivo  && p.cultivo  !== d.cultivo)  return false;
+    if(d.etiqueta && p.etiqueta !== d.etiqueta) return false;
+    if(d.calidad  && p.calidad  !== d.calidad)  return false;
+    if(d.tamano   && p.tamano   !== d.tamano)   return false;
+    return true;
+  });
+  fAcarreos = rawAcarreos.filter(a => {
+    const dd = (a.fecha||'').split('T')[0];
+    if(r.from && dd < r.from) return false;
+    if(r.to   && dd > r.to)   return false;
+    if(d.cultivo){
+      const cs = (a.detalles||[]).map(x => x.cultivo||'');
+      if(!cs.includes(d.cultivo)) return false;
+    }
+    return true;
+  });
+
+  document.getElementById('f-count').textContent =
+    fPalets.length + ' palets · ' + fAcarreos.length + ' remisiones';
+  renderCalidad();
+  renderPesos();
+}
+
+function setPeriod(p){
+  activePeriod = p;
+  const range = periodRange(p);
+  // clear all period pills
+  document.querySelectorAll('.p-btn[data-period]').forEach(b => b.classList.remove('active'));
+  const target = document.querySelector(`.p-btn[data-period="${p}"]`);
+  if(target) target.classList.add('active');
+  // clear month picker highlight
+  mpClearActive();
+  activeRange = range;
+  loadData();
+}
+
+function resetDimFilters(){
+  document.getElementById('f-cultivo').value  = '';
+  document.getElementById('f-etiqueta').value = '';
+  document.getElementById('f-calidad').value  = '';
+  document.getElementById('f-tamano').value   = '';
+  applyFilters();
+}
+
+function populateSelects(){
+  const cultivos  = [...new Set(rawPalets.map(r=>r.cultivo).filter(Boolean))].sort();
+  const etiquetas = [...new Set(rawPalets.map(r=>r.etiqueta).filter(Boolean))].sort();
+  const tamanos   = [...new Set(rawPalets.map(r=>r.tamano).filter(Boolean))].sort();
+  const fill = (id, opts) => {
+    const el = document.getElementById(id);
+    const cur = el.value;
+    el.innerHTML = '<option value="">Todos</option>' +
+      opts.map(o=>`<option${o===cur?' selected':''}>${o}</option>`).join('');
+  };
+  fill('f-cultivo',  cultivos);
+  fill('f-etiqueta', etiquetas);
+  fill('f-tamano',   tamanos);
+}
+
+/* ── DELTA & COMPARISON HELPERS ──────────────────────── */
+function deltaChip(cur, prv, higherIsBetter = true){
+  if(prv == null || prv === 0 || cur == null) return '';
+  const diff = cur - prv;
+  const pct  = diff / Math.abs(prv) * 100;
+  if(Math.abs(pct) < 0.5) return '<span class="delta neu">→ Sin cambio</span>';
+  const isGood = higherIsBetter ? diff > 0 : diff < 0;
+  const cls    = isGood ? 'up' : 'dn';
+  const arrow  = diff > 0 ? '↑' : '↓';
+  return `<span class="delta ${cls}">${arrow} ${diff>0?'+':''}${fN(pct,1)}% vs anterior</span>`;
+}
+
+function priorEquivRange(){
+  // Shift activeRange dates back 1 year to find equivalent prior-cycle window
+  const f = new Date((activeRange?.from || iso(new Date())) + 'T12:00:00');
+  const t = new Date((activeRange?.to   || iso(new Date())) + 'T12:00:00');
+  f.setFullYear(f.getFullYear() - 1);
+  t.setFullYear(t.getFullYear() - 1);
+  return { from: iso(f), to: iso(t) };
+}
+
+function filterByRange(rows, dateField, range){
+  return rows.filter(r => {
+    const d = (r[dateField]||'').split('T')[0];
+    return d >= range.from && d <= range.to;
+  });
+}
+
+function sparkBars(el, values, color = '#16a34a'){
+  if(!el || !values.length) return;
+  const max = Math.max(...values, 0.001);
+  el.innerHTML = values.map(v =>
+    `<div class="spark-bar" style="background:${color};opacity:.8;height:${Math.max(4, v/max*100).toFixed(0)}%"></div>`
+  ).join('');
+}
+
+/* ── AUTO COMPARISON LOADER ─────────────────────────────
+   Loads prior-cycle data silently in the background so
+   delta chips appear without requiring the toggle button. */
+let cmpReady = false;
+async function autoLoadCmp(){
+  if(cmpPalAnt.length || cmpAcrAnt.length){ cmpReady = true; return; }
+  try {
+    await loadCmpData();
+    cmpReady = true;
+    // Re-inject deltas on whichever panel is visible
+    const p = document.querySelector('.panel.active')?.id;
+    if(p === 'panel-calidad')  renderCalidad();
+    if(p === 'panel-pesos')    renderPesos();
+    if(p === 'panel-resumen')  renderResumen();
+  } catch(e){ console.warn('autoLoadCmp failed', e); }
+}
+
+/* ── RESUMEN PANEL ──────────────────────────────────────── */
+async function loadResumen(){
+  // Ensure base data + prior-cycle data
+  const from = activeRange?.from || iso(new Date());
+  const to   = activeRange?.to   || iso(new Date());
+  document.getElementById('res-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
+  if(!cmpReady) await autoLoadCmp();
+  renderResumen();
+}
+
+function renderResumen(){
+  const from = activeRange?.from || iso(new Date());
+  const to   = activeRange?.to   || iso(new Date());
+  document.getElementById('res-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
+
+  const cycles = bothCycles();
+  document.getElementById('res-lbl-act').textContent = cycles.labelAct;
+  document.getElementById('res-lbl-ant').textContent = cycles.labelAnt;
+
+  // ── Empaque KPIs ──
+  const totalBultos = rawPalets.reduce((s,r)=>s+(r.bultos||0), 0);
+  const bultosP1    = rawPalets.filter(r=>r.calidad==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const bultosP3    = rawPalets.filter(r=>r.calidad==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const pctP1Emp = totalBultos ? bultosP1/totalBultos*100 : 0;
+  const pctP3Emp = totalBultos ? bultosP3/totalBultos*100 : 0;
+
+  // Convert bultos to cajas (tomate default)
+  let totalCajasAct = 0;
+  {
+    const byGrpKg={};
+    rawPalets.forEach(r=>{ const kg=(r.peso||0)*(r.bultos||0); const g=(r.grupo_cultivo||r.cultivo||'TOMATE').toUpperCase(); byGrpKg[g]=(byGrpKg[g]||0)+kg; });
+    function kpb(g){ if(g.includes('LIMON')||g.includes('LEMON')) return KG_PER_BOX_LIMON; if(g.includes('CHILE')||g.includes('PEPPER')) return KG_PER_BULTO_CHILE; return KG_PER_BOX_TOMATE; }
+    Object.entries(byGrpKg).forEach(([g,kg])=>{ totalCajasAct += toBoxes(kg, kpb(g)); });
+  }
+
+  document.getElementById('rv-p1').textContent = fN(pctP1Emp,1) + '%';
+  document.getElementById('rv-cajas').innerHTML = fKM(totalCajasAct) + '<span style="font-size:.65rem;opacity:.6"> cx</span>';
+  document.getElementById('rv-merma-emp').textContent = fN(pctP3Emp,1) + '%';
+
+  // Empaque alert
+  const empAlert = document.getElementById('rv-emp-alert');
+  if(pctP1Emp > 0){
+    empAlert.style.display = 'flex';
+    if(pctP1Emp >= 70){ empAlert.className='ov-alert ok'; empAlert.textContent='✓ Calidad óptima — ' + fN(pctP1Emp,1) + '% Primera'; }
+    else if(pctP1Emp >= 60){ empAlert.className='ov-alert warn'; empAlert.textContent='⚠ Calidad media — ' + fN(pctP1Emp,1) + '% Primera'; }
+    else{ empAlert.className='ov-alert bad'; empAlert.textContent='✕ Calidad baja — ' + fN(pctP1Emp,1) + '% Primera'; }
+  }
+
+  // Empaque sparkline: % primera by ISO week
+  const empByWk = {};
+  rawPalets.forEach(r=>{
+    const d=(r.fecha_empaque||'').split('T')[0]; if(!d) return;
+    const wk=isoWeekLabel(d);
+    if(!empByWk[wk]) empByWk[wk]={tot:0,p1:0};
+    empByWk[wk].tot+=(r.bultos||0);
+    if(r.calidad==='PRIMERA') empByWk[wk].p1+=(r.bultos||0);
+  });
+  const empWks=Object.keys(empByWk).sort((a,b)=>parseInt(a.replace('Sem ',''))-parseInt(b.replace('Sem ','')));
+  sparkBars(document.getElementById('rv-emp-spark'), empWks.map(w=>empByWk[w].tot?empByWk[w].p1/empByWk[w].tot*100:0),'#16a34a');
+
+  // ── Báscula KPIs ──
+  const netoKg   = rawAcarreos.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0);
+  const netoTon  = netoKg/1000;
+  const rems     = rawAcarreos.length;
+  const avgRem   = rems ? netoKg/rems : 0;
+
+  document.getElementById('rv-neto').innerHTML = fN(netoTon,1)+'<span style="font-size:.7rem;opacity:.6"> t</span>';
+  document.getElementById('rv-rems').textContent = fK(rems);
+  document.getElementById('rv-avg-rem').innerHTML = fK(Math.round(avgRem))+'<span style="font-size:.65rem;opacity:.6"> kg</span>';
+
+  // Báscula daily sparkline
+  const basByDay={};
+  rawAcarreos.forEach(r=>{
+    const d=(r.fecha||'').split('T')[0]; if(!d) return;
+    basByDay[d]=(basByDay[d]||0)+((r.peso_bruto||0)-(r.tara||0));
+  });
+  const basDays=Object.keys(basByDay).sort().slice(-14);
+  sparkBars(document.getElementById('rv-bas-spark'), basDays.map(d=>basByDay[d]/1000),'#1d4ed8');
+
+  // ── Inbound KPIs ──
+  if(rawInbound.length){
+    const totF = rawInbound.reduce((s,r)=>s+(r.total_frutos||0),0);
+    const sumP1 = rawInbound.reduce((s,r)=>{ const p=(r.calidades||[]).find(c=>c.calidad==='PRIMERA'); return s+(p?p.cantidad:0); },0);
+    const merms = rawInbound.filter(r=>r.merma!=null);
+    const avgMerma = merms.length?merms.reduce((s,r)=>s+r.merma,0)/merms.length:0;
+    const temps = rawInbound.filter(r=>r.temperatura_fruto!=null);
+    const avgTemp = temps.length?temps.reduce((s,r)=>s+r.temperatura_fruto,0)/temps.length:0;
+    const pctP1Inb = totF ? sumP1/totF*100 : 0;
+    const tCol = avgTemp<28?'var(--green)':avgTemp<33?'var(--accent)':'var(--red)';
+
+    const inbP1Card = document.getElementById('inb-primera')?.closest('.stat');
+    if(inbP1Card){ inbP1Card.classList.remove('s-good','s-warn','s-bad'); inbP1Card.classList.add(pctP1Inb>=65?'s-good':pctP1Inb>=55?'s-warn':'s-bad'); }
+    document.getElementById('rv-inb-p1').innerHTML = `<span style="color:${pctP1Inb>=65?'var(--green)':pctP1Inb>=55?'var(--accent)':'var(--red)'}`">${fN(pctP1Inb,1)}%</span>`;
+    document.getElementById('rv-inb-merma').textContent = fN(avgMerma,1)+'%';
+    document.getElementById('rv-inb-temp').innerHTML = `<span style="color:${tCol}">${fN(avgTemp,1)}°</span>`;
+
+    const inbAlert = document.getElementById('rv-inb-alert');
+    inbAlert.style.display = 'flex';
+    if(pctP1Inb>=65){ inbAlert.className='ov-alert ok'; inbAlert.textContent='✓ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
+    else if(pctP1Inb>=55){ inbAlert.className='ov-alert warn'; inbAlert.textContent='⚠ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
+    else{ inbAlert.className='ov-alert bad'; inbAlert.textContent='✕ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
+
+    // Inbound sparkline: % primera by date
+    const inbByDay={};
+    rawInbound.forEach(r=>{
+      const d=(r.fecha||'').split('T')[0]; if(!d) return;
+      if(!inbByDay[d]) inbByDay[d]={p1:0,tot:0};
+      const p=(r.calidades||[]).find(c=>c.calidad==='PRIMERA');
+      inbByDay[d].p1+=(p?p.cantidad:0);
+      inbByDay[d].tot+=(r.total_frutos||0);
+    });
+    const inbDays=Object.keys(inbByDay).sort().slice(-14);
+    sparkBars(document.getElementById('rv-inb-spark'), inbDays.map(d=>inbByDay[d].tot?inbByDay[d].p1/inbByDay[d].tot*100:0),'#7c3aed');
+  } else {
+    ['rv-inb-p1','rv-inb-merma','rv-inb-temp'].forEach(id=>{ document.getElementById(id).textContent='—'; });
+  }
+
+  // ── Comparativo ciclo anterior ──
+  const priorPal = filterByRange(cmpPalAnt,'fecha_empaque', { from: cycles.anterior.from, to: cycles.anterior.to });
+  const priorAcr = filterByRange(cmpAcrAnt,'fecha',         { from: cycles.anterior.from, to: cycles.anterior.to });
+
+  const prTotB   = priorPal.reduce((s,r)=>s+(r.bultos||0),0);
+  const prP1B    = priorPal.filter(r=>r.calidad==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const prPctP1  = prTotB ? prP1B/prTotB*100 : 0;
+  let prCajas    = 0;
+  {
+    const byGrpKg={};
+    priorPal.forEach(r=>{ const kg=(r.peso||0)*(r.bultos||0); const g=(r.grupo_cultivo||r.cultivo||'TOMATE').toUpperCase(); byGrpKg[g]=(byGrpKg[g]||0)+kg; });
+    function kpb2(g){ if(g.includes('LIMON')||g.includes('LEMON')) return KG_PER_BOX_LIMON; if(g.includes('CHILE')||g.includes('PEPPER')) return KG_PER_BULTO_CHILE; return KG_PER_BOX_TOMATE; }
+    Object.entries(byGrpKg).forEach(([g,kg])=>{ prCajas += toBoxes(kg, kpb2(g)); });
+  }
+  const prNeto   = priorAcr.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0)/1000;
+  const prDias   = new Set(priorAcr.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
+  const actDias  = new Set(rawAcarreos.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
+
+  document.getElementById('res-neto-act').textContent  = fN(netoTon,1) + ' t';
+  document.getElementById('res-neto-ant').textContent  = cmpReady ? fN(prNeto,1) + ' t' : '—';
+  document.getElementById('res-p1-act').textContent    = fN(pctP1Emp,1) + '%';
+  document.getElementById('res-p1-ant').textContent    = cmpReady ? fN(prPctP1,1) + '%' : '—';
+  document.getElementById('res-cajas-act').innerHTML   = fKM(totalCajasAct) + ' cx';
+  document.getElementById('res-cajas-ant').innerHTML   = cmpReady ? fKM(prCajas) + ' cx' : '—';
+  document.getElementById('res-dias-act').textContent  = actDias;
+  document.getElementById('res-dias-ant').textContent  = cmpReady ? prDias : '—';
+
+  // Deltas on overview cards
+  document.getElementById('rv-p1-delta').innerHTML      = deltaChip(pctP1Emp, prPctP1, true);
+  document.getElementById('rv-cajas-delta').innerHTML   = deltaChip(totalCajasAct, prCajas, true);
+  document.getElementById('rv-merma-emp-delta').innerHTML = deltaChip(pctP3Emp, prTotB?priorPal.filter(r=>r.calidad==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0)/prTotB*100:null, false);
+  document.getElementById('rv-neto-delta').innerHTML    = deltaChip(netoTon, prNeto, true);
+  const prAvgRem = priorAcr.length ? priorAcr.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0)/priorAcr.length : 0;
+  document.getElementById('rv-avg-delta').innerHTML     = deltaChip(avgRem, prAvgRem, true);
+
+  // ── Combined weekly trend chart ──
+  // Weekly neto for actual and prior cycles
+  function netoByWk(rows, cycleFrom){
+    const m={};
+    rows.forEach(r=>{
+      const d=(r.fecha||'').split('T')[0]; if(!d) return;
+      const w=weekOfCycle(d,cycleFrom);
+      if(w<1||w>30) return;
+      m[w]=(m[w]||0)+((r.peso_bruto||0)-(r.tara||0));
+    });
+    return m;
+  }
+  const wActNeto = netoByWk(rawAcarreos, cycles.actual.from);
+  const wAntNeto = netoByWk(cmpAcrAnt,  cycles.anterior.from);
+  const maxWk = Math.max(...Object.keys(wActNeto).map(Number),...Object.keys(wAntNeto).map(Number),1);
+  const wks   = Array.from({length:maxWk},(_,i)=>i+1);
+
+  mkChart('chart-res-trend',{
+    type:'line',
+    data:{
+      labels: wks.map(w=>`S${w}`),
+      datasets:[
+        { label: cycles.labelAct,
+          data: wks.map(w=>wActNeto[w]!=null?(wActNeto[w]/1000).toFixed(1):null),
+          borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.07)',
+          borderWidth:2.5, pointRadius:3, pointHoverRadius:6,
+          fill:true, tension:.35, spanGaps:false, backgroundColor:gradFn(22,163,74,.2,0) },
+        { label: cycles.labelAnt,
+          data: wks.map(w=>wAntNeto[w]!=null?(wAntNeto[w]/1000).toFixed(1):null),
+          borderColor:'#d97706', backgroundColor:'rgba(217,119,6,.05)',
+          borderWidth:2, borderDash:[6,4], pointRadius:2, pointHoverRadius:5,
+          fill:true, tension:.35, spanGaps:false, backgroundColor:gradFn(217,119,6,.12,0) }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{
+        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:12 } },
+        tooltip:{ backgroundColor:'#0c2117', titleColor:'rgba(255,255,255,.5)', bodyColor:'#fff', padding:10, cornerRadius:8,
+          callbacks:{ label:c=>` ${c.dataset.label}: ${c.parsed.y??'—'} t` } }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10}}, border:{display:false} },
+        y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+'t'}, border:{display:false} }
+      }
+    }
+  });
+}
+
+/* ── HELPERS ──────────────────────────────────────────── */
+const CAL_COLOR = { PRIMERA:'#16a34a', SEGUNDA:'#d97706', TERCERA:'#dc2626' };
+const CAL_BG    = { PRIMERA:'#dcfce7', SEGUNDA:'#fef3c7', TERCERA:'#fee2e2' };
+const CAL_TC    = { PRIMERA:'#15803d', SEGUNDA:'#92400e', TERCERA:'#dc2626' };
+const CULT_LABEL = {
+  'GH ROUND TOMATOES':'Tomate Bola','GH ROMA TOMATOES':'Tomate Roma',
+  'CHILE ANAHEIM':'Chile Anaheim','CHILE FRESNO':'Chile Fresno',
+  'CHILE JALAPEÑO':'Chile Jalapeño','PEPINO':'Pepino','SORGO':'Sorgo','TRIGO':'Trigo'
+};
+const CULT_COLOR = {
+  'GH ROUND TOMATOES':'#dc2626','GH ROMA TOMATOES':'#d97706',
+  'CHILE ANAHEIM':'#16a34a','CHILE FRESNO':'#b45309',
+  'CHILE JALAPEÑO':'#65a30d','PEPINO':'#0891b2','SORGO':'#92400e','TRIGO':'#ca8a04'
+};
+function cult(k){ return CULT_LABEL[k]||k||'Otros'; }
+function cultColor(k){ return CULT_COLOR[k]||'#6b7280'; }
+function fN(n,d=1){ return typeof n==='number'?n.toLocaleString('es-MX',{minimumFractionDigits:d,maximumFractionDigits:d}):n; }
+function fK(n){ return typeof n==='number'?n.toLocaleString('es-MX'):n; }
+function fDate(iso){ return new Date(iso+'T12:00:00').toLocaleDateString('es-MX',{day:'2-digit',month:'short'}); }
+function fDateFull(iso){ return new Date(iso+'T12:00:00').toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'}); }
+function group(arr, key){ const m={}; arr.forEach(r=>{const k=r[key]||'—'; m[k]=(m[k]||0)+(r._v||0);}); return m; }
+
+
+/* ── GRADIENT HELPER ────────────────────────────────────── */
+function gradFn(r,g,b,a0=0.22,a1=0){
+  return ctx => {
+    const {chart} = ctx;
+    const {chartArea} = chart;
+    if(!chartArea) return `rgba(${r},${g},${b},${a0})`;
+    const grd = chart.ctx.createLinearGradient(0,chartArea.top,0,chartArea.bottom);
+    grd.addColorStop(0,`rgba(${r},${g},${b},${a0})`);
+    grd.addColorStop(1,`rgba(${r},${g},${b},${a1})`);
+    return grd;
+  };
+}
+/* Objective annotation line helper */
+function objLine(y, label, color='#d97706'){
+  return {
+    type:'line', yMin:y, yMax:y,
+    borderColor: color, borderWidth:1.5, borderDash:[5,4],
+    label:{ content:label, display:true, position:'end', padding:3,
+      backgroundColor:'rgba(217,119,6,.12)', color:'#92400e',
+      font:{size:9,family:'Inter',weight:'700'}, borderRadius:4 }
+  };
+}
+/* ── CHARTS REGISTRY ──────────────────────────────────── */
+const CH = {};
+function mkChart(id, cfg){
+  if(CH[id]) CH[id].destroy();
+  CH[id] = new Chart(document.getElementById(id).getContext('2d'), cfg);
+  return CH[id];
+}
+
+const CHART_DEFAULTS = {
+  animation:{ duration:400, easing:'easeOutQuart' },
+  plugins:{
+    legend:{ labels:{ font:{family:'Inter',size:10.5}, color:'#374151', boxWidth:10, padding:10, usePointStyle:true, pointStyleWidth:8 } },
+    tooltip:{
+      backgroundColor:'#0c2117', titleColor:'rgba(255,255,255,.5)',
+      bodyColor:'#f0fdf4', padding:10, cornerRadius:8, boxPadding:4,
+      borderColor:'rgba(255,255,255,.08)', borderWidth:1,
+      titleFont:{family:'Inter',size:10,weight:'600'},
+      bodyFont:{family:'Inter',size:11},
+    }
+  },
+  layout:{ padding:{ right:4, top:2 } },
+  scales:{
+    x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{family:'Inter',size:10},maxRotation:0}, border:{display:false} },
+    y:{ grid:{color:'rgba(0,0,0,.04)',drawTicks:false}, ticks:{color:'#9ca3af',font:{family:'Inter',size:10},padding:4}, border:{display:false} }
+  }
+};
+
+/* ── RENDER: CALIDAD ──────────────────────────────────── */
+function renderCalidad(){
+  if(!fPalets.length){
+    document.getElementById('cal-tbody').innerHTML='<tr><td colspan="9" class="empty">Sin datos para los filtros seleccionados.</td></tr>';
+    return;
+  }
+
+  const range = activeRange?.from && activeRange?.to
+    ? fDateFull(activeRange.from) + ' – ' + fDateFull(activeRange.to) : '';
+  document.getElementById('cal-rng').textContent = range;
+
+  /* Totals — cajas calculadas desde peso real ÷ constante por producto */
+  let pesoTotalKg = 0;
+  const byCalidadKg = { PRIMERA:0, SEGUNDA:0, TERCERA:0 };
+  const byGrupoKg   = {};
+  fPalets.forEach(r => {
+    const kg = (r.peso||0) * (r.bultos||0);
+    pesoTotalKg += kg;
+    if(byCalidadKg[r.calidad] != null) byCalidadKg[r.calidad] += kg;
+    const grp = (r.grupo_cultivo||r.cultivo||'TOMATE').toUpperCase();
+    byGrupoKg[grp] = (byGrupoKg[grp]||0) + kg;
+  });
+
+  function kgPerBoxFor(g){
+    if(g.includes('LIMON')||g.includes('LEMON')||g.includes('LIMA')) return KG_PER_BOX_LIMON;
+    if(g.includes('CHILE')||g.includes('PEPPER')) return KG_PER_BULTO_CHILE;
+    return KG_PER_BOX_TOMATE;
+  }
+  let totalCajas = 0;
+  Object.entries(byGrupoKg).forEach(([g,kg])=>{ totalCajas += toBoxes(kg, kgPerBoxFor(g)); });
+  const cajas1 = toBoxes(byCalidadKg.PRIMERA, KG_PER_BOX_TOMATE);
+  const cajas2 = toBoxes(byCalidadKg.SEGUNDA,  KG_PER_BOX_TOMATE);
+  const cajas3 = toBoxes(byCalidadKg.TERCERA,  KG_PER_BOX_TOMATE);
+
+  // bultos kept for %-of-total charts (uses actual counts for ratio accuracy)
+  const bultos   = fPalets.reduce((s,r)=>s+(r.bultos||0), 0);
+  const bultosP1 = fPalets.filter(r=>r.calidad==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const bultosP2 = fPalets.filter(r=>r.calidad==='SEGUNDA').reduce((s,r)=>s+(r.bultos||0),0);
+  const bultosP3 = fPalets.filter(r=>r.calidad==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const pesoTotal = pesoTotalKg;
+
+  // Update % labels on KPI cards
+  const pctP1Val = bultos ? bultosP1/bultos*100 : 0;
+  document.getElementById('s-p1').innerHTML = bultos ? fN(pctP1Val,1)+'<span class="stat-unit">%</span>' : '—';
+  const p1Card = document.getElementById('s-p1').closest('.stat');
+  if(p1Card){ p1Card.classList.remove('s-good','s-warn','s-bad'); p1Card.classList.add(pctP1Val>=70?'s-good':pctP1Val>=60?'s-warn':'s-bad'); }
+  document.getElementById('s-p2').innerHTML = bultos ? fN(bultosP2/bultos*100,1)+'<span class="stat-unit">%</span>' : '—';
+  document.getElementById('s-p3').innerHTML = bultos ? fN(bultosP3/bultos*100,1)+'<span class="stat-unit">%</span>' : '—';
+
+  document.getElementById('s-bultos').innerHTML =
+    fKM(totalCajas) + '<span style="font-size:.65rem;font-weight:500;color:var(--muted);margin-left:4px">cx</span>';
+  document.getElementById('s-palets').textContent =
+    fPalets.length.toLocaleString('es-MX') + ' registros · ' + fN(pesoTotalKg/1000) + ' t';
+  const TARGET_PESO = 11.8;
+  const pesoProm = bultos ? pesoTotal / bultos : null;
+  const statEl   = document.getElementById('stat-peso-prom');
+  statEl.classList.remove('peso-ok','peso-alto','peso-bajo','cg','ca','cb','cr','cp');
+  if (pesoProm === null) {
+    document.getElementById('s-peso-prom').innerHTML = '—';
+    document.getElementById('s-peso-prom-sub').innerHTML = 'kg promedio';
+    statEl.classList.add('cb');
+  } else if (pesoProm > TARGET_PESO) {
+    statEl.classList.add('peso-alto');
+    document.getElementById('s-peso-prom').innerHTML =
+      fN(pesoProm) + '<span class="stat-unit">kg</span>';
+    document.getElementById('s-peso-prom-sub').innerHTML =
+      `<span class="peso-alert-icon alto">⚠ ${fN(pesoProm - TARGET_PESO, 2)} kg por encima</span>`;
+  } else if (pesoProm < TARGET_PESO) {
+    statEl.classList.add('peso-bajo');
+    document.getElementById('s-peso-prom').innerHTML =
+      fN(pesoProm) + '<span class="stat-unit">kg</span>';
+    document.getElementById('s-peso-prom-sub').innerHTML =
+      `<span class="peso-alert-icon bajo">⚠ ${fN(TARGET_PESO - pesoProm, 2)} kg por debajo</span>`;
+  } else {
+    statEl.classList.add('peso-ok');
+    document.getElementById('s-peso-prom').innerHTML =
+      fN(pesoProm) + '<span class="stat-unit">kg</span>';
+    document.getElementById('s-peso-prom-sub').innerHTML =
+      `<span class="peso-alert-icon ok">✓ En objetivo</span>`;
+  }
+
+  /* Delta chips vs prior cycle */
+  if(cmpPalAnt.length){
+    const pr   = priorEquivRange();
+    const prPal= filterByRange(cmpPalAnt,'fecha_empaque',pr);
+    const prTot= prPal.reduce((s,r)=>s+(r.bultos||0),0);
+    const prP1 = prPal.filter(r=>r.calidad==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+    const prP2 = prPal.filter(r=>r.calidad==='SEGUNDA').reduce((s,r)=>s+(r.bultos||0),0);
+    const prP3 = prPal.filter(r=>r.calidad==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
+    const prProm= prTot ? prPal.reduce((s,r)=>s+(r.peso||0)*(r.bultos||0),0)/prTot : null;
+    let prCajas=0;
+    {const bg={};prPal.forEach(r=>{const kg=(r.peso||0)*(r.bultos||0);const g=(r.grupo_cultivo||r.cultivo||'T').toUpperCase();bg[g]=(bg[g]||0)+kg;});function kp(g){if(g.includes('LIMON')||g.includes('LEMON'))return KG_PER_BOX_LIMON;if(g.includes('CHILE')||g.includes('PEPPER'))return KG_PER_BULTO_CHILE;return KG_PER_BOX_TOMATE;}Object.entries(bg).forEach(([g,kg])=>{prCajas+=toBoxes(kg,kp(g));});}
+    document.getElementById('d-bultos').innerHTML = deltaChip(totalCajas, prCajas, true);
+    document.getElementById('d-p1').innerHTML     = deltaChip(bultos?bultosP1/bultos*100:0, prTot?prP1/prTot*100:0, true);
+    document.getElementById('d-p2').innerHTML     = deltaChip(bultos?bultosP2/bultos*100:0, prTot?prP2/prTot*100:0, false);
+    document.getElementById('d-p3').innerHTML     = deltaChip(bultos?bultosP3/bultos*100:0, prTot?prP3/prTot*100:0, false);
+    document.getElementById('d-peso-prom').innerHTML = pesoProm!=null&&prProm!=null ? deltaChip(pesoProm, prProm, true) : '';
+  }
+
+  /* Weekly trend chart: bars = cajas, line = % primera */
+  {
+    const byWk={};
+    fPalets.forEach(r=>{
+      const d=(r.fecha_empaque||'').split('T')[0]; if(!d) return;
+      const wk=isoWeekLabel(d);
+      if(!byWk[wk]) byWk[wk]={cx:0,p1:0,tot:0};
+      const kg=(r.peso||0)*(r.bultos||0);
+      byWk[wk].cx+=toBoxes(kg,KG_PER_BOX_TOMATE);
+      byWk[wk].tot+=(r.bultos||0);
+      if(r.calidad==='PRIMERA') byWk[wk].p1+=(r.bultos||0);
+    });
+    const wks=Object.keys(byWk).sort((a,b)=>parseInt(a.replace('Sem ',''))-parseInt(b.replace('Sem ','')));
+    mkChart('chart-cal-trend',{
+      type:'bar',
+      data:{
+        labels:wks,
+        datasets:[
+          { label:'Cajas', data:wks.map(w=>Math.round(byWk[w].cx)),
+            backgroundColor:'rgba(29,78,216,.22)', borderColor:'rgba(29,78,216,.7)', borderWidth:1, borderRadius:4, yAxisID:'y' },
+          { label:'% Primera', data:wks.map(w=>byWk[w].tot?+(byWk[w].p1/byWk[w].tot*100).toFixed(1):null),
+            type:'line', borderColor:'#16a34a', backgroundColor:gradFn(22,163,74,.18,0),
+            borderWidth:2.5, pointRadius:4, pointHoverRadius:7, fill:false, tension:.35, yAxisID:'y2' }
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        interaction:{ mode:'index', intersect:false },
+        plugins:{
+          legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:12 } },
+          tooltip:{ backgroundColor:'#0c2117', bodyColor:'#fff', padding:9, cornerRadius:8,
+            callbacks:{ label:c=>c.dataset.label==='% Primera'?` ${c.dataset.label}: ${c.parsed.y??'—'}%`:` ${c.dataset.label}: ${(c.parsed.y||0).toLocaleString('es-MX')} cx` } }
+        },
+        scales:{
+          x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10},maxRotation:0}, border:{display:false} },
+          y:{ position:'left', grid:{color:'rgba(0,0,0,.04)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v>=1000?Math.round(v/1000)+'K':v}, border:{display:false} },
+          y2:{ position:'right', grid:{display:false}, ticks:{color:'#16a34a',font:{size:10},callback:v=>v+'%'}, min:0, max:100, border:{display:false} }
+        }
+      }
+    });
+  }
+
+  /* Donut */
+  mkChart('chart-donut',{
+    type:'doughnut',
+    data:{
+      labels:['Primera','Segunda','Tercera'],
+      datasets:[{
+        data:[byCalidadKg.PRIMERA,byCalidadKg.SEGUNDA,byCalidadKg.TERCERA],
+        backgroundColor:['#16a34a','#d97706','#dc2626'],
+        borderWidth:3, borderColor:'#fff',
+        hoverOffset:6
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'62%',
+      plugins:{
+        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:11}, color:'#374151', boxWidth:12, padding:16 } },
+        tooltip:{ callbacks:{ label:c=>`${c.label}: ${fK(c.parsed)} bultos (${bultos?fN(c.parsed/bultos*100):0}%)` } }
+      }
+    }
+  });
+
+  /* Calidad por cultivo — stacked bar */
+  const cultivos = [...new Set(fPalets.map(r=>r.cultivo).filter(Boolean))];
+  const calByC = {};
+  cultivos.forEach(c=>{ calByC[c]={PRIMERA:0,SEGUNDA:0,TERCERA:0}; });
+  fPalets.forEach(r=>{ if(calByC[r.cultivo] && r.calidad in calByC[r.cultivo]) calByC[r.cultivo][r.calidad]+=(r.bultos||0); });
+
+  mkChart('chart-cal-cultivo',{
+    type:'bar',
+    data:{
+      labels: cultivos.map(cult),
+      datasets:[
+        { label:'Primera', data:cultivos.map(c=>calByC[c].PRIMERA), backgroundColor:'rgba(22,163,74,.8)', borderRadius:3 },
+        { label:'Segunda', data:cultivos.map(c=>calByC[c].SEGUNDA), backgroundColor:'rgba(217,119,6,.8)',  borderRadius:3 },
+        { label:'Tercera', data:cultivos.map(c=>calByC[c].TERCERA), backgroundColor:'rgba(220,38,38,.8)',  borderRadius:3 },
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{...CHART_DEFAULTS.plugins, tooltip:{mode:'index',intersect:false}},
+      scales:{
+        x:{ stacked:true, grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10}}, border:{display:false} },
+        y:{ stacked:true, grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10}}, border:{display:false} }
+      }
+    }
+  });
+
+  /* Tamaño bars */
+  const byTam={};
+  fPalets.forEach(r=>{ const k=r.tamano||'—'; byTam[k]=(byTam[k]||0)+(r.bultos||0); });
+  const tamSorted = Object.entries(byTam).sort((a,b)=>b[1]-a[1]);
+  const maxTam = tamSorted[0]?.[1]||1;
+  document.getElementById('tamano-bars').innerHTML = tamSorted.map(([t,v])=>`
+    <div class="prog-row">
+      <div class="prog-top">
+        <span class="prog-name">${t}</span>
+        <span class="prog-qty" style="color:var(--blue)">${fK(v)} bultos</span>
+      </div>
+      <div class="prog-track"><div class="prog-fill" style="width:${(v/maxTam*100).toFixed(1)}%;background:var(--blue)"></div></div>
+    </div>`).join('');
+
+  /* Etiqueta bar */
+  const byEtq={};
+  fPalets.forEach(r=>{ const k=r.etiqueta||'—'; byEtq[k]=(byEtq[k]||0)+(r.bultos||0); });
+  const etqEntries = Object.entries(byEtq).sort((a,b)=>b[1]-a[1]);
+  const ETQ_COLORS=['#16a34a','#1d4ed8','#7c3aed','#d97706','#dc2626','#0891b2'];
+  mkChart('chart-etiqueta',{
+    type:'bar',
+    data:{
+      labels:etqEntries.map(e=>e[0]),
+      datasets:[{
+        label:'Bultos',
+        data:etqEntries.map(e=>e[1]),
+        backgroundColor:etqEntries.map((_,i)=>ETQ_COLORS[i%ETQ_COLORS.length]+'cc'),
+        borderRadius:4
+      }]
+    },
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false} },
+      scales:{
+        x:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10}}, border:{display:false} },
+        y:{ grid:{display:false}, ticks:{color:'#374151',font:{size:11,weight:'600'}}, border:{display:false} }
+      }
+    }
+  });
+
+  /* Table */
+  const Q_BADGE = { PRIMERA:'q1 badge', SEGUNDA:'q2 badge', TERCERA:'q3 badge' };
+  const allRows = [...fPalets].sort((a,b)=>(b.fecha_empaque||'').localeCompare(a.fecha_empaque||''));
+  const rows = allRows.slice(0,200);
+  const calCapNote = allRows.length > 200 ? `<tr><td colspan="9" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted);background:#fafafa">Mostrando 200 de ${allRows.length.toLocaleString('es-MX')} registros</td></tr>` : '';
+  document.getElementById('cal-tbody').innerHTML = rows.map(r=>`<tr>
+    <td>${fDate(r.fecha_empaque.split('T')[0])}</td>
+    <td style="font-weight:600">${cult(r.cultivo)}</td>
+    <td>${r.etiqueta||'—'}</td>
+    <td><span class="${Q_BADGE[r.calidad]||'badge'}">${r.calidad||'—'}</span></td>
+    <td>${r.tamano||'—'}</td>
+    <td style="color:var(--muted)">${r.color||'—'}</td>
+    <td class="td-n">${fK(r.bultos)}</td>
+    <td class="td-n">${fN(r.peso)}</td>
+    <td class="td-n" style="color:var(--green);font-weight:700">$${fN(r.precio||0)}</td>
+  </tr>`).join('') + calCapNote || '<tr><td colspan="9" class="empty">Sin datos.</td></tr>';
+}
+
+/* ── RENDER: PESOS ──────────────────────────────────────── */
+function renderPesos(){
+  if(!fAcarreos.length){
+    document.getElementById('pesos-tbody').innerHTML='<tr><td colspan="7" class="empty">Sin remisiones para los filtros seleccionados.</td></tr>';
+    return;
+  }
+
+  /* Build flat rows */
+  const rows = [];
+  fAcarreos.forEach(r=>{
+    const neto = (r.peso_bruto||0)-(r.tara||0);
+    const d = (r.fecha||'').split('T')[0];
+    const dets = r.detalles||[{}];
+    rows.push({
+      fecha: d,
+      cultivo: dets[0]?.cultivo||'—',
+      caseta:  dets[0]?.caseta||'—',
+      bruto:   r.peso_bruto||0,
+      tara:    r.tara||0,
+      neto
+    });
+  });
+
+  /* KPIs */
+  const totNeto  = rows.reduce((s,r)=>s+r.neto,0);
+  const totBruto = rows.reduce((s,r)=>s+r.bruto,0);
+  const totTara  = rows.reduce((s,r)=>s+r.tara,0);
+  const avgNeto  = rows.length ? totNeto/rows.length : 0;
+
+  /* By date */
+  const byDate={};
+  rows.forEach(r=>{ byDate[r.fecha]=(byDate[r.fecha]||0)+r.neto; });
+  const dates=Object.keys(byDate).sort();
+  const peakVal = Math.max(...Object.values(byDate));
+  const peakDate = dates.find(d=>byDate[d]===peakVal)||'—';
+
+  document.getElementById('ps-neto').innerHTML      = fN(totNeto/1000)+'<span class="stat-unit">t</span>';
+  document.getElementById('ps-remisiones').textContent = rows.length+' remisiones';
+  document.getElementById('ps-bruto').innerHTML     = fK(Math.round(totBruto))+'<span class="stat-unit">kg</span>';
+  document.getElementById('ps-tara').innerHTML      = fK(Math.round(totTara))+'<span class="stat-unit">kg</span>';
+  document.getElementById('ps-avg').innerHTML       = fK(Math.round(avgNeto))+'<span class="stat-unit">kg</span>';
+  document.getElementById('ps-peak').innerHTML      = fN(peakVal/1000)+'<span class="stat-unit">t</span>';
+  document.getElementById('ps-peak-date').textContent = peakDate ? fDate(peakDate) : '—';
+  // Delta chips
+  if(cmpAcrAnt.length){
+    const pr    = priorEquivRange();
+    const prAcr = filterByRange(cmpAcrAnt,'fecha',pr);
+    const prNeto= prAcr.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0);
+    const prAvg = prAcr.length ? prNeto/prAcr.length : 0;
+    document.getElementById('d-neto').innerHTML = deltaChip(totNeto, prNeto, true);
+    document.getElementById('d-avg').innerHTML  = deltaChip(avgNeto, prAvg, true);
+  }
+
+  /* Daily chart — with optional previous-cycle overlay */
+  const cycles   = bothCycles();
+  const antDates = {};
+  if(cmpOn) cmpAcrAnt.forEach(r=>{
+    const d  = (r.fecha||'').split('T')[0];
+    // shift date +1 year so it aligns on the same x-axis
+    const shifted = new Date(d + 'T12:00:00');
+    shifted.setFullYear(shifted.getFullYear() + 1);
+    const ds = iso(shifted);
+    antDates[ds] = (antDates[ds]||0) + ((r.peso_bruto||0)-(r.tara||0));
+  });
+
+  const datasets = [{
+    label: cycles.labelAct || 'Actual',
+    data: dates.map(d=>+(byDate[d]/1000).toFixed(2)),
+    backgroundColor:'rgba(22,163,74,.75)',
+    borderColor:'#16a34a', borderWidth:1,
+    borderRadius:4, borderSkipped:false
+  }];
+  if(cmpOn) datasets.push({
+    label: cycles.labelAnt || 'Anterior',
+    data: dates.map(d => antDates[d] != null ? +(antDates[d]/1000).toFixed(2) : null),
+    type:'line',
+    borderColor:'rgba(217,119,6,.8)', backgroundColor:'transparent',
+    borderWidth:2, borderDash:[6,4],
+    pointRadius:2, pointHoverRadius:5, tension:.35, spanGaps:false
+  });
+
+  mkChart('chart-pesos-dia',{
+    type:'bar',
+    data:{ labels: dates.map(fDate), datasets },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>` ${c.parsed.y} t` } } },
+      scales:{
+        x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10},maxTicksLimit:10,maxRotation:0}, border:{display:false} },
+        y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+'t'}, border:{display:false} }
+      }
+    }
+  });
+
+  /* By cultivo bars */
+  const byCult={};
+  rows.forEach(r=>{ const k=r.cultivo||'—'; byCult[k]=(byCult[k]||0)+r.neto; });
+  const cultSorted=Object.entries(byCult).sort((a,b)=>b[1]-a[1]);
+  const maxC=cultSorted[0]?.[1]||1;
+  document.getElementById('cultivo-bars').innerHTML = cultSorted.map(([k,v])=>`
+    <div class="prog-row">
+      <div class="prog-top">
+        <span class="prog-name">${cult(k)}</span>
+        <span class="prog-qty" style="color:${cultColor(k)}">${fN(v/1000)} t</span>
+      </div>
+      <div class="prog-track"><div class="prog-fill" style="width:${(v/maxC*100).toFixed(1)}%;background:${cultColor(k)}"></div></div>
+    </div>`).join('');
+
+  /* Table */
+  const allPRows = [...rows].sort((a,b)=>b.fecha.localeCompare(a.fecha)||b.neto-a.neto);
+  const trows = allPRows.slice(0,200);
+  const pesCapNote = allPRows.length > 200 ? `<tr><td colspan="7" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted);background:#fafafa">Mostrando 200 de ${allPRows.length.toLocaleString('es-MX')} registros</td></tr>` : '';
+  document.getElementById('pesos-tbody').innerHTML = trows.map(r=>`<tr>
+    <td>${fDate(r.fecha)}</td>
+    <td style="font-weight:600">${cult(r.cultivo)}</td>
+    <td style="color:var(--muted);font-size:.72rem">${r.caseta.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</td>
+    <td class="td-n">${fK(Math.round(r.bruto))}</td>
+    <td class="td-n" style="color:var(--muted)">${fK(Math.round(r.tara))}</td>
+    <td class="td-n" style="color:var(--green);font-weight:800">${fK(Math.round(r.neto))}</td>
+    <td class="td-n" style="color:var(--green2)">${fN(r.neto/1000)}</td>
+  </tr>`).join('') + pesCapNote || '<tr><td colspan="7" class="empty">Sin datos.</td></tr>';
+}
+
+/* ── LOAD ───────────────────────────────────────────────── */
+function applyRawData(palets, acarreos, from, to, source){
+  rawPalets   = palets;
+  rawAcarreos = acarreos;
+  populateSelects();
+  applyFilters();
+  // Re-render whichever crop tab is active
+  const activePanel = document.querySelector('.panel.active')?.id;
+  if(activePanel === 'panel-tomate')  renderTomate(from, to);
+  if(activePanel === 'panel-limon')   renderCropPanel({ rows: flattenCrop(acarreos, isLimon, null), from, to, ids:{rangeLbl:'lim-range-lbl',total:'lim-total',totalSub:'lim-total-sub',dias:'lim-dias',prom:'lim-prom'}, chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody', kgPerUnit:KG_PER_BOX_LIMON, unitLabel:'cx' });
+  if(activePanel === 'panel-chile')   renderCropPanel({ rows: flattenCrop(acarreos, isChile, null), from, to, ids:{rangeLbl:'chi-range-lbl',total:'chi-total',totalSub:'chi-total-sub',dias:'chi-dias',vars:'chi-vars'}, chartSemId:'chart-chi-sem', varId:'chi-var-bars', tbodyId:'chi-tbody', kgPerUnit:KG_PER_BULTO_CHILE, unitLabel:'bts' });
+  if(activePanel === 'panel-inbound') loadInbound();
+
+  document.getElementById('ft-urls').textContent =
+    `vw_palets gte.${from} lte.${to}  ·  vw_acarreos gte.${from} lte.${to}`;
+  document.getElementById('ft-updated').textContent =
+    source + ' · ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
+    ' · ' + palets.length + ' palets · ' + acarreos.length + ' rem.';
+}
+
+async function loadData(force = false){
+  const mySeq = ++loadSeq;
+  const btn   = document.getElementById('btn-refresh');
+  const from  = activeRange?.from || iso(new Date());
+  const to    = activeRange?.to   || iso(new Date());
+
+  // 1 · Paint from cache immediately (if range matches and not forced)
+  const cached    = loadCache();
+  const cacheHit  = !force && cached && cached.from === from && cached.to === to;
+  const cacheFresh = cacheHit && (Date.now() - cached.savedAt < CACHE_TTL);
+
+  if(cacheHit){
+    applyRawData(cached.palets, cached.acarreos, from, to, 'Caché');
+    if(cacheFresh) return;                              // fresh → no background fetch
+    document.getElementById('ft-updated').textContent += ' (actualizando…)';
+  }
+
+  // 2 · Fetch — spinner visible only when no cache to show
+  if(!cacheHit){ btn.classList.add('spin'); btn.disabled = true; }
+  document.getElementById('err-banner').classList.remove('show');
+
+  const urlPalets   = `/vw_palets?select=fecha_empaque,cultivo,etiqueta,calidad,peso,bultos,tamano,color,precio,grupo_cultivo&fecha_empaque=gte.${from}&fecha_empaque=lte.${to}`;
+  const urlAcarreos = `/vw_acarreos?select=fecha,peso_bruto,tara,detalles&fecha=gte.${from}&fecha=lte.${to}`;
+
+  try {
+    btn.classList.add('spin'); btn.disabled = true;
+    const [palets, acarreos] = await Promise.all([getAll(urlPalets), getAll(urlAcarreos)]);
+    if(mySeq !== loadSeq) return;                   // a newer request already landed — drop this one
+    saveCache(from, to, palets, acarreos);
+    applyRawData(palets, acarreos, from, to, 'EYE Live');
+  } catch(err){
+    console.error(err);
+    if(!cacheHit){
+      document.getElementById('err-text').textContent = 'Error EYE: ' + err.message;
+      document.getElementById('err-banner').classList.add('show');
+    } else {
+      document.getElementById('ft-updated').textContent += ' · ⚠ sin conexión, mostrando caché';
+    }
+  } finally {
+    btn.classList.remove('spin'); btn.disabled = false;
+  }
+}
+
+/* ── TOMATE LOAD & RENDER ───────────────────────────────── */
+let rawTomate = [];
+
+/* ── UNIDAD: cajas de 25 lbs ─────────────────────────────
+   1 caja 25 lbs = 11.3398 kg
+──────────────────────────────────────────────────────── */
+/* Tomate: caja 25 lbs = 11.3398 kg */
+const KG_PER_BOX_TOMATE = 11.3398;
+/* Limón:  caja 40 lbs = 18.1437 kg */
+const KG_PER_BOX_LIMON  = 18.1437;
+/* Chile:  bulto 1 1/9 bushel = 30.8 kg (standard US chile carton) */
+const KG_PER_BULTO_CHILE = 30.8;
+
+function toBoxes(kg, kgPerBox){ return kg / kgPerBox; }
+function fBox(kg, kgPerBox, dec=0){
+  return toBoxes(kg, kgPerBox).toLocaleString('es-MX',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+}
+
+// K / M formatter
+function fKM(n){
+  if(n == null || isNaN(n)) return '—';
+  const abs = Math.abs(n);
+  if(abs >= 1_000_000) return (n/1_000_000).toLocaleString('es-MX',{minimumFractionDigits:1,maximumFractionDigits:1}) + 'M';
+  if(abs >= 1_000)     return (n/1_000).toLocaleString('es-MX',{minimumFractionDigits:1,maximumFractionDigits:1}) + 'K';
+  return Math.round(n).toLocaleString('es-MX');
+}
+
+const TOMATO_CULTIVOS = ['GH ROMA TOMATOES','GH ROUND TOMATOES','OF ROMA TOMATOES','OF ROUND TOMATOES'];
+const LIMON_CULTIVOS  = ['LIMON','LEMON','LIMA','GH LIMON','OF LIMON'];
+const CHILE_CULTIVOS  = ['CHILE','JALAPEÑO','ANAHEIM','FRESNO','SERRANO','HABANERO'];
+const TOMATO_TARGET   = { ROMA: 8.0, BOLA: 16.0 };
+
+function isRoma(c){ return (c||'').toUpperCase().includes('ROMA'); }
+function isBola(c){ return (c||'').toUpperCase().includes('ROUND'); }
+function isGH(c)  { return (c||'').toUpperCase().startsWith('GH '); }
+function isOF(c)  { return (c||'').toUpperCase().startsWith('OF '); }
+function isTomato(c){ const u=(c||'').toUpperCase(); return u.includes('TOMATO') || u.includes('TOMATE'); }
+function isLimon(c) { const u=(c||'').toUpperCase(); return LIMON_CULTIVOS.some(k=>u.includes(k.replace('GH ','').replace('OF ',''))) || u.includes('LIMON') || u.includes('LEMON') || u.includes('LIMA'); }
+function isChile(c) { const u=(c||'').toUpperCase(); return CHILE_CULTIVOS.some(k=>u.includes(k)) || u.includes('CHILE') || u.includes('PEPPER'); }
+
+function tomatoGroup(c){
+  if(isRoma(c))  return 'ROMA';
+  if(isBola(c))  return 'BOLA';
+  return 'OTROS';
+}
+function ghof(c){ return isGH(c) ? 'GH' : isOF(c) ? 'OF' : 'GH'; }
+
+function isoWeekLabel(isoDate){
+  // Returns "Sem N" based on day-of-year week
+  const d   = new Date(isoDate + 'T12:00:00');
+  const jan = new Date(d.getFullYear(), 0, 1);
+  const w   = Math.ceil(((d - jan) / 86400000 + jan.getDay() + 1) / 7);
+  return `Sem ${w}`;
+}
+
+// Generic flatten for any crop filter function
+function flattenCrop(acrRows, filterFn, targetFn){
+  const flat = [];
+  acrRows.forEach(r => {
+    const fecha = (r.fecha||'').split('T')[0];
+    (r.detalles||[]).forEach(d => {
+      const cultivo = (d.cultivo||'').toUpperCase();
+      if(!filterFn(cultivo)) return;
+      const kilos = d.kilos || 0;
+      const cant  = d.cantidad || 0;
+      const prom  = cant ? kilos / cant : (d.peso_promedio || 0);
+      const target = targetFn ? targetFn(cultivo) : null;
+      flat.push({
+        fecha, semana: isoWeekLabel(fecha),
+        lote:    (r.lote || '—').toUpperCase(),
+        caseta:  d.caseta || '—',
+        cultivo, color: (d.color||'—').toUpperCase(),
+        tipo:    d.tipo_envase || '—',
+        cantidad: cant, kilos, prom,
+        diferencia: target != null ? +(prom - target).toFixed(3) : null,
+        grupo: tomatoGroup(cultivo),
+        ambiente: ghof(cultivo),
+      });
+    });
+  });
+  return flat.sort((a,b) => b.fecha.localeCompare(a.fecha));
+}
+
+// Flatten acarreos → one row per detalle, tomato only
+function flattenTomate(acrRows){
+  const flat = [];
+  acrRows.forEach(r => {
+    const fecha = (r.fecha||'').split('T')[0];
+    (r.detalles||[]).forEach(d => {
+      const cultivo = (d.cultivo||'').toUpperCase();
+      if(!isTomato(cultivo)) return;
+      const kilos   = d.kilos || 0;
+      const cant    = d.cantidad || 0;
+      const prom    = cant ? kilos / cant : (d.peso_promedio || 0);
+      const grp     = tomatoGroup(cultivo);
+      const target  = grp === 'ROMA' ? TOMATO_TARGET.ROMA : grp === 'BOLA' ? TOMATO_TARGET.BOLA : null;
+      flat.push({
+        fecha, semana: isoWeekLabel(fecha),
+        lote:    (d.lote || r.lote || d.caseta?.split(' ').slice(-2).join(' ') || '—').toUpperCase(),
+        caseta:  d.caseta || '—',
+        cultivo, color: (d.color||'—').toUpperCase(),
+        tipo:    d.tipo_envase || '—',
+        cantidad: cant, kilos, prom,
+        diferencia: target != null ? +(prom - target).toFixed(3) : null,
+        grupo:   grp,
+        ambiente: ghof(cultivo),
+      });
+    });
+  });
+  return flat.sort((a,b) => b.fecha.localeCompare(a.fecha));
+}
+
+async function loadTomate(){
+  const btn = document.getElementById('btn-refresh');
+  btn.classList.add('spin'); btn.disabled = true;
+  document.getElementById('err-banner').classList.remove('show');
+
+  const from = activeRange?.from || iso(new Date());
+  const to   = activeRange?.to   || iso(new Date());
+
+  const urlAcr = `/vw_acarreos?select=fecha,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`;
+  document.getElementById('ft-urls').textContent = `vw_acarreos · Producción Tomate · ${from} → ${to}`;
+
+  try {
+    const acrRows = await get(urlAcr);
+    rawTomate = flattenTomate(acrRows);
+    renderTomate(from, to);
+    const now = new Date();
+    document.getElementById('ft-updated').textContent =
+      'Actualizado: ' + now.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
+      ' · ' + rawTomate.length + ' líneas tomate';
+  } catch(err){
+    console.error(err);
+    document.getElementById('err-text').textContent = 'Error EYE: ' + err.message;
+    document.getElementById('err-banner').classList.add('show');
+  } finally {
+    btn.classList.remove('spin'); btn.disabled = false;
+  }
+}
+
+function renderTomate(from, to){
+  const rows = rawTomate;
+  document.getElementById('tom-range-lbl').textContent =
+    fDateFull(from) + ' – ' + fDateFull(to);
+
+  if(!rows.length){
+    ['tom-total','tom-roma','tom-bola','tom-dias','tom-prom-roma','tom-prom-bola']
+      .forEach(id => document.getElementById(id).textContent = '—');
+    document.getElementById('tom-tbody').innerHTML =
+      '<tr><td colspan="11" class="empty">Sin datos de tomate para el período seleccionado.</td></tr>';
+    return;
+  }
+
+  // ── KPIs ──
+  const totalKg   = rows.reduce((s,r)=>s+r.kilos, 0);
+  const romaRows  = rows.filter(r=>r.grupo==='ROMA');
+  const bolaRows  = rows.filter(r=>r.grupo==='BOLA');
+  const romaKg    = romaRows.reduce((s,r)=>s+r.kilos, 0);
+  const bolaKg    = bolaRows.reduce((s,r)=>s+r.kilos, 0);
+  const dias      = new Set(rows.map(r=>r.fecha)).size;
+
+  const romaCant  = romaRows.reduce((s,r)=>s+r.cantidad, 0);
+  const bolaCant  = bolaRows.reduce((s,r)=>s+r.cantidad, 0);
+  const romaPromG = romaCant ? romaKg / romaCant : 0;
+  const bolaPromG = bolaCant ? bolaKg / bolaCant : 0;
+
+  document.getElementById('tom-total').innerHTML  = fKM(toBoxes(totalKg, KG_PER_BOX_TOMATE)) + '<span class="stat-unit">cx</span>';
+  document.getElementById('tom-total-sub').textContent = fN(totalKg/1000) + ' t · ' + rows.length + ' registros';
+  document.getElementById('tom-roma').innerHTML   = fKM(toBoxes(romaKg, KG_PER_BOX_TOMATE)) + '<span class="stat-unit">cx</span>';
+  document.getElementById('tom-roma-pct').textContent  = totalKg ? fN(romaKg/totalKg*100) + '% · ' + fN(romaKg/1000) + ' t' : '—';
+  document.getElementById('tom-bola').innerHTML   = fKM(toBoxes(bolaKg, KG_PER_BOX_TOMATE)) + '<span class="stat-unit">cx</span>';
+  document.getElementById('tom-bola-pct').textContent  = totalKg ? fN(bolaKg/totalKg*100) + '% · ' + fN(bolaKg/1000) + ' t' : '—';
+  document.getElementById('tom-dias').textContent = dias;
+
+  const ghKg = rows.filter(r=>r.ambiente==='GH').reduce((s,r)=>s+r.kilos,0);
+  const ofKg = rows.filter(r=>r.ambiente==='OF').reduce((s,r)=>s+r.kilos,0);
+  document.getElementById('tom-gh').innerHTML = fKM(toBoxes(ghKg, KG_PER_BOX_TOMATE))+'<span class="stat-unit">cx</span>';
+  document.getElementById('tom-gh-pct').textContent = totalKg ? fN(ghKg/totalKg*100)+'% · '+fN(ghKg/1000)+' t' : '—';
+  document.getElementById('tom-of').innerHTML = fKM(toBoxes(ofKg, KG_PER_BOX_TOMATE))+'<span class="stat-unit">cx</span>';
+  document.getElementById('tom-of-pct').textContent = totalKg ? fN(ofKg/totalKg*100)+'% · '+fN(ofKg/1000)+' t' : '—';
+
+  // Peso prom Roma con alerta
+  function setProm(valEl, subEl, cardEl, val, target, unit){
+    cardEl.classList.remove('cg','ca','cb','cr','cp','peso-ok','peso-alto','peso-bajo');
+    valEl.innerHTML = fN(val) + '<span class="stat-unit">' + unit + '</span>';
+    if(val > target){
+      cardEl.classList.add('peso-alto');
+      subEl.innerHTML = `<span class="peso-alert-icon alto">⚠ +${fN(val-target,3)} sobre obj.</span>`;
+    } else if(val < target && val > 0){
+      cardEl.classList.add('peso-bajo');
+      subEl.innerHTML = `<span class="peso-alert-icon bajo">⚠ −${fN(target-val,3)} bajo obj.</span>`;
+    } else {
+      cardEl.classList.add('peso-ok');
+      subEl.innerHTML = `<span class="peso-alert-icon ok">✓ En objetivo</span>`;
+    }
+  }
+  setProm(
+    document.getElementById('tom-prom-roma'),
+    document.getElementById('tom-prom-roma-sub'),
+    document.getElementById('tom-prom-card'),
+    romaPromG, TOMATO_TARGET.ROMA, 'kg'
+  );
+  setProm(
+    document.getElementById('tom-prom-bola'),
+    document.getElementById('tom-prom-bola-sub'),
+    document.getElementById('tom-prom-bola-card'),
+    bolaPromG, TOMATO_TARGET.BOLA, 'kg'
+  );
+
+  // ── Weekly stacked bar ──
+  const weekMap = {};
+  rows.forEach(r => {
+    if(!weekMap[r.semana]) weekMap[r.semana] = {ROMA:0,BOLA:0,OTROS:0};
+    weekMap[r.semana][r.grupo] += r.kilos;
+  });
+  const weeks = Object.keys(weekMap).sort((a,b)=>{
+    const n = s => parseInt(s.replace('Sem ',''));
+    return n(a)-n(b);
+  });
+  // Prev-cycle tomate overlay
+  const antTomWeek = {};
+  if(cmpOn){
+    const antFlat = flattenTomate(cmpAcrAnt);
+    antFlat.forEach(r => {
+      antTomWeek[r.semana] = (antTomWeek[r.semana]||0) + r.kilos;
+    });
+  }
+
+  const tomDatasets = [
+    { label:'Roma',  data:weeks.map(w=>Math.round(toBoxes(weekMap[w].ROMA, KG_PER_BOX_TOMATE))),  backgroundColor:'rgba(220,38,38,.8)',  borderRadius:3, stack:'s' },
+    { label:'Bola',  data:weeks.map(w=>Math.round(toBoxes(weekMap[w].BOLA, KG_PER_BOX_TOMATE))),  backgroundColor:'rgba(22,163,74,.8)',  borderRadius:3, stack:'s' },
+    { label:'Otros', data:weeks.map(w=>Math.round(toBoxes(weekMap[w].OTROS, KG_PER_BOX_TOMATE))), backgroundColor:'rgba(217,119,6,.7)',  borderRadius:3, stack:'s' },
+  ];
+  if(cmpOn) tomDatasets.push({
+    label: bothCycles().labelAnt || 'Ant.',
+    data: weeks.map(w => antTomWeek[w] != null ? Math.round(toBoxes(antTomWeek[w], KG_PER_BOX_TOMATE)) : null),
+    type:'line', borderColor:'rgba(217,119,6,.9)', backgroundColor:'transparent',
+    borderWidth:2.5, borderDash:[7,4], pointRadius:3, tension:.35, spanGaps:false, stack:undefined
+  });
+
+  mkChart('chart-tom-semana',{
+    type:'bar',
+    data:{ labels: weeks, datasets: tomDatasets },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ display:false },
+        tooltip:{ mode:'index', intersect:false, backgroundColor:'#0c2117', bodyColor:'#fff', padding:10, cornerRadius:8,
+          callbacks:{ label:c=>` ${c.dataset.label}: ${c.parsed.y.toLocaleString('es-MX')} cx` }
+        }
+      },
+      scales:{
+        x:{ stacked:true, grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10},maxRotation:0}, border:{display:false} },
+        y:{ stacked:true, grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+' cx'}, border:{display:false} }
+      }
+    }
+  });
+
+  // ── Lote bars ──
+  const loteMap = {};
+  rows.forEach(r => { loteMap[r.lote] = (loteMap[r.lote]||0) + r.kilos; });
+  const loteSorted = Object.entries(loteMap).sort((a,b)=>b[1]-a[1]);
+  const maxLote = loteSorted[0]?.[1] || 1;
+  const LOTE_COLORS = ['#16a34a','#1d4ed8','#7c3aed','#d97706','#dc2626'];
+  document.getElementById('tom-lote-bars').innerHTML = loteSorted.map(([l,kg],i)=>`
+    <div class="prog-row">
+      <div class="prog-top">
+        <span class="prog-name" style="font-size:.76rem">${l}</span>
+        <span class="prog-qty" style="color:${LOTE_COLORS[i%LOTE_COLORS.length]}">\${fBox(kg, KG_PER_BOX_TOMATE)} cx <span style="opacity:.5;font-weight:400">${fN(kg/1000)} t</span></span>
+      </div>
+      <div class="prog-track">
+        <div class="prog-fill" style="width:${(kg/maxLote*100).toFixed(1)}%;background:${LOTE_COLORS[i%LOTE_COLORS.length]}"></div>
+      </div>
+    </div>`).join('');
+
+  // ── Color donut ──
+  const colorMap = {};
+  rows.forEach(r => { colorMap[r.color] = (colorMap[r.color]||0) + r.kilos; });
+  const colorEntries = Object.entries(colorMap).sort((a,b)=>b[1]-a[1]);
+  const COLOR_PALETTE = ['#16a34a','#d97706','#dc2626','#1d4ed8','#7c3aed','#0891b2'];
+  mkChart('chart-tom-color',{
+    type:'doughnut',
+    data:{
+      labels: colorEntries.map(e=>e[0]),
+      datasets:[{ data:colorEntries.map(e=>e[1]), backgroundColor:COLOR_PALETTE, borderWidth:3, borderColor:'#fff', hoverOffset:4 }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'58%',
+      plugins:{
+        legend:{ position:'right', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:8 } },
+        tooltip:{ callbacks:{ label:c=>` ${c.label}: ${fN(c.parsed/1000)} t (${fN(c.parsed/totalKg*100)}%)` } }
+      }
+    }
+  });
+
+  // ── Peso promedio weekly trend ──
+  const weekProm = {};
+  const weekPromCnt = {};
+  rows.forEach(r => {
+    if(r.grupo==='OTROS') return;
+    const key = r.semana + '|' + r.grupo;
+    weekProm[key]    = (weekProm[key]   ||0) + r.kilos;
+    weekPromCnt[key] = (weekPromCnt[key]||0) + r.cantidad;
+  });
+  const romaAvgByWeek = weeks.map(w => {
+    const kg=weekProm[w+'|ROMA']||0, cnt=weekPromCnt[w+'|ROMA']||0;
+    return cnt ? +((kg/cnt).toFixed(3)) : null;
+  });
+  const bolaAvgByWeek = weeks.map(w => {
+    const kg=weekProm[w+'|BOLA']||0, cnt=weekPromCnt[w+'|BOLA']||0;
+    return cnt ? +((kg/cnt).toFixed(3)) : null;
+  });
+  mkChart('chart-tom-prom',{
+    type:'line',
+    data:{
+      labels: weeks,
+      datasets:[
+        {
+          label:'Roma (obj 8 kg)',
+          data: romaAvgByWeek,
+          borderColor:'#dc2626', backgroundColor:'rgba(220,38,38,.06)',
+          borderWidth:2.5, pointRadius:4, pointHoverRadius:7,
+          fill:true, tension:.35, spanGaps:false, yAxisID:'y'
+        },
+        {
+          label:'Bola (obj 16 kg)',
+          data: bolaAvgByWeek,
+          borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.06)',
+          borderWidth:2.5, pointRadius:4, pointHoverRadius:7,
+          fill:true, tension:.35, spanGaps:false, yAxisID:'y2'
+        },
+        // Target lines
+        { label:'Target Roma 8 kg', data:weeks.map(()=>8), borderColor:'rgba(220,38,38,.25)',
+          borderDash:[4,4], borderWidth:1.5, pointRadius:0, fill:false, yAxisID:'y' },
+        { label:'Target Bola 16 kg', data:weeks.map(()=>16), borderColor:'rgba(22,163,74,.25)',
+          borderDash:[4,4], borderWidth:1.5, pointRadius:0, fill:false, yAxisID:'y2' },
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{
+        legend:{ display:false },
+        tooltip:{ backgroundColor:'#0c2117', bodyColor:'#fff', padding:10, cornerRadius:8,
+          callbacks:{ label:c=>c.dataset.borderDash ? null : ` ${c.dataset.label}: ${c.parsed.y ?? '—'} kg` }
+        }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10},maxRotation:0}, border:{display:false} },
+        y: { position:'left',  grid:{color:'rgba(0,0,0,.04)'}, ticks:{color:'#f87171',font:{size:9},callback:v=>v+'kg'}, border:{display:false}, title:{display:true,text:'Roma',color:'#f87171',font:{size:9}} },
+        y2:{ position:'right', grid:{display:false},           ticks:{color:'#4ade80',font:{size:9},callback:v=>v+'kg'}, border:{display:false}, title:{display:true,text:'Bola',color:'#4ade80',font:{size:9}} },
+      }
+    }
+  });
+
+  // ── Casetas ──
+  const casetaMap = {};
+  rows.forEach(r => { casetaMap[r.caseta] = (casetaMap[r.caseta]||0) + r.kilos; });
+  const casetaSorted = Object.entries(casetaMap).sort((a,b)=>b[1]-a[1]).slice(0,15);
+  const maxCas = casetaSorted[0]?.[1]||1;
+  document.getElementById('tom-caseta-bars').innerHTML = casetaSorted.map(([c,kg])=>`
+    <div class="prog-row" style="margin-bottom:0">
+      <div class="prog-top">
+        <span class="prog-name" style="font-size:.72rem">${c.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</span>
+        <span class="prog-qty" style="color:var(--green2);font-size:.72rem">\${fBox(kg, KG_PER_BOX_TOMATE)} cx <span style="opacity:.5;font-weight:400">${fN(kg/1000)} t</span></span>
+      </div>
+      <div class="prog-track" style="height:5px">
+        <div class="prog-fill" style="width:${(kg/maxCas*100).toFixed(1)}%;background:var(--green2)"></div>
+      </div>
+    </div>`).join('');
+
+  // ── Detail table ──
+  document.getElementById('tom-tbody').innerHTML = rows.slice(0,300).map(r => {
+    const difCls = r.diferencia == null ? '' :
+      r.diferencia > 0  ? 'style="color:var(--red2);font-weight:700"' :
+      r.diferencia < 0  ? 'style="color:var(--accent);font-weight:700"' :
+      'style="color:var(--muted)"';
+    const difTxt = r.diferencia != null
+      ? (r.diferencia >= 0 ? '+' : '') + fN(r.diferencia, 3) : '—';
+    const grpColor = r.grupo==='ROMA' ? '#dc2626' : r.grupo==='BOLA' ? '#16a34a' : '#d97706';
+    return `<tr>
+      <td class="td-m">${fDate(r.fecha)}</td>
+      <td style="color:var(--muted);font-size:.72rem">${r.semana}</td>
+      <td style="font-weight:600">${r.lote}</td>
+      <td style="font-size:.72rem;color:var(--muted)">${r.caseta.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</td>
+      <td><span style="display:inline-flex;align-items:center;gap:4px">
+        <span style="width:7px;height:7px;border-radius:50%;background:${grpColor};flex-shrink:0;display:inline-block"></span>
+        ${r.grupo==='ROMA'?'Roma':r.grupo==='BOLA'?'Bola':r.cultivo.replace('GH ','').replace(' TOMATOES','')}
+      </span></td>
+      <td style="color:var(--muted)">${r.color}</td>
+      <td style="color:var(--muted);font-size:.72rem">${r.tipo}</td>
+      <td class="td-n">${fK(Math.round(r.cantidad))}</td>
+      <td class="td-n" style="font-weight:700">${fK(Math.round(r.kilos))}</td>
+      <td class="td-n" style="color:var(--blue)">${fN(r.prom, 3)}</td>
+      <td class="td-n" ${difCls}>${difTxt}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="11" class="empty">Sin datos.</td></tr>';
+}
+
+/* ── GENERIC CROP PANEL RENDERER ───────────────────────── */
+function renderCropPanel({ rows, ids, from, to, chartSemId, casetaId, varId, tbodyId, kgPerUnit, unitLabel }){
+  document.getElementById(ids.rangeLbl).textContent = fDateFull(from) + ' – ' + fDateFull(to);
+  const totalKg = rows.reduce((s,r)=>s+r.kilos,0);
+  const dias    = new Set(rows.map(r=>r.fecha)).size;
+  const totCant = rows.reduce((s,r)=>s+r.cantidad,0);
+  const promG   = totCant ? totalKg/totCant : 0;
+  const totalUnits = Math.round(toBoxes(totalKg, kgPerUnit));
+
+  document.getElementById(ids.total).innerHTML =
+    fKM(totalUnits) + '<span class="stat-unit">' + unitLabel + '</span>';
+  document.getElementById(ids.totalSub).textContent =
+    fN(totalKg/1000) + ' t · ' + rows.length + ' registros';
+  document.getElementById(ids.dias).textContent = dias;
+  if(ids.prom)  document.getElementById(ids.prom).innerHTML = fN(promG,3)+'<span class="stat-unit">kg</span>';
+  if(ids.vars){
+    const vars = new Set(rows.map(r=>r.cultivo)).size;
+    document.getElementById(ids.vars).textContent = vars;
+  }
+
+  // Weekly chart — in units (boxes/bultos)
+  const weekMap={};
+  rows.forEach(r=>{ weekMap[r.semana]=(weekMap[r.semana]||0)+r.kilos; });
+  const weeks=Object.keys(weekMap).sort((a,b)=>parseInt(a.replace('Sem ',''))-parseInt(b.replace('Sem ','')));
+  mkChart(chartSemId,{
+    type:'bar',
+    data:{
+      labels:weeks,
+      datasets:[{ label:`Producción (${unitLabel})`, data:weeks.map(w=>Math.round(toBoxes(weekMap[w],kgPerUnit))),
+        backgroundColor:'rgba(22,163,74,.78)', borderColor:'#16a34a', borderWidth:1, borderRadius:4 }]
+    },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>` ${c.parsed.y.toLocaleString('es-MX')} ${unitLabel}` } } },
+      scales:{
+        x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10},maxRotation:0}, border:{display:false} },
+        y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+' '+unitLabel}, border:{display:false} }
+      }
+    }
+  });
+
+  // Caseta or variety bars
+  const groupKey = varId ? 'cultivo' : 'caseta';
+  const grpMap={};
+  rows.forEach(r=>{ const k=r[groupKey]||'—'; grpMap[k]=(grpMap[k]||0)+r.kilos; });
+  const grpSorted=Object.entries(grpMap).sort((a,b)=>b[1]-a[1]).slice(0,12);
+  const maxG=grpSorted[0]?.[1]||1;
+  const GCOLORS=['#16a34a','#1d4ed8','#7c3aed','#d97706','#dc2626','#0891b2','#65a30d','#b45309'];
+  const barsEl = document.getElementById(varId || casetaId);
+  barsEl.innerHTML = grpSorted.map(([k,kg],i)=>`
+    <div class="prog-row" style="margin-bottom:0">
+      <div class="prog-top">
+        <span class="prog-name" style="font-size:.73rem">${k.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</span>
+        <span class="prog-qty" style="color:${GCOLORS[i%GCOLORS.length]};font-size:.73rem">
+          ${Math.round(toBoxes(kg,kgPerUnit)).toLocaleString('es-MX')} ${unitLabel}
+          <span style="opacity:.45;font-weight:400"> ${fN(kg/1000)} t</span>
+        </span>
+      </div>
+      <div class="prog-track" style="height:5px">
+        <div class="prog-fill" style="width:${(kg/maxG*100).toFixed(1)}%;background:${GCOLORS[i%GCOLORS.length]}"></div>
+      </div>
+    </div>`).join('');
+
+  // Table
+  document.getElementById(tbodyId).innerHTML = rows.slice(0,200).map(r=>`<tr>
+    <td class="td-m">${fDate(r.fecha)}</td>
+    <td style="color:var(--muted);font-size:.72rem">${r.semana}</td>
+    <td style="font-weight:600">${r.lote}</td>
+    <td style="font-size:.72rem;color:var(--muted)">${r.caseta.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</td>
+    <td>${r.cultivo.replace(/^(GH|OF)\s+/i,'<span style="font-size:.62rem;font-weight:700;padding:1px 5px;border-radius:4px;background:${isGH(r.cultivo)?\'rgba(22,163,74,.12)\'  :\'rgba(217,119,6,.15)\'};color:${isGH(r.cultivo)?\'#15803d\':\'#92400e\'};margin-right:4px">${isGH(r.cultivo)?\'GH\':\'OF\'}</span>').replace(/(GH|OF)\s+/i,'')}</td>
+    <td style="color:var(--muted)">${r.color}</td>
+    <td class="td-n">${fK(Math.round(r.cantidad))}</td>
+    <td class="td-n" style="font-weight:700">${fK(Math.round(r.kilos))}</td>
+    <td class="td-n" style="color:var(--blue)">${fN(r.prom,3)}</td>
+  </tr>`).join('') || '<tr><td colspan="9" class="empty">Sin datos.</td></tr>';
+}
+
+async function loadLimon(){
+  const btn=document.getElementById('btn-refresh');
+  btn.classList.add('spin'); btn.disabled=true;
+  document.getElementById('err-banner').classList.remove('show');
+  const from=activeRange?.from||iso(new Date()), to=activeRange?.to||iso(new Date());
+  document.getElementById('ft-urls').textContent=`vw_acarreos · Limón · ${from} → ${to}`;
+  try{
+    const rows=await getAll(`/vw_acarreos?select=fecha,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`);
+    const flat=flattenCrop(rows, isLimon, null);
+    renderCropPanel({ rows:flat, from, to,
+      ids:{ rangeLbl:'lim-range-lbl', total:'lim-total', totalSub:'lim-total-sub', dias:'lim-dias', prom:'lim-prom' },
+      chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody',
+      kgPerUnit: KG_PER_BOX_LIMON, unitLabel: 'cx'
+    });
+    document.getElementById('ft-updated').textContent='Actualizado: '+new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})+' · '+flat.length+' líneas limón';
+  }catch(e){
+    document.getElementById('err-text').textContent='Error EYE: '+e.message;
+    document.getElementById('err-banner').classList.add('show');
+  }finally{ btn.classList.remove('spin'); btn.disabled=false; }
+}
+
+async function loadChile(){
+  const btn=document.getElementById('btn-refresh');
+  btn.classList.add('spin'); btn.disabled=true;
+  document.getElementById('err-banner').classList.remove('show');
+  const from=activeRange?.from||iso(new Date()), to=activeRange?.to||iso(new Date());
+  document.getElementById('ft-urls').textContent=`vw_acarreos · Chile · ${from} → ${to}`;
+  try{
+    const rows=await getAll(`/vw_acarreos?select=fecha,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`);
+    const flat=flattenCrop(rows, isChile, null);
+    renderCropPanel({ rows:flat, from, to,
+      ids:{ rangeLbl:'chi-range-lbl', total:'chi-total', totalSub:'chi-total-sub', dias:'chi-dias', vars:'chi-vars' },
+      chartSemId:'chart-chi-sem', varId:'chi-var-bars', tbodyId:'chi-tbody',
+      kgPerUnit: KG_PER_BULTO_CHILE, unitLabel: 'bts'
+    });
+    document.getElementById('ft-updated').textContent='Actualizado: '+new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})+' · '+flat.length+' líneas chile';
+  }catch(e){
+    document.getElementById('err-text').textContent='Error EYE: '+e.message;
+    document.getElementById('err-banner').classList.add('show');
+  }finally{ btn.classList.remove('spin'); btn.disabled=false; }
+}
+
+/* ── INBOUND · CAMPO ────────────────────────────────────── */
+let rawInbound = [];
+
+async function loadInbound(){
+  const btn  = document.getElementById('btn-refresh');
+  const from = activeRange?.from || iso(new Date());
+  const to   = activeRange?.to   || iso(new Date());
+  btn.classList.add('spin'); btn.disabled = true;
+  document.getElementById('err-banner').classList.remove('show');
+  document.getElementById('ft-urls').textContent = `vw_inbound · ${from} → ${to}`;
+  try {
+    rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`);
+    renderInbound(from, to);
+    document.getElementById('ft-updated').textContent =
+      'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
+      ' · ' + rawInbound.length + ' inspecciones';
+  } catch(e){
+    document.getElementById('err-text').textContent = 'Error vw_inbound: ' + e.message;
+    document.getElementById('err-banner').classList.add('show');
+  } finally {
+    btn.classList.remove('spin'); btn.disabled = false;
+  }
+}
+
+function renderInbound(from, to){
+  const rows = rawInbound;
+  document.getElementById('inb-range-lbl').textContent =
+    fDateFull(from) + ' – ' + fDateFull(to);
+
+  if(!rows.length){
+    document.getElementById('inb-primera').textContent = '—';
+    document.getElementById('inb-merma').textContent   = '—';
+    document.getElementById('inb-temp').textContent    = '—';
+    document.getElementById('inb-frutos').textContent  = '—';
+    document.getElementById('inb-tbody').innerHTML =
+      '<tr><td colspan="9" class="empty">Sin datos para el período seleccionado.</td></tr>';
+    return;
+  }
+
+  // ── Flatten calidades per row ──
+  function pctPrimera(row){
+    const cals = row.calidades || [];
+    const tot  = row.total_frutos || 0;
+    if(!tot) return null;
+    const p1   = cals.find(c=>c.calidad==='PRIMERA');
+    return p1 ? p1.cantidad / tot * 100 : 0;
+  }
+  function pctSegunda(row){
+    const cals = row.calidades || [];
+    const tot  = row.total_frutos || 0;
+    if(!tot) return null;
+    const p2   = cals.find(c=>c.calidad==='SEGUNDA');
+    return p2 ? p2.cantidad / tot * 100 : 0;
+  }
+
+  // ── KPIs (weighted by total_frutos) ──
+  const totalFrutos  = rows.reduce((s,r)=>s+(r.total_frutos||0), 0);
+  const sumPrimera   = rows.reduce((s,r)=>{
+    const p1 = (r.calidades||[]).find(c=>c.calidad==='PRIMERA');
+    return s + (p1 ? p1.cantidad : 0);
+  }, 0);
+  const pctP1 = totalFrutos ? sumPrimera / totalFrutos * 100 : 0;
+
+  const mermas   = rows.filter(r=>r.merma!=null);
+  const avgMerma = mermas.length ? mermas.reduce((s,r)=>s+r.merma,0)/mermas.length : 0;
+
+  const temps    = rows.filter(r=>r.temperatura_fruto!=null);
+  const avgTemp  = temps.length ? temps.reduce((s,r)=>s+r.temperatura_fruto,0)/temps.length : 0;
+
+  const avgFcolor  = rows.filter(r=>r.porc_fuera_color!=null);
+  const avgFcol    = avgFcolor.length ? avgFcolor.reduce((s,r)=>s+r.porc_fuera_color,0)/avgFcolor.length : 0;
+  const avgFtam    = rows.filter(r=>r.porc_fuera_tamano!=null);
+  const avgFtamVal = avgFtam.length ? avgFtam.reduce((s,r)=>s+r.porc_fuera_tamano,0)/avgFtam.length : 0;
+
+  // primera KPI + color coding
+  const p1El  = document.getElementById('inb-primera');
+  const p1Cls = pctP1 >= 65 ? 'cg' : pctP1 >= 55 ? 'ca' : 'cr';
+  p1El.parentElement.className = 'stat ' + p1Cls;
+  p1El.innerHTML = fN(pctP1,1) + '<span class="stat-unit">%</span>';
+  document.getElementById('inb-primera-sub').textContent =
+    fK(Math.round(sumPrimera)) + ' de ' + fK(totalFrutos) + ' frutos';
+
+  // merma KPI
+  const mEl  = document.getElementById('inb-merma');
+  const mCrd = document.getElementById('inb-merma-card');
+  mEl.innerHTML = fN(avgMerma,1) + '<span class="stat-unit">%</span>';
+  mCrd.className = 'stat ' + (avgMerma < 8 ? 'cg' : avgMerma < 15 ? 'ca' : 'cr');
+
+  // temp KPI
+  const tEl  = document.getElementById('inb-temp');
+  const tCls = avgTemp < 28 ? 'temp-ok' : avgTemp < 33 ? 'temp-warn' : 'temp-hot';
+  tEl.innerHTML = `<span class="${tCls}">${fN(avgTemp,1)}</span><span class="stat-unit">°C</span>`;
+
+  document.getElementById('inb-frutos').innerHTML =
+    fKM(totalFrutos) + '<span class="stat-unit"> fr</span>';
+  document.getElementById('inb-registros').textContent = rows.length + ' inspecciones';
+  document.getElementById('inb-fcolor').innerHTML =
+    fN(avgFcol,1) + '<span class="stat-unit">%</span>';
+  document.getElementById('inb-ftamano').textContent = fN(avgFtamVal,1) + '% fuera tamaño';
+
+  // ── Chart: % Primera diario ──
+  const byDate = {};
+  rows.forEach(r => {
+    const d   = (r.fecha||'').split('T')[0];
+    if(!d) return;
+    if(!byDate[d]) byDate[d] = { p1:0, tot:0 };
+    const p1 = (r.calidades||[]).find(c=>c.calidad==='PRIMERA');
+    byDate[d].p1  += p1 ? p1.cantidad : 0;
+    byDate[d].tot += r.total_frutos || 0;
+  });
+  const days  = Object.keys(byDate).sort();
+  const p1pct = days.map(d => byDate[d].tot ? +(byDate[d].p1/byDate[d].tot*100).toFixed(1) : null);
+
+  mkChart('chart-inb-primera',{
+    type:'line',
+    data:{
+      labels: days.map(fDate),
+      datasets:[{
+        label:'% Primera', data: p1pct,
+        borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.08)',
+        borderWidth:2.5, pointRadius:4, pointHoverRadius:7,
+        fill:true, tension:.3, spanGaps:false, backgroundColor:gradFn(22,163,74,.2,0)
+      },{
+        label:'Objetivo 65%',
+        data: days.map(()=>65),
+        borderColor:'rgba(217,119,6,.55)', borderWidth:1.5,
+        borderDash:[6,4], pointRadius:0, fill:false, tension:0
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:10 } },
+        tooltip:{ backgroundColor:'#0c2117', bodyColor:'#fff', padding:9, cornerRadius:8,
+          callbacks:{ label: c => ` ${c.dataset.label}: ${c.parsed.y ?? '—'}%` }
+        }
+      },
+      annotation:{ annotations:{ obj65: objLine(65,'Obj. 65%') } },
+      scales:{
+        x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10},maxRotation:0,maxTicksLimit:14}, border:{display:false} },
+        y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+'%'}, min:0, max:100, border:{display:false} }
+      }
+    }
+  });
+
+  // ── Top daños bars ──
+  const danosMap = {};
+  rows.forEach(r => {
+    (r.danos||[]).forEach(d => {
+      danosMap[d.dano] = (danosMap[d.dano]||0) + (d.cantidad||0);
+    });
+  });
+  const danosSorted = Object.entries(danosMap).sort((a,b)=>b[1]-a[1]).slice(0,12);
+  const maxD = danosSorted[0]?.[1] || 1;
+  const DCOL = ['#dc2626','#d97706','#7c3aed','#1d4ed8','#0891b2','#65a30d'];
+  document.getElementById('inb-danos-bars').innerHTML = danosSorted.map(([k,v],i)=>`
+    <div class="prog-row" style="margin-bottom:0">
+      <div class="prog-top">
+        <span class="prog-name" style="font-size:.73rem">${k}</span>
+        <span class="prog-qty" style="color:${DCOL[i%DCOL.length]};font-size:.73rem">${fK(Math.round(v))}</span>
+      </div>
+      <div class="prog-track" style="height:5px">
+        <div class="prog-fill" style="width:${(v/maxD*100).toFixed(1)}%;background:${DCOL[i%DCOL.length]}"></div>
+      </div>
+    </div>`).join('') || '<div class="empty">Sin daños registrados.</div>';
+
+  // ── Colores donut ──
+  // Espectro maduración tomate: 1 verde → 6 rojo pasado
+  const COLOR_ORDER = ['Uno','Dos','Tres','Cuatro','Cinco','Seis'];
+  const COLOR_PALETTE = {
+    'Uno':   '#16a34a',  // verde maduro
+    'Dos':   '#84cc16',  // verde-amarillo (breaker)
+    'Tres':  '#eab308',  // amarillo-naranja (turning)
+    'Cuatro':'#f97316',  // naranja-rosado (pink stage)
+    'Cinco': '#ef4444',  // rojo claro (light red)
+    'Seis':  '#7f1d1d',  // rojo oscuro / pasado
+  };
+  const colMap = {};
+  rows.forEach(r => {
+    (r.colores||[]).forEach(c => {
+      colMap[c.color] = (colMap[c.color]||0) + (c.cantidad||0);
+    });
+  });
+  // Sort by canonical order; unknown colors at the end
+  const colKeys = Object.keys(colMap).sort((a,b) => {
+    const ia = COLOR_ORDER.indexOf(a), ib = COLOR_ORDER.indexOf(b);
+    return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+  });
+  const colTotal = Object.values(colMap).reduce((s,v)=>s+v,0);
+  mkChart('chart-inb-colores',{
+    type:'doughnut',
+    data:{
+      labels: colKeys,
+      datasets:[{ data: colKeys.map(k=>colMap[k]),
+        backgroundColor: colKeys.map(k=>COLOR_PALETTE[k]||'#9ca3af'),
+        borderWidth:2, borderColor:'#fff', hoverOffset:6 }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'62%',
+      plugins:{
+        legend:{ position:'right', labels:{ font:{family:'Inter',size:11}, color:'#374151', boxWidth:12, padding:10,
+          generateLabels: chart => chart.data.labels.map((lbl,i)=>({
+            text: `${lbl} — ${fN(colMap[lbl]/colTotal*100,1)}%`,
+            fillStyle: COLOR_PALETTE[lbl]||'#9ca3af',
+            strokeStyle:'#fff', lineWidth:1, index:i
+          }))
+        }},
+        tooltip:{ backgroundColor:'#0c2117', bodyColor:'#fff', padding:8, cornerRadius:8,
+          callbacks:{ label: c => ` ${c.label}: ${fK(c.parsed)} frutos (${fN(c.parsed/colTotal*100,1)}%)` }
+        }
+      }
+    }
+  });
+
+  // ── % Primera por caseta ──
+  const casetaMap = {};
+  rows.forEach(r => {
+    const cas = r.caseta || '—';
+    if(!casetaMap[cas]) casetaMap[cas] = { p1:0, tot:0 };
+    const p1 = (r.calidades||[]).find(c=>c.calidad==='PRIMERA');
+    casetaMap[cas].p1  += p1 ? p1.cantidad : 0;
+    casetaMap[cas].tot += r.total_frutos || 0;
+  });
+  const casetaList = Object.entries(casetaMap)
+    .map(([k,v]) => ({ k, pct: v.tot ? v.p1/v.tot*100 : 0, tot: v.tot }))
+    .sort((a,b)=>b.pct-a.pct);
+  const maxCp = 100;
+  document.getElementById('inb-caseta-bars').innerHTML = casetaList.map(({k,pct,tot})=>{
+    const col = pct>=65?'#16a34a':pct>=55?'#d97706':'#dc2626';
+    return `
+    <div class="prog-row" style="margin-bottom:0">
+      <div class="prog-top">
+        <span class="prog-name" style="font-size:.72rem">${k.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</span>
+        <span class="prog-qty" style="color:${col};font-size:.73rem">${fN(pct,1)}%
+          <span style="opacity:.4;font-weight:400"> ${fK(tot)} fr</span>
+        </span>
+      </div>
+      <div class="prog-track" style="height:5px">
+        <div class="prog-fill" style="width:${pct.toFixed(1)}%;background:${col}"></div>
+      </div>
+    </div>`;
+  }).join('') || '<div class="empty">Sin datos.</div>';
+
+  // ── Detail table ──
+  const sorted = [...rows].sort((a,b)=>b.fecha.localeCompare(a.fecha));
+  const inbCap = sorted.length > 300 ? `<tr><td colspan="9" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted);background:#fafafa">Mostrando 300 de ${sorted.length.toLocaleString('es-MX')} registros</td></tr>` : '';
+  document.getElementById('inb-tbody').innerHTML = sorted.slice(0,300).map(r => {
+    const p1pct = pctPrimera(r);
+    const p2pct = pctSegunda(r);
+    const m     = r.merma ?? null;
+    const t     = r.temperatura_fruto ?? null;
+    const fc    = r.porc_fuera_color ?? null;
+    const p1Col = p1pct==null?'':p1pct>=65?'color:var(--green);font-weight:700':p1pct>=55?'color:var(--accent);font-weight:700':'color:var(--red);font-weight:700';
+    const mCol  = m==null?'':m<8?'color:var(--green)':m<15?'color:var(--accent)':'color:var(--red);font-weight:700';
+    const tCol  = t==null?'':t<28?'color:var(--green)':t<33?'color:var(--accent)':'color:var(--red);font-weight:700';
+    return `<tr>
+      <td class="td-m">${fDate((r.fecha||'').split('T')[0])}</td>
+      <td style="font-size:.72rem">${r.caseta?.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')||'—'}</td>
+      <td style="color:var(--muted);font-size:.72rem">${r.variedad||'—'}</td>
+      <td class="td-n">${fK(r.total_frutos||0)}</td>
+      <td class="td-n" style="${p1Col}">${p1pct!=null?fN(p1pct,1)+'%':'—'}</td>
+      <td class="td-n">${p2pct!=null?fN(p2pct,1)+'%':'—'}</td>
+      <td class="td-n" style="${mCol}">${m!=null?fN(m,1)+'%':'—'}</td>
+      <td class="td-n" style="${tCol}">${t!=null?fN(t,1):' —'}</td>
+      <td class="td-n">${fc!=null?fN(fc,1)+'%':'—'}</td>
+    </tr>`;
+  }).join('') + inbCap || '<tr><td colspan="9" class="empty">Sin datos.</td></tr>';
+}
+
+/* ── VS CICLO ANTERIOR TOGGLE ───────────────────────────── */
+let cmpOn = false;
+let cmpAcrAnt = [], cmpPalAnt = [];
+
+async function toggleComparison(){
+  cmpOn = !cmpOn;
+  const btn = document.getElementById('btn-cmp');
+  btn.classList.toggle('active', cmpOn);
+  document.getElementById('cmp-lbl').textContent = cmpOn ? 'Ocultar anterior' : 'vs anterior';
+  if(cmpOn) await loadCmpData();
+  // Re-render whichever tab is active
+  const activePanel = document.querySelector('.panel.active')?.id;
+  if(activePanel === 'panel-pesos')   renderPesos();
+  if(activePanel === 'panel-calidad') renderCalidad();
+  if(activePanel === 'panel-tomate')  renderTomate(activeRange?.from, activeRange?.to);
+}
+
+async function loadCmpData(){
+  const cycles = bothCycles();
+  try {
+    [cmpPalAnt, cmpAcrAnt] = await Promise.all([
+      getAll(`/vw_palets?select=fecha_empaque,calidad,bultos,peso,cultivo&fecha_empaque=gte.${cycles.anterior.from}`),
+      getAll(`/vw_acarreos?select=fecha,peso_bruto,tara,detalles,lote&fecha=gte.${cycles.anterior.from}`)
+    ]);
+    document.getElementById('ft-urls').textContent +=
+      `  ·  Anterior: vw_acarreos gte.${cycles.anterior.from}&lte.${cycles.anterior.to}`;
+  } catch(e){ console.error(e); }
+}
+
+function weekOfCycle(isoDate, cycleFromISO){
+  const d  = new Date(isoDate + 'T12:00:00');
+  const s  = new Date(cycleFromISO + 'T12:00:00');
+  const dayN = Math.floor((d - s) / 86400000);
+  return Math.floor(dayN / 7) + 1;
+}
+
+/* ── PANEL TABS ─────────────────────────────────────────── */
+function syncFilterContext(panelId){
+  const paletsOnly = document.querySelectorAll('.f-palets-only');
+  const isPaletsTab = panelId === 'panel-calidad';
+  paletsOnly.forEach(el => el.classList.toggle('dimmed', !isPaletsTab));
+  if(!isPaletsTab){
+    // Clear palet-only selects so they don't silently affect calidad re-renders
+    document.getElementById('f-etiqueta').value = '';
+    document.getElementById('f-calidad').value  = '';
+    document.getElementById('f-tamano').value   = '';
+  }
+}
+
+document.querySelectorAll('.view-tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.view-tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+    syncFilterContext(btn.dataset.panel);
+    if(btn.dataset.panel === 'panel-resumen')  loadResumen();
+    if(btn.dataset.panel === 'panel-tomate')   loadTomate();
+    if(btn.dataset.panel === 'panel-limon')    loadLimon();
+    if(btn.dataset.panel === 'panel-chile')    loadChile();
+    if(btn.dataset.panel === 'panel-inbound')  loadInbound();
+  });
+});
+
+/* ── PERIOD BUTTON WIRING (use [data-period] to skip cmp-btn) ─── */
+document.querySelectorAll('.p-btn[data-period]').forEach(btn => {
+  btn.addEventListener('click', () => setPeriod(btn.dataset.period));
+});
+
+/* Dimension selects → refilter in-memory (no reload) */
+document.querySelectorAll('#f-cultivo,#f-etiqueta,#f-calidad,#f-tamano').forEach(el => {
+  el.addEventListener('change', applyFilters);
+});
+
+/* ── MONTH PICKER ────────────────────────────────────────── */
+const MESES     = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+const MESES_FUL = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+let mpYear   = new Date().getFullYear();
+let mpSelY   = null;   // selected year
+let mpSelM   = null;   // selected month (0-11)
+
+function mpClearActive(){
+  const btn = document.getElementById('mpicker-btn');
+  if(btn) btn.classList.remove('mpactive');
+  document.getElementById('mpicker-lbl').textContent = 'Por mes';
+  mpSelY = null; mpSelM = null;
+}
+
+function openMPicker(e){
+  e.stopPropagation();
+  const pop = document.getElementById('mpicker-pop');
+  const opening = !pop.classList.contains('mpopen');
+  pop.classList.toggle('mpopen');
+  document.getElementById('mp-backdrop').style.display = opening ? 'block' : 'none';
+  if(opening){ mpYear = mpSelY || new Date().getFullYear(); renderMPGrid(); }
+}
+
+function closeMPicker(){
+  document.getElementById('mpicker-pop').classList.remove('mpopen');
+  document.getElementById('mp-backdrop').style.display = 'none';
+}
+
+function mpNavYear(delta){
+  mpYear = Math.min(mpYear + delta, new Date().getFullYear());
+  renderMPGrid();
+}
+
+function renderMPGrid(){
+  const now = new Date();
+  document.getElementById('mp-year-lbl').textContent = mpYear;
+  // disable next-year nav if already at current year
+  document.querySelectorAll('.mp-nav')[1].style.opacity =
+    mpYear >= now.getFullYear() ? '.25' : '1';
+  document.querySelectorAll('.mp-nav')[1].style.pointerEvents =
+    mpYear >= now.getFullYear() ? 'none' : '';
+
+  const grid = document.getElementById('mp-grid');
+  grid.innerHTML = MESES.map((m, i) => {
+    const isFut = mpYear > now.getFullYear() ||
+                  (mpYear === now.getFullYear() && i > now.getMonth());
+    const isSel = mpSelY === mpYear && mpSelM === i;
+    return `<button class="mp-m${isFut?' mpfut':''}${isSel?' mpsel':''}"
+      onclick="pickMonth(${mpYear},${i})">${m}</button>`;
+  }).join('');
+}
+
+function pickMonth(year, month){
+  const from = `${year}-${String(month+1).padStart(2,'0')}-01`;
+  // last day of month, capped at today
+  const lastDay = new Date(year, month + 1, 0);
+  const today   = new Date();
+  const to = iso(lastDay <= today ? lastDay : today);
+  mpSelY = year; mpSelM = month;
+  activeRange = { from, to };
+  // clear period pills
+  document.querySelectorAll('.p-btn[data-period]').forEach(b => b.classList.remove('active'));
+  // highlight mpicker button
+  const btn = document.getElementById('mpicker-btn');
+  btn.classList.add('mpactive');
+  document.getElementById('mpicker-lbl').textContent = MESES_FUL[month] + ' ' + year;
+  closeMPicker();
+  loadData();
+  const activePanel = document.querySelector('.panel.active')?.id;
+  if(activePanel === 'panel-inbound') loadInbound();
+}
+
+// close month picker on outside click (desktop)
+document.addEventListener('click', e => {
+  const wrap = document.getElementById('mpicker-wrap');
+  if(wrap && !wrap.contains(e.target)) closeMPicker();
+});
+
+/* ── BOOT ───────────────────────────────────────────────── */
+// Frame mode: hide header when embedded via ?frame=1
+if(new URLSearchParams(window.location.search).get('frame') === '1'){
+  document.body.classList.add('frame');
+}
+syncFilterContext('panel-calidad');
+renderMPGrid();
+setPeriod('ciclo');
+// Silently load prior-cycle data after main data settles
+setTimeout(autoLoadCmp, 3500);
+</script>
+</body>
+</html>
