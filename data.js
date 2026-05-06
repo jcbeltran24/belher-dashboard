@@ -186,6 +186,41 @@ window.BELHER = {
       { prioridad:"Alta",  accion:"Cerrar memo de conciliación formal",        descripcion:"Firmado por ambas partes antes de iniciar temporada 2026-2027" }
     ],
 
+    /* ── Waterfall P&L liquidación WK18 (todas las líneas) ── */
+    waterfallLiquidacion: [
+      { concepto:"Ventas brutas",              monto:  17746742, tipo:"ingreso",   subtotal: null },
+      { concepto:"Aranceles (anti-dumping)",   monto:  -1775841, tipo:"deduccion", subtotal: null },
+      { concepto:"Comisión Calavo (22%)",      monto:  -1916508, tipo:"deduccion", subtotal: null },
+      { concepto:"Otros gastos (expenses)",    monto:  -1441186, tipo:"deduccion", subtotal: null },
+      { concepto:"VENTA NETA OPERATIVA",       monto:  12613207, tipo:"subtotal",  subtotal: true },
+      { concepto:"Pick & Pack",                monto:  -4466620, tipo:"deduccion", subtotal: null },
+      { concepto:"Preseason advance",          monto:  -5000000, tipo:"deduccion", subtotal: null },
+      { concepto:"Balance temporada 2024-25",  monto:   -655867, tipo:"deduccion", subtotal: null },
+      { concepto:"Avance de liquidación",      monto:   -350000, tipo:"deduccion", subtotal: null },
+      { concepto:"Préstamo",                   monto:   -472037, tipo:"deduccion", subtotal: null },
+      { concepto:"Intereses",                  monto:    -26789, tipo:"deduccion", subtotal: null },
+      { concepto:"Gastos varios",              monto:     -2421, tipo:"deduccion", subtotal: null },
+      { concepto:"SALDO A FAVOR DE BELHER",    monto:   1639473, tipo:"total",     subtotal: true }
+    ],
+
+    /* ── Conciliación lado a lado Belher vs Calavo ── */
+    conciliacionDetalle: [
+      { concepto:"Ventas brutas",          belher:  17746742, calavo:  17746742, diff:       0, nota:"Igual" },
+      { concepto:"Aranceles",              belher:  -1775841, calavo:  -1775841, diff:       0, nota:"Igual" },
+      { concepto:"Comisión Calavo",        belher:  -1916508, calavo:  -2128442, diff:  211934, nota:"Calavo aplica >22% — diferencia $211,934" },
+      { concepto:"Otros gastos",           belher:  -1441186, calavo:  -1441186, diff:       0, nota:"Igual" },
+      { concepto:"VENTA NETA OPERATIVA",   belher:  12613207, calavo:  12401273, diff:  211934, nota:"Subtotal", esSubtotal:true },
+      { concepto:"Pick & Pack",            belher:  -4466620, calavo:  -4466620, diff:       0, nota:"Igual" },
+      { concepto:"Preseason advance",      belher:  -5000000, calavo:  -5000000, diff:       0, nota:"Igual" },
+      { concepto:"Balance 2024-25",        belher:   -655867, calavo:   -655867, diff:       0, nota:"Igual" },
+      { concepto:"Avance liquidación",     belher:   -350000, calavo:   -350000, diff:       0, nota:"Igual" },
+      { concepto:"Préstamo",               belher:   -472037, calavo:   -417110, diff:  -54927, nota:"Calavo aplica menos pago — diferencia $54,927" },
+      { concepto:"Intereses",              belher:    -26789, calavo:    -26789, diff:       0, nota:"Igual" },
+      { concepto:"Gastos varios",          belher:     -2421, calavo:     -2421, diff:       0, nota:"Igual" },
+      { concepto:"Beltran fee ADM",        belher:         0, calavo:   -275660, diff:  275660, nota:"No reconocido por Calavo" },
+      { concepto:"SALDO A FAVOR",          belher:   1639473, calavo:   1206806, diff:  432667, nota:"Total diferencia", esSubtotal:true }
+    ],
+
     notaSettlement: "WK18 (26-Abr-2026): Settlement acumulado 528 POs. Según Belher: $1,639,473 · Según Calavo: $1,206,806 · Diferencia: $432,667 (fee ADM $275,660 + dif. comisión $211,934 - dif. préstamo $54,927). Quedan 55k cajas por liquidar (48k por facturar + 7k en piso). Proyección neta adicional: $712K–$963K. Saldo total esperado: $2.35M–$2.6M. Fuente: conciliación Leima / Google Sheets 06-May-2026.",
     pagos: [
       { sem:"WK01", wire:"02-Ene", pago:54120,  cajas:10824, cont:6,  estado:"Pagado"   },
