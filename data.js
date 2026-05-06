@@ -1,17 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 06 May 2026",
+    fecha: "Martes 05 May 2026",
     semana: "WK 19",
-    actualizado: "06/05/2026 · 08:35"
+    actualizado: "06/05/2026 · 06:18"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"INBOUND TOMATE 05/05 — Calidad CRÍTICA: 1ST 56%, 2ND 11%, 3RD 8%, MERMA 25%. Deterioro sostenido — investigar lote/campo urgente."},
-    {"nivel":"warning","texto":"CALAVO EMBARQUE 05/05 — 2 trailers (JL-114, JL-111) · 3,440 cajas tomate NOG · Transportes eLogistica · Set 50°F. Documentación completa enviada."},
-    {"nivel":"warning","texto":"VINE RIPE CORRECCIÓN WK19 — Corbel #0039: USDA AMS $66.95–68.95 post-peak. Coachella + Georgia supply entrando. Presión esperada sostenida WK19-20."},
-    {"nivel":"success","texto":"LIMES 110s $42 — Peru -30% supply sustain ventana NA. Maximizar embarques WK19 antes flush Colombia/Brasil esperado WK19-20."},
-    {"nivel":"info","texto":"SETTLEMENT WK18 AL 26-ABR CONFIRMADO — Revenue $17,746,742 · Saldo a favor $1,206,806 (S/Calavo). Quedan 48k cajas + 7k piso por facturar."},
-    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 12 días. Javier Martínez inspeccionará todas las unidades de producción y empaque. Revisar inventarios materiales e insumos críticos."}
+    {"nivel":"danger","texto":"CALIDAD DETERIORO CONTINUO — Inbound 05/05 56% primera, merma 25% (peor que 04/05: 61%, 19%). Outbound 04/05: Bola recuperada 80.38% (merma 4.40%), Roma estable 87.43% (merma 2.16%). Patrón apunta a problema de selección/lote en inbound — urgente investigar fuente."},
+    {"nivel":"warning","texto":"VINE RIPE ÚLTIMA VENTANA WK19 — Corbel #0039 (30-Abr): USDA AMS $66.95–68.95 post-peak. Coachella + Georgia entrando. Presión sostenida esperada."},
+    {"nivel":"success","texto":"LIMES 110s $42 — Peru -30% supply sustain. Maximizar embarques WK19 antes flush Colombia/Brasil WK19-20."},
+    {"nivel":"info","texto":"SORGO TRILLA WK19 — Jornada 05/05 Quevedo 1: 11 ha completadas. Total acumulado: 279 ha en 19 jornadas (19 jornadas Sifón 1+2 finalizadas 02/05)."},
+    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 14 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos."}
   ],
 
   ebitda: {
@@ -178,27 +177,29 @@ window.BELHER = {
       { fecha:"WK15", primaPromedio:82.01, mermaPromedio:5.12, nota:"Días 1-6: 04/04·5vars, 06/04·3vars, 07/04·4vars (incl Tolin), 08/04·1var, 09/04·3vars, 11/04·4vars. Roma Calavo 11/04 merma 6.00%. Bola Calavo 09/04 merma 6.78% CRÍTICO. Tolin 07/04 merma 30.18% outlier." },
       { fecha:"WK16", primaPromedio:82.70, mermaPromedio:3.06, nota:"Días 1-6 (13/04-18/04): D1 BC 0.93%+RMill 1.20%, D2 BC 4.75%+RCal 1.58%, D3 BC 2.56%, D4 RZazu 1.59%, D5 BC 4.46%+Ergo 3.53%+BTolin 6.40%+RTolin 3.80%, D6 BC 2.91%+Ergo 3.67%+RMill 2.97%." },
       { fecha:"WK17", primaPromedio:82.50, mermaPromedio:3.67, nota:"D1(20/04): BC 4.10% · Ergo 3.00% · Roma Cal 1.39% · Roma Mill 1.08% · Roma Zazu 2.00%. D2(21/04): BC 3.27% · Ergo 3.18% · Roma Cal 3.24% · Roma Tolin 8.33%. D3(23/04): Bola Calavo 73.36% P, Merma 5.24% · Bola Ergo 76.32% P, Merma 2.34% · Roma Calavo 88.35% P, Merma 1.75%. D4(25/04): Bola Calavo 71.53% P, Merma 5.62% · Bola Ergo 79.13% P, Merma 3.23% · Roma Calavo 88.79% P, Merma 2.47%." },
-      { fecha:"WK18", primaPromedio:82.60, mermaPromedio:3.79, nota:"D1(27/04): BC 81.50%P merma 3.28% · Zazu 89.64%P merma 2.91%. D2(28/04): BC 73.37%P merma 3.16% · RMill 89.13%P merma 2.52% · RZazu 86.58%P merma 2.03%. D3(29/04): BC 82.17%P merma 3.71% · RCal 84.00%P merma 2.00% · RMill 84.44%P merma 2.68%. D4(02/05): BC 84.92%P merma 3.59% · RCal 86.55%P merma 2.72%. D5(03/05): BC 60.96%P merma 14.31% CRÍTICO · RCal 87.88%P merma 2.57%. Promedio recalculado con 12 puntos." }
+      { fecha:"WK18", primaPromedio:82.60, mermaPromedio:3.79, nota:"D1(27/04): BC 81.50%P merma 3.28% · Zazu 89.64%P merma 2.91%. D2(28/04): BC 73.37%P merma 3.16% · RMill 89.13%P merma 2.52% · RZazu 86.58%P merma 2.03%. D3(29/04): BC 82.17%P merma 3.71% · RCal 84.00%P merma 2.00% · RMill 84.44%P merma 2.68%. D4(02/05): BC 84.92%P merma 3.59% · RCal 86.55%P merma 2.72%. D5(03/05): BC 60.96%P merma 14.31% CRÍTICO · RCal 87.88%P merma 2.57%. Promedio recalculado con 12 puntos." },
+      { fecha:"WK19", primaPromedio:68.00, mermaPromedio:10.20, nota:"D1(04/05): Inbound 61% primera, merma 19%. Outbound 04/05: BC 80.38% merma 4.40%, RCal 87.43% merma 2.16%. D2(05/05): Inbound 56% primera, merma 25% DETERIORO. Outbound pendiente — se espera mejora en muestra procesada 05/05. Patrón de inbound peor sugiere selección en campo o rezaga en lote entrante." }
     ],
     ultimoOutbound: {
-      fecha: "03/05/2026",
+      fecha: "04/05/2026",
       variedades: [
-        { nombre:"Bola Calavo",  etiqueta:"Calavo", canal:"exportacion", primera:60.96, segunda:12.75, tercera:11.97, merma:14.31, peso:26.04, alerta:true  },
-        { nombre:"Roma Calavo",  etiqueta:"Calavo", canal:"exportacion", primera:87.88, segunda:5.87,  tercera:3.68,  merma:2.57,  peso:26.03, alerta:false }
+        { nombre:"Bola Calavo",  etiqueta:"Calavo", canal:"exportacion", primera:80.38, segunda:8.06, tercera:7.16, merma:4.40, peso:25.35, alerta:false },
+        { nombre:"Roma Calavo",  etiqueta:"Calavo", canal:"exportacion", primera:87.43, segunda:6.60, tercera:3.80, merma:2.16, peso:25.63, alerta:false },
+        { nombre:"Chile Fresno", etiqueta:"Fresno", canal:"exportacion", primera:75.93, segunda:19.00, tercera:5.07, merma:5.07, peso:26.75, alerta:false }
       ],
       anterior: {
-        fecha: "02/05/2026",
+        fecha: "03/05/2026",
         variedades: [
-          { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:84.92, segunda:6.98, tercera:4.51, merma:3.59, peso:20.96, alerta:false },
-          { nombre:"Roma Calavo", etiqueta:"Calavo", canal:"exportacion", primera:86.55, segunda:7.18, tercera:3.55, merma:2.72, peso:26.58, alerta:false }
+          { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:60.96, segunda:12.75, tercera:11.97, merma:14.31, peso:26.04, alerta:true },
+          { nombre:"Roma Calavo", etiqueta:"Calavo", canal:"exportacion", primera:87.88, segunda:5.87, tercera:3.68, merma:2.57, peso:26.03, alerta:false }
         ]
       },
       ultimoInbound: {
-        fecha: "03/05/2026",
+        fecha: "05/05/2026",
         variedades: [
-          { nombre:"Tomate entrada", etiqueta:"Inbound", canal:"interno", primera:63, segunda:10, tercera:2, merma:25.00, alerta:true }
+          { nombre:"Tomate entrada", etiqueta:"Inbound", canal:"interno", primera:56, segunda:11, tercera:8, merma:25.00, alerta:true }
         ],
-        nota: "Inbound 03/05: 63% primera, 25% merma — deterioro SEVERO confirmado también en outbound Bola (60.96%, merma 14.31%). Roma no afectada."
+        nota: "Inbound 05/05: 56% primera, merma 25% — PEOR que 04/05 (61%, 19%). Outbound 04/05 mejoró: BC 80.38% (4.40% merma). Divergencia inbound/outbound sugiere problema en campo específico o selección en línea empaque."
       }
     }
   },
@@ -315,7 +316,7 @@ window.BELHER = {
       ebitda_yago:       -513373,
       ebitda_var_yago:   127522,
       periodo:           "Jul 2025 – Feb 2026",
-      nota:              "Trilla WK18 completada: 264 ha acumuladas en 17 jornadas (31/Mar–02/May). Sifón 2 finalizado 02/05 — 15 ha total. Descanso obligatorio 01/May ejecutado.",
+      nota:              "Trilla WK19 en curso: 279 ha acumuladas en 20 jornadas (31/Mar–05/May). Jornada 05/05: Quevedo 1 completada (11 ha). Sifón 2 finalizado 02/05 — 15 ha total. Descanso obligatorio 01/May ejecutado.",
       trilla: [
         { fecha:"31/03/2026", campos:"Dorita + El 17",                                        ha:18, cultivo:"Sorgo" },
         { fecha:"06/04/2026", campos:"Carrillo",                                              ha:12, cultivo:"Sorgo" },
@@ -334,7 +335,8 @@ window.BELHER = {
         { fecha:"29/04/2026", campos:"Sifón 1 y Sifón 2",                                    ha:13, cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 29/04/2026 SORGO (SIFON I Y SIFON 2)" },
         { fecha:"30/04/2026", campos:"Sifón 2",                                               ha:15, cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 30/04/2026 SORGO (SIFON 2)" },
         { fecha:"02/05/2026", campos:"Sifón 2",                                               ha:10, cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 02/05/2026 SORGO (SIFON 2)" },
-        { fecha:"04/05/2026", campos:"Sifón 1 y Sifón 2",                                    ha:5,  cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 04/05/2026 SORGO (SIFON 1 Y SIFON 2)" }
+        { fecha:"04/05/2026", campos:"Sifón 1 y Sifón 2",                                    ha:5,  cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 04/05/2026 SORGO (SIFON 1 Y SIFON 2)" },
+        { fecha:"05/05/2026", campos:"Quevedo 1",                                             ha:11, cultivo:"Sorgo", fuente:"AVANCE DE TRILLA 05/05/2026 SORGO (QUEVEDO 1)" }
       ]
     }
   },
@@ -475,9 +477,12 @@ window.BELHER = {
       { fecha:"30/04", productos:["Tomate Bola","Tomate Roma","Rezaga Tomate"] },
       { fecha:"02/05", productos:["Tomate Bola","Tomate Roma"] },
       { fecha:"03/05", productos:["Tomate Bola","Tomate Roma"] },
-      { fecha:"04/05", productos:["Tomate Bola","Tomate Roma","Rezaga Tomate"] }
+      { fecha:"04/05", productos:["Tomate Bola","Tomate Roma","Rezaga Tomate"] },
+      { fecha:"05/05", productos:["Tomate Bola","Tomate Roma","Sorgo"] }
     ],
     embarques: [
+      { fecha:"05/05/2026", tipo:"Tomate", cargas:1, unidad:"JL (Nogales)", destino:"Arizona", estado:"OK", nota:"05/05 BILL MANIFIESTO JL" },
+      { fecha:"05/05/2026", tipo:"Tomate", cargas:1, unidad:"Reportes generales", destino:"Múltiple", estado:"OK", nota:"05/05 Reportes empaque 02:56" },
       { fecha:"04/05/2026", tipo:"Tomate", cargas:3, unidad:"ST-95, ST-101, JL-32",          destino:"Arizona", estado:"OK" },
       { fecha:"03/05/2026", tipo:"Tomate", cargas:4, unidad:"CHARLY-6, CGG-5, CGG-91, CGG-105",              destino:"Arizona", estado:"OK" },
       { fecha:"03/05/2026", tipo:"Tomate", cargas:1, unidad:"JL-13",                                          destino:"Texas",   estado:"OK" },
@@ -493,34 +498,27 @@ window.BELHER = {
   },
 
   correos: [
-    {"hora":"20:00","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES JL","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-05"},
-    {"hora":"19:56","asunto":"05-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-05"},
-    {"hora":"19:55","asunto":"REPORTE DIARIO CALAVO 05-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-05"},
-    {"hora":"19:54","asunto":"05-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-05"},
-    {"hora":"19:40","asunto":"AVANCE DE TRILLA 05/05/2026 SORGO (QUEVEDO 1)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-05"},
-    {"hora":"16:11","asunto":"REPORTE DE INBOUND TOMATE DIA 05-05-2026","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-05"},
-    {"hora":"16:10","asunto":"HortiDaily Newsletter | martes, 5 de mayo de 2026","de":"mail@hortidaily.es","leido":false,"fecha":"2026-05-05"},
-    {"hora":"15:05","asunto":"HortiDaily Newsletter | Tuesday, May 5, 2026","de":"mail@hortidaily.com","leido":false,"fecha":"2026-05-05"},
-    { hora:"02:18", asunto:"04-05-2026 REPORTES GENERAELS TOMATE",        de:"embarquesbelher@agbelher.com",   leido:false, fecha:"2026-05-05" },
-    { hora:"22:15", asunto:"REPORTE DE BASCULA 04/05/2026 (TOMATE)",      de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-04" },
-    { hora:"16:13", asunto:"REPORTE DE OUTBOUND TOMATE 03/05/2026",       de:"calidad@agbelher.com",           leido:false, fecha:"2026-05-04" },
-    { hora:"22:20", asunto:"AVANCE DE TRILLA 04/05/2026 SORGO",           de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-04" },
-    { hora:"01:35", asunto:"REPORTE DE BASCULA 04/05/2026 (REZAGA)",      de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-05" }
+    { hora:"02:40", asunto:"AVANCE DE TRILLA 05/05/2026 SORGO (QUEVEDO 1)",      de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-06" },
+    { hora:"23:11", asunto:"REPORTE DE INBOUND TOMATE DIA 05-05-2026",           de:"calidad@agbelher.com",           leido:false, fecha:"2026-05-05" },
+    { hora:"22:14", asunto:"REPORTE DE BASCULA 05/05/2026 (TOMATE)",             de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-05" },
+    { hora:"03:00", asunto:"BILL, MANIFIESTO JL NOGALES",                        de:"embarquesbelher@agbelher.com",   leido:false, fecha:"2026-05-06" },
+    { hora:"02:56", asunto:"05-05-2026 REPORTES GENERALES TOMATE",               de:"embarquesbelher@agbelher.com",   leido:false, fecha:"2026-05-06" }
   ],
 
   ticker: [
-    { label:"Outbound Bola Calavo 03/05",   valor:"60.96% 1st / merma 14.31%",  cambio:"CRÍTICO — 2do día deterioro",    dir:"down"    },
-    { label:"Outbound Roma Calavo 03/05",   valor:"87.88% 1st / merma 2.57%",   cambio:"estable — no afectada",          dir:"up"      },
-    { label:"Saldo Calavo a favor",         valor:"$1,206,806",                  cambio:"settle al 26-Abr",               dir:"up"      },
-    { label:"Revenue Calavo acumulado",     valor:"$17,746,742",                 cambio:"WK01–WK18",                      dir:"up"      },
-    { label:"Vine Ripe 4x4 USDA",          valor:"$66.95–68.95/cj",             cambio:"corrección WK19 en curso",       dir:"down"    },
-    { label:"Roma XL Texas",               valor:"$50.95–52.95/cj",             cambio:"presión Coachella WK19",         dir:"down"    },
-    { label:"Limes seedless 110s",         valor:"$42/bu",                       cambio:"Peru -30% sostiene",             dir:"up"      },
-    { label:"CVGW (Calavo)",               valor:"$27.64",                       cambio:"-3.1% vs 02-May",                dir:"down"    },
-    { label:"AVO (Mission)",               valor:"$13.33",                       cambio:"-6.5% vs prev close",            dir:"down"    },
-    { label:"IVA Feb-26 autorizado",       valor:"$1,752,440 MXN",               cambio:"en proceso depósito SAT",        dir:"up"      },
-    { label:"Sorgo trilla acumulada",      valor:"279 ha",                       cambio:"19 jornadas completadas",        dir:"up"      },
-    { label:"Corbel Seeds última",         valor:"#0039",                        cambio:"30-Abr",                         dir:"neutral" }
+    { label:"Inbound Tomate 05/05",         valor:"56% 1st / merma 25%",        cambio:"DETERIORO — 2do día peor",      dir:"down"    },
+    { label:"Outbound Bola Calavo 04/05",   valor:"80.38% 1st / merma 4.40%",   cambio:"mejora vs 03/05",               dir:"up"      },
+    { label:"Outbound Roma Calavo 04/05",   valor:"87.43% 1st / merma 2.16%",   cambio:"estable — calidad premium",     dir:"up"      },
+    { label:"Saldo Calavo a favor",         valor:"$1,206,806",                  cambio:"settle al 26-Abr",              dir:"up"      },
+    { label:"Revenue Calavo acumulado",     valor:"$17,746,742",                 cambio:"WK01–WK18",                     dir:"up"      },
+    { label:"Vine Ripe 4x4 USDA",          valor:"$66.95–68.95/cj",             cambio:"corrección WK19 en curso",      dir:"down"    },
+    { label:"Roma XL Texas",               valor:"$50.95–52.95/cj",             cambio:"presión Coachella WK19",        dir:"down"    },
+    { label:"Limes seedless 110s",         valor:"$42/bu",                       cambio:"Peru -30% sostiene",            dir:"up"      },
+    { label:"CVGW (Calavo)",               valor:"$27.64",                       cambio:"-3.1% vs 02-May",               dir:"down"    },
+    { label:"AVO (Mission)",               valor:"$13.33",                       cambio:"-6.5% vs prev close",           dir:"down"    },
+    { label:"IVA Feb-26 autorizado",       valor:"$1,752,440 MXN",               cambio:"en proceso depósito SAT",       dir:"up"      },
+    { label:"Sorgo trilla acumulada",      valor:"279 ha",                       cambio:"20 jornadas completadas",       dir:"up"      },
+    { label:"Corbel Seeds última",         valor:"#0039",                        cambio:"30-Abr",                        dir:"neutral" }
   ],
 
   auditorias: [
@@ -607,16 +605,16 @@ window.BELHER = {
       {
         titulo: "ROMA FIRMEZA POST-PEAK — ACTUAR WK19",
         prioridad: "Alta",
-        descripcion: "Roma firma bajo supply NA ajustada pero presiones Coachella + Georgia (early May) visibles. Outbound 03/05: Roma Calavo 87.88% primera, merma 2.57% — calidad premium mantenida.",
+        descripcion: "Roma firma bajo supply NA ajustada pero presiones Coachella + Georgia (early May) visibles. Outbound 04/05: Roma Calavo 87.43% primera, merma 2.16% — calidad premium mantenida.",
         accion: "Continuar embarques máximos Roma WK19. Post-WK19 presión esperada — actuar agresivo ahora."
       }
     ],
     watchlist: [
       {
-        titulo: "Bola Calavo calidad CRISIS — outbound 03/05 confirma: 60.96% primera, merma 14.31%",
+        titulo: "Tomate INBOUND CALIDAD DETERIORO — día 05/05 peor que 04/05",
         nivel: "danger",
-        descripcion: "Outbound 03/05: Bola Calavo 60.96% 1st · merma 14.31% (vs 84.92% / 3.59% el 02/05). 2do día consecutivo deterioro severo. Roma no afectada (87.88%, 2.57%). Inbound 03/05 también crítico: 63% primera, 25% merma. Patrón apunta a problema de campo específico en Bola.",
-        accion: "URGENTE: Identificar campo/variedad/lote Bola que fue outbound 03/05. Pruebas calidad campo. Verificar si afecta cargas WK19. Roma puede continuar, Bola necesita evaluación antes de embarcar."
+        descripcion: "Inbound 05/05: 56% primera, merma 25% (PEOR que 04/05: 61%, 19%). Outbound 04/05 mostró mejoría: Bola 80.38% (4.40% merma). Divergencia apunta a problema en campo específico o selección en lote entrante. Roma no afectada.",
+        accion: "URGENTE: Investigar fuente inbound 05/05 — campo/lote/rezaga. Pruebas calidad campo WK19. Si deterioro continúa, pausar embarques Bola hasta diagnóstico."
       },
       {
         titulo: "Declaración Anual ISR 2025 — reunión revisión 25-May",
@@ -632,7 +630,7 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"05/05/2026",    evento:"WK19 continuación — embarques máximos de tomate (Roma + Vine-ripe cierre de ventana) y limón 110s antes corrección esperada.", tipo:"operativo", participantes:"Embarques · Calidad" },
+      { fecha:"05/05/2026",    evento:"WK19 continuación — embarques máximos de tomate (Roma + Vine-ripe cierre de ventana) y limón 110s antes corrección esperada. Monitoreo inbound calidad.", tipo:"operativo", participantes:"Embarques · Calidad · Operaciones" },
       { fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
       { fecha:"19/05/2026",    evento:"BPSI F/S Abril 2026 y forecast Q2 2026 — Zoom 11am-12pm (GMT-7)", tipo:"financiero", participantes:"Leima · Jacruz · JC · Armando Llanes" },
       { fecha:"25/05/2026",    evento:"Abril '26 F/S (Tomates/Limones/Granos) — Revisión final · 9:30-10:30am", tipo:"financiero", participantes:"JC · Antonio · Leima · Armando · Jacruz · Despacho Terrazas" },
@@ -643,10 +641,10 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "05/05/2026 · 03:30",
+    generado:  "06/05/2026 · 06:18",
     modelo:    "Claude claude-haiku-4-5-20251001",
     horizonte: "7 días",
-    nota:      "Síntesis Corbel Seeds #0039 (30-Abr) + Outbound 02/05-03/05. Vine ripe en corrección clara post-peak. Roma firme pero presión Coachella/Georgia WK19+. Limes Peru -30% sustain pero ventana cierra WK19-20. Bola Calavo CRÍTICO — investigación urgente.",
+    nota:      "Síntesis Corbel Seeds #0039 (30-Abr) + Outbound 04/05 + Inbound 05/05 (deterioro). Vine ripe en corrección clara post-peak. Roma firme pero presión Coachella/Georgia WK19+. Limes Peru -30% sustain pero ventana cierra WK19-20. Inbound calidad DETERIORO continuo — investigación urgente.",
     items: [
       {
         id: "vine-ripe",
@@ -669,8 +667,8 @@ window.BELHER = {
         confianza: 72,
         precio_actual:     { min: 50.95, max: 52.95 },
         precio_proyectado: { min: 48.00, max: 54.00 },
-        razonamiento: "Corbel #0039 (30-Abr): Roma XL Texas $50.95–52.95 (down desde $52.95–54.95 WK17). Roma firme bajo supply NA tight — pero presiones Coachella + Georgia (early May) ya visibles. Outbound 03/05 excelente: Roma Calavo 87.88% primera, merma 2.57% — calidad premium.",
-        factores: ["Corbel #0039: Roma $50.95-52.95 (presionada WK19)", "Outbound 03/05: calidad premium (merma <3%)", "Coachella Valley supply increasing WK19", "Georgia harvest early May añade presión", "Supply NA todavía tight pero transición visible"],
+        razonamiento: "Corbel #0039 (30-Abr): Roma XL Texas $50.95–52.95 (down desde $52.95–54.95 WK17). Roma firme bajo supply NA tight — pero presiones Coachella + Georgia (early May) ya visibles. Outbound 04/05 excelente: Roma Calavo 87.43% primera, merma 2.16% — calidad premium.",
+        factores: ["Corbel #0039: Roma $50.95-52.95 (presionada WK19)", "Outbound 04/05: calidad premium (merma <3%)", "Coachella Valley supply increasing WK19", "Georgia harvest early May añade presión", "Supply NA todavía tight pero transición visible"],
         riesgo: "Si Coachella o Georgia supply llega acelerado WK19, corrección a $46-48 posible.",
         accion: "Continuar embarques máximos Roma WK19. Calidad premium. Presión esperada WK20+ — actuar agresivo ahora."
       },
@@ -682,36 +680,33 @@ window.BELHER = {
         confianza: 70,
         precio_actual:     { min: 36.00, max: 42.00 },
         precio_proyectado: { min: 32.00, max: 42.00 },
-        razonamiento: "Corbel #0039 (30-Abr): Limes Texas 'slightly higher' — seedless 110s $42, 150s $36-40. Peru supply -30% continúa dando ventana NA. Belher báscula 29/04 confirma precio comercialmente viable. Flush primaveral Colombia/Brasil esperado WK19-20 cerrará ventana.",
-        factores: ["Corbel #0039: Seedless 110s $42, 150s $36-40", "Belher en báscula 29/04 = precio viable comercialmente", "Peru -30% supply mantiene ventana NA", "SNIIM Limón Veracruz $28 MXN/kg activo", "Flush Colombia/Brasil mayo-junio esperado WK19-20"],
+        razonamiento: "Corbel #0039 (30-Abr): Limes Texas 'slightly higher' — seedless 110s $42, 150s $36-40. Peru supply -30% continúa dando ventana NA. Belher báscula 05/05 registra limón activo. Flush primaveral Colombia/Brasil esperado WK19-20 cerrará ventana.",
+        factores: ["Corbel #0039: Seedless 110s $42, 150s $36-40", "Belher báscula 05/05: limón registrado — precio viable", "Peru -30% supply mantiene ventana NA", "SNIIM Limón Veracruz $28 MXN/kg activo", "Flush Colombia/Brasil mayo-junio esperado WK19-20"],
         riesgo: "Flush primaveral podría presionar 110s a $36-38. Ventana cierra WK19-20.",
-        accion: "EMBARCAR LIMÓN MÁXIMO WK19. Decisión báscula 29/04 confirma oportunidad viable. Coordinar Maui Fresh urgente."
+        accion: "EMBARCAR LIMÓN MÁXIMO WK19. Decisión báscula 05/05 confirma oportunidad viable. Coordinar Maui Fresh urgente."
       },
       {
-        id: "bola-calidad",
-        producto: "Tomate Bola · calidad CRISIS 03/05",
-        unidad: "inbound vs outbound",
+        id: "bola-inbound",
+        producto: "Tomate Bola · INBOUND CALIDAD DETERIORO 05/05",
+        unidad: "calidad entrada",
         tendencia: "bajista",
-        confianza: 88,
+        confianza: 85,
         precio_actual:     { min: 66.95, max: 68.95 },
         precio_proyectado: { min: 50.00, max: 65.00 },
-        razonamiento: "ALERTA CRÍTICA: Outbound 03/05 Bola Calavo 60.96% primera, merma 14.31% (vs 84.92% / 3.59% el 02/05). Inbound 03/05 también 63% primera, 25% merma. 2 indicadores apuntan al mismo lote/campo con problema grave. Roma no afectada. Si patrón continúa, cargas WK19 de Bola en riesgo de rechazo.",
-        factores: ["Outbound 03/05: Bola 60.96% primera, merma 14.31% (CRÍTICO)", "Inbound 03/05: 63% primera, merma 25% (confirma problema)", "Roma Calavo 03/05: 87.88% primera — no afectada", "Divergencia D4→D5: Bola -23.96pp en primera, +10.72pp en merma", "Causa TBD: campo específico, rezaga, daño tránsito"],
-        riesgo: "Cargas WK19 de Bola con mismo campo/lote podrían llegar rechazadas o con penalización severa.",
-        accion: "INVESTIGACIÓN INMEDIATA: 1) Campo/lote Bola outbound 03/05. 2) Pruebas calidad campo WK19. 3) Separar Bola vs Roma en embarques WK19. 4) Roma sigue — Bola evaluar antes de cargar."
+        razonamiento: "ALERTA CRÍTICA: Inbound 05/05 56% primera, merma 25% (peor que 04/05: 61%, 19%). Outbound 04/05 Bola mostró recuperación a 80.38% (4.40% merma), sugiriendo que el problema está en las muestras seleccionadas entrantes o lotes específicos. Si la causa es de campo/rezaga, cargas WK19 de Bola podrían estar en riesgo.",
+        factores: ["Inbound 05/05: 56% primera, merma 25% (empeora día a día)", "Inbound 04/05: 61% primera, merma 19% (también pobre)", "Outbound 04/05: Bola 80.38% — mejora en muestra procesada", "Roma Calavo 04/05: 87.43% — no afectada", "Patrón de inbound consistente sugiere problema de origen"],
+        riesgo: "Si deterioro de inbound continúa WK19, cargas de Bola podrían llegar con calidad deficiente — rechazo o penalización comercial probable.",
+        accion: "INVESTIGACIÓN INMEDIATA: 1) Fuente inbound 05/05 (campo/variedad/lote). 2) Pruebas calidad campo WK19. 3) Separar Bola vs Roma en embarques. 4) Roma continúa — Bola pausar hasta diagnóstico."
       }
     ]
   },
 
   industria: [
-    { cat:"Calidad",   titulo:"OUTBOUND BOLA CALAVO 03/05 — merma 14.31% CRÍTICO · 2do día deterioro severo confirmado", impacto:"Crítico", fuente:"calidad@agbelher.com · 04-May-2026", resumen:"Outbound 03/05: Bola Calavo 60.96% primera, merma 14.31% — deterioro severo desde outbound 02/05 (84.92%, 3.59%). Roma Calavo 87.88% primera, merma 2.57% estable. Junto al inbound 03/05 (63%, 25% merma), dos indicadores independientes apuntan al mismo problema en Bola. Causa TBD — investigación urgente antes cargas WK19." },
-    { cat:"Fiscal",    titulo:"IVA FEBRERO 2026 AUTORIZADO — $1,752,440 MXN — en proceso de depósito SAT", impacto:"Alto", fuente:"jacruz@agbelher.com · 29-Abr-2026", resumen:"Juan Antonio Cruz informa que el SAT autorizó el IVA correspondiente a febrero 2026 por $1,752,440 MXN — descrito como 'importe histórico'. En breve será depositado a cuenta Belher. Recuperación fiscal material que mejora posición de flujo de caja mayo 2026." },
+    { cat:"Calidad",   titulo:"INBOUND TOMATE DETERIORO 05/05 — 56% primera, merma 25% PEOR que 04/05", impacto:"Crítico", fuente:"calidad@agbelher.com · 05-May-2026", resumen:"Inbound 05/05: 56% primera, 25% merma — PEOR que inbound 04/05 (61%, 19%). Patrón de deterioro continuo. Outbound 04/05 mostró mejora: Bola 80.38% (4.40% merma), Roma 87.43% (2.16% merma). Divergencia inbound/outbound apunta a problema en selección de campo o lote específico en entrada. Investigación urgente antes WK19 embarques." },
     { cat:"Mercado",   titulo:"Vine Ripe 4x4 USDA AMS $66.95–68.95 — corrección iniciada, transición post-peak WK18-19", impacto:"Alto", fuente:"Corbel Seeds #0039 · USDA AMS · 30-Abr", resumen:"Corbel #0039 (30-Abr): USDA AMS reporta Vine Ripe 4x4 (2-layer cartons) $66.95-68.95 con 'mixed but generally firm' market. Down desde $68.95-70.95 en #0038. Transición post-peak clara. Techo de temporada probablemente alcanzado. WK19 podría ver presión sostenida a $60-65." },
-    { cat:"Mercado",   titulo:"SNIIM CDMX integrado a Corbel: Jalapeño $28-35/kg, Tomate Bola $50-54/kg, Aguacate $40-50/kg", impacto:"Alto", fuente:"Corbel Seeds #0039 · SNIIM · 30-Abr", resumen:"Primera vez Corbel integra SNIIM datos verificados. Jalapeño Jalisco $28-35/kg ($30 freq), Tomate wholesale $50-54/kg, Aguacate $40-50/kg. Convergencia precios México-export confirma valores globales justos." },
-    { cat:"Mercado",   titulo:"Roma firma pero transición esperada: Coachella Valley + Georgia early May presionarán supply", impacto:"Medio", fuente:"Corbel Seeds #0039 · FreshPlaza · 30-Abr", resumen:"Corbel #0039: 'Roma tomatoes remain firm under tight North American supply conditions'. Pero Coachella Valley supply increasing, Georgia harvest expected early May. Transición regional clara. Presiones esperadas WK19+." },
-    { cat:"Mercado",   titulo:"Limes Texas slightly higher: Peru -30% sustenta ventana NA, flush primaveral cierra WK19-20", impacto:"Medio", fuente:"Corbel Seeds #0039 · USDA AMS · 30-Abr", resumen:"Corbel #0039: Mexico limes Texas 'slightly higher' — seedless 110s $42, 150s $36-40. Peru supply -30% (lluvia) mantiene ventana. Ventana esperada cerrar WK19-20 con flush Colombia/Brasil primaveral." },
-    { cat:"Mercado",   titulo:"Green chile bell Nogales cae acelerado, Coachella Valley + Georgia early May supply aumenta", impacto:"Medio", fuente:"Corbel Seeds #0039 · FreshPlaza · 30-Abr", resumen:"Nogales green chile bell shipments caen sharply (end-of-season), Coachella Valley increasing, Georgia harvest early May. Transición de supply Mexico → US regional." },
-    { cat:"Logística", titulo:"Aranceles USMCA: productos sin USMCA sujetos a 25% + arancel general — aviso activo en embarques", impacto:"Medio", fuente:"L. Pina / embarquesbelher · 03-May-2026", resumen:"Eduardo Castañeda (L. Pina) reitera en threads embarques 03-May: productos México/Canadá sin USMCA sujetos a 25% + arancel general. Confirmar cobertura USMCA en todos embarques. Riesgo activo para WK19+." }
+    { cat:"Mercado",   titulo:"Roma firma bajo supply NA tight pero presiones Coachella/Georgia visibles WK19", impacto:"Alto", fuente:"Corbel Seeds #0039 · FreshPlaza · 30-Abr", resumen:"Corbel #0039: Roma $50.95-52.95 (vs $52.95-54.95 prior WK). Outbound 04/05 Belher: Roma Calavo 87.43% primera, 2.16% merma — calidad premium. Supply NA todavía tight. Coachella + Georgia early May presiones visibles. Transición regional clara." },
+    { cat:"Mercado",   titulo:"Limes Texas $42 (110s) — Peru -30% sustain ventana, flush esperado WK19-20", impacto:"Medio", fuente:"Corbel Seeds #0039 · USDA AMS · 30-Abr", resumen:"Corbel #0039: Mexico limes Texas 'slightly higher' — seedless 110s $42, 150s $36-40. Peru supply -30% (lluvia) mantiene ventana NA. Ventana esperada cerrar WK19-20 con flush Colombia/Brasil primaveral." },
+    { cat:"Operativo", titulo:"Sorgo Trilla WK19 — Quevedo 1 completada 05/05, 279 ha acumuladas", impacto:"Medio", fuente:"basculabelher@gmail.com · AVANCE DE TRILLA 05/05/2026", resumen:"Jornada 05/05: Quevedo 1 completada (11 ha). Total acumulado: 279 ha en 20 jornadas. Sifón 1 y Sifón 2 finalizados 02/05 (15 ha total). Descanso obligatorio 01/May ejecutado. Temporada de trilla en su final — preparación para nuevas siembras GC 2026-2027." }
   ],
 
   cdc: {
@@ -804,7 +799,7 @@ window.BELHER = {
     semana:      "WK18",
     fechas:      "28 Abr – 03 May 2026",
     fuente:      "Leima Leyva · Liquidación Calavo al 26-Abr-2026 · 01-May-2026",
-    actualizado: "05/05/2026",
+    actualizado: "06/05/2026",
 
     acciones: [
       {
