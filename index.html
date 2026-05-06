@@ -3692,11 +3692,9 @@ function checkPw(){
   <!-- ══════════ CALIDAD & OPS (iframe → calidad-pesos.html) ══════════ -->
   <div class="tab-panel" id="tab-optomate" style="padding:0;height:calc(100vh - 120px)">
     <iframe
-      src="calidad-pesos.html?frame=1"
       id="calidad-frame"
       title="Calidad &amp; Operaciones"
-      style="width:100%;height:100%;border:none;display:block"
-      loading="lazy">
+      style="width:100%;height:100%;border:none;display:block">
     </iframe>
   </div>
 
@@ -3981,6 +3979,11 @@ function checkPw(){
     btn.setAttribute('aria-selected', 'true');
     btn.scrollIntoView({ inline:'center', block:'nearest', behavior:'smooth' });
     document.getElementById('tab-' + tabId).classList.add('active');
+    /* Lazy-load iframe Calidad & Ops al primer clic */
+    if (tabId === 'optomate') {
+      var fr = document.getElementById('calidad-frame');
+      if (fr && !fr.src) fr.src = 'calidad-pesos.html?frame=1';
+    }
     /* setTimeout: ensure browser finishes painting before Chart.js measures canvas */
     setTimeout(function(){ initChartsForTab(tabId); }, 60);
     sessionStorage.setItem('belher_tab', tabId);
