@@ -2086,6 +2086,60 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 .cw-feed-item.info .cw-feed-lvl    { background:rgba(0,122,255,.15); color:#007aff; }
 .cw-feed-txt { font-size:.78rem; color:var(--text); line-height:1.5; }
 
+/* ── SETTLEMENT WK18 ── */
+.cw-settle-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+@media(max-width:520px){ .cw-settle-grid { grid-template-columns:1fr; } }
+.cw-settle-party { padding:16px 18px; border-radius:var(--r); border:1px solid; position:relative; }
+.cw-settle-party.belher { background:rgba(52,199,89,.06); border-color:rgba(52,199,89,.25); }
+.cw-settle-party.calavo { background:rgba(255,159,10,.06); border-color:rgba(255,159,10,.22); }
+.cw-settle-party-lbl { font-size:.55rem; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:5px; }
+.cw-settle-party.belher .cw-settle-party-lbl { color:#34c759; }
+.cw-settle-party.calavo .cw-settle-party-lbl { color:#fbbf24; }
+.cw-settle-party-val { font-size:1.9rem; font-weight:800; line-height:1; font-variant-numeric:tabular-nums; }
+.cw-settle-party.belher .cw-settle-party-val { color:#fff; }
+.cw-settle-party.calavo .cw-settle-party-val { color:#fbbf24; }
+.cw-settle-party-sub { font-size:.6rem; color:var(--muted); margin-top:5px; }
+.cw-settle-diff-row { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:rgba(255,69,58,.07); border:1px solid rgba(255,69,58,.2); border-radius:var(--r); margin-bottom:10px; }
+.cw-settle-diff-lbl { font-size:.6rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:#ff453a; }
+.cw-settle-diff-val { font-size:1.35rem; font-weight:800; color:#ff453a; font-variant-numeric:tabular-nums; }
+.cw-settle-conc-tbl { width:100%; border-collapse:collapse; font-size:.72rem; }
+.cw-settle-conc-tbl tr + tr td { border-top:1px solid rgba(255,255,255,.05); }
+.cw-settle-conc-tbl td { padding:8px 10px; color:var(--text); }
+.cw-settle-conc-tbl td:last-child { text-align:right; font-variant-numeric:tabular-nums; font-weight:700; white-space:nowrap; }
+.cw-settle-pos { color:#34c759; } .cw-settle-neg { color:#ff453a; }
+
+/* ── PROYECCIÓN 55K ── */
+.cw-proy-header { display:flex; align-items:baseline; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+.cw-proy-total { font-size:1.6rem; font-weight:800; color:#fff; font-variant-numeric:tabular-nums; }
+.cw-proy-sub { font-size:.65rem; color:var(--muted); }
+.cw-proy-chips { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+.cw-proy-chip { font-size:.65rem; padding:4px 10px; border-radius:20px; border:1px solid; }
+.cw-proy-chip.fact { background:rgba(0,122,255,.08); border-color:rgba(0,122,255,.25); color:#7aadff; }
+.cw-proy-chip.piso { background:rgba(255,159,10,.08); border-color:rgba(255,159,10,.22); color:#fbbf24; }
+.cw-proy-tbl { width:100%; border-collapse:collapse; font-size:.74rem; }
+.cw-proy-tbl thead th { font-size:.56rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--muted); padding:6px 10px; border-bottom:1px solid rgba(255,255,255,.08); text-align:right; }
+.cw-proy-tbl thead th:first-child { text-align:left; }
+.cw-proy-tbl tbody td { padding:10px 10px; border-bottom:1px solid rgba(255,255,255,.05); text-align:right; font-variant-numeric:tabular-nums; }
+.cw-proy-tbl tbody td:first-child { text-align:left; font-weight:700; }
+.cw-proy-tbl tbody tr.bajo td { color:rgba(255,255,255,.65); }
+.cw-proy-tbl tbody tr.alto td { color:#fff; }
+.cw-proy-badge { display:inline-block; font-size:.55rem; font-weight:800; letter-spacing:.7px; padding:2px 7px; border-radius:4px; margin-right:5px; }
+.cw-proy-badge.bajo { background:rgba(255,159,10,.15); color:#fbbf24; }
+.cw-proy-badge.alto { background:rgba(52,199,89,.12); color:#34c759; }
+.cw-proy-saldo-row { display:flex; align-items:center; justify-content:space-between; margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,.07); }
+.cw-proy-saldo-lbl { font-size:.6rem; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); }
+.cw-proy-saldo-range { font-size:1rem; font-weight:800; color:#fbbf24; font-variant-numeric:tabular-nums; }
+
+/* ── ACCIONES PENDIENTES ── */
+.cw-acc-list { display:flex; flex-direction:column; gap:8px; }
+.cw-acc-item { display:flex; align-items:flex-start; gap:12px; padding:11px 14px; border-radius:var(--r); border:1px solid rgba(255,255,255,.07); background:rgba(255,255,255,.03); }
+.cw-acc-badge { flex-shrink:0; font-size:.52rem; font-weight:800; letter-spacing:.8px; text-transform:uppercase; padding:3px 8px; border-radius:4px; margin-top:1px; }
+.cw-acc-badge.Alta { background:rgba(255,69,58,.15); color:#ff453a; border:1px solid rgba(255,69,58,.25); }
+.cw-acc-badge.Media { background:rgba(255,159,10,.12); color:#fbbf24; border:1px solid rgba(255,159,10,.2); }
+.cw-acc-body { flex:1; min-width:0; }
+.cw-acc-accion { font-size:.77rem; font-weight:700; color:var(--text); margin-bottom:2px; }
+.cw-acc-desc { font-size:.68rem; color:var(--muted); line-height:1.45; }
+
 /* ── COMMS TIMELINE ── */
 .cw-timeline { display:flex; flex-direction:column; }
 .cw-tl-item { display:flex; gap:14px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.05); }
@@ -3646,6 +3700,7 @@ function checkPw(){
     <div id="cw-header"></div>
     <div id="cw-stocks"></div>
     <div id="cw-alertas"></div>
+    <div id="cw-settlement"></div>
     <!-- cw-correos: ya en tab Hoy — oculto -->
     <div id="cw-correos" style="display:none"></div>
     <div id="cw-kpis"></div>
@@ -7378,6 +7433,102 @@ function checkPw(){
           '<span class="cw-feed-txt">' + a.texto + '</span>' +
         '</div>';
       }).join('') + '</div>';
+
+    /* ── SETTLEMENT WK18 ── */
+    (function() {
+      var cv = D.calavo;
+      var conc = cv.conciliacion || [];
+      var pend = cv.pendientes || {};
+      var acc  = cv.accionesPendientes || [];
+      var el = document.getElementById('cw-settlement');
+      if (!el) return;
+
+      function fmtD(n) { return '$' + Math.abs(n).toLocaleString('en-US'); }
+
+      /* ── Conciliación ── */
+      var concRows = conc.map(function(c) {
+        var isPos = c.monto >= 0;
+        return '<tr><td>' + c.concepto + '</td>' +
+          '<td class="' + (isPos ? 'cw-settle-pos' : 'cw-settle-neg') + '">' +
+            (isPos ? '+' : '−') + fmtD(c.monto) +
+          '</td></tr>';
+      }).join('');
+
+      var concHtml =
+        '<div class="cw-settle-grid">' +
+          '<div class="cw-settle-party belher">' +
+            '<div class="cw-settle-party-lbl">Belher calcula</div>' +
+            '<div class="cw-settle-party-val">$' + (cv.saldoBelher||0).toLocaleString('en-US') + '</div>' +
+            '<div class="cw-settle-party-sub">Saldo a cobrar · settlement WK18</div>' +
+          '</div>' +
+          '<div class="cw-settle-party calavo">' +
+            '<div class="cw-settle-party-lbl">Calavo reconoce</div>' +
+            '<div class="cw-settle-party-val">$' + (cv.saldoCalavo||0).toLocaleString('en-US') + '</div>' +
+            '<div class="cw-settle-party-sub">Saldo per statement 26-Abr-2026</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cw-settle-diff-row">' +
+          '<span class="cw-settle-diff-lbl">Diferencia sin conciliar</span>' +
+          '<span class="cw-settle-diff-val">$' + (cv.diferencia||0).toLocaleString('en-US') + '</span>' +
+        '</div>' +
+        '<div class="card" style="padding:14px 16px">' +
+          '<table class="cw-settle-conc-tbl"><tbody>' + concRows + '</tbody></table>' +
+        '</div>';
+
+      /* ── Proyección 55k cajas ── */
+      var esc = pend.escenarios || [];
+      var escRows = esc.map(function(e) {
+        return '<tr class="' + e.label.toLowerCase() + '">' +
+          '<td><span class="cw-proy-badge ' + e.label.toLowerCase() + '">' + e.label.toUpperCase() + '</span></td>' +
+          '<td>$' + e.precioCaja + '</td>' +
+          '<td>$' + e.revBruto.toLocaleString('en-US') + '</td>' +
+          '<td>$' + e.neto.toLocaleString('en-US') + '</td>' +
+        '</tr>';
+      }).join('');
+      var saldoBajo = pend.saldoTotalBajo || 0;
+      var saldoAlto = pend.saldoTotalAlto || 0;
+      var proyHtml =
+        '<div class="card" style="padding:16px 18px">' +
+          '<div class="cw-proy-header">' +
+            '<div class="cw-proy-total">' + (pend.cajasTotal||0).toLocaleString('en-US') + ' cajas</div>' +
+            '<div class="cw-proy-sub">por facturar — proyección adicional</div>' +
+          '</div>' +
+          '<div class="cw-proy-chips">' +
+            '<span class="cw-proy-chip fact">' + (pend.cajasPorFacturar||0).toLocaleString('en-US') + ' por facturar</span>' +
+            '<span class="cw-proy-chip piso">' + (pend.cajasPiso||0).toLocaleString('en-US') + ' en piso ⚠</span>' +
+          '</div>' +
+          '<table class="cw-proy-tbl">' +
+            '<thead><tr><th>Escenario</th><th>$/caja</th><th>Rev. Bruto</th><th>Neto</th></tr></thead>' +
+            '<tbody>' + escRows + '</tbody>' +
+          '</table>' +
+          '<div class="cw-proy-saldo-row">' +
+            '<span class="cw-proy-saldo-lbl">Saldo total esperado</span>' +
+            '<span class="cw-proy-saldo-range">$' + saldoBajo.toLocaleString('en-US') + ' – $' + saldoAlto.toLocaleString('en-US') + '</span>' +
+          '</div>' +
+        '</div>';
+
+      /* ── Acciones pendientes ── */
+      var accItems = acc.map(function(a) {
+        return '<div class="cw-acc-item">' +
+          '<span class="cw-acc-badge ' + a.prioridad + '">' + a.prioridad + '</span>' +
+          '<div class="cw-acc-body">' +
+            '<div class="cw-acc-accion">' + a.accion + '</div>' +
+            '<div class="cw-acc-desc">' + a.descripcion + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+      var altaCount  = acc.filter(function(a){ return a.prioridad === 'Alta'; }).length;
+      var mediaCount = acc.filter(function(a){ return a.prioridad === 'Media'; }).length;
+      var accHtml = '<div class="cw-acc-list">' + accItems + '</div>';
+
+      el.innerHTML =
+        secHdr('Conciliación WK18 · Settlement 26-Abr-2026', 'Leima / Google Sheets 06-May-2026') +
+        concHtml +
+        secHdr('Proyección Cajas Pendientes', '55k cajas · Escenarios Calavo FOB') +
+        proyHtml +
+        secHdr('Acciones Requeridas', altaCount + ' alta · ' + mediaCount + ' media') +
+        accHtml;
+    })();
 
     /* ── COMMS TIMELINE ── */
     document.getElementById('cw-correos').innerHTML =
