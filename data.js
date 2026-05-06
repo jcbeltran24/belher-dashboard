@@ -127,7 +127,9 @@ window.BELHER = {
       ],
       amortizadoWk16:  6679418,
       pendiente:             0,
-      creditoBelher:   1206806,
+      creditoBelher:   1639473,
+      creditoCalavo:   1206806,
+      diferencia:       432667,
       avgLiq_wk11_14:   455647,
       cruceEstimado:   "WK16",
       cruceEstimadoFecha: "15-Abr-2026",
@@ -136,14 +138,55 @@ window.BELHER = {
     },
     capitalTrabajo: 5959027,
     prestamo:        472037,
+    intereses:         26789,
+    gastosVarios:       2421,
     saldoAnterior:   655867,
     avanceLiquidacion: 350000,
 
-    porLiquidar:    1206806,
-    saldoActual:    1206806,
-    neto:           1206806,
+    /* ── Saldo Belher (versión conciliada) ── */
+    porLiquidar:    1639473,
+    saldoActual:    1639473,
+    saldoBelher:    1639473,
+    saldoCalavo:    1206806,
+    diferencia:      432667,
+    neto:           1639473,
 
-    notaSettlement: "Settle acumulado al 26-Abr-2026 (WK18): saldo a favor Belher $1,206,806 (S/Calavo reconciliado). Quedan 48k cajas + 7k en piso. Conciliación: Beltrán fee ADM $275,660 + dif comisión $211,934 - dif préstamo $54,927 = $432,667 variaciones. Fuente: Leima 01-May-2026.",
+    /* ── Conciliación: dónde está la diferencia de $432,667 ── */
+    conciliacion: [
+      { concepto:"Beltran fee ADM no reconocido por Calavo", monto:  275660, favorDe:"Belher" },
+      { concepto:"Dif. comisión — Calavo aplica >22% sobre $17.7M", monto: 211934, favorDe:"Belher" },
+      { concepto:"Dif. préstamo + intereses (Calavo aplica menos)", monto: -54927, favorDe:"Belher" }
+    ],
+
+    /* ── Proyección cajas pendientes (55k) ── */
+    pendientes: {
+      cajasPorFacturar: 48000,
+      cajasPiso:         7000,
+      cajasTotal:       55000,
+      lbsPorCaja:          25,
+      lbsTotal:       1375000,
+      escenarios: [
+        { label:"Bajo",  precioCaja: 37, revBruto: 2035000, neto:  712250 },
+        { label:"Alto",  precioCaja: 50, revBruto: 2750000, neto:  962500 }
+      ],
+      saldoTotalBajo:  2351723,
+      saldoTotalAlto:  2601973,
+      pctComision:       0.22,
+      pctOtros:          0.18,
+      pctPickPack:       0.25
+    },
+
+    /* ── Acciones requeridas ── */
+    accionesPendientes: [
+      { prioridad:"Alta",  accion:"Solicitar detalle PO×PO de comisión",      descripcion:"Validar 22% aplicado en cada uno de los 528 POs — diferencia $211,934" },
+      { prioridad:"Alta",  accion:"Conciliar Beltran fee ADM $275,660",        descripcion:"Exigir ajuste si está pactado en contrato con Calavo" },
+      { prioridad:"Alta",  accion:"Confirmar timeline 55k cajas",              descripcion:"Fecha de facturación 48k pendientes + 7k piso — cash flow $1.0M-$1.4M" },
+      { prioridad:"Media", accion:"Validar amortización préstamo",             descripcion:"Conciliar diferencia $54,927 contra saldo de préstamo de infraestructura" },
+      { prioridad:"Media", accion:"Solicitar reporte condition cajas en piso", descripcion:"7k cajas en piso con riesgo merma >15% — evaluar dump vs salvamento" },
+      { prioridad:"Alta",  accion:"Cerrar memo de conciliación formal",        descripcion:"Firmado por ambas partes antes de iniciar temporada 2026-2027" }
+    ],
+
+    notaSettlement: "WK18 (26-Abr-2026): Settlement acumulado 528 POs. Según Belher: $1,639,473 · Según Calavo: $1,206,806 · Diferencia: $432,667 (fee ADM $275,660 + dif. comisión $211,934 - dif. préstamo $54,927). Quedan 55k cajas por liquidar (48k por facturar + 7k en piso). Proyección neta adicional: $712K–$963K. Saldo total esperado: $2.35M–$2.6M. Fuente: conciliación Leima / Google Sheets 06-May-2026.",
     pagos: [
       { sem:"WK01", wire:"02-Ene", pago:54120,  cajas:10824, cont:6,  estado:"Pagado"   },
       { sem:"WK02", wire:"02-Ene", pago:121400, cajas:24280, cont:14, estado:"Pagado"   },
@@ -162,7 +205,12 @@ window.BELHER = {
       { sem:"WK15", wire:"08-Abr", pago:269880, cajas:53976, cont:33, estado:"Pagado", fob:39.72, nota:"FOB REAL confirmado WK16 settle: $2,144,379 / 53,976 = $39.72/cj" },
       { sem:"WK16", wire:"15-Abr", pago:190335, cajas:38067, cont:24, estado:"Pagado",  fob:28.95, nota:"Settle 15-Abr: $1,101,951 / 38,067 cajas = $28.95/cj. Cruce deuda confirmado." },
       { sem:"WK17", wire:"28-Abr", pago:350000, cajas:null,  cont:null, estado:"Pagado", nota:"Avance de liquidación recibido WK17 — settle acumulado en procesamiento." },
-      { sem:"WK18", wire:null,     pago:null,   cajas:null,  cont:null, estado:"Actual", nota:"Settle al 26-Abr: saldo a favor $1,206,806 (S/Calavo). 48k cajas + 7k piso pendientes." }
+      { sem:"WK18", wire:"26-Abr", pago:null,   cajas:null,  cont:528,  estado:"Settlement",
+        revenueBruto: 17746742, antiDumping: 1775841, comision: 1916508, otrosGastos: 1441186,
+        ventaNetaOp: 12613207, pickPack: 4466620, preseason: 5000000, balanceAnt: 655867,
+        avanceLiq: 350000, prestamo: 472037, intereses: 26789, gastosVarios: 2421,
+        saldoBelher: 1639473, saldoCalavo: 1206806, diferencia: 432667,
+        nota:"Settle WK18 (26-Abr-2026): 528 POs facturados. Belher: $1,639,473 · Calavo: $1,206,806 · Diferencia $432,667 = fee ADM $275,660 + dif comisión $211,934 - dif préstamo $54,927. Quedan 55k cajas." }
     ]
   },
 
