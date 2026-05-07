@@ -2086,88 +2086,6 @@ nav.tabs button.active { color: var(--accent2); font-weight: 700; }
 .cw-feed-item.info .cw-feed-lvl    { background:rgba(0,122,255,.15); color:#007aff; }
 .cw-feed-txt { font-size:.78rem; color:var(--text); line-height:1.5; }
 
-/* ── SETTLEMENT WK18 ── */
-.cw-settle-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
-@media(max-width:520px){ .cw-settle-grid { grid-template-columns:1fr; } }
-.cw-settle-party { padding:16px 18px; border-radius:var(--r); border:1px solid; position:relative; }
-.cw-settle-party.belher { background:rgba(52,199,89,.06); border-color:rgba(52,199,89,.25); }
-.cw-settle-party.calavo { background:rgba(255,159,10,.06); border-color:rgba(255,159,10,.22); }
-.cw-settle-party-lbl { font-size:.55rem; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:5px; }
-.cw-settle-party.belher .cw-settle-party-lbl { color:#34c759; }
-.cw-settle-party.calavo .cw-settle-party-lbl { color:#fbbf24; }
-.cw-settle-party-val { font-size:1.9rem; font-weight:800; line-height:1; font-variant-numeric:tabular-nums; }
-.cw-settle-party.belher .cw-settle-party-val { color:#fff; }
-.cw-settle-party.calavo .cw-settle-party-val { color:#fbbf24; }
-.cw-settle-party-sub { font-size:.6rem; color:var(--muted); margin-top:5px; }
-.cw-settle-diff-row { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:rgba(255,69,58,.07); border:1px solid rgba(255,69,58,.2); border-radius:var(--r); margin-bottom:10px; }
-.cw-settle-diff-lbl { font-size:.6rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:#ff453a; }
-.cw-settle-diff-val { font-size:1.35rem; font-weight:800; color:#ff453a; font-variant-numeric:tabular-nums; }
-.cw-settle-conc-tbl { width:100%; border-collapse:collapse; font-size:.72rem; }
-.cw-settle-conc-tbl tr + tr td { border-top:1px solid rgba(255,255,255,.05); }
-.cw-settle-conc-tbl td { padding:8px 10px; color:var(--text); }
-.cw-settle-conc-tbl td:last-child { text-align:right; font-variant-numeric:tabular-nums; font-weight:700; white-space:nowrap; }
-.cw-settle-pos { color:#34c759; } .cw-settle-neg { color:#ff453a; }
-
-/* ── PROYECCIÓN 55K ── */
-.cw-proy-header { display:flex; align-items:baseline; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
-.cw-proy-total { font-size:1.6rem; font-weight:800; color:#fff; font-variant-numeric:tabular-nums; }
-.cw-proy-sub { font-size:.65rem; color:var(--muted); }
-.cw-proy-chips { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
-.cw-proy-chip { font-size:.65rem; padding:4px 10px; border-radius:20px; border:1px solid; }
-.cw-proy-chip.fact { background:rgba(0,122,255,.08); border-color:rgba(0,122,255,.25); color:#7aadff; }
-.cw-proy-chip.piso { background:rgba(255,159,10,.08); border-color:rgba(255,159,10,.22); color:#fbbf24; }
-.cw-proy-tbl { width:100%; border-collapse:collapse; font-size:.74rem; }
-.cw-proy-tbl thead th { font-size:.56rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--muted); padding:6px 10px; border-bottom:1px solid rgba(255,255,255,.08); text-align:right; }
-.cw-proy-tbl thead th:first-child { text-align:left; }
-.cw-proy-tbl tbody td { padding:10px 10px; border-bottom:1px solid rgba(255,255,255,.05); text-align:right; font-variant-numeric:tabular-nums; }
-.cw-proy-tbl tbody td:first-child { text-align:left; font-weight:700; }
-.cw-proy-tbl tbody tr.bajo td { color:rgba(255,255,255,.65); }
-.cw-proy-tbl tbody tr.alto td { color:#fff; }
-.cw-proy-badge { display:inline-block; font-size:.55rem; font-weight:800; letter-spacing:.7px; padding:2px 7px; border-radius:4px; margin-right:5px; }
-.cw-proy-badge.bajo { background:rgba(255,159,10,.15); color:#fbbf24; }
-.cw-proy-badge.alto { background:rgba(52,199,89,.12); color:#34c759; }
-.cw-proy-saldo-row { display:flex; align-items:center; justify-content:space-between; margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,.07); }
-.cw-proy-saldo-lbl { font-size:.6rem; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); }
-.cw-proy-saldo-range { font-size:1rem; font-weight:800; color:#fbbf24; font-variant-numeric:tabular-nums; }
-
-/* ── ACCIONES PENDIENTES ── */
-.cw-acc-list { display:flex; flex-direction:column; gap:8px; }
-.cw-acc-item { display:flex; align-items:flex-start; gap:12px; padding:11px 14px; border-radius:var(--r); border:1px solid rgba(255,255,255,.07); background:rgba(255,255,255,.03); }
-.cw-acc-badge { flex-shrink:0; font-size:.52rem; font-weight:800; letter-spacing:.8px; text-transform:uppercase; padding:3px 8px; border-radius:4px; margin-top:1px; }
-.cw-acc-badge.Alta { background:rgba(255,69,58,.15); color:#ff453a; border:1px solid rgba(255,69,58,.25); }
-.cw-acc-badge.Media { background:rgba(255,159,10,.12); color:#fbbf24; border:1px solid rgba(255,159,10,.2); }
-.cw-acc-body { flex:1; min-width:0; }
-.cw-acc-accion { font-size:.77rem; font-weight:700; color:var(--text); margin-bottom:2px; }
-.cw-acc-desc { font-size:.68rem; color:var(--muted); line-height:1.45; }
-
-/* ── WATERFALL P&L ── */
-.cw-wf-tbl { width:100%; border-collapse:collapse; font-size:.74rem; font-variant-numeric:tabular-nums; }
-.cw-wf-tbl td { padding:7px 12px; }
-.cw-wf-tbl tbody tr td { border-bottom:1px solid rgba(255,255,255,.04); }
-.cw-wf-tbl td:last-child { text-align:right; font-weight:600; white-space:nowrap; }
-.cw-wf-row-ingreso td { color:#34c759; }
-.cw-wf-row-ingreso td:first-child { color:var(--text); font-weight:500; }
-.cw-wf-row-deduccion td:last-child { color:#ff453a; }
-.cw-wf-row-deduccion td:first-child { color:var(--muted); padding-left:22px; }
-.cw-wf-row-subtotal td { background:rgba(255,255,255,.04); font-weight:700; color:#fff; border-top:1px solid rgba(255,255,255,.12) !important; }
-.cw-wf-row-total td { background:rgba(52,199,89,.08); font-weight:800; color:#34c759; border-top:2px solid rgba(52,199,89,.3) !important; font-size:.82rem; }
-.cw-wf-bar-col { width:90px; }
-.cw-wf-bar-wrap { height:5px; background:rgba(255,255,255,.06); border-radius:3px; overflow:hidden; }
-.cw-wf-bar-fill { height:100%; border-radius:3px; }
-
-/* ── CONCILIACIÓN LADO A LADO ── */
-.cw-conc-tbl { width:100%; border-collapse:collapse; font-size:.71rem; font-variant-numeric:tabular-nums; }
-.cw-conc-tbl thead th { font-size:.56rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--muted); padding:7px 10px; border-bottom:1px solid rgba(255,255,255,.1); text-align:right; white-space:nowrap; }
-.cw-conc-tbl thead th:first-child { text-align:left; }
-.cw-conc-tbl tbody td { padding:8px 10px; border-bottom:1px solid rgba(255,255,255,.04); text-align:right; color:var(--text); }
-.cw-conc-tbl tbody td:first-child { text-align:left; color:var(--muted); }
-.cw-conc-tbl tbody tr.sub td { background:rgba(255,255,255,.04); font-weight:700; color:#fff; border-top:1px solid rgba(255,255,255,.1); }
-.cw-conc-tbl tbody tr.tot td { background:rgba(52,199,89,.08); font-weight:800; color:#34c759; border-top:2px solid rgba(52,199,89,.3); font-size:.78rem; }
-.cw-conc-diff-pos { color:#34c759; font-weight:700; }
-.cw-conc-diff-neg { color:#ff453a; font-weight:700; }
-.cw-conc-diff-zero { color:rgba(255,255,255,.2); }
-.cw-conc-calavo { color:#fbbf24; }
-
 /* ── COMMS TIMELINE ── */
 .cw-timeline { display:flex; flex-direction:column; }
 .cw-tl-item { display:flex; gap:14px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.05); }
@@ -3344,7 +3262,7 @@ header {
   <div class="pw-card">
     <img src="logo.svg" alt="Agrícola Belher" class="pw-logo-img">
     <div class="pw-divider"></div>
-    <div class="pw-sub">Acceso Restringido</div>
+    <div class="pw-sub">Acceso Restringido &nbsp;·&nbsp; GC 2025–2026</div>
     <input id="pw-input" class="pw-input" type="password" placeholder="Contraseña" autocomplete="current-password">
     <button class="pw-btn" onclick="checkPw()">Ingresar</button>
     <div class="pw-err" id="pw-err"></div>
@@ -3438,8 +3356,9 @@ function checkPw(){
   <button data-tab="ventas"       role="tab" aria-selected="false" aria-controls="tab-ventas">Export Calavo</button>
   <button data-tab="nacional"     role="tab" aria-selected="false" aria-controls="tab-nacional">Nacional</button>
   <button data-tab="finanzas"     role="tab" aria-selected="false" aria-controls="tab-finanzas">Finanzas</button>
-  <button data-tab="optomate"     role="tab" aria-selected="false" aria-controls="tab-optomate">Calidad &amp; Ops</button>
+  <button data-tab="optomate"     role="tab" aria-selected="false" aria-controls="tab-optomate">Ops Tomate</button>
   <button data-tab="cdc"          role="tab" aria-selected="false" aria-controls="tab-cdc">CDC · Personal</button>
+  <button data-tab="otros"        role="tab" aria-selected="false" aria-controls="tab-otros">Otros Cultivos</button>
   <button data-tab="calavoweekly" role="tab" aria-selected="false" aria-controls="tab-calavoweekly">Intel Calavo</button>
   <button data-tab="caades"       role="tab" aria-selected="false" aria-controls="tab-caades">Inventarios NOG</button>
   <button data-tab="estrategia"   role="tab" aria-selected="false" aria-controls="tab-estrategia">Estrategia</button>
@@ -3689,44 +3608,108 @@ function checkPw(){
 
   </div>
 
-  <!-- ══════════ CALIDAD & OPS (iframe → calidad-pesos.html) ══════════ -->
-  <div class="tab-panel" id="tab-optomate" style="padding:0;height:calc(100vh - 120px)">
-    <iframe
-      id="calidad-frame"
-      title="Calidad &amp; Operaciones"
-      style="width:100%;height:100%;border:none;display:block">
-    </iframe>
-  </div>
+  <!-- ══════════ OPS TOMATE ══════════ -->
+  <div class="tab-panel" id="tab-optomate">
 
-  <!-- Hidden stubs so existing JS references don't error -->
-  <div id="tomateHero"          style="display:none"></div>
-  <div id="tomateChannels"      style="display:none"></div>
-  <div id="tomatePaceStrip"     style="display:none"></div>
-  <div id="tomateCalavoStrip"   style="display:none"></div>
-  <div id="tomateCalidadSummary" style="display:none"></div>
-  <div id="outboundTitle"       style="display:none"></div>
-  <div id="calidadSummary"      style="display:none"></div>
-  <div id="qualidadRows"        style="display:none"></div>
-  <div id="calidadSemana"       style="display:none"></div>
-  <div id="bascWidget"          style="display:none"></div>
-  <div id="flotaResumen"        style="display:none"></div>
-  <div id="tomateOutboundFecha" style="display:none"></div>
-  <div id="tomateVariedadesAyer"   style="display:none"></div>
-  <div id="tomateVariedadesSemana" style="display:none"></div>
-  <canvas id="chartTomateCalidad" style="display:none"></canvas>
-  <canvas id="chartCalidad"       style="display:none"></canvas>
-  <canvas id="chartEmbarques"     style="display:none"></canvas>
-  <canvas id="chartTomateVolumen" style="display:none"></canvas>
-  <canvas id="chartTomatePrecio"  style="display:none"></canvas>
-  <canvas id="chartTomateFlota"   style="display:none"></canvas>
-  <table id="embTbl" style="display:none"><thead><tr></tr></thead><tbody></tbody></table>
+    <!-- Season Hero -->
+    <div id="tomateHero"></div>
+
+    <!-- tomateChannels: datos ya en tomateHero — oculto -->
+    <div id="tomateChannels" style="display:none"></div>
+
+    <!-- Revenue Pace strip -->
+    <div id="tomatePaceStrip"></div>
+    <!-- tomateCalavoStrip: Finanzas cubre esto — oculto -->
+    <div id="tomateCalavoStrip" style="display:none"></div>
+
+    <!-- Quality (full width) -->
+    <div class="section-title" style="margin-top:4px">Calidad · Temporada <span class="src-tag">Outbound calidad@agbelher.com</span></div>
+    <div id="tomateCalidadSummary"></div>
+    <div class="card" style="margin-top:8px"><div class="chart-box" style="height:190px"><canvas id="chartTomateCalidad"></canvas></div></div>
+
+    <!-- Quality by Variety — collapsible detail -->
+    <details class="tom-variety-details">
+      <summary>
+        <span class="tvd-label">Calidad por Variedad</span>
+        <span id="tomateOutboundFecha" class="tvd-fecha"></span>
+        <span class="src-tag">Outbound</span>
+        <span class="tvd-chevron"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </summary>
+      <div class="view-toggle" data-group="tomate-cal" style="margin:12px 0 8px">
+        <button class="vt-btn active" data-view="ayer">Día Anterior</button>
+        <button class="vt-btn" data-view="semana">Últimos 7 días</button>
+      </div>
+      <div class="view-panel active" data-group="tomate-cal" data-view="ayer" id="tomateVariedadesAyer"></div>
+      <div class="view-panel" data-group="tomate-cal" data-view="semana" id="tomateVariedadesSemana"></div>
+    </details>
+
+    <!-- "Calidad Exportación" duplicado de "Calidad por Variedad" arriba — oculto -->
+    <div id="outboundTitle" style="display:none"></div>
+    <div id="calidadSummary" style="display:none"></div>
+    <div id="qualidadRows" style="display:none"></div>
+    <div id="calidadSemana" style="display:none"></div>
+
+    <div class="section-title">Tendencia Semanal · 1ª Primera &amp; Merma <span class="src-tag">calidad@agbelher.com · promedio por semana</span></div>
+    <div class="card">
+      <div class="chart-box chart-box-tall"><canvas id="chartCalidad"></canvas></div>
+    </div>
+
+    <div class="section-title">Báscula · Actividad de Pesaje <span class="src-tag">basculabelher@gmail.com</span></div>
+    <div class="card">
+      <div class="bascula-grid" id="bascWidget"></div>
+    </div>
+
+    <!-- ── Embarques ── -->
+    <div class="section-title" style="margin-top:28px">Embarques · TX / AZ · Cargas por Día <span class="src-tag">embarquesbelher@agbelher.com</span></div>
+    <div class="card-table">
+      <div class="tbl-wrap">
+        <table id="embTbl">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th class="td-center">Cargas</th>
+              <th>Producto</th>
+              <th>Destino</th>
+              <th>Unidad</th>
+              <th>Flota</th>
+              <th class="td-center">Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- flotaResumen: redundante con embTbl + chartTomateFlota — oculto -->
+    <div id="flotaResumen" style="display:none"></div>
+
+    <div class="section-title">Volumen Diario de Embarques</div>
+    <div class="card">
+      <div class="chart-box"><canvas id="chartEmbarques"></canvas></div>
+    </div>
+
+    <div class="section-title">Volumen Semanal · Cajas Exportadas <span class="src-tag">Calavo Settlement WK01–WK12</span></div>
+    <div class="card">
+      <div class="chart-box" style="height:200px"><canvas id="chartTomateVolumen"></canvas></div>
+    </div>
+
+    <div class="section-title">Precio FOB Calavo vs Mercado USDA · Temporada 2025–2026 <span class="src-tag">Calavo Settlement + USDA Nogales · WK11–WK14 confirmado · WK01–WK10 estimado IA (USDA seasonal)</span></div>
+    <div class="card">
+      <div class="chart-box" style="height:240px"><canvas id="chartTomatePrecio"></canvas></div>
+    </div>
+
+    <div class="section-title" style="margin-top:0">Flota · Distribución por Transportista</div>
+    <div class="card" id="tomateFleetCard" style="padding:20px;max-width:340px">
+      <canvas id="chartTomateFlota" height="180"></canvas>
+    </div>
+
+  </div>
 
   <!-- ══════════ CALAVO WEEKLY ══════════ -->
   <div class="tab-panel" id="tab-calavoweekly">
     <div id="cw-header"></div>
     <div id="cw-stocks"></div>
     <div id="cw-alertas"></div>
-    <div id="cw-settlement"></div>
     <!-- cw-correos: ya en tab Hoy — oculto -->
     <div id="cw-correos" style="display:none"></div>
     <div id="cw-kpis"></div>
@@ -3743,18 +3726,37 @@ function checkPw(){
     <div id="cw-predicciones" style="display:none"></div>
   </div>
 
-  <!-- Hidden stubs for ex-tab-otros JS references -->
-  <div id="limonKpis"        style="display:none"></div>
-  <div id="limonClienteRisk" style="display:none"></div>
-  <div id="limonUsdaPrice"   style="display:none"></div>
-  <div id="limonPnl"         style="display:none"></div>
-  <div id="chileKpis"        style="display:none"></div>
-  <div id="chileContext"     style="display:none"></div>
-  <div id="granosKpis"       style="display:none"></div>
-  <div id="granosPnl"        style="display:none"></div>
-  <div id="granosCostMetrics" style="display:none"></div>
-  <div id="granosNotas"      style="display:none"></div>
-  <canvas id="chartLimonPrecio" style="display:none"></canvas>
+  <!-- ══════════ OTROS ══════════ -->
+  <div class="tab-panel" id="tab-otros">
+
+    <!-- ── LIMÓN ── -->
+    <div class="section-title">Limón Persa <span class="src-tag">jacruz@agbelher.com · P&amp;L Limón Feb 2026</span></div>
+    <div class="grid-4" id="limonKpis"></div>
+    <div id="limonClienteRisk"></div>
+    <div class="section-title">Precio FOB Nogales &amp; LA Terminal Market <span class="src-tag">USDA Market News · FOB Shipping Point + Terminal</span></div>
+    <div id="limonUsdaPrice"></div>
+    <div class="section-title">Histórico 12 Meses + Tendencia 4 Semanas <span class="src-tag">USDA Market News · Limón Persa 40lb carton</span></div>
+    <div class="card"><div class="chart-box chart-box-tall"><canvas id="chartLimonPrecio"></canvas></div></div>
+    <div class="section-title">P&amp;L Limón · Febrero 2026 <span class="src-tag">Maui Fresh International LLC</span></div>
+    <div class="card" id="limonPnl" style="padding:24px"></div>
+
+    <!-- ── CHILE ── -->
+    <div class="section-title" style="margin-top:28px">Chile <span class="src-tag">Corbel Seeds Daily · USDA</span></div>
+    <div class="grid-3" id="chileKpis"></div>
+    <div class="section-title">Análisis de Mercado · Oportunidad</div>
+    <div id="chileContext"></div>
+
+    <!-- ── GRANOS ── -->
+    <div class="section-title" style="margin-top:28px">Granos · Temporada <span class="src-tag">jacruz@agbelher.com · P&amp;L Granos Jul–Feb 2026</span></div>
+    <div class="grid-4" id="granosKpis"></div>
+    <div class="section-title">P&amp;L Temporada · Jul 2025 – Feb 2026</div>
+    <div class="card" id="granosPnl" style="padding:24px"></div>
+    <div class="section-title">Métricas por Hectárea <span class="src-tag">cálculo interno</span></div>
+    <div id="granosCostMetrics"></div>
+    <div class="section-title">Notas Operativas</div>
+    <div class="card" id="granosNotas" style="padding:20px"></div>
+
+  </div>
 
   <!-- ══════════ CERTIFICACIONES ══════════ -->
   <div class="tab-panel" id="tab-cert">
@@ -3979,11 +3981,6 @@ function checkPw(){
     btn.setAttribute('aria-selected', 'true');
     btn.scrollIntoView({ inline:'center', block:'nearest', behavior:'smooth' });
     document.getElementById('tab-' + tabId).classList.add('active');
-    /* Lazy-load iframe Calidad & Ops al primer clic */
-    if (tabId === 'optomate') {
-      var fr = document.getElementById('calidad-frame');
-      if (fr && !fr.src) fr.src = 'calidad-pesos.html?frame=1';
-    }
     /* setTimeout: ensure browser finishes painting before Chart.js measures canvas */
     setTimeout(function(){ initChartsForTab(tabId); }, 60);
     sessionStorage.setItem('belher_tab', tabId);
@@ -7464,143 +7461,6 @@ function checkPw(){
           '<span class="cw-feed-txt">' + a.texto + '</span>' +
         '</div>';
       }).join('') + '</div>';
-
-    /* ── SETTLEMENT WK18 ── */
-    (function() {
-      var cv = D.calavo;
-      var conc = cv.conciliacion || [];
-      var pend = cv.pendientes || {};
-      var acc  = cv.accionesPendientes || [];
-      var el = document.getElementById('cw-settlement');
-      if (!el) return;
-
-      function fmtD(n) { return '$' + Math.abs(n).toLocaleString('en-US'); }
-
-      /* ── Conciliación ── */
-      var concRows = conc.map(function(c) {
-        var isPos = c.monto >= 0;
-        return '<tr><td>' + c.concepto + '</td>' +
-          '<td class="' + (isPos ? 'cw-settle-pos' : 'cw-settle-neg') + '">' +
-            (isPos ? '+' : '−') + fmtD(c.monto) +
-          '</td></tr>';
-      }).join('');
-
-      var concHtml =
-        '<div class="cw-settle-grid">' +
-          '<div class="cw-settle-party belher">' +
-            '<div class="cw-settle-party-lbl">Belher calcula</div>' +
-            '<div class="cw-settle-party-val">$' + (cv.saldoBelher||0).toLocaleString('en-US') + '</div>' +
-            '<div class="cw-settle-party-sub">Saldo a cobrar · settlement WK18</div>' +
-          '</div>' +
-          '<div class="cw-settle-party calavo">' +
-            '<div class="cw-settle-party-lbl">Calavo reconoce</div>' +
-            '<div class="cw-settle-party-val">$' + (cv.saldoCalavo||0).toLocaleString('en-US') + '</div>' +
-            '<div class="cw-settle-party-sub">Saldo per statement 26-Abr-2026</div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="cw-settle-diff-row">' +
-          '<span class="cw-settle-diff-lbl">Diferencia sin conciliar</span>' +
-          '<span class="cw-settle-diff-val">$' + (cv.diferencia||0).toLocaleString('en-US') + '</span>' +
-        '</div>' +
-        '<div class="card" style="padding:14px 16px">' +
-          '<table class="cw-settle-conc-tbl"><tbody>' + concRows + '</tbody></table>' +
-        '</div>';
-
-      /* ── Proyección 55k cajas ── */
-      var esc = pend.escenarios || [];
-      var escRows = esc.map(function(e) {
-        return '<tr class="' + e.label.toLowerCase() + '">' +
-          '<td><span class="cw-proy-badge ' + e.label.toLowerCase() + '">' + e.label.toUpperCase() + '</span></td>' +
-          '<td>$' + e.precioCaja + '</td>' +
-          '<td>$' + e.revBruto.toLocaleString('en-US') + '</td>' +
-          '<td>$' + e.neto.toLocaleString('en-US') + '</td>' +
-        '</tr>';
-      }).join('');
-      var saldoBajo = pend.saldoTotalBajo || 0;
-      var saldoAlto = pend.saldoTotalAlto || 0;
-      var proyHtml =
-        '<div class="card" style="padding:16px 18px">' +
-          '<div class="cw-proy-header">' +
-            '<div class="cw-proy-total">' + (pend.cajasTotal||0).toLocaleString('en-US') + ' cajas</div>' +
-            '<div class="cw-proy-sub">por facturar — proyección adicional</div>' +
-          '</div>' +
-          '<div class="cw-proy-chips">' +
-            '<span class="cw-proy-chip fact">' + (pend.cajasPorFacturar||0).toLocaleString('en-US') + ' por facturar</span>' +
-            '<span class="cw-proy-chip piso">' + (pend.cajasPiso||0).toLocaleString('en-US') + ' en piso ⚠</span>' +
-          '</div>' +
-          '<table class="cw-proy-tbl">' +
-            '<thead><tr><th>Escenario</th><th>$/caja</th><th>Rev. Bruto</th><th>Neto</th></tr></thead>' +
-            '<tbody>' + escRows + '</tbody>' +
-          '</table>' +
-          '<div class="cw-proy-saldo-row">' +
-            '<span class="cw-proy-saldo-lbl">Saldo total esperado</span>' +
-            '<span class="cw-proy-saldo-range">$' + saldoBajo.toLocaleString('en-US') + ' – $' + saldoAlto.toLocaleString('en-US') + '</span>' +
-          '</div>' +
-        '</div>';
-
-      /* ── Acciones pendientes ── */
-      var accItems = acc.map(function(a) {
-        return '<div class="cw-acc-item">' +
-          '<span class="cw-acc-badge ' + a.prioridad + '">' + a.prioridad + '</span>' +
-          '<div class="cw-acc-body">' +
-            '<div class="cw-acc-accion">' + a.accion + '</div>' +
-            '<div class="cw-acc-desc">' + a.descripcion + '</div>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-      var altaCount  = acc.filter(function(a){ return a.prioridad === 'Alta'; }).length;
-      var mediaCount = acc.filter(function(a){ return a.prioridad === 'Media'; }).length;
-      var accHtml = '<div class="cw-acc-list">' + accItems + '</div>';
-
-      /* ── Waterfall P&L ── */
-      var wf = cv.waterfallLiquidacion || [];
-      var maxMonto = 0;
-      wf.forEach(function(r){ if(Math.abs(r.monto) > maxMonto && !r.subtotal) maxMonto = Math.abs(r.monto); });
-      var wfRows = wf.map(function(r) {
-        var cls = r.tipo === 'total' ? 'cw-wf-row-total' : r.tipo === 'subtotal' ? 'cw-wf-row-subtotal' : r.tipo === 'ingreso' ? 'cw-wf-row-ingreso' : 'cw-wf-row-deduccion';
-        var sign = r.monto >= 0 ? '+' : '';
-        var pct = r.subtotal ? 0 : Math.min(Math.abs(r.monto) / maxMonto * 100, 100);
-        var barColor = r.monto >= 0 ? '#34c759' : '#ff453a';
-        var barCell = !r.subtotal
-          ? '<td class="cw-wf-bar-col"><div class="cw-wf-bar-wrap"><div class="cw-wf-bar-fill" style="width:' + pct.toFixed(1) + '%;background:' + barColor + '"></div></div></td>'
-          : '<td></td>';
-        return '<tr class="' + cls + '"><td>' + r.concepto + '</td>' + barCell +
-          '<td>' + (r.monto >= 0 ? '' : '−') + '$' + Math.abs(r.monto).toLocaleString('en-US') + '</td></tr>';
-      }).join('');
-      var wfHtml = '<div class="card" style="padding:16px 18px;overflow-x:auto">' +
-        '<table class="cw-wf-tbl"><tbody>' + wfRows + '</tbody></table></div>';
-
-      /* ── Conciliación lado a lado ── */
-      var cd = cv.conciliacionDetalle || [];
-      var cdRows = cd.map(function(r) {
-        var rowCls = r.esSubtotal ? (r.concepto.indexOf('SALDO') >= 0 ? 'tot' : 'sub') : '';
-        var diffCls = r.diff > 0 ? 'cw-conc-diff-pos' : r.diff < 0 ? 'cw-conc-diff-neg' : 'cw-conc-diff-zero';
-        var diffTxt = r.diff === 0 ? '—' : (r.diff > 0 ? '+' : '−') + '$' + Math.abs(r.diff).toLocaleString('en-US');
-        return '<tr class="' + rowCls + '">' +
-          '<td>' + r.concepto + '</td>' +
-          '<td>' + (r.belher >= 0 ? '' : '−') + '$' + Math.abs(r.belher).toLocaleString('en-US') + '</td>' +
-          '<td class="cw-conc-calavo">' + (r.calavo >= 0 ? '' : '−') + '$' + Math.abs(r.calavo).toLocaleString('en-US') + '</td>' +
-          '<td class="' + diffCls + '">' + diffTxt + '</td>' +
-        '</tr>';
-      }).join('');
-      var cdHtml = '<div class="card" style="padding:16px 18px;overflow-x:auto">' +
-        '<table class="cw-conc-tbl">' +
-          '<thead><tr><th>Concepto</th><th>Belher</th><th style="color:#fbbf24">Calavo</th><th>Diferencia</th></tr></thead>' +
-          '<tbody>' + cdRows + '</tbody>' +
-        '</table></div>';
-
-      el.innerHTML =
-        secHdr('Liquidación WK18 · Waterfall P&L', 'Settlement acumulado 528 POs · 26-Abr-2026') +
-        wfHtml +
-        secHdr('Conciliación Belher vs Calavo · Línea a Línea', 'Leima / Google Sheets 06-May-2026') +
-        cdHtml +
-        secHdr('Resumen Diferencias WK18', 'Belher $1,639,473 · Calavo $1,206,806') +
-        concHtml +
-        secHdr('Proyección Cajas Pendientes', '55k cajas · Escenarios Calavo FOB') +
-        proyHtml +
-        secHdr('Acciones Requeridas', altaCount + ' alta · ' + mediaCount + ' media') +
-        accHtml;
-    })();
 
     /* ── COMMS TIMELINE ── */
     document.getElementById('cw-correos').innerHTML =
