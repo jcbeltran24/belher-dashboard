@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Viernes 08 May 2026",
     semana: "WK 19",
-    actualizado: "08/05/2026 · 06:00"
+    actualizado: "08/05/2026 · 14:05"
   },
 
   alertas: [
@@ -10,7 +10,8 @@ window.BELHER = {
     {"nivel":"success","texto":"SETTLEMENT WK19 EN RUTA — Calavo reporta ~$2.506M a favor (detalles análisis mañana). Tendencia acumulada positiva."},
     {"nivel":"warning","texto":"ÚLTIMA VENTANA VINE RIPE WK19 — Corbel #0039 reporta transición post-peak. Presión esperada WK20. Embarcar máximo HOY/MAÑANA."},
     {"nivel":"warning","texto":"LIMES 110s $42 — Peru -30% sustain. Ventana cierre WK19-20 esperada. Maximizar embarques limón antes corrección."},
-    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 10 días preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos."}
+    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 10 días preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos."},
+    {"nivel":"info","texto":"ASIA FRUIT LOGISTICA 2026 — Nuevos beneficios exclusivos para compradores. Oportunidad de prospección mercado asiático para WK20+."}
   ],
 
   ebitda: {
@@ -590,6 +591,12 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"14:07","asunto":"HortiDaily Newsletter | Friday, May 8, 2026","de":"mail@hortidaily.com","leido":false,"fecha":"2026-05-08"},
+    {"hora":"10:13","asunto":"¿Quién es el mayor experto en fútbol del sector internacional de frutas y hortalizas?","de":"mail@hortidaily.es","leido":false,"fecha":"2026-05-08"},
+    {"hora":"08:17","asunto":"The Morning — GBM","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-05-08"},
+    {"hora":"07:00","asunto":"The World of Fresh Meets in Asia - Now With Exclusive Buyer Benefits","de":"info@gp-events.com","leido":false,"fecha":"2026-05-08"},
+    {"hora":"06:35","asunto":"Haz que tus fotos revivan cada recuerdo (Adobe Lightroom)","de":"mail@mail.adobe.com","leido":false,"fecha":"2026-05-08"},
+    {"hora":"05:09","asunto":"Alerta de seguridad para jcbeltranochoa@gmail.com","de":"no-reply@accounts.google.com","leido":false,"fecha":"2026-05-08"},
     { hora:"00:37", asunto:"REPORTE DE BASCULA 07/05/2026 (REZAGA DE TOMATE)",      de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-08" },
     { hora:"00:04", asunto:"REPORTE DE BASCULA 07/05/2026 (LIMON PERSA)",           de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-08" },
     { hora:"00:02", asunto:"REPORTE DE BASCULA 07/05/2026 (TOMATE)",               de:"basculabelher@gmail.com",        leido:false, fecha:"2026-05-08" },
