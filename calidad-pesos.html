@@ -481,9 +481,9 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       <div class="f-label">Calidad</div>
       <select class="f-select" id="f-calidad">
         <option value="">Todas</option>
-        <option>PRIMERA</option>
-        <option>SEGUNDA</option>
-        <option>TERCERA</option>
+        <option value="PRIMERA">Primera (Calavo / Yameto)</option>
+        <option value="SEGUNDA">Segunda (Bueno / Tolin / JZ)</option>
+        <option value="TERCERA">Tercera (Don Memo)</option>
       </select>
     </div>
     <div class="f-group f-palets-only">
@@ -857,12 +857,33 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div id="lim-caseta-bars" style="display:flex;flex-direction:column;gap:8px"></div>
       </div>
     </div>
-    <div class="sec">Detalle</div>
+    <div class="sec">Detalle Cosecha</div>
     <div class="card">
       <div class="tbl-wrap">
         <table>
           <thead><tr><th>Fecha</th><th>Sem</th><th>Lote</th><th>Caseta</th><th>Cultivo</th><th>Color</th><th class="r">Cantidad</th><th class="r">Kg</th><th class="r">Prom kg</th></tr></thead>
           <tbody id="lim-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sec" style="margin-top:18px">Calidad Empaque · Limón
+      <span class="sec-source">vw_palets</span>
+    </div>
+    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:10px">
+      <div class="stat cb"><div class="stat-lbl">Cajas Empacadas</div><div class="stat-val" id="lim-emp-cajas"><span class="skel"></span></div><div class="stat-sub" id="lim-emp-sub">—</div></div>
+      <div class="stat cg"><div class="stat-lbl">Limoneira</div><div class="stat-val" id="lim-emp-limoneira">—</div><div class="stat-sub">cx exportación</div></div>
+      <div class="stat ca"><div class="stat-lbl">Rosario</div><div class="stat-val" id="lim-emp-rosario">—</div><div class="stat-sub">cx nacional</div></div>
+      <div class="stat cp"><div class="stat-lbl">Peso Prom/Bulto</div><div class="stat-val" id="lim-emp-peso">—</div><div class="stat-sub">kg promedio</div></div>
+    </div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Fecha</th><th>Etiqueta</th><th>Tamaño</th><th>Color</th>
+            <th class="r">Bultos</th><th class="r">Peso kg</th><th class="r">Precio</th>
+          </tr></thead>
+          <tbody id="lim-emp-tbody"></tbody>
         </table>
       </div>
     </div>
@@ -1159,7 +1180,7 @@ function applyFilters(){
     if(r.to   && dd > r.to)   return false;
     if(d.cultivo  && p.cultivo  !== d.cultivo)  return false;
     if(d.etiqueta && p.etiqueta !== d.etiqueta) return false;
-    if(d.calidad  && p.calidad  !== d.calidad)  return false;
+    if(d.calidad  && paletTier(p) !== d.calidad)  return false;
     if(d.tamano   && p.tamano   !== d.tamano)   return false;
     return true;
   });
@@ -1271,10 +1292,15 @@ async function autoLoadCmp(){
 
 /* ── RESUMEN PANEL ──────────────────────────────────────── */
 async function loadResumen(){
-  // Ensure base data + prior-cycle data
   const from = activeRange?.from || iso(new Date());
   const to   = activeRange?.to   || iso(new Date());
   document.getElementById('res-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
+  // Load inbound silently if not yet fetched for this range
+  if(!rawInbound.length){
+    try {
+      rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`);
+    } catch(e){ console.warn('inbound fetch failed', e); }
+  }
   if(!cmpReady) await autoLoadCmp();
   renderResumen();
 }
@@ -1290,8 +1316,8 @@ function renderResumen(){
 
   // ── Empaque KPIs ──
   const totalBultos = rawPalets.reduce((s,r)=>s+(r.bultos||0), 0);
-  const bultosP1    = rawPalets.filter(r=>r.calidad==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
-  const bultosP3    = rawPalets.filter(r=>r.calidad==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const bultosP1    = rawPalets.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const bultosP3    = rawPalets.filter(r=>paletTier(r)==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
   const pctP1Emp = totalBultos ? bultosP1/totalBultos*100 : 0;
   const pctP3Emp = totalBultos ? bultosP3/totalBultos*100 : 0;
 
@@ -1324,7 +1350,7 @@ function renderResumen(){
     const wk=isoWeekLabel(d);
     if(!empByWk[wk]) empByWk[wk]={tot:0,p1:0};
     empByWk[wk].tot+=(r.bultos||0);
-    if(r.calidad==='PRIMERA') empByWk[wk].p1+=(r.bultos||0);
+    if(paletTier(r)==='PRIMERA') empByWk[wk].p1+=(r.bultos||0);
   });
   const empWks=Object.keys(empByWk).sort((a,b)=>parseInt(a.replace('Sem ',''))-parseInt(b.replace('Sem ','')));
   sparkBars(document.getElementById('rv-emp-spark'), empWks.map(w=>empByWk[w].tot?empByWk[w].p1/empByWk[w].tot*100:0),'#16a34a');
@@ -1361,7 +1387,7 @@ function renderResumen(){
 
     const inbP1Card = document.getElementById('inb-primera')?.closest('.stat');
     if(inbP1Card){ inbP1Card.classList.remove('s-good','s-warn','s-bad'); inbP1Card.classList.add(pctP1Inb>=65?'s-good':pctP1Inb>=55?'s-warn':'s-bad'); }
-    document.getElementById('rv-inb-p1').innerHTML = `<span style="color:${pctP1Inb>=65?'var(--green)':pctP1Inb>=55?'var(--accent)':'var(--red)'}`">${fN(pctP1Inb,1)}%</span>`;
+    document.getElementById('rv-inb-p1').innerHTML = `<span style="color:${pctP1Inb>=65?'var(--green)':pctP1Inb>=55?'var(--accent)':'var(--red)'}">${fN(pctP1Inb,1)}%</span>`;
     document.getElementById('rv-inb-merma').textContent = fN(avgMerma,1)+'%';
     document.getElementById('rv-inb-temp').innerHTML = `<span style="color:${tCol}">${fN(avgTemp,1)}°</span>`;
 
@@ -1391,7 +1417,7 @@ function renderResumen(){
   const priorAcr = filterByRange(cmpAcrAnt,'fecha',         { from: cycles.anterior.from, to: cycles.anterior.to });
 
   const prTotB   = priorPal.reduce((s,r)=>s+(r.bultos||0),0);
-  const prP1B    = priorPal.filter(r=>r.calidad==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const prP1B    = priorPal.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
   const prPctP1  = prTotB ? prP1B/prTotB*100 : 0;
   let prCajas    = 0;
   {
@@ -1472,7 +1498,59 @@ function renderResumen(){
 }
 
 /* ── HELPERS ──────────────────────────────────────────── */
+/* ── CLASIFICACIÓN POR ETIQUETA ─────────────────────────────
+   Fuente de verdad para calidad: etiqueta (no el campo calidad del DB).
+   tier  → agrupa para % Primera / Segunda / Tercera
+   label → nombre visible en UI
+──────────────────────────────────────────────────────────── */
+// Etiquetas tomate — fuente de verdad para KPIs de calidad empaque
+const ETIQUETA_CAL = {
+  'CALAVO':   { tier:'PRIMERA', label:'Calavo',   desc:'Primera Exportación' },
+  'YAMETO':   { tier:'PRIMERA', label:'Yameto',   desc:'Primera Nacional'    },
+  'BUENO':    { tier:'SEGUNDA', label:'Bueno',    desc:'Segunda Exportación' },
+  'TOLIN':    { tier:'SEGUNDA', label:'Tolin',    desc:'Segunda Nacional'    },
+  'URSON':    { tier:'SEGUNDA', label:'Urson',    desc:'Calidad Nacional JZ' },
+  'ZAZU':     { tier:'SEGUNDA', label:'Zazu',     desc:'Calidad Nacional JZ' },
+  'ISIS':     { tier:'SEGUNDA', label:'Isis',     desc:'Calidad Nacional JZ' },
+  'DON MEMO': { tier:'TERCERA', label:'Don Memo', desc:'Tercera'             },
+};
+// Etiquetas limón — solo para display; excluidas de KPIs de tomate
+const ETIQUETA_LIMON = {
+  'LIMONEIRA': { label:'Limoneira', desc:'Primera Exportación Limón' },
+  'ROSARIO':   { label:'Rosario',   desc:'Primera Nacional Limón'   },
+};
+// Un palet es de limón si su cultivo contiene LIMON/LIME/LIMA
+function normStr(s){ return (s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase(); }
+function isLimonPalet(r){
+  const c = normStr(r.cultivo);
+  return c.includes('LIMON') || c.includes('LIME') || c.includes('LIMA');
+}
+// Solo palets de tomate/chile para KPIs de calidad empaque
+function isCalidadPalet(r){ return !isLimonPalet(r); }
+
+function paletTier(r){
+  const etq = (r.etiqueta||'').toUpperCase().trim();
+  return ETIQUETA_CAL[etq]?.tier || r.calidad || 'PRIMERA';
+}
+function paletLabel(r){
+  const etq = (r.etiqueta||'').toUpperCase().trim();
+  const m = ETIQUETA_CAL[etq] || ETIQUETA_LIMON[etq];
+  return m ? m.label : (r.etiqueta || r.calidad || '—');
+}
+function paletDesc(r){
+  const etq = (r.etiqueta||'').toUpperCase().trim();
+  const m = ETIQUETA_CAL[etq] || ETIQUETA_LIMON[etq];
+  return m ? m.desc : (r.etiqueta || r.calidad || '—');
+}
+
 const CAL_COLOR = { PRIMERA:'#16a34a', SEGUNDA:'#d97706', TERCERA:'#dc2626' };
+// Colores por etiqueta para el donut
+const ETQ_CAL_COLORS = {
+  'CALAVO':'#16a34a','YAMETO':'#22c55e',
+  'BUENO':'#d97706','TOLIN':'#f59e0b','URSON':'#b45309','ZAZU':'#ca8a04','ISIS':'#92400e',
+  'DON MEMO':'#dc2626',
+  'LIMONEIRA':'#0891b2','ROSARIO':'#06b6d4',
+};
 const CAL_BG    = { PRIMERA:'#dcfce7', SEGUNDA:'#fef3c7', TERCERA:'#fee2e2' };
 const CAL_TC    = { PRIMERA:'#15803d', SEGUNDA:'#92400e', TERCERA:'#dc2626' };
 const CULT_LABEL = {
@@ -1554,14 +1632,23 @@ function renderCalidad(){
     ? fDateFull(activeRange.from) + ' – ' + fDateFull(activeRange.to) : '';
   document.getElementById('cal-rng').textContent = range;
 
+  /* Palets para KPIs: excluir limón cuando no hay filtro de cultivo explícito */
+  const dimF = getDimFilters();
+  const calPalets = dimF.cultivo ? fPalets : fPalets.filter(isCalidadPalet);
+  const hasLimon  = dimF.cultivo ? false : fPalets.some(isLimonPalet);
+
   /* Totals — cajas calculadas desde peso real ÷ constante por producto */
   let pesoTotalKg = 0;
   const byCalidadKg = { PRIMERA:0, SEGUNDA:0, TERCERA:0 };
+  const byEtqKg     = {};
   const byGrupoKg   = {};
-  fPalets.forEach(r => {
-    const kg = (r.peso||0) * (r.bultos||0);
+  calPalets.forEach(r => {
+    const kg  = (r.peso||0) * (r.bultos||0);
+    const tier = paletTier(r);
+    const etq  = (r.etiqueta||'—').toUpperCase().trim();
     pesoTotalKg += kg;
-    if(byCalidadKg[r.calidad] != null) byCalidadKg[r.calidad] += kg;
+    if(tier in byCalidadKg) byCalidadKg[tier] += kg;
+    byEtqKg[etq] = (byEtqKg[etq]||0) + kg;
     const grp = (r.grupo_cultivo||r.cultivo||'TOMATE').toUpperCase();
     byGrupoKg[grp] = (byGrupoKg[grp]||0) + kg;
   });
@@ -1577,11 +1664,11 @@ function renderCalidad(){
   const cajas2 = toBoxes(byCalidadKg.SEGUNDA,  KG_PER_BOX_TOMATE);
   const cajas3 = toBoxes(byCalidadKg.TERCERA,  KG_PER_BOX_TOMATE);
 
-  // bultos kept for %-of-total charts (uses actual counts for ratio accuracy)
-  const bultos   = fPalets.reduce((s,r)=>s+(r.bultos||0), 0);
-  const bultosP1 = fPalets.filter(r=>r.calidad==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
-  const bultosP2 = fPalets.filter(r=>r.calidad==='SEGUNDA').reduce((s,r)=>s+(r.bultos||0),0);
-  const bultosP3 = fPalets.filter(r=>r.calidad==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
+  // bultos — solo calPalets (sin limón) para KPIs de porcentajes
+  const bultos   = calPalets.reduce((s,r)=>s+(r.bultos||0), 0);
+  const bultosP1 = calPalets.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const bultosP2 = calPalets.filter(r=>paletTier(r)==='SEGUNDA').reduce((s,r)=>s+(r.bultos||0),0);
+  const bultosP3 = calPalets.filter(r=>paletTier(r)==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
   const pesoTotal = pesoTotalKg;
 
   // Update % labels on KPI cards
@@ -1592,10 +1679,11 @@ function renderCalidad(){
   document.getElementById('s-p2').innerHTML = bultos ? fN(bultosP2/bultos*100,1)+'<span class="stat-unit">%</span>' : '—';
   document.getElementById('s-p3').innerHTML = bultos ? fN(bultosP3/bultos*100,1)+'<span class="stat-unit">%</span>' : '—';
 
+  const limonNote = hasLimon ? ` <span style="font-size:.58rem;color:var(--muted);font-weight:500">· limón excluido</span>` : '';
   document.getElementById('s-bultos').innerHTML =
-    fKM(totalCajas) + '<span style="font-size:.65rem;font-weight:500;color:var(--muted);margin-left:4px">cx</span>';
+    fKM(totalCajas) + '<span style="font-size:.65rem;font-weight:500;color:var(--muted);margin-left:4px">cx</span>' + limonNote;
   document.getElementById('s-palets').textContent =
-    fPalets.length.toLocaleString('es-MX') + ' registros · ' + fN(pesoTotalKg/1000) + ' t';
+    calPalets.length.toLocaleString('es-MX') + ' registros · ' + fN(pesoTotalKg/1000) + ' t';
   const TARGET_PESO = 11.8;
   const pesoProm = bultos ? pesoTotal / bultos : null;
   const statEl   = document.getElementById('stat-peso-prom');
@@ -1629,9 +1717,9 @@ function renderCalidad(){
     const pr   = priorEquivRange();
     const prPal= filterByRange(cmpPalAnt,'fecha_empaque',pr);
     const prTot= prPal.reduce((s,r)=>s+(r.bultos||0),0);
-    const prP1 = prPal.filter(r=>r.calidad==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
-    const prP2 = prPal.filter(r=>r.calidad==='SEGUNDA').reduce((s,r)=>s+(r.bultos||0),0);
-    const prP3 = prPal.filter(r=>r.calidad==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
+    const prP1 = prPal.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+    const prP2 = prPal.filter(r=>paletTier(r)==='SEGUNDA').reduce((s,r)=>s+(r.bultos||0),0);
+    const prP3 = prPal.filter(r=>paletTier(r)==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
     const prProm= prTot ? prPal.reduce((s,r)=>s+(r.peso||0)*(r.bultos||0),0)/prTot : null;
     let prCajas=0;
     {const bg={};prPal.forEach(r=>{const kg=(r.peso||0)*(r.bultos||0);const g=(r.grupo_cultivo||r.cultivo||'T').toUpperCase();bg[g]=(bg[g]||0)+kg;});function kp(g){if(g.includes('LIMON')||g.includes('LEMON'))return KG_PER_BOX_LIMON;if(g.includes('CHILE')||g.includes('PEPPER'))return KG_PER_BULTO_CHILE;return KG_PER_BOX_TOMATE;}Object.entries(bg).forEach(([g,kg])=>{prCajas+=toBoxes(kg,kp(g));});}
@@ -1644,21 +1732,22 @@ function renderCalidad(){
 
   /* Weekly trend chart: bars = cajas, line = % primera */
   {
-    const byWk={};
-    fPalets.forEach(r=>{
+    const byWk={};       // key → {cx,p1,tot,label}
+    calPalets.forEach(r=>{
       const d=(r.fecha_empaque||'').split('T')[0]; if(!d) return;
-      const wk=isoWeekLabel(d);
-      if(!byWk[wk]) byWk[wk]={cx:0,p1:0,tot:0};
+      const sk=isoWeekSortKey(d);   // "YYYY-WW" — sorts correctly across Dec/Jan
+      const lbl=isoWeekLabel(d);    // "Sem N" — for display
+      if(!byWk[sk]) byWk[sk]={cx:0,p1:0,tot:0,label:lbl};
       const kg=(r.peso||0)*(r.bultos||0);
-      byWk[wk].cx+=toBoxes(kg,KG_PER_BOX_TOMATE);
-      byWk[wk].tot+=(r.bultos||0);
-      if(r.calidad==='PRIMERA') byWk[wk].p1+=(r.bultos||0);
+      byWk[sk].cx+=toBoxes(kg,KG_PER_BOX_TOMATE);
+      byWk[sk].tot+=(r.bultos||0);
+      if(paletTier(r)==='PRIMERA') byWk[sk].p1+=(r.bultos||0);
     });
-    const wks=Object.keys(byWk).sort((a,b)=>parseInt(a.replace('Sem ',''))-parseInt(b.replace('Sem ','')));
+    const wks=Object.keys(byWk).sort(); // alphabetical YYYY-WW sort is chronological
     mkChart('chart-cal-trend',{
       type:'bar',
       data:{
-        labels:wks,
+        labels:wks.map(w=>byWk[w].label),
         datasets:[
           { label:'Cajas', data:wks.map(w=>Math.round(byWk[w].cx)),
             backgroundColor:'rgba(29,78,216,.22)', borderColor:'rgba(29,78,216,.7)', borderWidth:1, borderRadius:4, yAxisID:'y' },
@@ -1675,112 +1764,214 @@ function renderCalidad(){
           tooltip:{ backgroundColor:'#0c2117', bodyColor:'#fff', padding:9, cornerRadius:8,
             callbacks:{ label:c=>c.dataset.label==='% Primera'?` ${c.dataset.label}: ${c.parsed.y??'—'}%`:` ${c.dataset.label}: ${(c.parsed.y||0).toLocaleString('es-MX')} cx` } }
         },
+        annotation:{ annotations:{ obj70: objLine(70,'Obj. 70%','#16a34a') } },
         scales:{
-          x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10},maxRotation:0}, border:{display:false} },
-          y:{ position:'left', grid:{color:'rgba(0,0,0,.04)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v>=1000?Math.round(v/1000)+'K':v}, border:{display:false} },
-          y2:{ position:'right', grid:{display:false}, ticks:{color:'#16a34a',font:{size:10},callback:v=>v+'%'}, min:0, max:100, border:{display:false} }
+          x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{family:'Inter',size:10},maxRotation:0}, border:{display:false} },
+          y:{ position:'left', grid:{color:'rgba(0,0,0,.04)',drawTicks:false},
+            ticks:{color:'#9ca3af',font:{family:'Inter',size:10},padding:4,callback:v=>v>=1000?Math.round(v/1000)+'K':v},
+            border:{display:false} },
+          y2:{ position:'right', grid:{display:false},
+            ticks:{color:'#16a34a',font:{family:'Inter',size:10},callback:v=>v+'%'},
+            min:0, max:100, border:{display:false} }
         }
       }
     });
   }
 
   /* Donut */
+  // Donut por etiqueta — desglose real del negocio
+  const ETQ_ORDER = ['CALAVO','YAMETO','BUENO','TOLIN','URSON','ZAZU','ISIS','DON MEMO'];
+  const etqDonutEntries = ETQ_ORDER
+    .filter(e => byEtqKg[e] > 0)
+    .concat(Object.keys(byEtqKg).filter(e => !ETQ_ORDER.includes(e) && byEtqKg[e] > 0))
+    .map(e => ({ etq:e, kg:byEtqKg[e] }));
+  const totalEtqKg = etqDonutEntries.reduce((s,e)=>s+e.kg, 0);
   mkChart('chart-donut',{
     type:'doughnut',
     data:{
-      labels:['Primera','Segunda','Tercera'],
+      labels: etqDonutEntries.map(e => {
+        const m = ETIQUETA_CAL[e.etq];
+        return m ? `${m.label} — ${m.desc}` : e.etq;
+      }),
       datasets:[{
-        data:[byCalidadKg.PRIMERA,byCalidadKg.SEGUNDA,byCalidadKg.TERCERA],
-        backgroundColor:['#16a34a','#d97706','#dc2626'],
-        borderWidth:3, borderColor:'#fff',
-        hoverOffset:6
+        data: etqDonutEntries.map(e=>e.kg),
+        backgroundColor: etqDonutEntries.map(e => ETQ_CAL_COLORS[e.etq]||'#9ca3af'),
+        borderWidth:3, borderColor:'#fff', hoverOffset:6
       }]
     },
     options:{
       responsive:true, maintainAspectRatio:false, cutout:'62%',
       plugins:{
-        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:11}, color:'#374151', boxWidth:12, padding:16 } },
-        tooltip:{ callbacks:{ label:c=>`${c.label}: ${fK(c.parsed)} bultos (${bultos?fN(c.parsed/bultos*100):0}%)` } }
+        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10.5}, color:'#374151', boxWidth:12, padding:12 } },
+        tooltip:{ callbacks:{ label:c=>`${c.label.split(' — ')[0]}: ${fN(c.parsed/1000)} t (${totalEtqKg?fN(c.parsed/totalEtqKg*100):0}%)` } }
       }
     }
   });
 
-  /* Calidad por cultivo — stacked bar */
-  const cultivos = [...new Set(fPalets.map(r=>r.cultivo).filter(Boolean))];
-  const calByC = {};
-  cultivos.forEach(c=>{ calByC[c]={PRIMERA:0,SEGUNDA:0,TERCERA:0}; });
-  fPalets.forEach(r=>{ if(calByC[r.cultivo] && r.calidad in calByC[r.cultivo]) calByC[r.cultivo][r.calidad]+=(r.bultos||0); });
+  /* Calidad por cultivo — stacked bar, sorted by total descending */
+  const calByCRaw = {};
+  calPalets.forEach(r=>{
+    const c = r.cultivo||'—';
+    const t = paletTier(r);
+    if(!calByCRaw[c]) calByCRaw[c]={PRIMERA:0,SEGUNDA:0,TERCERA:0};
+    if(t in calByCRaw[c]) calByCRaw[c][c] = (calByCRaw[c][c]||0);
+    calByCRaw[c][t]+=(r.bultos||0);
+  });
+  // Sort cultivos by total bultos descending
+  const cultivos = Object.keys(calByCRaw).sort((a,b)=>{
+    const ta=calByCRaw[a].PRIMERA+calByCRaw[a].SEGUNDA+calByCRaw[a].TERCERA;
+    const tb=calByCRaw[b].PRIMERA+calByCRaw[b].SEGUNDA+calByCRaw[b].TERCERA;
+    return tb-ta;
+  });
+  const calByC = calByCRaw;
 
   mkChart('chart-cal-cultivo',{
     type:'bar',
     data:{
       labels: cultivos.map(cult),
       datasets:[
-        { label:'Primera', data:cultivos.map(c=>calByC[c].PRIMERA), backgroundColor:'rgba(22,163,74,.8)', borderRadius:3 },
-        { label:'Segunda', data:cultivos.map(c=>calByC[c].SEGUNDA), backgroundColor:'rgba(217,119,6,.8)',  borderRadius:3 },
-        { label:'Tercera', data:cultivos.map(c=>calByC[c].TERCERA), backgroundColor:'rgba(220,38,38,.8)',  borderRadius:3 },
+        { label:'Primera (Calavo/Yameto)',
+          data: cultivos.map(c=>calByC[c].PRIMERA),
+          backgroundColor:'rgba(22,163,74,.85)',
+          hoverBackgroundColor:'#16a34a',
+          borderRadius:{ topLeft:4, topRight:4 },
+          borderSkipped: false },
+        { label:'Segunda (Bueno/Tolin/JZ)',
+          data: cultivos.map(c=>calByC[c].SEGUNDA),
+          backgroundColor:'rgba(217,119,6,.85)',
+          hoverBackgroundColor:'#d97706',
+          borderSkipped: false },
+        { label:'Tercera (Don Memo)',
+          data: cultivos.map(c=>calByC[c].TERCERA),
+          backgroundColor:'rgba(220,38,38,.85)',
+          hoverBackgroundColor:'#dc2626',
+          borderSkipped: false },
       ]
     },
     options:{
       responsive:true, maintainAspectRatio:false,
-      plugins:{...CHART_DEFAULTS.plugins, tooltip:{mode:'index',intersect:false}},
+      interaction:{ mode:'index', intersect:false },
+      plugins:{
+        legend:{
+          position:'bottom',
+          labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:11, padding:14,
+            usePointStyle:true, pointStyleWidth:8 }
+        },
+        tooltip:{
+          backgroundColor:'#0c2117', titleColor:'rgba(255,255,255,.55)',
+          bodyColor:'#f0fdf4', padding:11, cornerRadius:8, boxPadding:4,
+          callbacks:{
+            title: items => cult(cultivos[items[0].dataIndex]),
+            label: c => {
+              const tot = cultivos.reduce ? (calByC[cultivos[c.dataIndex]]?.PRIMERA||0)+(calByC[cultivos[c.dataIndex]]?.SEGUNDA||0)+(calByC[cultivos[c.dataIndex]]?.TERCERA||0) : 1;
+              const pct = tot ? fN(c.parsed.y/tot*100,1) : '—';
+              return ` ${c.dataset.label.split(' ')[0]}: ${fK(Math.round(c.parsed.y))} bultos (${pct}%)`;
+            },
+            afterBody: items => {
+              const c = cultivos[items[0].dataIndex];
+              const tot=(calByC[c]?.PRIMERA||0)+(calByC[c]?.SEGUNDA||0)+(calByC[c]?.TERCERA||0);
+              const p1 = tot ? fN((calByC[c]?.PRIMERA||0)/tot*100,1) : '—';
+              return [`─────────────`, ` % Primera: ${p1}%`];
+            }
+          }
+        }
+      },
       scales:{
-        x:{ stacked:true, grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10}}, border:{display:false} },
-        y:{ stacked:true, grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10}}, border:{display:false} }
+        x:{ stacked:true, grid:{display:false},
+          ticks:{color:'#6b7280',font:{family:'Inter',size:10},maxRotation:0},
+          border:{display:false} },
+        y:{ stacked:true,
+          grid:{color:'rgba(0,0,0,.04)',drawTicks:false},
+          ticks:{color:'#9ca3af',font:{family:'Inter',size:10},
+            callback:v=>v>=1000?Math.round(v/1000)+'K':v,padding:6},
+          border:{display:false} }
       }
     }
   });
 
   /* Tamaño bars */
   const byTam={};
-  fPalets.forEach(r=>{ const k=r.tamano||'—'; byTam[k]=(byTam[k]||0)+(r.bultos||0); });
+  calPalets.forEach(r=>{ const k=r.tamano||'—'; byTam[k]=(byTam[k]||0)+(r.bultos||0); });
   const tamSorted = Object.entries(byTam).sort((a,b)=>b[1]-a[1]);
   const maxTam = tamSorted[0]?.[1]||1;
-  document.getElementById('tamano-bars').innerHTML = tamSorted.map(([t,v])=>`
-    <div class="prog-row">
-      <div class="prog-top">
-        <span class="prog-name">${t}</span>
-        <span class="prog-qty" style="color:var(--blue)">${fK(v)} bultos</span>
+  const totalTamBultos = tamSorted.reduce((s,[,v])=>s+v,0);
+  document.getElementById('tamano-bars').innerHTML = tamSorted.map(([t,v],i)=>{
+    const pct = totalTamBultos ? (v/totalTamBultos*100).toFixed(1) : 0;
+    const barPct = (v/maxTam*100).toFixed(1);
+    const hue = i===0?'var(--blue)':i===1?'#1d4ed8':i===2?'#3b82f6':'#6366f1';
+    return `<div class="prog-row" style="margin-bottom:9px">
+      <div class="prog-top" style="margin-bottom:4px">
+        <span class="prog-name" style="font-size:.76rem;font-weight:700;color:var(--text)">${t}</span>
+        <span style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:.68rem;color:var(--muted);font-variant-numeric:tabular-nums">${fK(v)} bultos</span>
+          <span style="font-size:.68rem;font-weight:700;color:${hue};background:rgba(29,78,216,.08);padding:1px 6px;border-radius:10px;font-variant-numeric:tabular-nums">${pct}%</span>
+        </span>
       </div>
-      <div class="prog-track"><div class="prog-fill" style="width:${(v/maxTam*100).toFixed(1)}%;background:var(--blue)"></div></div>
-    </div>`).join('');
+      <div class="prog-track" style="height:7px;border-radius:6px">
+        <div class="prog-fill" style="width:${barPct}%;background:${hue};border-radius:6px;transition:width .5s cubic-bezier(.4,0,.2,1)"></div>
+      </div>
+    </div>`;
+  }).join('');
 
   /* Etiqueta bar */
   const byEtq={};
-  fPalets.forEach(r=>{ const k=r.etiqueta||'—'; byEtq[k]=(byEtq[k]||0)+(r.bultos||0); });
+  calPalets.forEach(r=>{ const k=r.etiqueta||'—'; byEtq[k]=(byEtq[k]||0)+(r.bultos||0); });
   const etqEntries = Object.entries(byEtq).sort((a,b)=>b[1]-a[1]);
-  const ETQ_COLORS=['#16a34a','#1d4ed8','#7c3aed','#d97706','#dc2626','#0891b2'];
+  const totalEtqBultos = etqEntries.reduce((s,[,v])=>s+v,0);
   mkChart('chart-etiqueta',{
     type:'bar',
     data:{
-      labels:etqEntries.map(e=>e[0]),
+      labels: etqEntries.map(([etq])=>{
+        const m=ETIQUETA_CAL[etq.toUpperCase()];
+        return m ? `${m.label}` : etq;
+      }),
       datasets:[{
         label:'Bultos',
-        data:etqEntries.map(e=>e[1]),
-        backgroundColor:etqEntries.map((_,i)=>ETQ_COLORS[i%ETQ_COLORS.length]+'cc'),
-        borderRadius:4
+        data: etqEntries.map(([,v])=>v),
+        backgroundColor: etqEntries.map(([etq])=>ETQ_CAL_COLORS[etq.toUpperCase()]||'#6b7280'),
+        hoverBackgroundColor: etqEntries.map(([etq])=>ETQ_CAL_COLORS[etq.toUpperCase()]||'#6b7280'),
+        borderRadius:6,
+        borderSkipped:false,
+        barThickness:22
       }]
     },
     options:{
       indexAxis:'y', responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false} },
+      interaction:{ mode:'index', intersect:false },
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'#0c2117', bodyColor:'#f0fdf4', padding:10, cornerRadius:8,
+          callbacks:{
+            label:c=>{
+              const pct=totalEtqBultos?fN(c.parsed.x/totalEtqBultos*100,1):'—';
+              return ` ${fK(Math.round(c.parsed.x))} bultos — ${pct}% del total`;
+            }
+          }
+        }
+      },
       scales:{
-        x:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10}}, border:{display:false} },
-        y:{ grid:{display:false}, ticks:{color:'#374151',font:{size:11,weight:'600'}}, border:{display:false} }
+        x:{ grid:{color:'rgba(0,0,0,.04)',drawTicks:false},
+          ticks:{color:'#9ca3af',font:{family:'Inter',size:10},
+            callback:v=>v>=1000?Math.round(v/1000)+'K':v,padding:4},
+          border:{display:false} },
+        y:{ grid:{display:false},
+          ticks:{color:'#1f2937',font:{family:'Inter',size:11,weight:'600'}},
+          border:{display:false} }
       }
     }
   });
 
   /* Table */
-  const Q_BADGE = { PRIMERA:'q1 badge', SEGUNDA:'q2 badge', TERCERA:'q3 badge' };
-  const allRows = [...fPalets].sort((a,b)=>(b.fecha_empaque||'').localeCompare(a.fecha_empaque||''));
+  const TIER_BADGE = { PRIMERA:'q1 badge', SEGUNDA:'q2 badge', TERCERA:'q3 badge' };
+  const allRows = [...calPalets].sort((a,b)=>(b.fecha_empaque||'').localeCompare(a.fecha_empaque||''));
   const rows = allRows.slice(0,200);
   const calCapNote = allRows.length > 200 ? `<tr><td colspan="9" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted);background:#fafafa">Mostrando 200 de ${allRows.length.toLocaleString('es-MX')} registros</td></tr>` : '';
   document.getElementById('cal-tbody').innerHTML = rows.map(r=>`<tr>
     <td>${fDate(r.fecha_empaque.split('T')[0])}</td>
     <td style="font-weight:600">${cult(r.cultivo)}</td>
     <td>${r.etiqueta||'—'}</td>
-    <td><span class="${Q_BADGE[r.calidad]||'badge'}">${r.calidad||'—'}</span></td>
+    <td><span class="${TIER_BADGE[paletTier(r)]||'badge'}" title="${paletDesc(r)}">${paletLabel(r)}</span></td>
     <td>${r.tamano||'—'}</td>
     <td style="color:var(--muted)">${r.color||'—'}</td>
     <td class="td-n">${fK(r.bultos)}</td>
@@ -1921,7 +2112,7 @@ function applyRawData(palets, acarreos, from, to, source){
   // Re-render whichever crop tab is active
   const activePanel = document.querySelector('.panel.active')?.id;
   if(activePanel === 'panel-tomate')  renderTomate(from, to);
-  if(activePanel === 'panel-limon')   renderCropPanel({ rows: flattenCrop(acarreos, isLimon, null), from, to, ids:{rangeLbl:'lim-range-lbl',total:'lim-total',totalSub:'lim-total-sub',dias:'lim-dias',prom:'lim-prom'}, chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody', kgPerUnit:KG_PER_BOX_LIMON, unitLabel:'cx' });
+  if(activePanel === 'panel-limon'){   renderCropPanel({ rows: flattenCrop(acarreos, isLimon, null), from, to, ids:{rangeLbl:'lim-range-lbl',total:'lim-total',totalSub:'lim-total-sub',dias:'lim-dias',prom:'lim-prom'}, chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody', kgPerUnit:KG_PER_BOX_LIMON, unitLabel:'cx' }); renderLimonPalets(); }
   if(activePanel === 'panel-chile')   renderCropPanel({ rows: flattenCrop(acarreos, isChile, null), from, to, ids:{rangeLbl:'chi-range-lbl',total:'chi-total',totalSub:'chi-total-sub',dias:'chi-dias',vars:'chi-vars'}, chartSemId:'chart-chi-sem', varId:'chi-var-bars', tbodyId:'chi-tbody', kgPerUnit:KG_PER_BULTO_CHILE, unitLabel:'bts' });
   if(activePanel === 'panel-inbound') loadInbound();
 
@@ -2012,8 +2203,8 @@ function isBola(c){ return (c||'').toUpperCase().includes('ROUND'); }
 function isGH(c)  { return (c||'').toUpperCase().startsWith('GH '); }
 function isOF(c)  { return (c||'').toUpperCase().startsWith('OF '); }
 function isTomato(c){ const u=(c||'').toUpperCase(); return u.includes('TOMATO') || u.includes('TOMATE'); }
-function isLimon(c) { const u=(c||'').toUpperCase(); return LIMON_CULTIVOS.some(k=>u.includes(k.replace('GH ','').replace('OF ',''))) || u.includes('LIMON') || u.includes('LEMON') || u.includes('LIMA'); }
-function isChile(c) { const u=(c||'').toUpperCase(); return CHILE_CULTIVOS.some(k=>u.includes(k)) || u.includes('CHILE') || u.includes('PEPPER'); }
+function isLimon(c) { const u=normStr(c); return LIMON_CULTIVOS.some(k=>u.includes(normStr(k).replace('GH ','').replace('OF ',''))) || u.includes('LIMON') || u.includes('LEMON') || u.includes('LIMA'); }
+function isChile(c) { const u=normStr(c); return CHILE_CULTIVOS.some(k=>u.includes(normStr(k))) || u.includes('CHILE') || u.includes('PEPPER'); }
 
 function tomatoGroup(c){
   if(isRoma(c))  return 'ROMA';
@@ -2023,11 +2214,17 @@ function tomatoGroup(c){
 function ghof(c){ return isGH(c) ? 'GH' : isOF(c) ? 'OF' : 'GH'; }
 
 function isoWeekLabel(isoDate){
-  // Returns "Sem N" based on day-of-year week
   const d   = new Date(isoDate + 'T12:00:00');
   const jan = new Date(d.getFullYear(), 0, 1);
   const w   = Math.ceil(((d - jan) / 86400000 + jan.getDay() + 1) / 7);
   return `Sem ${w}`;
+}
+// Sort key that preserves year: "2025-W52" sorts before "2026-W01"
+function isoWeekSortKey(isoDate){
+  const d   = new Date(isoDate + 'T12:00:00');
+  const jan = new Date(d.getFullYear(), 0, 1);
+  const w   = Math.ceil(((d - jan) / 86400000 + jan.getDay() + 1) / 7);
+  return `${d.getFullYear()}-${String(w).padStart(2,'0')}`;
 }
 
 // Generic flatten for any crop filter function
@@ -2243,7 +2440,7 @@ function renderTomate(from, to){
     <div class="prog-row">
       <div class="prog-top">
         <span class="prog-name" style="font-size:.76rem">${l}</span>
-        <span class="prog-qty" style="color:${LOTE_COLORS[i%LOTE_COLORS.length]}">\${fBox(kg, KG_PER_BOX_TOMATE)} cx <span style="opacity:.5;font-weight:400">${fN(kg/1000)} t</span></span>
+        <span class="prog-qty" style="color:${LOTE_COLORS[i%LOTE_COLORS.length]}">${fBox(kg, KG_PER_BOX_TOMATE)} cx <span style="opacity:.5;font-weight:400">${fN(kg/1000)} t</span></span>
       </div>
       <div class="prog-track">
         <div class="prog-fill" style="width:${(kg/maxLote*100).toFixed(1)}%;background:${LOTE_COLORS[i%LOTE_COLORS.length]}"></div>
@@ -2339,7 +2536,7 @@ function renderTomate(from, to){
     <div class="prog-row" style="margin-bottom:0">
       <div class="prog-top">
         <span class="prog-name" style="font-size:.72rem">${c.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</span>
-        <span class="prog-qty" style="color:var(--green2);font-size:.72rem">\${fBox(kg, KG_PER_BOX_TOMATE)} cx <span style="opacity:.5;font-weight:400">${fN(kg/1000)} t</span></span>
+        <span class="prog-qty" style="color:var(--green2);font-size:.72rem">${fBox(kg, KG_PER_BOX_TOMATE)} cx <span style="opacity:.5;font-weight:400">${fN(kg/1000)} t</span></span>
       </div>
       <div class="prog-track" style="height:5px">
         <div class="prog-fill" style="width:${(kg/maxCas*100).toFixed(1)}%;background:var(--green2)"></div>
@@ -2442,7 +2639,7 @@ function renderCropPanel({ rows, ids, from, to, chartSemId, casetaId, varId, tbo
     <td style="color:var(--muted);font-size:.72rem">${r.semana}</td>
     <td style="font-weight:600">${r.lote}</td>
     <td style="font-size:.72rem;color:var(--muted)">${r.caseta.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</td>
-    <td>${r.cultivo.replace(/^(GH|OF)\s+/i,'<span style="font-size:.62rem;font-weight:700;padding:1px 5px;border-radius:4px;background:${isGH(r.cultivo)?\'rgba(22,163,74,.12)\'  :\'rgba(217,119,6,.15)\'};color:${isGH(r.cultivo)?\'#15803d\':\'#92400e\'};margin-right:4px">${isGH(r.cultivo)?\'GH\':\'OF\'}</span>').replace(/(GH|OF)\s+/i,'')}</td>
+    <td>${(()=>{ const gh=isGH(r.cultivo); const tag=gh?'GH':'OF'; const bg=gh?'rgba(22,163,74,.12)':'rgba(217,119,6,.15)'; const col=gh?'#15803d':'#92400e'; const name=r.cultivo.replace(/^(GH|OF)\s+/i,'').replace(/\s*TOMATOES?\s*/i,''); return `<span style="font-size:.62rem;font-weight:700;padding:1px 5px;border-radius:4px;background:${bg};color:${col};margin-right:4px">${tag}</span>${name}`; })()}</td>
     <td style="color:var(--muted)">${r.color}</td>
     <td class="td-n">${fK(Math.round(r.cantidad))}</td>
     <td class="td-n" style="font-weight:700">${fK(Math.round(r.kilos))}</td>
@@ -2455,7 +2652,7 @@ async function loadLimon(){
   btn.classList.add('spin'); btn.disabled=true;
   document.getElementById('err-banner').classList.remove('show');
   const from=activeRange?.from||iso(new Date()), to=activeRange?.to||iso(new Date());
-  document.getElementById('ft-urls').textContent=`vw_acarreos · Limón · ${from} → ${to}`;
+  document.getElementById('ft-urls').textContent=`vw_acarreos + vw_palets · Limón · ${from} → ${to}`;
   try{
     const rows=await getAll(`/vw_acarreos?select=fecha,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`);
     const flat=flattenCrop(rows, isLimon, null);
@@ -2464,11 +2661,53 @@ async function loadLimon(){
       chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody',
       kgPerUnit: KG_PER_BOX_LIMON, unitLabel: 'cx'
     });
-    document.getElementById('ft-updated').textContent='Actualizado: '+new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})+' · '+flat.length+' líneas limón';
+    renderLimonPalets();
+    document.getElementById('ft-updated').textContent='Actualizado: '+new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})+' · '+flat.length+' líneas cosecha · '+fPalets.filter(isLimonPalet).length+' palets empaque';
   }catch(e){
     document.getElementById('err-text').textContent='Error EYE: '+e.message;
     document.getElementById('err-banner').classList.add('show');
   }finally{ btn.classList.remove('spin'); btn.disabled=false; }
+}
+
+function renderLimonPalets(){
+  const limPalets = fPalets.filter(isLimonPalet)
+    .sort((a,b)=>(b.fecha_empaque||'').localeCompare(a.fecha_empaque||''));
+
+  if(!limPalets.length){
+    document.getElementById('lim-emp-tbody').innerHTML='<tr><td colspan="7" class="empty">Sin palets de limón en el período.</td></tr>';
+    ['lim-emp-cajas','lim-emp-limoneira','lim-emp-rosario','lim-emp-peso'].forEach(id=>{ document.getElementById(id).textContent='—'; });
+    return;
+  }
+
+  // KPIs
+  const totalBultos = limPalets.reduce((s,r)=>s+(r.bultos||0),0);
+  const totalKg     = limPalets.reduce((s,r)=>s+(r.peso||0)*(r.bultos||0),0);
+  const totalCajas  = toBoxes(totalKg, KG_PER_BOX_LIMON);
+  const pesoProm    = totalBultos ? totalKg/totalBultos : 0;
+
+  const byEtq = {};
+  limPalets.forEach(r=>{ const e=(r.etiqueta||'—').toUpperCase(); byEtq[e]=(byEtq[e]||0)+(r.bultos||0); });
+  const cajasLimoneira = toBoxes((limPalets.filter(r=>(r.etiqueta||'').toUpperCase()==='LIMONEIRA').reduce((s,r)=>s+(r.peso||0)*(r.bultos||0),0)), KG_PER_BOX_LIMON);
+  const cajasRosario   = toBoxes((limPalets.filter(r=>(r.etiqueta||'').toUpperCase()==='ROSARIO'  ).reduce((s,r)=>s+(r.peso||0)*(r.bultos||0),0)), KG_PER_BOX_LIMON);
+
+  document.getElementById('lim-emp-cajas').innerHTML     = fKM(totalCajas)+'<span class="stat-unit">cx</span>';
+  document.getElementById('lim-emp-sub').textContent     = limPalets.length+' registros · '+fN(totalKg/1000)+' t';
+  document.getElementById('lim-emp-limoneira').innerHTML = cajasLimoneira>0 ? fKM(cajasLimoneira)+'<span class="stat-unit">cx</span>' : '—';
+  document.getElementById('lim-emp-rosario').innerHTML   = cajasRosario>0   ? fKM(cajasRosario)  +'<span class="stat-unit">cx</span>' : '—';
+  document.getElementById('lim-emp-peso').innerHTML      = fN(pesoProm)+'<span class="stat-unit">kg</span>';
+
+  // Tabla
+  const rows = limPalets.slice(0,200);
+  const capNote = limPalets.length>200 ? `<tr><td colspan="7" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted)">Mostrando 200 de ${limPalets.length.toLocaleString('es-MX')} registros</td></tr>` : '';
+  document.getElementById('lim-emp-tbody').innerHTML = rows.map(r=>`<tr>
+    <td>${fDate((r.fecha_empaque||'').split('T')[0])}</td>
+    <td><span class="q1 badge">${paletLabel(r)}</span></td>
+    <td style="color:var(--muted)">${r.tamano||'—'}</td>
+    <td style="color:var(--muted)">${r.color||'—'}</td>
+    <td class="td-n">${fK(r.bultos)}</td>
+    <td class="td-n">${fN(r.peso)}</td>
+    <td class="td-n" style="color:var(--green);font-weight:700">$${fN(r.precio||0)}</td>
+  </tr>`).join('') + capNote;
 }
 
 async function loadChile(){
@@ -2611,9 +2850,9 @@ function renderInbound(from, to){
       labels: days.map(fDate),
       datasets:[{
         label:'% Primera', data: p1pct,
-        borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.08)',
+        borderColor:'#16a34a', backgroundColor:gradFn(22,163,74,.2,0),
         borderWidth:2.5, pointRadius:4, pointHoverRadius:7,
-        fill:true, tension:.3, spanGaps:false, backgroundColor:gradFn(22,163,74,.2,0)
+        fill:true, tension:.3, spanGaps:false
       },{
         label:'Objetivo 65%',
         data: days.map(()=>65),
