@@ -1,17 +1,18 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 08 May 2026",
+    fecha: "Sábado 09 May 2026",
     semana: "WK 19",
-    actualizado: "08/05/2026 · 14:05"
+    actualizado: "09/05/2026 · 07:45"
   },
 
   alertas: [
-    {"nivel":"success","texto":"OUTBOUND CALIDAD EXCELENTE 06/05 — Bola 86.29% primera (merma 3.05%), Roma 79.60% (merma 1.60% excelente), Chile 88.59% (merma 0.97%). Mejora continúa en WK19."},
+    {"nivel":"success","texto":"CALAVO 08/05 — 2 trailers despachados: ST-87 (1,600 cajas, 20 pallets) y ST-84 (1,384 cajas, 17 pallets). Total: 2,984 cajas de Tomate vía Transfríos Santa Teresa. Destino Nogales."},
+    {"nivel":"success","texto":"OUTBOUND CALIDAD EXCELENTE 06/05 — Bola 86.29% primera (merma 3.05%), Roma 79.60% (merma 1.60% excelente), Chile 88.59% (merma 0.97%). Mejora continua en WK19."},
     {"nivel":"success","texto":"SETTLEMENT WK19 EN RUTA — Calavo reporta ~$2.506M a favor (detalles análisis mañana). Tendencia acumulada positiva."},
     {"nivel":"warning","texto":"ÚLTIMA VENTANA VINE RIPE WK19 — Corbel #0039 reporta transición post-peak. Presión esperada WK20. Embarcar máximo HOY/MAÑANA."},
     {"nivel":"warning","texto":"LIMES 110s $42 — Peru -30% sustain. Ventana cierre WK19-20 esperada. Maximizar embarques limón antes corrección."},
     {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 10 días preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos."},
-    {"nivel":"info","texto":"ASIA FRUIT LOGISTICA 2026 — Nuevos beneficios exclusivos para compradores. Oportunidad de prospección mercado asiático para WK20+."}
+    {"nivel":"info","texto":"DOCUMENTACIÓN NOGALES ST — Bill, manifiesto, datos del transportista, facturas y XML enviados por embarques 08/05. Listo para cruce."}
   ],
 
   ebitda: {
@@ -591,6 +592,11 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"22:10","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES ST","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-08"},
+    {"hora":"22:04","asunto":"REPORTE DIARIO CALAVO 08-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-08"},
+    {"hora":"21:57","asunto":"08-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-08"},
+    {"hora":"21:21","asunto":"08-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-08"},
+    {"hora":"20:44","asunto":"REPORTE DE BASCULA 08/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-08"},
     {"hora":"14:07","asunto":"HortiDaily Newsletter | Friday, May 8, 2026","de":"mail@hortidaily.com","leido":false,"fecha":"2026-05-08"},
     {"hora":"10:13","asunto":"¿Quién es el mayor experto en fútbol del sector internacional de frutas y hortalizas?","de":"mail@hortidaily.es","leido":false,"fecha":"2026-05-08"},
     {"hora":"08:17","asunto":"The Morning — GBM","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-05-08"},
