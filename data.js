@@ -1,18 +1,18 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 09 May 2026",
+    fecha: "Domingo 10 May 2026",
     semana: "WK 19",
-    actualizado: "09/05/2026 · 07:45"
+    actualizado: "10/05/2026 · 07:45"
   },
 
   alertas: [
-    {"nivel":"success","texto":"CALAVO 08/05 — 2 trailers despachados: ST-87 (1,600 cajas, 20 pallets) y ST-84 (1,384 cajas, 17 pallets). Total: 2,984 cajas de Tomate vía Transfríos Santa Teresa. Destino Nogales."},
+    {"nivel":"success","texto":"DESPACHO 09/05 — 4 trailers, 6,028 cajas totales: CGG-152 Limón→MF (1,200 cajas/20 pallets), CGG-15 Chile→MF (988 cajas/20 pallets), JL-13 Tomate→KF (1,920 cajas/24 pallets), CGG-24 Tomate→NO (1,920 cajas/24 pallets). Operación Sábado completa."},
+    {"nivel":"success","texto":"DOCUMENTACIÓN COMPLETA 09/05 — Bill, manifiesto, transportista, facturas, XML y proformas enviados para rutas Nogales CGG y McAllen. Tomate listo para cruce de frontera."},
     {"nivel":"success","texto":"OUTBOUND CALIDAD EXCELENTE 06/05 — Bola 86.29% primera (merma 3.05%), Roma 79.60% (merma 1.60% excelente), Chile 88.59% (merma 0.97%). Mejora continua en WK19."},
-    {"nivel":"success","texto":"SETTLEMENT WK19 EN RUTA — Calavo reporta ~$2.506M a favor (detalles análisis mañana). Tendencia acumulada positiva."},
-    {"nivel":"warning","texto":"ÚLTIMA VENTANA VINE RIPE WK19 — Corbel #0039 reporta transición post-peak. Presión esperada WK20. Embarcar máximo HOY/MAÑANA."},
-    {"nivel":"warning","texto":"LIMES 110s $42 — Peru -30% sustain. Ventana cierre WK19-20 esperada. Maximizar embarques limón antes corrección."},
-    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 10 días preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos."},
-    {"nivel":"info","texto":"DOCUMENTACIÓN NOGALES ST — Bill, manifiesto, datos del transportista, facturas y XML enviados por embarques 08/05. Listo para cruce."}
+    {"nivel":"warning","texto":"ÚLTIMA VENTANA VINE RIPE WK19 — Transición post-peak en curso. Presión esperada WK20. Maximizar embarques de tomate esta semana."},
+    {"nivel":"warning","texto":"LIMES 110s $42 — Peru -30% sustain. Ventana de cierre WK19-20 esperada. Maximizar embarques limón antes de corrección."},
+    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 8 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos."},
+    {"nivel":"info","texto":"REPORTES GENERALES 09/05 — Reportes de embarque y empaque de Tomate, Chile y Limón Persa enviados por embarquesbelher@agbelher.com. Archivos adjuntos disponibles."}
   ],
 
   ebitda: {
@@ -592,6 +592,12 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"21:36","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-09"},
+    {"hora":"21:36","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS MCALLEN","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-09"},
+    {"hora":"21:27","asunto":"09-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-09"},
+    {"hora":"21:25","asunto":"09-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-09"},
+    {"hora":"21:24","asunto":"REPORTE DIARIO 09-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-09"},
+    {"hora":"21:23","asunto":"09-05-2026 REPORTES GENERALES LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-09"},
     {"hora":"22:10","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES ST","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-08"},
     {"hora":"22:04","asunto":"REPORTE DIARIO CALAVO 08-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-08"},
     {"hora":"21:57","asunto":"08-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-08"},
