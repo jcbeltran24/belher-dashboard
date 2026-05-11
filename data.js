@@ -1,18 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 10 May 2026",
-    semana: "WK 19",
-    actualizado: "10/05/2026 · 07:45"
+    fecha: "Lunes 11 May 2026",
+    semana: "WK 20",
+    actualizado: "11/05/2026 · 08:30"
   },
 
   alertas: [
-    {"nivel":"success","texto":"DESPACHO 09/05 — 4 trailers, 6,028 cajas totales: CGG-152 Limón→MF (1,200 cajas/20 pallets), CGG-15 Chile→MF (988 cajas/20 pallets), JL-13 Tomate→KF (1,920 cajas/24 pallets), CGG-24 Tomate→NO (1,920 cajas/24 pallets). Operación Sábado completa."},
-    {"nivel":"success","texto":"DOCUMENTACIÓN COMPLETA 09/05 — Bill, manifiesto, transportista, facturas, XML y proformas enviados para rutas Nogales CGG y McAllen. Tomate listo para cruce de frontera."},
-    {"nivel":"success","texto":"OUTBOUND CALIDAD EXCELENTE 06/05 — Bola 86.29% primera (merma 3.05%), Roma 79.60% (merma 1.60% excelente), Chile 88.59% (merma 0.97%). Mejora continua en WK19."},
-    {"nivel":"warning","texto":"ÚLTIMA VENTANA VINE RIPE WK19 — Transición post-peak en curso. Presión esperada WK20. Maximizar embarques de tomate esta semana."},
-    {"nivel":"warning","texto":"LIMES 110s $42 — Peru -30% sustain. Ventana de cierre WK19-20 esperada. Maximizar embarques limón antes de corrección."},
-    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 8 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos."},
-    {"nivel":"info","texto":"REPORTES GENERALES 09/05 — Reportes de embarque y empaque de Tomate, Chile y Limón Persa enviados por embarquesbelher@agbelher.com. Archivos adjuntos disponibles."}
+    {"nivel":"warning","texto":"INICIO WK20 — Transición post-peak en curso. Presión de precios esperada en tomate. Maximizar embarques de producto disponible esta semana."},
+    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 7 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos y documentación."},
+    {"nivel":"success","texto":"ADJUNTOS 10/05 COMPLETOS — 8 archivos descargados: rezaga tomate 09-05, inbound calidad/daños/consolidado, listado diario, diario báscula, acarreo diario y plantilla calidad outbound. Drive actualizado."},
+    {"nivel":"warning","texto":"LIMES 110s $42 — Peru -30% sustain. Ventana de cierre WK19-20 esperada. Monitorear precios limón esta semana."},
+    {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
+    {"nivel":"info","texto":"CONTRIBUCIONES POR PAGAR al 07-May — IMSS-INFONAVIT + SAT: MXP 25.4M / ~$1.4M USD. IMSS-INFONAVIT MXP 21.5M (vencido). Requiere atención urgente."}
   ],
 
   ebitda: {
@@ -592,6 +591,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"08:00","asunto":"DETECCIÓN DE CONTAMINANTES EN FRUTAS Y VERDURAS","de":"karen.arenivar@suminsaindustria.com","leido":false,"fecha":"2026-05-11"},
+    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 8 archivos (10-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-10"},
     {"hora":"21:36","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-09"},
     {"hora":"21:36","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS MCALLEN","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-09"},
     {"hora":"21:27","asunto":"09-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-09"},
