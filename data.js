@@ -1,17 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 11 May 2026",
+    fecha: "Martes 12 May 2026",
     semana: "WK 20",
-    actualizado: "11/05/2026 · 08:30"
+    actualizado: "12/05/2026 · 14:40"
   },
 
   alertas: [
-    {"nivel":"warning","texto":"INICIO WK20 — Transición post-peak en curso. Presión de precios esperada en tomate. Maximizar embarques de producto disponible esta semana."},
-    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 7 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos y documentación."},
-    {"nivel":"success","texto":"ADJUNTOS 10/05 COMPLETOS — 8 archivos descargados: rezaga tomate 09-05, inbound calidad/daños/consolidado, listado diario, diario báscula, acarreo diario y plantilla calidad outbound. Drive actualizado."},
-    {"nivel":"warning","texto":"LIMES 110s $42 — Peru -30% sustain. Ventana de cierre WK19-20 esperada. Monitorear precios limón esta semana."},
+    {"nivel":"success","texto":"REPORTE CALAVO 11/05 — 1 trailer CGG-53 REFRIGERADOS CGG: 1,920 cajas Tomate No.1 (24 pallets), P.O. 265556, salida 22:30. Operación nocturna completada."},
+    {"nivel":"success","texto":"BILL + MANIFIESTOS NOGALES CGG 11/05 — Documentación de carga Tomate enviada: bill, manifiesto, datos transportista, facturas XML y proformas. Archivos listos para aduana."},
+    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 6 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos y documentación."},
+    {"nivel":"warning","texto":"TRANSICIÓN WK20 POST-PEAK — Presión de precios en tomate continúa. Monitorear embarques y ajustar volumen según demanda del mercado."},
     {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
-    {"nivel":"info","texto":"CONTRIBUCIONES POR PAGAR al 07-May — IMSS-INFONAVIT + SAT: MXP 25.4M / ~$1.4M USD. IMSS-INFONAVIT MXP 21.5M (vencido). Requiere atención urgente."}
+    {"nivel":"info","texto":"CONTRIBUCIONES POR PAGAR — IMSS-INFONAVIT + SAT: MXP 25.4M / ~$1.4M USD. IMSS-INFONAVIT MXP 21.5M vencido. Requiere atención urgente."}
   ],
 
   ebitda: {
@@ -591,6 +591,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"22:56","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-11"},
+    {"hora":"22:46","asunto":"REPORTE DIARIO CALAVO 11-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-11"},
     {"hora":"08:00","asunto":"DETECCIÓN DE CONTAMINANTES EN FRUTAS Y VERDURAS","de":"karen.arenivar@suminsaindustria.com","leido":false,"fecha":"2026-05-11"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 8 archivos (10-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-10"},
     {"hora":"21:36","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-09"},
