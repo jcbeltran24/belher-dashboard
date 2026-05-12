@@ -128,6 +128,22 @@ const server = http.createServer(async (req, res) => {
   const path    = parsed.pathname;
   const q       = parsed.query;
 
+  const limit  = q.limit  ? parseInt(q.limit)  : null;
+  const offset = q.offset ? parseInt(q.offset) : 0;
+
+  function page(allRows) {
+    const total = allRows.length;
+    const rows  = limit !== null ? allRows.slice(offset, offset + limit) : allRows;
+    const lo    = rows.length ? offset : 0;
+    const hi    = rows.length ? offset + rows.length - 1 : 0;
+    const body  = JSON.stringify(rows);
+    res.writeHead(206, {
+      ...CORS,
+      'Content-Range': `${lo}-${hi}/${total}`,
+    });
+    res.end(body);
+  }
+
   function send(data, total) {
     const body = JSON.stringify(data);
     res.writeHead(206, {
@@ -146,14 +162,12 @@ const server = http.createServer(async (req, res) => {
     if (path === '/vw_palets') {
       const { from, to } = parseDates(q);
       const raw = await eyeFetch(`/api/eye/v1/Palet?FechaInicial=${from}&FechaFinal=${to}`);
-      const rows = (Array.isArray(raw) ? raw : []).map(mapPalet);
-      send(rows);
+      page((Array.isArray(raw) ? raw : []).map(mapPalet));
 
     } else if (path === '/vw_acarreos') {
       const { from, to } = parseDates(q);
       const raw = await eyeFetch(`/api/eye/v1/Acarreo?FechaInicial=${from}&FechaFinal=${to}`);
-      const rows = (Array.isArray(raw) ? raw : []).map(mapAcarreo);
-      send(rows);
+      page((Array.isArray(raw) ? raw : []).map(mapAcarreo));
 
     } else {
       res.writeHead(404, CORS); res.end(JSON.stringify({ error: 'not found' }));

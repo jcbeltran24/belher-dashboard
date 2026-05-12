@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 :root{
   --dark:#0c2117;--dark2:#162d1f;--green:#15803d;--green2:#16a34a;--green3:#22c55e;
@@ -417,7 +419,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   <div class="h-logo">AB</div>
   <div>
     <div class="h-title">Calidad &amp; Pesos</div>
-    <div class="h-sub">ABSA · EYE Live · vw_acarreos + vw_palets</div>
+    <div class="h-sub">ABSA · EYE Live + Supabase · vw_palets · vw_acarreos · vw_embarques · vw_rezaga</div>
   </div>
   <div class="h-spacer"></div>
   <div class="h-live"><div class="live-dot"></div>EN VIVO</div>
@@ -436,8 +438,8 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       <button class="p-btn" data-period="semana">Semana</button>
       <button class="p-btn" data-period="mes">Mes actual</button>
       <div class="p-sep"></div>
-      <button class="p-btn" data-period="ciclo">Ciclo</button>
-      <button class="p-btn" data-period="dos-ciclos">2 Ciclos</button>
+      <button class="p-btn" data-period="ciclo">Ciclo act.</button>
+      <button class="p-btn" data-period="ciclo-ant">Ciclo ant.</button>
     </div>
 
     <!-- Month picker popover -->
@@ -504,6 +506,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   <button class="view-tab" data-panel="panel-limon">Limón</button>
   <button class="view-tab" data-panel="panel-chile">Chile</button>
   <button class="view-tab" data-panel="panel-inbound">Inbound · Campo</button>
+  <button class="view-tab" data-panel="panel-embarques">Embarques</button>
 </div>
 
 <main>
@@ -698,8 +701,8 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
     <div class="g2" style="margin-bottom:10px">
       <!-- Bultos por tamaño -->
       <div class="card card-pad">
-        <div class="card-title">Bultos por Tamaño</div>
-        <div id="tamano-bars" style="display:flex;flex-direction:column;gap:10px;padding-top:4px"></div>
+        <div class="card-title">Bultos por Tamaño · por Cultivo</div>
+        <div id="tamano-bars" style="display:flex;flex-direction:column;gap:0;padding-top:4px"></div>
       </div>
       <!-- Bultos por etiqueta -->
       <div class="card card-pad">
@@ -760,6 +763,24 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       </div>
     </div>
 
+    <div class="sec">Rezaga · Báscula <span class="sec-source">vw_rezaga · Supabase</span></div>
+    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+      <div class="stat cg"><div class="stat-lbl">Neto Rezaga</div><div class="stat-val" id="rez-neto"><span class="skel"></span></div><div class="stat-sub" id="rez-neto-sub">—</div></div>
+      <div class="stat cb"><div class="stat-lbl">Bruto Rezaga</div><div class="stat-val" id="rez-bruto"><span class="skel"></span></div><div class="stat-sub">kg brutos</div></div>
+      <div class="stat ca"><div class="stat-lbl">Remisiones</div><div class="stat-val" id="rez-count"><span class="skel"></span></div><div class="stat-sub">rezaga báscula</div></div>
+    </div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Fecha</th><th>Cultivo</th><th>Tolva</th><th>Chofer</th><th>Vehículo</th>
+            <th class="r">Bruto kg</th><th class="r">Tara kg</th><th class="r">Neto kg</th>
+          </tr></thead>
+          <tbody id="rez-tbody"><tr><td colspan="8" class="empty">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
   </div><!-- /panel-pesos -->
 
   <!-- ══ PANEL: PRODUCCIÓN TOMATE ══════════════════════════ -->
@@ -784,11 +805,12 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
     <!-- Row 1: weekly bars + lote split -->
     <div class="g21" style="margin-bottom:10px">
       <div class="card card-pad">
-        <div class="card-title">Producción Semanal por Cultivo · Toneladas
+        <div class="card-title">Producción Semanal · Cajas × Semana de Ciclo
           <span style="display:inline-flex;align-items:center;gap:10px;margin-left:8px">
             <span style="display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#dc2626"><span style="width:12px;height:12px;background:#dc2626;border-radius:3px;display:inline-block"></span>Roma</span>
             <span style="display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#16a34a"><span style="width:12px;height:12px;background:#16a34a;border-radius:3px;display:inline-block"></span>Bola</span>
             <span style="display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#d97706"><span style="width:12px;height:12px;background:#d97706;border-radius:3px;display:inline-block"></span>Otros</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;font-size:.62rem;font-weight:600;color:rgba(217,119,6,.75)"><span style="width:16px;height:2px;border-top:2px dashed rgba(217,119,6,.9);display:inline-block"></span>Ciclo ant.</span>
           </span>
         </div>
         <div style="position:relative;height:240px"><canvas id="chart-tom-semana"></canvas></div>
@@ -801,21 +823,38 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       </div>
     </div>
 
-    <!-- Row 2: peso promedio trend + caseta ranking -->
-    <div class="g2" style="margin-bottom:10px">
-      <div class="card card-pad">
-        <div class="card-title">Peso Promedio / Unidad · Semanal
-          <span style="display:inline-flex;align-items:center;gap:10px;margin-left:8px">
-            <span style="font-weight:600;color:#dc2626">— Roma</span>
-            <span style="font-weight:600;color:#16a34a">— Bola</span>
-          </span>
-        </div>
-        <div style="position:relative;height:220px"><canvas id="chart-tom-prom"></canvas></div>
-      </div>
-      <div class="card card-pad">
-        <div class="card-title">Top Casetas · kg Total</div>
-        <div id="tom-caseta-bars" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto"></div>
-      </div>
+    <!-- Row 2: casetas -->
+    <div class="card card-pad" style="margin-bottom:10px">
+      <div class="card-title">Top Casetas · kg Total</div>
+      <div id="tom-caseta-bars" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto"></div>
+    </div>
+
+    <!-- Balance de Masas -->
+    <div class="sec">Balance de Masas · Aprovechamiento
+      <span class="sec-tag" id="san-range-lbl">—</span>
+    </div>
+    <div class="card card-pad" style="margin-bottom:10px">
+      <div id="sankey-wrap" style="width:100%"></div>
+    </div>
+
+    <!-- Reporte de cosecha y empaque -->
+    <div class="sec">Reporte de Cosecha &amp; Empaque
+      <span class="sec-tag" id="rep-range-lbl">—</span>
+    </div>
+    <div class="card card-pad" style="overflow-x:auto">
+      <table id="rep-table" style="width:100%;border-collapse:collapse;font-size:var(--t-sm)">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:6px 12px 8px;color:var(--muted);font-weight:700;font-size:var(--t-xs);letter-spacing:.5px;border-bottom:1px solid var(--border)">CONCEPTO</th>
+            <th style="text-align:right;padding:6px 12px 8px;color:#dc2626;font-weight:700;font-size:var(--t-xs);letter-spacing:.5px;border-bottom:1px solid var(--border)">TOMATE ROMA</th>
+            <th style="text-align:right;padding:6px 12px 8px;color:#16a34a;font-weight:700;font-size:var(--t-xs);letter-spacing:.5px;border-bottom:1px solid var(--border)">TOMATE BOLA</th>
+            <th style="text-align:right;padding:6px 12px 8px;color:var(--muted);font-weight:700;font-size:var(--t-xs);letter-spacing:.5px;border-bottom:1px solid var(--border)">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody id="rep-tbody">
+          <tr><td colspan="4" class="empty">Cargando…</td></tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- Detail table -->
@@ -1002,6 +1041,41 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 
   </div><!-- /panel-inbound -->
 
+  <!-- ══ PANEL: EMBARQUES ════════════════════════════════════ -->
+  <div class="panel" id="panel-embarques">
+
+    <div class="sec">Embarques
+      <span class="sec-tag" id="emb-range-lbl">—</span>
+      <span class="sec-source">vw_embarques · Supabase</span>
+    </div>
+    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+      <div class="stat cg"><div class="stat-lbl">Total Embarques</div><div class="stat-val" id="emb-total"><span class="skel"></span></div><div class="stat-sub" id="emb-total-sub">—</div></div>
+      <div class="stat cb"><div class="stat-lbl">Exportación</div><div class="stat-val" id="emb-exp"><span class="skel"></span></div><div class="stat-sub" id="emb-exp-sub">—</div></div>
+      <div class="stat ca"><div class="stat-lbl">Nacional</div><div class="stat-val" id="emb-nac"><span class="skel"></span></div><div class="stat-sub" id="emb-nac-sub">—</div></div>
+      <div class="stat cg"><div class="stat-lbl">Palets Embarcados</div><div class="stat-val" id="emb-palets"><span class="skel"></span></div><div class="stat-sub">total palets</div></div>
+      <div class="stat cp"><div class="stat-lbl">Kg Exportados</div><div class="stat-val" id="emb-kg"><span class="skel"></span></div><div class="stat-sub">peso bruto (cx)</div></div>
+    </div>
+
+    <div class="sec">Distribución Geográfica · Destinos</div>
+    <div class="card card-pad" style="padding:0;overflow:hidden">
+      <div id="emb-map" style="height:380px;width:100%;border-radius:var(--r)"></div>
+    </div>
+
+    <div class="sec">Detalle de Embarques</div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Fecha</th><th>Tipo</th><th>Distribuidor</th><th>Factura</th>
+            <th>Destino</th><th class="r">Palets</th><th class="r">Kg Totales</th>
+          </tr></thead>
+          <tbody id="emb-tbody"><tr><td colspan="7" class="empty">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /panel-embarques -->
+
 </main>
 
 <!-- Mobile month picker backdrop -->
@@ -1030,21 +1104,36 @@ const H = {
 };
 function get(path){ return fetch(API.url + path, {headers:H}).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }); }
 
+/* ── SUPABASE (vw_embarques, vw_rezaga) ─────────────────── */
+const SB_API = {
+  url:     'https://ygobydonbyxzlazbzzgf.supabase.co/rest/v1',
+  key:     'sb_publishable_w2UseCBv5L-yVkEorDmSSg_L66wISwn',
+  profile: 'eye'
+};
+const SB_H = {
+  'apikey': SB_API.key,
+  'Authorization': 'Bearer ' + SB_API.key,
+  'Accept-Profile': SB_API.profile,
+  'Accept': 'application/json'
+};
+
 /* Trae TODAS las filas paginando en paralelo.
    Estrategia:
    1) HEAD con limit=1&Prefer:count=exact para obtener el total sin bajar datos.
       Si CORS no expone content-range → fallback a sequential hasta página corta.
    2) Con total conocido: lanza TODAS las páginas en paralelo (lotes de 10). */
-async function getAll(basePath){
-  const PAGE = 1000;
-  const sep  = basePath.includes('?') ? '&' : '?';
-  const base = API.url + basePath;
+async function getAll(basePath, cfg){
+  const PAGE  = 1000;
+  const sep   = basePath.includes('?') ? '&' : '?';
+  const _url  = cfg ? cfg.url     : API.url;
+  const _H    = cfg ? cfg.headers : H;
+  const base  = _url + basePath;
 
   // 1 — Obtener total con limit=1 (mínimo payload) + count=exact
   let total = null;
   try {
     const rc = await fetch(base + sep + `limit=1&offset=0`,
-                 { headers: { ...H, 'Prefer': 'count=exact' } });
+                 { headers: { ..._H, 'Prefer': 'count=exact' } });
     const cr = rc.headers.get('content-range');  // "0-0/72825"
     if(cr) total = parseInt(cr.split('/')[1]);
   } catch(_){}
@@ -1057,7 +1146,7 @@ async function getAll(basePath){
     const all   = [];
     for(let i = 0; i < offsets.length; i += BATCH){
       const chunk = offsets.slice(i, i + BATCH).map(o =>
-        fetch(base + sep + `limit=${PAGE}&offset=${o}`, { headers: H })
+        fetch(base + sep + `limit=${PAGE}&offset=${o}`, { headers: _H })
           .then(r => r.ok ? r.json() : [])
       );
       (await Promise.all(chunk)).forEach(d => all.push(...d));
@@ -1069,7 +1158,7 @@ async function getAll(basePath){
   const all = [];
   let offset = 0;
   while(true){
-    const r    = await fetch(base + sep + `limit=${PAGE}&offset=${offset}`, { headers: H });
+    const r    = await fetch(base + sep + `limit=${PAGE}&offset=${offset}`, { headers: _H });
     const rows = r.ok ? await r.json() : [];
     all.push(...rows);
     if(rows.length < PAGE) break;
@@ -1079,7 +1168,7 @@ async function getAll(basePath){
 }
 
 /* ── CACHE ────────────────────────────────────────────── */
-const CACHE_KEY = 'belher_eye_cache_v3';
+const CACHE_KEY = 'belher_eye_cache_v4';
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour — background refresh if stale
 
 function saveCache(from, to, palets, acarreos){
@@ -1098,9 +1187,11 @@ function loadCache(){
 }
 
 /* ── RAW DATA ─────────────────────────────────────────── */
-let rawPalets   = [];
-let rawAcarreos = [];
-let loadSeq     = 0;   // increments on every loadData call — stale responses are dropped
+let rawPalets    = [];
+let rawAcarreos  = [];
+let rawRezaga    = [];
+let rawEmbarques = [];
+let loadSeq      = 0;   // increments on every loadData call — stale responses are dropped
 
 /* ── PERIOD HELPERS ────────────────────────────────────── */
 function iso(d){ return d.toISOString().split('T')[0]; }
@@ -1175,6 +1266,7 @@ function applyFilters(){
   const d = getDimFilters();
 
   fPalets = rawPalets.filter(p => {
+    if((p.estado||'') === 'CJV') return false;   // cajas verdes: estadio intermedio, no producto final
     const dd = (p.fecha_empaque||'').split('T')[0];
     if(r.from && dd < r.from) return false;
     if(r.to   && dd > r.to)   return false;
@@ -1291,23 +1383,44 @@ async function autoLoadCmp(){
 }
 
 /* ── RESUMEN PANEL ──────────────────────────────────────── */
+/* Resumen siempre muestra el ciclo completo, independiente del period selector */
+let _resPalets = [], _resAcarreos = [], _resCycleKey = '';
+
 async function loadResumen(){
-  const from = activeRange?.from || iso(new Date());
-  const to   = activeRange?.to   || iso(new Date());
-  document.getElementById('res-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
-  // Load inbound silently if not yet fetched for this range
+  const cycles = bothCycles();
+  const from   = cycles.actual.from;
+  const to     = cycles.actual.to;
+  const key    = from + ':' + to;
+  const btn    = document.getElementById('btn-refresh');
+
+  if(_resCycleKey !== key){
+    btn.classList.add('spin'); btn.disabled = true;
+    try {
+      [_resPalets, _resAcarreos] = await Promise.all([
+        getAll(`/vw_palets?select=fecha_empaque,cultivo,etiqueta,calidad,peso,bultos,estado&fecha_empaque=gte.${from}&fecha_empaque=lte.${to}`),
+        getAll(`/vw_acarreos?select=fecha,peso_bruto,tara&fecha=gte.${from}&fecha=lte.${to}`)
+      ]);
+      _resCycleKey = key;
+    } catch(e){ console.warn('loadResumen fetch failed', e); }
+    finally { btn.classList.remove('spin'); btn.disabled = false; }
+  }
+
   if(!rawInbound.length){
     try {
       rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`);
-    } catch(e){ console.warn('inbound fetch failed', e); }
+    } catch(e){}
   }
   if(!cmpReady) await autoLoadCmp();
   renderResumen();
 }
 
 function renderResumen(){
-  const from = activeRange?.from || iso(new Date());
-  const to   = activeRange?.to   || iso(new Date());
+  const cycles = bothCycles();
+  const from   = cycles.actual.from;
+  const to     = cycles.actual.to;
+  // Usar datos del ciclo completo (no activeRange)
+  const resPalets   = _resPalets.length   ? _resPalets   : resPalets.filter(p=>{ const d=(p.fecha_empaque||'').split('T')[0]; return d>=from&&d<=to; });
+  const resAcarreos = _resAcarreos.length ? _resAcarreos : resAcarreos.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   document.getElementById('res-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
 
   const cycles = bothCycles();
@@ -1315,9 +1428,9 @@ function renderResumen(){
   document.getElementById('res-lbl-ant').textContent = cycles.labelAnt;
 
   // ── Empaque KPIs ──
-  const totalBultos = rawPalets.reduce((s,r)=>s+(r.bultos||0), 0);
-  const bultosP1    = rawPalets.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
-  const bultosP3    = rawPalets.filter(r=>paletTier(r)==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const totalBultos = resPalets.reduce((s,r)=>s+(r.bultos||0), 0);
+  const bultosP1    = resPalets.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const bultosP3    = resPalets.filter(r=>paletTier(r)==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
   const pctP1Emp = totalBultos ? bultosP1/totalBultos*100 : 0;
   const pctP3Emp = totalBultos ? bultosP3/totalBultos*100 : 0;
 
@@ -1325,7 +1438,7 @@ function renderResumen(){
   let totalCajasAct = 0;
   {
     const byGrpKg={};
-    rawPalets.forEach(r=>{ const kg=(r.peso||0)*(r.bultos||0); const g=(r.grupo_cultivo||r.cultivo||'TOMATE').toUpperCase(); byGrpKg[g]=(byGrpKg[g]||0)+kg; });
+    resPalets.forEach(r=>{ const kg=(r.peso||0)*(r.bultos||0); const g=(r.grupo_cultivo||r.cultivo||'TOMATE').toUpperCase(); byGrpKg[g]=(byGrpKg[g]||0)+kg; });
     function kpb(g){ if(g.includes('LIMON')||g.includes('LEMON')) return KG_PER_BOX_LIMON; if(g.includes('CHILE')||g.includes('PEPPER')) return KG_PER_BULTO_CHILE; return KG_PER_BOX_TOMATE; }
     Object.entries(byGrpKg).forEach(([g,kg])=>{ totalCajasAct += toBoxes(kg, kpb(g)); });
   }
@@ -1345,7 +1458,7 @@ function renderResumen(){
 
   // Empaque sparkline: % primera by ISO week
   const empByWk = {};
-  rawPalets.forEach(r=>{
+  resPalets.forEach(r=>{
     const d=(r.fecha_empaque||'').split('T')[0]; if(!d) return;
     const wk=isoWeekLabel(d);
     if(!empByWk[wk]) empByWk[wk]={tot:0,p1:0};
@@ -1356,9 +1469,9 @@ function renderResumen(){
   sparkBars(document.getElementById('rv-emp-spark'), empWks.map(w=>empByWk[w].tot?empByWk[w].p1/empByWk[w].tot*100:0),'#16a34a');
 
   // ── Báscula KPIs ──
-  const netoKg   = rawAcarreos.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0);
+  const netoKg   = resAcarreos.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0);
   const netoTon  = netoKg/1000;
-  const rems     = rawAcarreos.length;
+  const rems     = resAcarreos.length;
   const avgRem   = rems ? netoKg/rems : 0;
 
   document.getElementById('rv-neto').innerHTML = fN(netoTon,1)+'<span style="font-size:.7rem;opacity:.6"> t</span>';
@@ -1367,7 +1480,7 @@ function renderResumen(){
 
   // Báscula daily sparkline
   const basByDay={};
-  rawAcarreos.forEach(r=>{
+  resAcarreos.forEach(r=>{
     const d=(r.fecha||'').split('T')[0]; if(!d) return;
     basByDay[d]=(basByDay[d]||0)+((r.peso_bruto||0)-(r.tara||0));
   });
@@ -1428,7 +1541,7 @@ function renderResumen(){
   }
   const prNeto   = priorAcr.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0)/1000;
   const prDias   = new Set(priorAcr.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
-  const actDias  = new Set(rawAcarreos.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
+  const actDias  = new Set(resAcarreos.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
 
   document.getElementById('res-neto-act').textContent  = fN(netoTon,1) + ' t';
   document.getElementById('res-neto-ant').textContent  = cmpReady ? fN(prNeto,1) + ' t' : '—';
@@ -1459,7 +1572,7 @@ function renderResumen(){
     });
     return m;
   }
-  const wActNeto = netoByWk(rawAcarreos, cycles.actual.from);
+  const wActNeto = netoByWk(resAcarreos, cycles.actual.from);
   const wAntNeto = netoByWk(cmpAcrAnt,  cycles.anterior.from);
   const maxWk = Math.max(...Object.keys(wActNeto).map(Number),...Object.keys(wAntNeto).map(Number),1);
   const wks   = Array.from({length:maxWk},(_,i)=>i+1);
@@ -1525,8 +1638,9 @@ function isLimonPalet(r){
   const c = normStr(r.cultivo);
   return c.includes('LIMON') || c.includes('LIME') || c.includes('LIMA');
 }
-// Solo palets de tomate/chile para KPIs de calidad empaque
-function isCalidadPalet(r){ return !isLimonPalet(r); }
+function isChilePalet(r){ const c = normStr(r.cultivo); return isChile(c); }
+// Solo palets de tomate para KPIs de calidad empaque (sin limón, sin chile)
+function isCalidadPalet(r){ return !isLimonPalet(r) && !isChilePalet(r); }
 
 function paletTier(r){
   const etq = (r.etiqueta||'').toUpperCase().trim();
@@ -1565,6 +1679,21 @@ const CULT_COLOR = {
 };
 function cult(k){ return CULT_LABEL[k]||k||'Otros'; }
 function cultColor(k){ return CULT_COLOR[k]||'#6b7280'; }
+
+// Normaliza cualquier variante de tomate (GH/OF Roma/Bola) a un nombre canónico
+function normCultivo(rawCultivo){
+  const u = (rawCultivo||'').toUpperCase();
+  if(isRoma(u)) return 'Tomate Roma';
+  if(isBola(u)) return 'Tomate Bola';
+  if(isLimon(u)) return 'Limón';
+  if(isChile(u)) return 'Chile';
+  return CULT_LABEL[rawCultivo] || rawCultivo || '—';
+}
+function normCultivoColor(k){
+  if(k==='Tomate Roma') return '#dc2626';
+  if(k==='Tomate Bola') return '#16a34a';
+  return cultColor(k);
+}
 function fN(n,d=1){ return typeof n==='number'?n.toLocaleString('es-MX',{minimumFractionDigits:d,maximumFractionDigits:d}):n; }
 function fK(n){ return typeof n==='number'?n.toLocaleString('es-MX'):n; }
 function fDate(iso){ return new Date(iso+'T12:00:00').toLocaleDateString('es-MX',{day:'2-digit',month:'short'}); }
@@ -1632,10 +1761,11 @@ function renderCalidad(){
     ? fDateFull(activeRange.from) + ' – ' + fDateFull(activeRange.to) : '';
   document.getElementById('cal-rng').textContent = range;
 
-  /* Palets para KPIs: excluir limón cuando no hay filtro de cultivo explícito */
+  /* Palets para KPIs: solo tomate (sin limón, sin chile) */
   const dimF = getDimFilters();
   const calPalets = dimF.cultivo ? fPalets : fPalets.filter(isCalidadPalet);
   const hasLimon  = dimF.cultivo ? false : fPalets.some(isLimonPalet);
+  const hasChile  = dimF.cultivo ? false : fPalets.some(isChilePalet);
 
   /* Totals — cajas calculadas desde peso real ÷ constante por producto */
   let pesoTotalKg = 0;
@@ -1679,9 +1809,10 @@ function renderCalidad(){
   document.getElementById('s-p2').innerHTML = bultos ? fN(bultosP2/bultos*100,1)+'<span class="stat-unit">%</span>' : '—';
   document.getElementById('s-p3').innerHTML = bultos ? fN(bultosP3/bultos*100,1)+'<span class="stat-unit">%</span>' : '—';
 
-  const limonNote = hasLimon ? ` <span style="font-size:.58rem;color:var(--muted);font-weight:500">· limón excluido</span>` : '';
+  const excluded = [hasLimon && 'limón', hasChile && 'chile'].filter(Boolean).join(', ');
+  const excludedNote = excluded ? ` <span style="font-size:.58rem;color:var(--muted);font-weight:500">· ${excluded} excluido</span>` : '';
   document.getElementById('s-bultos').innerHTML =
-    fKM(totalCajas) + '<span style="font-size:.65rem;font-weight:500;color:var(--muted);margin-left:4px">cx</span>' + limonNote;
+    fKM(totalCajas) + '<span style="font-size:.65rem;font-weight:500;color:var(--muted);margin-left:4px">cx</span>' + excludedNote;
   document.getElementById('s-palets').textContent =
     calPalets.length.toLocaleString('es-MX') + ' registros · ' + fN(pesoTotalKg/1000) + ' t';
   const TARGET_PESO = 11.8;
@@ -1808,13 +1939,12 @@ function renderCalidad(){
     }
   });
 
-  /* Calidad por cultivo — stacked bar, sorted by total descending */
+  /* Calidad por cultivo — stacked bar, Roma y Bola siempre separados */
   const calByCRaw = {};
   calPalets.forEach(r=>{
-    const c = r.cultivo||'—';
+    const c = normCultivo(r.cultivo);   // normaliza GH/OF → "Tomate Roma" / "Tomate Bola"
     const t = paletTier(r);
     if(!calByCRaw[c]) calByCRaw[c]={PRIMERA:0,SEGUNDA:0,TERCERA:0};
-    if(t in calByCRaw[c]) calByCRaw[c][c] = (calByCRaw[c][c]||0);
     calByCRaw[c][t]+=(r.bultos||0);
   });
   // Sort cultivos by total bultos descending
@@ -1889,29 +2019,48 @@ function renderCalidad(){
     }
   });
 
-  /* Tamaño bars */
-  const byTam={};
-  calPalets.forEach(r=>{ const k=r.tamano||'—'; byTam[k]=(byTam[k]||0)+(r.bultos||0); });
-  const tamSorted = Object.entries(byTam).sort((a,b)=>b[1]-a[1]);
-  const maxTam = tamSorted[0]?.[1]||1;
-  const totalTamBultos = tamSorted.reduce((s,[,v])=>s+v,0);
-  document.getElementById('tamano-bars').innerHTML = tamSorted.map(([t,v],i)=>{
-    const pct = totalTamBultos ? (v/totalTamBultos*100).toFixed(1) : 0;
-    const barPct = (v/maxTam*100).toFixed(1);
-    const hue = i===0?'var(--blue)':i===1?'#1d4ed8':i===2?'#3b82f6':'#6366f1';
-    return `<div class="prog-row" style="margin-bottom:9px">
-      <div class="prog-top" style="margin-bottom:4px">
-        <span class="prog-name" style="font-size:.76rem;font-weight:700;color:var(--text)">${t}</span>
-        <span style="display:flex;align-items:center;gap:8px">
-          <span style="font-size:.68rem;color:var(--muted);font-variant-numeric:tabular-nums">${fK(v)} bultos</span>
-          <span style="font-size:.68rem;font-weight:700;color:${hue};background:rgba(29,78,216,.08);padding:1px 6px;border-radius:10px;font-variant-numeric:tabular-nums">${pct}%</span>
-        </span>
-      </div>
-      <div class="prog-track" style="height:7px;border-radius:6px">
-        <div class="prog-fill" style="width:${barPct}%;background:${hue};border-radius:6px;transition:width .5s cubic-bezier(.4,0,.2,1)"></div>
-      </div>
+  /* Tamaño bars — separados por cultivo */
+  const tamByCult = {};   // cultivo → { tamano → bultos }
+  calPalets.forEach(r => {
+    const c = normCultivo(r.cultivo);
+    const t = r.tamano || '—';
+    if(!tamByCult[c]) tamByCult[c] = {};
+    tamByCult[c][t] = (tamByCult[c][t]||0) + (r.bultos||0);
+  });
+  // Order cultivos by total bultos desc
+  const cultOrder = Object.entries(tamByCult)
+    .map(([c, m]) => [c, Object.values(m).reduce((s,v)=>s+v,0)])
+    .sort((a,b) => b[1]-a[1])
+    .map(([c]) => c);
+  const CULT_HUE = { 'Tomate Roma':'#dc2626', 'Tomate Bola':'#16a34a' };
+  const tamHtml = cultOrder.map(cult => {
+    const tamMap = tamByCult[cult];
+    const cultTotal = Object.values(tamMap).reduce((s,v)=>s+v,0);
+    const tamSorted = Object.entries(tamMap).sort((a,b)=>b[1]-a[1]);
+    const maxV = tamSorted[0]?.[1]||1;
+    const hue  = CULT_HUE[cult] || '#1d4ed8';
+    const rows = tamSorted.map(([t,v]) => {
+      const pct    = cultTotal ? (v/cultTotal*100).toFixed(1) : 0;
+      const barPct = (v/maxV*100).toFixed(1);
+      return `<div class="prog-row" style="margin-bottom:6px">
+        <div class="prog-top" style="margin-bottom:3px">
+          <span style="font-size:.74rem;font-weight:700;color:var(--text)">${t}</span>
+          <span style="display:flex;align-items:center;gap:7px">
+            <span style="font-size:.66rem;color:var(--muted);font-variant-numeric:tabular-nums">${fK(v)} bts</span>
+            <span style="font-size:.66rem;font-weight:700;color:${hue};background:${hue}18;padding:1px 6px;border-radius:10px;font-variant-numeric:tabular-nums">${pct}%</span>
+          </span>
+        </div>
+        <div class="prog-track" style="height:6px;border-radius:5px">
+          <div class="prog-fill" style="width:${barPct}%;background:${hue};border-radius:5px;transition:width .5s cubic-bezier(.4,0,.2,1)"></div>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div style="margin-bottom:16px">
+      <div style="font-size:var(--t-xs);font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:${hue};margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid ${hue}22">${cult} <span style="font-weight:500;opacity:.6">${fK(cultTotal)} bts</span></div>
+      ${rows}
     </div>`;
   }).join('');
+  document.getElementById('tamano-bars').innerHTML = tamHtml || '<div style="color:var(--muted);font-size:.78rem">Sin datos</div>';
 
   /* Etiqueta bar */
   const byEtq={};
@@ -1969,7 +2118,7 @@ function renderCalidad(){
   const calCapNote = allRows.length > 200 ? `<tr><td colspan="9" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted);background:#fafafa">Mostrando 200 de ${allRows.length.toLocaleString('es-MX')} registros</td></tr>` : '';
   document.getElementById('cal-tbody').innerHTML = rows.map(r=>`<tr>
     <td>${fDate(r.fecha_empaque.split('T')[0])}</td>
-    <td style="font-weight:600">${cult(r.cultivo)}</td>
+    <td style="font-weight:600">${normCultivo(r.cultivo)}</td>
     <td>${r.etiqueta||'—'}</td>
     <td><span class="${TIER_BADGE[paletTier(r)]||'badge'}" title="${paletDesc(r)}">${paletLabel(r)}</span></td>
     <td>${r.tamano||'—'}</td>
@@ -2114,7 +2263,9 @@ function applyRawData(palets, acarreos, from, to, source){
   if(activePanel === 'panel-tomate')  renderTomate(from, to);
   if(activePanel === 'panel-limon'){   renderCropPanel({ rows: flattenCrop(acarreos, isLimon, null), from, to, ids:{rangeLbl:'lim-range-lbl',total:'lim-total',totalSub:'lim-total-sub',dias:'lim-dias',prom:'lim-prom'}, chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody', kgPerUnit:KG_PER_BOX_LIMON, unitLabel:'cx' }); renderLimonPalets(); }
   if(activePanel === 'panel-chile')   renderCropPanel({ rows: flattenCrop(acarreos, isChile, null), from, to, ids:{rangeLbl:'chi-range-lbl',total:'chi-total',totalSub:'chi-total-sub',dias:'chi-dias',vars:'chi-vars'}, chartSemId:'chart-chi-sem', varId:'chi-var-bars', tbodyId:'chi-tbody', kgPerUnit:KG_PER_BULTO_CHILE, unitLabel:'bts' });
-  if(activePanel === 'panel-inbound') loadInbound();
+  if(activePanel === 'panel-inbound')  loadInbound();
+  if(activePanel === 'panel-pesos')    loadRezaga();
+  if(activePanel === 'panel-embarques') loadEmbarques();
 
   document.getElementById('ft-urls').textContent =
     `vw_palets gte.${from} lte.${to}  ·  vw_acarreos gte.${from} lte.${to}`;
@@ -2144,7 +2295,7 @@ async function loadData(force = false){
   if(!cacheHit){ btn.classList.add('spin'); btn.disabled = true; }
   document.getElementById('err-banner').classList.remove('show');
 
-  const urlPalets   = `/vw_palets?select=fecha_empaque,cultivo,etiqueta,calidad,peso,bultos,tamano,color,precio,grupo_cultivo&fecha_empaque=gte.${from}&fecha_empaque=lte.${to}`;
+  const urlPalets   = `/vw_palets?select=fecha_empaque,cultivo,etiqueta,calidad,peso,bultos,tamano,color,precio,grupo_cultivo,gaseado,estado&fecha_empaque=gte.${from}&fecha_empaque=lte.${to}`;
   const urlAcarreos = `/vw_acarreos?select=fecha,peso_bruto,tara,detalles&fecha=gte.${from}&fecha=lte.${to}`;
 
   try {
@@ -2167,7 +2318,8 @@ async function loadData(force = false){
 }
 
 /* ── TOMATE LOAD & RENDER ───────────────────────────────── */
-let rawTomate = [];
+let rawTomate    = [];
+let rawTomateAnt = [];
 
 /* ── UNIDAD: cajas de 25 lbs ─────────────────────────────
    1 caja 25 lbs = 11.3398 kg
@@ -2225,6 +2377,225 @@ function isoWeekSortKey(isoDate){
   const jan = new Date(d.getFullYear(), 0, 1);
   const w   = Math.ceil(((d - jan) / 86400000 + jan.getDay() + 1) / 7);
   return `${d.getFullYear()}-${String(w).padStart(2,'0')}`;
+}
+
+/* ── BALANCE DE MASAS · SANKEY ─────────────────────────── */
+function renderSankey(from, to){
+  document.getElementById('san-range-lbl').textContent = fDateFull(from)+' – '+fDateFull(to);
+
+  // ── Cosecha ──────────────────────────────────────────────
+  let cosRoma=0, cosBola=0;
+  rawAcarreos.forEach(r=>{
+    const d=(r.fecha||'').split('T')[0];
+    if(d<from||d>to) return;
+    (r.detalles||[]).forEach(det=>{
+      const c=(det.cultivo||'').toUpperCase();
+      if(isRoma(c))      cosRoma+=det.kilos||0;
+      else if(isBola(c)) cosBola+=det.kilos||0;
+    });
+  });
+  const cosTotal=cosRoma+cosBola;
+
+  // ── Rezaga ───────────────────────────────────────────────
+  const rezTotal=rawRezaga.filter(r=>{
+    const d=(r.fecha||'').split('T')[0];
+    return d>=from&&d<=to&&(r.grupo_cultivo||'').toUpperCase().includes('TOMATE');
+  }).reduce((s,r)=>s+(r.peso_neto||0),0);
+
+  // ── Empaque final + CJV ──────────────────────────────────
+  let empTotal=0, cjvTotal=0;
+  let empRoma=0,empBola=0,cjvRoma=0,cjvBola=0;
+  rawPalets.forEach(r=>{
+    const d=(r.fecha_empaque||'').split('T')[0];
+    if(d<from||d>to) return;
+    const c=(r.cultivo||'').toUpperCase();
+    if(!isTomato(c)) return;
+    const kg=(r.peso||0)*(r.bultos||0);
+    if(r.estado==='CJV'){
+      cjvTotal+=kg;
+      if(isRoma(c)) cjvRoma+=kg; else if(isBola(c)) cjvBola+=kg;
+    } else {
+      empTotal+=kg;
+      if(isRoma(c)) empRoma+=kg; else if(isBola(c)) empBola+=kg;
+    }
+  });
+
+  // ── Sobrepeso ────────────────────────────────────────────
+  const spr=cosTotal-empTotal-cjvTotal-rezTotal;
+  const sprAbs=Math.abs(spr);
+  const sprLabel=spr>=0?'Sobrepeso':'Déficit';
+  const sprColor=spr>=0?'#7c3aed':'#dc2626';
+
+  const flows=[
+    {label:'Empaque Final', kg:empTotal, roma:empRoma, bola:empBola, color:'#16a34a'},
+    {label:'Cuartos Gas',   kg:cjvTotal, roma:cjvRoma, bola:cjvBola, color:'#1d4ed8'},
+    {label:'Rezaga',        kg:rezTotal, roma:0,        bola:0,        color:'#d97706'},
+    {label:sprLabel,        kg:sprAbs,   roma:0,        bola:0,        color:sprColor},
+  ].filter(f=>f.kg>0.5);
+
+  const W=680, H=300, PAD=8;
+  const srcX=20,srcW=110,dstX=520,dstW=120;
+  const usableH=H-20;
+  const total=flows.reduce((s,f)=>s+f.kg,0)||1;
+
+  // Position right nodes
+  let yy=10;
+  const nodes=flows.map(f=>{
+    const h=Math.max(28,(f.kg/total)*usableH);
+    const n={...f,y:yy,h};
+    yy+=h+PAD;
+    return n;
+  });
+  const totalH=nodes.reduce((s,n)=>s+n.h,0)+PAD*(nodes.length-1);
+  const vOff=(H-totalH)/2;
+  nodes.forEach(n=>n.y+=vOff);
+  const srcY=vOff, srcH=totalH;
+
+  // Flows
+  let curY=srcY;
+  const paths=nodes.map(n=>{
+    const y1a=curY, y1b=curY+n.h;
+    curY+=n.h;
+    const y2a=n.y, y2b=n.y+n.h;
+    const mx=(srcX+srcW+dstX)/2;
+    return `<path d="M${srcX+srcW},${y1a}C${mx},${y1a} ${mx},${y2a} ${dstX},${y2a}L${dstX},${y2b}C${mx},${y2b} ${mx},${y1b} ${srcX+srcW},${y1b}Z" fill="${n.color}" opacity="0.2"/>`;
+  }).join('');
+
+  // Labels right nodes
+  const dstLabels=nodes.map(n=>{
+    const mid=n.y+n.h/2;
+    const pct=cosTotal?(n.kg/cosTotal*100):0;
+    const showKg=n.h>36;
+    const showPct=n.h>52;
+    return `
+      <rect x="${dstX}" y="${n.y}" width="${dstW}" height="${n.h}" rx="6" fill="${n.color}" opacity="0.92"/>
+      <text x="${dstX+dstW/2}" y="${mid-(showKg?9:0)}" text-anchor="middle" fill="white" font-size="${n.h>50?10:9}" font-weight="700" font-family="Inter,-apple-system,sans-serif">${n.label}</text>
+      ${showKg?`<text x="${dstX+dstW/2}" y="${mid+7}" text-anchor="middle" fill="rgba(255,255,255,.9)" font-size="11" font-weight="800" font-family="JetBrains Mono,monospace">${fN(n.kg/1000,1)}t</text>`:''}
+      ${showPct?`<text x="${dstX+dstW/2}" y="${mid+21}" text-anchor="middle" fill="rgba(255,255,255,.7)" font-size="9" font-family="Inter,-apple-system,sans-serif">${fN(pct,1)}%</text>`:''}
+      <text x="${dstX+dstW+7}" y="${mid+4}" fill="${n.color}" font-size="11" font-weight="700" font-family="Inter,-apple-system,sans-serif">${fN(pct,1)}%</text>`;
+  }).join('');
+
+  // Roma/Bola breakdown line under Empaque Final
+  const empNode=nodes.find(n=>n.label==='Empaque Final');
+  const romaLabel=empNode&&cosTotal?`Roma ${fN(empRoma/1000,1)}t  ·  Bola ${fN(empBola/1000,1)}t`:'';
+  const srcMid=srcY+srcH/2;
+
+  const svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-height:270px;display:block">
+    ${paths}
+    <rect x="${srcX}" y="${srcY}" width="${srcW}" height="${srcH}" rx="8" fill="#15803d" opacity="0.95"/>
+    <text x="${srcX+srcW/2}" y="${srcMid-20}" text-anchor="middle" fill="white" font-size="9" font-weight="800" font-family="Inter,-apple-system,sans-serif" letter-spacing="0.5">COSECHA</text>
+    <text x="${srcX+srcW/2}" y="${srcMid-4}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="14" font-weight="800" font-family="JetBrains Mono,monospace">${fN(cosTotal/1000,1)}t</text>
+    <text x="${srcX+srcW/2}" y="${srcMid+12}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="9" font-family="Inter,-apple-system,sans-serif">Roma ${fN(cosRoma/1000,1)}t</text>
+    <text x="${srcX+srcW/2}" y="${srcMid+24}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="9" font-family="Inter,-apple-system,sans-serif">Bola ${fN(cosBola/1000,1)}t</text>
+    ${dstLabels}
+  </svg>`;
+
+  document.getElementById('sankey-wrap').innerHTML=svg;
+}
+
+/* ── REPORTE COSECHA & EMPAQUE ──────────────────────────── */
+function renderReporte(from, to){
+  document.getElementById('rep-range-lbl').textContent =
+    fDateFull(from) + ' – ' + fDateFull(to);
+
+  // ── Cosecha: acarreos detalles kilos por Roma/Bola ──
+  const cosecha = { ROMA:0, BOLA:0 };
+  rawAcarreos.forEach(r => {
+    const d = (r.fecha||'').split('T')[0];
+    if(from && d < from) return;
+    if(to   && d > to)   return;
+    (r.detalles||[]).forEach(det => {
+      const c = (det.cultivo||'').toUpperCase();
+      if(isRoma(c))      cosecha.ROMA += det.kilos||0;
+      else if(isBola(c)) cosecha.BOLA += det.kilos||0;
+    });
+  });
+
+  // ── Empacado & Gas: rawPalets (date-filtered, tomato only) ──
+  const emp = { ROMA:{P1:0,P2:0,P3:0}, BOLA:{P1:0,P2:0,P3:0} };
+  const gas = { ROMA:0, BOLA:0 };
+  rawPalets.forEach(r => {
+    const d = (r.fecha_empaque||'').split('T')[0];
+    if(from && d < from) return;
+    if(to   && d > to)   return;
+    const c = (r.cultivo||'').toUpperCase();
+    let grp;
+    if(isRoma(c))      grp = 'ROMA';
+    else if(isBola(c)) grp = 'BOLA';
+    else return;
+    const kg = (r.peso||0) * (r.bultos||0);
+    if(r.gaseado){
+      gas[grp] += kg;
+    } else {
+      const tier = paletTier(r);
+      if(tier === 'PRIMERA') emp[grp].P1 += kg;
+      else if(tier === 'SEGUNDA') emp[grp].P2 += kg;
+      else if(tier === 'TERCERA') emp[grp].P3 += kg;
+    }
+  });
+
+  // ── Merma Báscula: rawRezaga (TOMATE) ──
+  const mBascula = { ROMA:0, BOLA:0, TOTAL:0 };
+  rawRezaga.forEach(r => {
+    const d = (r.fecha||'').split('T')[0];
+    if(from && d < from) return;
+    if(to   && d > to)   return;
+    const g = (r.grupo_cultivo||'').toUpperCase();
+    if(g.includes('TOMATE')) mBascula.TOTAL += r.peso_neto||0;
+  });
+
+  // ── Totals ──
+  const salida = {
+    ROMA: emp.ROMA.P1 + emp.ROMA.P2 + emp.ROMA.P3 + gas.ROMA,
+    BOLA: emp.BOLA.P1 + emp.BOLA.P2 + emp.BOLA.P3 + gas.BOLA,
+  };
+  const aprov = {
+    ROMA: cosecha.ROMA ? salida.ROMA / cosecha.ROMA * 100 : 0,
+    BOLA: cosecha.BOLA ? salida.BOLA / cosecha.BOLA * 100 : 0,
+  };
+  const merma = {
+    ROMA: cosecha.ROMA - salida.ROMA,
+    BOLA: cosecha.BOLA - salida.BOLA,
+  };
+
+  function kg(v)  { return v > 0 ? fK(Math.round(v)) + ' kg' : '—'; }
+  function pct(v) { return v > 0 ? fN(v,1) + '%' : '—'; }
+  function rowSec(label){ return `<tr><td colspan="4" style="padding:10px 12px 4px;font-size:var(--t-xs);font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);background:var(--bg)">${label}</td></tr>`; }
+  function row(label, roma, bola, total, cls=''){
+    const style = cls === 'total'
+      ? 'font-weight:800;background:rgba(22,163,74,.05)'
+      : cls === 'muted' ? 'color:var(--muted)' : '';
+    const fs = cls === 'total' ? 'font-size:var(--t-base)' : '';
+    return `<tr style="${style}">
+      <td style="padding:5px 12px;${fs}">${label}</td>
+      <td style="padding:5px 12px;text-align:right;font-variant-numeric:tabular-nums;color:#dc2626;${fs}">${roma}</td>
+      <td style="padding:5px 12px;text-align:right;font-variant-numeric:tabular-nums;color:#16a34a;${fs}">${bola}</td>
+      <td style="padding:5px 12px;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);${fs}">${total}</td>
+    </tr>`;
+  }
+  function divider(){ return `<tr><td colspan="4" style="padding:0;border-top:1px solid var(--border)"></td></tr>`; }
+
+  document.getElementById('rep-tbody').innerHTML = [
+    rowSec('Cosecha de Campo'),
+    row('Total cosechado',
+      kg(cosecha.ROMA), kg(cosecha.BOLA),
+      kg(cosecha.ROMA + cosecha.BOLA), 'total'),
+    divider(),
+    rowSec('Empaque — Salida'),
+    row('1ra Calidad (sin gas)',  kg(emp.ROMA.P1), kg(emp.BOLA.P1), kg(emp.ROMA.P1+emp.BOLA.P1)),
+    row('2da Calidad (sin gas)',  kg(emp.ROMA.P2), kg(emp.BOLA.P2), kg(emp.ROMA.P2+emp.BOLA.P2)),
+    row('3ra Calidad (sin gas)',  kg(emp.ROMA.P3), kg(emp.BOLA.P3), kg(emp.ROMA.P3+emp.BOLA.P3)),
+    row('Entrada Gas (gaseado)',  kg(gas.ROMA),    kg(gas.BOLA),    kg(gas.ROMA+gas.BOLA)),
+    divider(),
+    row('Total Salida',
+      kg(salida.ROMA), kg(salida.BOLA),
+      kg(salida.ROMA + salida.BOLA), 'total'),
+    divider(),
+    rowSec('Eficiencia'),
+    row('Aprovechamiento',        pct(aprov.ROMA), pct(aprov.BOLA), pct((cosecha.ROMA+cosecha.BOLA) ? (salida.ROMA+salida.BOLA)/(cosecha.ROMA+cosecha.BOLA)*100 : 0)),
+    row('Merma (cosecha − salida)', kg(merma.ROMA),  kg(merma.BOLA),  kg(merma.ROMA+merma.BOLA)),
+    row('Merma Báscula (rezaga)', '—', '—', mBascula.TOTAL > 0 ? kg(mBascula.TOTAL) : '0 kg', 'muted'),
+  ].join('');
 }
 
 // Generic flatten for any crop filter function
@@ -2292,17 +2663,26 @@ async function loadTomate(){
   const from = activeRange?.from || iso(new Date());
   const to   = activeRange?.to   || iso(new Date());
 
-  const urlAcr = `/vw_acarreos?select=fecha,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`;
-  document.getElementById('ft-urls').textContent = `vw_acarreos · Producción Tomate · ${from} → ${to}`;
+  // Previous cycle boundaries (Dec Y-1 → Jun Y)
+  const actFrom = cycleStartOf(from);
+  const antFrom = `${parseInt(actFrom.split('-')[0])-1}-12-01`;
+  const antTo   = `${parseInt(actFrom.split('-')[0])}-06-30`;
+
+  const urlAcr    = `/vw_acarreos?select=fecha,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`;
+  const urlAcrAnt = `/vw_acarreos?select=fecha,lote,detalles&fecha=gte.${antFrom}&fecha=lte.${antTo}`;
+  document.getElementById('ft-urls').textContent = `vw_acarreos · Tomate · ${from} → ${to}  ·  ant. ${antFrom}`;
 
   try {
-    const acrRows = await get(urlAcr);
-    rawTomate = flattenTomate(acrRows);
+    const [acrRows, antRows] = await Promise.all([
+      get(urlAcr),
+      get(urlAcrAnt).catch(() => [])
+    ]);
+    rawTomate    = flattenTomate(acrRows);
+    rawTomateAnt = flattenTomate(antRows);
     renderTomate(from, to);
-    const now = new Date();
     document.getElementById('ft-updated').textContent =
-      'Actualizado: ' + now.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
-      ' · ' + rawTomate.length + ' líneas tomate';
+      'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
+      ' · ' + rawTomate.length + ' act · ' + rawTomateAnt.length + ' ant';
   } catch(err){
     console.error(err);
     document.getElementById('err-text').textContent = 'Error EYE: ' + err.message;
@@ -2381,46 +2761,51 @@ function renderTomate(from, to){
     bolaPromG, TOMATO_TARGET.BOLA, 'kg'
   );
 
-  // ── Weekly stacked bar ──
+  // ── Weekly stacked bar — cycle-relative weeks ──
+  const actFrom = cycleStartOf(from);
+  const antFrom = `${parseInt(actFrom.split('-')[0])-1}-12-01`;
+  const cycles  = bothCycles();
+
   const weekMap = {};
   rows.forEach(r => {
-    if(!weekMap[r.semana]) weekMap[r.semana] = {ROMA:0,BOLA:0,OTROS:0};
-    weekMap[r.semana][r.grupo] += r.kilos;
+    const w = weekOfCycle(r.fecha, actFrom);
+    if(!weekMap[w]) weekMap[w] = {ROMA:0,BOLA:0,OTROS:0};
+    weekMap[w][r.grupo] += r.kilos;
   });
-  const weeks = Object.keys(weekMap).sort((a,b)=>{
-    const n = s => parseInt(s.replace('Sem ',''));
-    return n(a)-n(b);
-  });
-  // Prev-cycle tomate overlay
+
+  // Previous cycle — always shown (cycle-aligned)
   const antTomWeek = {};
-  if(cmpOn){
-    const antFlat = flattenTomate(cmpAcrAnt);
-    antFlat.forEach(r => {
-      antTomWeek[r.semana] = (antTomWeek[r.semana]||0) + r.kilos;
-    });
-  }
+  rawTomateAnt.forEach(r => {
+    const w = weekOfCycle(r.fecha, antFrom);
+    antTomWeek[w] = (antTomWeek[w]||0) + r.kilos;
+  });
+
+  // X-axis: union of weeks present in either dataset, in order
+  const allWeekNums = new Set([...Object.keys(weekMap).map(Number), ...Object.keys(antTomWeek).map(Number)]);
+  const weekNums  = [...allWeekNums].sort((a,b)=>a-b);
+  const weekLabels = weekNums.map(w => 'S'+w);
 
   const tomDatasets = [
-    { label:'Roma',  data:weeks.map(w=>Math.round(toBoxes(weekMap[w].ROMA, KG_PER_BOX_TOMATE))),  backgroundColor:'rgba(220,38,38,.8)',  borderRadius:3, stack:'s' },
-    { label:'Bola',  data:weeks.map(w=>Math.round(toBoxes(weekMap[w].BOLA, KG_PER_BOX_TOMATE))),  backgroundColor:'rgba(22,163,74,.8)',  borderRadius:3, stack:'s' },
-    { label:'Otros', data:weeks.map(w=>Math.round(toBoxes(weekMap[w].OTROS, KG_PER_BOX_TOMATE))), backgroundColor:'rgba(217,119,6,.7)',  borderRadius:3, stack:'s' },
+    { label:'Roma',  data:weekNums.map(w=>Math.round(toBoxes((weekMap[w]?.ROMA||0), KG_PER_BOX_TOMATE))),  backgroundColor:'rgba(220,38,38,.8)',  borderRadius:3, stack:'s' },
+    { label:'Bola',  data:weekNums.map(w=>Math.round(toBoxes((weekMap[w]?.BOLA||0), KG_PER_BOX_TOMATE))),  backgroundColor:'rgba(22,163,74,.8)',  borderRadius:3, stack:'s' },
+    { label:'Otros', data:weekNums.map(w=>Math.round(toBoxes((weekMap[w]?.OTROS||0), KG_PER_BOX_TOMATE))), backgroundColor:'rgba(217,119,6,.7)',  borderRadius:3, stack:'s' },
   ];
-  if(cmpOn) tomDatasets.push({
-    label: bothCycles().labelAnt || 'Ant.',
-    data: weeks.map(w => antTomWeek[w] != null ? Math.round(toBoxes(antTomWeek[w], KG_PER_BOX_TOMATE)) : null),
+  if(rawTomateAnt.length) tomDatasets.push({
+    label: cycles.labelAnt || 'Ciclo ant.',
+    data: weekNums.map(w => antTomWeek[w] != null ? Math.round(toBoxes(antTomWeek[w], KG_PER_BOX_TOMATE)) : null),
     type:'line', borderColor:'rgba(217,119,6,.9)', backgroundColor:'transparent',
-    borderWidth:2.5, borderDash:[7,4], pointRadius:3, tension:.35, spanGaps:false, stack:undefined
+    borderWidth:2, borderDash:[6,4], pointRadius:2.5, tension:.35, spanGaps:false, stack:undefined
   });
 
   mkChart('chart-tom-semana',{
     type:'bar',
-    data:{ labels: weeks, datasets: tomDatasets },
+    data:{ labels: weekLabels, datasets: tomDatasets },
     options:{
       responsive:true, maintainAspectRatio:false,
       plugins:{
         legend:{ display:false },
         tooltip:{ mode:'index', intersect:false, backgroundColor:'#0c2117', bodyColor:'#fff', padding:10, cornerRadius:8,
-          callbacks:{ label:c=>` ${c.dataset.label}: ${c.parsed.y.toLocaleString('es-MX')} cx` }
+          callbacks:{ label:c=>` ${c.dataset.label}: ${(c.parsed.y||0).toLocaleString('es-MX')} cx` }
         }
       },
       scales:{
@@ -2430,22 +2815,39 @@ function renderTomate(from, to){
     }
   });
 
-  // ── Lote bars ──
+  // ── Lote bars — Roma/Bola separados ──
   const loteMap = {};
-  rows.forEach(r => { loteMap[r.lote] = (loteMap[r.lote]||0) + r.kilos; });
-  const loteSorted = Object.entries(loteMap).sort((a,b)=>b[1]-a[1]);
+  rows.forEach(r => {
+    if(!loteMap[r.lote]) loteMap[r.lote] = {ROMA:0,BOLA:0,OTROS:0};
+    loteMap[r.lote][r.grupo] += r.kilos;
+  });
+  const loteSorted = Object.entries(loteMap)
+    .map(([l,g]) => [l, g.ROMA+g.BOLA+g.OTROS, g])
+    .sort((a,b) => b[1]-a[1]);
   const maxLote = loteSorted[0]?.[1] || 1;
-  const LOTE_COLORS = ['#16a34a','#1d4ed8','#7c3aed','#d97706','#dc2626'];
-  document.getElementById('tom-lote-bars').innerHTML = loteSorted.map(([l,kg],i)=>`
+  document.getElementById('tom-lote-bars').innerHTML = loteSorted.map(([l,total,g])=>{
+    const romaPct  = total ? g.ROMA/total*100 : 0;
+    const bolaPct  = total ? g.BOLA/total*100 : 0;
+    const otrosPct = total ? g.OTROS/total*100 : 0;
+    return `
     <div class="prog-row">
       <div class="prog-top">
         <span class="prog-name" style="font-size:.76rem">${l}</span>
-        <span class="prog-qty" style="color:${LOTE_COLORS[i%LOTE_COLORS.length]}">${fBox(kg, KG_PER_BOX_TOMATE)} cx <span style="opacity:.5;font-weight:400">${fN(kg/1000)} t</span></span>
+        <span style="display:flex;align-items:center;gap:7px;font-size:.7rem;font-weight:600">
+          ${g.ROMA>0?`<span style="color:#dc2626">${fBox(g.ROMA,KG_PER_BOX_TOMATE,0)} cx Roma</span>`:''}
+          ${g.ROMA>0&&g.BOLA>0?`<span style="opacity:.25">·</span>`:''}
+          ${g.BOLA>0?`<span style="color:#16a34a">${fBox(g.BOLA,KG_PER_BOX_TOMATE,0)} cx Bola</span>`:''}
+        </span>
       </div>
-      <div class="prog-track">
-        <div class="prog-fill" style="width:${(kg/maxLote*100).toFixed(1)}%;background:${LOTE_COLORS[i%LOTE_COLORS.length]}"></div>
+      <div class="prog-track" style="overflow:hidden;display:flex;border-radius:4px">
+        <div style="width:${(total/maxLote*100).toFixed(1)}%;display:flex;height:100%">
+          ${romaPct>0?`<div style="width:${romaPct.toFixed(1)}%;background:#dc2626;transition:width .5s"></div>`:''}
+          ${bolaPct>0?`<div style="width:${bolaPct.toFixed(1)}%;background:#16a34a;transition:width .5s"></div>`:''}
+          ${otrosPct>0?`<div style="width:${otrosPct.toFixed(1)}%;background:#d97706;transition:width .5s"></div>`:''}
+        </div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   // ── Color donut ──
   const colorMap = {};
@@ -2467,81 +2869,44 @@ function renderTomate(from, to){
     }
   });
 
-  // ── Peso promedio weekly trend ──
-  const weekProm = {};
-  const weekPromCnt = {};
-  rows.forEach(r => {
-    if(r.grupo==='OTROS') return;
-    const key = r.semana + '|' + r.grupo;
-    weekProm[key]    = (weekProm[key]   ||0) + r.kilos;
-    weekPromCnt[key] = (weekPromCnt[key]||0) + r.cantidad;
-  });
-  const romaAvgByWeek = weeks.map(w => {
-    const kg=weekProm[w+'|ROMA']||0, cnt=weekPromCnt[w+'|ROMA']||0;
-    return cnt ? +((kg/cnt).toFixed(3)) : null;
-  });
-  const bolaAvgByWeek = weeks.map(w => {
-    const kg=weekProm[w+'|BOLA']||0, cnt=weekPromCnt[w+'|BOLA']||0;
-    return cnt ? +((kg/cnt).toFixed(3)) : null;
-  });
-  mkChart('chart-tom-prom',{
-    type:'line',
-    data:{
-      labels: weeks,
-      datasets:[
-        {
-          label:'Roma (obj 8 kg)',
-          data: romaAvgByWeek,
-          borderColor:'#dc2626', backgroundColor:'rgba(220,38,38,.06)',
-          borderWidth:2.5, pointRadius:4, pointHoverRadius:7,
-          fill:true, tension:.35, spanGaps:false, yAxisID:'y'
-        },
-        {
-          label:'Bola (obj 16 kg)',
-          data: bolaAvgByWeek,
-          borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.06)',
-          borderWidth:2.5, pointRadius:4, pointHoverRadius:7,
-          fill:true, tension:.35, spanGaps:false, yAxisID:'y2'
-        },
-        // Target lines
-        { label:'Target Roma 8 kg', data:weeks.map(()=>8), borderColor:'rgba(220,38,38,.25)',
-          borderDash:[4,4], borderWidth:1.5, pointRadius:0, fill:false, yAxisID:'y' },
-        { label:'Target Bola 16 kg', data:weeks.map(()=>16), borderColor:'rgba(22,163,74,.25)',
-          borderDash:[4,4], borderWidth:1.5, pointRadius:0, fill:false, yAxisID:'y2' },
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      interaction:{ mode:'index', intersect:false },
-      plugins:{
-        legend:{ display:false },
-        tooltip:{ backgroundColor:'#0c2117', bodyColor:'#fff', padding:10, cornerRadius:8,
-          callbacks:{ label:c=>c.dataset.borderDash ? null : ` ${c.dataset.label}: ${c.parsed.y ?? '—'} kg` }
-        }
-      },
-      scales:{
-        x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10},maxRotation:0}, border:{display:false} },
-        y: { position:'left',  grid:{color:'rgba(0,0,0,.04)'}, ticks:{color:'#f87171',font:{size:9},callback:v=>v+'kg'}, border:{display:false}, title:{display:true,text:'Roma',color:'#f87171',font:{size:9}} },
-        y2:{ position:'right', grid:{display:false},           ticks:{color:'#4ade80',font:{size:9},callback:v=>v+'kg'}, border:{display:false}, title:{display:true,text:'Bola',color:'#4ade80',font:{size:9}} },
-      }
-    }
-  });
 
-  // ── Casetas ──
+  // ── Casetas — Roma/Bola separados ──
   const casetaMap = {};
-  rows.forEach(r => { casetaMap[r.caseta] = (casetaMap[r.caseta]||0) + r.kilos; });
-  const casetaSorted = Object.entries(casetaMap).sort((a,b)=>b[1]-a[1]).slice(0,15);
+  rows.forEach(r => {
+    const c = r.caseta.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ');
+    if(!casetaMap[c]) casetaMap[c] = {ROMA:0,BOLA:0,OTROS:0};
+    casetaMap[c][r.grupo] += r.kilos;
+  });
+  const casetaSorted = Object.entries(casetaMap)
+    .map(([c,g]) => [c, g.ROMA+g.BOLA+g.OTROS, g])
+    .sort((a,b) => b[1]-a[1]).slice(0,15);
   const maxCas = casetaSorted[0]?.[1]||1;
-  document.getElementById('tom-caseta-bars').innerHTML = casetaSorted.map(([c,kg])=>`
+  document.getElementById('tom-caseta-bars').innerHTML = casetaSorted.map(([c,total,g])=>{
+    const romaPct  = total ? g.ROMA/total*100 : 0;
+    const bolaPct  = total ? g.BOLA/total*100 : 0;
+    const otrosPct = total ? g.OTROS/total*100 : 0;
+    return `
     <div class="prog-row" style="margin-bottom:0">
       <div class="prog-top">
-        <span class="prog-name" style="font-size:.72rem">${c.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</span>
-        <span class="prog-qty" style="color:var(--green2);font-size:.72rem">${fBox(kg, KG_PER_BOX_TOMATE)} cx <span style="opacity:.5;font-weight:400">${fN(kg/1000)} t</span></span>
+        <span class="prog-name" style="font-size:.72rem">${c}</span>
+        <span style="display:flex;align-items:center;gap:6px;font-size:.68rem;font-weight:600">
+          ${g.ROMA>0?`<span style="color:#dc2626">${fBox(g.ROMA,KG_PER_BOX_TOMATE,0)} R</span>`:''}
+          ${g.BOLA>0?`<span style="color:#16a34a">${fBox(g.BOLA,KG_PER_BOX_TOMATE,0)} B</span>`:''}
+        </span>
       </div>
-      <div class="prog-track" style="height:5px">
-        <div class="prog-fill" style="width:${(kg/maxCas*100).toFixed(1)}%;background:var(--green2)"></div>
+      <div class="prog-track" style="height:5px;overflow:hidden;display:flex;border-radius:4px">
+        <div style="width:${(total/maxCas*100).toFixed(1)}%;display:flex;height:100%">
+          ${romaPct>0?`<div style="width:${romaPct.toFixed(1)}%;background:#dc2626"></div>`:''}
+          ${bolaPct>0?`<div style="width:${bolaPct.toFixed(1)}%;background:#16a34a"></div>`:''}
+          ${otrosPct>0?`<div style="width:${otrosPct.toFixed(1)}%;background:#d97706"></div>`:''}
+        </div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+
+  // ── Balance de masas + Reporte ──
+  renderSankey(from, to);
+  renderReporte(from, to);
 
   // ── Detail table ──
   document.getElementById('tom-tbody').innerHTML = rows.slice(0,300).map(r => {
@@ -2554,7 +2919,7 @@ function renderTomate(from, to){
     const grpColor = r.grupo==='ROMA' ? '#dc2626' : r.grupo==='BOLA' ? '#16a34a' : '#d97706';
     return `<tr>
       <td class="td-m">${fDate(r.fecha)}</td>
-      <td style="color:var(--muted);font-size:.72rem">${r.semana}</td>
+      <td style="color:var(--muted);font-size:.72rem">S${weekOfCycle(r.fecha, actFrom)}</td>
       <td style="font-weight:600">${r.lote}</td>
       <td style="font-size:.72rem;color:var(--muted)">${r.caseta.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</td>
       <td><span style="display:inline-flex;align-items:center;gap:4px">
@@ -3021,8 +3386,8 @@ async function loadCmpData(){
   const cycles = bothCycles();
   try {
     [cmpPalAnt, cmpAcrAnt] = await Promise.all([
-      getAll(`/vw_palets?select=fecha_empaque,calidad,bultos,peso,cultivo&fecha_empaque=gte.${cycles.anterior.from}`),
-      getAll(`/vw_acarreos?select=fecha,peso_bruto,tara,detalles,lote&fecha=gte.${cycles.anterior.from}`)
+      getAll(`/vw_palets?select=fecha_empaque,calidad,bultos,peso,cultivo&fecha_empaque=gte.${cycles.anterior.from}&fecha_empaque=lte.${cycles.anterior.to}`),
+      getAll(`/vw_acarreos?select=fecha,peso_bruto,tara,detalles,lote&fecha=gte.${cycles.anterior.from}&fecha=lte.${cycles.anterior.to}`)
     ]);
     document.getElementById('ft-urls').textContent +=
       `  ·  Anterior: vw_acarreos gte.${cycles.anterior.from}&lte.${cycles.anterior.to}`;
@@ -3033,7 +3398,246 @@ function weekOfCycle(isoDate, cycleFromISO){
   const d  = new Date(isoDate + 'T12:00:00');
   const s  = new Date(cycleFromISO + 'T12:00:00');
   const dayN = Math.floor((d - s) / 86400000);
-  return Math.floor(dayN / 7) + 1;
+  return Math.max(1, Math.floor(dayN / 7) + 1);
+}
+
+function cycleStartOf(isoDate){
+  // Returns the Dec-1 that started the agricultural cycle containing isoDate
+  const y = parseInt(isoDate.split('-')[0]);
+  const m = parseInt(isoDate.split('-')[1]);
+  return m <= 6 ? `${y-1}-12-01` : `${y}-12-01`;
+}
+
+/* ── REZAGA ─────────────────────────────────────────────── */
+async function loadRezaga(){
+  const from = activeRange?.from || iso(new Date());
+  const to   = activeRange?.to   || iso(new Date());
+  const url  = `/vw_rezaga?select=folio,fecha,grupo_cultivo,tolva,chofer,vehiculo,peso_bruto,tara,peso_neto&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`;
+  try {
+    rawRezaga = await getAll(url, {url: SB_API.url, headers: SB_H});
+  } catch(e){
+    console.warn('vw_rezaga fetch failed', e);
+    rawRezaga = [];
+  }
+  renderRezaga();
+}
+
+function renderRezaga(){
+  const rows = rawRezaga;
+  if(!rows.length){
+    document.getElementById('rez-neto').textContent  = '—';
+    document.getElementById('rez-bruto').textContent = '—';
+    document.getElementById('rez-count').textContent = '—';
+    document.getElementById('rez-tbody').innerHTML   =
+      '<tr><td colspan="8" class="empty">Sin datos de rezaga para el período.</td></tr>';
+    return;
+  }
+  const neto  = rows.reduce((s,r)=>s+(r.peso_neto||0), 0);
+  const bruto = rows.reduce((s,r)=>s+(r.peso_bruto||0), 0);
+  document.getElementById('rez-neto').innerHTML  = fKM(neto/1000) + '<span class="stat-unit"> t</span>';
+  document.getElementById('rez-neto-sub').textContent = fK(Math.round(neto)) + ' kg netos';
+  document.getElementById('rez-bruto').innerHTML = fKM(bruto/1000) + '<span class="stat-unit"> t</span>';
+  document.getElementById('rez-count').textContent = rows.length.toLocaleString('es-MX');
+
+  const display = rows.slice(0, 300);
+  const capNote = rows.length > 300
+    ? `<tr><td colspan="8" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted)">Mostrando 300 de ${rows.length.toLocaleString('es-MX')} registros</td></tr>`
+    : '';
+  document.getElementById('rez-tbody').innerHTML = display.map(r => `<tr>
+    <td>${fDate((r.fecha||'').split('T')[0])}</td>
+    <td style="font-weight:600">${r.grupo_cultivo||'—'}</td>
+    <td style="color:var(--muted);font-size:.72rem">${r.tolva||'—'}</td>
+    <td style="font-size:.72rem">${r.chofer||'—'}</td>
+    <td style="font-size:.72rem;color:var(--muted)">${r.vehiculo||'—'}</td>
+    <td class="td-n">${fK(Math.round(r.peso_bruto||0))}</td>
+    <td class="td-n" style="color:var(--muted)">${fK(Math.round(r.tara||0))}</td>
+    <td class="td-n" style="color:var(--green);font-weight:800">${fK(Math.round(r.peso_neto||0))}</td>
+  </tr>`).join('') + capNote;
+}
+
+/* ── EMBARQUES ──────────────────────────────────────────── */
+async function loadEmbarques(){
+  const btn  = document.getElementById('btn-refresh');
+  const from = activeRange?.from || iso(new Date());
+  const to   = activeRange?.to   || iso(new Date());
+  btn.classList.add('spin'); btn.disabled = true;
+  document.getElementById('ft-urls').textContent = `vw_embarques · ${from} → ${to}`;
+  try {
+    const url = `/vw_embarques?select=fecha,tipo,folio,factura,distribuidor,agencia_aduanal,destino,monto_factura,detalle&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`;
+    rawEmbarques = await getAll(url, {url: SB_API.url, headers: SB_H});
+    renderEmbarques(from, to);
+    document.getElementById('ft-updated').textContent =
+      'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
+      ' · ' + rawEmbarques.length + ' embarques';
+  } catch(e){
+    console.error(e);
+    document.getElementById('err-text').textContent = 'Error vw_embarques: ' + e.message;
+    document.getElementById('err-banner').classList.add('show');
+  } finally {
+    btn.classList.remove('spin'); btn.disabled = false;
+  }
+}
+
+function renderEmbarques(from, to){
+  const rows = rawEmbarques;
+  document.getElementById('emb-range-lbl').textContent =
+    fDateFull(from) + ' – ' + fDateFull(to);
+
+  if(!rows.length){
+    ['emb-total','emb-exp','emb-nac','emb-palets','emb-kg'].forEach(id=>{
+      document.getElementById(id).textContent = '—';
+    });
+    document.getElementById('emb-tbody').innerHTML =
+      '<tr><td colspan="7" class="empty">Sin embarques para el período seleccionado.</td></tr>';
+    return;
+  }
+
+  const exp = rows.filter(r => r.tipo === 'Exportacion');
+  const nac = rows.filter(r => r.tipo !== 'Exportacion');
+  const totalPalets = rows.reduce((s,r)=>s+(r.detalle||[]).length, 0);
+  const totalKg     = rows.reduce((s,r)=>
+    s + (r.detalle||[]).reduce((ss,d)=>ss+(d.peso||0)*(d.bultos||0), 0), 0);
+  const expPalets   = exp.reduce((s,r)=>s+(r.detalle||[]).length, 0);
+
+  document.getElementById('emb-total').textContent = rows.length.toLocaleString('es-MX');
+  document.getElementById('emb-total-sub').textContent =
+    exp.length + ' exp · ' + nac.length + ' nac';
+  document.getElementById('emb-exp').textContent = exp.length.toLocaleString('es-MX');
+  document.getElementById('emb-exp-sub').textContent = expPalets + ' palets';
+  document.getElementById('emb-nac').textContent = nac.length.toLocaleString('es-MX');
+  document.getElementById('emb-nac-sub').textContent =
+    nac.reduce((s,r)=>s+(r.detalle||[]).length,0) + ' palets';
+  document.getElementById('emb-palets').textContent = totalPalets.toLocaleString('es-MX');
+  document.getElementById('emb-kg').innerHTML =
+    fKM(totalKg/1000) + '<span class="stat-unit"> t</span>';
+
+  const TIPO_BADGE = {
+    'Exportacion': `<span style="display:inline-block;padding:1px 7px;border-radius:4px;font-size:.62rem;font-weight:800;letter-spacing:.4px;background:rgba(29,78,216,.12);color:#1d4ed8">EXP</span>`,
+    'Nacional':    `<span style="display:inline-block;padding:1px 7px;border-radius:4px;font-size:.62rem;font-weight:800;letter-spacing:.4px;background:rgba(21,128,61,.12);color:#15803d">NAC</span>`
+  };
+  const display = rows.slice(0, 300);
+  const capNote = rows.length > 300
+    ? `<tr><td colspan="7" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted)">Mostrando 300 de ${rows.length.toLocaleString('es-MX')} registros</td></tr>`
+    : '';
+  document.getElementById('emb-tbody').innerHTML = display.map(r => {
+    const palets = (r.detalle||[]).length;
+    const kg     = (r.detalle||[]).reduce((s,d)=>s+(d.peso||0)*(d.bultos||0), 0);
+    const badge  = TIPO_BADGE[r.tipo] || r.tipo || '—';
+    const dest   = (r.destino||'—').split(',')[0];
+    return `<tr>
+      <td>${fDate((r.fecha||'').split('T')[0])}</td>
+      <td>${badge}</td>
+      <td style="font-weight:600;font-size:.78rem">${r.distribuidor||'—'}</td>
+      <td style="color:var(--muted);font-size:.72rem">${r.factura||'—'}</td>
+      <td style="font-size:.72rem;color:var(--muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${dest}</td>
+      <td class="td-n">${palets}</td>
+      <td class="td-n" style="color:var(--green);font-weight:700">${fK(Math.round(kg))}</td>
+    </tr>`;
+  }).join('') + capNote;
+
+  renderEmbarquesMap();
+}
+
+/* ── EMBARQUES MAP ──────────────────────────────────────── */
+let _embMap = null;
+let _embMarkers = [];
+
+const DEST_GEO = {
+  // US destinations
+  AZ:          { lat: 31.35, lng: -110.94, label: 'Nogales / Rio Rico, AZ' },
+  CA:          { lat: 34.05, lng: -118.24, label: 'Los Ángeles, CA' },
+  MCALLEN:     { lat: 26.20, lng: -98.23,  label: 'McAllen, TX' },
+  TX:          { lat: 32.78, lng: -96.82,  label: 'Dallas / Garland, TX' },
+  NM:          { lat: 32.32, lng: -106.77, label: 'Las Cruces, NM' },
+  FL:          { lat: 25.77, lng: -80.19,  label: 'Miami, FL' },
+  // Mexico
+  MONTERREY:   { lat: 25.67, lng: -100.31, label: 'Monterrey, NL' },
+  'MEXICO':    { lat: 19.43, lng: -99.13,  label: 'Ciudad de México' },
+  'CDMX':      { lat: 19.43, lng: -99.13,  label: 'Ciudad de México' },
+  HERMOSILLO:  { lat: 29.07, lng: -110.95, label: 'Hermosillo, Son.' },
+  TIJUANA:     { lat: 32.53, lng: -117.03, label: 'Tijuana, BC' },
+  CULIACAN:    { lat: 24.80, lng: -107.39, label: 'Culiacán, Sin.' },
+  GUADALAJARA: { lat: 20.67, lng: -103.35, label: 'Guadalajara, Jal.' },
+  // Origin (farm)
+  ORIGIN:      { lat: 24.50, lng: -107.50, label: 'Agrícola Belher (origen)' },
+};
+
+function parseDestGeo(destino){
+  if(!destino) return null;
+  const up = destino.toUpperCase().replace(/[.,\-]/g,' ');
+  // McAllen — múltiples ortografías antes del catch-all TX
+  if(/\bM[CA]ALLEN\b|\bMC\s*ALLEN\b|\bMACALLEN\b/.test(up)) return DEST_GEO.MCALLEN;
+  // US state codes
+  for(const code of ['AZ','CA','TX','NM','FL']){
+    if(new RegExp('\\b'+code+'\\b').test(up)) return DEST_GEO[code];
+  }
+  // Mexico cities
+  for(const key of Object.keys(DEST_GEO)){
+    if(up.includes(key)) return DEST_GEO[key];
+  }
+  return null;
+}
+
+function renderEmbarquesMap(){
+  const mapEl = document.getElementById('emb-map');
+  if(!mapEl) return;
+
+  // Aggregate by geo location
+  const geoAgg = {};
+  rawEmbarques.forEach(r => {
+    const geo = parseDestGeo(r.destino);
+    if(!geo) return;
+    const key = geo.label;
+    if(!geoAgg[key]) geoAgg[key] = { geo, count:0, palets:0, kg:0, tipos:{} };
+    geoAgg[key].count++;
+    const p = (r.detalle||[]).length;
+    const k = (r.detalle||[]).reduce((s,d)=>s+(d.peso||0)*(d.bultos||0),0);
+    geoAgg[key].palets += p;
+    geoAgg[key].kg     += k;
+    geoAgg[key].tipos[r.tipo] = (geoAgg[key].tipos[r.tipo]||0) + 1;
+  });
+
+  // Init or reuse map
+  if(!_embMap){
+    _embMap = L.map('emb-map', { zoomControl:true, attributionControl:false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+      attribution:'© CartoDB', maxZoom:13
+    }).addTo(_embMap);
+  } else {
+    _embMarkers.forEach(m => m.remove());
+    _embMarkers = [];
+  }
+
+  if(!Object.keys(geoAgg).length){
+    _embMap.setView([28, -105], 5);
+    return;
+  }
+
+  // Add origin marker
+  const orgCircle = L.circleMarker([DEST_GEO.ORIGIN.lat, DEST_GEO.ORIGIN.lng],{
+    radius:8, color:'#15803d', fillColor:'#22c55e', fillOpacity:.9, weight:2
+  }).addTo(_embMap)
+    .bindTooltip('<b>Origen: Agrícola Belher</b><br>Culiacán, Sinaloa', {permanent:false, direction:'right'});
+  _embMarkers.push(orgCircle);
+
+  const maxCount = Math.max(...Object.values(geoAgg).map(g=>g.count));
+  const allLatLngs = [[DEST_GEO.ORIGIN.lat, DEST_GEO.ORIGIN.lng]];
+
+  Object.values(geoAgg).forEach(({geo, count, palets, kg, tipos}) => {
+    const r     = 10 + (count / maxCount) * 28;
+    const isExp = (tipos['Exportacion']||0) > (tipos['Nacional']||0);
+    const color = isExp ? '#1d4ed8' : '#15803d';
+    const fill  = isExp ? '#3b82f6' : '#22c55e';
+    const circle = L.circleMarker([geo.lat, geo.lng],{
+      radius: r, color, fillColor: fill, fillOpacity:.65, weight:2
+    }).addTo(_embMap)
+      .bindTooltip(`<b>${geo.label}</b><br>${count} embarques · ${palets} palets<br>${fK(Math.round(kg))} kg · ${isExp?'Exportación':'Nacional'}`,
+        {permanent:false, direction:'top'});
+    _embMarkers.push(circle);
+    allLatLngs.push([geo.lat, geo.lng]);
+  });
+
+  _embMap.fitBounds(L.latLngBounds(allLatLngs).pad(0.15));
 }
 
 /* ── PANEL TABS ─────────────────────────────────────────── */
@@ -3056,11 +3660,13 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     btn.classList.add('active');
     document.getElementById(btn.dataset.panel).classList.add('active');
     syncFilterContext(btn.dataset.panel);
-    if(btn.dataset.panel === 'panel-resumen')  loadResumen();
-    if(btn.dataset.panel === 'panel-tomate')   loadTomate();
-    if(btn.dataset.panel === 'panel-limon')    loadLimon();
-    if(btn.dataset.panel === 'panel-chile')    loadChile();
-    if(btn.dataset.panel === 'panel-inbound')  loadInbound();
+    if(btn.dataset.panel === 'panel-resumen')   loadResumen();
+    if(btn.dataset.panel === 'panel-tomate')    loadTomate();
+    if(btn.dataset.panel === 'panel-limon')     loadLimon();
+    if(btn.dataset.panel === 'panel-chile')     loadChile();
+    if(btn.dataset.panel === 'panel-inbound')   loadInbound();
+    if(btn.dataset.panel === 'panel-pesos')     loadRezaga();
+    if(btn.dataset.panel === 'panel-embarques') loadEmbarques();
   });
 });
 
@@ -3144,7 +3750,9 @@ function pickMonth(year, month){
   closeMPicker();
   loadData();
   const activePanel = document.querySelector('.panel.active')?.id;
-  if(activePanel === 'panel-inbound') loadInbound();
+  if(activePanel === 'panel-inbound')   loadInbound();
+  if(activePanel === 'panel-pesos')     loadRezaga();
+  if(activePanel === 'panel-embarques') loadEmbarques();
 }
 
 // close month picker on outside click (desktop)
