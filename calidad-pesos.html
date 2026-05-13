@@ -1615,11 +1615,13 @@ function renderResumen(){
     }
   });
 
-  // Sankey con datos del ciclo completo
+  // Sankey — respeta el período activo
+  const sankeyFrom = actR.from;
+  const sankeyTo   = actR.to;
   const _savePal = rawPalets, _saveAcr = rawAcarreos;
   rawPalets   = _resPalets.length   ? _resPalets   : rawPalets;
   rawAcarreos = _resAcarreos.length ? _resAcarreos : rawAcarreos;
-  renderSankey(from, to, 'sankey-wrap-res');
+  renderSankey(sankeyFrom, sankeyTo, 'sankey-wrap-res');
   rawPalets   = _savePal;
   rawAcarreos = _saveAcr;
 }
