@@ -488,6 +488,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   <button class="view-tab" data-panel="panel-tomate">Producción Tomate</button>
   <button class="view-tab" data-panel="panel-otros">Producción Otros</button>
   <button class="view-tab" data-panel="panel-embarques">Embarques</button>
+  <button class="view-tab" data-panel="panel-balance">Balance de Masas</button>
 </div>
 
 <main>
@@ -1048,6 +1049,70 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
     </div>
 
   </div><!-- /panel-embarques -->
+
+  <!-- ── BALANCE DE MASAS ───────────────────────────────── -->
+  <div class="panel" id="panel-balance">
+
+    <div class="sec">Balance de Masas
+      <span class="sec-tag" id="bal-rng">—</span>
+      <span class="sec-source">báscula + palets + rezaga</span>
+    </div>
+
+    <!-- KPI strip -->
+    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px">
+      <div class="stat" style="border-left:3px solid #15803d">
+        <div class="stat-lbl">Cosecha Tomate</div>
+        <div class="stat-val cg" id="bal-cosecha"><span class="skel"></span></div>
+        <div class="stat-sub"><span id="bal-cos-roma">—</span> Roma · <span id="bal-cos-bola">—</span> Bola</div>
+      </div>
+      <div class="stat" style="border-left:3px solid #16a34a">
+        <div class="stat-lbl">Empaque Final</div>
+        <div class="stat-val cg" id="bal-empaque"><span class="skel"></span></div>
+        <div class="stat-sub"><span id="bal-emp-roma">—</span> Roma · <span id="bal-emp-bola">—</span> Bola</div>
+      </div>
+      <div class="stat" style="border-left:3px solid #1d4ed8">
+        <div class="stat-lbl">Cuartos Gas</div>
+        <div class="stat-val cb" id="bal-cjv"><span class="skel"></span></div>
+        <div class="stat-sub" id="bal-cjv-sub">—</div>
+      </div>
+      <div class="stat" style="border-left:3px solid #d97706">
+        <div class="stat-lbl">Rezaga</div>
+        <div class="stat-val ca" id="bal-rezaga"><span class="skel"></span></div>
+        <div class="stat-sub" id="bal-rez-sub">—</div>
+      </div>
+      <div class="stat" style="border-left:3px solid #7c3aed">
+        <div class="stat-lbl">Eficiencia</div>
+        <div class="stat-val" id="bal-efic" style="color:#7c3aed"><span class="skel"></span></div>
+        <div class="stat-sub">empacado ÷ cosechado</div>
+      </div>
+    </div>
+
+    <!-- Sankey grande -->
+    <div class="card card-pad" style="margin-bottom:14px">
+      <div id="sankey-wrap-balance" style="min-height:80px"></div>
+    </div>
+
+    <!-- Desglose Roma / Bola -->
+    <div class="g2">
+      <div class="card card-pad">
+        <div class="card-title" style="color:#15803d">● Tomate Roma</div>
+        <div class="stat-strip" style="grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0;box-shadow:none;border:none">
+          <div><div class="stat-lbl">Cosecha</div><div class="stat-val cg" id="bal-r-cos" style="font-size:1.1rem">—</div></div>
+          <div><div class="stat-lbl">Empacado</div><div class="stat-val cg" id="bal-r-emp" style="font-size:1.1rem">—</div></div>
+          <div><div class="stat-lbl">Eficiencia</div><div class="stat-val" id="bal-r-efic" style="font-size:1.1rem;color:#7c3aed">—</div></div>
+        </div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title" style="color:#0d9488">● Tomate Bola (Round)</div>
+        <div class="stat-strip" style="grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0;box-shadow:none;border:none">
+          <div><div class="stat-lbl">Cosecha</div><div class="stat-val cg" id="bal-b-cos" style="font-size:1.1rem">—</div></div>
+          <div><div class="stat-lbl">Empacado</div><div class="stat-val cg" id="bal-b-emp" style="font-size:1.1rem">—</div></div>
+          <div><div class="stat-lbl">Eficiencia</div><div class="stat-val" id="bal-b-efic" style="font-size:1.1rem;color:#7c3aed">—</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /panel-balance -->
 
 </main>
 
@@ -2279,6 +2344,7 @@ function applyRawData(palets, acarreos, from, to, source){
   // Re-render whichever crop tab is active
   const activePanel = document.querySelector('.panel.active')?.id;
   if(activePanel === 'panel-resumen') renderResumen();
+  if(activePanel === 'panel-balance') renderBalance();
   if(activePanel === 'panel-tomate')  renderTomate(from, to);
   if(activePanel === 'panel-otros'){
     renderCropPanel({ rows: flattenCrop(acarreos, isLimon, null), from, to, ids:{rangeLbl:'lim-range-lbl',total:'lim-total',totalSub:'lim-total-sub',dias:'lim-dias',prom:'lim-prom'}, chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody', kgPerUnit:KG_PER_BOX_LIMON, unitLabel:'cx' }); renderLimonPalets();
@@ -2402,7 +2468,7 @@ function isoWeekSortKey(isoDate){
 }
 
 /* ── BALANCE DE MASAS · SANKEY ─────────────────────────── */
-function renderSankey(from, to, targetId='sankey-wrap'){
+function renderSankey(from, to, targetId='sankey-wrap', opts={}){
   document.getElementById('san-range-lbl').textContent = fDateFull(from)+' – '+fDateFull(to);
 
   // ── Cosecha — neto báscula escalado por proporción tomate del camión ──
@@ -2477,9 +2543,9 @@ function renderSankey(from, to, targetId='sankey-wrap'){
     return;
   }
 
-  // Dimensiones — viewBox cuadrada-ish, sin etiquetas externas que se salgan
-  const W=640, H=260, PAD=6;
-  const srcX=16, srcW=108, dstX=490, dstW=132;
+  // Dimensiones — configurables por caller
+  const W=opts.W||640, H=opts.H||260, PAD=opts.PAD||6;
+  const srcX=16, srcW=opts.srcW||108, dstX=opts.dstX||(W-opts.dstW-16||W-148), dstW=opts.dstW||132;
   const usableH=H-16;
   const total=flows.reduce((s,f)=>s+f.kg,0)||1;
 
@@ -2526,7 +2592,7 @@ function renderSankey(from, to, targetId='sankey-wrap'){
   }).join('');
 
   const srcMid=srcY+srcH/2;
-  const svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;max-width:640px">
+  const svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;max-width:${W}px">
     ${paths}
     <rect x="${srcX}" y="${srcY}" width="${srcW}" height="${srcH}" rx="8" fill="#15803d" opacity="0.95"/>
     <text x="${srcX+srcW/2}" y="${srcMid-18}" text-anchor="middle" fill="white" font-size="8" font-weight="800" font-family="Inter,-apple-system,sans-serif" letter-spacing="0.5">COSECHA</text>
@@ -2537,6 +2603,83 @@ function renderSankey(from, to, targetId='sankey-wrap'){
   </svg>`;
 
   el.innerHTML=svg;
+}
+
+/* ── BALANCE DE MASAS · PANEL COMPLETO ─────────────────── */
+function renderBalance(){
+  const actR = activeRange || { from: bothCycles().actual.from, to: iso(new Date()) };
+  const from = actR.from, to = actR.to;
+  document.getElementById('bal-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
+
+  // Datos: usar _resPalets/_resAcarreos si disponibles, sino rawPalets/rawAcarreos
+  const balPalets   = (_resPalets.length   ? _resPalets   : rawPalets).filter(p=>{ const d=(p.fecha_empaque||'').split('T')[0]; return d>=from&&d<=to; });
+  const balAcarreos = (_resAcarreos.length ? _resAcarreos : rawAcarreos).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+
+  // ── Cosecha por neto báscula ──
+  let cosRoma=0, cosBola=0;
+  balAcarreos.forEach(r=>{
+    const neto=(r.peso_bruto||0)-(r.tara||0); if(neto<=0) return;
+    let dR=0,dB=0,dT=0;
+    (r.detalles||[]).forEach(det=>{
+      const c=(det.cultivo||'').toUpperCase(), kg=det.kilos||0; dT+=kg;
+      if(isRoma(c)) dR+=kg; else if(isBola(c)) dB+=kg;
+    });
+    if(dT<=0) return;
+    const tn=neto*(dR+dB)/dT, rp=(dR+dB)>0?dR/(dR+dB):0.5;
+    cosRoma+=tn*rp; cosBola+=tn*(1-rp);
+  });
+  const cosTotal=cosRoma+cosBola;
+
+  // ── Empaque ──
+  let empTotal=0,cjvTotal=0,empRoma=0,empBola=0,cjvRoma=0,cjvBola=0;
+  balPalets.forEach(r=>{
+    const c=(r.cultivo||'').toUpperCase(); if(!isTomato(c)) return;
+    const kg=(r.peso||0)*(r.bultos||0);
+    if(r.estado==='CJV'){ cjvTotal+=kg; if(isRoma(c)) cjvRoma+=kg; else if(isBola(c)) cjvBola+=kg; }
+    else { empTotal+=kg; if(isRoma(c)) empRoma+=kg; else if(isBola(c)) empBola+=kg; }
+  });
+
+  // ── Rezaga ──
+  const rezTotal=rawRezaga.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to&&(r.grupo_cultivo||'').toUpperCase().includes('TOMATE'); }).reduce((s,r)=>s+(r.peso_neto||0),0);
+
+  const efic = cosTotal>0 ? (empTotal+cjvTotal)/cosTotal*100 : 0;
+  const spr  = cosTotal-empTotal-cjvTotal-rezTotal;
+
+  // ── KPIs ──
+  const T = v => fN(v/1000,1)+'<span style="font-size:.65rem;opacity:.55"> t</span>';
+  document.getElementById('bal-cosecha').innerHTML = T(cosTotal);
+  document.getElementById('bal-cos-roma').textContent = fN(cosRoma/1000,1)+'t';
+  document.getElementById('bal-cos-bola').textContent = fN(cosBola/1000,1)+'t';
+  document.getElementById('bal-empaque').innerHTML  = T(empTotal);
+  document.getElementById('bal-emp-roma').textContent = fN(empRoma/1000,1)+'t';
+  document.getElementById('bal-emp-bola').textContent = fN(empBola/1000,1)+'t';
+  document.getElementById('bal-cjv').innerHTML    = T(cjvTotal);
+  document.getElementById('bal-cjv-sub').textContent = fN(cjvTotal/1000,1)+'t en gaseo';
+  document.getElementById('bal-rezaga').innerHTML = T(rezTotal);
+  document.getElementById('bal-rez-sub').textContent = cosTotal>0?fN(rezTotal/cosTotal*100,1)+'% de cosecha':'—';
+  const eficEl = document.getElementById('bal-efic');
+  eficEl.innerHTML = fN(efic,1)+'<span style="font-size:.65rem;opacity:.55">%</span>';
+  eficEl.style.color = efic>=90?'#16a34a':efic>=80?'#d97706':'#dc2626';
+
+  // Roma / Bola cards
+  const rEfic = cosRoma>0?(empRoma+cjvRoma)/cosRoma*100:0;
+  const bEfic = cosBola>0?(empBola+cjvBola)/cosBola*100:0;
+  document.getElementById('bal-r-cos').innerHTML  = T(cosRoma);
+  document.getElementById('bal-r-emp').innerHTML  = T(empRoma+cjvRoma);
+  document.getElementById('bal-r-efic').innerHTML = fN(rEfic,1)+'%';
+  document.getElementById('bal-r-efic').style.color = rEfic>=90?'#16a34a':rEfic>=80?'#d97706':'#dc2626';
+  document.getElementById('bal-b-cos').innerHTML  = T(cosBola);
+  document.getElementById('bal-b-emp').innerHTML  = T(empBola+cjvBola);
+  document.getElementById('bal-b-efic').innerHTML = fN(bEfic,1)+'%';
+  document.getElementById('bal-b-efic').style.color = bEfic>=90?'#16a34a':bEfic>=80?'#d97706':'#dc2626';
+
+  // Sankey grande — swap temporal igual que en Resumen
+  const _sp=rawPalets, _sa=rawAcarreos;
+  rawPalets   = balPalets;
+  rawAcarreos = balAcarreos;
+  renderSankey(from, to, 'sankey-wrap-balance', {W:860, H:380, PAD:8, srcW:130, dstW:160});
+  rawPalets   = _sp;
+  rawAcarreos = _sa;
 }
 
 /* ── REPORTE COSECHA & EMPAQUE ──────────────────────────── */
@@ -3686,6 +3829,7 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     if(btn.dataset.panel === 'panel-inbound')   loadInbound();
     if(btn.dataset.panel === 'panel-pesos')     { renderPesos(); loadRezaga(); }
     if(btn.dataset.panel === 'panel-embarques') loadEmbarques();
+    if(btn.dataset.panel === 'panel-balance')   { if(!_resCycleKey) loadResumen(); else renderBalance(); }
   });
 });
 
