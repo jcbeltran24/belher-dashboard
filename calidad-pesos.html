@@ -1466,21 +1466,21 @@ function renderResumen(){
   document.getElementById('res-lbl-act').textContent = fmtR(actR);
   document.getElementById('res-lbl-ant').textContent = fmtR(antR);
 
-  // ── Empaque KPIs ──
-  const totalBultos = resPalets.reduce((s,r)=>s+(r.bultos||0), 0);
-  const bultosP1    = resPalets.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
-  const bultosP3    = resPalets.filter(r=>paletTier(r)==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
+  // ── Filtros tomate — todo el Resumen mide solo tomate ──
+  function isTomRem(r){ return (r.detalles||[]).some(d=>{ const c=(d.cultivo||'').toUpperCase(); return isRoma(c)||isBola(c); }); }
+  const tomPalets   = resPalets.filter(isCalidadPalet);
+  const tomAcarreos = resAcarreos.filter(isTomRem);
+
+  // ── Empaque KPIs (tomate) ──
+  const totalBultos = tomPalets.reduce((s,r)=>s+(r.bultos||0), 0);
+  const bultosP1    = tomPalets.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const bultosP3    = tomPalets.filter(r=>paletTier(r)==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0);
   const pctP1Emp = totalBultos ? bultosP1/totalBultos*100 : 0;
   const pctP3Emp = totalBultos ? bultosP3/totalBultos*100 : 0;
 
-  // Convert bultos to cajas (tomate default)
-  let totalCajasAct = 0;
-  {
-    const byGrpKg={};
-    resPalets.forEach(r=>{ const kg=(r.peso||0)*(r.bultos||0); const g=(r.grupo_cultivo||r.cultivo||'TOMATE').toUpperCase(); byGrpKg[g]=(byGrpKg[g]||0)+kg; });
-    function kpb(g){ if(g.includes('LIMON')||g.includes('LEMON')) return KG_PER_BOX_LIMON; if(g.includes('CHILE')||g.includes('PEPPER')) return KG_PER_BULTO_CHILE; return KG_PER_BOX_TOMATE; }
-    Object.entries(byGrpKg).forEach(([g,kg])=>{ totalCajasAct += toBoxes(kg, kpb(g)); });
-  }
+  // Cajas tomate (25 lbs = 11.34 kg)
+  const totalKgTom  = tomPalets.reduce((s,r)=>s+(r.peso||0)*(r.bultos||0),0);
+  const totalCajasAct = toBoxes(totalKgTom, KG_PER_BOX_TOMATE);
 
   document.getElementById('rv-p1').textContent = fN(pctP1Emp,1) + '%';
   document.getElementById('rv-cajas').innerHTML = fKM(totalCajasAct) + '<span style="font-size:.65rem;opacity:.6"> cx</span>';
@@ -1495,9 +1495,9 @@ function renderResumen(){
     else{ empAlert.className='ov-alert bad'; empAlert.textContent='✕ Calidad baja — ' + fN(pctP1Emp,1) + '% Primera'; }
   }
 
-  // Empaque sparkline: % primera by ISO week
+  // Empaque sparkline: % primera por semana (tomate)
   const empByWk = {};
-  resPalets.forEach(r=>{
+  tomPalets.forEach(r=>{
     const d=(r.fecha_empaque||'').split('T')[0]; if(!d) return;
     const wk=isoWeekLabel(d);
     if(!empByWk[wk]) empByWk[wk]={tot:0,p1:0};
@@ -1507,24 +1507,24 @@ function renderResumen(){
   const empWks=Object.keys(empByWk).sort((a,b)=>parseInt(a.replace('Sem ',''))-parseInt(b.replace('Sem ','')));
   sparkBars(document.getElementById('rv-emp-spark'), empWks.map(w=>empByWk[w].tot?empByWk[w].p1/empByWk[w].tot*100:0),'#16a34a');
 
-  // ── Báscula KPIs ──
-  const netoKg   = resAcarreos.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0);
-  const netoTon  = netoKg/1000;
-  const rems     = resAcarreos.length;
-  const avgRem   = rems ? netoKg/rems : 0;
+  // ── Báscula KPIs (tomate) ──
+  const netoKg  = tomAcarreos.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0);
+  const rems    = tomAcarreos.length;
+  const avgRem  = rems ? netoKg/rems : 0;
+  const fKg = v => v>=1e6 ? fN(v/1e6,2)+'M' : fK(Math.round(v));
 
-  document.getElementById('rv-neto').innerHTML = fN(netoTon,1)+'<span style="font-size:.7rem;opacity:.6"> t</span>';
+  document.getElementById('rv-neto').innerHTML = fKg(netoKg)+'<span style="font-size:.7rem;opacity:.6"> kg</span>';
   document.getElementById('rv-rems').textContent = fK(rems);
   document.getElementById('rv-avg-rem').innerHTML = fK(Math.round(avgRem))+'<span style="font-size:.65rem;opacity:.6"> kg</span>';
 
-  // Báscula daily sparkline
+  // Báscula daily sparkline (tomate)
   const basByDay={};
-  resAcarreos.forEach(r=>{
+  tomAcarreos.forEach(r=>{
     const d=(r.fecha||'').split('T')[0]; if(!d) return;
     basByDay[d]=(basByDay[d]||0)+((r.peso_bruto||0)-(r.tara||0));
   });
   const basDays=Object.keys(basByDay).sort().slice(-14);
-  sparkBars(document.getElementById('rv-bas-spark'), basDays.map(d=>basByDay[d]/1000),'#1d4ed8');
+  sparkBars(document.getElementById('rv-bas-spark'), basDays.map(d=>basByDay[d]),'#1d4ed8');
 
   // ── Inbound KPIs ──
   if(rawInbound.length){
@@ -1572,39 +1572,29 @@ function renderResumen(){
   // ── Comparativo — mismo período activo vs mismo período ciclo anterior ──
   const cmpRange  = priorEquivRange();
   const actR2     = activeRange || { from, to };
-  const actPal    = filterByRange(_resPalets.length ? _resPalets : rawPalets, 'fecha_empaque', actR2);
-  const actAcr    = filterByRange(_resAcarreos.length ? _resAcarreos : rawAcarreos, 'fecha', actR2);
-  const priorPal  = filterByRange(cmpPalAnt,'fecha_empaque', cmpRange);
-  const priorAcr  = filterByRange(cmpAcrAnt,'fecha',         cmpRange);
+  const actPal    = filterByRange(_resPalets.length ? _resPalets : rawPalets, 'fecha_empaque', actR2).filter(isCalidadPalet);
+  const actAcr    = filterByRange(_resAcarreos.length ? _resAcarreos : rawAcarreos, 'fecha', actR2).filter(isTomRem);
+  const priorPal  = filterByRange(cmpPalAnt,'fecha_empaque', cmpRange).filter(isCalidadPalet);
+  const priorAcr  = filterByRange(cmpAcrAnt,'fecha',         cmpRange).filter(isTomRem);
 
   // Actual period KPIs for Comparativo
   const actTotB   = actPal.reduce((s,r)=>s+(r.bultos||0),0);
   const actP1B    = actPal.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
   const actPctP1  = actTotB ? actP1B/actTotB*100 : 0;
-  let   actCajas  = 0;
-  { const byGrpKg={};
-    actPal.forEach(r=>{ const kg=(r.peso||0)*(r.bultos||0); const g=(r.grupo_cultivo||r.cultivo||'TOMATE').toUpperCase(); byGrpKg[g]=(byGrpKg[g]||0)+kg; });
-    function kpbA(g){ if(g.includes('LIMON')||g.includes('LEMON')) return KG_PER_BOX_LIMON; if(g.includes('CHILE')||g.includes('PEPPER')) return KG_PER_BULTO_CHILE; return KG_PER_BOX_TOMATE; }
-    Object.entries(byGrpKg).forEach(([g,kg])=>{ actCajas += toBoxes(kg, kpbA(g)); }); }
-  const actNeto   = actAcr.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0)/1000;
+  const actCajas  = toBoxes(actPal.reduce((s,r)=>s+(r.peso||0)*(r.bultos||0),0), KG_PER_BOX_TOMATE);
+  const actNeto   = actAcr.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0);
   const actDias2  = new Set(actAcr.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
 
   const prTotB   = priorPal.reduce((s,r)=>s+(r.bultos||0),0);
   const prP1B    = priorPal.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
   const prPctP1  = prTotB ? prP1B/prTotB*100 : 0;
-  let prCajas    = 0;
-  {
-    const byGrpKg={};
-    priorPal.forEach(r=>{ const kg=(r.peso||0)*(r.bultos||0); const g=(r.grupo_cultivo||r.cultivo||'TOMATE').toUpperCase(); byGrpKg[g]=(byGrpKg[g]||0)+kg; });
-    function kpb2(g){ if(g.includes('LIMON')||g.includes('LEMON')) return KG_PER_BOX_LIMON; if(g.includes('CHILE')||g.includes('PEPPER')) return KG_PER_BULTO_CHILE; return KG_PER_BOX_TOMATE; }
-    Object.entries(byGrpKg).forEach(([g,kg])=>{ prCajas += toBoxes(kg, kpb2(g)); });
-  }
-  const prNeto   = priorAcr.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0)/1000;
+  const prCajas  = toBoxes(priorPal.reduce((s,r)=>s+(r.peso||0)*(r.bultos||0),0), KG_PER_BOX_TOMATE);
+  const prNeto   = priorAcr.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0);
   const prDias   = new Set(priorAcr.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
-  const actDias  = new Set(resAcarreos.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
+  const actDias  = new Set(tomAcarreos.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
 
-  document.getElementById('res-neto-act').textContent  = fN(actNeto,1) + ' t';
-  document.getElementById('res-neto-ant').textContent  = cmpReady ? fN(prNeto,1) + ' t' : '—';
+  document.getElementById('res-neto-act').textContent  = fKg(actNeto);
+  document.getElementById('res-neto-ant').textContent  = cmpReady ? fKg(prNeto) : '—';
   document.getElementById('res-p1-act').textContent    = fN(actPctP1,1) + '%';
   document.getElementById('res-p1-ant').textContent    = cmpReady ? fN(prPctP1,1) + '%' : '—';
   document.getElementById('res-cajas-act').innerHTML   = fKM(actCajas) + ' cx';
@@ -1615,8 +1605,8 @@ function renderResumen(){
   // Deltas on overview cards
   document.getElementById('rv-p1-delta').innerHTML      = deltaChip(pctP1Emp, prPctP1, true);
   document.getElementById('rv-cajas-delta').innerHTML   = deltaChip(totalCajasAct, prCajas, true);
-  document.getElementById('rv-merma-emp-delta').innerHTML = deltaChip(pctP3Emp, prTotB?priorPal.filter(r=>r.calidad==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0)/prTotB*100:null, false);
-  document.getElementById('rv-neto-delta').innerHTML    = deltaChip(netoTon, prNeto, true);
+  document.getElementById('rv-merma-emp-delta').innerHTML = deltaChip(pctP3Emp, prTotB?priorPal.filter(r=>paletTier(r)==='TERCERA').reduce((s,r)=>s+(r.bultos||0),0)/prTotB*100:null, false);
+  document.getElementById('rv-neto-delta').innerHTML    = deltaChip(netoKg, prNeto, true);
   const prAvgRem = priorAcr.length ? priorAcr.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0)/priorAcr.length : 0;
   document.getElementById('rv-avg-delta').innerHTML     = deltaChip(avgRem, prAvgRem, true);
 
@@ -1632,10 +1622,10 @@ function renderResumen(){
     });
     return m;
   }
-  // Filter actAcr to activeRange so X-axis matches selected period
-  const actAcrTrend = filterByRange(_resAcarreos.length ? _resAcarreos : rawAcarreos, 'fecha', activeRange || {from, to});
+  // Tendencia tomate — filtrar remisiones tomate por activeRange
+  const actAcrTrend = filterByRange(_resAcarreos.length ? _resAcarreos : rawAcarreos, 'fecha', activeRange || {from, to}).filter(isTomRem);
   const wActNeto = netoByWk(actAcrTrend, cycles.actual.from);
-  const wAntNeto = netoByWk(cmpAcrAnt,  cycles.anterior.from);
+  const wAntNeto = netoByWk(cmpAcrAnt.filter(isTomRem), cycles.anterior.from);
   // X-axis only covers weeks present in current period
   const wks = [...new Set(Object.keys(wActNeto).map(Number))].sort((a,b)=>a-b);
 
