@@ -2402,16 +2402,29 @@ function isoWeekSortKey(isoDate){
 function renderSankey(from, to, targetId='sankey-wrap'){
   document.getElementById('san-range-lbl').textContent = fDateFull(from)+' – '+fDateFull(to);
 
-  // ── Cosecha ──────────────────────────────────────────────
+  // ── Cosecha — neto báscula escalado por proporción tomate del camión ──
+  // Los detalles usan cantidad×pesoPromedio (estimado campo) que subestima
+  // el peso real. Usamos peso_bruto-tara y lo distribuimos por la proporción
+  // que ocupan Roma/Bola dentro del total de kilos del detalles.
   let cosRoma=0, cosBola=0;
   rawAcarreos.forEach(r=>{
     const d=(r.fecha||'').split('T')[0];
     if(d<from||d>to) return;
+    const neto=(r.peso_bruto||0)-(r.tara||0);
+    if(neto<=0) return;
+    let dRoma=0,dBola=0,dTotal=0;
     (r.detalles||[]).forEach(det=>{
       const c=(det.cultivo||'').toUpperCase();
-      if(isRoma(c))      cosRoma+=det.kilos||0;
-      else if(isBola(c)) cosBola+=det.kilos||0;
+      const kg=det.kilos||0;
+      dTotal+=kg;
+      if(isRoma(c)) dRoma+=kg;
+      else if(isBola(c)) dBola+=kg;
     });
+    if(dTotal<=0) return;
+    const tomNeto=neto*(dRoma+dBola)/dTotal;
+    const rPct=(dRoma+dBola)>0?dRoma/(dRoma+dBola):0.5;
+    cosRoma+=tomNeto*rPct;
+    cosBola+=tomNeto*(1-rPct);
   });
   const cosTotal=cosRoma+cosBola;
 
