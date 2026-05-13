@@ -53,7 +53,7 @@ header{background:#0c2117;height:46px;display:flex;align-items:center;padding:0 
 
 /* ── FILTERS BAR ── */
 .filters{background:#162d1f;padding:6px 20px;display:flex;flex-direction:column;gap:4px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
-.f-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.f-row{display:flex;flex-wrap:nowrap;align-items:center;gap:6px;overflow-x:auto;overflow-y:visible;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .f-label{display:none}
 .f-group{display:flex;align-items:center}
 /* Period pill group */
@@ -537,6 +537,31 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
   <!-- ══ PANEL: RESUMEN ════════════════════════════════════ -->
   <div class="panel active" id="panel-resumen">
 
+    <!-- Precios de Mercado LA Terminal — arriba de todo -->
+    <div class="sec">Precios Mercado <span class="sec-tag" id="mkt-date">—</span><span class="sec-tag" style="font-size:.67rem;opacity:.55;margin-left:4px">LA Terminal · USDA</span></div>
+    <div class="mkt-grid" style="margin-bottom:10px">
+      <div class="mkt-card">
+        <div class="mkt-name">Tomate Bola</div>
+        <div class="mkt-price" id="mkt-bola-val"><span class="skel"></span></div>
+        <div class="mkt-sub">25 lb · MX · campo abierto</div>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-name">Tomate Roma</div>
+        <div class="mkt-price" id="mkt-roma-val"><span class="skel"></span></div>
+        <div class="mkt-sub">25 lb · MX · plum type</div>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-name">Limón Persa</div>
+        <div class="mkt-price" id="mkt-lime-val"><span class="skel"></span></div>
+        <div class="mkt-sub">40 lb · MX · seedless</div>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-name">Chile Bell</div>
+        <div class="mkt-price" id="mkt-chile-val"><span class="skel"></span></div>
+        <div class="mkt-sub">1⅑ bushel · MX</div>
+      </div>
+    </div>
+
     <div class="sec">Vista General <span class="sec-tag" id="res-rng">—</span></div>
 
     <!-- 3 department overview cards -->
@@ -621,31 +646,6 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
         </div>
       </div>
 
-    </div>
-
-    <!-- Precios de Mercado LA Terminal -->
-    <div class="sec">Precios Mercado <span class="sec-tag" id="mkt-date">—</span><span class="sec-tag" style="font-size:.67rem;opacity:.55;margin-left:4px">LA Terminal · USDA</span></div>
-    <div class="mkt-grid" style="margin-bottom:10px">
-      <div class="mkt-card">
-        <div class="mkt-name">Tomate Bola</div>
-        <div class="mkt-price" id="mkt-bola-val"><span class="skel"></span></div>
-        <div class="mkt-sub">25 lb · MX · campo abierto</div>
-      </div>
-      <div class="mkt-card">
-        <div class="mkt-name">Tomate Roma</div>
-        <div class="mkt-price" id="mkt-roma-val"><span class="skel"></span></div>
-        <div class="mkt-sub">25 lb · MX · plum type</div>
-      </div>
-      <div class="mkt-card">
-        <div class="mkt-name">Limón Persa</div>
-        <div class="mkt-price" id="mkt-lime-val"><span class="skel"></span></div>
-        <div class="mkt-sub">40 lb · MX · seedless</div>
-      </div>
-      <div class="mkt-card">
-        <div class="mkt-name">Chile Bell</div>
-        <div class="mkt-price" id="mkt-chile-val"><span class="skel"></span></div>
-        <div class="mkt-sub">1⅑ bushel · MX</div>
-      </div>
     </div>
 
     <!-- Comparativo ciclo anterior -->
@@ -1790,21 +1790,20 @@ function renderResumen(){
   // X-axis only covers weeks present in current period
   const wks = [...new Set(Object.keys(wActNeto).map(Number))].sort((a,b)=>a-b);
 
+  const _resTrendType = wks.length <= 2 ? 'bar' : 'line';
   mkChart('chart-res-trend',{
-    type:'line',
+    type: _resTrendType,
     data:{
       labels: wks.map(w=>`S${w}`),
       datasets:[
         { label: cycles.labelAct,
           data: wks.map(w=>wActNeto[w]!=null?(wActNeto[w]/1000).toFixed(1):null),
-          borderColor:'#16a34a',
-          borderWidth:2.5, pointRadius:3, pointHoverRadius:6,
-          fill:true, tension:.35, spanGaps:false, backgroundColor:gradFn(22,163,74,.2,0) },
+          borderColor:'#16a34a', backgroundColor: _resTrendType==='bar' ? 'rgba(22,163,74,.72)' : gradFn(22,163,74,.2,0),
+          ...(_resTrendType==='line' ? { borderWidth:2.5, pointRadius:3, pointHoverRadius:6, fill:true, tension:.35, spanGaps:false } : { borderRadius:4 }) },
         { label: cycles.labelAnt,
           data: wks.map(w=>wAntNeto[w]!=null?(wAntNeto[w]/1000).toFixed(1):null),
-          borderColor:'#d97706',
-          borderWidth:2, borderDash:[6,4], pointRadius:2, pointHoverRadius:5,
-          fill:true, tension:.35, spanGaps:false, backgroundColor:gradFn(217,119,6,.12,0) }
+          borderColor:'#d97706', backgroundColor: _resTrendType==='bar' ? 'rgba(217,119,6,.55)' : gradFn(217,119,6,.12,0),
+          ...(_resTrendType==='line' ? { borderWidth:2, borderDash:[6,4], pointRadius:2, pointHoverRadius:5, fill:true, tension:.35, spanGaps:false } : { borderRadius:4 }) }
       ]
     },
     options:{
@@ -3597,15 +3596,16 @@ function renderInbound(from, to){
   const days  = Object.keys(byDate).sort();
   const p1pct = days.map(d => byDate[d].denom ? +Math.min(100, byDate[d].p1/byDate[d].denom*100).toFixed(1) : null);
   _wxInbDays = days;
+  const _inbType = days.length <= 2 ? 'bar' : 'line';
   mkChart('chart-inb-primera',{
-    type:'line',
+    type: _inbType,
     data:{
       labels: days.map(fDate),
       datasets:[{
         label:'% Primera', data: p1pct,
-        borderColor:'#16a34a', backgroundColor:gradFn(22,163,74,.2,0),
-        borderWidth:2.5, pointRadius:4, pointHoverRadius:7,
-        fill:true, tension:.3, spanGaps:false
+        borderColor:'#16a34a',
+        backgroundColor: _inbType==='bar' ? 'rgba(22,163,74,.72)' : gradFn(22,163,74,.2,0),
+        ...(_inbType==='line' ? { borderWidth:2.5, pointRadius:4, pointHoverRadius:7, fill:true, tension:.3, spanGaps:false } : { borderRadius:4 })
       }]
     },
     options:{
@@ -4197,8 +4197,8 @@ async function loadMarketPrices(){
     const romaRows  = prices.filter(r => /plum/i.test(r.commodity) && /mexico/i.test(r.origin));
     const limeRows  = fruits.filter(r => /lime/i.test(r.commodity) && /mexico/i.test(r.origin));
     const chileRows = prices.filter(r =>
-      /pepper.*bell|bell.*pepper/i.test(r.commodity) &&
-      /mexico/i.test(r.origin) && /1 1\/9/i.test(r.package||'')
+      /bell/i.test(r.commodity) && /pepper/i.test(r.commodity) &&
+      /mexico/i.test(r.origin)
     );
 
     function mkRange(rows){
