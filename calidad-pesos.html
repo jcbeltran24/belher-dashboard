@@ -53,10 +53,10 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ── FILTERS BAR ── */
-.filters{background:var(--dark2);padding:5px 20px;display:flex;flex-direction:column;gap:5px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
-.f-row{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
-.f-label{font-size:var(--t-nano);font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.55)}
-.f-group{display:flex;flex-direction:column;gap:2px}
+.filters{background:var(--dark2);padding:6px 20px;display:flex;flex-direction:column;gap:4px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
+.f-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.f-label{display:none}
+.f-group{display:flex;align-items:center}
 /* Period pill group */
 .period-btns{display:flex;gap:1px;padding:2px;background:rgba(0,0,0,.18);border-radius:8px;flex-shrink:0}
 .p-btn{height:22px;padding:0 10px;border-radius:6px;background:transparent;border:none;color:rgba(255,255,255,.5);font-size:var(--t-nano);font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;transition:background .12s,color .12s}
@@ -88,13 +88,14 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;
 .cmp-btn:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.22)}
 .cmp-btn.active{background:rgba(124,58,237,.18);border-color:rgba(167,139,250,.4);color:#c4b5fd;font-weight:700}
 
-.f-select{height:24px;padding:0 8px;border-radius:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);color:#fff;font-size:.67rem;font-family:inherit;outline:none;transition:.15s;min-width:110px;cursor:pointer}
-.f-select:focus{border-color:rgba(251,191,36,.5);background:rgba(255,255,255,.1)}
+.f-select{height:26px;padding:0 24px 0 10px;border-radius:6px;background:rgba(255,255,255,.06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,.4)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 7px center / 10px no-repeat;border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.85);font-size:.68rem;font-family:inherit;outline:none;transition:.15s;cursor:pointer;appearance:none;-webkit-appearance:none}
+.f-select:hover{background-color:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22)}
+.f-select:focus{border-color:rgba(251,191,36,.5);background-color:rgba(255,255,255,.1)}
 .f-select option{background:#162d1f;color:#fff}
-.f-reset{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);font-size:.63rem;font-weight:600;font-family:inherit;cursor:pointer;transition:.14s}
-.f-reset:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8)}
-.f-count{margin-left:auto;font-size:.6rem;color:rgba(255,255,255,.28);white-space:nowrap;font-variant-numeric:tabular-nums}
-.f-divider{width:1px;height:14px;background:rgba(255,255,255,.08);align-self:center;flex-shrink:0}
+.f-reset{height:26px;padding:0 10px;border-radius:6px;background:transparent;border:none;color:rgba(255,255,255,.35);font-size:.67rem;font-weight:500;font-family:inherit;cursor:pointer;transition:.14s;text-decoration:underline;text-underline-offset:2px}
+.f-reset:hover{color:rgba(255,255,255,.75)}
+.f-count{font-size:.6rem;color:rgba(255,255,255,.28);white-space:nowrap;font-variant-numeric:tabular-nums}
+.f-divider{display:none}
 
 /* ── TABS ── */
 .view-tabs{background:var(--dark2);display:flex;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;overflow-x:auto;scrollbar-width:none}
@@ -432,18 +433,14 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 
 <!-- FILTERS -->
 <div class="filters">
-  <!-- Row 1: period pills + month picker + comparison -->
+  <!-- Row 1: always visible -->
   <div class="f-row">
     <div class="period-btns">
       <button class="p-btn" data-period="hoy">Hoy</button>
       <button class="p-btn" data-period="semana">Semana</button>
-      <button class="p-btn" data-period="mes">Mes actual</button>
-      <div class="p-sep"></div>
-      <button class="p-btn" data-period="ciclo">Ciclo act.</button>
-      <button class="p-btn" data-period="ciclo-ant">Ciclo ant.</button>
+      <button class="p-btn" data-period="mes">Mes</button>
+      <button class="p-btn" data-period="ciclo">Ciclo</button>
     </div>
-
-    <!-- Month picker popover -->
     <div class="mpicker-wrap" id="mpicker-wrap">
       <button class="mpicker-btn" id="mpicker-btn" onclick="openMPicker(event)" aria-label="Seleccionar mes">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -460,41 +457,25 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div class="mp-today-hint">Selecciona un mes para cargarlo completo</div>
       </div>
     </div>
-
-    <div class="f-divider"></div>
-
-    <!-- Comparison toggle -->
     <button class="cmp-btn" id="btn-cmp" onclick="toggleComparison()" aria-label="Comparar con ciclo anterior">
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
       <span id="cmp-lbl">vs anterior</span>
     </button>
+    <div style="width:1px;height:14px;background:rgba(255,255,255,.1);flex-shrink:0"></div>
+    <select class="f-select" id="f-cultivo"><option value="">Todos los cultivos</option></select>
+    <div class="f-count" id="f-count" style="margin-left:auto"></div>
   </div>
-
-  <!-- Row 2: dimension filters -->
-  <div class="f-row">
-    <div class="f-group">
-      <div class="f-label">Cultivo</div>
-      <select class="f-select" id="f-cultivo"><option value="">Todos</option></select>
-    </div>
-    <div class="f-group f-palets-only">
-      <div class="f-label">Etiqueta</div>
-      <select class="f-select" id="f-etiqueta"><option value="">Todas</option></select>
-    </div>
-    <div class="f-group f-palets-only">
-      <div class="f-label">Calidad</div>
-      <select class="f-select" id="f-calidad">
-        <option value="">Todas</option>
-        <option value="PRIMERA">Primera (Calavo / Yameto)</option>
-        <option value="SEGUNDA">Segunda (Bueno / Tolin / JZ)</option>
-        <option value="TERCERA">Tercera (Don Memo)</option>
-      </select>
-    </div>
-    <div class="f-group f-palets-only">
-      <div class="f-label">Tamaño</div>
-      <select class="f-select" id="f-tamano"><option value="">Todos</option></select>
-    </div>
-    <button class="f-reset" onclick="resetDimFilters()">Limpiar</button>
-    <div class="f-count" id="f-count"></div>
+  <!-- Row 2: Calidades filters — hidden by default -->
+  <div class="f-row" id="f-filters-row" style="display:none">
+    <select class="f-select" id="f-etiqueta"><option value="">Todas las etiquetas</option></select>
+    <select class="f-select" id="f-calidad">
+      <option value="">Todas las calidades</option>
+      <option value="PRIMERA">Primera (Calavo / Yameto)</option>
+      <option value="SEGUNDA">Segunda (Bueno / Tolin / JZ)</option>
+      <option value="TERCERA">Tercera (Don Memo)</option>
+    </select>
+    <select class="f-select" id="f-tamano"><option value="">Todos los tamaños</option></select>
+    <button class="f-reset" onclick="resetDimFilters()">Limpiar filtros</button>
   </div>
 </div>
 
@@ -3660,11 +3641,11 @@ function renderEmbarquesMap(){
 
 /* ── PANEL TABS ─────────────────────────────────────────── */
 function syncFilterContext(panelId){
-  const paletsOnly = document.querySelectorAll('.f-palets-only');
-  const isPaletsTab = panelId === 'panel-calidad';
-  paletsOnly.forEach(el => el.classList.toggle('dimmed', !isPaletsTab));
-  if(!isPaletsTab){
-    // Clear palet-only selects so they don't silently affect calidad re-renders
+  const filtersRow = document.getElementById('f-filters-row');
+  if(panelId === 'panel-calidad'){
+    filtersRow.style.display = 'flex';
+  } else {
+    filtersRow.style.display = 'none';
     document.getElementById('f-etiqueta').value = '';
     document.getElementById('f-calidad').value  = '';
     document.getElementById('f-tamano').value   = '';
@@ -3679,11 +3660,12 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     document.getElementById(btn.dataset.panel).classList.add('active');
     syncFilterContext(btn.dataset.panel);
     if(btn.dataset.panel === 'panel-resumen')   loadResumen();
+    if(btn.dataset.panel === 'panel-calidad')   renderCalidad();
     if(btn.dataset.panel === 'panel-tomate')    loadTomate();
     if(btn.dataset.panel === 'panel-limon')     loadLimon();
     if(btn.dataset.panel === 'panel-chile')     loadChile();
     if(btn.dataset.panel === 'panel-inbound')   loadInbound();
-    if(btn.dataset.panel === 'panel-pesos')     loadRezaga();
+    if(btn.dataset.panel === 'panel-pesos')     { renderPesos(); loadRezaga(); }
     if(btn.dataset.panel === 'panel-embarques') loadEmbarques();
   });
 });
