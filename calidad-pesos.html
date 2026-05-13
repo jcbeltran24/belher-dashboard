@@ -482,12 +482,11 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 <!-- VIEW TABS -->
 <div class="view-tabs">
   <button class="view-tab active" data-panel="panel-resumen">Resumen</button>
-  <button class="view-tab" data-panel="panel-calidad">Calidades · Empaque</button>
-  <button class="view-tab" data-panel="panel-pesos">Pesos · Báscula</button>
-  <button class="view-tab" data-panel="panel-tomate">Tomate</button>
-  <button class="view-tab" data-panel="panel-limon">Limón</button>
-  <button class="view-tab" data-panel="panel-chile">Chile</button>
-  <button class="view-tab" data-panel="panel-inbound">Inbound · Campo</button>
+  <button class="view-tab" data-panel="panel-pesos">Báscula</button>
+  <button class="view-tab" data-panel="panel-inbound">Calidad Inbound</button>
+  <button class="view-tab" data-panel="panel-calidad">Calidad Empaque</button>
+  <button class="view-tab" data-panel="panel-tomate">Producción Tomate</button>
+  <button class="view-tab" data-panel="panel-otros">Producción Otros</button>
   <button class="view-tab" data-panel="panel-embarques">Embarques</button>
 </div>
 
@@ -858,7 +857,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   </div><!-- /panel-tomate -->
 
   <!-- ══ PANEL: LIMÓN ═══════════════════════════════════════ -->
-  <div class="panel" id="panel-limon">
+  <div class="panel" id="panel-otros">
     <div class="sec">Producción Limón
       <span class="sec-tag" id="lim-range-lbl">—</span>
       <span class="sec-source">vw_acarreos · detalles</span>
@@ -908,10 +907,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         </table>
       </div>
     </div>
-  </div><!-- /panel-limon -->
-
-  <!-- ══ PANEL: CHILE ════════════════════════════════════════ -->
-  <div class="panel" id="panel-chile">
+    <div style="height:1px;background:var(--border);margin:18px 0"></div>
     <div class="sec">Producción Chile
       <span class="sec-tag" id="chi-range-lbl">—</span>
       <span class="sec-source">vw_acarreos · detalles</span>
@@ -940,7 +936,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         </table>
       </div>
     </div>
-  </div><!-- /panel-chile -->
+  </div><!-- /panel-otros -->
 
   <!-- ══ PANEL: INBOUND · CAMPO ═══════════════════════════ -->
   <div class="panel" id="panel-inbound">
@@ -2260,8 +2256,10 @@ function applyRawData(palets, acarreos, from, to, source){
   // Re-render whichever crop tab is active
   const activePanel = document.querySelector('.panel.active')?.id;
   if(activePanel === 'panel-tomate')  renderTomate(from, to);
-  if(activePanel === 'panel-limon'){   renderCropPanel({ rows: flattenCrop(acarreos, isLimon, null), from, to, ids:{rangeLbl:'lim-range-lbl',total:'lim-total',totalSub:'lim-total-sub',dias:'lim-dias',prom:'lim-prom'}, chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody', kgPerUnit:KG_PER_BOX_LIMON, unitLabel:'cx' }); renderLimonPalets(); }
-  if(activePanel === 'panel-chile')   renderCropPanel({ rows: flattenCrop(acarreos, isChile, null), from, to, ids:{rangeLbl:'chi-range-lbl',total:'chi-total',totalSub:'chi-total-sub',dias:'chi-dias',vars:'chi-vars'}, chartSemId:'chart-chi-sem', varId:'chi-var-bars', tbodyId:'chi-tbody', kgPerUnit:KG_PER_BULTO_CHILE, unitLabel:'bts' });
+  if(activePanel === 'panel-otros'){
+    renderCropPanel({ rows: flattenCrop(acarreos, isLimon, null), from, to, ids:{rangeLbl:'lim-range-lbl',total:'lim-total',totalSub:'lim-total-sub',dias:'lim-dias',prom:'lim-prom'}, chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody', kgPerUnit:KG_PER_BOX_LIMON, unitLabel:'cx' }); renderLimonPalets();
+    renderCropPanel({ rows: flattenCrop(acarreos, isChile, null), from, to, ids:{rangeLbl:'chi-range-lbl',total:'chi-total',totalSub:'chi-total-sub',dias:'chi-dias',vars:'chi-vars'}, chartSemId:'chart-chi-sem', varId:'chi-var-bars', tbodyId:'chi-tbody', kgPerUnit:KG_PER_BULTO_CHILE, unitLabel:'bts' });
+  }
   if(activePanel === 'panel-inbound')  loadInbound();
   if(activePanel === 'panel-pesos')    loadRezaga();
   if(activePanel === 'panel-embarques') loadEmbarques();
@@ -3662,8 +3660,7 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     if(btn.dataset.panel === 'panel-resumen')   loadResumen();
     if(btn.dataset.panel === 'panel-calidad')   renderCalidad();
     if(btn.dataset.panel === 'panel-tomate')    loadTomate();
-    if(btn.dataset.panel === 'panel-limon')     loadLimon();
-    if(btn.dataset.panel === 'panel-chile')     loadChile();
+    if(btn.dataset.panel === 'panel-otros')     { loadLimon(); loadChile(); }
     if(btn.dataset.panel === 'panel-inbound')   loadInbound();
     if(btn.dataset.panel === 'panel-pesos')     { renderPesos(); loadRezaga(); }
     if(btn.dataset.panel === 'panel-embarques') loadEmbarques();
