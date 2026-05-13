@@ -714,7 +714,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       <div class="stat cb"><div class="stat-lbl">Bruto Total</div><div class="stat-val" id="ps-bruto"><span class="skel"></span></div><div class="stat-sub">kg brutos</div></div>
       <div class="stat ca"><div class="stat-lbl">Tara Total</div><div class="stat-val" id="ps-tara"><span class="skel"></span></div><div class="stat-sub">kg descontados</div></div>
       <div class="stat cp"><div class="stat-lbl">Neto Prom/Rem.</div><div class="stat-val" id="ps-avg"><span class="skel"></span></div><div class="stat-sub">kg por remisión</div><div class="stat-delta" id="d-avg"></div></div>
-      <div class="stat cg"><div class="stat-lbl">Mejor Día</div><div class="stat-val" id="ps-peak"><span class="skel"></span></div><div class="stat-sub" id="ps-peak-date">—</div></div>
+      <div class="stat ca"><div class="stat-lbl">% Rezaga Tomate</div><div class="stat-val" id="ps-peak">—</div><div class="stat-sub" id="ps-peak-date">—</div></div>
     </div>
 
     <div class="g2" style="margin-bottom:10px">
@@ -945,7 +945,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
     <!-- KPI strip -->
     <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(155px,1fr))">
       <div class="stat cg">
-        <div class="stat-lbl">% Primera <span style="opacity:.55;font-weight:400;font-size:.58rem">obj. ≥ 65%</span></div>
+        <div class="stat-lbl">% Primera <span style="opacity:.55;font-weight:400;font-size:.58rem">obj. ≥ 85%</span></div>
         <div class="stat-val" id="inb-primera"><span class="skel"></span></div>
         <div class="stat-sub" id="inb-primera-sub">—</div>
       </div>
@@ -970,6 +970,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div class="stat-sub" id="inb-ftamano">—% fuera tamaño</div>
       </div>
     </div>
+    <div id="inb-fcolor-alert" class="ov-alert bad" style="display:none;margin-bottom:10px"></div>
 
     <!-- Row 1: trend % primera + top daños -->
     <div class="g2" style="margin-bottom:10px">
@@ -1538,15 +1539,15 @@ function renderResumen(){
     const tCol = avgTemp<28?'var(--green)':avgTemp<33?'var(--accent)':'var(--red)';
 
     const inbP1Card = document.getElementById('inb-primera')?.closest('.stat');
-    if(inbP1Card){ inbP1Card.classList.remove('s-good','s-warn','s-bad'); inbP1Card.classList.add(pctP1Inb>=65?'s-good':pctP1Inb>=55?'s-warn':'s-bad'); }
-    document.getElementById('rv-inb-p1').innerHTML = `<span style="color:${pctP1Inb>=65?'var(--green)':pctP1Inb>=55?'var(--accent)':'var(--red)'}">${fN(pctP1Inb,1)}%</span>`;
+    if(inbP1Card){ inbP1Card.classList.remove('s-good','s-warn','s-bad'); inbP1Card.classList.add(pctP1Inb>=85?'s-good':pctP1Inb>=70?'s-warn':'s-bad'); }
+    document.getElementById('rv-inb-p1').innerHTML = `<span style="color:${pctP1Inb>=85?'var(--green)':pctP1Inb>=70?'var(--accent)':'var(--red)'}">${fN(pctP1Inb,1)}%</span>`;
     document.getElementById('rv-inb-merma').textContent = fN(avgMerma,1)+'%';
     document.getElementById('rv-inb-temp').innerHTML = `<span style="color:${tCol}">${fN(avgTemp,1)}°</span>`;
 
     const inbAlert = document.getElementById('rv-inb-alert');
     inbAlert.style.display = 'flex';
-    if(pctP1Inb>=65){ inbAlert.className='ov-alert ok'; inbAlert.textContent='✓ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
-    else if(pctP1Inb>=55){ inbAlert.className='ov-alert warn'; inbAlert.textContent='⚠ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
+    if(pctP1Inb>=85){ inbAlert.className='ov-alert ok'; inbAlert.textContent='✓ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
+    else if(pctP1Inb>=70){ inbAlert.className='ov-alert warn'; inbAlert.textContent='⚠ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
     else{ inbAlert.className='ov-alert bad'; inbAlert.textContent='✕ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
 
     // Inbound sparkline: % primera by date
@@ -2234,13 +2235,18 @@ function renderPesos(){
   const peakVal = Math.max(...Object.values(byDate));
   const peakDate = dates.find(d=>byDate[d]===peakVal)||'—';
 
-  document.getElementById('ps-neto').innerHTML      = fN(totNeto/1000)+'<span class="stat-unit">t</span>';
+  const fKgStat = v => v>=1e6?fN(v/1e6,2)+'<span class="stat-unit">M kg</span>':fK(Math.round(v))+'<span class="stat-unit">kg</span>';
+  document.getElementById('ps-neto').innerHTML      = fKgStat(totNeto);
   document.getElementById('ps-remisiones').textContent = rows.length+' remisiones';
-  document.getElementById('ps-bruto').innerHTML     = fK(Math.round(totBruto))+'<span class="stat-unit">kg</span>';
-  document.getElementById('ps-tara').innerHTML      = fK(Math.round(totTara))+'<span class="stat-unit">kg</span>';
+  document.getElementById('ps-bruto').innerHTML     = fKgStat(totBruto);
+  document.getElementById('ps-tara').innerHTML      = fKgStat(totTara);
   document.getElementById('ps-avg').innerHTML       = fK(Math.round(avgNeto))+'<span class="stat-unit">kg</span>';
-  document.getElementById('ps-peak').innerHTML      = fN(peakVal/1000)+'<span class="stat-unit">t</span>';
-  document.getElementById('ps-peak-date').textContent = peakDate ? fDate(peakDate) : '—';
+  // % Rezaga tomate en el período
+  const from_p = activeRange?.from||iso(new Date()), to_p = activeRange?.to||iso(new Date());
+  const rezKg = rawRezaga.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from_p&&d<=to_p&&(r.grupo_cultivo||'').toUpperCase().includes('TOMATE'); }).reduce((s,r)=>s+(r.peso_neto||0),0);
+  const rezPct = totNeto>0 ? rezKg/totNeto*100 : null;
+  document.getElementById('ps-peak').innerHTML = rezPct!=null ? fN(rezPct,1)+'<span class="stat-unit">%</span>' : '—';
+  document.getElementById('ps-peak-date').textContent = rezPct!=null ? fK(Math.round(rezKg))+' kg rezaga' : 'carga rezaga primero';
   // Delta chips
   if(cmpAcrAnt.length){
     const pr    = priorEquivRange();
@@ -2294,18 +2300,18 @@ function renderPesos(){
     }
   });
 
-  /* By cultivo bars */
+  /* By cultivo bars — agrupa por nombre normalizado (GH/OF → mismo bucket) */
   const byCult={};
-  rows.forEach(r=>{ const k=r.cultivo||'—'; byCult[k]=(byCult[k]||0)+r.neto; });
+  rows.forEach(r=>{ const k=normCultivo(r.cultivo); byCult[k]=(byCult[k]||0)+r.neto; });
   const cultSorted=Object.entries(byCult).sort((a,b)=>b[1]-a[1]);
   const maxC=cultSorted[0]?.[1]||1;
   document.getElementById('cultivo-bars').innerHTML = cultSorted.map(([k,v])=>`
     <div class="prog-row">
       <div class="prog-top">
-        <span class="prog-name">${cult(k)}</span>
-        <span class="prog-qty" style="color:${cultColor(k)}">${fN(v/1000)} t</span>
+        <span class="prog-name">${k}</span>
+        <span class="prog-qty" style="color:${normCultivoColor(k)}">${v>=1e6?fN(v/1e6,2)+' M kg':fK(Math.round(v))+' kg'}</span>
       </div>
-      <div class="prog-track"><div class="prog-fill" style="width:${(v/maxC*100).toFixed(1)}%;background:${cultColor(k)}"></div></div>
+      <div class="prog-track"><div class="prog-fill" style="width:${(v/maxC*100).toFixed(1)}%;background:${normCultivoColor(k)}"></div></div>
     </div>`).join('');
 
   /* Table */
@@ -3322,7 +3328,7 @@ function renderInbound(from, to){
 
   // primera KPI + color coding
   const p1El  = document.getElementById('inb-primera');
-  const p1Cls = pctP1 >= 65 ? 'cg' : pctP1 >= 55 ? 'ca' : 'cr';
+  const p1Cls = pctP1 >= 85 ? 'cg' : pctP1 >= 70 ? 'ca' : 'cr';
   p1El.parentElement.className = 'stat ' + p1Cls;
   p1El.innerHTML = fN(pctP1,1) + '<span class="stat-unit">%</span>';
   document.getElementById('inb-primera-sub').textContent =
@@ -3369,7 +3375,7 @@ function renderInbound(from, to){
         borderWidth:2.5, pointRadius:4, pointHoverRadius:7,
         fill:true, tension:.3, spanGaps:false
       },{
-        label:'Objetivo 65%',
+        label:'Objetivo 85%',
         data: days.map(()=>65),
         borderColor:'rgba(217,119,6,.55)', borderWidth:1.5,
         borderDash:[6,4], pointRadius:0, fill:false, tension:0
@@ -3383,7 +3389,7 @@ function renderInbound(from, to){
           callbacks:{ label: c => ` ${c.dataset.label}: ${c.parsed.y ?? '—'}%` }
         }
       },
-      annotation:{ annotations:{ obj65: objLine(65,'Obj. 65%') } },
+      annotation:{ annotations:{ obj85: objLine(85,'Obj. 85%') } },
       scales:{
         x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10},maxRotation:0,maxTicksLimit:14}, border:{display:false} },
         y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+'%'}, min:0, max:100, border:{display:false} }
@@ -3391,21 +3397,24 @@ function renderInbound(from, to){
     }
   });
 
-  // ── Top daños bars ──
+  // ── Top daños — % de frutos inspeccionados ──
   const danosMap = {};
+  const totalFrutosInb = rows.reduce((s,r)=>s+rowDenom(r),0)||1;
   rows.forEach(r => {
     (r.danos||[]).forEach(d => {
       danosMap[d.dano] = (danosMap[d.dano]||0) + (d.cantidad||0);
     });
   });
-  const danosSorted = Object.entries(danosMap).sort((a,b)=>b[1]-a[1]).slice(0,12);
+  const danosSorted = Object.entries(danosMap)
+    .map(([k,v])=>[k, v/totalFrutosInb*100])
+    .sort((a,b)=>b[1]-a[1]).slice(0,12);
   const maxD = danosSorted[0]?.[1] || 1;
   const DCOL = ['#dc2626','#d97706','#7c3aed','#1d4ed8','#0891b2','#65a30d'];
   document.getElementById('inb-danos-bars').innerHTML = danosSorted.map(([k,v],i)=>`
     <div class="prog-row" style="margin-bottom:0">
       <div class="prog-top">
         <span class="prog-name" style="font-size:.73rem">${k}</span>
-        <span class="prog-qty" style="color:${DCOL[i%DCOL.length]};font-size:.73rem">${fK(Math.round(v))}</span>
+        <span class="prog-qty" style="color:${DCOL[i%DCOL.length]};font-size:.73rem">${fN(v,2)}%</span>
       </div>
       <div class="prog-track" style="height:5px">
         <div class="prog-fill" style="width:${(v/maxD*100).toFixed(1)}%;background:${DCOL[i%DCOL.length]}"></div>
@@ -3460,21 +3469,34 @@ function renderInbound(from, to){
     }
   });
 
-  // ── % Primera por caseta ──
+  // Alerta fuera de color: colores 4,5,6 > 10%
+  const fueraColKg = (colMap['Cuatro']||0)+(colMap['Cinco']||0)+(colMap['Seis']||0);
+  const fueraColPct = colTotal ? fueraColKg/colTotal*100 : 0;
+  const fcAlertEl = document.getElementById('inb-fcolor-alert');
+  if(fcAlertEl){
+    if(fueraColPct > 10){
+      fcAlertEl.style.display='flex'; fcAlertEl.className='ov-alert bad';
+      fcAlertEl.textContent=`⚠ Fuera de color ${fN(fueraColPct,1)}% — colores 4-6 superan 10%`;
+    } else {
+      fcAlertEl.style.display='none';
+    }
+  }
+
+  // ── % Primera por caseta — usa rowDenom para evitar >100% ──
   const casetaMap = {};
   rows.forEach(r => {
     const cas = r.caseta || '—';
     if(!casetaMap[cas]) casetaMap[cas] = { p1:0, tot:0 };
     const p1 = (r.calidades||[]).find(c=>c.calidad==='PRIMERA');
     casetaMap[cas].p1  += p1 ? p1.cantidad : 0;
-    casetaMap[cas].tot += r.total_frutos || 0;
+    casetaMap[cas].tot += rowDenom(r);
   });
   const casetaList = Object.entries(casetaMap)
     .map(([k,v]) => ({ k, pct: v.tot ? v.p1/v.tot*100 : 0, tot: v.tot }))
     .sort((a,b)=>b.pct-a.pct);
   const maxCp = 100;
   document.getElementById('inb-caseta-bars').innerHTML = casetaList.map(({k,pct,tot})=>{
-    const col = pct>=65?'#16a34a':pct>=55?'#d97706':'#dc2626';
+    const col = pct>=85?'#16a34a':pct>=70?'#d97706':'#dc2626';
     return `
     <div class="prog-row" style="margin-bottom:0">
       <div class="prog-top">
@@ -3498,7 +3520,7 @@ function renderInbound(from, to){
     const m     = r.merma ?? null;
     const t     = r.temperatura_fruto ?? null;
     const fc    = r.porc_fuera_color ?? null;
-    const p1Col = p1pct==null?'':p1pct>=65?'color:var(--green);font-weight:700':p1pct>=55?'color:var(--accent);font-weight:700':'color:var(--red);font-weight:700';
+    const p1Col = p1pct==null?'':p1pct>=85?'color:var(--green);font-weight:700':p1pct>=70?'color:var(--accent);font-weight:700':'color:var(--red);font-weight:700';
     const mCol  = m==null?'':m<8?'color:var(--green)':m<15?'color:var(--accent)':'color:var(--red);font-weight:700';
     const tCol  = t==null?'':t<28?'color:var(--green)':t<33?'color:var(--accent)':'color:var(--red);font-weight:700';
     return `<tr>
