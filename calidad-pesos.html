@@ -3294,29 +3294,30 @@ function renderInbound(from, to){
     return;
   }
 
-  // ── Flatten calidades per row ──
-  function pctPrimera(row){
+  // Denominador efectivo por fila: max(total_frutos, Σcalidades)
+  // Previene porcentajes >100% cuando hay error de captura en EYE
+  function rowDenom(row){
     const cals = row.calidades || [];
-    const tot  = row.total_frutos || 0;
-    if(!tot) return null;
-    const p1   = cals.find(c=>c.calidad==='PRIMERA');
-    return p1 ? p1.cantidad / tot * 100 : 0;
+    const sumC = cals.reduce((s,c)=>s+(c.cantidad||0),0);
+    return Math.max(row.total_frutos||0, sumC);
   }
-  function pctSegunda(row){
-    const cals = row.calidades || [];
-    const tot  = row.total_frutos || 0;
-    if(!tot) return null;
-    const p2   = cals.find(c=>c.calidad==='SEGUNDA');
-    return p2 ? p2.cantidad / tot * 100 : 0;
+  function pctCal(row, calidad){
+    const denom = rowDenom(row);
+    if(!denom) return null;
+    const c = (row.calidades||[]).find(c=>c.calidad===calidad);
+    return c ? Math.min(100, c.cantidad/denom*100) : 0;
   }
+  function pctPrimera(row){ return pctCal(row,'PRIMERA'); }
+  function pctSegunda(row){ return pctCal(row,'SEGUNDA'); }
 
-  // ── KPIs (weighted by total_frutos) ──
-  const totalFrutos  = rows.reduce((s,r)=>s+(r.total_frutos||0), 0);
-  const sumPrimera   = rows.reduce((s,r)=>{
+  // ── KPIs — usa denominador efectivo por fila ──
+  const totalFrutos = rows.reduce((s,r)=>s+(r.total_frutos||0), 0);
+  const totalDenom  = rows.reduce((s,r)=>s+rowDenom(r), 0);
+  const sumPrimera  = rows.reduce((s,r)=>{
     const p1 = (r.calidades||[]).find(c=>c.calidad==='PRIMERA');
-    return s + (p1 ? p1.cantidad : 0);
-  }, 0);
-  const pctP1 = totalFrutos ? sumPrimera / totalFrutos * 100 : 0;
+    return s+(p1?p1.cantidad:0);
+  },0);
+  const pctP1 = totalDenom ? Math.min(100, sumPrimera/totalDenom*100) : 0;
 
   const mermas   = rows.filter(r=>r.merma!=null);
   const avgMerma = mermas.length ? mermas.reduce((s,r)=>s+r.merma,0)/mermas.length : 0;
@@ -3335,7 +3336,7 @@ function renderInbound(from, to){
   p1El.parentElement.className = 'stat ' + p1Cls;
   p1El.innerHTML = fN(pctP1,1) + '<span class="stat-unit">%</span>';
   document.getElementById('inb-primera-sub').textContent =
-    fK(Math.round(sumPrimera)) + ' de ' + fK(totalFrutos) + ' frutos';
+    fK(Math.round(sumPrimera)) + ' de ' + fK(totalDenom) + ' frutos';
 
   // merma KPI
   const mEl  = document.getElementById('inb-merma');
@@ -3360,13 +3361,13 @@ function renderInbound(from, to){
   rows.forEach(r => {
     const d   = (r.fecha||'').split('T')[0];
     if(!d) return;
-    if(!byDate[d]) byDate[d] = { p1:0, tot:0 };
+    if(!byDate[d]) byDate[d] = { p1:0, denom:0 };
     const p1 = (r.calidades||[]).find(c=>c.calidad==='PRIMERA');
-    byDate[d].p1  += p1 ? p1.cantidad : 0;
-    byDate[d].tot += r.total_frutos || 0;
+    byDate[d].p1    += p1 ? p1.cantidad : 0;
+    byDate[d].denom += rowDenom(r);
   });
   const days  = Object.keys(byDate).sort();
-  const p1pct = days.map(d => byDate[d].tot ? +(byDate[d].p1/byDate[d].tot*100).toFixed(1) : null);
+  const p1pct = days.map(d => byDate[d].denom ? +Math.min(100, byDate[d].p1/byDate[d].denom*100).toFixed(1) : null);
 
   mkChart('chart-inb-primera',{
     type:'line',
