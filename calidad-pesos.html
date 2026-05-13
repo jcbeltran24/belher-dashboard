@@ -1206,10 +1206,14 @@ const CACHE_TTL = 60 * 60 * 1000; // 1 hour — background refresh if stale
 
 function saveCache(from, to, palets, acarreos){
   try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify({
-      from, to, palets, acarreos, savedAt: Date.now()
-    }));
-  } catch(e){ console.warn('Cache write failed', e); }
+    const payload = JSON.stringify({ from, to, palets, acarreos, savedAt: Date.now() });
+    try {
+      localStorage.setItem(CACHE_KEY, payload);
+    } catch(e){
+      localStorage.clear();
+      localStorage.setItem(CACHE_KEY, payload);
+    }
+  } catch(e){ /* payload too large even after clear — skip cache */ }
 }
 
 function loadCache(){
