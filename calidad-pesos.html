@@ -3315,10 +3315,6 @@ function renderInbound(from, to){
   const temps    = rows.filter(r=>r.temperatura_fruto!=null);
   const avgTemp  = temps.length ? temps.reduce((s,r)=>s+r.temperatura_fruto,0)/temps.length : 0;
 
-  const avgFcolor  = rows.filter(r=>r.porc_fuera_color!=null);
-  const avgFcol    = avgFcolor.length ? avgFcolor.reduce((s,r)=>s+r.porc_fuera_color,0)/avgFcolor.length : 0;
-  const avgFtam    = rows.filter(r=>r.porc_fuera_tamano!=null);
-  const avgFtamVal = avgFtam.length ? avgFtam.reduce((s,r)=>s+r.porc_fuera_tamano,0)/avgFtam.length : 0;
 
   // primera KPI + color coding
   const p1El  = document.getElementById('inb-primera');
@@ -3342,9 +3338,6 @@ function renderInbound(from, to){
   document.getElementById('inb-frutos').innerHTML =
     fKM(totalFrutos) + '<span class="stat-unit"> fr</span>';
   document.getElementById('inb-registros').textContent = rows.length + ' inspecciones';
-  document.getElementById('inb-fcolor').innerHTML =
-    fN(avgFcol,1) + '<span class="stat-unit">%</span>';
-  document.getElementById('inb-ftamano').textContent = fN(avgFtamVal,1) + '% fuera tamaño';
 
   // ── Chart: % Primera diario ──
   const byDate = {};
