@@ -80,7 +80,7 @@ header{background:var(--dark);height:46px;display:flex;align-items:center;paddin
 .mp-m:hover:not(.mpfut){background:#f0fdf4;color:#15803d}
 .mp-m.mpsel{background:#fbbf24;color:#0c2117;font-weight:800;box-shadow:0 1px 4px rgba(251,191,36,.35)}
 .mp-m.mpfut{opacity:.25;pointer-events:none}
-.mp-today-hint{text-align:center;margin-top:11px;padding-top:10px;border-top:1px solid #f0f4f0;font-size:.6rem;color:var(--muted);font-weight:500}
+.mp-today-hint{text-align:center;margin-top:11px;padding-top:10px;border-top:1px solid #f0f4f0;font-size:var(--t-nano);color:var(--muted);font-weight:500}
 
 /* Comparison button */
 .cmp-btn{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:.65rem;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:4px;transition:.14s}
@@ -93,7 +93,7 @@ header{background:var(--dark);height:46px;display:flex;align-items:center;paddin
 .f-select option{background:#162d1f;color:#fff}
 .f-reset{height:26px;padding:0 10px;border-radius:6px;background:transparent;border:none;color:rgba(255,255,255,.35);font-size:.67rem;font-weight:500;font-family:inherit;cursor:pointer;transition:.14s;text-decoration:underline;text-underline-offset:2px}
 .f-reset:hover{color:rgba(255,255,255,.75)}
-.f-count{font-size:.6rem;color:rgba(255,255,255,.28);white-space:nowrap;font-variant-numeric:tabular-nums}
+.f-count{font-size:var(--t-nano);color:rgba(255,255,255,.28);white-space:nowrap;font-variant-numeric:tabular-nums}
 .f-divider{display:none}
 
 /* ── TABS ── */
@@ -246,7 +246,7 @@ tbody td{padding:6px 11px;vertical-align:middle}
 
 /* mini spark bars inside ov-card */
 .spark{display:flex;align-items:flex-end;gap:2px;height:26px}
-.spark-bar{flex:1;border-radius:2px 2px 0 0;min-height:2px;transition:height .3s}
+.spark-bar{flex:1;border-radius:2px 2px 0 0;min-height:2px}
 
 /* Alert banner inside cards */
 .ov-alert{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:6px;font-size:var(--t-nano);font-weight:600}
@@ -411,7 +411,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   main{padding:10px 10px 20px}
   .stat-val{font-size:1.14rem}
   .stat{padding:10px 11px}
-  .p-btn{padding:0 8px;font-size:.6rem}
+  .p-btn{padding:0 8px;font-size:.62rem}
   table{font-size:.65rem}
 }
 
@@ -668,7 +668,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       <div class="stat cg"><div class="stat-lbl">% Primera</div><div class="stat-val" id="s-p1"><span class="skel"></span></div><div class="stat-sub">del empaque</div><div class="stat-delta" id="d-p1"></div></div>
       <div class="stat ca"><div class="stat-lbl">% Segunda</div><div class="stat-val" id="s-p2"><span class="skel"></span></div><div class="stat-sub">del empaque</div><div class="stat-delta" id="d-p2"></div></div>
       <div class="stat cr"><div class="stat-lbl">% Tercera</div><div class="stat-val" id="s-p3"><span class="skel"></span></div><div class="stat-sub">del empaque</div><div class="stat-delta" id="d-p3"></div></div>
-      <div class="stat" id="stat-peso-prom"><div class="stat-lbl">Peso Prom/Bulto <span style="font-size:.6rem;font-weight:500;opacity:.7">obj. 11.8 kg</span></div><div class="stat-val" id="s-peso-prom"><span class="skel"></span></div><div class="stat-sub" id="s-peso-prom-sub">kg promedio</div><div class="stat-delta" id="d-peso-prom"></div></div>
+      <div class="stat" id="stat-peso-prom"><div class="stat-lbl">Peso Prom/Bulto <span style="font-size:var(--t-nano);font-weight:500;opacity:.7">obj. 11.8 kg</span></div><div class="stat-val" id="s-peso-prom"><span class="skel"></span></div><div class="stat-sub" id="s-peso-prom-sub">kg promedio</div><div class="stat-delta" id="d-peso-prom"></div></div>
     </div>
 
     <!-- Tendencia semanal % Primera + volumen -->
@@ -2626,12 +2626,12 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
 
   const sprPct = vCos > 0 ? (Math.abs(spr)/vCos*100) : 0;
   const skipNote = skipCount > 0
-    ? `<div style="font-size:.6rem;color:var(--muted);text-align:right;margin-top:4px;padding-right:4px">
+    ? `<div style="font-size:.72rem;color:var(--muted);text-align:right;margin-top:4px;padding-right:4px">
         ⚠ ${skipCount} acarreo${skipCount>1?'s':''} sin detalle excluido${skipCount>1?'s':''} (${fN(skipNeto/1000,1)} t neto)
        </div>`
     : '';
   const sprNote = sprPct > 8
-    ? `<div style="font-size:.6rem;color:#7c3aed;text-align:right;margin-top:2px;padding-right:4px">
+    ? `<div style="font-size:.72rem;color:#7c3aed;text-align:right;margin-top:2px;padding-right:4px">
         Sobrepeso ${fN(sprPct,1)}% — revisar completitud de rezaga y detalles de acarreos
        </div>`
     : '';
