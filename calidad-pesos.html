@@ -2638,17 +2638,18 @@ function renderBalance(){
   const efic = cosTotal>0 ? (empTotal+cjvTotal)/cosTotal*100 : 0;
   const spr  = cosTotal-empTotal-cjvTotal-rezTotal;
 
-  // ── KPIs ──
-  const T = v => fN(v/1000,1)+'<span style="font-size:.65rem;opacity:.55"> t</span>';
-  document.getElementById('bal-cosecha').innerHTML = T(cosTotal);
+  // ── KPIs — cosecha en t (peso báscula), empaque en cajas ──
+  const Tk  = v => fN(v/1000,1)+'<span style="font-size:.65rem;opacity:.55"> t</span>';
+  const Cx  = (kg, kpp) => fKM(toBoxes(kg,kpp))+'<span style="font-size:.65rem;opacity:.55"> cx</span>';
+  document.getElementById('bal-cosecha').innerHTML = Tk(cosTotal);
   document.getElementById('bal-cos-roma').textContent = fN(cosRoma/1000,1)+'t';
   document.getElementById('bal-cos-bola').textContent = fN(cosBola/1000,1)+'t';
-  document.getElementById('bal-empaque').innerHTML  = T(empTotal);
-  document.getElementById('bal-emp-roma').textContent = fN(empRoma/1000,1)+'t';
-  document.getElementById('bal-emp-bola').textContent = fN(empBola/1000,1)+'t';
-  document.getElementById('bal-cjv').innerHTML    = T(cjvTotal);
-  document.getElementById('bal-cjv-sub').textContent = fN(cjvTotal/1000,1)+'t en gaseo';
-  document.getElementById('bal-rezaga').innerHTML = T(rezTotal);
+  document.getElementById('bal-empaque').innerHTML  = Cx(empTotal, KG_PER_BOX_TOMATE);
+  document.getElementById('bal-emp-roma').textContent = fKM(toBoxes(empRoma,KG_PER_BOX_TOMATE))+' cx';
+  document.getElementById('bal-emp-bola').textContent = fKM(toBoxes(empBola,KG_PER_BOX_TOMATE))+' cx';
+  document.getElementById('bal-cjv').innerHTML    = Cx(cjvTotal, KG_PER_BOX_TOMATE);
+  document.getElementById('bal-cjv-sub').title    = 'Cajas registradas como entradas a cuartos de gas. Salida aún no confirmada.';
+  document.getElementById('bal-rezaga').innerHTML = Tk(rezTotal);
   document.getElementById('bal-rez-sub').textContent = cosTotal>0?fN(rezTotal/cosTotal*100,1)+'% de cosecha':'—';
   const eficEl = document.getElementById('bal-efic');
   eficEl.innerHTML = fN(efic,1)+'<span style="font-size:.65rem;opacity:.55">%</span>';
@@ -2657,12 +2658,12 @@ function renderBalance(){
   // Roma / Bola cards
   const rEfic = cosRoma>0?(empRoma+cjvRoma)/cosRoma*100:0;
   const bEfic = cosBola>0?(empBola+cjvBola)/cosBola*100:0;
-  document.getElementById('bal-r-cos').innerHTML  = T(cosRoma);
-  document.getElementById('bal-r-emp').innerHTML  = T(empRoma+cjvRoma);
+  document.getElementById('bal-r-cos').innerHTML  = Tk(cosRoma);
+  document.getElementById('bal-r-emp').innerHTML  = Cx(empRoma+cjvRoma, KG_PER_BOX_TOMATE);
   document.getElementById('bal-r-efic').innerHTML = fN(rEfic,1)+'%'+(rEfic>100?' <span title="Salida supera cosecha estimada: inventario previo en gaseo o imprecisión en proporción de camiones mixtos" style="font-size:.7rem">⚠</span>':'');
   document.getElementById('bal-r-efic').style.color = rEfic>100?'#d97706':rEfic>=90?'#16a34a':rEfic>=80?'#d97706':'#dc2626';
-  document.getElementById('bal-b-cos').innerHTML  = T(cosBola);
-  document.getElementById('bal-b-emp').innerHTML  = T(empBola+cjvBola);
+  document.getElementById('bal-b-cos').innerHTML  = Tk(cosBola);
+  document.getElementById('bal-b-emp').innerHTML  = Cx(empBola+cjvBola, KG_PER_BOX_TOMATE);
   document.getElementById('bal-b-efic').innerHTML = fN(bEfic,1)+'%'+(bEfic>100?' <span title="Salida supera cosecha estimada: inventario previo en gaseo o imprecisión en proporción de camiones mixtos" style="font-size:.7rem">⚠</span>':'');
   document.getElementById('bal-b-efic').style.color = bEfic>100?'#d97706':bEfic>=90?'#16a34a':bEfic>=80?'#d97706':'#dc2626';
 
@@ -2750,8 +2751,9 @@ function renderReporte(from, to){
     BOLA: cosecha.BOLA - salida.BOLA,
   };
 
-  function kg(v)  { return v > 0 ? fK(Math.round(v)) + ' kg' : '—'; }
-  function pct(v) { return v > 0 ? fN(v,1) + '%' : '—'; }
+  function kg(v)   { return v > 0 ? fK(Math.round(v)) + ' kg' : '—'; }
+  function cx(v)   { return v > 0 ? fKM(toBoxes(v, KG_PER_BOX_TOMATE)) + ' cx' : '—'; }
+  function pct(v)  { return v > 0 ? fN(v,1) + '%' : '—'; }
   function rowSec(label){ return `<tr><td colspan="4" style="padding:10px 12px 4px;font-size:var(--t-xs);font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);background:var(--bg)">${label}</td></tr>`; }
   function row(label, roma, bola, total, cls=''){
     const style = cls === 'total'
@@ -2793,15 +2795,15 @@ function renderReporte(from, to){
       kg(cosecha.ROMA), kg(cosecha.BOLA),
       kg(cosecha.ROMA + cosecha.BOLA), 'total'),
     divider(),
-    rowSec('Empaque — Salida'),
-    row('1ra Calidad (sin gas)',  kg(emp.ROMA.P1), kg(emp.BOLA.P1), kg(emp.ROMA.P1+emp.BOLA.P1)),
-    row('2da Calidad (sin gas)',  kg(emp.ROMA.P2), kg(emp.BOLA.P2), kg(emp.ROMA.P2+emp.BOLA.P2)),
-    row('3ra Calidad (sin gas)',  kg(emp.ROMA.P3), kg(emp.BOLA.P3), kg(emp.ROMA.P3+emp.BOLA.P3)),
-    row('Entrada Gas (gaseado)',  kg(gas.ROMA),    kg(gas.BOLA),    kg(gas.ROMA+gas.BOLA)),
+    rowSec('Empaque — Salida (cajas 25 lbs)'),
+    row('1ra Calidad (sin gas)',  cx(emp.ROMA.P1), cx(emp.BOLA.P1), cx(emp.ROMA.P1+emp.BOLA.P1)),
+    row('2da Calidad (sin gas)',  cx(emp.ROMA.P2), cx(emp.BOLA.P2), cx(emp.ROMA.P2+emp.BOLA.P2)),
+    row('3ra Calidad (sin gas)',  cx(emp.ROMA.P3), cx(emp.BOLA.P3), cx(emp.ROMA.P3+emp.BOLA.P3)),
+    row('Entrada Gaseo ⚠',        cx(gas.ROMA),    cx(gas.BOLA),    cx(gas.ROMA+gas.BOLA)),
     divider(),
     row('Total Salida',
-      kg(salida.ROMA), kg(salida.BOLA),
-      kg(salida.ROMA + salida.BOLA), 'total'),
+      cx(salida.ROMA), cx(salida.BOLA),
+      cx(salida.ROMA + salida.BOLA), 'total'),
     divider(),
     rowSec('Eficiencia'),
     `<tr><td style="padding:5px 12px">Aprovechamiento</td>
