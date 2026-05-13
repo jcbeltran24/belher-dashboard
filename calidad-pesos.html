@@ -1564,7 +1564,8 @@ function renderResumen(){
     return m;
   }
   const wActNeto = netoByWk(resAcarreos, cycles.actual.from);
-  const maxWk = Math.max(...Object.keys(wActNeto).map(Number),1);
+  const wAntNeto = netoByWk(cmpAcrAnt,  cycles.anterior.from);
+  const maxWk = Math.max(...Object.keys(wActNeto).map(Number),...Object.keys(wAntNeto).map(Number),1);
   const wks   = Array.from({length:maxWk},(_,i)=>i+1);
 
   mkChart('chart-res-trend',{
@@ -1576,23 +1577,27 @@ function renderResumen(){
           data: wks.map(w=>wActNeto[w]!=null?(wActNeto[w]/1000).toFixed(1):null),
           borderColor:'#16a34a',
           borderWidth:2.5, pointRadius:3, pointHoverRadius:6,
-          fill:true, tension:.35, spanGaps:false, backgroundColor:gradFn(22,163,74,.2,0) }
+          fill:true, tension:.35, spanGaps:false, backgroundColor:gradFn(22,163,74,.2,0) },
+        { label: cycles.labelAnt,
+          data: wks.map(w=>wAntNeto[w]!=null?(wAntNeto[w]/1000).toFixed(1):null),
+          borderColor:'#d97706',
+          borderWidth:2, borderDash:[6,4], pointRadius:2, pointHoverRadius:5,
+          fill:true, tension:.35, spanGaps:false, backgroundColor:gradFn(217,119,6,.12,0) }
       ]
     },
     options:{
       responsive:true, maintainAspectRatio:false,
       interaction:{ mode:'index', intersect:false },
       plugins:{
-        legend:{ display:false },
+        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:12 } },
         tooltip:{ backgroundColor:'#0c2117', titleColor:'rgba(255,255,255,.85)', bodyColor:'#fff', padding:10, cornerRadius:8,
           callbacks:{
             title(items){
               const w = parseInt(items[0].label.replace('S',''));
-              const d = new Date(cycles.actual.from + 'T12:00:00');
-              d.setDate(d.getDate() + (w-1)*7);
-              return `S${w}  ·  ${d.toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})}`;
+              function wkDate(cf,n){ const d=new Date(cf+'T12:00:00'); d.setDate(d.getDate()+(n-1)*7); return d.toLocaleDateString('es-MX',{day:'numeric',month:'short'}); }
+              return `S${w}  ·  Act: ${wkDate(cycles.actual.from,w)}  /  Ant: ${wkDate(cycles.anterior.from,w)}`;
             },
-            label:c=>` ${fN(c.parsed.y??0,1)} t`
+            label:c=>` ${c.dataset.label}: ${c.parsed.y??'—'} t`
           } }
       },
       scales:{
