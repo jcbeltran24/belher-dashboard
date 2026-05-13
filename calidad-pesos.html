@@ -2693,17 +2693,27 @@ function renderReporte(from, to){
   document.getElementById('rep-range-lbl').textContent =
     fDateFull(from) + ' – ' + fDateFull(to);
 
-  // ── Cosecha: acarreos detalles kilos por Roma/Bola ──
+  // ── Cosecha: neto báscula distribuido por proporción Roma/Bola de detalles ──
+  // Usar det.kilos directamente subestima (~17% menos que el peso real en báscula).
+  // Mismo método que renderSankey/renderBalance para consistencia.
   const cosecha = { ROMA:0, BOLA:0 };
   rawAcarreos.forEach(r => {
     const d = (r.fecha||'').split('T')[0];
     if(from && d < from) return;
     if(to   && d > to)   return;
+    const neto = (r.peso_bruto||0) - (r.tara||0);
+    if(neto <= 0) return;
+    let dR=0, dB=0, dT=0;
     (r.detalles||[]).forEach(det => {
-      const c = (det.cultivo||'').toUpperCase();
-      if(isRoma(c))      cosecha.ROMA += det.kilos||0;
-      else if(isBola(c)) cosecha.BOLA += det.kilos||0;
+      const c = (det.cultivo||'').toUpperCase(), kg = det.kilos||0;
+      dT += kg;
+      if(isRoma(c)) dR += kg;
+      else if(isBola(c)) dB += kg;
     });
+    if(dT <= 0) return;
+    const tn = neto*(dR+dB)/dT, rp = (dR+dB)>0 ? dR/(dR+dB) : 0.5;
+    cosecha.ROMA += tn * rp;
+    cosecha.BOLA += tn * (1-rp);
   });
 
   // ── Empacado & Gas: rawPalets (date-filtered, tomato only) ──
