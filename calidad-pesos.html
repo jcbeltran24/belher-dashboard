@@ -628,16 +628,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 
     <!-- Tendencia semanal combinada -->
     <div class="card card-pad" style="margin-bottom:10px">
-      <div class="card-title">Tendencia Semanal · Neto Báscula (toneladas)
-        <span style="display:inline-flex;align-items:center;gap:12px;margin-left:8px">
-          <span style="display:inline-flex;align-items:center;gap:4px;font-weight:700;color:#16a34a">
-            <span style="width:18px;height:3px;background:#16a34a;border-radius:2px;display:inline-block"></span>Ciclo actual
-          </span>
-          <span style="display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#d97706;opacity:.8">
-            <span style="width:18px;height:3px;background:#d97706;border-radius:2px;border-bottom:2px dashed #d97706;display:inline-block"></span>Ciclo anterior
-          </span>
-        </span>
-      </div>
+      <div class="card-title">Tendencia Semanal · Neto Báscula (toneladas)</div>
       <div style="position:relative;height:240px"><canvas id="chart-res-trend"></canvas></div>
     </div>
 
@@ -1573,8 +1564,7 @@ function renderResumen(){
     return m;
   }
   const wActNeto = netoByWk(resAcarreos, cycles.actual.from);
-  const wAntNeto = netoByWk(cmpAcrAnt,  cycles.anterior.from);
-  const maxWk = Math.max(...Object.keys(wActNeto).map(Number),...Object.keys(wAntNeto).map(Number),1);
+  const maxWk = Math.max(...Object.keys(wActNeto).map(Number),1);
   const wks   = Array.from({length:maxWk},(_,i)=>i+1);
 
   mkChart('chart-res-trend',{
@@ -1584,35 +1574,25 @@ function renderResumen(){
       datasets:[
         { label: cycles.labelAct,
           data: wks.map(w=>wActNeto[w]!=null?(wActNeto[w]/1000).toFixed(1):null),
-          borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.07)',
+          borderColor:'#16a34a',
           borderWidth:2.5, pointRadius:3, pointHoverRadius:6,
-          fill:true, tension:.35, spanGaps:false, backgroundColor:gradFn(22,163,74,.2,0) },
-        { label: cycles.labelAnt,
-          data: wks.map(w=>wAntNeto[w]!=null?(wAntNeto[w]/1000).toFixed(1):null),
-          borderColor:'#d97706', backgroundColor:'rgba(217,119,6,.05)',
-          borderWidth:2, borderDash:[6,4], pointRadius:2, pointHoverRadius:5,
-          fill:true, tension:.35, spanGaps:false, backgroundColor:gradFn(217,119,6,.12,0) }
+          fill:true, tension:.35, spanGaps:false, backgroundColor:gradFn(22,163,74,.2,0) }
       ]
     },
     options:{
       responsive:true, maintainAspectRatio:false,
       interaction:{ mode:'index', intersect:false },
       plugins:{
-        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:12 } },
+        legend:{ display:false },
         tooltip:{ backgroundColor:'#0c2117', titleColor:'rgba(255,255,255,.85)', bodyColor:'#fff', padding:10, cornerRadius:8,
           callbacks:{
             title(items){
               const w = parseInt(items[0].label.replace('S',''));
-              function wkDate(cycleFrom, weekN){
-                const d = new Date(cycleFrom + 'T12:00:00');
-                d.setDate(d.getDate() + (weekN-1)*7);
-                return d.toLocaleDateString('es-MX',{day:'numeric',month:'short'});
-              }
-              const actStart = wkDate(cycles.actual.from, w);
-              const antStart = wkDate(cycles.anterior.from, w);
-              return `S${w}  ·  Act: ${actStart}  /  Ant: ${antStart}`;
+              const d = new Date(cycles.actual.from + 'T12:00:00');
+              d.setDate(d.getDate() + (w-1)*7);
+              return `S${w}  ·  ${d.toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})}`;
             },
-            label:c=>` ${c.dataset.label}: ${c.parsed.y??'—'} t`
+            label:c=>` ${fN(c.parsed.y??0,1)} t`
           } }
       },
       scales:{
