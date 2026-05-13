@@ -14,7 +14,22 @@ const TOKEN = [
   'eyJVaWQiOiJlYjZiNWY4YS0yN2U2LTRhZDAtODMwYy05MDRlNTBmOGRhNTUiLCJlbWFpbCI6IkRhc2hib2FyZEBHTUFJTC5DT00iLCJzdWIiOiJEYXNoYm9hcmRAR01BSUwuQ09NIiwiQ29tcGFueUlkIjoiMGUwM2EyYTctYjQ4Zi00NjNlLWIzNDctMTQ0NzhiZDc5YWE4IiwiRW1wbG95ZWVJZCI6IiIsImp0aSI6ImFkNWZmZThhLTU3MDgtNDhjMy1iYTU4LTVhOWU1ZjlhYzk0MCIsInJvbGUiOiJFeHRlcm5hbEN1c3RvbWVyIiwibmJmIjoxNzc3NTg4NzM0LCJleHAiOjI1MzQ0NTI3MzQsImlhdCI6MTc3NzU4ODczNCwiaXNzIjoiOEU2MkEzMjgtRUZCRS00QkM2LTg3OUItNzBFNEMwMURDNTQ4LUNENDhENkU0LTQwMTMtNEJFNy1CNzhFLTYxMjc4Nzk0RTQ5NyIsImF1ZCI6IkQxRUUxRjA2LTE0RkEtNDY5QS1BQ0U4LTFGMjM2NDVBNzk2Mi1FMjk5ODhDMi0zODBBLTQxNkQtODE0MS0zQkZEM0FEMUFDRDEifQ',
   '0QulmnGvM_NaWTgHU-oBVBePutmre4oAUwoppPhBfmE'
 ].join('.');
-const PORT = 8742;
+const PORT  = 8742;
+const TTL   = 5 * 60 * 1000; // 5 min cache
+
+/* ── In-memory cache ────────────────────────────────────── */
+const _cache = new Map();
+
+function cacheGet(key) {
+  const e = _cache.get(key);
+  if (!e) return null;
+  if (Date.now() - e.ts > TTL) { _cache.delete(key); return null; }
+  return e.rows;
+}
+
+function cacheSet(key, rows) {
+  _cache.set(key, { rows, ts: Date.now() });
+}
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -161,13 +176,25 @@ const server = http.createServer(async (req, res) => {
   try {
     if (path === '/vw_palets') {
       const { from, to } = parseDates(q);
-      const raw = await eyeFetch(`/api/eye/v1/Palet?FechaInicial=${from}&FechaFinal=${to}`);
-      page((Array.isArray(raw) ? raw : []).map(mapPalet));
+      const key = `palets:${from}:${to}`;
+      let rows = cacheGet(key);
+      if (!rows) {
+        const raw = await eyeFetch(`/api/eye/v1/Palet?FechaInicial=${from}&FechaFinal=${to}`);
+        rows = (Array.isArray(raw) ? raw : []).map(mapPalet);
+        cacheSet(key, rows);
+      }
+      page(rows);
 
     } else if (path === '/vw_acarreos') {
       const { from, to } = parseDates(q);
-      const raw = await eyeFetch(`/api/eye/v1/Acarreo?FechaInicial=${from}&FechaFinal=${to}`);
-      page((Array.isArray(raw) ? raw : []).map(mapAcarreo));
+      const key = `acarreos:${from}:${to}`;
+      let rows = cacheGet(key);
+      if (!rows) {
+        const raw = await eyeFetch(`/api/eye/v1/Acarreo?FechaInicial=${from}&FechaFinal=${to}`);
+        rows = (Array.isArray(raw) ? raw : []).map(mapAcarreo);
+        cacheSet(key, rows);
+      }
+      page(rows);
 
     } else {
       res.writeHead(404, CORS); res.end(JSON.stringify({ error: 'not found' }));

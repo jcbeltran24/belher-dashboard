@@ -499,8 +499,8 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 
 <!-- VIEW TABS -->
 <div class="view-tabs">
-  <button class="view-tab" data-panel="panel-resumen">Resumen</button>
-  <button class="view-tab active" data-panel="panel-calidad">Calidades · Empaque</button>
+  <button class="view-tab active" data-panel="panel-resumen">Resumen</button>
+  <button class="view-tab" data-panel="panel-calidad">Calidades · Empaque</button>
   <button class="view-tab" data-panel="panel-pesos">Pesos · Báscula</button>
   <button class="view-tab" data-panel="panel-tomate">Tomate</button>
   <button class="view-tab" data-panel="panel-limon">Limón</button>
@@ -516,7 +516,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   </div>
 
   <!-- ══ PANEL: RESUMEN ════════════════════════════════════ -->
-  <div class="panel" id="panel-resumen">
+  <div class="panel active" id="panel-resumen">
 
     <div class="sec">Vista General <span class="sec-tag" id="res-rng">—</span></div>
 
@@ -663,7 +663,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   </div><!-- /panel-resumen -->
 
   <!-- ══ PANEL: CALIDADES ══════════════════════════════════ -->
-  <div class="panel active" id="panel-calidad">
+  <div class="panel" id="panel-calidad">
 
     <div class="sec">Resumen de Calidad <span id="cal-rng" style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.7rem;color:var(--muted)"></span></div>
     <div class="stat-strip">
@@ -3766,9 +3766,10 @@ document.addEventListener('click', e => {
 if(new URLSearchParams(window.location.search).get('frame') === '1'){
   document.body.classList.add('frame');
 }
-syncFilterContext('panel-calidad');
+syncFilterContext('panel-resumen');
 renderMPGrid();
-setPeriod('ciclo');
+setPeriod('hoy');
+loadResumen();
 // Silently load prior-cycle data after main data settles
 setTimeout(autoLoadCmp, 3500);
 </script>
