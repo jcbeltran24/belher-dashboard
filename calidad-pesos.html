@@ -2693,14 +2693,15 @@ function renderReporte(from, to){
   document.getElementById('rep-range-lbl').textContent =
     fDateFull(from) + ' – ' + fDateFull(to);
 
+  // Usar _resPalets/_resAcarreos como fuente primaria (igual que renderBalance)
+  const repPalets   = (_resPalets.length   ? _resPalets   : rawPalets).filter(p=>{ const d=(p.fecha_empaque||'').split('T')[0]; return d>=from&&d<=to; });
+  const repAcarreos = (_resAcarreos.length ? _resAcarreos : rawAcarreos).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+
   // ── Cosecha: neto báscula distribuido por proporción Roma/Bola de detalles ──
   // Usar det.kilos directamente subestima (~17% menos que el peso real en báscula).
   // Mismo método que renderSankey/renderBalance para consistencia.
   const cosecha = { ROMA:0, BOLA:0 };
-  rawAcarreos.forEach(r => {
-    const d = (r.fecha||'').split('T')[0];
-    if(from && d < from) return;
-    if(to   && d > to)   return;
+  repAcarreos.forEach(r => {
     const neto = (r.peso_bruto||0) - (r.tara||0);
     if(neto <= 0) return;
     let dR=0, dB=0, dT=0;
@@ -2716,13 +2717,10 @@ function renderReporte(from, to){
     cosecha.BOLA += tn * (1-rp);
   });
 
-  // ── Empacado & Gas: rawPalets (date-filtered, tomato only) ──
+  // ── Empacado & Gas: repPalets (ya date-filtered, tomato only) ──
   const emp = { ROMA:{P1:0,P2:0,P3:0}, BOLA:{P1:0,P2:0,P3:0} };
   const gas = { ROMA:0, BOLA:0 };
-  rawPalets.forEach(r => {
-    const d = (r.fecha_empaque||'').split('T')[0];
-    if(from && d < from) return;
-    if(to   && d > to)   return;
+  repPalets.forEach(r => {
     const c = (r.cultivo||'').toUpperCase();
     let grp;
     if(isRoma(c))      grp = 'ROMA';
