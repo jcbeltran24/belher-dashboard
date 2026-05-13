@@ -2,13 +2,13 @@ window.BELHER = {
   meta: {
     fecha: "Miércoles 13 May 2026",
     semana: "WK 20",
-    actualizado: "13/05/2026 · 00:20"
+    actualizado: "13/05/2026 · 09:50"
   },
 
   alertas: [
-    {"nivel":"success","texto":"REPORTE CALAVO 11/05 — 1 trailer CGG-53 REFRIGERADOS CGG: 1,920 cajas Tomate No.1 (24 pallets), P.O. 265556, salida 22:30. Operación nocturna completada."},
-    {"nivel":"success","texto":"BILL + MANIFIESTOS NOGALES CGG 11/05 — Documentación de carga Tomate enviada: bill, manifiesto, datos transportista, facturas XML y proformas. Archivos listos para aduana."},
-    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 6 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos y documentación."},
+    {"nivel":"success","texto":"OUTBOUND TOMATE 11/05 — BOLA CALAVO: 1ª 82.75% / 2ª 8.14% / Merma 3.47% / Peso prom. 25.32. ROMA CALAVO: 1ª 91.57% / 2ª 4.52% / Merma 1.41% / Peso prom. 25.59. Calidad de exportación."},
+    {"nivel":"success","texto":"REPORTES GENERALES TOMATE 12/05 — Embarques Belher confirmó despacho de reportes generales de embarque y empaque. Operación nocturna completada."},
+    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 5 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos y documentación."},
     {"nivel":"warning","texto":"TRANSICIÓN WK20 POST-PEAK — Presión de precios en tomate continúa. Monitorear embarques y ajustar volumen según demanda del mercado."},
     {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
     {"nivel":"info","texto":"CONTRIBUCIONES POR PAGAR — IMSS-INFONAVIT + SAT: MXP 25.4M / ~$1.4M USD. IMSS-INFONAVIT MXP 21.5M vencido. Requiere atención urgente."}
@@ -591,6 +591,10 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"20:08","asunto":"12-05-2026 REPORTES GENERALES DE TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-12"},
+    {"hora":"18:33","asunto":"REPORTE DE BASCULA 12/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-12"},
+    {"hora":"15:46","asunto":"REPORTE DE BASCULA 12/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-12"},
+    {"hora":"10:09","asunto":"REPORTE DE OUTBOUND TOMATE 11/05/2026","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-12"},
     {"hora":"22:56","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-11"},
     {"hora":"22:46","asunto":"REPORTE DIARIO CALAVO 11-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-11"},
     {"hora":"08:00","asunto":"DETECCIÓN DE CONTAMINANTES EN FRUTAS Y VERDURAS","de":"karen.arenivar@suminsaindustria.com","leido":false,"fecha":"2026-05-11"},
