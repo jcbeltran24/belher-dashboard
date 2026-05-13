@@ -1173,7 +1173,8 @@ async function loadWeather(from, to){
 
 // Aggregate daily wx to weekly (week-aligned from cycleStart)
 function wxWeekly(weekNums, cycleStart){
-  const cs = new Date(cycleStart + 'T12:00:00');
+  const cs = new Date((cycleStart||'') + 'T12:00:00');
+  if(isNaN(cs.getTime())) return weekNums.map(() => ({ tMax: null, rain: null }));
   return weekNums.map(w => {
     const days = [];
     for(let i = 0; i < 7; i++){
@@ -1219,15 +1220,19 @@ function _addWxDatasets(chart, tempArr, rainArr){
 
 function injectWeatherDaily(chartId, dates){
   if(!Object.keys(wxData).length) return;
-  _addWxDatasets(CH[chartId],
-    dates.map(d => wxData[d]?.tMax ?? null),
-    dates.map(d => wxData[d]?.rain ?? null));
+  try {
+    _addWxDatasets(CH[chartId],
+      dates.map(d => wxData[d]?.tMax ?? null),
+      dates.map(d => wxData[d]?.rain ?? null));
+  } catch(e){ console.warn('wx daily', e); }
 }
 
 function injectWeatherWeekly(chartId, weekNums, cycleStart){
   if(!Object.keys(wxData).length) return;
-  const agg = wxWeekly(weekNums, cycleStart);
-  _addWxDatasets(CH[chartId], agg.map(a => a.tMax), agg.map(a => a.rain));
+  try {
+    const agg = wxWeekly(weekNums, cycleStart);
+    _addWxDatasets(CH[chartId], agg.map(a => a.tMax), agg.map(a => a.rain));
+  } catch(e){ console.warn('wx weekly', e); }
 }
 
 // Called when weather loads to inject into whichever charts are already built
