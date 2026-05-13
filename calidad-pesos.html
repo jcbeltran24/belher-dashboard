@@ -1444,11 +1444,9 @@ async function loadResumen(){
     finally { btn.classList.remove('spin'); btn.disabled = false; }
   }
 
-  if(!rawInbound.length){
-    try {
-      rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`, {url:SB_API.url, headers:SB_H});
-    } catch(e){}
-  }
+  try {
+    rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`, {url:SB_API.url, headers:SB_H});
+  } catch(e){}
   if(!cmpReady) await autoLoadCmp();
   renderResumen();
 }
@@ -3282,7 +3280,7 @@ async function loadInbound(){
 }
 
 function renderInbound(from, to){
-  const rows = rawInbound;
+  const rows = rawInbound.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   document.getElementById('inb-range-lbl').textContent =
     fDateFull(from) + ' – ' + fDateFull(to);
 
