@@ -39,8 +39,7 @@ body.frame main{padding-top:8px}
 
 /* ── HEADER ── */
 header{background:var(--dark);height:46px;display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:100}
-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,var(--accent2),var(--green3) 38%,rgba(34,197,94,0))}
-.h-logo{width:28px;height:28px;border-radius:7px;background:linear-gradient(140deg,var(--green2),var(--green3));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;color:#fff;flex-shrink:0}
+.h-logo{width:28px;height:28px;border-radius:7px;background:var(--green2);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;color:#fff;flex-shrink:0}
 .h-title{font-size:.82rem;font-weight:700;color:#fff}
 .h-sub{font-size:var(--t-nano);color:rgba(255,255,255,.5);letter-spacing:.3px}
 .h-spacer{flex:1}
@@ -172,7 +171,7 @@ tbody td{padding:6px 11px;vertical-align:middle}
 .prog-name{font-size:.72rem;font-weight:600;color:var(--text)}
 .prog-qty{font-size:.72rem;font-weight:800;font-variant-numeric:tabular-nums}
 .prog-track{height:5px;background:var(--bg2);border-radius:3px;overflow:hidden}
-.prog-fill{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.prog-fill{height:100%;border-radius:4px}
 
 /* ── FILTER CONTEXT VISIBILITY ── */
 .f-palets-only { transition: opacity .2s; }
@@ -193,11 +192,17 @@ tbody td{padding:6px 11px;vertical-align:middle}
 .delta.dn{background:#fee2e2;color:#dc2626}
 .delta.neu{background:#f3f4f6;color:#6b7280}
 .stat-delta{min-height:16px}
-/* ── SEMAPHORE LEFT BAR ── */
-.stat::after{content:'';position:absolute;top:10%;left:0;bottom:10%;width:3px;border-radius:0 2px 2px 0;background:var(--sc,var(--green2));opacity:.7;transition:opacity .2s}
-.stat:hover::after{opacity:1}
 .s-good{--sc:var(--green2)}.s-warn{--sc:var(--accent)}.s-bad{--sc:var(--red2)}
 .s-warn{background:rgba(217,119,6,.03)}.s-bad{background:rgba(220,38,38,.03)}
+/* Balance de Masas channel tints — replaces border-left:3px */
+.bal-ch-blue  {--sc:var(--blue);  background:rgba(29,78,216,.04);  border-color:rgba(29,78,216,.18)}
+.bal-ch-amber {--sc:var(--accent);background:rgba(217,119,6,.04);  border-color:rgba(217,119,6,.2)}
+.bal-ch-purple{--sc:var(--purple);background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.18)}
+/* Spark chart mini-label */
+.spark-lbl{font-size:var(--t-nano);color:var(--muted);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px}
+/* Resumen ghost control — period pills dim when Resumen is active */
+.filters.resumen-mode .period-btns{opacity:.38;pointer-events:none}
+.filters.resumen-mode .period-btns::after{content:'Ciclo completo';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:var(--t-nano);color:rgba(255,255,255,.55);font-weight:600;letter-spacing:.4px;white-space:nowrap;pointer-events:none}
 
 /* ── PANEL ENTER ANIMATION ── */
 @keyframes panelIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
@@ -382,11 +387,11 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   /* Tables */
   .tbl-wrap{max-height:300px}
   table{font-size:.69rem}
-  thead th{padding:7px 9px;font-size:.5rem;letter-spacing:.5px}
+  thead th{padding:7px 9px;font-size:.62rem;letter-spacing:.5px}
   tbody td{padding:7px 9px}
 
   /* Section headers */
-  .sec{font-size:.5rem;letter-spacing:1.1px;margin:14px 0 10px;gap:7px}
+  .sec{font-size:.62rem;letter-spacing:1.1px;margin:14px 0 10px;gap:7px}
   .sec::before{height:10px}
 
   /* Progress bars */
@@ -540,7 +545,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         </div>
         <div class="ov-divider"></div>
         <div>
-          <div style="font-size:.52rem;color:var(--muted);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">Neto diario — t</div>
+          <div class="spark-lbl">Neto diario — t</div>
           <div class="spark" id="rv-bas-spark"></div>
         </div>
       </div>
@@ -565,7 +570,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div class="ov-divider"></div>
         <div id="rv-inb-alert" class="ov-alert ok" style="display:none"></div>
         <div>
-          <div style="font-size:.52rem;color:var(--muted);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">% Primera campo — diario</div>
+          <div class="spark-lbl">% Primera campo — diario</div>
           <div class="spark" id="rv-inb-spark"></div>
         </div>
       </div>
@@ -593,7 +598,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div class="ov-divider"></div>
         <div id="rv-emp-alert" class="ov-alert ok" style="display:none"></div>
         <div>
-          <div style="font-size:.52rem;color:var(--muted);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">% Primera — últimas semanas</div>
+          <div class="spark-lbl">% Primera — últimas semanas</div>
           <div class="spark" id="rv-emp-spark"></div>
         </div>
       </div>
@@ -1031,29 +1036,29 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 
     <!-- KPI strip -->
     <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px">
-      <div class="stat" style="border-left:3px solid #15803d">
+      <div class="stat cg">
         <div class="stat-lbl">Cosecha Tomate</div>
         <div class="stat-val cg" id="bal-cosecha"><span class="skel"></span></div>
         <div class="stat-sub"><span id="bal-cos-roma">—</span> Roma · <span id="bal-cos-bola">—</span> Bola</div>
       </div>
-      <div class="stat" style="border-left:3px solid #16a34a">
+      <div class="stat s-good">
         <div class="stat-lbl">Empaque Final</div>
         <div class="stat-val cg" id="bal-empaque"><span class="skel"></span></div>
         <div class="stat-sub"><span id="bal-emp-roma">—</span> Roma · <span id="bal-emp-bola">—</span> Bola</div>
       </div>
-      <div class="stat" style="border-left:3px solid #1d4ed8">
+      <div class="stat bal-ch-blue">
         <div class="stat-lbl" title="Cajas con entrada a cuartos de gaseo (CJV). Salida aún no confirmada — puede incluir inventario en proceso.">Entrada Gaseo</div>
         <div class="stat-val cb" id="bal-cjv"><span class="skel"></span></div>
         <div class="stat-sub" id="bal-cjv-sub" title="Cajas registradas como entradas a cuartos de gas. Salida aún no confirmada.">salida pendiente ⚠</div>
       </div>
-      <div class="stat" style="border-left:3px solid #d97706">
+      <div class="stat bal-ch-amber">
         <div class="stat-lbl" title="kg de rezaga tomate en el período (vw_rezaga, Supabase)">Rezaga</div>
         <div class="stat-val ca" id="bal-rezaga"><span class="skel"></span></div>
         <div class="stat-sub" id="bal-rez-sub">—</div>
       </div>
-      <div class="stat" style="border-left:3px solid #7c3aed">
+      <div class="stat bal-ch-purple">
         <div class="stat-lbl" title="Empaque Final ÷ Cosechado en báscula. Valores >100% indican captura incompleta en acarreos.">Eficiencia</div>
-        <div class="stat-val" id="bal-efic" style="color:#7c3aed"><span class="skel"></span></div>
+        <div class="stat-val" id="bal-efic" style="color:var(--purple)"><span class="skel"></span></div>
         <div class="stat-sub">empacado ÷ cosechado</div>
       </div>
     </div>
@@ -1971,7 +1976,7 @@ function renderCalidad(){
           tooltip:{ backgroundColor:'#0c2117', bodyColor:'#fff', padding:9, cornerRadius:8,
             callbacks:{ label:c=>c.dataset.label==='% Primera'?` ${c.dataset.label}: ${c.parsed.y??'—'}%`:` ${c.dataset.label}: ${(c.parsed.y||0).toLocaleString('es-MX')} cx` } }
         },
-        annotation:{ annotations:{ obj70: objLine(70,'Obj. 70%','#16a34a') } },
+        annotation:{ annotations:{ obj85: objLine(85,'Obj. 85%') } },
         scales:{
           x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{family:'Inter',size:10},maxRotation:0}, border:{display:false} },
           y:{ position:'left', grid:{color:'rgba(0,0,0,.04)',drawTicks:false},
@@ -2127,7 +2132,7 @@ function renderCalidad(){
           </span>
         </div>
         <div class="prog-track" style="height:6px;border-radius:5px">
-          <div class="prog-fill" style="width:${barPct}%;background:${hue};border-radius:5px;transition:width .5s cubic-bezier(.4,0,.2,1)"></div>
+          <div class="prog-fill" style="width:${barPct}%;background:${hue};border-radius:5px"></div>
         </div>
       </div>`;
     }).join('');
@@ -2354,7 +2359,7 @@ function applyRawData(palets, acarreos, from, to, source){
   if(activePanel === 'panel-embarques') loadEmbarques();
 
   document.getElementById('ft-urls').textContent =
-    `vw_palets gte.${from} lte.${to}  ·  vw_acarreos gte.${from} lte.${to}`;
+    `${from} — ${to}  ·  Empaque + Báscula`;
   document.getElementById('ft-updated').textContent =
     source + ' · ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
     ' · ' + palets.length + ' palets · ' + acarreos.length + ' rem.';
@@ -3056,9 +3061,9 @@ function renderTomate(from, to){
       </div>
       <div class="prog-track" style="overflow:hidden;display:flex;border-radius:4px">
         <div style="width:${(total/maxLote*100).toFixed(1)}%;display:flex;height:100%">
-          ${romaPct>0?`<div style="width:${romaPct.toFixed(1)}%;background:#dc2626;transition:width .5s"></div>`:''}
-          ${bolaPct>0?`<div style="width:${bolaPct.toFixed(1)}%;background:#16a34a;transition:width .5s"></div>`:''}
-          ${otrosPct>0?`<div style="width:${otrosPct.toFixed(1)}%;background:#d97706;transition:width .5s"></div>`:''}
+          ${romaPct>0?`<div style="width:${romaPct.toFixed(1)}%;background:#dc2626"></div>`:''}
+          ${bolaPct>0?`<div style="width:${bolaPct.toFixed(1)}%;background:#16a34a"></div>`:''}
+          ${otrosPct>0?`<div style="width:${otrosPct.toFixed(1)}%;background:#d97706"></div>`:''}
         </div>
       </div>
     </div>`;
@@ -3423,11 +3428,6 @@ function renderInbound(from, to){
         borderColor:'#16a34a', backgroundColor:gradFn(22,163,74,.2,0),
         borderWidth:2.5, pointRadius:4, pointHoverRadius:7,
         fill:true, tension:.3, spanGaps:false
-      },{
-        label:'Objetivo 85%',
-        data: days.map(()=>65),
-        borderColor:'rgba(217,119,6,.55)', borderWidth:1.5,
-        borderDash:[6,4], pointRadius:0, fill:false, tension:0
       }]
     },
     options:{
@@ -3890,6 +3890,7 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(btn.dataset.panel).classList.add('active');
+    document.querySelector('.filters').classList.toggle('resumen-mode', btn.dataset.panel==='panel-resumen');
     syncFilterContext(btn.dataset.panel);
     if(btn.dataset.panel === 'panel-resumen')   loadResumen();
     if(btn.dataset.panel === 'panel-calidad')   renderCalidad();
@@ -4000,6 +4001,7 @@ if(new URLSearchParams(window.location.search).get('frame') === '1'){
   document.body.classList.add('frame');
 }
 syncFilterContext('panel-resumen');
+document.querySelector('.filters').classList.add('resumen-mode');
 renderMPGrid();
 setPeriod('ciclo');
 loadResumen();
