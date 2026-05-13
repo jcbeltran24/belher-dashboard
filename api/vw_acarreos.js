@@ -80,8 +80,9 @@ module.exports = async function handler(req, res) {
 
     res.writeHead(206, {
       ...CORS,
-      'Content-Type':  'application/json',
-      'Content-Range': `${lo}-${hi}/${allRows.length}`,
+      'Content-Type':    'application/json',
+      'Content-Range':   `${lo}-${hi}/${allRows.length}`,
+      'Cache-Control':   's-maxage=300, stale-while-revalidate=60',
     });
     res.end(JSON.stringify(rows));
   } catch (e) {
