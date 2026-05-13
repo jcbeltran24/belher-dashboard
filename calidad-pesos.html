@@ -1809,8 +1809,9 @@ function renderResumen(){
 ──────────────────────────────────────────────────────────── */
 // Etiquetas tomate — fuente de verdad para KPIs de calidad empaque
 const ETIQUETA_CAL = {
-  'CALAVO':   { tier:'PRIMERA', label:'Calavo',   desc:'Primera Exportación' },
-  'YAMETO':   { tier:'PRIMERA', label:'Yameto',   desc:'Primera Nacional'    },
+  'CALAVO':    { tier:'PRIMERA', label:'Calavo',    desc:'Primera Exportación' },
+  'YAMETO':    { tier:'PRIMERA', label:'Yameto',    desc:'Primera Nacional'    },
+  'MILLENIUM': { tier:'PRIMERA', label:'Millenium', desc:'Primera Exportación' },
   'BUENO':    { tier:'SEGUNDA', label:'Bueno',    desc:'Segunda Exportación' },
   'TOLIN':    { tier:'SEGUNDA', label:'Tolin',    desc:'Segunda Nacional'    },
   'URSON':    { tier:'SEGUNDA', label:'Urson',    desc:'Calidad Nacional JZ' },
@@ -1851,7 +1852,7 @@ function paletDesc(r){
 const CAL_COLOR = { PRIMERA:'#16a34a', SEGUNDA:'#d97706', TERCERA:'#dc2626' };
 // Colores por etiqueta para el donut
 const ETQ_CAL_COLORS = {
-  'CALAVO':'#16a34a','YAMETO':'#22c55e',
+  'CALAVO':'#16a34a','YAMETO':'#22c55e','MILLENIUM':'#4ade80',
   'BUENO':'#d97706','TOLIN':'#f59e0b','URSON':'#b45309','ZAZU':'#ca8a04','ISIS':'#92400e',
   'DON MEMO':'#dc2626',
   'LIMONEIRA':'#0891b2','ROSARIO':'#06b6d4',
@@ -2105,7 +2106,7 @@ function renderCalidad(){
 
   /* Donut */
   // Donut por etiqueta — desglose real del negocio
-  const ETQ_ORDER = ['CALAVO','YAMETO','BUENO','TOLIN','URSON','ZAZU','ISIS','DON MEMO'];
+  const ETQ_ORDER = ['CALAVO','YAMETO','MILLENIUM','BUENO','TOLIN','URSON','ZAZU','ISIS','DON MEMO'];
   const etqDonutEntries = ETQ_ORDER
     .filter(e => byEtqKg[e] > 0)
     .concat(Object.keys(byEtqKg).filter(e => !ETQ_ORDER.includes(e) && byEtqKg[e] > 0))
