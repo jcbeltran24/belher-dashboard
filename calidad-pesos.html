@@ -3622,20 +3622,29 @@ async function loadEmbarques(){
   const to   = activeRange?.to   || iso(new Date());
   btn.classList.add('spin'); btn.disabled = true;
   document.getElementById('ft-urls').textContent = `vw_embarques · ${from} → ${to}`;
-  try {
-    const url = `/vw_embarques?select=fecha,tipo,folio,factura,distribuidor,agencia_aduanal,destino,monto_factura,detalle&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`;
-    rawEmbarques = await getAll(url, {url: SB_API.url, headers: SB_H});
-    renderEmbarques(from, to);
-    document.getElementById('ft-updated').textContent =
-      'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
-      ' · ' + rawEmbarques.length + ' embarques';
-  } catch(e){
-    console.error(e);
-    document.getElementById('err-text').textContent = 'Error vw_embarques: ' + e.message;
-    document.getElementById('err-banner').classList.add('show');
-  } finally {
-    btn.classList.remove('spin'); btn.disabled = false;
+  const url = `/vw_embarques?select=fecha,tipo,folio,factura,distribuidor,agencia_aduanal,destino,monto_factura,detalle&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`;
+  const sbCfg = {url: SB_API.url, headers: SB_H};
+  let attempts = 0;
+  while(attempts < 2){
+    try {
+      rawEmbarques = await getAll(url, sbCfg);
+      renderEmbarques(from, to);
+      document.getElementById('ft-updated').textContent =
+        'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
+        ' · ' + rawEmbarques.length + ' embarques';
+      break;
+    } catch(e){
+      attempts++;
+      if(attempts >= 2){
+        console.error(e);
+        document.getElementById('err-text').textContent = 'Error vw_embarques: ' + e.message + ' — intenta de nuevo';
+        document.getElementById('err-banner').classList.add('show');
+      } else {
+        await new Promise(r => setTimeout(r, 1500));
+      }
+    }
   }
+  btn.classList.remove('spin'); btn.disabled = false;
 }
 
 function renderEmbarques(from, to){
