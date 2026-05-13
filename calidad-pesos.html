@@ -1563,10 +1563,12 @@ function renderResumen(){
     });
     return m;
   }
-  const wActNeto = netoByWk(resAcarreos, cycles.actual.from);
+  // Filter actAcr to activeRange so X-axis matches selected period
+  const actAcrTrend = filterByRange(_resAcarreos.length ? _resAcarreos : rawAcarreos, 'fecha', activeRange || {from, to});
+  const wActNeto = netoByWk(actAcrTrend, cycles.actual.from);
   const wAntNeto = netoByWk(cmpAcrAnt,  cycles.anterior.from);
-  const maxWk = Math.max(...Object.keys(wActNeto).map(Number),...Object.keys(wAntNeto).map(Number),1);
-  const wks   = Array.from({length:maxWk},(_,i)=>i+1);
+  // X-axis only covers weeks present in current period
+  const wks = [...new Set(Object.keys(wActNeto).map(Number))].sort((a,b)=>a-b);
 
   mkChart('chart-res-trend',{
     type:'line',
@@ -2183,14 +2185,16 @@ function renderPesos(){
   /* Daily chart — with optional previous-cycle overlay */
   const cycles   = bothCycles();
   const antDates = {};
-  if(cmpOn) cmpAcrAnt.forEach(r=>{
-    const d  = (r.fecha||'').split('T')[0];
-    // shift date +1 year so it aligns on the same x-axis
-    const shifted = new Date(d + 'T12:00:00');
-    shifted.setFullYear(shifted.getFullYear() + 1);
-    const ds = iso(shifted);
-    antDates[ds] = (antDates[ds]||0) + ((r.peso_bruto||0)-(r.tara||0));
-  });
+  if(cmpOn){
+    const pr = priorEquivRange();
+    filterByRange(cmpAcrAnt,'fecha',pr).forEach(r=>{
+      const d  = (r.fecha||'').split('T')[0];
+      const shifted = new Date(d + 'T12:00:00');
+      shifted.setFullYear(shifted.getFullYear() + 1);
+      const ds = iso(shifted);
+      antDates[ds] = (antDates[ds]||0) + ((r.peso_bruto||0)-(r.tara||0));
+    });
+  }
 
   const datasets = [{
     label: cycles.labelAct || 'Actual',
@@ -2753,9 +2757,8 @@ function renderTomate(from, to){
     antTomWeek[w] = (antTomWeek[w]||0) + r.kilos;
   });
 
-  // X-axis: union of weeks present in either dataset, in order
-  const allWeekNums = new Set([...Object.keys(weekMap).map(Number), ...Object.keys(antTomWeek).map(Number)]);
-  const weekNums  = [...allWeekNums].sort((a,b)=>a-b);
+  // X-axis: only weeks in current period (prior overlaid on same weeks)
+  const weekNums  = [...new Set(Object.keys(weekMap).map(Number))].sort((a,b)=>a-b);
   const weekLabels = weekNums.map(w => 'S'+w);
 
   const tomDatasets = [
