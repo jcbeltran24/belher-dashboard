@@ -1066,7 +1066,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 <script>
 /* ── API ──────────────────────────────────────────────── */
 const API = {
-  url:     'http://localhost:8742',
+  url:     window.location.port === '8741' ? 'http://localhost:8742' : '',
   key:     '',
   profile: ''
 };
