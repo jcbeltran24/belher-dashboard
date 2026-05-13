@@ -1324,19 +1324,24 @@ async function getAll(basePath, cfg){
 }
 
 /* ── CACHE ────────────────────────────────────────────── */
-const CACHE_KEY = 'belher_eye_cache_v4';
+const CACHE_KEY = 'belher_eye_cache_v5';
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour — background refresh if stale
+const FULL_FROM = '2024-12-01';   // earliest date in store — covers 2 complete cycles
 
-function saveCache(from, to, palets, acarreos){
+let store = { palets:[], acarreos:[], inbound:[], rezaga:[], embarques:[], loadedAt:0 };
+
+function saveCache(from, to, palets, acarreos, inbound=[], rezaga=[], embarques=[]){
   try {
-    const payload = JSON.stringify({ from, to, palets, acarreos, savedAt: Date.now() });
+    const full = JSON.stringify({ from, to, palets, acarreos, inbound, rezaga, embarques, savedAt: Date.now() });
     try {
-      localStorage.setItem(CACHE_KEY, payload);
+      localStorage.setItem(CACHE_KEY, full);
     } catch(e){
-      localStorage.clear();
-      localStorage.setItem(CACHE_KEY, payload);
+      // Too large with Supabase data — try EYE-only
+      const slim = JSON.stringify({ from, to, palets, acarreos, inbound:[], rezaga:[], embarques:[], savedAt: Date.now() });
+      try { localStorage.setItem(CACHE_KEY, slim); }
+      catch(e2){ localStorage.clear(); localStorage.setItem(CACHE_KEY, slim); }
     }
-  } catch(e){ /* payload too large even after clear — skip cache */ }
+  } catch(e){ /* skip cache */ }
 }
 
 function loadCache(){
@@ -1467,7 +1472,11 @@ function setPeriod(p){
   mpClearActive();
   pushUrlState();
   activeRange = range;
-  loadData();
+  if(store.loadedAt){
+    applyRawData(store.palets, store.acarreos, range?.from || iso(new Date()), range?.to || iso(new Date()), 'Store');
+  } else {
+    loadAll();
+  }
 }
 
 function resetDimFilters(){
@@ -1555,30 +1564,15 @@ async function loadResumen(){
   const from   = cycles.actual.from;
   const to     = cycles.actual.to;
   const key    = from + ':' + to;
-  const btn    = document.getElementById('btn-refresh');
 
-  if(_resCycleKey !== key){
-    btn.classList.add('spin'); btn.disabled = true;
-    try {
-      const _ef = u => fetch(API.url + u, {headers: H}).then(r => {
-        if(r.status === 502) showToast('EYE proxy no disponible (502)', 'warn');
-        return r.ok ? r.json() : [];
-      });
-      [_resPalets, _resAcarreos] = await Promise.all([
-        _ef(`/vw_palets?select=fecha_empaque,cultivo,etiqueta,calidad,peso,bultos,estado&fecha_empaque=gte.${from}&fecha_empaque=lte.${to}`),
-        _ef(`/vw_acarreos?select=fecha,peso_bruto,tara,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`)
-      ]);
-      _resCycleKey = key;
-    } catch(e){ console.warn('loadResumen fetch failed', e); }
-    finally { btn.classList.remove('spin'); btn.disabled = false; }
-  }
+  // Derive from store — no network call
+  const fd = (arr, field) => arr.filter(r => { const d=(r[field]||'').split('T')[0]; return d>=from&&d<=to; });
+  _resPalets   = fd(store.palets,   'fecha_empaque');
+  _resAcarreos = fd(store.acarreos, 'fecha');
+  rawInbound   = fd(store.inbound,  'fecha');
+  rawRezaga    = fd(store.rezaga,   'fecha');
+  _resCycleKey = key;
 
-  try {
-    [rawInbound, rawRezaga] = await Promise.all([
-      getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`, {url:SB_API.url, headers:SB_H}),
-      getAll(`/vw_rezaga?select=folio,fecha,grupo_cultivo,tolva,chofer,vehiculo,peso_bruto,tara,peso_neto&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, {url:SB_API.url, headers:SB_H})
-    ]);
-  } catch(e){}
   if(!cmpReady) await autoLoadCmp();
   renderResumen();
 }
@@ -2476,7 +2470,7 @@ function applyRawData(palets, acarreos, from, to, source){
   const activePanel = document.querySelector('.panel.active')?.id;
   if(activePanel === 'panel-resumen') renderResumen();
   if(activePanel === 'panel-balance') renderBalance();
-  if(activePanel === 'panel-tomate')  renderTomate(from, to);
+  if(activePanel === 'panel-tomate')  loadTomate();
   if(activePanel === 'panel-otros'){
     renderCropPanel({ rows: flattenCrop(acarreos, isLimon, null), from, to, ids:{rangeLbl:'lim-range-lbl',total:'lim-total',totalSub:'lim-total-sub',dias:'lim-dias',prom:'lim-prom'}, chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody', kgPerUnit:KG_PER_BOX_LIMON, unitLabel:'cx' }); renderLimonPalets();
     renderCropPanel({ rows: flattenCrop(acarreos, isChile, null), from, to, ids:{rangeLbl:'chi-range-lbl',total:'chi-total',totalSub:'chi-total-sub',dias:'chi-dias',vars:'chi-vars'}, chartSemId:'chart-chi-sem', varId:'chi-var-bars', tbodyId:'chi-tbody', kgPerUnit:KG_PER_BULTO_CHILE, unitLabel:'bts' });
@@ -2492,57 +2486,98 @@ function applyRawData(palets, acarreos, from, to, source){
     ' · ' + palets.length + ' palets · ' + acarreos.length + ' rem.';
 }
 
-async function loadData(force = false){
+async function loadAll(force = false){
   const mySeq = ++loadSeq;
   const btn   = document.getElementById('btn-refresh');
-  const from  = activeRange?.from || iso(new Date());
-  const to    = activeRange?.to   || iso(new Date());
+  const from  = FULL_FROM;
+  const to    = iso(new Date());
 
-  // 1 · Paint from cache immediately (if range matches and not forced)
+  // 1 · Paint from cache immediately
   const cached    = loadCache();
   const cacheHit  = !force && cached && cached.from === from && cached.to === to;
   const cacheFresh = cacheHit && (Date.now() - cached.savedAt < CACHE_TTL);
 
   if(cacheHit){
-  loadWeather(from, to);
-    applyRawData(cached.palets, cached.acarreos, from, to, 'Caché');
-    if(cacheFresh) return;                              // fresh → no background fetch
+    store.palets    = cached.palets;
+    store.acarreos  = cached.acarreos;
+    store.inbound   = cached.inbound   || [];
+    store.rezaga    = cached.rezaga    || [];
+    store.embarques = cached.embarques || [];
+    rawPalets    = cached.palets;
+    rawAcarreos  = cached.acarreos;
+    rawInbound   = cached.inbound   || [];
+    rawRezaga    = cached.rezaga    || [];
+    rawEmbarques = cached.embarques || [];
+    _populateResumeSlices(cached.palets, cached.acarreos, cached.inbound||[], cached.rezaga||[]);
+    loadWeather(from, to);
+    const rf = activeRange?.from || from, rt = activeRange?.to || to;
+    applyRawData(cached.palets, cached.acarreos, rf, rt, 'Caché');
+    if(cacheFresh) return;
     document.getElementById('ft-updated').textContent += ' (actualizando…)';
   }
 
-  // 2 · Fetch — spinner visible only when no cache to show
+  // 2 · Fetch all sources in parallel
   if(!cacheHit){ btn.classList.add('spin'); btn.disabled = true; }
   document.getElementById('err-banner').classList.remove('show');
 
-  const urlPalets   = `/vw_palets?select=fecha_empaque,cultivo,etiqueta,calidad,peso,bultos,tamano,color,precio,grupo_cultivo,gaseado,estado&fecha_empaque=gte.${from}&fecha_empaque=lte.${to}`;
-  const urlAcarreos = `/vw_acarreos?select=fecha,peso_bruto,tara,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`;
+  const eyeFetch = u => fetch(API.url + u, {headers: H}).then(r => {
+    if(r.status === 502) showToast('EYE proxy no disponible (502) — cargando caché', 'warn');
+    return r.ok ? r.json() : [];
+  });
+  const sbCfg = {url: SB_API.url, headers: SB_H};
 
   try {
     btn.classList.add('spin'); btn.disabled = true;
-    const eyeFetch = u => fetch(API.url + u, {headers: H}).then(r => {
-      if(r.status === 502) showToast('EYE proxy no disponible (502) — cargando caché', 'warn');
-      return r.ok ? r.json() : [];
-    });
-    const [palets, acarreos] = await Promise.all([eyeFetch(urlPalets), eyeFetch(urlAcarreos)]);
-    if(mySeq !== loadSeq) return;                   // a newer request already landed — drop this one
-    saveCache(from, to, palets, acarreos);
+    const [palets, acarreos, inbound, rezaga, embarques] = await Promise.all([
+      eyeFetch(`/vw_palets?select=fecha_empaque,cultivo,etiqueta,calidad,peso,bultos,tamano,color,precio,grupo_cultivo,gaseado,estado&fecha_empaque=gte.${from}&fecha_empaque=lte.${to}`),
+      eyeFetch(`/vw_acarreos?select=fecha,peso_bruto,tara,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`),
+      getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`, sbCfg).catch(()=>[]),
+      getAll(`/vw_rezaga?select=folio,fecha,grupo_cultivo,tolva,chofer,vehiculo,peso_bruto,tara,peso_neto&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbCfg).catch(()=>[]),
+      getAll(`/vw_embarques?select=fecha,tipo,folio,factura,distribuidor,agencia_aduanal,destino,monto_factura,detalle&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbCfg).catch(()=>[]),
+    ]);
+    if(mySeq !== loadSeq) return;
+
+    store = { palets, acarreos, inbound, rezaga, embarques, loadedAt: Date.now() };
+    rawPalets    = palets;
+    rawAcarreos  = acarreos;
+    rawInbound   = inbound;
+    rawRezaga    = rezaga;
+    rawEmbarques = embarques;
+    _populateResumeSlices(palets, acarreos, inbound, rezaga);
+
+    saveCache(from, to, palets, acarreos, inbound, rezaga, embarques);
     loadWeather(from, to);
-    applyRawData(palets, acarreos, from, to, 'EYE Live');
+    if(!cmpReady) autoLoadCmp().catch(console.warn);
+    const rf = activeRange?.from || from, rt = activeRange?.to || to;
+    applyRawData(palets, acarreos, rf, rt, 'EYE Live');
   } catch(err){
     console.error(err);
     if(!cacheHit){
       document.querySelectorAll('.skel').forEach(s => s.replaceWith('—'));
-      document.getElementById('err-text').textContent = 'Error EYE: ' + err.message;
+      document.getElementById('err-text').textContent = 'Error: ' + err.message;
       document.getElementById('err-banner').classList.add('show');
-      showToast('Error EYE: ' + err.message, 'error');
+      showToast('Error: ' + err.message, 'error');
     } else {
       document.getElementById('ft-updated').textContent += ' · ⚠ sin conexión, mostrando caché';
-      showToast('Sin conexión EYE — mostrando caché', 'warn', 3000);
+      showToast('Sin conexión — mostrando caché', 'warn', 3000);
     }
   } finally {
     btn.classList.remove('spin'); btn.disabled = false;
   }
 }
+
+function _populateResumeSlices(palets, acarreos, inbound, rezaga){
+  const cycles = bothCycles();
+  const cf = cycles.actual.from, ct = cycles.actual.to;
+  const fd = (arr, field) => arr.filter(r => { const d=(r[field]||'').split('T')[0]; return d>=cf&&d<=ct; });
+  _resPalets   = fd(palets,   'fecha_empaque');
+  _resAcarreos = fd(acarreos, 'fecha');
+  rawInbound   = fd(inbound,  'fecha');
+  rawRezaga    = fd(rezaga,   'fecha');
+  _resCycleKey = cf + ':' + ct;
+}
+
+async function loadData(force = false){ return loadAll(force); }
 
 /* ── TOMATE LOAD & RENDER ───────────────────────────────── */
 let rawTomate    = [];
@@ -3055,8 +3090,11 @@ async function loadTomate(){
   const antFrom = `${parseInt(actFrom.split('-')[0])-1}-12-01`;
   document.getElementById('ft-urls').textContent = `vw_acarreos · Tomate · ${from} → ${to}  ·  ant. ${antFrom}`;
 
-  // Reusar rawAcarreos (ya cargado por loadData) — sin llamada extra al EYE proxy
-  rawTomate = flattenTomate(rawAcarreos);
+  // Filter from store by active range — no network call
+  const acr = store.loadedAt
+    ? store.acarreos.filter(r => { const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; })
+    : rawAcarreos;
+  rawTomate = flattenTomate(acr);
 
   // Año anterior: usar cmpAcrAnt (ya cargado por autoLoadCmp/loadCmpData)
   if(!cmpReady) await autoLoadCmp();
@@ -3361,25 +3399,17 @@ function renderCropPanel({ rows, ids, from, to, chartSemId, casetaId, varId, tbo
 }
 
 async function loadLimon(){
-  const btn=document.getElementById('btn-refresh');
-  btn.classList.add('spin'); btn.disabled=true;
-  document.getElementById('err-banner').classList.remove('show');
   const from=activeRange?.from||iso(new Date()), to=activeRange?.to||iso(new Date());
-  document.getElementById('ft-urls').textContent=`vw_acarreos + vw_palets · Limón · ${from} → ${to}`;
-  try{
-    const rows=await getAll(`/vw_acarreos?select=fecha,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`);
-    const flat=flattenCrop(rows, isLimon, null);
-    renderCropPanel({ rows:flat, from, to,
-      ids:{ rangeLbl:'lim-range-lbl', total:'lim-total', totalSub:'lim-total-sub', dias:'lim-dias', prom:'lim-prom' },
-      chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody',
-      kgPerUnit: KG_PER_BOX_LIMON, unitLabel: 'cx'
-    });
-    renderLimonPalets();
-    document.getElementById('ft-updated').textContent='Actualizado: '+new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})+' · '+flat.length+' líneas cosecha · '+fPalets.filter(isLimonPalet).length+' palets empaque';
-  }catch(e){
-    document.getElementById('err-text').textContent='Error EYE: '+e.message;
-    document.getElementById('err-banner').classList.add('show');
-  }finally{ btn.classList.remove('spin'); btn.disabled=false; }
+  document.getElementById('ft-urls').textContent=`store · Limón · ${from} → ${to}`;
+  const rows = store.acarreos.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  const flat = flattenCrop(rows, isLimon, null);
+  renderCropPanel({ rows:flat, from, to,
+    ids:{ rangeLbl:'lim-range-lbl', total:'lim-total', totalSub:'lim-total-sub', dias:'lim-dias', prom:'lim-prom' },
+    chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody',
+    kgPerUnit: KG_PER_BOX_LIMON, unitLabel: 'cx'
+  });
+  renderLimonPalets();
+  document.getElementById('ft-updated').textContent='Actualizado: '+new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})+' · '+flat.length+' líneas cosecha · '+fPalets.filter(isLimonPalet).length+' palets empaque';
 }
 
 function renderLimonPalets(){
@@ -3424,48 +3454,30 @@ function renderLimonPalets(){
 }
 
 async function loadChile(){
-  const btn=document.getElementById('btn-refresh');
-  btn.classList.add('spin'); btn.disabled=true;
-  document.getElementById('err-banner').classList.remove('show');
   const from=activeRange?.from||iso(new Date()), to=activeRange?.to||iso(new Date());
-  document.getElementById('ft-urls').textContent=`vw_acarreos · Chile · ${from} → ${to}`;
-  try{
-    const rows=await getAll(`/vw_acarreos?select=fecha,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`);
-    const flat=flattenCrop(rows, isChile, null);
-    renderCropPanel({ rows:flat, from, to,
-      ids:{ rangeLbl:'chi-range-lbl', total:'chi-total', totalSub:'chi-total-sub', dias:'chi-dias', vars:'chi-vars' },
-      chartSemId:'chart-chi-sem', varId:'chi-var-bars', tbodyId:'chi-tbody',
-      kgPerUnit: KG_PER_BULTO_CHILE, unitLabel: 'bts'
-    });
-    document.getElementById('ft-updated').textContent='Actualizado: '+new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})+' · '+flat.length+' líneas chile';
-  }catch(e){
-    document.getElementById('err-text').textContent='Error EYE: '+e.message;
-    document.getElementById('err-banner').classList.add('show');
-  }finally{ btn.classList.remove('spin'); btn.disabled=false; }
+  document.getElementById('ft-urls').textContent=`store · Chile · ${from} → ${to}`;
+  const rows = store.acarreos.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  const flat = flattenCrop(rows, isChile, null);
+  renderCropPanel({ rows:flat, from, to,
+    ids:{ rangeLbl:'chi-range-lbl', total:'chi-total', totalSub:'chi-total-sub', dias:'chi-dias', vars:'chi-vars' },
+    chartSemId:'chart-chi-sem', varId:'chi-var-bars', tbodyId:'chi-tbody',
+    kgPerUnit: KG_PER_BULTO_CHILE, unitLabel: 'bts'
+  });
+  document.getElementById('ft-updated').textContent='Actualizado: '+new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})+' · '+flat.length+' líneas chile';
 }
 
 /* ── INBOUND · CAMPO ────────────────────────────────────── */
 let rawInbound = [];
 
 async function loadInbound(){
-  const btn  = document.getElementById('btn-refresh');
   const from = activeRange?.from || iso(new Date());
   const to   = activeRange?.to   || iso(new Date());
-  btn.classList.add('spin'); btn.disabled = true;
-  document.getElementById('err-banner').classList.remove('show');
-  document.getElementById('ft-urls').textContent = `vw_inbound · ${from} → ${to}`;
-  try {
-    rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`, {url:SB_API.url, headers:SB_H});
-    renderInbound(from, to);
-    document.getElementById('ft-updated').textContent =
-      'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
-      ' · ' + rawInbound.length + ' inspecciones';
-  } catch(e){
-    document.getElementById('err-text').textContent = 'Error vw_inbound: ' + e.message;
-    document.getElementById('err-banner').classList.add('show');
-  } finally {
-    btn.classList.remove('spin'); btn.disabled = false;
-  }
+  document.getElementById('ft-urls').textContent = `store · inbound · ${from} → ${to}`;
+  rawInbound = store.inbound.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  renderInbound(from, to);
+  document.getElementById('ft-updated').textContent =
+    'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
+    ' · ' + rawInbound.length + ' inspecciones';
 }
 
 function renderInbound(from, to){
@@ -3738,15 +3750,9 @@ async function toggleComparison(){
 
 async function loadCmpData(){
   const cycles = bothCycles();
-  try {
-    const _cef = u => fetch(API.url + u, {headers: H}).then(r => r.ok ? r.json() : []);
-    [cmpPalAnt, cmpAcrAnt] = await Promise.all([
-      _cef(`/vw_palets?select=fecha_empaque,etiqueta,calidad,bultos,peso,cultivo&fecha_empaque=gte.${cycles.anterior.from}&fecha_empaque=lte.${cycles.anterior.to}`),
-      _cef(`/vw_acarreos?select=fecha,peso_bruto,tara,detalles,lote&fecha=gte.${cycles.anterior.from}&fecha=lte.${cycles.anterior.to}`)
-    ]);
-    document.getElementById('ft-urls').textContent +=
-      `  ·  Anterior: vw_acarreos gte.${cycles.anterior.from}&lte.${cycles.anterior.to}`;
-  } catch(e){ console.error(e); }
+  const af = cycles.anterior.from, at = cycles.anterior.to;
+  cmpPalAnt = store.palets.filter(p  => { const d=(p.fecha_empaque||'').split('T')[0]; return d>=af&&d<=at; });
+  cmpAcrAnt = store.acarreos.filter(r => { const d=(r.fecha||'').split('T')[0]; return d>=af&&d<=at; });
 }
 
 function weekOfCycle(isoDate, cycleFromISO){
@@ -3767,13 +3773,7 @@ function cycleStartOf(isoDate){
 async function loadRezaga(){
   const from = activeRange?.from || iso(new Date());
   const to   = activeRange?.to   || iso(new Date());
-  const url  = `/vw_rezaga?select=folio,fecha,grupo_cultivo,tolva,chofer,vehiculo,peso_bruto,tara,peso_neto&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`;
-  try {
-    rawRezaga = await getAll(url, {url: SB_API.url, headers: SB_H});
-  } catch(e){
-    console.warn('vw_rezaga fetch failed', e);
-    rawRezaga = [];
-  }
+  rawRezaga = store.rezaga.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   renderRezaga();
 }
 
@@ -3812,34 +3812,14 @@ function renderRezaga(){
 
 /* ── EMBARQUES ──────────────────────────────────────────── */
 async function loadEmbarques(){
-  const btn  = document.getElementById('btn-refresh');
   const from = activeRange?.from || iso(new Date());
   const to   = activeRange?.to   || iso(new Date());
-  btn.classList.add('spin'); btn.disabled = true;
-  document.getElementById('ft-urls').textContent = `vw_embarques · ${from} → ${to}`;
-  const url = `/vw_embarques?select=fecha,tipo,folio,factura,distribuidor,agencia_aduanal,destino,monto_factura,detalle&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`;
-  const sbCfg = {url: SB_API.url, headers: SB_H};
-  let attempts = 0;
-  while(attempts < 2){
-    try {
-      rawEmbarques = await getAll(url, sbCfg);
-      renderEmbarques(from, to);
-      document.getElementById('ft-updated').textContent =
-        'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
-        ' · ' + rawEmbarques.length + ' embarques';
-      break;
-    } catch(e){
-      attempts++;
-      if(attempts >= 2){
-        console.error(e);
-        document.getElementById('err-text').textContent = 'Error vw_embarques: ' + e.message + ' — intenta de nuevo';
-        document.getElementById('err-banner').classList.add('show');
-      } else {
-        await new Promise(r => setTimeout(r, 1500));
-      }
-    }
-  }
-  btn.classList.remove('spin'); btn.disabled = false;
+  document.getElementById('ft-urls').textContent = `store · embarques · ${from} → ${to}`;
+  rawEmbarques = store.embarques.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  renderEmbarques(from, to);
+  document.getElementById('ft-updated').textContent =
+    'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
+    ' · ' + rawEmbarques.length + ' embarques';
 }
 
 function renderEmbarques(from, to){
@@ -4142,12 +4122,13 @@ function pickMonth(year, month){
   btn.classList.add('mpactive');
   document.getElementById('mpicker-lbl').textContent = MESES_FUL[month] + ' ' + year;
   closeMPicker();
-  if(!cmpReady) autoLoadCmp();
-  loadData();
-  const activePanel = document.querySelector('.panel.active')?.id;
-  if(activePanel === 'panel-inbound')   loadInbound();
-  if(activePanel === 'panel-pesos')     loadRezaga();
-  if(activePanel === 'panel-embarques') loadEmbarques();
+  if(store.loadedAt){
+    const rf = activeRange?.from || iso(new Date()), rt = activeRange?.to || iso(new Date());
+    applyRawData(store.palets, store.acarreos, rf, rt, 'Store');
+    if(!cmpReady) autoLoadCmp();
+  } else {
+    loadAll();
+  }
 }
 
 // close month picker on outside click (desktop)
@@ -4174,10 +4155,7 @@ if(_savedTab && _savedTab !== 'panel-resumen'){
 }
 
 renderMPGrid();
-setPeriod(_savedPeriod);
-if(!_savedTab || _savedTab === 'panel-resumen'){
-  loadResumen().then(() => autoLoadCmp().catch(console.warn));
-}
+setPeriod(_savedPeriod); // → loadAll() on first boot; store-render on subsequent calls
 </script>
 </body>
 </html>
