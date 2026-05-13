@@ -632,6 +632,12 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       <div style="position:relative;height:240px"><canvas id="chart-res-trend"></canvas></div>
     </div>
 
+    <!-- Balance de Masas -->
+    <div class="card card-pad" style="margin-bottom:10px">
+      <div class="card-title">Balance de Masas · Ciclo Completo</div>
+      <div id="sankey-wrap-res" style="width:100%"></div>
+    </div>
+
   </div><!-- /panel-resumen -->
 
   <!-- ══ PANEL: CALIDADES ══════════════════════════════════ -->
@@ -1608,6 +1614,14 @@ function renderResumen(){
       }
     }
   });
+
+  // Sankey con datos del ciclo completo
+  const _savePal = rawPalets, _saveAcr = rawAcarreos;
+  rawPalets   = _resPalets.length   ? _resPalets   : rawPalets;
+  rawAcarreos = _resAcarreos.length ? _resAcarreos : rawAcarreos;
+  renderSankey(from, to, 'sankey-wrap-res');
+  rawPalets   = _savePal;
+  rawAcarreos = _saveAcr;
 }
 
 /* ── HELPERS ──────────────────────────────────────────── */
@@ -2384,7 +2398,7 @@ function isoWeekSortKey(isoDate){
 }
 
 /* ── BALANCE DE MASAS · SANKEY ─────────────────────────── */
-function renderSankey(from, to){
+function renderSankey(from, to, targetId='sankey-wrap'){
   document.getElementById('san-range-lbl').textContent = fDateFull(from)+' – '+fDateFull(to);
 
   // ── Cosecha ──────────────────────────────────────────────
@@ -2494,7 +2508,7 @@ function renderSankey(from, to){
     ${dstLabels}
   </svg>`;
 
-  document.getElementById('sankey-wrap').innerHTML=svg;
+  const el = document.getElementById(targetId); if(el) el.innerHTML=svg;
 }
 
 /* ── REPORTE COSECHA & EMPAQUE ──────────────────────────── */
