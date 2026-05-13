@@ -2672,12 +2672,12 @@ function renderBalance(){
   const bEfic = cosBola>0?(empBola+cjvBola)/cosBola*100:0;
   document.getElementById('bal-r-cos').innerHTML  = T(cosRoma);
   document.getElementById('bal-r-emp').innerHTML  = T(empRoma+cjvRoma);
-  document.getElementById('bal-r-efic').innerHTML = fN(rEfic,1)+'%';
-  document.getElementById('bal-r-efic').style.color = rEfic>=90?'#16a34a':rEfic>=80?'#d97706':'#dc2626';
+  document.getElementById('bal-r-efic').innerHTML = fN(rEfic,1)+'%'+(rEfic>100?' <span title="Salida supera cosecha estimada: inventario previo en gaseo o imprecisión en proporción de camiones mixtos" style="font-size:.7rem">⚠</span>':'');
+  document.getElementById('bal-r-efic').style.color = rEfic>100?'#d97706':rEfic>=90?'#16a34a':rEfic>=80?'#d97706':'#dc2626';
   document.getElementById('bal-b-cos').innerHTML  = T(cosBola);
   document.getElementById('bal-b-emp').innerHTML  = T(empBola+cjvBola);
-  document.getElementById('bal-b-efic').innerHTML = fN(bEfic,1)+'%';
-  document.getElementById('bal-b-efic').style.color = bEfic>=90?'#16a34a':bEfic>=80?'#d97706':'#dc2626';
+  document.getElementById('bal-b-efic').innerHTML = fN(bEfic,1)+'%'+(bEfic>100?' <span title="Salida supera cosecha estimada: inventario previo en gaseo o imprecisión en proporción de camiones mixtos" style="font-size:.7rem">⚠</span>':'');
+  document.getElementById('bal-b-efic').style.color = bEfic>100?'#d97706':bEfic>=90?'#16a34a':bEfic>=80?'#d97706':'#dc2626';
 
   // Sankey grande — swap temporal igual que en Resumen
   const _sp=rawPalets, _sa=rawAcarreos;
@@ -2727,7 +2727,7 @@ function renderReporte(from, to){
     else if(isBola(c)) grp = 'BOLA';
     else return;
     const kg = (r.peso||0) * (r.bultos||0);
-    if(r.gaseado){
+    if(r.estado === 'CJV'){
       gas[grp] += kg;
     } else {
       const tier = paletTier(r);
@@ -3876,7 +3876,7 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     if(btn.dataset.panel === 'panel-inbound')   loadInbound();
     if(btn.dataset.panel === 'panel-pesos')     { renderPesos(); loadRezaga(); }
     if(btn.dataset.panel === 'panel-embarques') loadEmbarques();
-    if(btn.dataset.panel === 'panel-balance')   { if(!_resCycleKey) loadResumen(); else renderBalance(); }
+    if(btn.dataset.panel === 'panel-balance')   { if(!_resCycleKey) loadResumen().then(()=>renderBalance()); else renderBalance(); }
   });
 });
 
