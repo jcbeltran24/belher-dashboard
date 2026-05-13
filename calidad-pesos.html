@@ -2698,7 +2698,7 @@ function renderTomate(from, to){
     fDateFull(from) + ' – ' + fDateFull(to);
 
   if(!rows.length){
-    ['tom-total','tom-roma','tom-bola','tom-dias','tom-prom-roma','tom-prom-bola']
+    ['tom-total','tom-roma','tom-bola','tom-dias']
       .forEach(id => document.getElementById(id).textContent = '—');
     document.getElementById('tom-tbody').innerHTML =
       '<tr><td colspan="11" class="empty">Sin datos de tomate para el período seleccionado.</td></tr>';
@@ -2733,33 +2733,6 @@ function renderTomate(from, to){
   document.getElementById('tom-of').innerHTML = fKM(toBoxes(ofKg, KG_PER_BOX_TOMATE))+'<span class="stat-unit">cx</span>';
   document.getElementById('tom-of-pct').textContent = totalKg ? fN(ofKg/totalKg*100)+'% · '+fN(ofKg/1000)+' t' : '—';
 
-  // Peso prom Roma con alerta
-  function setProm(valEl, subEl, cardEl, val, target, unit){
-    cardEl.classList.remove('cg','ca','cb','cr','cp','peso-ok','peso-alto','peso-bajo');
-    valEl.innerHTML = fN(val) + '<span class="stat-unit">' + unit + '</span>';
-    if(val > target){
-      cardEl.classList.add('peso-alto');
-      subEl.innerHTML = `<span class="peso-alert-icon alto">⚠ +${fN(val-target,3)} sobre obj.</span>`;
-    } else if(val < target && val > 0){
-      cardEl.classList.add('peso-bajo');
-      subEl.innerHTML = `<span class="peso-alert-icon bajo">⚠ −${fN(target-val,3)} bajo obj.</span>`;
-    } else {
-      cardEl.classList.add('peso-ok');
-      subEl.innerHTML = `<span class="peso-alert-icon ok">✓ En objetivo</span>`;
-    }
-  }
-  setProm(
-    document.getElementById('tom-prom-roma'),
-    document.getElementById('tom-prom-roma-sub'),
-    document.getElementById('tom-prom-card'),
-    romaPromG, TOMATO_TARGET.ROMA, 'kg'
-  );
-  setProm(
-    document.getElementById('tom-prom-bola'),
-    document.getElementById('tom-prom-bola-sub'),
-    document.getElementById('tom-prom-bola-card'),
-    bolaPromG, TOMATO_TARGET.BOLA, 'kg'
-  );
 
   // ── Weekly stacked bar — cycle-relative weeks ──
   const actFrom = cycleStartOf(from);
