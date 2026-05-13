@@ -2232,8 +2232,7 @@ function renderPesos(){
   const fKgStat = v => v>=1e6?fN(v/1e6,2)+'<span class="stat-unit">M kg</span>':fK(Math.round(v))+'<span class="stat-unit">kg</span>';
   document.getElementById('ps-neto').innerHTML      = fKgStat(totNeto);
   document.getElementById('ps-remisiones').textContent = rows.length+' remisiones';
-  document.getElementById('ps-bruto').innerHTML     = fKgStat(totBruto);
-  document.getElementById('ps-tara').innerHTML      = fKgStat(totTara);
+
   document.getElementById('ps-avg').innerHTML       = fK(Math.round(avgNeto))+'<span class="stat-unit">kg</span>';
   // % Rezaga tomate en el período
   const from_p = activeRange?.from||iso(new Date()), to_p = activeRange?.to||iso(new Date());
