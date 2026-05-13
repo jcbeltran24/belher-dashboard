@@ -464,6 +464,7 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
   <div class="f-row">
     <div class="period-btns">
       <button class="p-btn" data-period="hoy">Hoy</button>
+      <button class="p-btn" data-period="ayer">Ayer</button>
       <button class="p-btn" data-period="semana">Semana</button>
       <button class="p-btn" data-period="mes">Mes</button>
       <button class="p-btn" data-period="ciclo">Ciclo</button>
@@ -1359,6 +1360,11 @@ function periodRange(p){
   switch(p){
     case 'hoy':
       return { from: today, to: today };
+    case 'ayer': {
+      const ayer = new Date(now); ayer.setDate(ayer.getDate() - 1);
+      const ayerStr = iso(ayer);
+      return { from: ayerStr, to: ayerStr };
+    }
     case 'semana': {
       const mon = monday(0);
       return { from: iso(mon), to: today };
