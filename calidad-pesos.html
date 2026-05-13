@@ -1419,11 +1419,10 @@ function renderResumen(){
   const from   = cycles.actual.from;
   const to     = cycles.actual.to;
   // Usar datos del ciclo completo (no activeRange)
-  const resPalets   = _resPalets.length   ? _resPalets   : resPalets.filter(p=>{ const d=(p.fecha_empaque||'').split('T')[0]; return d>=from&&d<=to; });
-  const resAcarreos = _resAcarreos.length ? _resAcarreos : resAcarreos.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  const resPalets   = _resPalets.length   ? _resPalets   : rawPalets.filter(p=>{ const d=(p.fecha_empaque||'').split('T')[0]; return d>=from&&d<=to; });
+  const resAcarreos = _resAcarreos.length ? _resAcarreos : rawAcarreos.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   document.getElementById('res-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
 
-  const cycles = bothCycles();
   document.getElementById('res-lbl-act').textContent = cycles.labelAct;
   document.getElementById('res-lbl-ant').textContent = cycles.labelAnt;
 
