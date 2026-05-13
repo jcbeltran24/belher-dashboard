@@ -2276,6 +2276,7 @@ function applyRawData(palets, acarreos, from, to, source){
   applyFilters();
   // Re-render whichever crop tab is active
   const activePanel = document.querySelector('.panel.active')?.id;
+  if(activePanel === 'panel-resumen') renderResumen();
   if(activePanel === 'panel-tomate')  renderTomate(from, to);
   if(activePanel === 'panel-otros'){
     renderCropPanel({ rows: flattenCrop(acarreos, isLimon, null), from, to, ids:{rangeLbl:'lim-range-lbl',total:'lim-total',totalSub:'lim-total-sub',dias:'lim-dias',prom:'lim-prom'}, chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody', kgPerUnit:KG_PER_BOX_LIMON, unitLabel:'cx' }); renderLimonPalets();
