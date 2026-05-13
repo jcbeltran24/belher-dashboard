@@ -38,7 +38,7 @@ body.frame .filters{position:sticky;top:0;z-index:200}
 body.frame main{padding-top:8px}
 
 /* ── HEADER ── */
-header{background:var(--dark);height:46px;display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:100}
+header{background:#0c2117;height:46px;display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:100}
 .h-logo{width:28px;height:28px;border-radius:7px;background:var(--green2);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;color:#fff;flex-shrink:0}
 .h-title{font-size:.82rem;font-weight:700;color:#fff}
 .h-sub{font-size:var(--t-nano);color:rgba(255,255,255,.5);letter-spacing:.3px}
@@ -46,13 +46,13 @@ header{background:var(--dark);height:46px;display:flex;align-items:center;paddin
 .h-live{display:flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);font-size:var(--t-nano);font-weight:700;letter-spacing:.8px;color:#4ade80}
 .live-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.8)}}
-#btn-refresh{display:flex;align-items:center;gap:5px;padding:0 10px;height:26px;border-radius:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.7);font-size:.65rem;font-weight:600;font-family:inherit;cursor:pointer;transition:.15s}
+#btn-refresh{display:flex;align-items:center;gap:5px;padding:0 10px;height:26px;border-radius:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.7);font-size:var(--t-nano);font-weight:600;font-family:inherit;cursor:pointer;transition:.15s}
 #btn-refresh:hover{background:rgba(255,255,255,.14);color:#fff}
 #btn-refresh.spin svg{animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ── FILTERS BAR ── */
-.filters{background:var(--dark2);padding:6px 20px;display:flex;flex-direction:column;gap:4px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
+.filters{background:#162d1f;padding:6px 20px;display:flex;flex-direction:column;gap:4px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
 .f-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .f-label{display:none}
 .f-group{display:flex;align-items:center}
@@ -65,7 +65,7 @@ header{background:var(--dark);height:46px;display:flex;align-items:center;paddin
 
 /* Month picker */
 .mpicker-wrap{position:relative}
-.mpicker-btn{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.6);font-size:.65rem;font-weight:600;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap;transition:.14s}
+.mpicker-btn{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.6);font-size:var(--t-nano);font-weight:600;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap;transition:.14s}
 .mpicker-btn:hover{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.24);color:#fff}
 .mpicker-btn.mpactive{background:rgba(251,191,36,.16);border-color:rgba(251,191,36,.42);color:#fbbf24}
 .mpicker-pop{display:none;position:absolute;top:calc(100% + 7px);left:0;z-index:400;background:#fff;border:1px solid #d1fae5;border-radius:14px;box-shadow:0 16px 48px rgba(12,33,23,.22),0 3px 10px rgba(12,33,23,.1);width:248px;padding:14px;animation:mpfade .13s ease-out}
@@ -83,11 +83,11 @@ header{background:var(--dark);height:46px;display:flex;align-items:center;paddin
 .mp-today-hint{text-align:center;margin-top:11px;padding-top:10px;border-top:1px solid #f0f4f0;font-size:var(--t-nano);color:var(--muted);font-weight:500}
 
 /* Comparison button */
-.cmp-btn{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:.65rem;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:4px;transition:.14s}
+.cmp-btn{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:var(--t-nano);font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:4px;transition:.14s}
 .cmp-btn:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.22)}
 .cmp-btn.active{background:rgba(15,118,110,.18);border-color:rgba(167,139,250,.4);color:#c4b5fd;font-weight:700}
 
-.f-select{height:26px;padding:0 24px 0 10px;border-radius:6px;background:rgba(255,255,255,.06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,.4)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 7px center / 10px no-repeat;border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.85);font-size:.68rem;font-family:inherit;outline:none;transition:.15s;cursor:pointer;appearance:none;-webkit-appearance:none}
+.f-select{height:26px;padding:0 24px 0 10px;border-radius:6px;background:rgba(255,255,255,.06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,.4)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 7px center / 10px no-repeat;border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.85);font-size:var(--t-nano);font-family:inherit;outline:none;transition:.15s;cursor:pointer;appearance:none;-webkit-appearance:none}
 .f-select:hover{background-color:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22)}
 .f-select:focus{border-color:rgba(251,191,36,.5);background-color:rgba(255,255,255,.1)}
 .f-select option{background:#162d1f;color:#fff}
@@ -97,7 +97,7 @@ header{background:var(--dark);height:46px;display:flex;align-items:center;paddin
 .f-divider{display:none}
 
 /* ── TABS ── */
-.view-tabs{background:var(--dark2);display:flex;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;overflow-x:auto;scrollbar-width:none}
+.view-tabs{background:#162d1f;display:flex;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;overflow-x:auto;scrollbar-width:none}
 .view-tabs::-webkit-scrollbar{display:none}
 .view-tab{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.36);padding:0 16px;height:34px;font-family:inherit;font-size:.73rem;font-weight:600;position:relative;transition:color .18s;white-space:nowrap;flex-shrink:0}
 .view-tab::after{content:'';position:absolute;bottom:0;left:10px;right:10px;height:2px;background:var(--accent2);border-radius:2px 2px 0 0;transform:scaleX(0);transition:transform .2s cubic-bezier(.4,0,.2,1)}
@@ -155,7 +155,7 @@ main{flex:1;padding:14px 20px 32px;max-width:1400px;width:100%;margin:0 auto}
 .tbl-wrap{overflow-x:auto;max-height:360px;overflow-y:auto}
 table{width:100%;border-collapse:collapse;font-size:.74rem}
 thead{position:sticky;top:0;z-index:2}
-thead tr{background:var(--dark)}
+thead tr{background:#0c2117}
 thead th{padding:7px 11px;text-align:left;font-size:var(--t-nano);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.6);white-space:nowrap}
 thead th.r{text-align:right}
 tbody tr{border-bottom:1px solid #f0f4f0;transition:background .1s}
@@ -265,7 +265,7 @@ tbody td{padding:6px 11px;vertical-align:middle}
 .cmp-big{font-size:var(--t-xl);font-weight:700;line-height:1;letter-spacing:-.4px;font-family:var(--font-num)}
 .cmp-act-val{color:var(--green)}
 .cmp-ant-val{color:var(--accent)}
-.cmp-small{font-size:.65rem;color:var(--muted)}
+.cmp-small{font-size:var(--t-nano);color:var(--muted)}
 
 /* ── ERROR / EMPTY ── */
 .err{display:none;align-items:center;gap:8px;padding:10px 14px;background:#fff5f5;border:1px solid #fecaca;border-radius:var(--r-sm);font-size:.78rem;color:#7f1d1d;margin-bottom:14px}
@@ -287,8 +287,8 @@ header:has(#btn-refresh.spin)~.filters::before{content:'';display:block;height:2
 .sub-tab:hover{color:var(--text)}
 .sub-tab.active{color:var(--green2);border-bottom-color:var(--green2)}
 /* Error banner retry button */
-.err-retry{margin-left:auto;padding:3px 12px;border-radius:6px;background:var(--red);border:none;color:#fff;font-family:inherit;font-size:var(--t-nano);font-weight:700;cursor:pointer;white-space:nowrap}
-.err-retry:hover{background:var(--red2)}
+.err-retry{margin-left:auto;padding:3px 12px;border-radius:6px;background:#dc2626;border:none;color:#fff;font-family:inherit;font-size:var(--t-nano);font-weight:700;cursor:pointer;white-space:nowrap}
+.err-retry:hover{background:#ef4444}
 
 /* ── PESO ALERTA ── */
 .stat.peso-ok   { --sc: var(--green2); }
@@ -302,11 +302,11 @@ header:has(#btn-refresh.spin)~.filters::before{content:'';display:block;height:2
 .peso-alert-icon.ok   { background: #dcfce7; color: #15803d; }
 
 /* ── SKELETON ── */
-.skel{background:linear-gradient(90deg,var(--bg2) 25%,var(--border) 50%,var(--bg2) 75%);background-size:200% 100%;animation:shim 1.4s infinite;border-radius:4px;height:1.4em;display:inline-block;min-width:60px}
+.skel{background:linear-gradient(90deg,var(--bg2) 25%,var(--border) 50%,var(--bg2) 75%);background-size:200% 100%;animation:shim 1.4s infinite;border-radius:4px;height:1.4em;display:inline-block;min-width:60px;color:transparent}
 @keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 /* ── FOOTER ── */
-footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding:7px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:10px}
+footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:10px}
 .ft-l{font-size:.62rem;color:rgba(255,255,255,.28);white-space:nowrap}
 .ft-r{font-size:.62rem;color:rgba(255,255,255,.28)}
 .ft-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0;overflow:hidden}
@@ -344,7 +344,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   .f-count{display:none}
   .f-label{font-size:.48rem}
   .f-select{min-width:96px;height:26px;font-size:.66rem;padding:0 8px}
-  .f-reset{height:26px;padding:0 9px;font-size:.65rem}
+  .f-reset{height:26px;padding:0 9px;font-size:var(--t-nano)}
   .period-btns{flex-shrink:0}
   .p-btn{padding:0 9px;font-size:.63rem}
   .mpicker-btn,.cmp-btn{height:26px;padding:0 9px;font-size:.63rem;flex-shrink:0;gap:4px}
@@ -381,8 +381,8 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   .stat::before{border-radius:var(--r) var(--r) 0 0}
   .stat-val{font-size:1.28rem;letter-spacing:-.3px}
   .stat-lbl{font-size:.62rem;margin-bottom:5px;letter-spacing:.8px}
-  .stat-sub{font-size:.65rem;margin-top:3px}
-  .stat-unit{font-size:.68rem}
+  .stat-sub{font-size:var(--t-nano);margin-top:3px}
+  .stat-unit{font-size:var(--t-nano)}
 
   /* Charts */
   .chart-h{height:165px}
@@ -420,7 +420,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   .stat-val{font-size:1.14rem}
   .stat{padding:10px 11px}
   .p-btn{padding:0 8px;font-size:.62rem}
-  table{font-size:.65rem}
+  table{font-size:var(--t-nano)}
 }
 
 /* Overview card metrics on small screens */
@@ -1510,7 +1510,7 @@ function renderResumen(){
   const totalCajasAct = toBoxes(totalKgTom, KG_PER_BOX_TOMATE);
 
   document.getElementById('rv-p1').textContent = fN(pctP1Emp,1) + '%';
-  document.getElementById('rv-cajas').innerHTML = fKM(totalCajasAct) + '<span style="font-size:.65rem;opacity:.6"> cx</span>';
+  document.getElementById('rv-cajas').innerHTML = fKM(totalCajasAct) + '<span style="font-size:var(--t-nano);opacity:.6"> cx</span>';
   document.getElementById('rv-merma-emp').textContent = fN(pctP3Emp,1) + '%';
 
   // Empaque alert
@@ -1542,7 +1542,7 @@ function renderResumen(){
 
   document.getElementById('rv-neto').innerHTML = fKg(netoKg)+'<span style="font-size:.7rem;opacity:.6"> kg</span>';
   document.getElementById('rv-rems').textContent = fK(rems);
-  document.getElementById('rv-avg-rem').innerHTML = fK(Math.round(avgRem))+'<span style="font-size:.65rem;opacity:.6"> kg</span>';
+  document.getElementById('rv-avg-rem').innerHTML = fK(Math.round(avgRem))+'<span style="font-size:var(--t-nano);opacity:.6"> kg</span>';
 
   // Báscula daily sparkline (tomate)
   const basByDay={};
@@ -1909,7 +1909,7 @@ function renderCalidad(){
   const excluded = [hasLimon && 'limón', hasChile && 'chile'].filter(Boolean).join(', ');
   const excludedNote = excluded ? ` <span style="font-size:var(--t-nano);color:var(--muted);font-weight:500">· ${excluded} excluido</span>` : '';
   document.getElementById('s-bultos').innerHTML =
-    fKM(totalCajas) + '<span style="font-size:.65rem;font-weight:500;color:var(--muted);margin-left:4px">cx</span>' + excludedNote;
+    fKM(totalCajas) + '<span style="font-size:var(--t-nano);font-weight:500;color:var(--muted);margin-left:4px">cx</span>' + excludedNote;
   document.getElementById('s-palets').textContent =
     calPalets.length.toLocaleString('es-MX') + ' registros · ' + fN(pesoTotalKg/1000) + ' t';
   const TARGET_PESO = 11.8;
@@ -2212,7 +2212,7 @@ function renderCalidad(){
   const TIER_BADGE = { PRIMERA:'q1 badge', SEGUNDA:'q2 badge', TERCERA:'q3 badge' };
   const allRows = [...calPalets].sort((a,b)=>(b.fecha_empaque||'').localeCompare(a.fecha_empaque||''));
   const rows = allRows.slice(0,200);
-  const calCapNote = allRows.length > 200 ? `<tr><td colspan="9" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted);background:#fafafa">Mostrando 200 de ${allRows.length.toLocaleString('es-MX')} registros</td></tr>` : '';
+  const calCapNote = allRows.length > 200 ? `<tr><td colspan="9" style="text-align:center;padding:8px;font-size:var(--t-nano);color:var(--muted);background:#fafafa">Mostrando 200 de ${allRows.length.toLocaleString('es-MX')} registros</td></tr>` : '';
   document.getElementById('cal-tbody').innerHTML = rows.map(r=>`<tr>
     <td>${fDate(r.fecha_empaque.split('T')[0])}</td>
     <td style="font-weight:600">${normCultivo(r.cultivo)}</td>
@@ -2343,7 +2343,7 @@ function renderPesos(){
   /* Table */
   const allPRows = [...rows].sort((a,b)=>b.fecha.localeCompare(a.fecha)||b.neto-a.neto);
   const trows = allPRows.slice(0,200);
-  const pesCapNote = allPRows.length > 200 ? `<tr><td colspan="7" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted);background:#fafafa">Mostrando 200 de ${allPRows.length.toLocaleString('es-MX')} registros</td></tr>` : '';
+  const pesCapNote = allPRows.length > 200 ? `<tr><td colspan="7" style="text-align:center;padding:8px;font-size:var(--t-nano);color:var(--muted);background:#fafafa">Mostrando 200 de ${allPRows.length.toLocaleString('es-MX')} registros</td></tr>` : '';
   document.getElementById('pesos-tbody').innerHTML = trows.map(r=>`<tr>
     <td>${fDate(r.fecha)}</td>
     <td style="font-weight:600">${cult(r.cultivo)}</td>
@@ -2696,8 +2696,8 @@ function renderBalance(){
   const spr  = cosTotal-empTotal-cjvTotal-rezTotal;
 
   // ── KPIs — cosecha en t (peso báscula), empaque en cajas ──
-  const Tk  = v => fN(v/1000,1)+'<span style="font-size:.65rem;opacity:.55"> t</span>';
-  const Cx  = (kg, kpp) => fKM(toBoxes(kg,kpp))+'<span style="font-size:.65rem;opacity:.55"> cx</span>';
+  const Tk  = v => fN(v/1000,1)+'<span style="font-size:var(--t-nano);opacity:.55"> t</span>';
+  const Cx  = (kg, kpp) => fKM(toBoxes(kg,kpp))+'<span style="font-size:var(--t-nano);opacity:.55"> cx</span>';
   document.getElementById('bal-cosecha').innerHTML = Tk(cosTotal);
   document.getElementById('bal-cos-roma').textContent = fN(cosRoma/1000,1)+'t';
   document.getElementById('bal-cos-bola').textContent = fN(cosBola/1000,1)+'t';
@@ -2709,7 +2709,7 @@ function renderBalance(){
   document.getElementById('bal-rezaga').innerHTML = Tk(rezTotal);
   document.getElementById('bal-rez-sub').textContent = cosTotal>0?fN(rezTotal/cosTotal*100,1)+'% de cosecha':'—';
   const eficEl = document.getElementById('bal-efic');
-  eficEl.innerHTML = fN(efic,1)+'<span style="font-size:.65rem;opacity:.55">%</span>';
+  eficEl.innerHTML = fN(efic,1)+'<span style="font-size:var(--t-nano);opacity:.55">%</span>';
   eficEl.style.color = efic>=90?'#16a34a':efic>=80?'#d97706':'#dc2626';
 
   // Roma / Bola cards
@@ -2839,7 +2839,7 @@ function renderReporte(from, to){
   if(aprov.ROMA > 100) excepciones.push(`Roma ${fN(aprov.ROMA,1)}%`);
   if(aprov.BOLA > 100) excepciones.push(`Bola ${fN(aprov.BOLA,1)}%`);
 
-  const excRow = excepciones.length ? `<tr><td colspan="4" style="padding:6px 12px 8px;font-size:.65rem;color:#92400e;background:rgba(217,119,6,.07);border-top:1px solid rgba(217,119,6,.2)">
+  const excRow = excepciones.length ? `<tr><td colspan="4" style="padding:6px 12px 8px;font-size:var(--t-nano);color:#92400e;background:rgba(217,119,6,.07);border-top:1px solid rgba(217,119,6,.2)">
     ⚠ <strong>Excepción ${excepciones.join(' · ')}</strong> — La salida supera la cosecha estimada del período.
     Posibles causas: (1) inventario en cuartos de gas de antes del ${fDateFull(from)} empacado en este ciclo,
     (2) imprecisión en la proporción Roma/Bola de camiones mixtos (estimado campo vs. peso real báscula),
@@ -3126,7 +3126,7 @@ function renderTomate(from, to){
     <div class="prog-row" style="margin-bottom:0">
       <div class="prog-top">
         <span class="prog-name" style="font-size:.72rem">${c}</span>
-        <span style="display:flex;align-items:center;gap:6px;font-size:.68rem;font-weight:600">
+        <span style="display:flex;align-items:center;gap:6px;font-size:var(--t-nano);font-weight:600">
           ${g.ROMA>0?`<span style="color:#dc2626">${fBox(g.ROMA,KG_PER_BOX_TOMATE,0)} R</span>`:''}
           ${g.BOLA>0?`<span style="color:#16a34a">${fBox(g.BOLA,KG_PER_BOX_TOMATE,0)} B</span>`:''}
         </span>
@@ -3296,7 +3296,7 @@ function renderLimonPalets(){
 
   // Tabla
   const rows = limPalets.slice(0,200);
-  const capNote = limPalets.length>200 ? `<tr><td colspan="7" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted)">Mostrando 200 de ${limPalets.length.toLocaleString('es-MX')} registros</td></tr>` : '';
+  const capNote = limPalets.length>200 ? `<tr><td colspan="7" style="text-align:center;padding:8px;font-size:var(--t-nano);color:var(--muted)">Mostrando 200 de ${limPalets.length.toLocaleString('es-MX')} registros</td></tr>` : '';
   document.getElementById('lim-emp-tbody').innerHTML = rows.map(r=>`<tr>
     <td>${fDate((r.fecha_empaque||'').split('T')[0])}</td>
     <td><span class="q1 badge">${paletLabel(r)}</span></td>
@@ -3579,7 +3579,7 @@ function renderInbound(from, to){
 
   // ── Detail table ──
   const sorted = [...rows].sort((a,b)=>b.fecha.localeCompare(a.fecha));
-  const inbCap = sorted.length > 300 ? `<tr><td colspan="9" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted);background:#fafafa">Mostrando 300 de ${sorted.length.toLocaleString('es-MX')} registros</td></tr>` : '';
+  const inbCap = sorted.length > 300 ? `<tr><td colspan="9" style="text-align:center;padding:8px;font-size:var(--t-nano);color:var(--muted);background:#fafafa">Mostrando 300 de ${sorted.length.toLocaleString('es-MX')} registros</td></tr>` : '';
   document.getElementById('inb-tbody').innerHTML = sorted.slice(0,300).map(r => {
     const p1pct = pctPrimera(r);
     const p2pct = pctSegunda(r);
@@ -3680,7 +3680,7 @@ function renderRezaga(){
 
   const display = rows.slice(0, 300);
   const capNote = rows.length > 300
-    ? `<tr><td colspan="8" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted)">Mostrando 300 de ${rows.length.toLocaleString('es-MX')} registros</td></tr>`
+    ? `<tr><td colspan="8" style="text-align:center;padding:8px;font-size:var(--t-nano);color:var(--muted)">Mostrando 300 de ${rows.length.toLocaleString('es-MX')} registros</td></tr>`
     : '';
   document.getElementById('rez-tbody').innerHTML = display.map(r => `<tr>
     <td>${fDate((r.fecha||'').split('T')[0])}</td>
@@ -3765,7 +3765,7 @@ function renderEmbarques(from, to){
   };
   const display = rows.slice(0, 300);
   const capNote = rows.length > 300
-    ? `<tr><td colspan="7" style="text-align:center;padding:8px;font-size:.65rem;color:var(--muted)">Mostrando 300 de ${rows.length.toLocaleString('es-MX')} registros</td></tr>`
+    ? `<tr><td colspan="7" style="text-align:center;padding:8px;font-size:var(--t-nano);color:var(--muted)">Mostrando 300 de ${rows.length.toLocaleString('es-MX')} registros</td></tr>`
     : '';
   document.getElementById('emb-tbody').innerHTML = display.map(r => {
     const palets = (r.detalle||[]).length;
