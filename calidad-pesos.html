@@ -2778,6 +2778,26 @@ function renderReporte(from, to){
   }
   function divider(){ return `<tr><td colspan="4" style="padding:0;border-top:1px solid var(--border)"></td></tr>`; }
 
+  // Aprovechamiento coloreado — >100% en ámbar (posible excepción)
+  function pctAprov(v){
+    if(!v) return '—';
+    const color = v > 100 ? '#d97706' : v >= 90 ? '#16a34a' : v >= 80 ? '#d97706' : '#dc2626';
+    const tag   = v > 100 ? ' ⚠' : '';
+    return `<span style="color:${color};font-weight:700">${fN(v,1)}%${tag}</span>`;
+  }
+
+  const aprovTotal = (cosecha.ROMA+cosecha.BOLA) ? (salida.ROMA+salida.BOLA)/(cosecha.ROMA+cosecha.BOLA)*100 : 0;
+  const excepciones = [];
+  if(aprov.ROMA > 100) excepciones.push(`Roma ${fN(aprov.ROMA,1)}%`);
+  if(aprov.BOLA > 100) excepciones.push(`Bola ${fN(aprov.BOLA,1)}%`);
+
+  const excRow = excepciones.length ? `<tr><td colspan="4" style="padding:6px 12px 8px;font-size:.65rem;color:#92400e;background:rgba(217,119,6,.07);border-top:1px solid rgba(217,119,6,.2)">
+    ⚠ <strong>Excepción ${excepciones.join(' · ')}</strong> — La salida supera la cosecha estimada del período.
+    Posibles causas: (1) inventario en cuartos de gas de antes del ${fDateFull(from)} empacado en este ciclo,
+    (2) imprecisión en la proporción Roma/Bola de camiones mixtos (estimado campo vs. peso real báscula),
+    (3) registros de cultivo incorrectos en palets. El total del ciclo (${fN(aprovTotal,1)}%) sí es confiable.
+  </td></tr>` : '';
+
   document.getElementById('rep-tbody').innerHTML = [
     rowSec('Cosecha de Campo'),
     row('Total cosechado',
@@ -2795,7 +2815,11 @@ function renderReporte(from, to){
       kg(salida.ROMA + salida.BOLA), 'total'),
     divider(),
     rowSec('Eficiencia'),
-    row('Aprovechamiento',        pct(aprov.ROMA), pct(aprov.BOLA), pct((cosecha.ROMA+cosecha.BOLA) ? (salida.ROMA+salida.BOLA)/(cosecha.ROMA+cosecha.BOLA)*100 : 0)),
+    `<tr><td style="padding:5px 12px">Aprovechamiento</td>
+      <td style="padding:5px 12px;text-align:right">${pctAprov(aprov.ROMA)}</td>
+      <td style="padding:5px 12px;text-align:right">${pctAprov(aprov.BOLA)}</td>
+      <td style="padding:5px 12px;text-align:right">${pctAprov(aprovTotal)}</td></tr>`,
+    excRow,
     row('Merma (cosecha − salida)', kg(merma.ROMA),  kg(merma.BOLA),  kg(merma.ROMA+merma.BOLA)),
     row('Merma Báscula (rezaga)', '—', '—', mBascula.TOTAL > 0 ? kg(mBascula.TOTAL) : '0 kg', 'muted'),
   ].join('');
