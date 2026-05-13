@@ -1,6 +1,8 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/calidad-pesos.html" }
+    { "source": "/vw_palets",   "destination": "/api/vw_palets" },
+    { "source": "/vw_acarreos", "destination": "/api/vw_acarreos" },
+    { "source": "/",            "destination": "/calidad-pesos.html" }
   ],
   "functions": {
     "api/vw_palets.js":   { "maxDuration": 30 },
