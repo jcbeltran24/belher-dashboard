@@ -805,34 +805,6 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       <div id="tom-caseta-bars" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto"></div>
     </div>
 
-    <!-- Balance de Masas -->
-    <div class="sec">Balance de Masas · Aprovechamiento
-      <span class="sec-tag" id="san-range-lbl">—</span>
-    </div>
-    <div class="card card-pad" style="margin-bottom:10px">
-      <div id="sankey-wrap" style="width:100%"></div>
-    </div>
-
-    <!-- Reporte de cosecha y empaque -->
-    <div class="sec">Reporte de Cosecha &amp; Empaque
-      <span class="sec-tag" id="rep-range-lbl">—</span>
-    </div>
-    <div class="card card-pad" style="overflow-x:auto">
-      <table id="rep-table" style="width:100%;border-collapse:collapse;font-size:var(--t-sm)">
-        <thead>
-          <tr>
-            <th style="text-align:left;padding:6px 12px 8px;color:var(--muted);font-weight:700;font-size:var(--t-xs);letter-spacing:.5px;border-bottom:1px solid var(--border)">CONCEPTO</th>
-            <th style="text-align:right;padding:6px 12px 8px;color:#dc2626;font-weight:700;font-size:var(--t-xs);letter-spacing:.5px;border-bottom:1px solid var(--border)">TOMATE ROMA</th>
-            <th style="text-align:right;padding:6px 12px 8px;color:#16a34a;font-weight:700;font-size:var(--t-xs);letter-spacing:.5px;border-bottom:1px solid var(--border)">TOMATE BOLA</th>
-            <th style="text-align:right;padding:6px 12px 8px;color:var(--muted);font-weight:700;font-size:var(--t-xs);letter-spacing:.5px;border-bottom:1px solid var(--border)">TOTAL</th>
-          </tr>
-        </thead>
-        <tbody id="rep-tbody">
-          <tr><td colspan="4" class="empty">Cargando…</td></tr>
-        </tbody>
-      </table>
-    </div>
-
     <!-- Detail table -->
     <div class="sec">Detalle de Acarreo · Tomate</div>
     <div class="card">
@@ -2454,7 +2426,8 @@ function isoWeekSortKey(isoDate){
 
 /* ── BALANCE DE MASAS · SANKEY ─────────────────────────── */
 function renderSankey(from, to, targetId='sankey-wrap', opts={}){
-  document.getElementById('san-range-lbl').textContent = fDateFull(from)+' – '+fDateFull(to);
+  const _sanLbl = document.getElementById('san-range-lbl');
+  if(_sanLbl) _sanLbl.textContent = fDateFull(from)+' – '+fDateFull(to);
 
   // ── Cosecha — neto báscula escalado por proporción tomate del camión ──
   // Los detalles usan cantidad×pesoPromedio (estimado campo) que subestima
@@ -3082,10 +3055,6 @@ function renderTomate(from, to){
       </div>
     </div>`;
   }).join('');
-
-  // ── Balance de masas + Reporte ──
-  renderSankey(from, to);
-  renderReporte(from, to);
 
   // ── Detail table ──
   document.getElementById('tom-tbody').innerHTML = rows.slice(0,300).map(r => {
