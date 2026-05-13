@@ -1372,7 +1372,7 @@ async function loadResumen(){
     try {
       [_resPalets, _resAcarreos] = await Promise.all([
         getAll(`/vw_palets?select=fecha_empaque,cultivo,etiqueta,calidad,peso,bultos,estado&fecha_empaque=gte.${from}&fecha_empaque=lte.${to}`),
-        getAll(`/vw_acarreos?select=fecha,peso_bruto,tara&fecha=gte.${from}&fecha=lte.${to}`)
+        getAll(`/vw_acarreos?select=fecha,peso_bruto,tara,detalles&fecha=gte.${from}&fecha=lte.${to}`)
       ]);
       _resCycleKey = key;
     } catch(e){ console.warn('loadResumen fetch failed', e); }
