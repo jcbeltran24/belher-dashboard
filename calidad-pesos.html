@@ -2318,7 +2318,8 @@ async function loadData(force = false){
 
   try {
     btn.classList.add('spin'); btn.disabled = true;
-    const [palets, acarreos] = await Promise.all([getAll(urlPalets), getAll(urlAcarreos)]);
+    const eyeFetch = u => fetch(API.url + u, {headers: H}).then(r => r.ok ? r.json() : []);
+    const [palets, acarreos] = await Promise.all([eyeFetch(urlPalets), eyeFetch(urlAcarreos)]);
     if(mySeq !== loadSeq) return;                   // a newer request already landed — drop this one
     saveCache(from, to, palets, acarreos);
     applyRawData(palets, acarreos, from, to, 'EYE Live');
