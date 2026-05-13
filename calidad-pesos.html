@@ -2513,13 +2513,16 @@ function renderSankey(from, to, targetId='sankey-wrap'){
   const dstLabels=nodes.map(n=>{
     const mid=n.y+n.h/2;
     const pct=cosTotal?(n.kg/cosTotal*100):0;
-    const showKg=n.h>38;
-    const showPct=n.h>54;
-    const fs=n.h>50?10:9;
+    const tall=n.h>=52, mid2=n.h>=36, small=n.h<36;
+    const fs=tall?10:9;
+    // Layout: label + kg + % cuando hay espacio; label + % cuando medio; solo label+% compacto cuando pequeño
+    const labelY = tall ? mid-14 : mid2 ? mid-8 : mid-3;
+    const kgY    = mid+4;
+    const pctY   = tall ? mid+18 : mid2 ? mid+8 : mid+9;
     return `<rect x="${dstX}" y="${n.y}" width="${dstW}" height="${n.h}" rx="5" fill="${n.color}" opacity="0.93"/>
-      <text x="${dstX+dstW/2}" y="${mid+(showKg?-10:showPct?-6:4)}" text-anchor="middle" fill="white" font-size="${fs}" font-weight="700" font-family="Inter,-apple-system,sans-serif">${n.label}</text>
-      ${showKg?`<text x="${dstX+dstW/2}" y="${mid+5}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="12" font-weight="800" font-family="JetBrains Mono,monospace">${fN(n.kg/1000,1)}t</text>`:''}
-      ${showPct?`<text x="${dstX+dstW/2}" y="${mid+19}" text-anchor="middle" fill="rgba(255,255,255,.75)" font-size="9" font-family="Inter,-apple-system,sans-serif">${fN(pct,1)}%</text>`:''}`;
+      <text x="${dstX+dstW/2}" y="${labelY}" text-anchor="middle" fill="white" font-size="${fs}" font-weight="700" font-family="Inter,-apple-system,sans-serif">${n.label}</text>
+      ${tall?`<text x="${dstX+dstW/2}" y="${kgY}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="12" font-weight="800" font-family="JetBrains Mono,monospace">${fN(n.kg/1000,1)}t</text>`:''}
+      <text x="${dstX+dstW/2}" y="${pctY}" text-anchor="middle" fill="rgba(255,255,255,${tall?.7:.85})" font-size="${small?9:10}" font-weight="${small?700:600}" font-family="Inter,-apple-system,sans-serif">${fN(pct,1)}%</text>`;
   }).join('');
 
   const srcMid=srcY+srcH/2;
@@ -3764,6 +3767,7 @@ function pickMonth(year, month){
   btn.classList.add('mpactive');
   document.getElementById('mpicker-lbl').textContent = MESES_FUL[month] + ' ' + year;
   closeMPicker();
+  if(!cmpReady) autoLoadCmp();
   loadData();
   const activePanel = document.querySelector('.panel.active')?.id;
   if(activePanel === 'panel-inbound')   loadInbound();
