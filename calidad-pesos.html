@@ -1604,8 +1604,21 @@ function renderResumen(){
       interaction:{ mode:'index', intersect:false },
       plugins:{
         legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:12 } },
-        tooltip:{ backgroundColor:'#0c2117', titleColor:'rgba(255,255,255,.5)', bodyColor:'#fff', padding:10, cornerRadius:8,
-          callbacks:{ label:c=>` ${c.dataset.label}: ${c.parsed.y??'—'} t` } }
+        tooltip:{ backgroundColor:'#0c2117', titleColor:'rgba(255,255,255,.85)', bodyColor:'#fff', padding:10, cornerRadius:8,
+          callbacks:{
+            title(items){
+              const w = parseInt(items[0].label.replace('S',''));
+              function wkDate(cycleFrom, weekN){
+                const d = new Date(cycleFrom + 'T12:00:00');
+                d.setDate(d.getDate() + (weekN-1)*7);
+                return d.toLocaleDateString('es-MX',{day:'numeric',month:'short'});
+              }
+              const actStart = wkDate(cycles.actual.from, w);
+              const antStart = wkDate(cycles.anterior.from, w);
+              return `S${w}  ·  Act: ${actStart}  /  Ant: ${antStart}`;
+            },
+            label:c=>` ${c.dataset.label}: ${c.parsed.y??'—'} t`
+          } }
       },
       scales:{
         x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10}}, border:{display:false} },
