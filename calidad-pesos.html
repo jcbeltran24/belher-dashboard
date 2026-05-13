@@ -1145,6 +1145,101 @@ function showToast(msg, type='error', dur=4500){
   }, dur);
 }
 
+/* ── WEATHER ─────────────────────────────────────────────── */
+const WX_LAT = 24.50, WX_LON = -107.50;
+const WX_CACHE_TTL = 6 * 3600000; // 6h
+let wxData = {};   // { 'YYYY-MM-DD': { tMax, tMin, rain } }
+
+async function loadWeather(from, to){
+  const ckey = `wx:${from}:${to}`;
+  try {
+    const cached = JSON.parse(localStorage.getItem(ckey) || 'null');
+    if(cached && Date.now() - cached.ts < WX_CACHE_TTL){ wxData = cached.d; injectWeatherAll(); return; }
+  } catch(e){}
+  try {
+    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${WX_LAT}&longitude=${WX_LON}&start_date=${from}&end_date=${to}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=America%2FMazatlan`;
+    const r = await fetch(url);
+    if(!r.ok) throw new Error(r.status);
+    const j = await r.json();
+    wxData = {};
+    j.daily.time.forEach((d, i) => {
+      wxData[d] = { tMax: j.daily.temperature_2m_max[i], tMin: j.daily.temperature_2m_min[i], rain: j.daily.precipitation_sum[i] || 0 };
+    });
+    localStorage.setItem(ckey, JSON.stringify({ ts: Date.now(), d: wxData }));
+    injectWeatherAll();
+  } catch(e){ console.warn('Weather:', e); }
+}
+
+// Aggregate daily wx to weekly (week-aligned from cycleStart)
+function wxWeekly(weekNums, cycleStart){
+  const cs = new Date(cycleStart + 'T12:00:00');
+  return weekNums.map(w => {
+    const days = [];
+    for(let i = 0; i < 7; i++){
+      const d = new Date(cs.getTime() + ((w-1)*7 + i) * 86400000);
+      const k = iso(d);
+      if(wxData[k]) days.push(wxData[k]);
+    }
+    if(!days.length) return { tMax: null, rain: null };
+    return {
+      tMax: +(days.reduce((s,d) => s + d.tMax, 0) / days.length).toFixed(1),
+      rain: +(days.reduce((s,d) => s + d.rain, 0)).toFixed(1)
+    };
+  });
+}
+
+const WX_Y_AXIS = {
+  position: 'right', grid: { display: false },
+  ticks: { color: 'rgba(217,119,6,.65)', font: { size: 9 }, maxTicksLimit: 5,
+    callback: v => v + (v !== null && v <= 60 ? '°' : '') },
+  border: { display: false }, min: 0
+};
+
+function _addWxDatasets(chart, tempArr, rainArr){
+  if(!chart) return;
+  chart.data.datasets = chart.data.datasets.filter(ds => !ds._wx);
+  chart.data.datasets.push({
+    _wx: true, label: 'Temp. Máx (°C)', type: 'line',
+    data: tempArr,
+    borderColor: 'rgba(217,119,6,.55)', backgroundColor: 'transparent',
+    borderWidth: 1.5, borderDash: [4, 3], pointRadius: 0,
+    tension: .35, spanGaps: true, yAxisID: 'yW', order: 99
+  });
+  chart.data.datasets.push({
+    _wx: true, label: 'Lluvia (mm)', type: 'bar',
+    data: rainArr,
+    backgroundColor: 'rgba(14,165,233,.22)', borderColor: 'transparent',
+    barPercentage: 0.5, categoryPercentage: 0.8,
+    yAxisID: 'yW', order: 98
+  });
+  chart.options.scales.yW = WX_Y_AXIS;
+  chart.update('none');
+}
+
+function injectWeatherDaily(chartId, dates){
+  if(!Object.keys(wxData).length) return;
+  _addWxDatasets(CH[chartId],
+    dates.map(d => wxData[d]?.tMax ?? null),
+    dates.map(d => wxData[d]?.rain ?? null));
+}
+
+function injectWeatherWeekly(chartId, weekNums, cycleStart){
+  if(!Object.keys(wxData).length) return;
+  const agg = wxWeekly(weekNums, cycleStart);
+  _addWxDatasets(CH[chartId], agg.map(a => a.tMax), agg.map(a => a.rain));
+}
+
+// Called when weather loads to inject into whichever charts are already built
+let _wxPesos = [], _wxInbDays = [], _wxCalWks = [], _wxCalActFrom = '';
+let _wxTomWks = [], _wxTomActFrom = '';
+
+function injectWeatherAll(){
+  if(_wxPesos.length)    injectWeatherDaily('chart-pesos-dia',  _wxPesos);
+  if(_wxInbDays.length)  injectWeatherDaily('chart-inb-primera',_wxInbDays);
+  if(_wxCalWks.length)   injectWeatherWeekly('chart-cal-trend', _wxCalWks,  _wxCalActFrom);
+  if(_wxTomWks.length)   injectWeatherWeekly('chart-tom-semana',_wxTomWks,  _wxTomActFrom);
+}
+
 /* ── API ──────────────────────────────────────────────── */
 const API = {
   url:     window.location.port === '8741' ? 'http://localhost:8742' : '',
@@ -1972,6 +2067,7 @@ function renderCalidad(){
       if(paletTier(r)==='PRIMERA') byWk[sk].p1+=(r.bultos||0);
     });
     const wks=Object.keys(byWk).sort(); // alphabetical YYYY-WW sort is chronological
+    _wxCalWks = wks; _wxCalActFrom = cycleStartOf(calPalets[0]?.fecha_empaque || iso(new Date()));
     mkChart('chart-cal-trend',{
       type:'bar',
       data:{
@@ -2004,6 +2100,7 @@ function renderCalidad(){
         }
       }
     });
+    injectWeatherWeekly('chart-cal-trend', wks, _wxCalActFrom);
   }
 
   /* Donut */
@@ -2313,6 +2410,7 @@ function renderPesos(){
     pointRadius:2, pointHoverRadius:5, tension:.35, spanGaps:false
   });
 
+  _wxPesos = dates;
   mkChart('chart-pesos-dia',{
     type:'bar',
     data:{ labels: dates.map(fDate), datasets },
@@ -2325,6 +2423,7 @@ function renderPesos(){
       }
     }
   });
+  injectWeatherDaily('chart-pesos-dia', dates);
 
   /* By cultivo bars — agrupa por nombre normalizado (GH/OF → mismo bucket) */
   const byCult={};
@@ -2393,6 +2492,7 @@ async function loadData(force = false){
   const cacheFresh = cacheHit && (Date.now() - cached.savedAt < CACHE_TTL);
 
   if(cacheHit){
+  loadWeather(from, to);
     applyRawData(cached.palets, cached.acarreos, from, to, 'Caché');
     if(cacheFresh) return;                              // fresh → no background fetch
     document.getElementById('ft-updated').textContent += ' (actualizando…)';
@@ -2414,6 +2514,7 @@ async function loadData(force = false){
     const [palets, acarreos] = await Promise.all([eyeFetch(urlPalets), eyeFetch(urlAcarreos)]);
     if(mySeq !== loadSeq) return;                   // a newer request already landed — drop this one
     saveCache(from, to, palets, acarreos);
+    loadWeather(from, to);
     applyRawData(palets, acarreos, from, to, 'EYE Live');
   } catch(err){
     console.error(err);
@@ -3021,6 +3122,7 @@ function renderTomate(from, to){
   // X-axis: only weeks in current period (prior overlaid on same weeks)
   const weekNums  = [...new Set(Object.keys(weekMap).map(Number))].sort((a,b)=>a-b);
   const weekLabels = weekNums.map(w => 'S'+w);
+  _wxTomWks = weekNums; _wxTomActFrom = actFrom;
 
   const tomDatasets = [
     { label:'Roma',  data:weekNums.map(w=>Math.round(toBoxes((weekMap[w]?.ROMA||0), KG_PER_BOX_TOMATE))),  backgroundColor:'rgba(220,38,38,.8)',  borderRadius:3, stack:'s' },
@@ -3051,6 +3153,7 @@ function renderTomate(from, to){
       }
     }
   });
+  injectWeatherWeekly('chart-tom-semana', weekNums, actFrom);
 
   // ── Lote bars — Roma/Bola separados ──
   const loteMap = {};
@@ -3435,7 +3538,7 @@ function renderInbound(from, to){
   });
   const days  = Object.keys(byDate).sort();
   const p1pct = days.map(d => byDate[d].denom ? +Math.min(100, byDate[d].p1/byDate[d].denom*100).toFixed(1) : null);
-
+  _wxInbDays = days;
   mkChart('chart-inb-primera',{
     type:'line',
     data:{
@@ -3462,6 +3565,7 @@ function renderInbound(from, to){
       }
     }
   });
+  injectWeatherDaily('chart-inb-primera', days);
 
   // ── Top daños — % de frutos inspeccionados ──
   const danosMap = {};
