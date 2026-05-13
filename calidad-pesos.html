@@ -1497,8 +1497,8 @@ function renderResumen(){
   const empAlert = document.getElementById('rv-emp-alert');
   if(pctP1Emp > 0){
     empAlert.style.display = 'flex';
-    if(pctP1Emp >= 70){ empAlert.className='ov-alert ok'; empAlert.textContent='✓ Calidad óptima — ' + fN(pctP1Emp,1) + '% Primera'; }
-    else if(pctP1Emp >= 60){ empAlert.className='ov-alert warn'; empAlert.textContent='⚠ Calidad media — ' + fN(pctP1Emp,1) + '% Primera'; }
+    if(pctP1Emp >= 85){ empAlert.className='ov-alert ok'; empAlert.textContent='✓ Calidad óptima — ' + fN(pctP1Emp,1) + '% Primera'; }
+    else if(pctP1Emp >= 75){ empAlert.className='ov-alert warn'; empAlert.textContent='⚠ Calidad media — ' + fN(pctP1Emp,1) + '% Primera'; }
     else{ empAlert.className='ov-alert bad'; empAlert.textContent='✕ Calidad baja — ' + fN(pctP1Emp,1) + '% Primera'; }
   }
 
@@ -1545,15 +1545,15 @@ function renderResumen(){
     const tCol = avgTemp<28?'var(--green)':avgTemp<33?'var(--accent)':'var(--red)';
 
     const inbP1Card = document.getElementById('inb-primera')?.closest('.stat');
-    if(inbP1Card){ inbP1Card.classList.remove('s-good','s-warn','s-bad'); inbP1Card.classList.add(pctP1Inb>=85?'s-good':pctP1Inb>=70?'s-warn':'s-bad'); }
-    document.getElementById('rv-inb-p1').innerHTML = `<span style="color:${pctP1Inb>=85?'var(--green)':pctP1Inb>=70?'var(--accent)':'var(--red)'}">${fN(pctP1Inb,1)}%</span>`;
+    if(inbP1Card){ inbP1Card.classList.remove('s-good','s-warn','s-bad'); inbP1Card.classList.add(pctP1Inb>=85?'s-good':pctP1Inb>=75?'s-warn':'s-bad'); }
+    document.getElementById('rv-inb-p1').innerHTML = `<span style="color:${pctP1Inb>=85?'var(--green)':pctP1Inb>=75?'var(--accent)':'var(--red)'}">${fN(pctP1Inb,1)}%</span>`;
     document.getElementById('rv-inb-merma').textContent = fN(avgMerma,1)+'%';
     document.getElementById('rv-inb-temp').innerHTML = `<span style="color:${tCol}">${fN(avgTemp,1)}°</span>`;
 
     const inbAlert = document.getElementById('rv-inb-alert');
     inbAlert.style.display = 'flex';
     if(pctP1Inb>=85){ inbAlert.className='ov-alert ok'; inbAlert.textContent='✓ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
-    else if(pctP1Inb>=70){ inbAlert.className='ov-alert warn'; inbAlert.textContent='⚠ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
+    else if(pctP1Inb>=75){ inbAlert.className='ov-alert warn'; inbAlert.textContent='⚠ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
     else{ inbAlert.className='ov-alert bad'; inbAlert.textContent='✕ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
 
     // Inbound sparkline: % primera by date
@@ -1881,7 +1881,7 @@ function renderCalidad(){
   const pctP1Val = bultos ? bultosP1/bultos*100 : 0;
   document.getElementById('s-p1').innerHTML = bultos ? fN(pctP1Val,1)+'<span class="stat-unit">%</span>' : '—';
   const p1Card = document.getElementById('s-p1').closest('.stat');
-  if(p1Card){ p1Card.classList.remove('s-good','s-warn','s-bad'); p1Card.classList.add(pctP1Val>=70?'s-good':pctP1Val>=60?'s-warn':'s-bad'); }
+  if(p1Card){ p1Card.classList.remove('s-good','s-warn','s-bad'); p1Card.classList.add(pctP1Val>=85?'s-good':pctP1Val>=75?'s-warn':'s-bad'); }
   document.getElementById('s-p2').innerHTML = bultos ? fN(bultosP2/bultos*100,1)+'<span class="stat-unit">%</span>' : '—';
   document.getElementById('s-p3').innerHTML = bultos ? fN(bultosP3/bultos*100,1)+'<span class="stat-unit">%</span>' : '—';
 
@@ -3380,7 +3380,7 @@ function renderInbound(from, to){
 
   // primera KPI + color coding
   const p1El  = document.getElementById('inb-primera');
-  const p1Cls = pctP1 >= 85 ? 'cg' : pctP1 >= 70 ? 'ca' : 'cr';
+  const p1Cls = pctP1 >= 85 ? 'cg' : pctP1 >= 75 ? 'ca' : 'cr';
   p1El.parentElement.className = 'stat ' + p1Cls;
   p1El.innerHTML = fN(pctP1,1) + '<span class="stat-unit">%</span>';
   document.getElementById('inb-primera-sub').textContent =
