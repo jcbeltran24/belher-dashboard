@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calidad & Pesos — Belher</title>
+<title>Operaciones Belher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -420,7 +420,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 <header>
   <div class="h-logo">AB</div>
   <div>
-    <div class="h-title">Calidad &amp; Pesos</div>
+    <div class="h-title">Operaciones Belher</div>
     <div class="h-sub">ABSA · EYE Live + Supabase · vw_palets · vw_acarreos · vw_embarques · vw_rezaga</div>
   </div>
   <div class="h-spacer"></div>
@@ -1401,8 +1401,11 @@ function renderResumen(){
   const resAcarreos = _resAcarreos.length ? _resAcarreos : rawAcarreos.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   document.getElementById('res-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
 
-  document.getElementById('res-lbl-act').textContent = cycles.labelAct;
-  document.getElementById('res-lbl-ant').textContent = cycles.labelAnt;
+  const actR = activeRange || { from: cycles.actual.from, to: cycles.actual.to };
+  const antR = priorEquivRange();
+  const fmtR = r => r.from === r.to ? fDateFull(r.from) : fDateFull(r.from) + ' – ' + fDateFull(r.to);
+  document.getElementById('res-lbl-act').textContent = fmtR(actR);
+  document.getElementById('res-lbl-ant').textContent = fmtR(antR);
 
   // ── Empaque KPIs ──
   const totalBultos = resPalets.reduce((s,r)=>s+(r.bultos||0), 0);
@@ -1507,9 +1510,25 @@ function renderResumen(){
     sparkBars(document.getElementById('rv-inb-spark'), Array(14).fill(0), '#d1d5db');
   }
 
-  // ── Comparativo ciclo anterior ──
-  const priorPal = filterByRange(cmpPalAnt,'fecha_empaque', { from: cycles.anterior.from, to: cycles.anterior.to });
-  const priorAcr = filterByRange(cmpAcrAnt,'fecha',         { from: cycles.anterior.from, to: cycles.anterior.to });
+  // ── Comparativo — mismo período activo vs mismo período ciclo anterior ──
+  const cmpRange  = priorEquivRange();
+  const actR2     = activeRange || { from, to };
+  const actPal    = filterByRange(_resPalets.length ? _resPalets : rawPalets, 'fecha_empaque', actR2);
+  const actAcr    = filterByRange(_resAcarreos.length ? _resAcarreos : rawAcarreos, 'fecha', actR2);
+  const priorPal  = filterByRange(cmpPalAnt,'fecha_empaque', cmpRange);
+  const priorAcr  = filterByRange(cmpAcrAnt,'fecha',         cmpRange);
+
+  // Actual period KPIs for Comparativo
+  const actTotB   = actPal.reduce((s,r)=>s+(r.bultos||0),0);
+  const actP1B    = actPal.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
+  const actPctP1  = actTotB ? actP1B/actTotB*100 : 0;
+  let   actCajas  = 0;
+  { const byGrpKg={};
+    actPal.forEach(r=>{ const kg=(r.peso||0)*(r.bultos||0); const g=(r.grupo_cultivo||r.cultivo||'TOMATE').toUpperCase(); byGrpKg[g]=(byGrpKg[g]||0)+kg; });
+    function kpbA(g){ if(g.includes('LIMON')||g.includes('LEMON')) return KG_PER_BOX_LIMON; if(g.includes('CHILE')||g.includes('PEPPER')) return KG_PER_BULTO_CHILE; return KG_PER_BOX_TOMATE; }
+    Object.entries(byGrpKg).forEach(([g,kg])=>{ actCajas += toBoxes(kg, kpbA(g)); }); }
+  const actNeto   = actAcr.reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0)/1000;
+  const actDias2  = new Set(actAcr.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
 
   const prTotB   = priorPal.reduce((s,r)=>s+(r.bultos||0),0);
   const prP1B    = priorPal.filter(r=>paletTier(r)==='PRIMERA').reduce((s,r)=>s+(r.bultos||0),0);
@@ -1525,13 +1544,13 @@ function renderResumen(){
   const prDias   = new Set(priorAcr.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
   const actDias  = new Set(resAcarreos.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
 
-  document.getElementById('res-neto-act').textContent  = fN(netoTon,1) + ' t';
+  document.getElementById('res-neto-act').textContent  = fN(actNeto,1) + ' t';
   document.getElementById('res-neto-ant').textContent  = cmpReady ? fN(prNeto,1) + ' t' : '—';
-  document.getElementById('res-p1-act').textContent    = fN(pctP1Emp,1) + '%';
+  document.getElementById('res-p1-act').textContent    = fN(actPctP1,1) + '%';
   document.getElementById('res-p1-ant').textContent    = cmpReady ? fN(prPctP1,1) + '%' : '—';
-  document.getElementById('res-cajas-act').innerHTML   = fKM(totalCajasAct) + ' cx';
+  document.getElementById('res-cajas-act').innerHTML   = fKM(actCajas) + ' cx';
   document.getElementById('res-cajas-ant').innerHTML   = cmpReady ? fKM(prCajas) + ' cx' : '—';
-  document.getElementById('res-dias-act').textContent  = actDias;
+  document.getElementById('res-dias-act').textContent  = actDias2;
   document.getElementById('res-dias-ant').textContent  = cmpReady ? prDias : '—';
 
   // Deltas on overview cards
