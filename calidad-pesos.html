@@ -6,7 +6,7 @@
 <title>Operaciones Belher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -15,7 +15,7 @@
 :root{
   --dark:#0c2117;--dark2:#162d1f;--green:#15803d;--green2:#16a34a;--green3:#22c55e;
   --accent:#d97706;--accent2:#fbbf24;--red:#dc2626;--red2:#ef4444;--blue:#1d4ed8;
-  --purple:#7c3aed;--bg:#e6eee6;--bg2:#dbe6db;--border:#c5d9c5;
+  --purple:#0f766e;--bg:#e6eee6;--bg2:#dbe6db;--border:#c5d9c5;
   --text:#0f1f14;--muted:#6b7280;--card:#fff;--r:12px;--r-sm:8px;--r-lg:16px;
   --shadow:0 1px 3px rgba(12,33,23,.06),0 4px 16px rgba(12,33,23,.08);
   --shadow-md:0 4px 8px rgba(12,33,23,.08),0 12px 32px rgba(12,33,23,.12);
@@ -30,7 +30,7 @@
   --t-2xl: 1.45rem;  /* 23.2px — KPI stat-val */
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;font-size:14px}
+body{font-family:'IBM Plex Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;font-size:14px}
 /* ── FRAME MODE (embedded via iframe ?frame=1) ── */
 body.frame{background:transparent;min-height:0}
 body.frame header{display:none}
@@ -85,7 +85,7 @@ header{background:var(--dark);height:46px;display:flex;align-items:center;paddin
 /* Comparison button */
 .cmp-btn{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:.65rem;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:4px;transition:.14s}
 .cmp-btn:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.22)}
-.cmp-btn.active{background:rgba(124,58,237,.18);border-color:rgba(167,139,250,.4);color:#c4b5fd;font-weight:700}
+.cmp-btn.active{background:rgba(15,118,110,.18);border-color:rgba(167,139,250,.4);color:#c4b5fd;font-weight:700}
 
 .f-select{height:26px;padding:0 24px 0 10px;border-radius:6px;background:rgba(255,255,255,.06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,.4)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 7px center / 10px no-repeat;border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.85);font-size:.68rem;font-family:inherit;outline:none;transition:.15s;cursor:pointer;appearance:none;-webkit-appearance:none}
 .f-select:hover{background-color:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22)}
@@ -111,7 +111,7 @@ main{flex:1;padding:14px 20px 32px;max-width:1400px;width:100%;margin:0 auto}
 .panel.active{display:block}
 
 /* ── SECTION ── */
-.sec{display:flex;align-items:center;gap:8px;font-size:var(--t-nano);font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin:14px 0 9px}
+.sec{display:flex;align-items:center;gap:8px;font-size:var(--t-xs);font-weight:700;letter-spacing:.2px;color:var(--muted);margin:14px 0 9px}
 .sec:first-child{margin-top:0}
 .sec::before{content:'';width:3px;height:10px;border-radius:2px;background:linear-gradient(to bottom,var(--accent2),var(--green3));flex-shrink:0}
 .sec::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent)}
@@ -141,7 +141,7 @@ main{flex:1;padding:14px 20px 32px;max-width:1400px;width:100%;margin:0 auto}
 /* ── CARD ── */
 .card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow)}
 .card-pad{padding:13px 15px}
-.card-title{font-size:var(--t-nano);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.card-title{font-size:var(--t-nano);font-weight:700;letter-spacing:.1px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .chart-h{position:relative;height:190px}
 .chart-h canvas{max-height:220px}
 .chart-md{position:relative;height:220px}
@@ -197,9 +197,9 @@ tbody td{padding:6px 11px;vertical-align:middle}
 /* Balance de Masas channel tints — replaces border-left:3px */
 .bal-ch-blue  {--sc:var(--blue);  background:rgba(29,78,216,.04);  border-color:rgba(29,78,216,.18)}
 .bal-ch-amber {--sc:var(--accent);background:rgba(217,119,6,.04);  border-color:rgba(217,119,6,.2)}
-.bal-ch-purple{--sc:var(--purple);background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.18)}
+.bal-ch-purple{--sc:var(--purple);background:rgba(15,118,110,.04);border-color:rgba(15,118,110,.18)}
 /* Spark chart mini-label */
-.spark-lbl{font-size:var(--t-nano);color:var(--muted);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px}
+.spark-lbl{font-size:var(--t-nano);color:var(--muted);font-weight:600;letter-spacing:.1px;margin-bottom:4px}
 /* Resumen ghost control — period pills dim when Resumen is active */
 .filters.resumen-mode .period-btns{opacity:.38;pointer-events:none}
 .filters.resumen-mode .period-btns::after{content:'Ciclo completo';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:var(--t-nano);color:rgba(255,255,255,.55);font-weight:600;letter-spacing:.4px;white-space:nowrap;pointer-events:none}
@@ -1091,7 +1091,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div id="sankey-wrap-roma" style="min-height:60px"></div>
       </div>
       <div class="card card-pad">
-        <div class="card-title" style="color:#0d9488">● Tomate Bola</div>
+        <div class="card-title" style="color:#0f766e">● Tomate Bola</div>
         <div id="sankey-wrap-bola" style="min-height:60px"></div>
       </div>
     </div>
@@ -1103,15 +1103,15 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div class="stat-strip" style="grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0;box-shadow:none;border:none">
           <div><div class="stat-lbl">Cosecha</div><div class="stat-val cg" id="bal-r-cos" style="font-size:1.1rem">—</div></div>
           <div><div class="stat-lbl">Empacado</div><div class="stat-val cg" id="bal-r-emp" style="font-size:1.1rem">—</div></div>
-          <div><div class="stat-lbl" title="Empacado Roma ÷ Cosechado Roma">Eficiencia</div><div class="stat-val" id="bal-r-efic" style="font-size:1.1rem;color:#7c3aed">—</div></div>
+          <div><div class="stat-lbl" title="Empacado Roma ÷ Cosechado Roma">Eficiencia</div><div class="stat-val" id="bal-r-efic" style="font-size:1.1rem;color:#0f766e">—</div></div>
         </div>
       </div>
       <div class="card card-pad">
-        <div class="card-title" style="color:#0d9488">● Tomate Bola (Round)</div>
+        <div class="card-title" style="color:#0f766e">● Tomate Bola (Round)</div>
         <div class="stat-strip" style="grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0;box-shadow:none;border:none">
           <div><div class="stat-lbl">Cosecha</div><div class="stat-val cg" id="bal-b-cos" style="font-size:1.1rem">—</div></div>
           <div><div class="stat-lbl">Empacado</div><div class="stat-val cg" id="bal-b-emp" style="font-size:1.1rem">—</div></div>
-          <div><div class="stat-lbl" title="Empacado Bola ÷ Cosechado Bola">Eficiencia</div><div class="stat-val" id="bal-b-efic" style="font-size:1.1rem;color:#7c3aed">—</div></div>
+          <div><div class="stat-lbl" title="Empacado Bola ÷ Cosechado Bola">Eficiencia</div><div class="stat-val" id="bal-b-efic" style="font-size:1.1rem;color:#0f766e">—</div></div>
         </div>
       </div>
     </div>
@@ -1586,7 +1586,7 @@ function renderResumen(){
       inbByDay[d].tot+=(r.total_frutos||0);
     });
     const inbDays=Object.keys(inbByDay).sort().slice(-14);
-    sparkBars(document.getElementById('rv-inb-spark'), inbDays.map(d=>inbByDay[d].tot?inbByDay[d].p1/inbByDay[d].tot*100:0),'#7c3aed');
+    sparkBars(document.getElementById('rv-inb-spark'), inbDays.map(d=>inbByDay[d].tot?inbByDay[d].p1/inbByDay[d].tot*100:0),'#0f766e');
   } else {
     ['rv-inb-p1','rv-inb-merma','rv-inb-temp'].forEach(id=>{ document.getElementById(id).textContent='—'; });
     const inbAlert = document.getElementById('rv-inb-alert');
@@ -1677,7 +1677,7 @@ function renderResumen(){
       responsive:true, maintainAspectRatio:false,
       interaction:{ mode:'index', intersect:false },
       plugins:{
-        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:12 } },
+        legend:{ position:'bottom', labels:{ font:{family:'IBM Plex Sans',size:10}, color:'#374151', boxWidth:10, padding:12 } },
         tooltip:{ backgroundColor:'#0c2117', titleColor:'rgba(255,255,255,.85)', bodyColor:'#fff', padding:10, cornerRadius:8,
           callbacks:{
             title(items){
@@ -1816,7 +1816,7 @@ function objLine(y, label, color='#d97706'){
     borderColor: color, borderWidth:1.5, borderDash:[5,4],
     label:{ content:label, display:true, position:'end', padding:3,
       backgroundColor:'rgba(217,119,6,.12)', color:'#92400e',
-      font:{size:9,family:'Inter',weight:'700'}, borderRadius:4 }
+      font:{size:9,family:'IBM Plex Sans',weight:'700'}, borderRadius:4 }
   };
 }
 /* ── CHARTS REGISTRY ──────────────────────────────────── */
@@ -1830,19 +1830,19 @@ function mkChart(id, cfg){
 const CHART_DEFAULTS = {
   animation:{ duration:400, easing:'easeOutQuart' },
   plugins:{
-    legend:{ labels:{ font:{family:'Inter',size:10.5}, color:'#374151', boxWidth:10, padding:10, usePointStyle:true, pointStyleWidth:8 } },
+    legend:{ labels:{ font:{family:'IBM Plex Sans',size:10.5}, color:'#374151', boxWidth:10, padding:10, usePointStyle:true, pointStyleWidth:8 } },
     tooltip:{
       backgroundColor:'#0c2117', titleColor:'rgba(255,255,255,.5)',
       bodyColor:'#f0fdf4', padding:10, cornerRadius:8, boxPadding:4,
       borderColor:'rgba(255,255,255,.08)', borderWidth:1,
-      titleFont:{family:'Inter',size:10,weight:'600'},
-      bodyFont:{family:'Inter',size:11},
+      titleFont:{family:'IBM Plex Sans',size:10,weight:'600'},
+      bodyFont:{family:'IBM Plex Sans',size:11},
     }
   },
   layout:{ padding:{ right:4, top:2 } },
   scales:{
-    x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{family:'Inter',size:10},maxRotation:0}, border:{display:false} },
-    y:{ grid:{color:'rgba(0,0,0,.04)',drawTicks:false}, ticks:{color:'#9ca3af',font:{family:'Inter',size:10},padding:4}, border:{display:false} }
+    x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{family:'IBM Plex Sans',size:10},maxRotation:0}, border:{display:false} },
+    y:{ grid:{color:'rgba(0,0,0,.04)',drawTicks:false}, ticks:{color:'#9ca3af',font:{family:'IBM Plex Sans',size:10},padding:4}, border:{display:false} }
   }
 };
 
@@ -1988,18 +1988,18 @@ function renderCalidad(){
         responsive:true, maintainAspectRatio:false,
         interaction:{ mode:'index', intersect:false },
         plugins:{
-          legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:12 } },
+          legend:{ position:'bottom', labels:{ font:{family:'IBM Plex Sans',size:10}, color:'#374151', boxWidth:10, padding:12 } },
           tooltip:{ backgroundColor:'#0c2117', bodyColor:'#fff', padding:9, cornerRadius:8,
             callbacks:{ label:c=>c.dataset.label==='% Primera'?` ${c.dataset.label}: ${c.parsed.y??'—'}%`:` ${c.dataset.label}: ${(c.parsed.y||0).toLocaleString('es-MX')} cx` } }
         },
         annotation:{ annotations:{ obj85: objLine(85,'Obj. 85%') } },
         scales:{
-          x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{family:'Inter',size:10},maxRotation:0}, border:{display:false} },
+          x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{family:'IBM Plex Sans',size:10},maxRotation:0}, border:{display:false} },
           y:{ position:'left', grid:{color:'rgba(0,0,0,.04)',drawTicks:false},
-            ticks:{color:'#9ca3af',font:{family:'Inter',size:10},padding:4,callback:v=>v>=1000?Math.round(v/1000)+'K':v},
+            ticks:{color:'#9ca3af',font:{family:'IBM Plex Sans',size:10},padding:4,callback:v=>v>=1000?Math.round(v/1000)+'K':v},
             border:{display:false} },
           y2:{ position:'right', grid:{display:false},
-            ticks:{color:'#16a34a',font:{family:'Inter',size:10},callback:v=>v+'%'},
+            ticks:{color:'#16a34a',font:{family:'IBM Plex Sans',size:10},callback:v=>v+'%'},
             min:0, max:100, border:{display:false} }
         }
       }
@@ -2030,7 +2030,7 @@ function renderCalidad(){
     options:{
       responsive:true, maintainAspectRatio:false, cutout:'62%',
       plugins:{
-        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10.5}, color:'#374151', boxWidth:12, padding:12 } },
+        legend:{ position:'bottom', labels:{ font:{family:'IBM Plex Sans',size:10.5}, color:'#374151', boxWidth:12, padding:12 } },
         tooltip:{ callbacks:{ label:c=>`${c.label.split(' — ')[0]}: ${fN(c.parsed/1000)} t (${totalEtqKg?fN(c.parsed/totalEtqKg*100):0}%)` } }
       }
     }
@@ -2081,7 +2081,7 @@ function renderCalidad(){
       plugins:{
         legend:{
           position:'bottom',
-          labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:11, padding:14,
+          labels:{ font:{family:'IBM Plex Sans',size:10}, color:'#374151', boxWidth:11, padding:14,
             usePointStyle:true, pointStyleWidth:8 }
         },
         tooltip:{
@@ -2105,11 +2105,11 @@ function renderCalidad(){
       },
       scales:{
         x:{ stacked:true, grid:{display:false},
-          ticks:{color:'#6b7280',font:{family:'Inter',size:10},maxRotation:0},
+          ticks:{color:'#6b7280',font:{family:'IBM Plex Sans',size:10},maxRotation:0},
           border:{display:false} },
         y:{ stacked:true,
           grid:{color:'rgba(0,0,0,.04)',drawTicks:false},
-          ticks:{color:'#9ca3af',font:{family:'Inter',size:10},
+          ticks:{color:'#9ca3af',font:{family:'IBM Plex Sans',size:10},
             callback:v=>v>=1000?Math.round(v/1000)+'K':v,padding:6},
           border:{display:false} }
       }
@@ -2198,11 +2198,11 @@ function renderCalidad(){
       },
       scales:{
         x:{ grid:{color:'rgba(0,0,0,.04)',drawTicks:false},
-          ticks:{color:'#9ca3af',font:{family:'Inter',size:10},
+          ticks:{color:'#9ca3af',font:{family:'IBM Plex Sans',size:10},
             callback:v=>v>=1000?Math.round(v/1000)+'K':v,padding:4},
           border:{display:false} },
         y:{ grid:{display:false},
-          ticks:{color:'#1f2937',font:{family:'Inter',size:11,weight:'600'}},
+          ticks:{color:'#1f2937',font:{family:'IBM Plex Sans',size:11,weight:'600'}},
           border:{display:false} }
       }
     }
@@ -2560,7 +2560,7 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
   const spr=vCos-vEmp-vCjv-vRez;
   const sprAbs=Math.abs(spr);
   const sprLabel=spr>=0?'Sobrepeso':'Déficit';
-  const sprColor=spr>=0?'#7c3aed':'#dc2626';
+  const sprColor=spr>=0?'#0f766e':'#dc2626';
 
   const flows=[
     {label:'Empaque Final',   kg:vEmp,  color:'#16a34a'},
@@ -2621,21 +2621,21 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
     const kgY    = mid+4;
     const pctY   = tall ? mid+18 : mid2 ? mid+8 : mid+9;
     return `<rect x="${dstX}" y="${n.y}" width="${dstW}" height="${n.h}" rx="5" fill="${n.color}" opacity="0.93"/>
-      <text x="${dstX+dstW/2}" y="${labelY}" text-anchor="middle" fill="white" font-size="${fs}" font-weight="700" font-family="Inter,-apple-system,sans-serif">${n.label}</text>
+      <text x="${dstX+dstW/2}" y="${labelY}" text-anchor="middle" fill="white" font-size="${fs}" font-weight="700" font-family="IBM Plex Sans,-apple-system,sans-serif">${n.label}</text>
       ${tall?`<text x="${dstX+dstW/2}" y="${kgY}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="12" font-weight="800" font-family="JetBrains Mono,monospace">${fN(n.kg/1000,1)}t</text>`:''}
-      <text x="${dstX+dstW/2}" y="${pctY}" text-anchor="middle" fill="rgba(255,255,255,${tall?.7:.85})" font-size="${small?9:10}" font-weight="${small?700:600}" font-family="Inter,-apple-system,sans-serif">${fN(pct,1)}%</text>`;
+      <text x="${dstX+dstW/2}" y="${pctY}" text-anchor="middle" fill="rgba(255,255,255,${tall?.7:.85})" font-size="${small?9:10}" font-weight="${small?700:600}" font-family="IBM Plex Sans,-apple-system,sans-serif">${fN(pct,1)}%</text>`;
   }).join('');
 
   const srcColor = variedad==='ROMA' ? '#b91c1c' : variedad==='BOLA' ? '#0f766e' : '#15803d';
   const srcMid=srcY+srcH/2;
   const srcLabel = variedad==='ROMA' ? 'ROMA' : variedad==='BOLA' ? 'BOLA' : 'COSECHA';
-  const srcSub   = variedad ? '' : `<text x="${srcX+srcW/2}" y="${srcMid+13}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="Inter,-apple-system,sans-serif">R ${fN(cosRoma/1000,1)}t</text>
-    <text x="${srcX+srcW/2}" y="${srcMid+24}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="Inter,-apple-system,sans-serif">B ${fN(cosBola/1000,1)}t</text>`;
+  const srcSub   = variedad ? '' : `<text x="${srcX+srcW/2}" y="${srcMid+13}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="IBM Plex Sans,-apple-system,sans-serif">R ${fN(cosRoma/1000,1)}t</text>
+    <text x="${srcX+srcW/2}" y="${srcMid+24}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="IBM Plex Sans,-apple-system,sans-serif">B ${fN(cosBola/1000,1)}t</text>`;
 
   const svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;max-width:${W}px">
     ${paths}
     <rect x="${srcX}" y="${srcY}" width="${srcW}" height="${srcH}" rx="8" fill="${srcColor}" opacity="0.95"/>
-    <text x="${srcX+srcW/2}" y="${srcMid-18}" text-anchor="middle" fill="white" font-size="8" font-weight="800" font-family="Inter,-apple-system,sans-serif" letter-spacing="0.5">${srcLabel}</text>
+    <text x="${srcX+srcW/2}" y="${srcMid-18}" text-anchor="middle" fill="white" font-size="8" font-weight="800" font-family="IBM Plex Sans,-apple-system,sans-serif" letter-spacing="0.5">${srcLabel}</text>
     <text x="${srcX+srcW/2}" y="${srcMid-2}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="13" font-weight="800" font-family="JetBrains Mono,monospace">${fN(vCos/1000,1)}t</text>
     ${srcSub}
     ${dstLabels}
@@ -2648,7 +2648,7 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
        </div>`
     : '';
   const sprNote = sprPct > 8
-    ? `<div style="font-size:.72rem;color:#7c3aed;text-align:right;margin-top:2px;padding-right:4px">
+    ? `<div style="font-size:.72rem;color:#0f766e;text-align:right;margin-top:2px;padding-right:4px">
         Sobrepeso ${fN(sprPct,1)}% — revisar completitud de rezaga y detalles de acarreos
        </div>`
     : '';
@@ -3090,7 +3090,7 @@ function renderTomate(from, to){
   const colorMap = {};
   rows.forEach(r => { colorMap[r.color] = (colorMap[r.color]||0) + r.kilos; });
   const colorEntries = Object.entries(colorMap).sort((a,b)=>b[1]-a[1]);
-  const COLOR_PALETTE = ['#16a34a','#d97706','#dc2626','#1d4ed8','#7c3aed','#0891b2'];
+  const COLOR_PALETTE = ['#16a34a','#d97706','#dc2626','#1d4ed8','#0f766e','#0891b2'];
   mkChart('chart-tom-color',{
     type:'doughnut',
     data:{
@@ -3100,7 +3100,7 @@ function renderTomate(from, to){
     options:{
       responsive:true, maintainAspectRatio:false, cutout:'58%',
       plugins:{
-        legend:{ position:'right', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:8 } },
+        legend:{ position:'right', labels:{ font:{family:'IBM Plex Sans',size:10}, color:'#374151', boxWidth:10, padding:8 } },
         tooltip:{ callbacks:{ label:c=>` ${c.label}: ${fN(c.parsed/1000)} t (${fN(c.parsed/totalKg*100)}%)` } }
       }
     }
@@ -3215,7 +3215,7 @@ function renderCropPanel({ rows, ids, from, to, chartSemId, casetaId, varId, tbo
   rows.forEach(r=>{ const k=r[groupKey]||'—'; grpMap[k]=(grpMap[k]||0)+r.kilos; });
   const grpSorted=Object.entries(grpMap).sort((a,b)=>b[1]-a[1]).slice(0,12);
   const maxG=grpSorted[0]?.[1]||1;
-  const GCOLORS=['#16a34a','#1d4ed8','#7c3aed','#d97706','#dc2626','#0891b2','#65a30d','#b45309'];
+  const GCOLORS=['#16a34a','#1d4ed8','#0f766e','#d97706','#dc2626','#0891b2','#65a30d','#b45309'];
   const barsEl = document.getElementById(varId || casetaId);
   barsEl.innerHTML = grpSorted.map(([k,kg],i)=>`
     <div class="prog-row" style="margin-bottom:0">
@@ -3450,7 +3450,7 @@ function renderInbound(from, to){
     options:{
       responsive:true, maintainAspectRatio:false,
       plugins:{
-        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:10}, color:'#374151', boxWidth:10, padding:10 } },
+        legend:{ position:'bottom', labels:{ font:{family:'IBM Plex Sans',size:10}, color:'#374151', boxWidth:10, padding:10 } },
         tooltip:{ backgroundColor:'#0c2117', bodyColor:'#fff', padding:9, cornerRadius:8,
           callbacks:{ label: c => ` ${c.dataset.label}: ${c.parsed.y ?? '—'}%` }
         }
@@ -3475,7 +3475,7 @@ function renderInbound(from, to){
     .map(([k,v])=>[k, v/totalFrutosInb*100])
     .sort((a,b)=>b[1]-a[1]).slice(0,12);
   const maxD = danosSorted[0]?.[1] || 1;
-  const DCOL = ['#dc2626','#d97706','#7c3aed','#1d4ed8','#0891b2','#65a30d'];
+  const DCOL = ['#dc2626','#d97706','#0f766e','#1d4ed8','#0891b2','#65a30d'];
   document.getElementById('inb-danos-bars').innerHTML = danosSorted.map(([k,v],i)=>`
     <div class="prog-row" style="margin-bottom:0">
       <div class="prog-top">
@@ -3521,7 +3521,7 @@ function renderInbound(from, to){
     options:{
       responsive:true, maintainAspectRatio:false, cutout:'62%',
       plugins:{
-        legend:{ position:'right', labels:{ font:{family:'Inter',size:11}, color:'#374151', boxWidth:12, padding:10,
+        legend:{ position:'right', labels:{ font:{family:'IBM Plex Sans',size:11}, color:'#374151', boxWidth:12, padding:10,
           generateLabels: chart => chart.data.labels.map((lbl,i)=>({
             text: `${lbl} — ${fN(colMap[lbl]/colTotal*100,1)}%`,
             fillStyle: COLOR_PALETTE[lbl]||'#9ca3af',
