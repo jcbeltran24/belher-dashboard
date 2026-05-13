@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Miércoles 13 May 2026",
     semana: "WK 20",
-    actualizado: "13/05/2026 · 09:50"
+    actualizado: "13/05/2026 · 11:05"
   },
 
   alertas: [
@@ -635,8 +635,8 @@ window.BELHER = {
     { label:"Vine Ripe 4x4 USDA",          valor:"$66.95–68.95/cj",             cambio:"corrección WK19 en curso",    dir:"down"    },
     { label:"Roma XL Texas",               valor:"$50.95–52.95/cj",             cambio:"presión Coachella WK19",     dir:"down"    },
     { label:"Limes seedless 110s",         valor:"$42/bu",                       cambio:"Peru -30% sostiene",         dir:"up"      },
-    { label:"CVGW (Calavo)",               valor:"$27.70",                       cambio:"-1.63% vs prev close",       dir:"down"    },
-    { label:"AVO (Mission)",               valor:"$13.30",                       cambio:"-4.04% vs prev close",       dir:"down"    },
+    { label:"CVGW (Calavo)",               valor:"$26.85",                       cambio:"-4.07% vs prev close",       dir:"down"    },
+    { label:"AVO (Mission)",               valor:"$12.39",                       cambio:"-8.96% vs prev close",       dir:"down"    },
     { label:"Sorgo trilla acumulada",      valor:"292 ha",                       cambio:"21 jornadas (31/Mar–06/May)", dir:"up"      },
     { label:"Corbel Seeds última",         valor:"#0039",                        cambio:"30-Abr",                     dir:"neutral" }
   ],
@@ -750,8 +750,7 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"08/05/2026",    evento:"WK19 ÚLTIMAS HORAS — embarques máximos de tomate (Roma + Vine-ripe cierre de ventana) y limón 110s antes corrección esperada. Monitoreo outbound calidad.", tipo:"operativo", participantes:"Embarques · Calidad · Operaciones" },
-      { fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
+{ fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
       { fecha:"19/05/2026",    evento:"BPSI F/S Abril 2026 y forecast Q2 2026 — Zoom 11am-12pm (GMT-7)", tipo:"financiero", participantes:"Leima · Jacruz · JC · Armando Llanes" },
       { fecha:"25/05/2026",    evento:"Abril '26 F/S (Tomates/Limones/Granos) — Revisión final · 9:30-10:30am", tipo:"financiero", participantes:"JC · Antonio · Leima · Armando · Jacruz · Despacho Terrazas" },
       { fecha:"25/05/2026",    evento:"ABSA Revisión declaración final ISR 2025 y PTU · 11am-12pm", tipo:"financiero", participantes:"JC · Antonio · Armando · Jacruz · fcalderon@cryasociados.com" },
@@ -762,7 +761,7 @@ window.BELHER = {
 
   predicciones: {
     generado:  "06/05/2026 · 06:18",
-    modelo:    "Claude claude-haiku-4-5-20251001",
+    modelo:    "Claude claude-sonnet-4-6",
     horizonte: "7 días",
     nota:      "Síntesis Corbel Seeds #0039 (30-Abr) + Outbound 04/05 + Inbound 05/05 (deterioro). Vine ripe en corrección clara post-peak. Roma firme pero presión Coachella/Georgia WK19+. Limes Peru -30% sustain pero ventana cierra WK19-20. Inbound calidad DETERIORO continuo — investigación urgente.",
     items: [
@@ -924,13 +923,13 @@ window.BELHER = {
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 27.70, prevClose: 28.16, cambio: -0.46, cambioPct: -1.63,
+        precio: 26.85, prevClose: 27.99, cambio: -1.14, cambioPct: -4.07,
         h52: 28.98, l52: 18.40, volumen: null,
         fuente: "Yahoo Finance · latest"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 13.30, prevClose: 13.86, cambio: -0.56, cambioPct: -4.04,
+        precio: 12.39, prevClose: 13.61, cambio: -1.22, cambioPct: -8.96,
         h52: 15.53, l52: 10.00, volumen: null,
         fuente: "Yahoo Finance · latest"
       }
@@ -959,7 +958,7 @@ window.BELHER = {
 
     alertas: [
       { nivel: "success", texto: "SETTLEMENT WK19 (07-May): Calavo reporta ~$2.506M a favor. Conciliación detallada 08-May por Leima." },
-      { nivel: "warning", texto: "CVGW $27.70 (-1.63%) · AVO $13.30 (-4.04%) — ambos en corrección moderada." },
+      { nivel: "warning", texto: "CVGW $26.85 (-4.07%) · AVO $12.39 (-8.96%) — caída acelerada ambas acciones 13-May." },
       { nivel: "warning", texto: "Tomato Weekly Update WK19 pendiente — Irene sin envío. Monitoreo de reporte formal." }
     ],
 
