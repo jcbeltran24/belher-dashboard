@@ -58,7 +58,7 @@ header{background:var(--dark);height:46px;display:flex;align-items:center;paddin
 .f-group{display:flex;align-items:center}
 /* Period pill group */
 .period-btns{display:flex;gap:1px;padding:2px;background:rgba(0,0,0,.18);border-radius:8px;flex-shrink:0;position:relative}
-.p-btn{height:22px;padding:0 10px;border-radius:6px;background:transparent;border:none;color:rgba(255,255,255,.5);font-size:var(--t-nano);font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;transition:background .12s,color .12s}
+.p-btn{min-height:32px;padding:0 10px;border-radius:6px;background:transparent;border:none;color:rgba(255,255,255,.5);font-size:var(--t-nano);font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;transition:background .12s,color .12s}
 .p-btn:hover{background:rgba(255,255,255,.09);color:rgba(255,255,255,.85)}
 .p-btn.active{background:var(--accent2);color:var(--dark);font-weight:800;box-shadow:0 1px 4px rgba(251,191,36,.3)}
 .p-sep{width:1px;height:16px;background:rgba(255,255,255,.12);align-self:center;margin:0 1px;flex-shrink:0}
@@ -241,7 +241,7 @@ tbody td{padding:6px 11px;vertical-align:middle}
 .ov-m{display:flex;flex-direction:column;gap:1px}
 .ov-m-lbl{font-size:var(--t-nano);font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
 .ov-m-val{font-size:var(--t-lg);font-weight:700;letter-spacing:-.3px;line-height:1.1;font-family:var(--font-num)}
-.ov-m-sub{font-size:.57rem;color:var(--muted)}
+.ov-m-sub{font-size:var(--t-nano);color:var(--muted)}
 .ov-divider{height:1px;background:var(--border)}
 
 /* mini spark bars inside ov-card */
@@ -281,6 +281,14 @@ tbody td{padding:6px 11px;vertical-align:middle}
 header:has(#btn-refresh.spin)~.filters::before{content:'';display:block;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--accent2),var(--green),var(--accent2));background-size:200% 100%;animation:load-bar-slide 1.2s linear infinite;margin-bottom:4px}
 @keyframes load-bar-slide{0%{background-position:100% 0}100%{background-position:-100% 0}}
 .empty{text-align:center;padding:32px;color:var(--muted);font-size:.82rem}
+/* Sub-tabs (panel-otros: Limón / Chile) */
+.sub-tabs{display:flex;gap:0;margin-bottom:18px;border-bottom:1px solid var(--border)}
+.sub-tab{background:none;border:none;border-bottom:2.5px solid transparent;padding:9px 22px;font-family:inherit;font-size:var(--t-sm);font-weight:700;color:var(--muted);cursor:pointer;transition:color .15s,border-color .15s;margin-bottom:-1px}
+.sub-tab:hover{color:var(--text)}
+.sub-tab.active{color:var(--green2);border-bottom-color:var(--green2)}
+/* Error banner retry button */
+.err-retry{margin-left:auto;padding:3px 12px;border-radius:6px;background:var(--red);border:none;color:#fff;font-family:inherit;font-size:var(--t-nano);font-weight:700;cursor:pointer;white-space:nowrap}
+.err-retry:hover{background:var(--red2)}
 
 /* ── PESO ALERTA ── */
 .stat.peso-ok   { --sc: var(--green2); }
@@ -338,7 +346,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   .f-select{min-width:96px;height:26px;font-size:.66rem;padding:0 8px}
   .f-reset{height:26px;padding:0 9px;font-size:.65rem}
   .period-btns{flex-shrink:0}
-  .p-btn{padding:0 9px;font-size:.63rem;height:23px}
+  .p-btn{padding:0 9px;font-size:.63rem}
   .mpicker-btn,.cmp-btn{height:26px;padding:0 9px;font-size:.63rem;flex-shrink:0;gap:4px}
   .f-divider{height:16px;margin:0 1px}
 
@@ -505,7 +513,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   <button class="view-tab" data-panel="panel-inbound">Calidad Inbound</button>
   <button class="view-tab" data-panel="panel-calidad">Calidad Empaque</button>
   <button class="view-tab" data-panel="panel-tomate">Producción Tomate</button>
-  <button class="view-tab" data-panel="panel-otros">Producción Otros</button>
+  <button class="view-tab" data-panel="panel-otros">Limón · Chile</button>
   <button class="view-tab" data-panel="panel-embarques">Embarques</button>
   <button class="view-tab" data-panel="panel-balance">Balance de Masas</button>
 </div>
@@ -514,6 +522,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   <div class="err" id="err-banner">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
     <span id="err-text">Error al cargar.</span>
+    <button class="err-retry" onclick="loadData(true)">Reintentar</button>
   </div>
 
   <!-- ══ PANEL: RESUMEN ════════════════════════════════════ -->
@@ -793,8 +802,8 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       <div class="stat cg"><div class="stat-lbl">Tomate Bola</div><div class="stat-val" id="tom-bola"><span class="skel"></span></div><div class="stat-sub" id="tom-bola-pct">—</div></div>
       <div class="stat cb"><div class="stat-lbl">Jornadas</div><div class="stat-val" id="tom-dias"><span class="skel"></span></div><div class="stat-sub">días con cosecha</div></div>
 
-      <div class="stat cg"><div class="stat-lbl">Greenhouse <span style="font-size:.55rem;padding:1px 5px;border-radius:4px;background:rgba(22,163,74,.15);color:#15803d;font-weight:700">GH</span></div><div class="stat-val" id="tom-gh"><span class="skel"></span></div><div class="stat-sub" id="tom-gh-pct">—</div></div>
-      <div class="stat ca"><div class="stat-lbl">Open Field <span style="font-size:.55rem;padding:1px 5px;border-radius:4px;background:rgba(217,119,6,.15);color:#92400e;font-weight:700">OF</span></div><div class="stat-val" id="tom-of"><span class="skel"></span></div><div class="stat-sub" id="tom-of-pct">—</div></div>
+      <div class="stat cg"><div class="stat-lbl">Greenhouse <span style="font-size:var(--t-nano);padding:1px 5px;border-radius:4px;background:rgba(22,163,74,.15);color:#15803d;font-weight:700">GH</span></div><div class="stat-val" id="tom-gh"><span class="skel"></span></div><div class="stat-sub" id="tom-gh-pct">—</div></div>
+      <div class="stat ca"><div class="stat-lbl">Open Field <span style="font-size:var(--t-nano);padding:1px 5px;border-radius:4px;background:rgba(217,119,6,.15);color:#92400e;font-weight:700">OF</span></div><div class="stat-val" id="tom-of"><span class="skel"></span></div><div class="stat-sub" id="tom-of-pct">—</div></div>
     </div>
 
     <!-- Row 1: weekly bars + lote split -->
@@ -844,6 +853,11 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 
   <!-- ══ PANEL: LIMÓN ═══════════════════════════════════════ -->
   <div class="panel" id="panel-otros">
+    <div class="sub-tabs">
+      <button class="sub-tab active" data-sub="sub-limon">Limón</button>
+      <button class="sub-tab" data-sub="sub-chile">Chile</button>
+    </div>
+    <div class="sub-panel" id="sub-limon">
     <div class="sec">Producción Limón
       <span class="sec-tag" id="lim-range-lbl">—</span>
       <span class="sec-source">vw_acarreos · detalles</span>
@@ -883,7 +897,8 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         </table>
       </div>
     </div>
-    <div style="height:1px;background:var(--border);margin:18px 0"></div>
+    </div><!-- /sub-limon -->
+    <div class="sub-panel" id="sub-chile" style="display:none">
     <div class="sec">Producción Chile
       <span class="sec-tag" id="chi-range-lbl">—</span>
       <span class="sec-source">vw_acarreos · detalles</span>
@@ -912,6 +927,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         </table>
       </div>
     </div>
+    </div><!-- /sub-chile -->
   </div><!-- /panel-otros -->
 
   <!-- ══ PANEL: INBOUND · CAMPO ═══════════════════════════ -->
@@ -925,17 +941,17 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
     <!-- KPI strip -->
     <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(155px,1fr))">
       <div class="stat cg">
-        <div class="stat-lbl">% Primera <span style="opacity:.55;font-weight:400;font-size:.58rem">obj. ≥ 85%</span></div>
+        <div class="stat-lbl">% Primera <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">obj. ≥ 85%</span></div>
         <div class="stat-val" id="inb-primera"><span class="skel"></span></div>
         <div class="stat-sub" id="inb-primera-sub">—</div>
       </div>
       <div class="stat ca" id="inb-merma-card">
-        <div class="stat-lbl">% Merma <span style="opacity:.55;font-weight:400;font-size:.58rem">obj. &lt; 8%</span></div>
+        <div class="stat-lbl">% Merma <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">obj. &lt; 8%</span></div>
         <div class="stat-val" id="inb-merma"><span class="skel"></span></div>
         <div class="stat-sub">promedio</div>
       </div>
       <div class="stat cb">
-        <div class="stat-lbl">Temperatura Fruto <span style="opacity:.55;font-weight:400;font-size:.58rem">obj. &lt; 28°C</span></div>
+        <div class="stat-lbl">Temperatura Fruto <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">obj. &lt; 28°C</span></div>
         <div class="stat-val" id="inb-temp"><span class="skel"></span></div>
         <div class="stat-sub">°C promedio</div>
       </div>
@@ -1110,7 +1126,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 <footer>
   <div class="ft-l">Agrícola Belher S.A. de C.V.</div>
   <div class="ft-meta">
-    <div style="font-size:.58rem;color:rgba(255,255,255,.22);font-family:monospace;max-width:500px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="ft-urls">—</div>
+    <div style="font-size:var(--t-nano);color:rgba(255,255,255,.22);font-family:monospace;max-width:500px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="ft-urls">—</div>
     <div class="ft-r" id="ft-updated">—</div>
   </div>
 </footer>
@@ -1339,12 +1355,11 @@ function applyFilters(){
 function setPeriod(p){
   activePeriod = p;
   const range = periodRange(p);
-  // clear all period pills
   document.querySelectorAll('.p-btn[data-period]').forEach(b => b.classList.remove('active'));
   const target = document.querySelector(`.p-btn[data-period="${p}"]`);
   if(target) target.classList.add('active');
-  // clear month picker highlight
   mpClearActive();
+  pushUrlState();
   activeRange = range;
   loadData();
 }
@@ -1834,7 +1849,8 @@ const CHART_DEFAULTS = {
 /* ── RENDER: CALIDAD ──────────────────────────────────── */
 function renderCalidad(){
   if(!fPalets.length){
-    document.getElementById('cal-tbody').innerHTML='<tr><td colspan="9" class="empty">Sin datos para los filtros seleccionados.</td></tr>';
+    const _calF = document.getElementById('f-cultivo')?.value || document.getElementById('f-etiqueta')?.value;
+    document.getElementById('cal-tbody').innerHTML=`<tr><td colspan="9" class="empty">Sin datos${_calF ? ' para el filtro activo — prueba sin filtro de cultivo/etiqueta' : ' en el período seleccionado'}.</td></tr>`;
     return;
   }
 
@@ -1891,7 +1907,7 @@ function renderCalidad(){
   document.getElementById('s-p3').innerHTML = bultos ? fN(bultosP3/bultos*100,1)+'<span class="stat-unit">%</span>' : '—';
 
   const excluded = [hasLimon && 'limón', hasChile && 'chile'].filter(Boolean).join(', ');
-  const excludedNote = excluded ? ` <span style="font-size:.58rem;color:var(--muted);font-weight:500">· ${excluded} excluido</span>` : '';
+  const excludedNote = excluded ? ` <span style="font-size:var(--t-nano);color:var(--muted);font-weight:500">· ${excluded} excluido</span>` : '';
   document.getElementById('s-bultos').innerHTML =
     fKM(totalCajas) + '<span style="font-size:.65rem;font-weight:500;color:var(--muted);margin-left:4px">cx</span>' + excludedNote;
   document.getElementById('s-palets').textContent =
@@ -2213,7 +2229,7 @@ function renderCalidad(){
 /* ── RENDER: PESOS ──────────────────────────────────────── */
 function renderPesos(){
   if(!fAcarreos.length){
-    document.getElementById('pesos-tbody').innerHTML='<tr><td colspan="7" class="empty">Sin remisiones para los filtros seleccionados.</td></tr>';
+    document.getElementById('pesos-tbody').innerHTML='<tr><td colspan="7" class="empty">Sin remisiones en el período — prueba un rango más amplio.</td></tr>';
     return;
   }
 
@@ -2402,6 +2418,7 @@ async function loadData(force = false){
   } catch(err){
     console.error(err);
     if(!cacheHit){
+      document.querySelectorAll('.skel').forEach(s => s.replaceWith('—'));
       document.getElementById('err-text').textContent = 'Error EYE: ' + err.message;
       document.getElementById('err-banner').classList.add('show');
       showToast('Error EYE: ' + err.message, 'error');
@@ -3830,7 +3847,7 @@ function renderEmbarquesMap(){
 
   // Init or reuse map
   if(!_embMap){
-    _embMap = L.map('emb-map', { zoomControl:true, attributionControl:false });
+    _embMap = L.map('emb-map', { zoomControl:true, attributionControl:true });
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
       attribution:'© CartoDB', maxZoom:13
     }).addTo(_embMap);
@@ -3892,16 +3909,44 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     document.getElementById(btn.dataset.panel).classList.add('active');
     document.querySelector('.filters').classList.toggle('resumen-mode', btn.dataset.panel==='panel-resumen');
     syncFilterContext(btn.dataset.panel);
+    pushUrlState();
     if(btn.dataset.panel === 'panel-resumen')   loadResumen();
     if(btn.dataset.panel === 'panel-calidad')   renderCalidad();
     if(btn.dataset.panel === 'panel-tomate')    loadTomate();
-    if(btn.dataset.panel === 'panel-otros')     { loadLimon(); loadChile(); }
+    if(btn.dataset.panel === 'panel-otros'){
+      const activeSub = document.querySelector('#panel-otros .sub-tab.active')?.dataset.sub;
+      if(activeSub === 'sub-chile') loadChile(); else loadLimon();
+    }
     if(btn.dataset.panel === 'panel-inbound')   loadInbound();
     if(btn.dataset.panel === 'panel-pesos')     { renderPesos(); loadRezaga(); }
     if(btn.dataset.panel === 'panel-embarques') loadEmbarques();
     if(btn.dataset.panel === 'panel-balance')   { if(!_resCycleKey) loadResumen().then(()=>renderBalance()); else renderBalance(); }
   });
 });
+
+/* ── SUB-TABS (Limón / Chile) ────────────────────────────── */
+document.querySelectorAll('.sub-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.sub-tabs').querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = btn.closest('.panel');
+    panel.querySelectorAll('.sub-panel').forEach(p => { p.style.display = 'none'; });
+    document.getElementById(btn.dataset.sub).style.display = '';
+    if(btn.dataset.sub === 'sub-limon') loadLimon();
+    if(btn.dataset.sub === 'sub-chile') loadChile();
+    pushUrlState();
+  });
+});
+
+/* ── URL STATE ───────────────────────────────────────────── */
+function pushUrlState(){
+  if(document.body.classList.contains('frame')) return;
+  const tab = document.querySelector('.panel.active')?.id || 'panel-resumen';
+  const params = new URLSearchParams(window.location.search);
+  params.set('tab', tab);
+  if(activePeriod) params.set('period', activePeriod);
+  history.replaceState(null, '', '?' + params.toString());
+}
 
 /* ── PERIOD BUTTON WIRING (use [data-period] to skip cmp-btn) ─── */
 document.querySelectorAll('.p-btn[data-period]').forEach(btn => {
@@ -3997,16 +4042,26 @@ document.addEventListener('click', e => {
 
 /* ── BOOT ───────────────────────────────────────────────── */
 // Frame mode: hide header when embedded via ?frame=1
-if(new URLSearchParams(window.location.search).get('frame') === '1'){
-  document.body.classList.add('frame');
+const _initP = new URLSearchParams(window.location.search);
+if(_initP.get('frame') === '1') document.body.classList.add('frame');
+
+// Restore saved tab from URL (before rendering)
+const _savedTab    = _initP.get('tab');
+const _savedPeriod = _initP.get('period') || 'ciclo';
+
+if(_savedTab && _savedTab !== 'panel-resumen'){
+  const savedBtn = document.querySelector(`.view-tab[data-panel="${_savedTab}"]`);
+  if(savedBtn) savedBtn.click();
+} else {
+  syncFilterContext('panel-resumen');
+  document.querySelector('.filters').classList.add('resumen-mode');
 }
-syncFilterContext('panel-resumen');
-document.querySelector('.filters').classList.add('resumen-mode');
+
 renderMPGrid();
-setPeriod('ciclo');
-loadResumen();
-// Silently load prior-cycle data after main data settles
-setTimeout(autoLoadCmp, 3500);
+setPeriod(_savedPeriod);
+if(!_savedTab || _savedTab === 'panel-resumen'){
+  loadResumen().then(() => autoLoadCmp().catch(console.warn));
+}
 </script>
 </body>
 </html>
