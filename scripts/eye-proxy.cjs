@@ -17,8 +17,9 @@ const TOKEN = [
 const PORT  = 8742;
 const TTL   = 5 * 60 * 1000; // 5 min cache
 
-/* ── In-memory cache ────────────────────────────────────── */
-const _cache = new Map();
+/* ── In-memory cache with in-flight dedup ───────────────── */
+const _cache    = new Map();
+const _inflight = new Map(); // key → Promise<rows>
 
 function cacheGet(key) {
   const e = _cache.get(key);
@@ -29,6 +30,23 @@ function cacheGet(key) {
 
 function cacheSet(key, rows) {
   _cache.set(key, { rows, ts: Date.now() });
+}
+
+// Returns rows from cache, or waits for an in-flight fetch, or starts one
+async function cacheOrFetch(key, fetcher) {
+  const cached = cacheGet(key);
+  if (cached) return cached;
+  if (_inflight.has(key)) return _inflight.get(key);
+  const p = fetcher().then(rows => {
+    cacheSet(key, rows);
+    _inflight.delete(key);
+    return rows;
+  }).catch(e => {
+    _inflight.delete(key);
+    throw e;
+  });
+  _inflight.set(key, p);
+  return p;
 }
 
 const CORS = {
@@ -176,24 +194,20 @@ const server = http.createServer(async (req, res) => {
   try {
     if (path === '/vw_palets') {
       const { from, to } = parseDates(q);
-      const key = `palets:${from}:${to}`;
-      let rows = cacheGet(key);
-      if (!rows) {
+      const key  = `palets:${from}:${to}`;
+      const rows = await cacheOrFetch(key, async () => {
         const raw = await eyeFetch(`/api/eye/v1/Palet?FechaInicial=${from}&FechaFinal=${to}`);
-        rows = (Array.isArray(raw) ? raw : []).map(mapPalet);
-        cacheSet(key, rows);
-      }
+        return (Array.isArray(raw) ? raw : []).map(mapPalet);
+      });
       page(rows);
 
     } else if (path === '/vw_acarreos') {
       const { from, to } = parseDates(q);
-      const key = `acarreos:${from}:${to}`;
-      let rows = cacheGet(key);
-      if (!rows) {
+      const key  = `acarreos:${from}:${to}`;
+      const rows = await cacheOrFetch(key, async () => {
         const raw = await eyeFetch(`/api/eye/v1/Acarreo?FechaInicial=${from}&FechaFinal=${to}`);
-        rows = (Array.isArray(raw) ? raw : []).map(mapAcarreo);
-        cacheSet(key, rows);
-      }
+        return (Array.isArray(raw) ? raw : []).map(mapAcarreo);
+      });
       page(rows);
 
     } else {
