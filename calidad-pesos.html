@@ -556,9 +556,9 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
         <div class="mkt-sub">40 lb · MX · seedless</div>
       </div>
       <div class="mkt-card">
-        <div class="mkt-name">Chile Bell</div>
+        <div class="mkt-name">Chile Habanero</div>
         <div class="mkt-price" id="mkt-chile-val"><span class="skel"></span></div>
-        <div class="mkt-sub">1⅑ bushel · MX</div>
+        <div class="mkt-sub">10 lb RPC · MX</div>
       </div>
     </div>
 
@@ -4197,8 +4197,7 @@ async function loadMarketPrices(){
     const romaRows  = prices.filter(r => /plum/i.test(r.commodity) && /mexico/i.test(r.origin));
     const limeRows  = fruits.filter(r => /lime/i.test(r.commodity) && /mexico/i.test(r.origin));
     const chileRows = prices.filter(r =>
-      /bell/i.test(r.commodity) && /pepper/i.test(r.commodity) &&
-      /mexico/i.test(r.origin)
+      /habanero/i.test(r.commodity) && /mexico/i.test(r.origin)
     );
 
     function mkRange(rows){
