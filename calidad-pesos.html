@@ -1408,7 +1408,7 @@ async function loadResumen(){
 
   if(!rawInbound.length){
     try {
-      rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`);
+      rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`, {url:SB_API.url, headers:SB_H});
     } catch(e){}
   }
   if(!cmpReady) await autoLoadCmp();
@@ -3125,7 +3125,7 @@ async function loadInbound(){
   document.getElementById('err-banner').classList.remove('show');
   document.getElementById('ft-urls').textContent = `vw_inbound · ${from} → ${to}`;
   try {
-    rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`);
+    rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`, {url:SB_API.url, headers:SB_H});
     renderInbound(from, to);
     document.getElementById('ft-updated').textContent =
       'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
