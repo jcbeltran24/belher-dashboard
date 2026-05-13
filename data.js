@@ -2,14 +2,14 @@ window.BELHER = {
   meta: {
     fecha: "Miércoles 13 May 2026",
     semana: "WK 20",
-    actualizado: "13/05/2026 · 11:05"
+    actualizado: "13/05/2026 · 15:23"
   },
 
   alertas: [
     {"nivel":"success","texto":"OUTBOUND TOMATE 11/05 — BOLA CALAVO: 1ª 82.75% / 2ª 8.14% / Merma 3.47% / Peso prom. 25.32. ROMA CALAVO: 1ª 91.57% / 2ª 4.52% / Merma 1.41% / Peso prom. 25.59. Calidad de exportación."},
     {"nivel":"success","texto":"REPORTES GENERALES TOMATE 12/05 — Embarques Belher confirmó despacho de reportes generales de embarque y empaque. Operación nocturna completada."},
     {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 5 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos y documentación."},
-    {"nivel":"warning","texto":"TRANSICIÓN WK20 POST-PEAK — Presión de precios en tomate continúa. Monitorear embarques y ajustar volumen según demanda del mercado."},
+    {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets quitando market share."},
     {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
     {"nivel":"info","texto":"CONTRIBUCIONES POR PAGAR — IMSS-INFONAVIT + SAT: MXP 25.4M / ~$1.4M USD. IMSS-INFONAVIT MXP 21.5M vencido. Requiere atención urgente."}
   ],
@@ -531,29 +531,30 @@ window.BELHER = {
   },
 
   mercado: {
-    reporte: "Corbel Seeds #0039",
-    fecha: "Miércoles 13 May 2026",
-    resumen: "Corbel #0039 (30-Abr): Vine ripe 4x4/4x5 2-layer $66.95–68.95 (down desde $68.95-70.95), mercado en transición post-peak. Roma firma pero presionada: $50.95–52.95. Limes Texas levemente firmes: seedless 110s $42, 150s $36-40. Chile bell GH: orange/extra-large $14-15, red $16-18. SNIIM CDMX: Jalapeño Jalisco $28-35/kg ($30 freq), Tomate Bola wholesale $50-54/kg.",
+    reporte: "Calavo Market Call WK20",
+    fecha: "13/05/2026",
+    resumen: "WK20: Vine-ripe $26 avg (caída desde $48 WK19). 4x4/4x5: $30-32, algunos $28. 5x5: $16-18, 6x6: $12-14. Romans: $24-26, jumbos $20-22. AgBelher avg $22-23. Primera carga ADM en camino (4x4/4x5, expecting $20s). Romans harvest julio (no junio). Canadá +300% NE markets, Florida subió producción Roma, España importa Romans a NY. Aranceles bajaron 6%→5%. Inventario final: 2,100 Romans tallas pequeñas.",
     precios:  [
-      { producto:"Vine Ripe 4x4 2-layer",   min:66.95, max:68.95, anterior:70.95, via:"USDA AMS FOB",  alerta:true  },
-      { producto:"Roma XL 25lb",            min:50.95, max:52.95, anterior:54.95, via:"Texas",          alerta:true  },
+      { producto:"Vine Ripe 4x4/4x5",      min:28.00, max:32.00, anterior:48.00, via:"Calavo WK20",   alerta:true  },
+      { producto:"Vine Ripe 5x5/5x6",      min:16.00, max:18.00, anterior:null,  via:"Calavo WK20",   alerta:false },
+      { producto:"Vine Ripe 6x6",           min:12.00, max:14.00, anterior:null,  via:"Calavo WK20",   alerta:false },
+      { producto:"Roma XL 25lb",            min:24.00, max:26.00, anterior:50.95, via:"Calavo WK20",   alerta:true  },
+      { producto:"Roma Jumbo 4x4/4x5",      min:20.00, max:22.00, anterior:null,  via:"Calavo WK20",   alerta:false },
+      { producto:"AgBelher promedio",       min:22.00, max:23.00, anterior:null,  via:"Calavo WK20",   alerta:false },
       { producto:"Jalapeño",                min:33.00, max:35.00, anterior:54.00, via:"Texas",          alerta:true  },
       { producto:"Habanero 8lb",            min:32.00, max:34.00, anterior:42.00, via:"Texas",          alerta:false },
-      { producto:"Serrano",                 min:51.00, max:53.00, anterior:68.00, via:"Texas",          alerta:false },
       { producto:"Chile Bell orange 11lb",  min:14.00, max:15.00, anterior:11.00, via:"Texas",          alerta:false },
       { producto:"Chile Bell red 11lb",     min:16.00, max:18.00, anterior:15.00, via:"Texas",          alerta:false },
-      { producto:"Cucumber medium 1 1/9bu", min:22.95, max:24.95, anterior:30.95, via:"Texas",          alerta:false },
       { producto:"Limón seedless 110s",     min:42.00, max:42.00, anterior:40.00, via:"Texas",          alerta:false },
-      { producto:"Limón seedless 150s",     min:36.00, max:40.00, anterior:36.00, via:"Texas",          alerta:false },
-      { producto:"Grape tomato",            min:12.95, max:16.95, anterior:null,  via:"Texas",          alerta:false },
-      { producto:"Limón California",        min:24.75, max:36.35, anterior:null,  via:"CA Lemon",       alerta:false }
+      { producto:"Limón seedless 150s",     min:36.00, max:40.00, anterior:36.00, via:"Texas",          alerta:false }
     ],
     noticias: [
-      { titulo:"Vine Ripe 4x4 USDA AMS $66.95–68.95 (down desde $68.95-70.95) — mercado en transición post-peak. Last opportunity premium prices WK18.", impacto:"Alto", fuente:"Corbel Seeds #0039 · USDA AMS · 30-Abr" },
-      { titulo:"Roma firma bajo supply ajustada NA pero Coachella + Georgia early May presionarán. Precios $50.95-52.95 vs $52.95-54.95 semana pasada.", impacto:"Alto", fuente:"Corbel Seeds #0039 · FreshPlaza" },
-      { titulo:"SNIIM CDMX integrado a Corbel: Jalapeño Jalisco $28-35/kg ($30 freq), Tomate Bola wholesale $50-54/kg, Aguacate $40-50/kg. Mercado doméstico activo.", impacto:"Medio", fuente:"Corbel Seeds #0039 · SNIIM · 30-Abr" },
-      { titulo:"Green chile bell Nogales cae acelerado (supply end of season), Coachella Valley production increasing, Georgia harvest early May. Transición regional.", impacto:"Medio", fuente:"Corbel Seeds #0039 · FreshPlaza" },
-      { titulo:"Limes Texas slightly higher: seedless 110s $42, 150s $36-40. Peru supply -30% (lluvia) mantiene ventana NA pero cierre WK19-20 esperado.", impacto:"Medio", fuente:"Corbel Seeds #0039 · USDA AMS" }
+      { titulo:"WK19 precio $26 avg — caída desde $48. 4x4/4x5 $30-32 aún viables, 6x6 ya en $12-14.", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026" },
+      { titulo:"Canadá +300% producción NE últimos 2 años — GH high-tech, duty-free, quitando share en NY/Baltimore/Chicago.", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026" },
+      { titulo:"Romans harvest julio (no junio). 20-Jun: volumen limitado solo para programa Charlie. Jumbos 4x4/4x5.", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026" },
+      { titulo:"Florida aumentó producción Roma significativamente. España importando Romans a NY mercado premium. Guatemala 2 cargas.", impacto:"Medio", fuente:"Calavo Market Call · 13-May-2026" },
+      { titulo:"Aranceles bajaron 6%→5%. Importadores pequeños MX no renuevan bonds para resto de temporada.", impacto:"Medio", fuente:"Calavo Market Call · 13-May-2026" },
+      { titulo:"Inventario final: 2,100 Romans tallas pequeñas. Calidad actual 2 semanas más — luego enfoque 5x6/6x6.", impacto:"Bajo", fuente:"Calavo Market Call · 13-May-2026" }
     ]
   },
 
@@ -632,8 +633,8 @@ window.BELHER = {
     { label:"Outbound Chile Anaheim 06/05", valor:"88.59% 1st / merma 0.97%",   cambio:"superior",                   dir:"up"      },
     { label:"Settlement WK19",              valor:"~$2.506M a favor",            cambio:"Calavo 07-May",              dir:"up"      },
     { label:"Revenue Calavo acumulado",     valor:"$17,746,742",                 cambio:"WK01–WK18",                  dir:"up"      },
-    { label:"Vine Ripe 4x4 USDA",          valor:"$66.95–68.95/cj",             cambio:"corrección WK19 en curso",    dir:"down"    },
-    { label:"Roma XL Texas",               valor:"$50.95–52.95/cj",             cambio:"presión Coachella WK19",     dir:"down"    },
+    { label:"Vine Ripe 4x4/4x5 WK20",      valor:"$28–32/cj",                   cambio:"down desde $48 WK19",         dir:"down"    },
+    { label:"Roma XL WK20",               valor:"$24–26/cj",                   cambio:"down desde $50.95 WK19",     dir:"down"    },
     { label:"Limes seedless 110s",         valor:"$42/bu",                       cambio:"Peru -30% sostiene",         dir:"up"      },
     { label:"CVGW (Calavo)",               valor:"$26.85",                       cambio:"-4.07% vs prev close",       dir:"down"    },
     { label:"AVO (Mission)",               valor:"$12.39",                       cambio:"-8.96% vs prev close",       dir:"down"    },
@@ -711,22 +712,22 @@ window.BELHER = {
     ],
     oportunidades: [
       {
-        titulo: "VINE RIPE CORRECCIÓN — ÚLTIMA VENTANA WK19",
-        prioridad: "Crítica",
-        descripcion: "Corbel #0039 (30-Abr): USDA AMS Vine Ripe 4x4 $66.95-68.95 (down desde $68.95-70.95). Techo de temporada alcanzado. WK19 esperado con corrección sostenida a $60-65 max con Coachella y Georgia entrando.",
-        accion: "Embarcar vine-ripe máximo HOY/MAÑANA WK19. Post WK19: reducir exposición. Priorizar roma + limes."
+        titulo: "CAJAS 2LB VIVA PROGRAM — CECSO JULIO",
+        prioridad: "Media",
+        descripcion: "Calavo requiere muestras de caja pequeña 2lb para programa Viva. Dummies para PMA show. Producción lista para julio. Contacto: Jesús Díaz Ledezma · CECSO. Actualización pendiente 14-May.",
+        accion: "Contactar Jesús Díaz Ledezma (CECSO) para confirmar timeline caja 2lb. Deadline: julio 2026."
       },
       {
-        titulo: "LIMES 110s $42 — VENTANA PERU -30%",
+        titulo: "PRIMERA CARGA ADM WK20 — 4x4/4x5 expecting $20s",
         prioridad: "Alta",
-        descripcion: "Corbel #0039: Seedless 110s Texas $42. Peru supply -30% (lluvia) mantiene ventana NA. Ventana esperada cierre WK19-20 con flush primaveral Colombia/Brasil.",
-        accion: "Maximizar embarques limón 110s Maui Fresh WK19 HOY/MAÑANA. Coordinar urgente — ventana se cierra pronto."
+        descripcion: "Primera carga ADM en camino — principalmente 4x4/4x5, expectativa $20s. Romans harvest julio — volumen Charlie solo 20-Jun (limitado, jumbos 4x4/4x5).",
+        accion: "Confirmar logística ADM primera carga. Coordinar calidad para 4x4/4x5."
       },
       {
-        titulo: "ROMA FIRMEZA POST-PEAK — ACTUAR WK19",
+        titulo: "PROYECCIONES CULIACÁN — SIGUIENTE TEMPORADA",
         prioridad: "Alta",
-        descripcion: "Roma firma bajo supply NA ajustada pero presiones Coachella + Georgia (early May) visibles. Outbound 06/05: Roma Calavo 79.60% primera, merma 1.60% — calidad premium mantenida.",
-        accion: "Continuar embarques máximos Roma WK19 HOY/MAÑANA. Post-WK19 presión esperada — actuar agresivo ahora."
+        descripcion: "Calavo pide proyecciones Culiacán esta semana. Target 60-70% volumen programado. Finalizar estrategia octubre/noviembre.",
+        accion: "Redactar proyecciones Culiacán esta semana y presentar a Calavo."
       }
     ],
     watchlist: [
@@ -750,7 +751,8 @@ window.BELHER = {
       }
     ],
     proximos: [
-{ fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
+{ fecha:"14/05/2026",    evento:"Update cajas 2lb Viva Program — llamada con Jesús Díaz Ledezma (CECSO). Confirmar muestras y timeline producción julio.", tipo:"operativo", participantes:"JC · Jesús Díaz Ledezma · CECSO" },
+      { fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
       { fecha:"19/05/2026",    evento:"BPSI F/S Abril 2026 y forecast Q2 2026 — Zoom 11am-12pm (GMT-7)", tipo:"financiero", participantes:"Leima · Jacruz · JC · Armando Llanes" },
       { fecha:"25/05/2026",    evento:"Abril '26 F/S (Tomates/Limones/Granos) — Revisión final · 9:30-10:30am", tipo:"financiero", participantes:"JC · Antonio · Leima · Armando · Jacruz · Despacho Terrazas" },
       { fecha:"25/05/2026",    evento:"ABSA Revisión declaración final ISR 2025 y PTU · 11am-12pm", tipo:"financiero", participantes:"JC · Antonio · Armando · Jacruz · fcalderon@cryasociados.com" },
@@ -822,9 +824,9 @@ window.BELHER = {
 
   industria: [
     { cat:"Calidad",   titulo:"OUTBOUND TOMATE EXCELENTE 06/05 — Bola 86.29%, Roma 79.60%, Chile 88.59%", impacto:"Positivo", fuente:"calidad@agbelher.com · 06-May-2026", resumen:"Outbound 06/05: Bola Calavo 86.29% primera (merma 3.05%), Roma Calavo 79.60% (merma 1.60%), Chile Anaheim 88.59% (merma 0.97%). Patrón de mejora sostenido. Cargas procesadas satisfactoriamente — problema inbound 04/05 localizado y resuelto." },
-    { cat:"Mercado",   titulo:"Vine Ripe 4x4 USDA AMS $66.95–68.95 — corrección iniciada, transición post-peak WK18-19", impacto:"Alto", fuente:"Corbel Seeds #0039 · USDA AMS · 30-Abr", resumen:"Corbel #0039 (30-Abr): USDA AMS reporta Vine Ripe 4x4 (2-layer cartons) $66.95-68.95 con 'mixed but generally firm' market. Down desde $68.95-70.95 en #0038. Transición post-peak clara. Techo de temporada probablemente alcanzado. WK19 podría ver presión sostenida a $60-65." },
-    { cat:"Mercado",   titulo:"Roma firma bajo supply NA tight pero presiones Coachella/Georgia visibles WK19", impacto:"Alto", fuente:"Corbel Seeds #0039 · FreshPlaza · 30-Abr", resumen:"Corbel #0039: Roma $50.95-52.95 (vs $52.95-54.95 prior WK). Outbound 06/05 Belher: Roma Calavo 79.60% primera, 1.60% merma — calidad premium. Supply NA todavía tight. Coachella + Georgia early May presiones visibles. Transición regional clara." },
-    { cat:"Mercado",   titulo:"Limes Texas $42 (110s) — Peru -30% sustain ventana, flush esperado WK19-20", impacto:"Medio", fuente:"Corbel Seeds #0039 · USDA AMS · 30-Abr", resumen:"Corbel #0039: Mexico limes Texas 'slightly higher' — seedless 110s $42, 150s $36-40. Peru supply -30% (lluvia) mantiene ventana NA. Belher báscula activa 07/05 limón. Ventana esperada cerrar WK19-20 con flush Colombia/Brasil primaveral." },
+    { cat:"Mercado",   titulo:"WK20: Vine-ripe $26 avg — caída desde $48 WK19. 4x4: $28-32, 6x6: $12-14", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026", resumen:"Corrección confirmada WK20. Vine-ripe $26 promedio (down $48 WK19). 4x4/4x5: $30-32 algunos $28. 5x5: $16-18, 6x6: $12-14. AgBelher promedio $22-23. Primera carga ADM en camino expecting $20s. Calidad se mantiene 2 semanas más." },
+    { cat:"Mercado",   titulo:"Romans harvest julio (no junio) — 20-Jun solo volumen limitado Charlie", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026", resumen:"Romans harvest inicia julio, no junio como se estimaba. Excepción: 20 junio volumen muy limitado para programa Charlie (extra large/jumbos 4x4/4x5). Esto retrasa revenue Romans temporada. $24-26 jumbos $20-22." },
+    { cat:"Competencia", titulo:"Canadá +300% producción GH NE — duty-free quitando share NY/Baltimore/Chicago", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026", resumen:"Producción canadiense creció 300% últimos 2 años en Northeast. Invernaderos high-tech, calidad excepcional, libre de aranceles, menos regulación que importaciones MX. Tomando market share en NY, Baltimore, Chicago. Florida también aumentó Roma. España importando Romans a NY." },
     { cat:"Operativo", titulo:"Sorgo Trilla WK19 — Quevedo 1+Aguaruto completada 06/05, 292 ha acumuladas", impacto:"Medio", fuente:"basculabelher@gmail.com · AVANCE DE TRILLA 06/05/2026", resumen:"Jornada 06/05: Quevedo 1+Aguaruto completada (13 ha). Total acumulado: 292 ha en 21 jornadas. Sifón finalizados 02/05 — 15 ha total. Descanso obligatorio 01/May ejecutado. Temporada de trilla en su final — preparación para nuevas siembras GC 2026-2027." }
   ],
 
