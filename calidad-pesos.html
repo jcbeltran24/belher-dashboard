@@ -247,6 +247,7 @@ tbody td{padding:6px 11px;vertical-align:middle}
 .ov-alert.ok{background:#dcfce7;color:#15803d}
 .ov-alert.warn{background:#fef3c7;color:#92400e}
 .ov-alert.bad{background:#fee2e2;color:#dc2626}
+.ov-alert.muted{background:#f3f4f6;color:#9ca3af}
 
 /* KPI comparison row */
 .cmp-row{display:grid;grid-template-columns:1fr auto 1fr;gap:0;background:var(--card);border-radius:var(--r);border:1px solid var(--border);overflow:hidden}
@@ -1522,6 +1523,11 @@ function renderResumen(){
     sparkBars(document.getElementById('rv-inb-spark'), inbDays.map(d=>inbByDay[d].tot?inbByDay[d].p1/inbByDay[d].tot*100:0),'#7c3aed');
   } else {
     ['rv-inb-p1','rv-inb-merma','rv-inb-temp'].forEach(id=>{ document.getElementById(id).textContent='—'; });
+    const inbAlert = document.getElementById('rv-inb-alert');
+    inbAlert.style.display = 'flex';
+    inbAlert.className = 'ov-alert muted';
+    inbAlert.textContent = '○  Sin datos de inspección de campo';
+    sparkBars(document.getElementById('rv-inb-spark'), Array(14).fill(0), '#d1d5db');
   }
 
   // ── Comparativo ciclo anterior ──
