@@ -1028,9 +1028,9 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div class="stat-sub"><span id="bal-emp-roma">—</span> Roma · <span id="bal-emp-bola">—</span> Bola</div>
       </div>
       <div class="stat" style="border-left:3px solid #1d4ed8">
-        <div class="stat-lbl">Cuartos Gas</div>
+        <div class="stat-lbl">Entrada Gaseo</div>
         <div class="stat-val cb" id="bal-cjv"><span class="skel"></span></div>
-        <div class="stat-sub" id="bal-cjv-sub">—</div>
+        <div class="stat-sub" id="bal-cjv-sub" title="Cajas registradas como entradas a cuartos de gas. Salida aún no confirmada.">salida pendiente ⚠</div>
       </div>
       <div class="stat" style="border-left:3px solid #d97706">
         <div class="stat-lbl">Rezaga</div>
@@ -1044,9 +1044,21 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       </div>
     </div>
 
-    <!-- Sankey grande -->
-    <div class="card card-pad" style="margin-bottom:14px">
+    <!-- Sankey total -->
+    <div class="card card-pad" style="margin-bottom:10px">
       <div id="sankey-wrap-balance" style="min-height:80px"></div>
+    </div>
+
+    <!-- Sankeys por variedad -->
+    <div class="g2" style="margin-bottom:14px">
+      <div class="card card-pad">
+        <div class="card-title" style="color:#dc2626">● Tomate Roma</div>
+        <div id="sankey-wrap-roma" style="min-height:60px"></div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title" style="color:#0d9488">● Tomate Bola</div>
+        <div id="sankey-wrap-bola" style="min-height:60px"></div>
+      </div>
     </div>
 
     <!-- Desglose Roma / Bola -->
@@ -2425,9 +2437,11 @@ function isoWeekSortKey(isoDate){
 }
 
 /* ── BALANCE DE MASAS · SANKEY ─────────────────────────── */
-function renderSankey(from, to, targetId='sankey-wrap', opts={}){
-  const _sanLbl = document.getElementById('san-range-lbl');
-  if(_sanLbl) _sanLbl.textContent = fDateFull(from)+' – '+fDateFull(to);
+function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
+  if(!variedad){
+    const _sanLbl = document.getElementById('san-range-lbl');
+    if(_sanLbl) _sanLbl.textContent = fDateFull(from)+' – '+fDateFull(to);
+  }
 
   // ── Cosecha — neto báscula escalado por proporción tomate del camión ──
   // Los detalles usan cantidad×pesoPromedio (estimado campo) que subestima
@@ -2479,24 +2493,30 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}){
     }
   });
 
+  // ── Seleccionar totales por variedad o global ────────────
+  const vCos = variedad==='ROMA' ? cosRoma : variedad==='BOLA' ? cosBola : cosRoma+cosBola;
+  const vEmp = variedad==='ROMA' ? empRoma : variedad==='BOLA' ? empBola : empTotal;
+  const vCjv = variedad==='ROMA' ? cjvRoma : variedad==='BOLA' ? cjvBola : cjvTotal;
+  const vRez = variedad ? 0 : rezTotal;  // rezaga no tiene split Roma/Bola
+
   // ── Sobrepeso ────────────────────────────────────────────
-  const spr=cosTotal-empTotal-cjvTotal-rezTotal;
+  const spr=vCos-vEmp-vCjv-vRez;
   const sprAbs=Math.abs(spr);
   const sprLabel=spr>=0?'Sobrepeso':'Déficit';
   const sprColor=spr>=0?'#7c3aed':'#dc2626';
 
   const flows=[
-    {label:'Empaque Final', kg:empTotal, roma:empRoma, bola:empBola, color:'#16a34a'},
-    {label:'Cuartos Gas',   kg:cjvTotal, roma:cjvRoma, bola:cjvBola, color:'#1d4ed8'},
-    {label:'Rezaga',        kg:rezTotal, roma:0,        bola:0,        color:'#d97706'},
-    {label:sprLabel,        kg:sprAbs,   roma:0,        bola:0,        color:sprColor},
+    {label:'Empaque Final',   kg:vEmp,  color:'#16a34a'},
+    {label:'Entrada Gaseo ⚠', kg:vCjv,  color:'#1d4ed8'},
+    ...(vRez>0.5 ? [{label:'Rezaga', kg:vRez, color:'#d97706'}] : []),
+    {label:sprLabel,          kg:sprAbs, color:sprColor},
   ].filter(f=>f.kg>0.5);
 
   const el=document.getElementById(targetId);
   if(!el) return;
 
   // Sin datos
-  if(!flows.length || cosTotal<1){
+  if(!flows.length || vCos<1){
     el.innerHTML=`<div style="text-align:center;padding:32px 0;color:#9ca3af;font-size:.8rem">Sin datos para el período seleccionado</div>`;
     return;
   }
@@ -2536,7 +2556,7 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}){
   // Nodos destino — todo dentro del nodo, sin texto externo
   const dstLabels=nodes.map(n=>{
     const mid=n.y+n.h/2;
-    const pct=cosTotal?(n.kg/cosTotal*100):0;
+    const pct=vCos?(n.kg/vCos*100):0;
     const tall=n.h>=52, mid2=n.h>=36, small=n.h<36;
     const fs=tall?10:9;
     // Layout: label + kg + % cuando hay espacio; label + % cuando medio; solo label+% compacto cuando pequeño
@@ -2549,18 +2569,22 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}){
       <text x="${dstX+dstW/2}" y="${pctY}" text-anchor="middle" fill="rgba(255,255,255,${tall?.7:.85})" font-size="${small?9:10}" font-weight="${small?700:600}" font-family="Inter,-apple-system,sans-serif">${fN(pct,1)}%</text>`;
   }).join('');
 
+  const srcColor = variedad==='ROMA' ? '#b91c1c' : variedad==='BOLA' ? '#0f766e' : '#15803d';
   const srcMid=srcY+srcH/2;
+  const srcLabel = variedad==='ROMA' ? 'ROMA' : variedad==='BOLA' ? 'BOLA' : 'COSECHA';
+  const srcSub   = variedad ? '' : `<text x="${srcX+srcW/2}" y="${srcMid+13}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="Inter,-apple-system,sans-serif">R ${fN(cosRoma/1000,1)}t</text>
+    <text x="${srcX+srcW/2}" y="${srcMid+24}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="Inter,-apple-system,sans-serif">B ${fN(cosBola/1000,1)}t</text>`;
+
   const svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;max-width:${W}px">
     ${paths}
-    <rect x="${srcX}" y="${srcY}" width="${srcW}" height="${srcH}" rx="8" fill="#15803d" opacity="0.95"/>
-    <text x="${srcX+srcW/2}" y="${srcMid-18}" text-anchor="middle" fill="white" font-size="8" font-weight="800" font-family="Inter,-apple-system,sans-serif" letter-spacing="0.5">COSECHA</text>
-    <text x="${srcX+srcW/2}" y="${srcMid-2}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="13" font-weight="800" font-family="JetBrains Mono,monospace">${fN(cosTotal/1000,1)}t</text>
-    <text x="${srcX+srcW/2}" y="${srcMid+13}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="Inter,-apple-system,sans-serif">R ${fN(cosRoma/1000,1)}t</text>
-    <text x="${srcX+srcW/2}" y="${srcMid+24}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="Inter,-apple-system,sans-serif">B ${fN(cosBola/1000,1)}t</text>
+    <rect x="${srcX}" y="${srcY}" width="${srcW}" height="${srcH}" rx="8" fill="${srcColor}" opacity="0.95"/>
+    <text x="${srcX+srcW/2}" y="${srcMid-18}" text-anchor="middle" fill="white" font-size="8" font-weight="800" font-family="Inter,-apple-system,sans-serif" letter-spacing="0.5">${srcLabel}</text>
+    <text x="${srcX+srcW/2}" y="${srcMid-2}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="13" font-weight="800" font-family="JetBrains Mono,monospace">${fN(vCos/1000,1)}t</text>
+    ${srcSub}
     ${dstLabels}
   </svg>`;
 
-  const sprPct = cosTotal > 0 ? (Math.abs(spr)/cosTotal*100) : 0;
+  const sprPct = vCos > 0 ? (Math.abs(spr)/vCos*100) : 0;
   const skipNote = skipCount > 0
     ? `<div style="font-size:.6rem;color:var(--muted);text-align:right;margin-top:4px;padding-right:4px">
         ⚠ ${skipCount} acarreo${skipCount>1?'s':''} sin detalle excluido${skipCount>1?'s':''} (${fN(skipNeto/1000,1)} t neto)
@@ -2642,11 +2666,13 @@ function renderBalance(){
   document.getElementById('bal-b-efic').innerHTML = fN(bEfic,1)+'%'+(bEfic>100?' <span title="Salida supera cosecha estimada: inventario previo en gaseo o imprecisión en proporción de camiones mixtos" style="font-size:.7rem">⚠</span>':'');
   document.getElementById('bal-b-efic').style.color = bEfic>100?'#d97706':bEfic>=90?'#16a34a':bEfic>=80?'#d97706':'#dc2626';
 
-  // Sankey grande — swap temporal igual que en Resumen
+  // Sankeys — swap temporal de rawPalets/rawAcarreos para que renderSankey use datos del período
   const _sp=rawPalets, _sa=rawAcarreos;
   rawPalets   = balPalets;
   rawAcarreos = balAcarreos;
-  renderSankey(from, to, 'sankey-wrap-balance', {W:860, H:380, PAD:8, srcW:130, dstW:160});
+  renderSankey(from, to, 'sankey-wrap-balance', {W:860, H:360, PAD:8, srcW:130, dstW:160});
+  renderSankey(from, to, 'sankey-wrap-roma',    {W:480, H:220, PAD:6, srcW:100, dstW:130}, 'ROMA');
+  renderSankey(from, to, 'sankey-wrap-bola',    {W:480, H:220, PAD:6, srcW:100, dstW:130}, 'BOLA');
   rawPalets   = _sp;
   rawAcarreos = _sa;
 }
