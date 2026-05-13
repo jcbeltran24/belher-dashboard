@@ -1440,7 +1440,10 @@ async function loadResumen(){
   }
 
   try {
-    rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`, {url:SB_API.url, headers:SB_H});
+    [rawInbound, rawRezaga] = await Promise.all([
+      getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`, {url:SB_API.url, headers:SB_H}),
+      getAll(`/vw_rezaga?select=folio,fecha,grupo_cultivo,tolva,chofer,vehiculo,peso_bruto,tara,peso_neto&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, {url:SB_API.url, headers:SB_H})
+    ]);
   } catch(e){}
   if(!cmpReady) await autoLoadCmp();
   renderResumen();
@@ -1462,7 +1465,8 @@ function renderResumen(){
   document.getElementById('res-lbl-ant').textContent = fmtR(antR);
 
   // ── Filtros tomate — todo el Resumen mide solo tomate ──
-  function isTomRem(r){ return (r.detalles||[]).some(d=>{ const c=(d.cultivo||'').toUpperCase(); return isRoma(c)||isBola(c); }); }
+  // isTomato() cubre nombres alternativos del ciclo anterior ("TOMATE BOLA", "TOMATE", etc.)
+  function isTomRem(r){ return (r.detalles||[]).some(d=>{ const c=(d.cultivo||'').toUpperCase(); return isRoma(c)||isBola(c)||isTomato(c); }); }
   const tomPalets   = resPalets.filter(isCalidadPalet);
   const tomAcarreos = resAcarreos.filter(isTomRem);
 
@@ -2462,7 +2466,7 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}){
   // Los detalles usan cantidad×pesoPromedio (estimado campo) que subestima
   // el peso real. Usamos peso_bruto-tara y lo distribuimos por la proporción
   // que ocupan Roma/Bola dentro del total de kilos del detalles.
-  let cosRoma=0, cosBola=0;
+  let cosRoma=0, cosBola=0, skipCount=0, skipNeto=0;
   rawAcarreos.forEach(r=>{
     const d=(r.fecha||'').split('T')[0];
     if(d<from||d>to) return;
@@ -2476,7 +2480,7 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}){
       if(isRoma(c)) dRoma+=kg;
       else if(isBola(c)) dBola+=kg;
     });
-    if(dTotal<=0) return;
+    if(dTotal<=0){ skipCount++; skipNeto+=neto; return; }
     const tomNeto=neto*(dRoma+dBola)/dTotal;
     const rPct=(dRoma+dBola)>0?dRoma/(dRoma+dBola):0.5;
     cosRoma+=tomNeto*rPct;
@@ -2589,7 +2593,18 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}){
     ${dstLabels}
   </svg>`;
 
-  el.innerHTML=svg;
+  const sprPct = cosTotal > 0 ? (Math.abs(spr)/cosTotal*100) : 0;
+  const skipNote = skipCount > 0
+    ? `<div style="font-size:.6rem;color:var(--muted);text-align:right;margin-top:4px;padding-right:4px">
+        ⚠ ${skipCount} acarreo${skipCount>1?'s':''} sin detalle excluido${skipCount>1?'s':''} (${fN(skipNeto/1000,1)} t neto)
+       </div>`
+    : '';
+  const sprNote = sprPct > 8
+    ? `<div style="font-size:.6rem;color:#7c3aed;text-align:right;margin-top:2px;padding-right:4px">
+        Sobrepeso ${fN(sprPct,1)}% — revisar completitud de rezaga y detalles de acarreos
+       </div>`
+    : '';
+  el.innerHTML = svg + skipNote + sprNote;
 }
 
 /* ── BALANCE DE MASAS · PANEL COMPLETO ─────────────────── */
