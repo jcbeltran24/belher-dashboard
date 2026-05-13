@@ -81,7 +81,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;
 .mp-m:hover:not(.mpfut){background:#f0fdf4;color:#15803d}
 .mp-m.mpsel{background:#fbbf24;color:#0c2117;font-weight:800;box-shadow:0 1px 4px rgba(251,191,36,.35)}
 .mp-m.mpfut{opacity:.25;pointer-events:none}
-.mp-today-hint{text-align:center;margin-top:11px;padding-top:10px;border-top:1px solid #f0f4f0;font-size:.6rem;color:#9ca3af;font-weight:500}
+.mp-today-hint{text-align:center;margin-top:11px;padding-top:10px;border-top:1px solid #f0f4f0;font-size:.6rem;color:var(--muted);font-weight:500}
 
 /* Comparison button */
 .cmp-btn{height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:.65rem;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:4px;transition:.14s}
@@ -248,7 +248,7 @@ tbody td{padding:6px 11px;vertical-align:middle}
 .ov-alert.ok{background:#dcfce7;color:#15803d}
 .ov-alert.warn{background:#fef3c7;color:#92400e}
 .ov-alert.bad{background:#fee2e2;color:#dc2626}
-.ov-alert.muted{background:#f3f4f6;color:#9ca3af}
+.ov-alert.muted{background:#f3f4f6;color:var(--muted)}
 
 /* KPI comparison row */
 .cmp-row{display:grid;grid-template-columns:1fr auto 1fr;gap:0;background:var(--card);border-radius:var(--r);border:1px solid var(--border);overflow:hidden}
@@ -265,6 +265,16 @@ tbody td{padding:6px 11px;vertical-align:middle}
 /* ── ERROR / EMPTY ── */
 .err{display:none;align-items:center;gap:8px;padding:10px 14px;background:#fff5f5;border:1px solid #fecaca;border-radius:var(--r-sm);font-size:.78rem;color:#7f1d1d;margin-bottom:14px}
 .err.show{display:flex}
+/* Toast */
+#toast{position:fixed;bottom:24px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast-item{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--r);font-size:.78rem;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.18);opacity:0;transform:translateY(10px);transition:opacity .2s,transform .2s;pointer-events:auto;max-width:320px}
+.toast-item.show{opacity:1;transform:none}
+.toast-item.toast-error{background:#7f1d1d;color:#fef2f2}
+.toast-item.toast-warn{background:#78350f;color:#fef9c3}
+.toast-item.toast-ok{background:#14532d;color:#dcfce7}
+/* Loading bar — shown while refresh button is spinning */
+header:has(#btn-refresh.spin)~.filters::before{content:'';display:block;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--accent2),var(--green),var(--accent2));background-size:200% 100%;animation:load-bar-slide 1.2s linear infinite;margin-bottom:4px}
+@keyframes load-bar-slide{0%{background-position:100% 0}100%{background-position:-100% 0}}
 .empty{text-align:center;padding:32px;color:var(--muted);font-size:.82rem}
 
 /* ── PESO ALERTA ── */
@@ -411,10 +421,14 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 /* ── Touch: remove hover lift on touch devices ──────────── */
 @media(hover:none){
   .stat:hover{box-shadow:var(--shadow);transform:none}
+  /* 44px minimum touch targets on touch/tablet */
+  .p-btn{min-height:44px;padding:0 14px}
+  .view-tab{min-height:44px}
 }
 </style>
 </head>
 <body>
+<div id="toast"></div>
 
 <!-- HEADER -->
 <header>
@@ -712,8 +726,8 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
     <div class="stat-strip">
       <div class="stat cg"><div class="stat-lbl">Neto Total</div><div class="stat-val" id="ps-neto"><span class="skel"></span></div><div class="stat-sub" id="ps-remisiones">— remisiones</div><div class="stat-delta" id="d-neto"></div></div>
 
-      <div class="stat cp"><div class="stat-lbl">Neto Prom/Rem.</div><div class="stat-val" id="ps-avg"><span class="skel"></span></div><div class="stat-sub">kg por remisión</div><div class="stat-delta" id="d-avg"></div></div>
-      <div class="stat ca"><div class="stat-lbl">% Rezaga Tomate</div><div class="stat-val" id="ps-peak">—</div><div class="stat-sub" id="ps-peak-date">—</div></div>
+      <div class="stat cp"><div class="stat-lbl" title="Peso neto promedio por remisión de báscula en el período">Neto Prom/Rem.</div><div class="stat-val" id="ps-avg"><span class="skel"></span></div><div class="stat-sub">kg por remisión</div><div class="stat-delta" id="d-avg"></div></div>
+      <div class="stat ca"><div class="stat-lbl" title="Kg rezaga tomate ÷ neto total báscula en el período">% Rezaga Tomate</div><div class="stat-val" id="ps-peak">—</div><div class="stat-sub" id="ps-peak-date">—</div></div>
     </div>
 
     <div class="g2" style="margin-bottom:10px">
@@ -742,9 +756,9 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 
     <div class="sec">Rezaga · Báscula <span class="sec-source">vw_rezaga · Supabase</span></div>
     <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
-      <div class="stat cg"><div class="stat-lbl">Neto Rezaga</div><div class="stat-val" id="rez-neto"><span class="skel"></span></div><div class="stat-sub" id="rez-neto-sub">—</div></div>
-      <div class="stat cb"><div class="stat-lbl">Bruto Rezaga</div><div class="stat-val" id="rez-bruto"><span class="skel"></span></div><div class="stat-sub">kg brutos</div></div>
-      <div class="stat ca"><div class="stat-lbl">Remisiones</div><div class="stat-val" id="rez-count"><span class="skel"></span></div><div class="stat-sub">rezaga báscula</div></div>
+      <div class="stat cg"><div class="stat-lbl" title="Peso neto de rezaga registrada en báscula (vw_rezaga, Supabase)">Neto Rezaga</div><div class="stat-val" id="rez-neto"><span class="skel"></span></div><div class="stat-sub" id="rez-neto-sub">—</div></div>
+      <div class="stat cb"><div class="stat-lbl" title="Peso bruto de rezaga antes de descontar tara">Bruto Rezaga</div><div class="stat-val" id="rez-bruto"><span class="skel"></span></div><div class="stat-sub">kg brutos</div></div>
+      <div class="stat ca"><div class="stat-lbl" title="Número de remisiones de rezaga registradas en el período">Remisiones</div><div class="stat-val" id="rez-count"><span class="skel"></span></div><div class="stat-sub">rezaga báscula</div></div>
     </div>
     <div class="card">
       <div class="tbl-wrap">
@@ -1028,17 +1042,17 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div class="stat-sub"><span id="bal-emp-roma">—</span> Roma · <span id="bal-emp-bola">—</span> Bola</div>
       </div>
       <div class="stat" style="border-left:3px solid #1d4ed8">
-        <div class="stat-lbl">Entrada Gaseo</div>
+        <div class="stat-lbl" title="Cajas con entrada a cuartos de gaseo (CJV). Salida aún no confirmada — puede incluir inventario en proceso.">Entrada Gaseo</div>
         <div class="stat-val cb" id="bal-cjv"><span class="skel"></span></div>
         <div class="stat-sub" id="bal-cjv-sub" title="Cajas registradas como entradas a cuartos de gas. Salida aún no confirmada.">salida pendiente ⚠</div>
       </div>
       <div class="stat" style="border-left:3px solid #d97706">
-        <div class="stat-lbl">Rezaga</div>
+        <div class="stat-lbl" title="kg de rezaga tomate en el período (vw_rezaga, Supabase)">Rezaga</div>
         <div class="stat-val ca" id="bal-rezaga"><span class="skel"></span></div>
         <div class="stat-sub" id="bal-rez-sub">—</div>
       </div>
       <div class="stat" style="border-left:3px solid #7c3aed">
-        <div class="stat-lbl">Eficiencia</div>
+        <div class="stat-lbl" title="Empaque Final ÷ Cosechado en báscula. Valores >100% indican captura incompleta en acarreos.">Eficiencia</div>
         <div class="stat-val" id="bal-efic" style="color:#7c3aed"><span class="skel"></span></div>
         <div class="stat-sub">empacado ÷ cosechado</div>
       </div>
@@ -1068,7 +1082,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div class="stat-strip" style="grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0;box-shadow:none;border:none">
           <div><div class="stat-lbl">Cosecha</div><div class="stat-val cg" id="bal-r-cos" style="font-size:1.1rem">—</div></div>
           <div><div class="stat-lbl">Empacado</div><div class="stat-val cg" id="bal-r-emp" style="font-size:1.1rem">—</div></div>
-          <div><div class="stat-lbl">Eficiencia</div><div class="stat-val" id="bal-r-efic" style="font-size:1.1rem;color:#7c3aed">—</div></div>
+          <div><div class="stat-lbl" title="Empacado Roma ÷ Cosechado Roma">Eficiencia</div><div class="stat-val" id="bal-r-efic" style="font-size:1.1rem;color:#7c3aed">—</div></div>
         </div>
       </div>
       <div class="card card-pad">
@@ -1076,7 +1090,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         <div class="stat-strip" style="grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0;box-shadow:none;border:none">
           <div><div class="stat-lbl">Cosecha</div><div class="stat-val cg" id="bal-b-cos" style="font-size:1.1rem">—</div></div>
           <div><div class="stat-lbl">Empacado</div><div class="stat-val cg" id="bal-b-emp" style="font-size:1.1rem">—</div></div>
-          <div><div class="stat-lbl">Eficiencia</div><div class="stat-val" id="bal-b-efic" style="font-size:1.1rem;color:#7c3aed">—</div></div>
+          <div><div class="stat-lbl" title="Empacado Bola ÷ Cosechado Bola">Eficiencia</div><div class="stat-val" id="bal-b-efic" style="font-size:1.1rem;color:#7c3aed">—</div></div>
         </div>
       </div>
     </div>
@@ -1097,6 +1111,19 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 </footer>
 
 <script>
+/* ── TOAST ──────────────────────────────────────────────── */
+function showToast(msg, type='error', dur=4500){
+  const el = document.createElement('div');
+  el.className = `toast-item toast-${type}`;
+  el.textContent = msg;
+  document.getElementById('toast').appendChild(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('show')));
+  setTimeout(() => {
+    el.classList.remove('show');
+    setTimeout(() => el.remove(), 230);
+  }, dur);
+}
+
 /* ── API ──────────────────────────────────────────────── */
 const API = {
   url:     window.location.port === '8741' ? 'http://localhost:8742' : '',
@@ -1407,7 +1434,10 @@ async function loadResumen(){
   if(_resCycleKey !== key){
     btn.classList.add('spin'); btn.disabled = true;
     try {
-      const _ef = u => fetch(API.url + u, {headers: H}).then(r => r.ok ? r.json() : []);
+      const _ef = u => fetch(API.url + u, {headers: H}).then(r => {
+        if(r.status === 502) showToast('EYE proxy no disponible (502)', 'warn');
+        return r.ok ? r.json() : [];
+      });
       [_resPalets, _resAcarreos] = await Promise.all([
         _ef(`/vw_palets?select=fecha_empaque,cultivo,etiqueta,calidad,peso,bultos,estado&fecha_empaque=gte.${from}&fecha_empaque=lte.${to}`),
         _ef(`/vw_acarreos?select=fecha,peso_bruto,tara,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`)
@@ -2356,7 +2386,10 @@ async function loadData(force = false){
 
   try {
     btn.classList.add('spin'); btn.disabled = true;
-    const eyeFetch = u => fetch(API.url + u, {headers: H}).then(r => r.ok ? r.json() : []);
+    const eyeFetch = u => fetch(API.url + u, {headers: H}).then(r => {
+      if(r.status === 502) showToast('EYE proxy no disponible (502) — cargando caché', 'warn');
+      return r.ok ? r.json() : [];
+    });
     const [palets, acarreos] = await Promise.all([eyeFetch(urlPalets), eyeFetch(urlAcarreos)]);
     if(mySeq !== loadSeq) return;                   // a newer request already landed — drop this one
     saveCache(from, to, palets, acarreos);
@@ -2366,8 +2399,10 @@ async function loadData(force = false){
     if(!cacheHit){
       document.getElementById('err-text').textContent = 'Error EYE: ' + err.message;
       document.getElementById('err-banner').classList.add('show');
+      showToast('Error EYE: ' + err.message, 'error');
     } else {
       document.getElementById('ft-updated').textContent += ' · ⚠ sin conexión, mostrando caché';
+      showToast('Sin conexión EYE — mostrando caché', 'warn', 3000);
     }
   } finally {
     btn.classList.remove('spin'); btn.disabled = false;
