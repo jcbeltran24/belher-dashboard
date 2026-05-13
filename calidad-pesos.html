@@ -255,6 +255,14 @@ tbody td{padding:6px 11px;vertical-align:middle}
 .ov-alert.bad{background:#fee2e2;color:#dc2626}
 .ov-alert.muted{background:#f3f4f6;color:var(--muted)}
 
+/* Market prices grid */
+.mkt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mkt-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:3px}
+.mkt-name{font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.mkt-price{font-size:1.2rem;font-weight:800;font-family:var(--mono);color:var(--green)}
+.mkt-sub{font-size:.62rem;color:var(--muted);opacity:.7}
+@media(max-width:640px){.mkt-grid{grid-template-columns:repeat(2,1fr)}}
+
 /* KPI comparison row */
 .cmp-row{display:grid;grid-template-columns:1fr auto 1fr;gap:0;background:var(--card);border-radius:var(--r);border:1px solid var(--border);overflow:hidden}
 .cmp-col{padding:10px 13px;display:flex;flex-direction:column;gap:2px}
@@ -613,6 +621,31 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
         </div>
       </div>
 
+    </div>
+
+    <!-- Precios de Mercado LA Terminal -->
+    <div class="sec">Precios Mercado <span class="sec-tag" id="mkt-date">—</span><span class="sec-tag" style="font-size:.67rem;opacity:.55;margin-left:4px">LA Terminal · USDA</span></div>
+    <div class="mkt-grid" style="margin-bottom:10px">
+      <div class="mkt-card">
+        <div class="mkt-name">Tomate Bola</div>
+        <div class="mkt-price" id="mkt-bola-val"><span class="skel"></span></div>
+        <div class="mkt-sub">25 lb · MX · campo abierto</div>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-name">Tomate Roma</div>
+        <div class="mkt-price" id="mkt-roma-val"><span class="skel"></span></div>
+        <div class="mkt-sub">25 lb · MX · plum type</div>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-name">Limón Persa</div>
+        <div class="mkt-price" id="mkt-lime-val"><span class="skel"></span></div>
+        <div class="mkt-sub">40 lb · MX · seedless</div>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-name">Chile Bell</div>
+        <div class="mkt-price" id="mkt-chile-val"><span class="skel"></span></div>
+        <div class="mkt-sub">1⅑ bushel · MX</div>
+      </div>
     </div>
 
     <!-- Comparativo ciclo anterior -->
@@ -1575,6 +1608,7 @@ async function loadResumen(){
 
   if(!cmpReady) await autoLoadCmp();
   renderResumen();
+  loadMarketPrices().catch(console.warn);
 }
 
 function renderResumen(){
@@ -4136,6 +4170,66 @@ document.addEventListener('click', e => {
   const wrap = document.getElementById('mpicker-wrap');
   if(wrap && !wrap.contains(e.target)) closeMPicker();
 });
+
+/* ── MARKET PRICES (USDA LA Terminal) ─────────────────────── */
+let _mktCache = { ts: 0, data: null };
+const MKT_TTL = 4 * 3600000; // 4 h
+
+async function loadMarketPrices(){
+  if(_mktCache.data && (Date.now() - _mktCache.ts < MKT_TTL)){
+    renderMarketPrices(_mktCache.data);
+    return;
+  }
+  try {
+    const [veg, frt] = await Promise.all([
+      fetch('/usda?type=vegetables').then(r => r.ok ? r.json() : null).catch(()=>null),
+      fetch('/usda?type=fruits').then(r => r.ok ? r.json() : null).catch(()=>null),
+    ]);
+    const prices = veg?.prices || [];
+    const fruits = frt?.prices || [];
+    const date   = veg?.report_date || frt?.report_date || '';
+
+    const bolaRows  = prices.filter(r =>
+      /tomato/i.test(r.commodity) && !/plum|cherry|grape/i.test(r.commodity) &&
+      /mexico/i.test(r.origin) && !/greenhouse/i.test(r.environment||'') &&
+      /25 lb/i.test(r.package||'')
+    );
+    const romaRows  = prices.filter(r => /plum/i.test(r.commodity) && /mexico/i.test(r.origin));
+    const limeRows  = fruits.filter(r => /lime/i.test(r.commodity) && /mexico/i.test(r.origin));
+    const chileRows = prices.filter(r =>
+      /pepper.*bell|bell.*pepper/i.test(r.commodity) &&
+      /mexico/i.test(r.origin) && /1 1\/9/i.test(r.package||'')
+    );
+
+    function mkRange(rows){
+      const los = rows.map(r=>parseFloat(r.low_price)).filter(v=>v>0);
+      const his = rows.map(r=>parseFloat(r.high_price||r.low_price)).filter(v=>v>0);
+      return los.length ? { lo: Math.min(...los), hi: Math.max(...his) } : null;
+    }
+
+    const data = { date, bola: mkRange(bolaRows), roma: mkRange(romaRows), lime: mkRange(limeRows), chile: mkRange(chileRows) };
+    _mktCache = { ts: Date.now(), data };
+    renderMarketPrices(data);
+  } catch(e){ console.warn('loadMarketPrices', e); }
+}
+
+function renderMarketPrices(d){
+  const fP  = v => v != null ? '$' + v.toFixed(0) : '—';
+  const fR  = (lo, hi) => {
+    if(!lo && lo !== 0) return '—';
+    return (lo === hi || !hi) ? fP(lo) : fP(lo) + ' – ' + fP(hi);
+  };
+  const fDate = s => {
+    if(!s) return '—';
+    const [m,,dd,,yy] = s.split(/[\/-]/);
+    return `${dd}/${m}/${yy}`;
+  };
+  document.getElementById('mkt-date').textContent = d.date ? fDate(d.date) : '—';
+  document.getElementById('mkt-bola-val').innerHTML  = fR(d.bola?.lo,  d.bola?.hi);
+  document.getElementById('mkt-roma-val').innerHTML  = fR(d.roma?.lo,  d.roma?.hi);
+  document.getElementById('mkt-lime-val').innerHTML  = fR(d.lime?.lo,  d.lime?.hi);
+  document.getElementById('mkt-chile-val').innerHTML = fR(d.chile?.lo, d.chile?.hi);
+}
 
 /* ── BOOT ───────────────────────────────────────────────── */
 // Frame mode: hide header when embedded via ?frame=1
