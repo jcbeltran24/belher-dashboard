@@ -1566,7 +1566,7 @@ function setPeriod(p){
   pushUrlState();
   activeRange = range;
   if(store.loadedAt){
-    applyRawData(store.palets, store.acarreos, range?.from || iso(new Date()), range?.to || iso(new Date()), 'Store');
+    applyRawData(store.palets, store.acarreos, range?.from || isoLocal(new Date()), range?.to || isoLocal(new Date()), 'Store');
   } else {
     loadAll();
   }
@@ -1609,8 +1609,8 @@ function deltaChip(cur, prv, higherIsBetter = true){
 
 function priorEquivRange(){
   // Shift activeRange dates back 1 year to find equivalent prior-cycle window
-  const f = new Date((activeRange?.from || iso(new Date())) + 'T12:00:00');
-  const t = new Date((activeRange?.to   || iso(new Date())) + 'T12:00:00');
+  const f = new Date((activeRange?.from || isoLocal(new Date())) + 'T12:00:00');
+  const t = new Date((activeRange?.to   || isoLocal(new Date())) + 'T12:00:00');
   f.setFullYear(f.getFullYear() - 1);
   t.setFullYear(t.getFullYear() - 1);
   return { from: iso(f), to: iso(t) };
@@ -1658,13 +1658,20 @@ async function loadResumen(){
   const to     = cycles.actual.to;
   const key    = from + ':' + to;
 
-  // Derive from store — no network call
   const fd = (arr, field) => arr.filter(r => { const d=(r[field]||'').split('T')[0]; return d>=from&&d<=to; });
   _resPalets   = fd(store.palets,   'fecha_empaque');
   _resAcarreos = fd(store.acarreos, 'fecha');
-  _resInbound  = fd(store.inbound,  'fecha');
-  rawInbound   = _resInbound;
   rawRezaga    = fd(store.rezaga,   'fecha');
+
+  // Siempre fetch inbound del ciclo desde Supabase — store.inbound puede ser [] por cache slim
+  const sbC = {url: SB_API.url, headers: SB_H};
+  try {
+    _resInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbC);
+    store.inbound = _resInbound;   // actualizar store para que loadInbound también lo use
+  } catch(e){
+    _resInbound = fd(store.inbound, 'fecha');
+  }
+  rawInbound   = _resInbound;
   _resCycleKey = key;
 
   if(!cmpReady) await autoLoadCmp();
@@ -2481,7 +2488,7 @@ function renderPesos(){
 
   document.getElementById('ps-avg').innerHTML       = fK(Math.round(avgNeto))+'<span class="stat-unit">kg</span>';
   // % Rezaga tomate en el período
-  const from_p = activeRange?.from||iso(new Date()), to_p = activeRange?.to||iso(new Date());
+  const from_p = activeRange?.from||isoLocal(new Date()), to_p = activeRange?.to||isoLocal(new Date());
   const rezKg = rawRezaga.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from_p&&d<=to_p&&(r.grupo_cultivo||'').toUpperCase().includes('TOMATE'); }).reduce((s,r)=>s+(r.peso_neto||0),0);
   const rezPct = totNeto>0 ? rezKg/totNeto*100 : null;
   document.getElementById('ps-peak').innerHTML = rezPct!=null ? fN(rezPct,1)+'<span class="stat-unit">%</span>' : '—';
@@ -2921,7 +2928,7 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
 
 /* ── BALANCE DE MASAS · PANEL COMPLETO ─────────────────── */
 function renderBalance(){
-  const actR = activeRange || { from: bothCycles().actual.from, to: iso(new Date()) };
+  const actR = activeRange || { from: bothCycles().actual.from, to: isoLocal(new Date()) };
   const from = actR.from, to = actR.to;
   document.getElementById('bal-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
 
@@ -3139,8 +3146,8 @@ function renderReporte(from, to){
 
 /* ── CLIMA · PANEL ──────────────────────────────────────── */
 function renderClima(){
-  const from = activeRange?.from || iso(new Date());
-  const to   = activeRange?.to   || iso(new Date());
+  const from = activeRange?.from || isoLocal(new Date());
+  const to   = activeRange?.to   || isoLocal(new Date());
   document.getElementById('wx-range-lbl').textContent = fDateFull(from) + ' – ' + fDateFull(to);
 
   // Collect daily wx data for the active range
@@ -3274,8 +3281,8 @@ async function loadTomate(){
   btn.classList.add('spin'); btn.disabled = true;
   document.getElementById('err-banner').classList.remove('show');
 
-  const from = activeRange?.from || iso(new Date());
-  const to   = activeRange?.to   || iso(new Date());
+  const from = activeRange?.from || isoLocal(new Date());
+  const to   = activeRange?.to   || isoLocal(new Date());
 
   const actFrom = cycleStartOf(from);
   const antFrom = `${parseInt(actFrom.split('-')[0])-1}-12-01`;
@@ -3590,7 +3597,7 @@ function renderCropPanel({ rows, ids, from, to, chartSemId, casetaId, varId, tbo
 }
 
 async function loadLimon(){
-  const from=activeRange?.from||iso(new Date()), to=activeRange?.to||iso(new Date());
+  const from=activeRange?.from||isoLocal(new Date()), to=activeRange?.to||isoLocal(new Date());
   document.getElementById('ft-urls').textContent=`store · Limón · ${from} → ${to}`;
   const rows = store.acarreos.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   const flat = flattenCrop(rows, isLimon, null);
@@ -3645,7 +3652,7 @@ function renderLimonPalets(){
 }
 
 async function loadChile(){
-  const from=activeRange?.from||iso(new Date()), to=activeRange?.to||iso(new Date());
+  const from=activeRange?.from||isoLocal(new Date()), to=activeRange?.to||isoLocal(new Date());
   document.getElementById('ft-urls').textContent=`store · Chile · ${from} → ${to}`;
   const rows = store.acarreos.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   const flat = flattenCrop(rows, isChile, null);
@@ -3661,10 +3668,16 @@ async function loadChile(){
 let rawInbound = [];
 
 async function loadInbound(){
-  const from = activeRange?.from || iso(new Date());
-  const to   = activeRange?.to   || iso(new Date());
-  document.getElementById('ft-urls').textContent = `store · inbound · ${from} → ${to}`;
-  rawInbound = store.inbound.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  const from = activeRange?.from || isoLocal(new Date());
+  const to   = activeRange?.to   || isoLocal(new Date());
+  document.getElementById('ft-urls').textContent = `Supabase · inbound · ${from} → ${to}`;
+  document.getElementById('inb-primera').textContent = '…';
+  const sbC = {url: SB_API.url, headers: SB_H};
+  try {
+    rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbC);
+  } catch(e){
+    rawInbound = (store.inbound||[]).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  }
   renderInbound(from, to);
   document.getElementById('ft-updated').textContent =
     'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
@@ -3672,7 +3685,7 @@ async function loadInbound(){
 }
 
 function renderInbound(from, to){
-  const rows = rawInbound.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  const rows = rawInbound;  // ya viene filtrado por loadInbound
   document.getElementById('inb-range-lbl').textContent =
     fDateFull(from) + ' – ' + fDateFull(to);
 
@@ -3963,9 +3976,14 @@ function cycleStartOf(isoDate){
 
 /* ── REZAGA ─────────────────────────────────────────────── */
 async function loadRezaga(){
-  const from = activeRange?.from || iso(new Date());
-  const to   = activeRange?.to   || iso(new Date());
-  rawRezaga = store.rezaga.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  const from = activeRange?.from || isoLocal(new Date());
+  const to   = activeRange?.to   || isoLocal(new Date());
+  const sbC = {url: SB_API.url, headers: SB_H};
+  try {
+    rawRezaga = await getAll(`/vw_rezaga?select=folio,fecha,grupo_cultivo,tolva,chofer,vehiculo,peso_bruto,tara,peso_neto&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbC);
+  } catch(e){
+    rawRezaga = (store.rezaga||[]).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  }
   renderRezaga();
 }
 
@@ -4004,10 +4022,15 @@ function renderRezaga(){
 
 /* ── EMBARQUES ──────────────────────────────────────────── */
 async function loadEmbarques(){
-  const from = activeRange?.from || iso(new Date());
-  const to   = activeRange?.to   || iso(new Date());
-  document.getElementById('ft-urls').textContent = `store · embarques · ${from} → ${to}`;
-  rawEmbarques = store.embarques.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  const from = activeRange?.from || isoLocal(new Date());
+  const to   = activeRange?.to   || isoLocal(new Date());
+  document.getElementById('ft-urls').textContent = `Supabase · embarques · ${from} → ${to}`;
+  const sbC = {url: SB_API.url, headers: SB_H};
+  try {
+    rawEmbarques = await getAll(`/vw_embarques?select=fecha,tipo,folio,factura,distribuidor,agencia_aduanal,destino,monto_factura,detalle&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbC);
+  } catch(e){
+    rawEmbarques = (store.embarques||[]).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
+  }
   renderEmbarques(from, to);
   document.getElementById('ft-updated').textContent =
     'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
@@ -4316,7 +4339,7 @@ function pickMonth(year, month){
   document.getElementById('mpicker-lbl').textContent = MESES_FUL[month] + ' ' + year;
   closeMPicker();
   if(store.loadedAt){
-    const rf = activeRange?.from || iso(new Date()), rt = activeRange?.to || iso(new Date());
+    const rf = activeRange?.from || isoLocal(new Date()), rt = activeRange?.to || iso(new Date());
     applyRawData(store.palets, store.acarreos, rf, rt, 'Store');
     if(!cmpReady) autoLoadCmp();
   } else {
