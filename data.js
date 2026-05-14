@@ -1,14 +1,15 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 13 May 2026",
+    fecha: "Jueves 14 May 2026",
     semana: "WK 20",
-    actualizado: "13/05/2026 · 14:30"
+    actualizado: "14/05/2026 · 14:30"
   },
 
   alertas: [
-    {"nivel":"success","texto":"OUTBOUND TOMATE 11/05 — BOLA CALAVO: 1ª 82.75% / 2ª 8.14% / Merma 3.47% / Peso prom. 25.32. ROMA CALAVO: 1ª 91.57% / 2ª 4.52% / Merma 1.41% / Peso prom. 25.59. Calidad de exportación."},
-    {"nivel":"success","texto":"REPORTES GENERALES TOMATE 12/05 — Embarques Belher confirmó despacho de reportes generales de embarque y empaque. Operación nocturna completada."},
-    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 5 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos y documentación."},
+    {"nivel":"success","texto":"REPORTE DIARIO CALAVO 13/05 — 2 trailers despachados (JL-122 y JL-110 · TRANSPORTES ELOGISTICA). TOMATE: 3,200 cajas / 40 pallets. Set point 50°F. PO 265709 + 265710. Operación nocturna completada."},
+    {"nivel":"success","texto":"MANIFIESTO CHILE 13/05 — Carga de Chile Anaheim, Fresno y Habanero despachada. Chofer: Jesús Buelna Castro · Caja CGG-148 · Placa 74UG5K. Documentos adjuntados."},
+    {"nivel":"success","texto":"REPORTES GENERALES TOMATE 13/05 — Embarques Belher confirmó reportes generales de embarque y empaque de tomate. Operación completada."},
+    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 4 días para preparación. Javier Martínez inspecciona todas unidades. Revisar inventarios críticos y documentación."},
     {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets quitando market share."},
     {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
     {"nivel":"info","texto":"CONTRIBUCIONES POR PAGAR — IMSS-INFONAVIT + SAT: MXP 25.4M / ~$1.4M USD. IMSS-INFONAVIT MXP 21.5M vencido. Requiere atención urgente."}
@@ -592,6 +593,12 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"20:57","asunto":"MANIFIESTO DE CARGA DE CHILE ANAHEIM- FRESNO-HABANERO","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-13"},
+    {"hora":"20:56","asunto":"13-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-13"},
+    {"hora":"20:54","asunto":"13-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-13"},
+    {"hora":"20:32","asunto":"REPORTE DIARIO CALAVO 13-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-13"},
+    {"hora":"20:31","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES JL","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-13"},
+    {"hora":"19:57","asunto":"REPORTE DE BASCULA 13/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-13"},
     {"hora":"20:08","asunto":"12-05-2026 REPORTES GENERALES DE TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-12"},
     {"hora":"18:33","asunto":"REPORTE DE BASCULA 12/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-12"},
     {"hora":"15:46","asunto":"REPORTE DE BASCULA 12/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-12"},
