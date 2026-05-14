@@ -2142,7 +2142,7 @@ function renderCalidad(){
         }
       }
     });
-    injectWeatherWeekly('chart-cal-trend', wks, _wxCalActFrom);
+    // weather overlay removed — use dedicated Clima tab
   }
 
   /* Donut */
@@ -2465,7 +2465,7 @@ function renderPesos(){
       }
     }
   });
-  injectWeatherDaily('chart-pesos-dia', dates);
+  // weather overlay removed — use dedicated Clima tab
 
   /* By cultivo bars — agrupa por nombre normalizado (GH/OF → mismo bucket) */
   const byCult={};
@@ -3241,7 +3241,7 @@ function renderTomate(from, to){
       }
     }
   });
-  injectWeatherWeekly('chart-tom-semana', weekNums, actFrom);
+  // weather overlay removed — use dedicated Clima tab
 
   // ── Lote bars — Roma/Bola separados ──
   const loteMap = {};
@@ -3628,7 +3628,7 @@ function renderInbound(from, to){
       }
     }
   });
-  injectWeatherDaily('chart-inb-primera', days);
+  // weather overlay removed — use dedicated Clima tab
 
   // ── Top daños — % de frutos inspeccionados ──
   const danosMap = {};
