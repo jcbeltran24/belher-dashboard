@@ -2575,16 +2575,17 @@ function applyRawData(palets, acarreos, from, to, source){
   applyFilters();
   // Re-render whichever crop tab is active
   const activePanel = document.querySelector('.panel.active')?.id;
-  if(activePanel === 'panel-resumen') renderResumen();
-  if(activePanel === 'panel-balance') renderBalance();
-  if(activePanel === 'panel-clima')   renderClima();
-  if(activePanel === 'panel-tomate')  loadTomate();
+  if(activePanel === 'panel-resumen')  renderResumen();
+  if(activePanel === 'panel-calidad')  renderCalidad();
+  if(activePanel === 'panel-balance')  renderBalance();
+  if(activePanel === 'panel-clima')    renderClima();
+  if(activePanel === 'panel-tomate')   loadTomate();
   if(activePanel === 'panel-otros'){
     const activeSub = document.querySelector('#panel-otros .sub-tab.active')?.dataset.sub;
     if(activeSub === 'sub-chile') loadChile(); else loadLimon();
   }
   if(activePanel === 'panel-inbound')  loadInbound();
-  if(activePanel === 'panel-pesos')    loadRezaga();
+  if(activePanel === 'panel-pesos')    { renderPesos(); loadRezaga(); }
   if(activePanel === 'panel-embarques') loadEmbarques();
 
   document.getElementById('ft-urls').textContent =
