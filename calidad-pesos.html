@@ -1683,7 +1683,7 @@ async function loadResumen(){
   // Siempre fetch inbound del ciclo desde Supabase — store.inbound puede ser [] por cache slim
   const sbC = {url: SB_API.url, headers: SB_H};
   try {
-    _resInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbC);
+    _resInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}T23:59:59&order=fecha.desc`, sbC);
     store.inbound = _resInbound;   // actualizar store para que loadInbound también lo use
   } catch(e){
     _resInbound = fd(store.inbound, 'fecha');
@@ -2669,9 +2669,9 @@ async function loadAll(force = false){
     const [palets, acarreos, inbound, rezaga, embarques] = await Promise.all([
       eyeFetch(`/vw_palets?select=fecha_empaque,cultivo,etiqueta,calidad,peso,bultos,tamano,color,precio,grupo_cultivo,gaseado,estado&fecha_empaque=gte.${from}&fecha_empaque=lte.${to}`),
       eyeFetch(`/vw_acarreos?select=fecha,peso_bruto,tara,lote,detalles&fecha=gte.${from}&fecha=lte.${to}`),
-      getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}`, sbCfg).catch(()=>[]),
-      getAll(`/vw_rezaga?select=folio,fecha,grupo_cultivo,tolva,chofer,vehiculo,peso_bruto,tara,peso_neto&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbCfg).catch(()=>[]),
-      getAll(`/vw_embarques?select=fecha,tipo,folio,factura,distribuidor,agencia_aduanal,destino,monto_factura,detalle&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbCfg).catch(()=>[]),
+      getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}T23:59:59`, sbCfg).catch(()=>[]),
+      getAll(`/vw_rezaga?select=folio,fecha,grupo_cultivo,tolva,chofer,vehiculo,peso_bruto,tara,peso_neto&fecha=gte.${from}&fecha=lte.${to}T23:59:59&order=fecha.desc`, sbCfg).catch(()=>[]),
+      getAll(`/vw_embarques?select=fecha,tipo,folio,factura,distribuidor,agencia_aduanal,destino,monto_factura,detalle&fecha=gte.${from}&fecha=lte.${to}T23:59:59&order=fecha.desc`, sbCfg).catch(()=>[]),
     ]);
     if(mySeq !== loadSeq) return;
 
@@ -3178,10 +3178,21 @@ function renderClima(){
   }
 
   if(!days.length){
-    ['wx-tmax','wx-tmin','wx-lluvia','wx-dias-lluvia'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent='—'; });
-    const tb = document.getElementById('wx-tbody');
-    if(tb) tb.innerHTML='<tr><td colspan="4" class="empty">Sin datos de clima para este período.</td></tr>';
-    return;
+    // Fallback: mostrar los últimos 7 días disponibles en wxData (retraso ~5 días del archivo)
+    const allKeys = Object.keys(wxData).sort();
+    if(allKeys.length){
+      const lastKey = allKeys[allKeys.length - 1];
+      const cutKey  = allKeys[Math.max(0, allKeys.length - 7)];
+      allKeys.filter(k=>k>=cutKey).forEach(k=>days.push({ fecha:k, ...wxData[k] }));
+      document.getElementById('wx-range-lbl').textContent =
+        'Último dato disponible: ' + fDateFull(lastKey) + ' (archivo ~5 días de retraso)';
+    }
+    if(!days.length){
+      ['wx-tmax','wx-tmin','wx-lluvia','wx-dias-lluvia'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent='—'; });
+      const tb = document.getElementById('wx-tbody');
+      if(tb) tb.innerHTML='<tr><td colspan="4" class="empty">Sin datos de clima disponibles — reintenta en unos minutos.</td></tr>';
+      return;
+    }
   }
 
   // KPIs
@@ -3691,7 +3702,7 @@ async function loadInbound(){
   document.getElementById('inb-primera').textContent = '…';
   const sbC = {url: SB_API.url, headers: SB_H};
   try {
-    rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbC);
+    rawInbound = await getAll(`/vw_inbound?select=*&fecha=gte.${from}&fecha=lte.${to}T23:59:59&order=fecha.desc`, sbC);
   } catch(e){
     rawInbound = (store.inbound||[]).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   }
@@ -3997,7 +4008,7 @@ async function loadRezaga(){
   const to   = activeRange?.to   || isoLocal(new Date());
   const sbC = {url: SB_API.url, headers: SB_H};
   try {
-    rawRezaga = await getAll(`/vw_rezaga?select=folio,fecha,grupo_cultivo,tolva,chofer,vehiculo,peso_bruto,tara,peso_neto&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbC);
+    rawRezaga = await getAll(`/vw_rezaga?select=folio,fecha,grupo_cultivo,tolva,chofer,vehiculo,peso_bruto,tara,peso_neto&fecha=gte.${from}&fecha=lte.${to}T23:59:59&order=fecha.desc`, sbC);
   } catch(e){
     rawRezaga = (store.rezaga||[]).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   }
@@ -4044,7 +4055,7 @@ async function loadEmbarques(){
   document.getElementById('ft-urls').textContent = `Supabase · embarques · ${from} → ${to}`;
   const sbC = {url: SB_API.url, headers: SB_H};
   try {
-    rawEmbarques = await getAll(`/vw_embarques?select=fecha,tipo,folio,factura,distribuidor,agencia_aduanal,destino,monto_factura,detalle&fecha=gte.${from}&fecha=lte.${to}&order=fecha.desc`, sbC);
+    rawEmbarques = await getAll(`/vw_embarques?select=fecha,tipo,folio,factura,distribuidor,agencia_aduanal,destino,monto_factura,detalle&fecha=gte.${from}&fecha=lte.${to}T23:59:59&order=fecha.desc`, sbC);
   } catch(e){
     rawEmbarques = (store.embarques||[]).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   }
