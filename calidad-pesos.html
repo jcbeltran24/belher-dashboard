@@ -2612,6 +2612,7 @@ async function loadAll(force = false){
     store.inbound   = cached.inbound   || [];
     store.rezaga    = cached.rezaga    || [];
     store.embarques = cached.embarques || [];
+    store.loadedAt  = cached.savedAt   || Date.now();
     rawPalets    = cached.palets;
     rawAcarreos  = cached.acarreos;
     rawInbound   = cached.inbound   || [];
@@ -3278,7 +3279,7 @@ async function loadTomate(){
   document.getElementById('ft-urls').textContent = `vw_acarreos · Tomate · ${from} → ${to}  ·  ant. ${antFrom}`;
 
   // Filter from store by active range — no network call
-  const acr = store.loadedAt
+  const acr = store.acarreos.length
     ? store.acarreos.filter(r => { const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; })
     : rawAcarreos;
   rawTomate = flattenTomate(acr);
