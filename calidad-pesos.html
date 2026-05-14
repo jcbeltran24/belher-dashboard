@@ -1452,10 +1452,12 @@ let loadSeq      = 0;   // increments on every loadData call — stale responses
 
 /* ── PERIOD HELPERS ────────────────────────────────────── */
 function iso(d){ return d.toISOString().split('T')[0]; }
+// Fecha LOCAL (no UTC) — evita el desfase horario UTC-7 después de las 5pm
+function isoLocal(d){ const p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
 
 function periodRange(p){
   const now   = new Date();
-  const today = iso(now);
+  const today = isoLocal(now);   // fecha LOCAL, no UTC
   const dow   = now.getDay(); // 0=Sun
   const monday = n => { const d = new Date(now); d.setDate(d.getDate() - ((dow+6)%7) + n); return d; };
 
@@ -1464,21 +1466,20 @@ function periodRange(p){
       return { from: today, to: today };
     case 'ayer': {
       const ayer = new Date(now); ayer.setDate(ayer.getDate() - 1);
-      const ayerStr = iso(ayer);
-      return { from: ayerStr, to: ayerStr };
+      return { from: isoLocal(ayer), to: isoLocal(ayer) };
     }
     case 'semana': {
       const mon = monday(0);
-      return { from: iso(mon), to: today };
+      return { from: isoLocal(mon), to: today };
     }
     case 'semana-ant': {
       const mon  = monday(-7);
       const sun  = monday(-1); sun.setDate(sun.getDate() - 1);
-      return { from: iso(mon), to: iso(sun) };
+      return { from: isoLocal(mon), to: isoLocal(sun) };
     }
     case 'mes': {
       const first = new Date(now.getFullYear(), now.getMonth(), 1);
-      return { from: iso(first), to: today };
+      return { from: isoLocal(first), to: today };
     }
     case 'ciclo': {
       // Ciclo Belher: diciembre → junio
