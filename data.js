@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 13 May 2026",
+    fecha: "Martes 13 May 2026",
     semana: "WK 20",
-    actualizado: "13/05/2026 · 15:23"
+    actualizado: "13/05/2026 · 14:30"
   },
 
   alertas: [
@@ -268,14 +268,14 @@ window.BELHER = {
       { fecha:"WK19", primaPromedio:83.16, mermaPromedio:2.82, nota:"D1(04/05): Inbound 61% primera, merma 19%. Outbound 04/05: BC 80.38% merma 4.40%, RCal 87.43% merma 2.16%. D2(05/05): Outbound 05/05 mejora — BC 79.74% merma 4.20%, RCal 84.30% merma 2.55%, Chile Fresno 80.21% merma 3.38%. D3(06/05): Outbound 06/05 EXCELENTE — Bola 86.29% merma 3.05%, Roma 79.60% merma 1.60%, Chile Anaheim 88.59% merma 0.97%. Patrón sostenido de recuperación calidad." }
     ],
     ultimoOutbound: {
-      fecha: "Miércoles 13 May 2026",
+      fecha: "Martes 13 May 2026",
       variedades: [
         { nombre:"Bola Calavo",     etiqueta:"Calavo", canal:"exportacion", primera:86.29, segunda:5.89, tercera:4.77, merma:3.05, peso:25.40, alerta:false },
         { nombre:"Roma Calavo",     etiqueta:"Calavo", canal:"exportacion", primera:79.60, segunda:10.80, tercera:8.00, merma:1.60, peso:26.84, alerta:false },
         { nombre:"Chile Anaheim",   etiqueta:"Anaheim", canal:"exportacion", primera:88.59, segunda:10.43, tercera:0.98, merma:0.97, peso:25.87, alerta:false }
       ],
       anterior: {
-        fecha: "Miércoles 13 May 2026",
+        fecha: "Martes 13 May 2026",
         variedades: [
           { nombre:"Bola Calavo", etiqueta:"Calavo", canal:"exportacion", primera:79.74, segunda:8.22, tercera:7.85, merma:4.20, peso:25.55, alerta:false },
           { nombre:"Roma Calavo", etiqueta:"Calavo", canal:"exportacion", primera:84.30, segunda:7.73, tercera:5.42, merma:2.55, peso:25.54, alerta:false },
@@ -283,7 +283,7 @@ window.BELHER = {
         ]
       },
       ultimoInbound: {
-        fecha: "Miércoles 13 May 2026",
+        fecha: "Martes 13 May 2026",
         variedades: [
           { nombre:"Tomate entrada", etiqueta:"Inbound", canal:"interno", primera:56, segunda:11, tercera:8, merma:25.00, alerta:true }
         ],
@@ -751,7 +751,7 @@ window.BELHER = {
       }
     ],
     proximos: [
-{ fecha:"14/05/2026",    evento:"Update cajas 2lb Viva Program — llamada con Jesús Díaz Ledezma (CECSO). Confirmar muestras y timeline producción julio.", tipo:"operativo", participantes:"JC · Jesús Díaz Ledezma · CECSO" },
+      { fecha:"14/05/2026",    evento:"Update cajas 2lb Viva Program — llamada con Jesús Díaz Ledezma (CECSO). Confirmar muestras y timeline producción julio.", tipo:"operativo", participantes:"JC · Jesús Díaz Ledezma · CECSO" },
       { fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
       { fecha:"19/05/2026",    evento:"BPSI F/S Abril 2026 y forecast Q2 2026 — Zoom 11am-12pm (GMT-7)", tipo:"financiero", participantes:"Leima · Jacruz · JC · Armando Llanes" },
       { fecha:"25/05/2026",    evento:"Abril '26 F/S (Tomates/Limones/Granos) — Revisión final · 9:30-10:30am", tipo:"financiero", participantes:"JC · Antonio · Leima · Armando · Jacruz · Despacho Terrazas" },
@@ -939,19 +939,19 @@ window.BELHER = {
 
     correos: [
       {
-        fecha: "Miércoles 13 May 2026", de: "Leima Leyva", cargo: "Finance Manager · Agrícola Belher/ADM",
+        fecha: "Martes 13 May 2026", de: "Leima Leyva", cargo: "Finance Manager · Agrícola Belher/ADM",
         asunto: "2026 03-05 Agricola Belher Settle WK19 7 Mayo 2026.xlsx",
         tipo: "settlement", nivel: "success",
         resumen: "Leima comparte liquidación WK19 recibida de Calavo (07-May-2026). Revenue estimado según Calavo: ~$2.506M a favor. Análisis y conciliación detallada mañana 08-May."
       },
       {
-        fecha: "Miércoles 13 May 2026", de: "Leima Leyva", cargo: "Finance Manager · Agrícola Belher/ADM",
+        fecha: "Martes 13 May 2026", de: "Leima Leyva", cargo: "Finance Manager · Agrícola Belher/ADM",
         asunto: "Liquidación Calavo al 26 abril '26 — saldo a favor $1,206,806",
         tipo: "settlement", nivel: "success",
         resumen: "Leima comparte liquidación acumulada al 26-Abr. Revenue $17,746,742 · Aranceles $1,775,841 · Comisiones $1,916,508 · Venta neta $12,613,207 · P&P $4,466,620. Saldo S/Belher: $1,639,473. Conciliación S/Calavo: $1,206,806. Quedan cajas por facturar."
       },
       {
-        fecha: "Miércoles 13 May 2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya · Calavo",
+        fecha: "Martes 13 May 2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya · Calavo",
         asunto: "Canceled: Weekly Tomato Meeting — sin Tomato Weekly Update WK18",
         tipo: "fyi", nivel: "warning",
         resumen: "Irene cancela reunión semanal Teams del 28/04. Sin adjunto Tomato Weekly Update WK17/18. 3 semanas sin reporte formal Calavo."
