@@ -542,7 +542,6 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
   <button class="view-tab" data-panel="panel-otros">Limón · Chile</button>
   <button class="view-tab" data-panel="panel-embarques">Embarques</button>
   <button class="view-tab" data-panel="panel-balance">Balance de Masas</button>
-  <button class="view-tab" data-panel="panel-clima">Clima</button>
 </div>
 
 <main>
@@ -1173,56 +1172,6 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
 
   </div><!-- /panel-balance -->
 
-  <!-- ══ PANEL: CLIMA ═══════════════════════════════════════ -->
-  <div class="panel" id="panel-clima">
-    <div class="sec">Clima · Navolato
-      <span class="sec-tag" id="wx-range-lbl">—</span>
-      <span class="sec-source">Open-Meteo</span>
-    </div>
-
-    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
-      <div class="stat ca">
-        <div class="stat-lbl">Temp. Máx Prom.</div>
-        <div class="stat-val" id="wx-tmax"><span class="skel"></span></div>
-        <div class="stat-sub">°C promedio período</div>
-      </div>
-      <div class="stat cb">
-        <div class="stat-lbl">Temp. Mín Prom.</div>
-        <div class="stat-val" id="wx-tmin"><span class="skel"></span></div>
-        <div class="stat-sub">°C promedio período</div>
-      </div>
-      <div class="stat cp">
-        <div class="stat-lbl">Precipitación Total</div>
-        <div class="stat-val" id="wx-lluvia"><span class="skel"></span></div>
-        <div class="stat-sub">mm acumulado</div>
-      </div>
-      <div class="stat cg">
-        <div class="stat-lbl">Días con Lluvia</div>
-        <div class="stat-val" id="wx-dias-lluvia"><span class="skel"></span></div>
-        <div class="stat-sub">&gt; 0.5 mm</div>
-      </div>
-    </div>
-
-    <div class="g2" style="margin-bottom:10px">
-      <div class="card card-pad">
-        <div class="card-title">Temperatura Diaria (°C)</div>
-        <div style="position:relative;height:240px"><canvas id="chart-wx-temp"></canvas></div>
-      </div>
-      <div class="card card-pad">
-        <div class="card-title">Precipitación Diaria (mm)</div>
-        <div style="position:relative;height:240px"><canvas id="chart-wx-lluvia"></canvas></div>
-      </div>
-    </div>
-
-    <div class="sec">Historial Diario</div>
-    <div class="card">
-      <table class="tbl">
-        <thead><tr><th>Fecha</th><th class="td-n">T. Máx</th><th class="td-n">T. Mín</th><th class="td-n">Lluvia</th></tr></thead>
-        <tbody id="wx-tbody"></tbody>
-      </table>
-    </div>
-  </div><!-- /panel-clima -->
-
 </main>
 
 <!-- Mobile month picker backdrop -->
@@ -1352,7 +1301,6 @@ function injectWeatherAll(){
   if(_wxCalWks.length)   injectWeatherWeekly('chart-cal-trend', _wxCalWks,  _wxCalActFrom);
   if(_wxTomWks.length)   injectWeatherWeekly('chart-tom-semana',_wxTomWks,  _wxTomActFrom);
   const ap = document.querySelector('.panel.active')?.id;
-  if(ap === 'panel-clima') renderClima();
 }
 
 /* ── API ──────────────────────────────────────────────── */
@@ -2605,7 +2553,6 @@ function applyRawData(palets, acarreos, from, to, source){
   if(activePanel === 'panel-resumen')  renderResumen();
   if(activePanel === 'panel-calidad')  renderCalidad();
   if(activePanel === 'panel-balance')  renderBalance();
-  if(activePanel === 'panel-clima')    renderClima();
   if(activePanel === 'panel-tomate')   loadTomate();
   if(activePanel === 'panel-otros'){
     const activeSub = document.querySelector('#panel-otros .sub-tab.active')?.dataset.sub;
@@ -3161,91 +3108,6 @@ function renderReporte(from, to){
   ].join('');
 }
 
-/* ── CLIMA · PANEL ──────────────────────────────────────── */
-function renderClima(){
-  const from = activeRange?.from || isoLocal(new Date());
-  const to   = activeRange?.to   || isoLocal(new Date());
-  document.getElementById('wx-range-lbl').textContent = fDateFull(from) + ' – ' + fDateFull(to);
-
-  // Collect daily wx data for the active range
-  const days = [];
-  let d = new Date(from+'T12:00:00');
-  const endD = new Date(to+'T12:00:00');
-  while(d <= endD){
-    const k = iso(d);
-    if(wxData[k]) days.push({ fecha: k, ...wxData[k] });
-    d.setDate(d.getDate()+1);
-  }
-
-  if(!days.length){
-    // Fallback: mostrar los últimos 7 días disponibles en wxData (retraso ~5 días del archivo)
-    const allKeys = Object.keys(wxData).sort();
-    if(allKeys.length){
-      const lastKey = allKeys[allKeys.length - 1];
-      const cutKey  = allKeys[Math.max(0, allKeys.length - 7)];
-      allKeys.filter(k=>k>=cutKey).forEach(k=>days.push({ fecha:k, ...wxData[k] }));
-      document.getElementById('wx-range-lbl').textContent =
-        'Último dato disponible: ' + fDateFull(lastKey) + ' (archivo ~5 días de retraso)';
-    }
-    if(!days.length){
-      ['wx-tmax','wx-tmin','wx-lluvia','wx-dias-lluvia'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent='—'; });
-      const tb = document.getElementById('wx-tbody');
-      if(tb) tb.innerHTML='<tr><td colspan="4" class="empty">Sin datos de clima disponibles — reintenta en unos minutos.</td></tr>';
-      return;
-    }
-  }
-
-  // KPIs
-  const avgTMax = days.reduce((s,r)=>s+r.tMax,0)/days.length;
-  const avgTMin = days.reduce((s,r)=>s+r.tMin,0)/days.length;
-  const totalRain = days.reduce((s,r)=>s+r.rain,0);
-  const diasLluvia = days.filter(r=>r.rain>0.5).length;
-  document.getElementById('wx-tmax').innerHTML = fN(avgTMax,1)+'<span class="stat-unit">°C</span>';
-  document.getElementById('wx-tmin').innerHTML = fN(avgTMin,1)+'<span class="stat-unit">°C</span>';
-  document.getElementById('wx-lluvia').innerHTML = fN(totalRain,1)+'<span class="stat-unit">mm</span>';
-  document.getElementById('wx-dias-lluvia').textContent = diasLluvia;
-
-  const labels = days.map(r => fDate(r.fecha));
-  const tMaxArr = days.map(r => r.tMax);
-  const tMinArr = days.map(r => r.tMin);
-  const rainArr = days.map(r => r.rain);
-  const xCfg = { grid:{display:false}, ticks:{color:'#9ca3af',font:{size:9},maxTicksLimit:14,maxRotation:0}, border:{display:false} };
-
-  mkChart('chart-wx-temp',{
-    type:'line',
-    data:{ labels, datasets:[
-      { label:'T. Máxima', data:tMaxArr, borderColor:'#ef4444', backgroundColor:'rgba(239,68,68,.08)', borderWidth:2, tension:.35, pointRadius:0, fill:true },
-      { label:'T. Mínima', data:tMinArr, borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,.08)', borderWidth:2, tension:.35, pointRadius:0, fill:true }
-    ]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:true,position:'top',labels:{font:{size:10},color:'#9ca3af',boxWidth:10}},
-        tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y.toFixed(1)}°C`}} },
-      scales:{ x:xCfg, y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+'°'}, border:{display:false} } }
-    }
-  });
-
-  mkChart('chart-wx-lluvia',{
-    type:'bar',
-    data:{ labels, datasets:[
-      { label:'Lluvia (mm)', data:rainArr, backgroundColor:'rgba(14,165,233,.65)', borderColor:'#0ea5e9', borderWidth:1, borderRadius:3 }
-    ]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` ${c.parsed.y.toFixed(1)} mm`}} },
-      scales:{ x:xCfg, y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+' mm'}, border:{display:false}, min:0 } }
-    }
-  });
-
-  // Detail table (most recent first)
-  const tbody = document.getElementById('wx-tbody');
-  if(tbody){
-    tbody.innerHTML = days.slice().reverse().slice(0,90).map(r=>`<tr>
-      <td class="td-m">${fDateFull(r.fecha)}</td>
-      <td class="td-n" style="color:#ef4444">${fN(r.tMax,1)}°</td>
-      <td class="td-n" style="color:#3b82f6">${fN(r.tMin,1)}°</td>
-      <td class="td-n" style="color:#0ea5e9">${r.rain>0.1 ? fN(r.rain,1)+' mm' : '—'}</td>
-    </tr>`).join('') || '<tr><td colspan="4" class="empty">Sin datos.</td></tr>';
-  }
-}
 
 // Generic flatten for any crop filter function
 function flattenCrop(acrRows, filterFn, targetFn){
@@ -3551,6 +3413,14 @@ function renderTomate(from, to){
 /* ── GENERIC CROP PANEL RENDERER ───────────────────────── */
 function renderCropPanel({ rows, ids, from, to, chartSemId, casetaId, varId, tbodyId, kgPerUnit, unitLabel }){
   document.getElementById(ids.rangeLbl).textContent = fDateFull(from) + ' – ' + fDateFull(to);
+  if(!rows.length){
+    ['total','totalSub','dias','prom','vars'].forEach(k=>{ if(ids[k]){ const el=document.getElementById(ids[k]); if(el) el.textContent='—'; }});
+    const emptyMsg = `Sin cosecha registrada para ${fDateFull(from)}${from!==to?' – '+fDateFull(to):''}. Prueba otro período.`;
+    document.getElementById(tbodyId).innerHTML=`<tr><td colspan="9" class="empty">${emptyMsg}</td></tr>`;
+    const barsEl=document.getElementById(varId||casetaId); if(barsEl) barsEl.innerHTML='';
+    if(CH[chartSemId]){CH[chartSemId].destroy();delete CH[chartSemId];}
+    return;
+  }
   const totalKg = rows.reduce((s,r)=>s+r.kilos,0);
   const dias    = new Set(rows.map(r=>r.fecha)).size;
   const totCant = rows.reduce((s,r)=>s+r.cantidad,0);
@@ -4260,7 +4130,6 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     if(btn.dataset.panel === 'panel-pesos')     { renderPesos(); loadRezaga(); }
     if(btn.dataset.panel === 'panel-embarques') loadEmbarques();
     if(btn.dataset.panel === 'panel-balance')   { if(!_resCycleKey) loadResumen().then(()=>renderBalance()); else renderBalance(); }
-    if(btn.dataset.panel === 'panel-clima')     renderClima();
   });
 });
 
