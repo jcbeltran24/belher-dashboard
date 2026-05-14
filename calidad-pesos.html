@@ -76,7 +76,7 @@ header{background:#0c2117;height:46px;display:flex;align-items:center;padding:0 
 .mp-nav{width:28px;height:28px;border-radius:7px;border:1px solid #e4ece4;background:#f8faf8;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:1rem;font-family:inherit;line-height:1;transition:.12s}
 .mp-nav:hover{background:#dcfce7;color:#15803d;border-color:#86efac}
 .mp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
-.mp-m{padding:8px 3px;border-radius:8px;border:none;background:none;font-family:inherit;font-size:.71rem;font-weight:600;color:#374151;cursor:pointer;transition:.1s;text-align:center;letter-spacing:0}
+.mp-m{padding:8px 3px;border-radius:8px;border:none;background:none;font-family:inherit;font-size:var(--t-nano);font-weight:600;color:#374151;cursor:pointer;transition:.1s;text-align:center;letter-spacing:0}
 .mp-m:hover:not(.mpfut){background:#f0fdf4;color:#15803d}
 .mp-m.mpsel{background:#fbbf24;color:#0c2117;font-weight:800;box-shadow:0 1px 4px rgba(251,191,36,.35)}
 .mp-m.mpfut{opacity:.25;pointer-events:none}
@@ -91,8 +91,8 @@ header{background:#0c2117;height:46px;display:flex;align-items:center;padding:0 
 .f-select:hover{background-color:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22)}
 .f-select:focus{border-color:rgba(251,191,36,.5);background-color:rgba(255,255,255,.1)}
 .f-select option{background:#162d1f;color:#fff}
-.f-reset{height:26px;padding:0 10px;border-radius:6px;background:transparent;border:none;color:rgba(255,255,255,.35);font-size:.67rem;font-weight:500;font-family:inherit;cursor:pointer;transition:.14s;text-decoration:underline;text-underline-offset:2px}
-.f-reset:hover{color:rgba(255,255,255,.75)}
+.f-reset{height:26px;padding:0 10px;border-radius:6px;background:transparent;border:none;color:rgba(255,255,255,.4);font-size:var(--t-nano);font-weight:500;font-family:inherit;cursor:pointer;transition:.14s;text-decoration:underline;text-underline-offset:2px;text-decoration-color:rgba(255,255,255,.2)}
+.f-reset:hover{color:rgba(255,255,255,.8);text-decoration-color:rgba(255,255,255,.45)}
 .f-count{font-size:var(--t-nano);color:rgba(255,255,255,.28);white-space:nowrap;font-variant-numeric:tabular-nums}
 .f-divider{display:none}
 
@@ -120,10 +120,10 @@ main{flex:1;padding:14px 20px 32px;max-width:1400px;width:100%;margin:0 auto}
 .stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:12px}
 .stat{background:var(--card);border-radius:var(--r);padding:12px 14px;border:1px solid var(--border);box-shadow:var(--shadow);position:relative;overflow:hidden;transition:box-shadow .15s,transform .15s}
 .stat:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
-.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:var(--sc,var(--green2));border-radius:var(--r) var(--r) 0 0}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--sc,var(--green2));border-radius:var(--r) var(--r) 0 0}
 .stat.cg{--sc:var(--green2)}.stat.ca{--sc:var(--accent)}.stat.cb{--sc:var(--blue)}.stat.cp{--sc:var(--purple)}.stat.cr{--sc:var(--red2)}
 .stat-lbl{font-size:var(--t-nano);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.stat-val{font-size:var(--t-2xl);font-weight:700;line-height:1;letter-spacing:-.5px;font-family:var(--font-num)}
+.stat-val{font-size:var(--t-2xl);font-weight:700;line-height:1;letter-spacing:-.5px;font-family:var(--font-num);font-variant-numeric:tabular-nums}
 .stat.cg .stat-val{color:var(--green)}.stat.ca .stat-val{color:var(--accent)}.stat.cb .stat-val{color:var(--blue)}.stat.cp .stat-val{color:var(--purple)}.stat.cr .stat-val{color:var(--red)}
 .stat-unit{font-size:var(--t-xs);opacity:.55;margin-left:2px;font-weight:600;font-family:var(--font-num)}
 .stat-sub{font-size:var(--t-nano);color:var(--muted);margin-top:3px}
@@ -140,7 +140,7 @@ main{flex:1;padding:14px 20px 32px;max-width:1400px;width:100%;margin:0 auto}
 
 /* ── CARD ── */
 .card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow)}
-.card-pad{padding:13px 15px}
+.card-pad{padding:12px 16px}
 .card-title{font-size:var(--t-nano);font-weight:700;letter-spacing:.1px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .chart-h{position:relative;height:190px}
 .chart-h canvas{max-height:220px}
@@ -240,7 +240,7 @@ tbody td{padding:6px 11px;vertical-align:middle}
 .ov-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .ov-m{display:flex;flex-direction:column;gap:1px}
 .ov-m-lbl{font-size:var(--t-nano);font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
-.ov-m-val{font-size:var(--t-lg);font-weight:700;letter-spacing:-.3px;line-height:1.1;font-family:var(--font-num)}
+.ov-m-val{font-size:var(--t-lg);font-weight:700;letter-spacing:-.3px;line-height:1.1;font-family:var(--font-num);font-variant-numeric:tabular-nums}
 .ov-m-sub{font-size:var(--t-nano);color:var(--muted)}
 .ov-divider{height:1px;background:var(--border)}
 
@@ -259,8 +259,8 @@ tbody td{padding:6px 11px;vertical-align:middle}
 .mkt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .mkt-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:3px}
 .mkt-name{font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-.mkt-price{font-size:1.2rem;font-weight:800;font-family:var(--mono);color:var(--green)}
-.mkt-sub{font-size:.62rem;color:var(--muted);opacity:.7}
+.mkt-price{font-size:1.2rem;font-weight:800;font-family:var(--font-num);color:var(--green);font-variant-numeric:tabular-nums}
+.mkt-sub{font-size:var(--t-nano);color:var(--muted)}
 @media(max-width:640px){.mkt-grid{grid-template-columns:repeat(2,1fr)}}
 
 /* KPI comparison row */
@@ -270,7 +270,7 @@ tbody td{padding:6px 11px;vertical-align:middle}
 .cmp-col.ant{background:rgba(217,119,6,.04)}
 .cmp-sep{width:1px;background:var(--border);align-self:stretch}
 .cmp-lbl-head{font-size:var(--t-nano);font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
-.cmp-big{font-size:var(--t-xl);font-weight:700;line-height:1;letter-spacing:-.4px;font-family:var(--font-num)}
+.cmp-big{font-size:var(--t-xl);font-weight:700;line-height:1;letter-spacing:-.4px;font-family:var(--font-num);font-variant-numeric:tabular-nums}
 .cmp-act-val{color:var(--green)}
 .cmp-ant-val{color:var(--accent)}
 .cmp-small{font-size:var(--t-nano);color:var(--muted)}
@@ -315,8 +315,8 @@ header:has(#btn-refresh.spin)~.filters::before{content:'';display:block;height:2
 
 /* ── FOOTER ── */
 footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:10px}
-.ft-l{font-size:.62rem;color:rgba(255,255,255,.28);white-space:nowrap}
-.ft-r{font-size:.62rem;color:rgba(255,255,255,.28)}
+.ft-l{font-size:var(--t-nano);color:rgba(255,255,255,.38);white-space:nowrap}
+.ft-r{font-size:var(--t-nano);color:rgba(255,255,255,.38)}
 .ft-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0;overflow:hidden}
 
 /* ═══════════════════════════════════════════════════════════
@@ -445,6 +445,23 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
   /* 44px minimum touch targets on touch/tablet */
   .p-btn{min-height:44px;padding:0 14px}
   .view-tab{min-height:44px}
+  .mpicker-btn,.cmp-btn{min-height:44px;padding:0 14px}
+}
+
+/* ── Focus visible — keyboard navigation ─────────────────── */
+:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;border-radius:4px}
+button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
+.mpicker-btn:focus-visible,.cmp-btn:focus-visible,.mp-nav:focus-visible,
+.mp-m:focus-visible,.err-retry:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+/* Selects get a filled focus ring */
+.f-select:focus-visible{outline:2px solid rgba(251,191,36,.7);outline-offset:0}
+
+/* ── prefers-reduced-motion ────────────────────────────── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .skel{animation:none;background:var(--bg2)}
+  .live-dot{animation:none;opacity:1}
+  .panel.active,.panel.active .stat,.panel.active .card{animation:none}
 }
 </style>
 </head>
@@ -456,7 +473,7 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
   <div class="h-logo">AB</div>
   <div>
     <div class="h-title">Operaciones Belher</div>
-    <div class="h-sub">ABSA · EYE Live + Supabase · vw_palets · vw_acarreos · vw_embarques · vw_rezaga</div>
+    <div class="h-sub">ABSA · EYE Live + Supabase</div>
   </div>
   <div class="h-spacer"></div>
   <div class="h-live"><div class="live-dot"></div>EN VIVO</div>
@@ -497,7 +514,7 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
       <span id="cmp-lbl">vs anterior</span>
     </button>
-    <div style="width:1px;height:14px;background:rgba(255,255,255,.1);flex-shrink:0"></div>
+    <div class="f-divider" style="width:1px;height:14px;background:rgba(255,255,255,.1);flex-shrink:0"></div>
     <select class="f-select" id="f-cultivo"><option value="">Todos los cultivos</option></select>
     <div class="f-count" id="f-count" style="margin-left:auto"></div>
   </div>
@@ -540,8 +557,8 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
 
     <!-- Precios de Mercado LA Terminal — arriba de todo -->
     <div class="sec">Precios Destino LA Terminal <span class="sec-tag" id="mkt-date">—</span></div>
-    <div style="font-size:.67rem;color:var(--muted);opacity:.65;margin:-6px 0 8px;padding:0 2px">
-      Precio al que llega el producto en Los Ángeles (USDA Market News) · No es FOB Nogales — USDA no publica ese dato vía API
+    <div style="font-size:var(--t-nano);color:var(--muted);opacity:.7;margin:-6px 0 8px;padding:0 2px">
+      Precio de llegada en Los Ángeles (USDA Market News) · No es FOB Nogales
     </div>
     <div class="mkt-grid" style="margin-bottom:10px">
       <div class="mkt-card">
