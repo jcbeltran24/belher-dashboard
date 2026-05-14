@@ -201,7 +201,8 @@ tbody td{padding:6px 11px;vertical-align:middle}
 /* Spark chart mini-label */
 .spark-lbl{font-size:var(--t-nano);color:var(--muted);font-weight:600;letter-spacing:.1px;margin-bottom:4px}
 /* Resumen ghost control — period pills dim when Resumen is active */
-.filters.resumen-mode .period-btns{opacity:.38}
+.filters.resumen-mode .period-btns .p-btn:not(.active){opacity:.35}
+.filters.resumen-mode .period-btns .p-btn.active{opacity:1}
 
 /* ── PANEL ENTER ANIMATION ── */
 @keyframes panelIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
