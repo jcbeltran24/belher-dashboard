@@ -525,6 +525,7 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
   <button class="view-tab" data-panel="panel-otros">Limón · Chile</button>
   <button class="view-tab" data-panel="panel-embarques">Embarques</button>
   <button class="view-tab" data-panel="panel-balance">Balance de Masas</button>
+  <button class="view-tab" data-panel="panel-clima">Clima</button>
 </div>
 
 <main>
@@ -1155,6 +1156,56 @@ footer{background:#0c2117;border-top:1px solid rgba(255,255,255,.06);padding:7px
 
   </div><!-- /panel-balance -->
 
+  <!-- ══ PANEL: CLIMA ═══════════════════════════════════════ -->
+  <div class="panel" id="panel-clima">
+    <div class="sec">Clima · Navolato
+      <span class="sec-tag" id="wx-range-lbl">—</span>
+      <span class="sec-source">Open-Meteo</span>
+    </div>
+
+    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+      <div class="stat ca">
+        <div class="stat-lbl">Temp. Máx Prom.</div>
+        <div class="stat-val" id="wx-tmax"><span class="skel"></span></div>
+        <div class="stat-sub">°C promedio período</div>
+      </div>
+      <div class="stat cb">
+        <div class="stat-lbl">Temp. Mín Prom.</div>
+        <div class="stat-val" id="wx-tmin"><span class="skel"></span></div>
+        <div class="stat-sub">°C promedio período</div>
+      </div>
+      <div class="stat cp">
+        <div class="stat-lbl">Precipitación Total</div>
+        <div class="stat-val" id="wx-lluvia"><span class="skel"></span></div>
+        <div class="stat-sub">mm acumulado</div>
+      </div>
+      <div class="stat cg">
+        <div class="stat-lbl">Días con Lluvia</div>
+        <div class="stat-val" id="wx-dias-lluvia"><span class="skel"></span></div>
+        <div class="stat-sub">&gt; 0.5 mm</div>
+      </div>
+    </div>
+
+    <div class="g2" style="margin-bottom:10px">
+      <div class="card card-pad">
+        <div class="card-title">Temperatura Diaria (°C)</div>
+        <div style="position:relative;height:240px"><canvas id="chart-wx-temp"></canvas></div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title">Precipitación Diaria (mm)</div>
+        <div style="position:relative;height:240px"><canvas id="chart-wx-lluvia"></canvas></div>
+      </div>
+    </div>
+
+    <div class="sec">Historial Diario</div>
+    <div class="card">
+      <table class="tbl">
+        <thead><tr><th>Fecha</th><th class="td-n">T. Máx</th><th class="td-n">T. Mín</th><th class="td-n">Lluvia</th></tr></thead>
+        <tbody id="wx-tbody"></tbody>
+      </table>
+    </div>
+  </div><!-- /panel-clima -->
+
 </main>
 
 <!-- Mobile month picker backdrop -->
@@ -1280,6 +1331,8 @@ function injectWeatherAll(){
   if(_wxInbDays.length)  injectWeatherDaily('chart-inb-primera',_wxInbDays);
   if(_wxCalWks.length)   injectWeatherWeekly('chart-cal-trend', _wxCalWks,  _wxCalActFrom);
   if(_wxTomWks.length)   injectWeatherWeekly('chart-tom-semana',_wxTomWks,  _wxTomActFrom);
+  const ap = document.querySelector('.panel.active')?.id;
+  if(ap === 'panel-clima') renderClima();
 }
 
 /* ── API ──────────────────────────────────────────────── */
@@ -1593,7 +1646,7 @@ async function autoLoadCmp(){
 
 /* ── RESUMEN PANEL ──────────────────────────────────────── */
 /* Resumen siempre muestra el ciclo completo, independiente del period selector */
-let _resPalets = [], _resAcarreos = [], _resCycleKey = '';
+let _resPalets = [], _resAcarreos = [], _resInbound = [], _resCycleKey = '';
 
 async function loadResumen(){
   const cycles = bothCycles();
@@ -1605,7 +1658,8 @@ async function loadResumen(){
   const fd = (arr, field) => arr.filter(r => { const d=(r[field]||'').split('T')[0]; return d>=from&&d<=to; });
   _resPalets   = fd(store.palets,   'fecha_empaque');
   _resAcarreos = fd(store.acarreos, 'fecha');
-  rawInbound   = fd(store.inbound,  'fecha');
+  _resInbound  = fd(store.inbound,  'fecha');
+  rawInbound   = _resInbound;
   rawRezaga    = fd(store.rezaga,   'fecha');
   _resCycleKey = key;
 
@@ -1690,13 +1744,26 @@ function renderResumen(){
   sparkBars(document.getElementById('rv-bas-spark'), basDays.map(d=>basByDay[d]),'#1d4ed8');
 
   // ── Inbound KPIs — filtrado por período activo ──
-  const inbActR = rawInbound.filter(r => inActR((r.fecha||'').split('T')[0]));
+  const inbSrc = _resInbound.length ? _resInbound : rawInbound;
+  let inbActR = inbSrc.filter(r => inActR((r.fecha||'').split('T')[0]));
+  let inbFallbackLbl = '';
+  if(!inbActR.length && activePeriod !== 'ciclo'){
+    // Sin inspecciones en el período corto — mostrar últimas 2 semanas disponibles
+    const sorted = inbSrc.slice().sort((a,b)=>(b.fecha||'').localeCompare(a.fecha||''));
+    if(sorted.length){
+      const lastD = (sorted[0].fecha||'').split('T')[0];
+      const cut = new Date(lastD+'T12:00:00'); cut.setDate(cut.getDate()-13);
+      const cutStr = cut.toISOString().split('T')[0];
+      inbActR = inbSrc.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=cutStr&&d<=lastD; });
+      if(inbActR.length) inbFallbackLbl = fDateFull(lastD);
+    }
+  }
   if(inbActR.length){
     const totF = inbActR.reduce((s,r)=>s+(r.total_frutos||0),0);
     const sumP1 = inbActR.reduce((s,r)=>{ const p=(r.calidades||[]).find(c=>c.calidad==='PRIMERA'); return s+(p?p.cantidad:0); },0);
     const merms = inbActR.filter(r=>r.merma!=null);
     const avgMerma = merms.length?merms.reduce((s,r)=>s+r.merma,0)/merms.length:0;
-    const temps = rawInbound.filter(r=>r.temperatura_fruto!=null);
+    const temps = inbActR.filter(r=>r.temperatura_fruto!=null);
     const avgTemp = temps.length?temps.reduce((s,r)=>s+r.temperatura_fruto,0)/temps.length:0;
     const pctP1Inb = totF ? sumP1/totF*100 : 0;
     const tCol = avgTemp<28?'var(--green)':avgTemp<33?'var(--accent)':'var(--red)';
@@ -1709,13 +1776,14 @@ function renderResumen(){
 
     const inbAlert = document.getElementById('rv-inb-alert');
     inbAlert.style.display = 'flex';
-    if(pctP1Inb>=85){ inbAlert.className='ov-alert ok'; inbAlert.textContent='✓ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
-    else if(pctP1Inb>=75){ inbAlert.className='ov-alert warn'; inbAlert.textContent='⚠ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
-    else{ inbAlert.className='ov-alert bad'; inbAlert.textContent='✕ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'; }
+    const inbSuffix = inbFallbackLbl ? ` · al ${inbFallbackLbl}` : '';
+    if(pctP1Inb>=85){ inbAlert.className='ov-alert ok'; inbAlert.textContent='✓ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'+inbSuffix; }
+    else if(pctP1Inb>=75){ inbAlert.className='ov-alert warn'; inbAlert.textContent='⚠ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'+inbSuffix; }
+    else{ inbAlert.className='ov-alert bad'; inbAlert.textContent='✕ '+fN(pctP1Inb,1)+'% primera · Merma '+fN(avgMerma,1)+'%'+inbSuffix; }
 
-    // Inbound sparkline: % primera by date
+    // Inbound sparkline: % primera by date (ciclo completo para contexto)
     const inbByDay={};
-    rawInbound.forEach(r=>{
+    inbSrc.forEach(r=>{
       const d=(r.fecha||'').split('T')[0]; if(!d) return;
       if(!inbByDay[d]) inbByDay[d]={p1:0,tot:0};
       const p=(r.calidades||[]).find(c=>c.calidad==='PRIMERA');
@@ -2506,10 +2574,11 @@ function applyRawData(palets, acarreos, from, to, source){
   const activePanel = document.querySelector('.panel.active')?.id;
   if(activePanel === 'panel-resumen') renderResumen();
   if(activePanel === 'panel-balance') renderBalance();
+  if(activePanel === 'panel-clima')   renderClima();
   if(activePanel === 'panel-tomate')  loadTomate();
   if(activePanel === 'panel-otros'){
-    renderCropPanel({ rows: flattenCrop(acarreos, isLimon, null), from, to, ids:{rangeLbl:'lim-range-lbl',total:'lim-total',totalSub:'lim-total-sub',dias:'lim-dias',prom:'lim-prom'}, chartSemId:'chart-lim-sem', casetaId:'lim-caseta-bars', tbodyId:'lim-tbody', kgPerUnit:KG_PER_BOX_LIMON, unitLabel:'cx' }); renderLimonPalets();
-    renderCropPanel({ rows: flattenCrop(acarreos, isChile, null), from, to, ids:{rangeLbl:'chi-range-lbl',total:'chi-total',totalSub:'chi-total-sub',dias:'chi-dias',vars:'chi-vars'}, chartSemId:'chart-chi-sem', varId:'chi-var-bars', tbodyId:'chi-tbody', kgPerUnit:KG_PER_BULTO_CHILE, unitLabel:'bts' });
+    const activeSub = document.querySelector('#panel-otros .sub-tab.active')?.dataset.sub;
+    if(activeSub === 'sub-chile') loadChile(); else loadLimon();
   }
   if(activePanel === 'panel-inbound')  loadInbound();
   if(activePanel === 'panel-pesos')    loadRezaga();
@@ -2610,7 +2679,8 @@ function _populateResumeSlices(palets, acarreos, inbound, rezaga){
   const fd = (arr, field) => arr.filter(r => { const d=(r[field]||'').split('T')[0]; return d>=cf&&d<=ct; });
   _resPalets   = fd(palets,   'fecha_empaque');
   _resAcarreos = fd(acarreos, 'fecha');
-  rawInbound   = fd(inbound,  'fecha');
+  _resInbound  = fd(inbound,  'fecha');
+  rawInbound   = _resInbound;
   rawRezaga    = fd(rezaga,   'fecha');
   _resCycleKey = cf + ':' + ct;
 }
@@ -3057,6 +3127,81 @@ function renderReporte(from, to){
     row('Merma (cosecha − salida)', kg(merma.ROMA),  kg(merma.BOLA),  kg(merma.ROMA+merma.BOLA)),
     row('Merma Báscula (rezaga)', '—', '—', mBascula.TOTAL > 0 ? kg(mBascula.TOTAL) : '0 kg', 'muted'),
   ].join('');
+}
+
+/* ── CLIMA · PANEL ──────────────────────────────────────── */
+function renderClima(){
+  const from = activeRange?.from || iso(new Date());
+  const to   = activeRange?.to   || iso(new Date());
+  document.getElementById('wx-range-lbl').textContent = fDateFull(from) + ' – ' + fDateFull(to);
+
+  // Collect daily wx data for the active range
+  const days = [];
+  let d = new Date(from+'T12:00:00');
+  const endD = new Date(to+'T12:00:00');
+  while(d <= endD){
+    const k = iso(d);
+    if(wxData[k]) days.push({ fecha: k, ...wxData[k] });
+    d.setDate(d.getDate()+1);
+  }
+
+  if(!days.length){
+    ['wx-tmax','wx-tmin','wx-lluvia','wx-dias-lluvia'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent='—'; });
+    const tb = document.getElementById('wx-tbody');
+    if(tb) tb.innerHTML='<tr><td colspan="4" class="empty">Sin datos de clima para este período.</td></tr>';
+    return;
+  }
+
+  // KPIs
+  const avgTMax = days.reduce((s,r)=>s+r.tMax,0)/days.length;
+  const avgTMin = days.reduce((s,r)=>s+r.tMin,0)/days.length;
+  const totalRain = days.reduce((s,r)=>s+r.rain,0);
+  const diasLluvia = days.filter(r=>r.rain>0.5).length;
+  document.getElementById('wx-tmax').innerHTML = fN(avgTMax,1)+'<span class="stat-unit">°C</span>';
+  document.getElementById('wx-tmin').innerHTML = fN(avgTMin,1)+'<span class="stat-unit">°C</span>';
+  document.getElementById('wx-lluvia').innerHTML = fN(totalRain,1)+'<span class="stat-unit">mm</span>';
+  document.getElementById('wx-dias-lluvia').textContent = diasLluvia;
+
+  const labels = days.map(r => fDate(r.fecha));
+  const tMaxArr = days.map(r => r.tMax);
+  const tMinArr = days.map(r => r.tMin);
+  const rainArr = days.map(r => r.rain);
+  const xCfg = { grid:{display:false}, ticks:{color:'#9ca3af',font:{size:9},maxTicksLimit:14,maxRotation:0}, border:{display:false} };
+
+  mkChart('chart-wx-temp',{
+    type:'line',
+    data:{ labels, datasets:[
+      { label:'T. Máxima', data:tMaxArr, borderColor:'#ef4444', backgroundColor:'rgba(239,68,68,.08)', borderWidth:2, tension:.35, pointRadius:0, fill:true },
+      { label:'T. Mínima', data:tMinArr, borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,.08)', borderWidth:2, tension:.35, pointRadius:0, fill:true }
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:true,position:'top',labels:{font:{size:10},color:'#9ca3af',boxWidth:10}},
+        tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y.toFixed(1)}°C`}} },
+      scales:{ x:xCfg, y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+'°'}, border:{display:false} } }
+    }
+  });
+
+  mkChart('chart-wx-lluvia',{
+    type:'bar',
+    data:{ labels, datasets:[
+      { label:'Lluvia (mm)', data:rainArr, backgroundColor:'rgba(14,165,233,.65)', borderColor:'#0ea5e9', borderWidth:1, borderRadius:3 }
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` ${c.parsed.y.toFixed(1)} mm`}} },
+      scales:{ x:xCfg, y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+' mm'}, border:{display:false}, min:0 } }
+    }
+  });
+
+  // Detail table (most recent first)
+  const tbody = document.getElementById('wx-tbody');
+  if(tbody){
+    tbody.innerHTML = days.slice().reverse().slice(0,90).map(r=>`<tr>
+      <td class="td-m">${fDateFull(r.fecha)}</td>
+      <td class="td-n" style="color:#ef4444">${fN(r.tMax,1)}°</td>
+      <td class="td-n" style="color:#3b82f6">${fN(r.tMin,1)}°</td>
+      <td class="td-n" style="color:#0ea5e9">${r.rain>0.1 ? fN(r.rain,1)+' mm' : '—'}</td>
+    </tr>`).join('') || '<tr><td colspan="4" class="empty">Sin datos.</td></tr>';
+  }
 }
 
 // Generic flatten for any crop filter function
@@ -4056,6 +4201,7 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     if(btn.dataset.panel === 'panel-pesos')     { renderPesos(); loadRezaga(); }
     if(btn.dataset.panel === 'panel-embarques') loadEmbarques();
     if(btn.dataset.panel === 'panel-balance')   { if(!_resCycleKey) loadResumen().then(()=>renderBalance()); else renderBalance(); }
+    if(btn.dataset.panel === 'panel-clima')     renderClima();
   });
 });
 
