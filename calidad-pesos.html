@@ -201,9 +201,7 @@ tbody td{padding:6px 11px;vertical-align:middle}
 /* Spark chart mini-label */
 .spark-lbl{font-size:var(--t-nano);color:var(--muted);font-weight:600;letter-spacing:.1px;margin-bottom:4px}
 /* Resumen ghost control — period pills dim when Resumen is active */
-.filters.resumen-mode .period-btns{opacity:1;pointer-events:none;position:relative}
-.filters.resumen-mode .period-btns .p-btn{visibility:hidden}
-.filters.resumen-mode .period-btns::after{content:'Ciclo completo';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:var(--t-nano);color:rgba(255,255,255,.38);font-weight:600;letter-spacing:.4px;white-space:nowrap;pointer-events:none}
+.filters.resumen-mode .period-btns{opacity:.38;pointer-events:none}
 
 /* ── PANEL ENTER ANIMATION ── */
 @keyframes panelIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
@@ -2547,6 +2545,7 @@ async function loadAll(force = false){
     rawEmbarques = cached.embarques || [];
     _populateResumeSlices(cached.palets, cached.acarreos, cached.inbound||[], cached.rezaga||[]);
     loadWeather(from, to);
+    loadMarketPrices().catch(console.warn);
     const rf = activeRange?.from || from, rt = activeRange?.to || to;
     applyRawData(cached.palets, cached.acarreos, rf, rt, 'Caché');
     if(cacheFresh) return;
