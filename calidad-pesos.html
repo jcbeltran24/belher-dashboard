@@ -1621,19 +1621,18 @@ function renderResumen(){
   // Usar datos del ciclo completo (no activeRange)
   const resPalets   = _resPalets.length   ? _resPalets   : rawPalets.filter(p=>{ const d=(p.fecha_empaque||'').split('T')[0]; return d>=from&&d<=to; });
   const resAcarreos = _resAcarreos.length ? _resAcarreos : rawAcarreos.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
-  document.getElementById('res-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
-
   const actR = activeRange || { from: cycles.actual.from, to: cycles.actual.to };
   const antR = priorEquivRange();
   const fmtR = r => r.from === r.to ? fDateFull(r.from) : fDateFull(r.from) + ' – ' + fDateFull(r.to);
+  document.getElementById('res-rng').textContent = fmtR(actR);
   document.getElementById('res-lbl-act').textContent = fmtR(actR);
   document.getElementById('res-lbl-ant').textContent = fmtR(antR);
 
-  // ── Filtros tomate — todo el Resumen mide solo tomate ──
-  // isTomato() cubre nombres alternativos del ciclo anterior ("TOMATE BOLA", "TOMATE", etc.)
+  // ── Filtros tomate filtrados por período activo ──
   function isTomRem(r){ return (r.detalles||[]).some(d=>{ const c=(d.cultivo||'').toUpperCase(); return isRoma(c)||isBola(c)||isTomato(c); }); }
-  const tomPalets   = resPalets.filter(isCalidadPalet);
-  const tomAcarreos = resAcarreos.filter(isTomRem);
+  function inActR(d){ return d >= actR.from && d <= actR.to; }
+  const tomPalets   = resPalets.filter(p  => isCalidadPalet(p) && inActR((p.fecha_empaque||'').split('T')[0]));
+  const tomAcarreos = resAcarreos.filter(r => isTomRem(r)      && inActR((r.fecha||'').split('T')[0]));
 
   // ── Empaque KPIs (tomate) ──
   const totalBultos = tomPalets.reduce((s,r)=>s+(r.bultos||0), 0);
@@ -1690,11 +1689,12 @@ function renderResumen(){
   const basDays=Object.keys(basByDay).sort().slice(-14);
   sparkBars(document.getElementById('rv-bas-spark'), basDays.map(d=>basByDay[d]),'#1d4ed8');
 
-  // ── Inbound KPIs ──
-  if(rawInbound.length){
-    const totF = rawInbound.reduce((s,r)=>s+(r.total_frutos||0),0);
-    const sumP1 = rawInbound.reduce((s,r)=>{ const p=(r.calidades||[]).find(c=>c.calidad==='PRIMERA'); return s+(p?p.cantidad:0); },0);
-    const merms = rawInbound.filter(r=>r.merma!=null);
+  // ── Inbound KPIs — filtrado por período activo ──
+  const inbActR = rawInbound.filter(r => inActR((r.fecha||'').split('T')[0]));
+  if(inbActR.length){
+    const totF = inbActR.reduce((s,r)=>s+(r.total_frutos||0),0);
+    const sumP1 = inbActR.reduce((s,r)=>{ const p=(r.calidades||[]).find(c=>c.calidad==='PRIMERA'); return s+(p?p.cantidad:0); },0);
+    const merms = inbActR.filter(r=>r.merma!=null);
     const avgMerma = merms.length?merms.reduce((s,r)=>s+r.merma,0)/merms.length:0;
     const temps = rawInbound.filter(r=>r.temperatura_fruto!=null);
     const avgTemp = temps.length?temps.reduce((s,r)=>s+r.temperatura_fruto,0)/temps.length:0;
