@@ -2651,7 +2651,7 @@ const CHILE_CULTIVOS  = ['CHILE','JALAPEÑO','ANAHEIM','FRESNO','SERRANO','HABAN
 const TOMATO_TARGET   = { ROMA: 8.0, BOLA: 16.0 };
 
 function isRoma(c){ return (c||'').toUpperCase().includes('ROMA'); }
-function isBola(c){ return (c||'').toUpperCase().includes('ROUND'); }
+function isBola(c){ const u=(c||'').toUpperCase(); return u.includes('ROUND') || u.includes('BOLA'); }
 function isGH(c)  { return (c||'').toUpperCase().startsWith('GH '); }
 function isOF(c)  { return (c||'').toUpperCase().startsWith('OF '); }
 function isTomato(c){ const u=(c||'').toUpperCase(); return u.includes('TOMATO') || u.includes('TOMATE'); }
