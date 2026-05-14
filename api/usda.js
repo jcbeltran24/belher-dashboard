@@ -42,29 +42,31 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const today = new Date().toISOString().split('T')[0];
-  const url   = `${MARS_BASE}/${REPORT[type]}?q=report_begin_date=${today}&allSections=true`;
-  const auth  = 'Basic ' + Buffer.from(`${key}:`).toString('base64');
+  const auth = 'Basic ' + Buffer.from(`${key}:`).toString('base64');
+
+  function dateStr(offsetDays) {
+    const d = new Date();
+    d.setDate(d.getDate() + offsetDays);
+    return d.toISOString().split('T')[0];
+  }
+
+  async function fetchReport(date) {
+    const url = `${MARS_BASE}/${REPORT[type]}?q=report_begin_date=${date}&allSections=true`;
+    const r = await fetch(url, { headers: { Authorization: auth }, signal: AbortSignal.timeout(20000) });
+    if (!r.ok) throw new Error(`MARS ${r.status}`);
+    const data = await r.json();
+    const details = Array.isArray(data) ? (data.find(s => s.reportSection === 'Report Details')?.results || []) : [];
+    const header  = Array.isArray(data) ? (data.find(s => s.reportSection === 'Report Header')?.results?.[0] || {}) : {};
+    return { details, header };
+  }
 
   try {
-    const upstream = await fetch(url, {
-      headers: { Authorization: auth },
-      signal: AbortSignal.timeout(20000),
-    });
-
-    if (!upstream.ok) {
-      res.writeHead(502, CORS);
-      res.end(JSON.stringify({ error: `MARS ${upstream.status}` }));
-      return;
+    // Try today first; fall back up to 4 days (weekend/holiday gap)
+    let details = [], header = {};
+    for (let offset = 0; offset >= -4; offset--) {
+      const { details: d, header: h } = await fetchReport(dateStr(offset));
+      if (d.length > 0) { details = d; header = h; break; }
     }
-
-    const data    = await upstream.json();
-    const details = Array.isArray(data)
-      ? (data.find(s => s.reportSection === 'Report Details')?.results || [])
-      : [];
-    const header  = Array.isArray(data)
-      ? (data.find(s => s.reportSection === 'Report Header')?.results?.[0] || {})
-      : {};
 
     const prices = details
       .filter(FILTERS[type])
