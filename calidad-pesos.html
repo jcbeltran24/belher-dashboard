@@ -1239,13 +1239,16 @@ const WX_CACHE_TTL = 6 * 3600000; // 6h
 let wxData = {};   // { 'YYYY-MM-DD': { tMax, tMin, rain } }
 
 async function loadWeather(from, to){
-  const ckey = `wx:${from}:${to}`;
+  // Archive API has a ~5-day lag — cap end_date to avoid 400 errors
+  const maxAvail = new Date(); maxAvail.setDate(maxAvail.getDate() - 5);
+  const toCapped = to < iso(maxAvail) ? to : iso(maxAvail);
+  const ckey = `wx:${from}:${toCapped}`;
   try {
     const cached = JSON.parse(localStorage.getItem(ckey) || 'null');
     if(cached && Date.now() - cached.ts < WX_CACHE_TTL){ wxData = cached.d; injectWeatherAll(); return; }
   } catch(e){}
   try {
-    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${WX_LAT}&longitude=${WX_LON}&start_date=${from}&end_date=${to}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=America%2FMazatlan`;
+    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${WX_LAT}&longitude=${WX_LON}&start_date=${from}&end_date=${toCapped}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=America%2FMazatlan`;
     const r = await fetch(url);
     if(!r.ok) throw new Error(r.status);
     const j = await r.json();
