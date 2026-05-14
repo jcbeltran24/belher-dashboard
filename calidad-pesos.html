@@ -1676,7 +1676,8 @@ function renderResumen(){
   const cycles = bothCycles();
   const from   = cycles.actual.from;
   const to     = cycles.actual.to;
-  // Usar datos del ciclo completo (no activeRange)
+  // _resPalets/_resAcarreos solo cubren el ciclo actual — para períodos históricos
+  // usamos rawPalets/rawAcarreos (que van desde FULL_FROM hasta hoy)
   const resPalets   = _resPalets.length   ? _resPalets   : rawPalets.filter(p=>{ const d=(p.fecha_empaque||'').split('T')[0]; return d>=from&&d<=to; });
   const resAcarreos = _resAcarreos.length ? _resAcarreos : rawAcarreos.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
   const actR = activeRange || { from: cycles.actual.from, to: cycles.actual.to };
@@ -1689,8 +1690,9 @@ function renderResumen(){
   // ── Filtros tomate filtrados por período activo ──
   function isTomRem(r){ return (r.detalles||[]).some(d=>{ const c=(d.cultivo||'').toUpperCase(); return isRoma(c)||isBola(c)||isTomato(c); }); }
   function inActR(d){ return d >= actR.from && d <= actR.to; }
-  const tomPalets   = resPalets.filter(p  => isCalidadPalet(p) && inActR((p.fecha_empaque||'').split('T')[0]));
-  const tomAcarreos = resAcarreos.filter(r => isTomRem(r)      && inActR((r.fecha||'').split('T')[0]));
+  // Para KPIs del período: usar rawPalets/rawAcarreos (cubre histórico y ciclo actual)
+  const tomPalets   = rawPalets.filter(p  => isCalidadPalet(p) && inActR((p.fecha_empaque||'').split('T')[0]));
+  const tomAcarreos = rawAcarreos.filter(r => isTomRem(r)      && inActR((r.fecha||'').split('T')[0]));
 
   // ── Empaque KPIs (tomate) ──
   const totalBultos = tomPalets.reduce((s,r)=>s+(r.bultos||0), 0);
