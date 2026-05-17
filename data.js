@@ -2,14 +2,16 @@ window.BELHER = {
   meta: {
     fecha: "Domingo 17 May 2026",
     semana: "WK 20",
-    actualizado: "17/05/2026 · 12:00"
+    actualizado: "17/05/2026 · 13:47"
   },
 
   alertas: [
-    {"nivel":"success","texto":"OUTBOUND TOMATE 14/05 — ROMA CALAVO: 1ª 89.50% / 2ª 5.70% / 3ª 3.60% / Merma 1.20% / Peso prom. 25.49. Excelente calidad de exportación."},
-    {"nivel":"success","texto":"REPORTES GENERALES TOMATE 15/05 — Embarques Belher confirmó despacho de reportes generales de embarque y empaque. Operación nocturna completada."},
-    {"nivel":"success","texto":"REPORTE GENERAL CHILE 15/05 — Embarques Belher envió reporte general de embarque de chile. Operación nocturna completada."},
-    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 1 día para preparación. Javier Martínez inspecciona todas las unidades. Revisar inventarios críticos y documentación."},
+    {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado. Revisar actividad en myaccount.google.com."},
+    {"nivel":"success","texto":"REPORTE CALAVO 16/05 — 2 trailers despachados, 3,840 cajas de tomate. PO 265927 (TRI-29/Elogística, dest. KF, 1,920 cajas) + PO 262928 (ST-90/Transfríos Sta. Teresa, dest. NO, 1,920 cajas). Set point 50°F."},
+    {"nivel":"success","texto":"REPORTES GENERALES TOMATE 16/05 — Embarques Belher confirmó despacho de reportes generales de embarque y empaque. Operación nocturna completada (21:11 hrs)."},
+    {"nivel":"success","texto":"BILL/MANIFIESTO TOMATE 16/05 — Documentación completa despachada: Nogales ST y McAllen. Bills, manifiestos, datos transportista, facturas XML y proformas enviados."},
+    {"nivel":"warning","texto":"OUTBOUND TOMATE 15/05 — ROMA CALAVO: 1ª 85.48% / 2ª 4.43% / 3ª 5.05% / Merma 5.05% / Peso prom. 25.89. Merma más alta vs día anterior (1.20%). Monitorear calidad."},
+    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — Mañana inicia. Javier Martínez inspecciona todas las unidades. Revisar inventarios críticos y documentación."},
     {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets quitando market share."},
     {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
     {"nivel":"info","texto":"CONTRIBUCIONES POR PAGAR — IMSS-INFONAVIT + SAT: MXP 25.4M / ~$1.4M USD. IMSS-INFONAVIT MXP 21.5M vencido. Requiere atención urgente."}
@@ -587,6 +589,14 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"10:24","asunto":"Alerta de seguridad para jcbeltranochoa@gmail.com","de":"no-reply@accounts.google.com","leido":false,"fecha":"2026-05-17"},
+    {"hora":"21:33","asunto":"REPORTE DIARIO CALAVO 16-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-16"},
+    {"hora":"21:32","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES ST","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-16"},
+    {"hora":"21:31","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS MCALLEN","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-16"},
+    {"hora":"21:11","asunto":"16-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-16"},
+    {"hora":"19:02","asunto":"REPORTE DE BASCULA 16/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-16"},
+    {"hora":"14:56","asunto":"REPORTE DE BASCULA 16/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-16"},
+    {"hora":"10:09","asunto":"REPORTE DE OUTBOUND TOMATE 15/05/2026","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-16"},
     {"hora":"23:14","asunto":"15-05-2026 REPORTE GENERAL CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-15"},
     {"hora":"23:13","asunto":"15-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-15"},
     {"hora":"22:37","asunto":"REPORTE DE BASCULA 15/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-15"},
