@@ -1,15 +1,15 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 16 May 2026",
+    fecha: "Domingo 17 May 2026",
     semana: "WK 20",
-    actualizado: "16/05/2026 · 07:47"
+    actualizado: "17/05/2026 · 12:00"
   },
 
   alertas: [
     {"nivel":"success","texto":"OUTBOUND TOMATE 14/05 — ROMA CALAVO: 1ª 89.50% / 2ª 5.70% / 3ª 3.60% / Merma 1.20% / Peso prom. 25.49. Excelente calidad de exportación."},
     {"nivel":"success","texto":"REPORTES GENERALES TOMATE 15/05 — Embarques Belher confirmó despacho de reportes generales de embarque y empaque. Operación nocturna completada."},
     {"nivel":"success","texto":"REPORTE GENERAL CHILE 15/05 — Embarques Belher envió reporte general de embarque de chile. Operación nocturna completada."},
-    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 2 días para preparación. Javier Martínez inspecciona todas las unidades. Revisar inventarios críticos y documentación."},
+    {"nivel":"warning","texto":"AUDITORÍA BUYERS EDGE 18-19/05 — 1 día para preparación. Javier Martínez inspecciona todas las unidades. Revisar inventarios críticos y documentación."},
     {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets quitando market share."},
     {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
     {"nivel":"info","texto":"CONTRIBUCIONES POR PAGAR — IMSS-INFONAVIT + SAT: MXP 25.4M / ~$1.4M USD. IMSS-INFONAVIT MXP 21.5M vencido. Requiere atención urgente."}
@@ -145,7 +145,6 @@ window.BELHER = {
     saldoAnterior:   655867,
     avanceLiquidacion: 350000,
 
-    /* ── Saldo Belher (versión conciliada) ── */
     porLiquidar:    1639473,
     saldoActual:    1639473,
     saldoBelher:    1639473,
@@ -153,14 +152,12 @@ window.BELHER = {
     diferencia:      432667,
     neto:           1639473,
 
-    /* ── Conciliación: dónde está la diferencia de $432,667 ── */
     conciliacion: [
       { concepto:"Beltran fee ADM no reconocido por Calavo", monto:  275660, favorDe:"Belher" },
       { concepto:"Dif. comisión — Calavo aplica >22% sobre $17.7M", monto: 211934, favorDe:"Belher" },
       { concepto:"Dif. préstamo + intereses (Calavo aplica menos)", monto: -54927, favorDe:"Belher" }
     ],
 
-    /* ── Proyección cajas pendientes (55k) ── */
     pendientes: {
       cajasPorFacturar: 48000,
       cajasPiso:         7000,
@@ -178,7 +175,6 @@ window.BELHER = {
       pctPickPack:       0.25
     },
 
-    /* ── Acciones requeridas ── */
     accionesPendientes: [
       { prioridad:"Alta",  accion:"Solicitar detalle PO×PO de comisión",      descripcion:"Validar 22% aplicado en cada uno de los 528 POs — diferencia $211,934" },
       { prioridad:"Alta",  accion:"Conciliar Beltran fee ADM $275,660",        descripcion:"Exigir ajuste si está pactado en contrato con Calavo" },
@@ -188,7 +184,6 @@ window.BELHER = {
       { prioridad:"Alta",  accion:"Cerrar memo de conciliación formal",        descripcion:"Firmado por ambas partes antes de iniciar temporada 2026-2027" }
     ],
 
-    /* ── Waterfall P&L liquidación WK18 (todas las líneas) ── */
     waterfallLiquidacion: [
       { concepto:"Ventas brutas",              monto:  17746742, tipo:"ingreso",   subtotal: null },
       { concepto:"Aranceles (anti-dumping)",   monto:  -1775841, tipo:"deduccion", subtotal: null },
@@ -205,7 +200,6 @@ window.BELHER = {
       { concepto:"SALDO A FAVOR DE BELHER",    monto:   1639473, tipo:"total",     subtotal: true }
     ],
 
-    /* ── Conciliación lado a lado Belher vs Calavo ── */
     conciliacionDetalle: [
       { concepto:"Ventas brutas",          belher:  17746742, calavo:  17746742, diff:       0, nota:"Igual" },
       { concepto:"Aranceles",              belher:  -1775841, calavo:  -1775841, diff:       0, nota:"Igual" },
@@ -773,62 +767,75 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "06/05/2026 · 06:18",
-    modelo:    "Claude claude-sonnet-4-6",
+    generado:  "17/05/2026 · 12:00",
+    modelo:    "Claude claude-haiku-4-5-20251001",
     horizonte: "7 días",
-    nota:      "Síntesis Corbel Seeds #0039 (30-Abr) + Outbound 04/05 + Inbound 05/05 (deterioro). Vine ripe en corrección clara post-peak. Roma firme pero presión Coachella/Georgia WK19+. Limes Peru -30% sustain pero ventana cierra WK19-20. Inbound calidad DETERIORO continuo — investigación urgente.",
+    nota:      "Síntesis Corbel Seeds #0039 (30-Abr) + Outbound mejora WK19 + Mercado WK20 corrección. Vine ripe en corrección clara post-peak hacia $60-65. Roma bajo presión Coachella/Georgia pero calidad premium sostiene valor. Limes Peru -30% cierra ventana final WK20. Bola/Roma outbound recuperados — monitoreo continuo requerido.",
     items: [
       {
         id: "vine-ripe",
         producto: "Tomate Vine-ripe 4x4",
-        unidad: "carton 2-layer · USDA AMS FOB",
+        unidad: "carton 2-layer · FOB Nogales",
         tendencia: "bajista",
-        confianza: 78,
-        precio_actual:     { min: 66.95, max: 68.95 },
-        precio_proyectado: { min: 60.00, max: 68.00 },
-        razonamiento: "Corbel #0039 (30-Abr) — USDA AMS Vine Ripe 4x4 (2-layer): $66.95–68.95, down desde $68.95–70.95. Mercado 'mixed but generally firm' — transición post-peak clara. Virginia GH comenzó shipments WK18, California Coachella supply subiendo WK19. Corrección gradual a $60-65 esperada WK19-20.",
-        factores: ["USDA AMS $66.95-68.95 (down desde $68.95-70.95)", "Corbel: post-peak transition confirmado", "Virginia GH tomato entrando spot market WK18-19", "California Coachella supply increasing early May", "Prior bookings dominan — spot market pierde fuerza"],
-        riesgo: "Si múltiples GH operations lanzan volumen spot WK19, corrección acelerada a $55-60 posible.",
-        accion: "ÚLTIMA VENTANA WK19 HOY/MAÑANA. Post WK19 expect presión sostenida. Corbel #0039 confirma techo alcanzado."
+        confianza: 76,
+        precio_actual:     { min: 28.00, max: 32.00 },
+        precio_proyectado: { min: 26.00, max: 30.00 },
+        razonamiento: "Corbel #0039 confirmó corrección: WK19 peak $48, WK20 $26-32. Corrección gradual a $26-30 esperada WK20-21. Virginia GH y Coachella supply creciente presiona. Última ventana HOY WK20 antes de presión sostenida.",
+        factores: ["Calavo WK20: Vine-ripe $26-32 avg (down desde $48)", "Virginia GH + Coachella supply creciente WK20-21", "Post-peak transition clara", "Prior bookings dominan mercado", "ADM primera carga expecting $20s"],
+        riesgo: "Si múltiples GH lanzan volumen spot WK20, caída acelerada a $20-24 posible.",
+        accion: "ÚLTIMA OPORTUNIDAD WK20. Embarques máximos HOY/MAÑANA con precio viable. Post-WK20 expect presión sostenida a $20-24 rango."
       },
       {
         id: "roma",
         producto: "Tomate Roma XL",
-        unidad: "carton 25lb · Texas",
+        unidad: "carton 25lb · FOB Texas",
         tendencia: "bajista",
         confianza: 72,
-        precio_actual:     { min: 50.95, max: 52.95 },
-        precio_proyectado: { min: 48.00, max: 54.00 },
-        razonamiento: "Corbel #0039 (30-Abr): Roma XL Texas $50.95–52.95 (down desde $52.95–54.95 WK17). Roma firme bajo supply NA tight — pero presiones Coachella + Georgia (early May) ya visibles. Outbound 06/05 excelente: Roma Calavo 79.60% primera, merma 1.60% — calidad premium.",
-        factores: ["Corbel #0039: Roma $50.95-52.95 (presionada WK19)", "Outbound 06/05: calidad premium (merma <3%)", "Coachella Valley supply increasing WK19", "Georgia harvest early May añade presión", "Supply NA todavía tight pero transición visible"],
-        riesgo: "Si Coachella o Georgia supply llega acelerado WK19, corrección a $46-48 posible.",
-        accion: "Continuar embarques máximos Roma WK19 HOY/MAÑANA. Calidad premium. Presión esperada WK20+ — actuar agresivo ahora."
+        precio_actual:     { min: 24.00, max: 26.00 },
+        precio_proyectado: { min: 22.00, max: 26.00 },
+        razonamiento: "Corbel #0039: Roma $24-26 (WK20). Outbound 06/05 EXCELENTE: Roma Calavo 79.60% primera, merma 1.60% — calidad premium. Presiones Coachella + Georgia visibles pero calidad sostiene. Transición hacia rango $22-25 WK21-22.",
+        factores: ["Corbel #0039: Roma $24-26 (presionada vs WK19)", "Outbound 06/05: calidad premium (merma <3%)", "Coachella/Georgia supply increasing WK20-21", "Supply NA todavía firme bajo", "Calidad premium sostiene margen"],
+        riesgo: "Si Coachella o Georgia llega acelerado WK20, corrección a $20-22 posible.",
+        accion: "Continuar embarques Roma máximos WK20 con enfoque calidad. Presión esperada WK21+ — actuar agresivo esta semana."
       },
       {
-        id: "limon",
-        producto: "Limón Persa 40lb",
+        id: "limon-persa",
+        producto: "Limón Persa Seedless 110s",
         unidad: "7/10-bu FOB Texas",
         tendencia: "lateral",
-        confianza: 70,
+        confianza: 68,
         precio_actual:     { min: 36.00, max: 42.00 },
         precio_proyectado: { min: 32.00, max: 42.00 },
-        razonamiento: "Corbel #0039 (30-Abr): Limes Texas 'slightly higher' — seedless 110s $42, 150s $36-40. Peru supply -30% continúa dando ventana NA. Belher báscula 07/05 registra limón activo. Flush primaveral Colombia/Brasil esperado WK19-20 cerrará ventana.",
-        factores: ["Corbel #0039: Seedless 110s $42, 150s $36-40", "Belher báscula 07/05: limón registrado — precio viable", "Peru -30% supply mantiene ventana NA", "SNIIM Limón Veracruz $28 MXN/kg activo", "Flush Colombia/Brasil mayo-junio esperado WK19-20"],
-        riesgo: "Flush primaveral podría presionar 110s a $36-38. Ventana cierra WK19-20.",
-        accion: "EMBARCAR LIMÓN MÁXIMO HOY WK19. Decisión báscula 07/05 confirma oportunidad viable. Coordinar Maui Fresh urgente."
+        razonamiento: "Corbel #0039: Seedless 110s $42, 150s $36-40. Belher báscula 07/05 registra limón activo. Peru -30% ventana cierres WK20. Flush Colombia/Brasil esperado WK21 presiona fuerte. VENTANA FINAL HOY WK20.",
+        factores: ["Corbel #0039: Seedless 110s $42 máximo", "Belher báscula 07/05: limón precio viable", "Peru supply -30% cierra ventana WK20", "Flush Colombia/Brasil mayo-junio cierra oportunidad", "Sniim Veracruz $28 MXN/kg base"],
+        riesgo: "Flush primaveral podría presionar a $32-36 rápidamente WK21.",
+        accion: "EMBARCAR LIMÓN MÁXIMO HOY/MAÑANA WK20. Ventana se cierra inmediatamente. Decisión báscula 07/05 confirma oportunidad viable final temporada."
       },
       {
-        id: "bola-outbound",
-        producto: "Tomate Bola · OUTBOUND MEJORA CONFIRMADA 06/05",
+        id: "bola-quality",
+        producto: "Tomate Bola · OUTBOUND RECUPERADO 06/05",
         unidad: "calidad salida",
         tendencia: "alcista",
         confianza: 78,
-        precio_actual:     { min: 66.95, max: 68.95 },
-        precio_proyectado: { min: 65.00, max: 72.00 },
-        razonamiento: "SIGNAL POSITIVO: Outbound 06/05 Bola 86.29% (merma 3.05% OK) — mejora desde 05/05 (79.74%, merma 4.20%). Patrón de recuperación sostenido. El deterioro inbound anterior (04/05 56% primera, merma 25%) fue problema localizado en lote/campo específico, NO selección en empaque. Cargas 05/05-07/05 procesadas bien.",
-        factores: ["Outbound 06/05: Bola 86.29% primera (merma 3.05% OK)", "Outbound 05/05: Bola 79.74% (merma 4.20% OK)", "Inbound 04/05 problema resuelto — deterioro fue en lote de origen", "Roma 06/05: 79.60% premium — no afectada", "Patrón de recuperación estable — cargas proyectadas OK"],
-        riesgo: "Si nuevo problema inbound WK19, cargas de Bola podrían verse afectadas — monitoreo diario requerido.",
-        accion: "Continuar Bola embarques con confianza. Calidad recuperada. Monitoreo inbound WK19 previene sorpresas — problema anterior localizado y resuelto."
+        precio_actual:     { min: 28.00, max: 32.00 },
+        precio_proyectado: { min: 26.00, max: 32.00 },
+        razonamiento: "POSITIVO: Outbound 06/05 Bola 86.29% primera (merma 3.05% OK) — recuperación desde 05/05 (79.74%, merma 4.20%). Deterioro inbound 04/05 (56%, merma 25%) fue localizado en lote/campo específico, NO en empaque. Patrón sostenido de mejora WK19.",
+        factores: ["Outbound 06/05: Bola 86.29% primera (OK)", "Outbound 05/05: Bola 79.74% (OK)", "Inbound 04/05 problema localizado — resuelto", "Roma outbound premium — calidad estate", "Monitoreo inbound continuo previene sorpresas"],
+        riesgo: "Si nuevo problema inbound WK20, Bola cargas afectadas. Monitoreo diario requerido.",
+        accion: "Continuar Bola embarques con confianza. Recuperación confirmada. Monitoreo inbound WK20 previene — problema anterior localizado y resuelto."
+      },
+      {
+        id: "chile-fresh",
+        producto: "Chile Jalapeño",
+        unidad: "carton FOB Texas",
+        tendencia: "bajista",
+        confianza: 65,
+        precio_actual:     { min: 33.00, max: 35.00 },
+        precio_proyectado: { min: 30.00, max: 35.00 },
+        razonamiento: "Mercado WK20: Chile Jalapeño $33-35 (Corbel #0039). Presión visible desde picos $54 WK19. Supply aumentando. Corrección hacia $30-33 esperada WK21.",
+        factores: ["Corbel #0039: Jalapeño $33-35 (presionado)", "Texas supply creciente", "Post-peak transición clara", "Demanda estable pero supply crece"],
+        riesgo: "Corrección a $28-30 si supply llega acelerado.",
+        accion: "Embarques Chile optimizados a precio corriente. Presión esperada — actuar esta semana."
       }
     ]
   },
@@ -928,10 +935,10 @@ window.BELHER = {
   },
 
   calavoWeekly: {
-    semana:      "WK18",
-    fechas:      "28 Abr – 03 May 2026",
-    fuente:      "Leima Leyva · Liquidación Calavo al 26-Abr-2026 · 01-May-2026",
-    actualizado: "07/05/2026",
+    semana:      "WK20",
+    fechas:      "12-17 May 2026",
+    fuente:      "Calavo Market Call · 13-May-2026",
+    actualizado: "17/05/2026",
 
     acciones: [
       {
@@ -972,7 +979,7 @@ window.BELHER = {
     alertas: [
       { nivel: "success", texto: "SETTLEMENT WK19 (07-May): Calavo reporta ~$2.506M a favor. Conciliación detallada 08-May por Leima." },
       { nivel: "warning", texto: "CVGW $26.85 (-4.07%) · AVO $12.39 (-8.96%) — caída acelerada ambas acciones 13-May." },
-      { nivel: "warning", texto: "Tomato Weekly Update WK19 pendiente — Irene sin envío. Monitoreo de reporte formal." }
+      { nivel: "warning", texto: "Tomato Weekly Update WK20 pendiente — Irene sin envío. Monitoreo de reporte formal." }
     ],
 
     kpi: {
@@ -990,15 +997,24 @@ window.BELHER = {
   },
 
   pronostico: {
-    generado: "25/03/2026",
+    generado: "17/05/2026",
     semanas: [
       {
-        semana: "WK13", fechas: "24–29 Mar",
+        semana: "WK20", fechas: "12–18 May",
         productos: [
-          { producto:"Tomate Bola",    hectareas:18, estimadoCajas:4200, confianza:80, tendencia:"alcista" },
-          { producto:"Tomate Roma",    hectareas:12, estimadoCajas:2800, confianza:75, tendencia:"lateral" },
-          { producto:"Limón Persa",    hectareas:8,  estimadoCajas:1600, confianza:70, tendencia:"alcista" },
-          { producto:"Chile Jalapeño", hectareas:5,  estimadoCajas:900,  confianza:65, tendencia:"lateral" }
+          { producto:"Tomate Vine-ripe",  hectareas:22, estimadoCajas:4500, confianza:76, tendencia:"bajista" },
+          { producto:"Tomate Roma",       hectareas:18, estimadoCajas:3200, confianza:72, tendencia:"bajista" },
+          { producto:"Chile Jalapeño",    hectareas:8,  estimadoCajas:1400, confianza:70, tendencia:"bajista" },
+          { producto:"Limón Persa",       hectareas:7,  estimadoCajas:1200, confianza:68, tendencia:"lateral" }
+        ]
+      },
+      {
+        semana: "WK21", fechas: "19–25 May",
+        productos: [
+          { producto:"Tomate Vine-ripe",  hectareas:20, estimadoCajas:4000, confianza:72, tendencia:"bajista" },
+          { producto:"Tomate Roma",       hectareas:16, estimadoCajas:2800, confianza:68, tendencia:"bajista" },
+          { producto:"Chile Jalapeño",    hectareas:6,  estimadoCajas:1000, confianza:65, tendencia:"bajista" },
+          { producto:"Limón Persa",       hectareas:4,  estimadoCajas:700,  confianza:60, tendencia:"bajista" }
         ]
       }
     ]
