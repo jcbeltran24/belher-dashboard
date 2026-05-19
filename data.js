@@ -1,16 +1,15 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 18 May 2026",
+    fecha: "Martes 19 May 2026",
     semana: "WK 21",
-    actualizado: "18/05/2026 · 15:49"
+    actualizado: "19/05/2026 · 15:40"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"🔍 AUDITORÍA BUYERS EDGE HOY 18-19/05 — En curso. Javier Martínez inspeccionando todas las unidades. Verificar inventarios críticos y documentación completa."},
+    {"nivel":"success","texto":"REPORTES GENERALES EMBARQUE 18/05 — Embarques Belher confirmó envío de reportes de embarque y empaque de tomate. Operación nocturna completada."},
+    {"nivel":"success","texto":"ADJUNTOS BÁSCULAS 18/05 (descargados 19-May 07:53) — 5 archivos procesados: Rezaga de Tomate, Listado Diario (Tomate), Diario de Báscula (Tomate), Acarreo Diario (Tomate) + Plantilla de Calidad Outbound. Guardados en Drive: Belher Adjuntos."},
     {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado en myaccount.google.com."},
     {"nivel":"success","texto":"REPORTE CALAVO 16/05 — 2 trailers despachados, 3,840 cajas de tomate. PO 265927 (TRI-29/Elogística, dest. KF, 1,920 cajas) + PO 262928 (ST-90/Transfríos Sta. Teresa, dest. NO, 1,920 cajas). Set point 50°F."},
-    {"nivel":"success","texto":"REPORTES GENERALES TOMATE & CHILE 16/05 — Embarques Belher confirmó despacho de reportes generales de embarque y empaque. Operación nocturna completada."},
-    {"nivel":"success","texto":"BILL/MANIFIESTO TOMATE 16/05 — Documentación completa despachada: Nogales ST y McAllen. Bills, manifiestos, datos transportista, facturas XML y proformas enviados."},
     {"nivel":"warning","texto":"OUTBOUND TOMATE 15/05 — ROMA CALAVO: 1ª 85.48% / 2ª 4.43% / 3ª 5.05% / Merma 5.05% / Peso prom. 25.89. Merma elevada. Monitorear calidad."},
     {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets."},
     {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
@@ -589,6 +588,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 5 archivos (19-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-19"},
+    {"hora":"20:14","asunto":"18-05-2026 REPORTES GENERALES","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-18"},
     {"hora":"10:24","asunto":"Alerta de seguridad para jcbeltranochoa@gmail.com","de":"no-reply@accounts.google.com","leido":false,"fecha":"2026-05-17"},
     {"hora":"21:33","asunto":"REPORTE DIARIO CALAVO 16-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-16"},
     {"hora":"21:32","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES ST","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-16"},
