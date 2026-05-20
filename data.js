@@ -1,16 +1,19 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 19 May 2026",
+    fecha: "Miércoles 20 May 2026",
     semana: "WK 21",
-    actualizado: "19/05/2026 · 15:40"
+    actualizado: "20/05/2026 · 15:41"
   },
 
   alertas: [
-    {"nivel":"success","texto":"REPORTES GENERALES EMBARQUE 18/05 — Embarques Belher confirmó envío de reportes de embarque y empaque de tomate. Operación nocturna completada."},
-    {"nivel":"success","texto":"ADJUNTOS BÁSCULAS 18/05 (descargados 19-May 07:53) — 5 archivos procesados: Rezaga de Tomate, Listado Diario (Tomate), Diario de Báscula (Tomate), Acarreo Diario (Tomate) + Plantilla de Calidad Outbound. Guardados en Drive: Belher Adjuntos."},
+    {"nivel":"info","texto":"📅 REUNIÓN CONTRATO ABSA-CALAVO — Jue 21 May · 1:30–2:30 pm (GMT-7). Zoom: 882 2811 3382 / clave 716942. Anfitrión: Juan Antonio Cruz (jacruz@agbelher.com). Agenda: contrato de distribución."},
+    {"nivel":"success","texto":"ADJUNTOS BÁSCULAS 20/05 (descargados 07:53) — 9 archivos procesados: Rezaga de Tomate 19/05, Listado Diario Limón Persa 19/05, y 7 adicionales. Guardados en Drive: Belher Adjuntos."},
+    {"nivel":"success","texto":"REPORTES GENERALES TOMATE 19/05 — Embarques Belher confirmó envío de reportes de embarque y empaque de tomate. Operación nocturna completada."},
+    {"nivel":"success","texto":"MANIFIESTO LIMÓN PERSA + CHILE HABANERO/FRESNO 19/05 — Chofer: Cristhian Gabriel Franco Barraza (667-429-3236). Caja CGG-116 (placas 992XS7): Limón Persa + Chile Habanero. Caja CGG-134 (placas 85UE82): Chile Anaheim + Fresno. Destino Nogales CGG."},
+    {"nivel":"success","texto":"BILL/MANIFIESTOS TOMATE NOGALES CGG 19/05 — Embarques Belher envió documentos completos: bill of lading, manifiesto, datos transportista, facturas XML y proformas."},
+    {"nivel":"success","texto":"REPORTES GENERALES LIMÓN Y CHILE 19/05 — Embarques Belher confirmó envío de reportes generales de empaque y embarque de limón persa y chile."},
+    {"nivel":"warning","texto":"OUTBOUND TOMATE 18/05 — BOLA YAMETO: 1ª 74.40% / 2ª 15.60% / 3ª 4.80% / Merma 5.20% / Peso prom. 32.59. BOLA TOLIN: 1ª 63.64% / Merma 5.45%. ROMA CALAVO: 1ª 82.13% / Merma 2.80% / Peso prom. 25.89. ROMA YAMETO: 1ª 75.60% / Merma 6.00%."},
     {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado en myaccount.google.com."},
-    {"nivel":"success","texto":"REPORTE CALAVO 16/05 — 2 trailers despachados, 3,840 cajas de tomate. PO 265927 (TRI-29/Elogística, dest. KF, 1,920 cajas) + PO 262928 (ST-90/Transfríos Sta. Teresa, dest. NO, 1,920 cajas). Set point 50°F."},
-    {"nivel":"warning","texto":"OUTBOUND TOMATE 15/05 — ROMA CALAVO: 1ª 85.48% / 2ª 4.43% / 3ª 5.05% / Merma 5.05% / Peso prom. 25.89. Merma elevada. Monitorear calidad."},
     {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets."},
     {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
     {"nivel":"info","texto":"CONTRIBUCIONES POR PAGAR — IMSS-INFONAVIT + SAT: MXP 25.4M / ~$1.4M USD. IMSS-INFONAVIT MXP 21.5M vencido. Requiere atención urgente."}
@@ -588,6 +591,16 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:54","asunto":"✅ Belher Adjuntos — 9 archivos (20-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-20"},
+    {"hora":"21:20","asunto":"19-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
+    {"hora":"20:35","asunto":"MANIFIESTO DE CARGA DE LIMON PERSA-CHILE HABANERO Y FRESNO","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
+    {"hora":"20:34","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
+    {"hora":"20:32","asunto":"19-05-2026 REPORTES GENERALES LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
+    {"hora":"20:30","asunto":"19-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
+    {"hora":"16:27","asunto":"Invitación: Contrato de Distribución ABSA-CALAVO jue 21 de may de 2026 1:30pm - 2:30pm","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-05-19"},
+    {"hora":"16:47","asunto":"REPORTE DE BASCULA 19/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-19"},
+    {"hora":"15:28","asunto":"REPORTE DE BASCULA 19/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-19"},
+    {"hora":"10:17","asunto":"REPORTE DE OUTBOUND TOMATE 18/05/2026","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-19"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 5 archivos (19-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-19"},
     {"hora":"20:14","asunto":"18-05-2026 REPORTES GENERALES","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-18"},
     {"hora":"10:24","asunto":"Alerta de seguridad para jcbeltranochoa@gmail.com","de":"no-reply@accounts.google.com","leido":false,"fecha":"2026-05-17"},
