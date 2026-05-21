@@ -1,17 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 20 May 2026",
+    fecha: "Jueves 21 May 2026",
     semana: "WK 21",
-    actualizado: "20/05/2026 · 15:41"
+    actualizado: "21/05/2026 · 08:43"
   },
 
   alertas: [
-    {"nivel":"info","texto":"📅 REUNIÓN CONTRATO ABSA-CALAVO — Jue 21 May · 1:30–2:30 pm (GMT-7). Zoom: 882 2811 3382 / clave 716942. Anfitrión: Juan Antonio Cruz (jacruz@agbelher.com). Agenda: contrato de distribución."},
+    {"nivel":"warning","texto":"📅 HOY — REUNIÓN CONTRATO ABSA-CALAVO · Jue 21 May · 1:30–2:30 pm (GMT-7). Zoom: 882 2811 3382 / clave 716942. Anfitrión: Juan Antonio Cruz (jacruz@agbelher.com). Agenda: contrato de distribución."},
+    {"nivel":"success","texto":"ADJUNTOS BÁSCULAS 21/05 (descargados 07:53) — 9 archivos: Diario, Listado y Acarreo Limón Persa 20/05 · Diario, Listado y Acarreo Tomate 20/05 · Weekly Sales WK47 (25-26 Mayo) · Plantilla Calidad Outbound. Guardados en Drive: Belher Adjuntos."},
     {"nivel":"success","texto":"ADJUNTOS BÁSCULAS 20/05 (descargados 07:53) — 9 archivos procesados: Rezaga de Tomate 19/05, Listado Diario Limón Persa 19/05, y 7 adicionales. Guardados en Drive: Belher Adjuntos."},
     {"nivel":"success","texto":"REPORTES GENERALES TOMATE 19/05 — Embarques Belher confirmó envío de reportes de embarque y empaque de tomate. Operación nocturna completada."},
     {"nivel":"success","texto":"MANIFIESTO LIMÓN PERSA + CHILE HABANERO/FRESNO 19/05 — Chofer: Cristhian Gabriel Franco Barraza (667-429-3236). Caja CGG-116 (placas 992XS7): Limón Persa + Chile Habanero. Caja CGG-134 (placas 85UE82): Chile Anaheim + Fresno. Destino Nogales CGG."},
     {"nivel":"success","texto":"BILL/MANIFIESTOS TOMATE NOGALES CGG 19/05 — Embarques Belher envió documentos completos: bill of lading, manifiesto, datos transportista, facturas XML y proformas."},
-    {"nivel":"success","texto":"REPORTES GENERALES LIMÓN Y CHILE 19/05 — Embarques Belher confirmó envío de reportes generales de empaque y embarque de limón persa y chile."},
     {"nivel":"warning","texto":"OUTBOUND TOMATE 18/05 — BOLA YAMETO: 1ª 74.40% / 2ª 15.60% / 3ª 4.80% / Merma 5.20% / Peso prom. 32.59. BOLA TOLIN: 1ª 63.64% / Merma 5.45%. ROMA CALAVO: 1ª 82.13% / Merma 2.80% / Peso prom. 25.89. ROMA YAMETO: 1ª 75.60% / Merma 6.00%."},
     {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado en myaccount.google.com."},
     {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets."},
@@ -591,6 +591,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:54","asunto":"✅ Belher Adjuntos — 9 archivos (21-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-21"},
     {"hora":"07:54","asunto":"✅ Belher Adjuntos — 9 archivos (20-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-20"},
     {"hora":"21:20","asunto":"19-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
     {"hora":"20:35","asunto":"MANIFIESTO DE CARGA DE LIMON PERSA-CHILE HABANERO Y FRESNO","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
