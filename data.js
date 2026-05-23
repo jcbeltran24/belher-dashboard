@@ -1,19 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 22 May 2026",
+    fecha: "Sábado 23 May 2026",
     semana: "WK 21",
-    actualizado: "22/05/2026 · 14:52"
+    actualizado: "23/05/2026 · 13:51"
   },
 
   alertas: [
-    {"nivel":"success","texto":"REPORTES GENERALES TOMATE 21/05 — Embarques Belher confirmó envío de reportes de embarque y empaque de tomate nocturno (18:20). Operación completada."},
-    {"nivel":"success","texto":"BÁSCULAS 21/05 — Reportes de tomate (15:36) y rezaga de tomate (16:50) del día 21/05/2026 recibidos y procesados desde Báscula Belher."},
-    {"nivel":"warning","texto":"📅 HOY — REUNIÓN CONTRATO ABSA-CALAVO · Jue 21 May · 1:30–2:30 pm (GMT-7). Zoom: 882 2811 3382 / clave 716942. Anfitrión: Juan Antonio Cruz (jacruz@agbelher.com). Agenda: contrato de distribución."},
-    {"nivel":"success","texto":"ADJUNTOS BÁSCULAS 21/05 (descargados 07:53) — 9 archivos: Diario, Listado y Acarreo Limón Persa 20/05 · Diario, Listado y Acarreo Tomate 20/05 · Weekly Sales WK47 (25-26 Mayo) · Plantilla Calidad Outbound. Guardados en Drive: Belher Adjuntos."},
-    {"nivel":"success","texto":"ADJUNTOS BÁSCULAS 20/05 (descargados 07:53) — 9 archivos procesados: Rezaga de Tomate 19/05, Listado Diario Limón Persa 19/05, y 7 adicionales. Guardados en Drive: Belher Adjuntos."},
-    {"nivel":"success","texto":"REPORTES GENERALES TOMATE 19/05 — Embarques Belher confirmó envío de reportes de embarque y empaque de tomate. Operación nocturna completada."},
-    {"nivel":"success","texto":"MANIFIESTO LIMÓN PERSA + CHILE HABANERO/FRESNO 19/05 — Chofer: Cristhian Gabriel Franco Barraza (667-429-3236). Caja CGG-116 (placas 992XS7): Limón Persa + Chile Habanero. Caja CGG-134 (placas 85UE82): Chile Anaheim + Fresno. Destino Nogales CGG."},
-    {"nivel":"warning","texto":"OUTBOUND TOMATE 18/05 — BOLA YAMETO: 1ª 74.40% / 2ª 15.60% / 3ª 4.80% / Merma 5.20% / Peso prom. 32.59. BOLA TOLIN: 1ª 63.64% / Merma 5.45%. ROMA CALAVO: 1ª 82.13% / Merma 2.80% / Peso prom. 25.89. ROMA YAMETO: 1ª 75.60% / Merma 6.00%."},
+    {"nivel":"warning","texto":"⚖️ CONTRATO CALAVO 2026-2029 — JC envió versión final con comentarios y minuta ejecutiva (22 May, 13:19). Incluye cláusula 15 revisada: mecanismo de revisión anual + cláusula de salida flexible. Paquete listo para enviar a Irene la próxima semana. Pendiente revisión de Armando, Antonio y Juan José."},
+    {"nivel":"info","texto":"💰 LIQUIDACIÓN CALAVO al 16-May-26 — 962K cajas enviadas / 933K facturadas / 4K en piso / 11K por facturar / 14K rework. Saldo a favor Belher: USD 3,225K. Precio promedio mayo: USD 21.94. Ventas brutas: USD 21.1M | Aranceles: $2.19M | Comisiones: $2.27M | Venta neta: $15.09M. Armando revisará con JC, Antonio y Leima en Culiacán la próxima semana."},
+    {"nivel":"warning","texto":"🔍 CONCILIACIÓN CALAVO $2.3M — 4 puntos pendientes representan ~$453K. Armando urge contactar a Irene en conjunto la próxima semana (historial: semanas en resolver). Coordinación: Armando + Antonio + JC + Leima en Culiacán."},
+    {"nivel":"success","texto":"REPORTES GENERALES 22/05 — Embarques Belher confirmó envío de reportes de embarque y empaque (20:18). Operación nocturna completada."},
+    {"nivel":"success","texto":"BÁSCULAS 22/05 — Reportes de tomate (16:13) y rezaga de tomate (16:41) del día 22/05/2026 recibidos desde Báscula Belher."},
+    {"nivel":"info","texto":"INFORME DE PAGO 22/05 — Sistema automático Belher emitió informe de pago Folio 16220520260001 (22/05/2026). Proveedor: Juan Carlos Beltrán Ochoa. RFC: ABE180411CB8."},
     {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado en myaccount.google.com."},
     {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets."},
     {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
@@ -592,6 +590,11 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"20:18","asunto":"22-05-2026 REPORTES GENERALES","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-22"},
+    {"hora":"16:41","asunto":"REPORTE DE BASCULA 22/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-22"},
+    {"hora":"16:31","asunto":"Informe de Pago — Folio 16220520260001","de":"server_send@agbelher.com","leido":false,"fecha":"2026-05-22"},
+    {"hora":"16:13","asunto":"REPORTE DE BASCULA 22/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-22"},
+    {"hora":"13:19","asunto":"Contrato Calavo 2026-2029 — Versión final con comentarios y minuta","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-22"},
     {"hora":"18:20","asunto":"21-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-21"},
     {"hora":"16:50","asunto":"REPORTE DE BASCULA 21/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-21"},
     {"hora":"15:36","asunto":"REPORTE DE BASCULA 21/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-21"},
