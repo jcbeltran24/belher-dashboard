@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Sábado 23 May 2026",
     semana: "WK 21",
-    actualizado: "23/05/2026 · 13:51"
+    actualizado: "23/05/2026 · 18:36"
   },
 
   alertas: [
@@ -788,9 +788,6 @@ window.BELHER = {
       }
     ],
     proximos: [
-      { fecha:"14/05/2026",    evento:"Update cajas 2lb Viva Program — llamada con Jesús Díaz Ledezma (CECSO). Confirmar muestras y timeline producción julio.", tipo:"operativo", participantes:"JC · Jesús Díaz Ledezma · CECSO" },
-      { fecha:"18-19/05/2026", evento:"Auditoría Cliente Calavo — Buyers Edge (Javier Martínez). Inspeccionará todas las unidades de producción y empaque.", tipo:"auditoria", participantes:"C. Marisol Castro · JC · Calavo Buyers Edge" },
-      { fecha:"19/05/2026",    evento:"BPSI F/S Abril 2026 y forecast Q2 2026 — Zoom 11am-12pm (GMT-7)", tipo:"financiero", participantes:"Leima · Jacruz · JC · Armando Llanes" },
       { fecha:"25/05/2026",    evento:"Abril '26 F/S (Tomates/Limones/Granos) — Revisión final · 9:30-10:30am", tipo:"financiero", participantes:"JC · Antonio · Leima · Armando · Jacruz · Despacho Terrazas" },
       { fecha:"25/05/2026",    evento:"ABSA Revisión declaración final ISR 2025 y PTU · 11am-12pm", tipo:"financiero", participantes:"JC · Antonio · Armando · Jacruz · fcalderon@cryasociados.com" },
       { fecha:"25/05/2026",    evento:"Reunión alineación Contrato 2026-2029 — John Lindeman · James Snyder · Irene Amezaga · Armando Llanes", tipo:"reunion", participantes:"Antonio, JC, Calavo, Armando Llanes, Notaría 97" },
