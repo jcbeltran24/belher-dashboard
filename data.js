@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 23 May 2026",
+    fecha: "Viernes 23 May 2026",
     semana: "WK 21",
-    actualizado: "23/05/2026 · 18:36"
+    actualizado: "23/05/2026 · 21:15"
   },
 
   alertas: [
@@ -673,8 +673,8 @@ window.BELHER = {
     { label:"Vine Ripe 4x4/4x5 WK20",      valor:"$28–32/cj",                   cambio:"down desde $48 WK19",         dir:"down"    },
     { label:"Roma XL WK20",               valor:"$24–26/cj",                   cambio:"down desde $50.95 WK19",     dir:"down"    },
     { label:"Limes seedless 110s",         valor:"$42/bu",                       cambio:"Peru -30% sostiene",         dir:"up"      },
-    { label:"CVGW (Calavo)",               valor:"$26.46",                       cambio:"-1.31%",                     dir:"down"    },
-    { label:"AVO (Mission)",               valor:"$11.94",                       cambio:"-3.40%",                     dir:"down"    },
+    { label:"CVGW (Calavo)",               valor:"$28.03",                       cambio:"+4.56%",                     dir:"up"      },
+    { label:"AVO (Mission)",               valor:"$12.20",                       cambio:"-1.29%",                     dir:"down"    },
     { label:"Sorgo trilla acumulada",      valor:"292 ha",                       cambio:"21 jornadas (31/Mar–06/May)", dir:"up"      },
     { label:"Corbel Seeds última",         valor:"#0039",                        cambio:"30-Abr",                     dir:"neutral" }
   ],
@@ -972,15 +972,15 @@ window.BELHER = {
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 26.46, prevClose: 26.81, cambio: -0.35, cambioPct: -1.31,
+        precio: 28.03, prevClose: 26.81, cambio: 1.22, cambioPct: 4.56,
         h52: 28.98, l52: 18.40, volumen: 313400,
-        fuente: "Yahoo Finance · 22-May-2026"
+        fuente: "Yahoo Finance · 23-May-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 11.94, prevClose: 12.36, cambio: -0.42, cambioPct: -3.40,
+        precio: 12.20, prevClose: 12.36, cambio: -0.16, cambioPct: -1.29,
         h52: 15.53, l52: 10.00, volumen: 1004114,
-        fuente: "Yahoo Finance · 22-May-2026"
+        fuente: "Yahoo Finance · 23-May-2026"
       }
     ],
 
@@ -1007,7 +1007,7 @@ window.BELHER = {
 
     alertas: [
       { nivel: "success", texto: "SETTLEMENT WK19 (07-May): Calavo reporta ~$2.506M a favor. Conciliación detallada 08-May por Leima." },
-      { nivel: "warning", texto: "CVGW $26.46 (-1.31%) · AVO $11.94 (-3.40%) — sector avocado sigue bajo presión." },
+      { nivel: "warning", texto: "CVGW $28.03 (+4.56%) · AVO $12.20 (-1.29%) — repunte en Calavo. Monitoreo en Mission Produce." },
       { nivel: "warning", texto: "Tomato Weekly Update WK20 pendiente — Irene sin envío. Monitoreo de reporte formal." }
     ],
 
