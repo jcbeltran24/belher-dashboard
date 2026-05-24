@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 23 May 2026",
+    fecha: "Domingo 24 May 2026",
     semana: "WK 21",
-    actualizado: "23/05/2026 · 21:15"
+    actualizado: "24/05/2026 · 13:49"
   },
 
   alertas: [
+    {"nivel":"success","texto":"REPORTES GENERALES 23/05 — Embarques Belher confirmó envío de reportes de embarque y empaque de tomate (19:13). Operación nocturna completada."},
+    {"nivel":"success","texto":"📎 ADJUNTOS BELHER 23/05 — 6 archivos descargados a Drive (07:53): Báscula rezaga, Diario de báscula, Listado diario, Acarreo diario (tomate 22-May), Settlement Calavo WK21 (16-May), Plantilla de calidad outbound."},
     {"nivel":"warning","texto":"⚖️ CONTRATO CALAVO 2026-2029 — JC envió versión final con comentarios y minuta ejecutiva (22 May, 13:19). Incluye cláusula 15 revisada: mecanismo de revisión anual + cláusula de salida flexible. Paquete listo para enviar a Irene la próxima semana. Pendiente revisión de Armando, Antonio y Juan José."},
     {"nivel":"info","texto":"💰 LIQUIDACIÓN CALAVO al 16-May-26 — 962K cajas enviadas / 933K facturadas / 4K en piso / 11K por facturar / 14K rework. Saldo a favor Belher: USD 3,225K. Precio promedio mayo: USD 21.94. Ventas brutas: USD 21.1M | Aranceles: $2.19M | Comisiones: $2.27M | Venta neta: $15.09M. Armando revisará con JC, Antonio y Leima en Culiacán la próxima semana."},
     {"nivel":"warning","texto":"🔍 CONCILIACIÓN CALAVO $2.3M — 4 puntos pendientes representan ~$453K. Armando urge contactar a Irene en conjunto la próxima semana (historial: semanas en resolver). Coordinación: Armando + Antonio + JC + Leima en Culiacán."},
-    {"nivel":"success","texto":"REPORTES GENERALES 22/05 — Embarques Belher confirmó envío de reportes de embarque y empaque (20:18). Operación nocturna completada."},
-    {"nivel":"success","texto":"BÁSCULAS 22/05 — Reportes de tomate (16:13) y rezaga de tomate (16:41) del día 22/05/2026 recibidos desde Báscula Belher."},
     {"nivel":"info","texto":"INFORME DE PAGO 22/05 — Sistema automático Belher emitió informe de pago Folio 16220520260001 (22/05/2026). Proveedor: Juan Carlos Beltrán Ochoa. RFC: ABE180411CB8."},
     {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado en myaccount.google.com."},
     {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets."},
@@ -590,6 +590,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"19:13","asunto":"23-05-2026 REPORTES GENERALES","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-23"},
+    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 6 archivos (23-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-23"},
     {"hora":"20:18","asunto":"22-05-2026 REPORTES GENERALES","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-22"},
     {"hora":"16:41","asunto":"REPORTE DE BASCULA 22/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-22"},
     {"hora":"16:31","asunto":"Informe de Pago — Folio 16220520260001","de":"server_send@agbelher.com","leido":false,"fecha":"2026-05-22"},
