@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 24 May 2026",
+    fecha: "Lunes 25 May 2026",
     semana: "WK 21",
-    actualizado: "24/05/2026 · 13:49"
+    actualizado: "25/05/2026 · 15:21"
   },
 
   alertas: [
+    {"nivel":"info","texto":"🌱 REUNIÓN CORBEL SEEDS 25/05 — Invitación actualizada por Raymundo Elizalde: Corbel Seeds (Comunicación) hoy lunes 25 May, 9:30–11:30am (GMT-7) vía Zoom. Hora y descripción modificadas. Zoom: https://zoom.us/j/98625841657"},
     {"nivel":"success","texto":"REPORTES GENERALES 23/05 — Embarques Belher confirmó envío de reportes de embarque y empaque de tomate (19:13). Operación nocturna completada."},
     {"nivel":"success","texto":"📎 ADJUNTOS BELHER 23/05 — 6 archivos descargados a Drive (07:53): Báscula rezaga, Diario de báscula, Listado diario, Acarreo diario (tomate 22-May), Settlement Calavo WK21 (16-May), Plantilla de calidad outbound."},
     {"nivel":"warning","texto":"⚖️ CONTRATO CALAVO 2026-2029 — JC envió versión final con comentarios y minuta ejecutiva (22 May, 13:19). Incluye cláusula 15 revisada: mecanismo de revisión anual + cláusula de salida flexible. Paquete listo para enviar a Irene la próxima semana. Pendiente revisión de Armando, Antonio y Juan José."},
@@ -590,6 +591,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"00:09","asunto":"Invitación actualizada: Corbel Seeds (Comunicacion) lun 25 de may 9:30am–11:30am","de":"ray@agbelher.com","leido":false,"fecha":"2026-05-25"},
     {"hora":"19:13","asunto":"23-05-2026 REPORTES GENERALES","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-23"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 6 archivos (23-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-23"},
     {"hora":"20:18","asunto":"22-05-2026 REPORTES GENERALES","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-22"},
