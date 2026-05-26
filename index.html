@@ -554,21 +554,21 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
   <!-- ══ PANEL: RESUMEN ════════════════════════════════════ -->
   <div class="panel active" id="panel-resumen">
 
-    <!-- Precios de Mercado LA Terminal — arriba de todo -->
-    <div class="sec">Precios Destino LA Terminal <span class="sec-tag" id="mkt-date">—</span></div>
+    <!-- Precios de Mercado USDA — arriba de todo -->
+    <div class="sec">Precios de Mercado USDA <span class="sec-tag" id="mkt-date">—</span></div>
     <div style="font-size:var(--t-nano);color:var(--muted);opacity:.7;margin:-6px 0 8px;padding:0 2px">
-      Precio de llegada en Los Ángeles (USDA Market News) · No es FOB Nogales
+      Tomate: FOB cruce Nogales / McAllen-Laredo (IX_FV120) · Limón y chile: llegada LA Terminal
     </div>
     <div class="mkt-grid" style="margin-bottom:10px">
       <div class="mkt-card">
         <div class="mkt-name">Tomate Bola</div>
         <div class="mkt-price" id="mkt-bola-val"><span class="skel"></span></div>
-        <div class="mkt-sub">Destino LA · 25 lb · MX</div>
+        <div class="mkt-sub">FOB cruce · Vine Ripe · MX</div>
       </div>
       <div class="mkt-card">
         <div class="mkt-name">Tomate Roma</div>
         <div class="mkt-price" id="mkt-roma-val"><span class="skel"></span></div>
-        <div class="mkt-sub">Destino LA · 25 lb · MX</div>
+        <div class="mkt-sub">FOB cruce · 25 lb · MX</div>
       </div>
       <div class="mkt-card">
         <div class="mkt-name">Limón Persa</div>
@@ -4260,20 +4260,16 @@ async function loadMarketPrices(){
     return;
   }
   try {
-    const [veg, frt] = await Promise.all([
+    // Tomate → FOB cruce (PDF IX_FV120, sin key). Limón/chile → LA Terminal (MARS API, requiere key).
+    const [fob, veg, frt] = await Promise.all([
+      fetch('/usda-fob').then(r => r.ok ? r.json() : null).catch(()=>null),
       fetch('/usda?type=vegetables').then(r => r.ok ? r.json() : null).catch(()=>null),
       fetch('/usda?type=fruits').then(r => r.ok ? r.json() : null).catch(()=>null),
     ]);
     const prices = veg?.prices || [];
     const fruits = frt?.prices || [];
-    const date   = veg?.report_date || frt?.report_date || '';
+    const date   = fob?.report_date_us || veg?.report_date || frt?.report_date || '';
 
-    const bolaRows  = prices.filter(r =>
-      /tomato/i.test(r.commodity) && !/plum|cherry|grape/i.test(r.commodity) &&
-      /mexico/i.test(r.origin) && !/greenhouse/i.test(r.environment||'') &&
-      /25 lb/i.test(r.package||'')
-    );
-    const romaRows  = prices.filter(r => /plum/i.test(r.commodity) && /mexico/i.test(r.origin));
     const limeRows  = fruits.filter(r => /lime/i.test(r.commodity) && /mexico/i.test(r.origin));
     const chileRows = prices.filter(r =>
       /habanero/i.test(r.commodity) && /mexico/i.test(r.origin)
@@ -4285,7 +4281,13 @@ async function loadMarketPrices(){
       return los.length ? { lo: Math.min(...los), hi: Math.max(...his) } : null;
     }
 
-    const data = { date, bola: mkRange(bolaRows), roma: mkRange(romaRows), lime: mkRange(limeRows), chile: mkRange(chileRows) };
+    const data = {
+      date,
+      bola:  fob?.bola || null,   // Vine Ripe FOB (Nogales + McAllen/Laredo)
+      roma:  fob?.roma || null,   // Roma 25 lb FOB
+      lime:  mkRange(limeRows),
+      chile: mkRange(chileRows),
+    };
     _mktCache = { ts: Date.now(), data };
     renderMarketPrices(data);
   } catch(e){ console.warn('loadMarketPrices', e); }
