@@ -1,0 +1,12 @@
+# Versiones anteriores del dashboard — se conservan en el repo/disco como
+# histórico, pero NO se publican en producción para que no se entrelacen con
+# la versión viva (index.html · "Operaciones Belher") ni reaparezcan/descarguen.
+index.html.bak
+index.html.bak2
+data.js.bak
+legacy.html
+dashboard_belher.html
+hoy_redesign.html
+
+# Respaldos y artefactos locales
+*.bak
