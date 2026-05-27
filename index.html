@@ -3016,10 +3016,10 @@ function renderBalance(){
   const _splitDelta  = Math.abs(_fieldRomaSh - _packRomaSh);
   const _noteEl = document.getElementById('bal-split-note');
   if(_noteEl) _noteEl.innerHTML =
-    '<b>¿Por qué la eficiencia por variedad puede pasar de 100%?</b><br>' +
-    'La báscula pesa cada camión <b>completo</b> (Roma y Bola revueltos), no por separado. Para dividir la cosecha por variedad, el sistema usa la <b>proporción estimada por el capturista en campo</b>; el empaque, en cambio, registra la variedad <b>exacta</b> de cada palet.<br>' +
-    'En este período el campo estimó <b>Roma ' + fN(_fieldRomaSh,1) + '% / Bola ' + fN(100-_fieldRomaSh,1) + '%</b>, pero lo realmente empacado fue <b>Roma ' + fN(_packRomaSh,1) + '% / Bola ' + fN(100-_packRomaSh,1) + '%</b> — una diferencia de <b>' + fN(_splitDelta,1) + ' puntos</b>. Por eso una variedad pasa de 100% y la otra queda por debajo, aunque <b>el total del ciclo (' + fN(efic,1) + '%) es exacto</b> porque el peso total de báscula sí es real.<br>' +
-    '👉 <b>No significa que se empacó más de lo cosechado</b> (es físicamente imposible): significa que el desglose Roma/Bola de la cosecha es un estimado. Para eliminarlo habría que pesar Roma y Bola por separado en báscula.';
+    '<b>¿Por qué la eficiencia puede pasar de 100%?</b> Hay dos causas, según el período que veas:<br>' +
+    '<b>1) Desfase de tiempo (tomate en piso / gas).</b> El tomate cosechado un día se empaca <b>días después</b> (queda en piso o en cámara de gas). Por eso el empaque de un día o período corto incluye fruta cosechada antes, y al compararlo contra la cosecha de esa misma ventana puede dar más de 100%. Es timing, no producto extra.<br>' +
+    '<b>2) Split Roma/Bola estimado.</b> La báscula pesa cada camión <b>completo</b> (Roma y Bola revueltos); el reparto por variedad de la <b>cosecha</b> lo estima el capturista en campo, mientras que el empaque tiene la variedad <b>exacta</b> por palet. En este período el campo estimó <b>Roma ' + fN(_fieldRomaSh,1) + '% / Bola ' + fN(100-_fieldRomaSh,1) + '%</b> vs. empacado real <b>Roma ' + fN(_packRomaSh,1) + '% / Bola ' + fN(100-_packRomaSh,1) + '%</b> (' + fN(_splitDelta,1) + ' pts de diferencia) — por eso una variedad pasa de 100% y la otra queda debajo.<br>' +
+    '👉 <b>El total del ciclo (' + fN(efic,1) + '%) es exacto</b>: de hecho se empaca <b>menos</b> de lo cosechado (el resto es merma). Nunca se empaca más de lo cosechado en la realidad — el >100% es desfase de tiempo y/o split estimado, no producto de más.';
 
   // Sankeys — swap temporal de rawPalets/rawAcarreos para que renderSankey use datos del período
   const _sp=rawPalets, _sa=rawAcarreos;
