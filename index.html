@@ -2988,21 +2988,25 @@ function renderBalance(){
   document.getElementById('bal-cjv-sub').title    = 'Cajas registradas como entradas a cuartos de gas. Salida aún no confirmada.';
   document.getElementById('bal-rezaga').innerHTML = Tk(rezTotal);
   document.getElementById('bal-rez-sub').textContent = cosTotal>0?fN(rezTotal/cosTotal*100,1)+'% de cosecha':'—';
+  // Eficiencia: máx 100% (imposible empacar más de lo cosechado). El ⚠ marca
+  // cuando el cálculo crudo supera 100% (cosecha estimada baja / rezaga incompleta).
+  const GAS_WARN = 'Salida supera cosecha estimada: rezaga incompleta o imprecisión en la proporción Roma/Bola de camiones mixtos. Capado a 100%.';
+  const eficCap = v => Math.min(v, 100);
   const eficEl = document.getElementById('bal-efic');
-  eficEl.innerHTML = fN(efic,1)+'<span style="font-size:var(--t-nano);opacity:.55">%</span>';
-  eficEl.style.color = efic>=90?'#16a34a':efic>=80?'#d97706':'#dc2626';
+  eficEl.innerHTML = fN(eficCap(efic),1)+'<span style="font-size:var(--t-nano);opacity:.55">%</span>'+(efic>100.5?' <span title="'+GAS_WARN+'" style="font-size:.7rem">⚠</span>':'');
+  eficEl.style.color = efic>100.5?'#d97706':efic>=90?'#16a34a':efic>=80?'#d97706':'#dc2626';
 
   // Roma / Bola cards
   const rEfic = cosRoma>0?(empRoma+cjvRoma)/cosRoma*100:0;
   const bEfic = cosBola>0?(empBola+cjvBola)/cosBola*100:0;
   document.getElementById('bal-r-cos').innerHTML  = Tk(cosRoma);
   document.getElementById('bal-r-emp').innerHTML  = Cx(empRoma+cjvRoma, KG_PER_BOX_TOMATE);
-  document.getElementById('bal-r-efic').innerHTML = fN(rEfic,1)+'%'+(rEfic>100?' <span title="Salida supera cosecha estimada: inventario previo en gaseo o imprecisión en proporción de camiones mixtos" style="font-size:.7rem">⚠</span>':'');
-  document.getElementById('bal-r-efic').style.color = rEfic>100?'#d97706':rEfic>=90?'#16a34a':rEfic>=80?'#d97706':'#dc2626';
+  document.getElementById('bal-r-efic').innerHTML = fN(eficCap(rEfic),1)+'%'+(rEfic>100.5?' <span title="'+GAS_WARN+'" style="font-size:.7rem">⚠</span>':'');
+  document.getElementById('bal-r-efic').style.color = rEfic>100.5?'#d97706':rEfic>=90?'#16a34a':rEfic>=80?'#d97706':'#dc2626';
   document.getElementById('bal-b-cos').innerHTML  = Tk(cosBola);
   document.getElementById('bal-b-emp').innerHTML  = Cx(empBola+cjvBola, KG_PER_BOX_TOMATE);
-  document.getElementById('bal-b-efic').innerHTML = fN(bEfic,1)+'%'+(bEfic>100?' <span title="Salida supera cosecha estimada: inventario previo en gaseo o imprecisión en proporción de camiones mixtos" style="font-size:.7rem">⚠</span>':'');
-  document.getElementById('bal-b-efic').style.color = bEfic>100?'#d97706':bEfic>=90?'#16a34a':bEfic>=80?'#d97706':'#dc2626';
+  document.getElementById('bal-b-efic').innerHTML = fN(eficCap(bEfic),1)+'%'+(bEfic>100.5?' <span title="'+GAS_WARN+'" style="font-size:.7rem">⚠</span>':'');
+  document.getElementById('bal-b-efic').style.color = bEfic>100.5?'#d97706':bEfic>=90?'#16a34a':bEfic>=80?'#d97706':'#dc2626';
 
   // Sankeys — swap temporal de rawPalets/rawAcarreos para que renderSankey use datos del período
   const _sp=rawPalets, _sa=rawAcarreos;
@@ -3106,12 +3110,13 @@ function renderReporte(from, to){
   }
   function divider(){ return `<tr><td colspan="4" style="padding:0;border-top:1px solid var(--border)"></td></tr>`; }
 
-  // Aprovechamiento coloreado — >100% en ámbar (posible excepción)
+  // Aprovechamiento coloreado — capado a 100% (imposible empacar más de lo
+  // cosechado); >100% crudo se marca con ⚠ (estimado de cosecha bajo).
   function pctAprov(v){
     if(!v) return '—';
-    const color = v > 100 ? '#d97706' : v >= 90 ? '#16a34a' : v >= 80 ? '#d97706' : '#dc2626';
-    const tag   = v > 100 ? ' ⚠' : '';
-    return `<span style="color:${color};font-weight:700">${fN(v,1)}%${tag}</span>`;
+    const color = v > 100.5 ? '#d97706' : v >= 90 ? '#16a34a' : v >= 80 ? '#d97706' : '#dc2626';
+    const tag   = v > 100.5 ? ' ⚠' : '';
+    return `<span style="color:${color};font-weight:700">${fN(Math.min(v,100),1)}%${tag}</span>`;
   }
 
   const aprovTotal = (cosecha.ROMA+cosecha.BOLA) ? (salida.ROMA+salida.BOLA)/(cosecha.ROMA+cosecha.BOLA)*100 : 0;
