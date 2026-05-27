@@ -1,16 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 26 May 2026",
+    fecha: "Miércoles 27 May 2026",
     semana: "WK 22",
-    actualizado: "26/05/2026 · 23:01"
+    actualizado: "27/05/2026 · 16:01"
   },
 
   alertas: [
-    {"nivel":"success","texto":"📎 ADJUNTOS BELHER 26/05 — 1 archivo descargado a Drive (07:53): Plantilla de Calidad Outbound (fecha 25-May-2026). Carpeta: Belher Adjuntos."},
+    {"nivel":"success","texto":"✅ AUDITORÍA BUYERS EDGE-CALAVO 27/05 — Resultado FAVORABLE: Empaque 94.3% (8 NC) · Álamo 96.2% (4 NC) · La 25 96.4% (4 NC). Belher permanece en lista de proveedores aprobados. Plazo acciones correctivas: 8 de junio 2026."},
+    {"nivel":"success","texto":"🤝 CONTRATO BELTRAN-CALAVO 26/05 — JC envió versión final del contrato. Confirmación de recibido por Irene Amezaga (VP Sales, Calavo) y Armando Llanes (CFO, Don Memo). Contrato en proceso de cierre con Calavo, Antonio, JC y Armando."},
+    {"nivel":"success","texto":"📎 ADJUNTOS BELHER 27/05 — 5 archivos descargados a Drive (07:53): Rezaga de Tomate 26-05, Acarreo Diario Limón Persa 26-05, Diario de Báscula Limón Persa 26-05, Listado Diario Limón Persa 26-05, Plantilla de Calidad Outbound. Carpeta: Belher Adjuntos."},
     {"nivel":"info","texto":"🧾 FACTURA MATRAZ LAB 26/05 — CONTPAQ i emitió factura UUID: ae6be09e-e338-42e6-966d-5599f836078b. Disponible para descarga por 30 días en portal CFDI."},
     {"nivel":"success","texto":"📊 CALIDAD OUTBOUND TOMATE 23/05 — Bola Yameto: Primera 72.29% · Segunda 14.57% · Tercera 10.29% · Merma 2.86% · Peso promedio 31.62g. Reporte emitido por calidad@agbelher.com."},
-    {"nivel":"info","texto":"🌱 REUNIÓN CORBEL SEEDS 25/05 — Invitación actualizada por Raymundo Elizalde: Corbel Seeds (Comunicación) hoy lunes 25 May, 9:30–11:30am (GMT-7) vía Zoom. Hora y descripción modificadas. Zoom: https://zoom.us/j/98625841657"},
-    {"nivel":"warning","texto":"⚖️ CONTRATO CALAVO 2026-2029 — JC envió versión final con comentarios y minuta ejecutiva (22 May, 13:19). Incluye cláusula 15 revisada: mecanismo de revisión anual + cláusula de salida flexible. Paquete listo para enviar a Irene la próxima semana. Pendiente revisión de Armando, Antonio y Juan José."},
+    {"nivel":"warning","texto":"⚖️ ACCIONES CORRECTIVAS AUDITORÍA — Deadline 8 de junio para enviar acciones correctivas a Buyers Edge-Calavo. Marisol Castro coordina reunión con involucrados directos. No conformidades documentadas en Excel + PDF adjunto."},
     {"nivel":"info","texto":"💰 LIQUIDACIÓN CALAVO al 16-May-26 — 962K cajas enviadas / 933K facturadas / 4K en piso / 11K por facturar / 14K rework. Saldo a favor Belher: USD 3,225K. Precio promedio mayo: USD 21.94. Ventas brutas: USD 21.1M | Aranceles: $2.19M | Comisiones: $2.27M | Venta neta: $15.09M."},
     {"nivel":"warning","texto":"🔍 CONCILIACIÓN CALAVO $2.3M — 4 puntos pendientes representan ~$453K. Armando urge contactar a Irene en conjunto la próxima semana (historial: semanas en resolver). Coordinación: Armando + Antonio + JC + Leima en Culiacán."},
     {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado en myaccount.google.com."},
@@ -591,6 +592,12 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"10:53","asunto":"✅ Belher Adjuntos — 5 archivos (27-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-27"},
+    {"hora":"16:49","asunto":"Auditoría de segunda parte (Buyers Edge-Calavo) — Resultado","de":"c.marisol@agbelher.com","leido":false,"fecha":"2026-05-26"},
+    {"hora":"16:59","asunto":"REPORTE DE BASCULA 26/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-26"},
+    {"hora":"14:27","asunto":"REPORTE DE BASCULA 26/05/2026 (LIMON PERSA)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-26"},
+    {"hora":"10:59","asunto":"Fwd: Beltran-Calavo Contract Update","de":"antonio@agbelher.com","leido":false,"fecha":"2026-05-26"},
+    {"hora":"15:24","asunto":"Transferencia Interbancaria SPEI — Banbajío","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-05-26"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 1 archivos (26-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-26"},
     {"hora":"14:42","asunto":"Factura MATRAZ LAB — UUID: ae6be09e-e338-42e6-966d-5599f836078b","de":"facturacion@cfdi.com.mx","leido":false,"fecha":"2026-05-26"},
     {"hora":"00:09","asunto":"Invitación actualizada: Corbel Seeds (Comunicacion) lun 25 de may 9:30am–11:30am","de":"ray@agbelher.com","leido":false,"fecha":"2026-05-25"},
