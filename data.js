@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Martes 26 May 2026",
     semana: "WK 22",
-    actualizado: "26/05/2026 · 09:57"
+    actualizado: "26/05/2026 · 23:01"
   },
 
   alertas: [
@@ -679,8 +679,8 @@ window.BELHER = {
     { label:"Vine Ripe 4x4/4x5 WK20",      valor:"$28–32/cj",                   cambio:"down desde $48 WK19",         dir:"down"    },
     { label:"Roma XL WK20",               valor:"$24–26/cj",                   cambio:"down desde $50.95 WK19",     dir:"down"    },
     { label:"Limes seedless 110s",         valor:"$42/bu",                       cambio:"Peru -30% sostiene",         dir:"up"      },
-    { label:"CVGW (Calavo)",               valor:"$28.03",                       cambio:"+4.56%",                     dir:"up"      },
-    { label:"AVO (Mission)",               valor:"$12.20",                       cambio:"-1.29%",                     dir:"down"    },
+    { label:"CVGW (Calavo)",               valor:"$26.27",                       cambio:"-2.05%",                     dir:"down"    },
+    { label:"AVO (Mission)",               valor:"$11.65",                       cambio:"-5.20%",                     dir:"down"    },
     { label:"Sorgo trilla acumulada",      valor:"292 ha",                       cambio:"21 jornadas (31/Mar–06/May)", dir:"up"      },
     { label:"Corbel Seeds última",         valor:"#0039",                        cambio:"30-Abr",                     dir:"neutral" }
   ],
@@ -978,15 +978,15 @@ window.BELHER = {
     acciones: [
       {
         simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 28.03, prevClose: 26.81, cambio: 1.22, cambioPct: 4.56,
-        h52: 28.98, l52: 18.40, volumen: 313400,
-        fuente: "Yahoo Finance · 23-May-2026"
+        precio: 26.27, prevClose: 26.82, cambio: -0.55, cambioPct: -2.05,
+        h52: 28.98, l52: 18.40, volumen: null,
+        fuente: "Yahoo Finance · 26-May-2026"
       },
       {
         simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 12.20, prevClose: 12.36, cambio: -0.16, cambioPct: -1.29,
-        h52: 15.53, l52: 10.00, volumen: 1004114,
-        fuente: "Yahoo Finance · 23-May-2026"
+        precio: 11.65, prevClose: 12.29, cambio: -0.64, cambioPct: -5.20,
+        h52: 15.53, l52: 10.00, volumen: null,
+        fuente: "Yahoo Finance · 26-May-2026"
       }
     ],
 
