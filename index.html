@@ -1175,9 +1175,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
         </div>
       </div>
     </div>
-    <div style="font-size:var(--t-nano);color:var(--muted);opacity:.75;margin:6px 2px 0;line-height:1.4">
-      ⓘ La eficiencia por variedad puede pasar de 100% (marcado ⚠): la báscula pesa camiones <b>mixtos</b>, así que el split Roma/Bola de la <b>cosecha</b> es un estimado de campo, mientras que el empaque tiene la variedad exacta por palet. Además el empaque puede incluir fruta gasificada de días previos. El <b>total del ciclo sí es confiable</b>.
-    </div>
+    <div id="bal-split-note" style="font-size:var(--t-xs);color:var(--ink);background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.25);border-radius:8px;padding:10px 12px;margin:8px 2px 0;line-height:1.5"></div>
 
   </div><!-- /panel-balance -->
 
@@ -3010,6 +3008,18 @@ function renderBalance(){
   document.getElementById('bal-b-emp').innerHTML  = Cx(empBola+cjvBola, KG_PER_BOX_TOMATE);
   document.getElementById('bal-b-efic').innerHTML = fN(bEfic,1)+'%'+(bEfic>100.5?' <span title="'+SPLIT_WARN+'" style="font-size:.7rem;cursor:help">⚠</span>':'');
   document.getElementById('bal-b-efic').style.color = bEfic>100.5?'#d97706':bEfic>=90?'#16a34a':bEfic>=80?'#d97706':'#dc2626';
+
+  // Nota explicativa con los números REALES del período (defendible ante terceros)
+  const _packR = empRoma+cjvRoma, _packB = empBola+cjvBola, _packT = _packR+_packB;
+  const _fieldRomaSh = cosTotal>0 ? cosRoma/cosTotal*100 : 0;
+  const _packRomaSh  = _packT>0   ? _packR/_packT*100    : 0;
+  const _splitDelta  = Math.abs(_fieldRomaSh - _packRomaSh);
+  const _noteEl = document.getElementById('bal-split-note');
+  if(_noteEl) _noteEl.innerHTML =
+    '<b>¿Por qué la eficiencia por variedad puede pasar de 100%?</b><br>' +
+    'La báscula pesa cada camión <b>completo</b> (Roma y Bola revueltos), no por separado. Para dividir la cosecha por variedad, el sistema usa la <b>proporción estimada por el capturista en campo</b>; el empaque, en cambio, registra la variedad <b>exacta</b> de cada palet.<br>' +
+    'En este período el campo estimó <b>Roma ' + fN(_fieldRomaSh,1) + '% / Bola ' + fN(100-_fieldRomaSh,1) + '%</b>, pero lo realmente empacado fue <b>Roma ' + fN(_packRomaSh,1) + '% / Bola ' + fN(100-_packRomaSh,1) + '%</b> — una diferencia de <b>' + fN(_splitDelta,1) + ' puntos</b>. Por eso una variedad pasa de 100% y la otra queda por debajo, aunque <b>el total del ciclo (' + fN(efic,1) + '%) es exacto</b> porque el peso total de báscula sí es real.<br>' +
+    '👉 <b>No significa que se empacó más de lo cosechado</b> (es físicamente imposible): significa que el desglose Roma/Bola de la cosecha es un estimado. Para eliminarlo habría que pesar Roma y Bola por separado en báscula.';
 
   // Sankeys — swap temporal de rawPalets/rawAcarreos para que renderSankey use datos del período
   const _sp=rawPalets, _sa=rawAcarreos;
