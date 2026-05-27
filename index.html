@@ -2682,6 +2682,14 @@ const KG_PER_BOX_LIMON  = 18.1437;
 /* Chile:  bulto 1 1/9 bushel = 30.8 kg (standard US chile carton) */
 const KG_PER_BULTO_CHILE = 30.8;
 
+// Factor kg→caja por grupo de cultivo (global; usado por báscula, balance, etc.)
+function kgPerBoxFor(g){
+  g = (g||'').toUpperCase();
+  if(g.includes('LIMON')||g.includes('LEMON')||g.includes('LIMA')) return KG_PER_BOX_LIMON;
+  if(g.includes('CHILE')||g.includes('PEPPER')) return KG_PER_BULTO_CHILE;
+  return KG_PER_BOX_TOMATE;
+}
+
 function toBoxes(kg, kgPerBox){ return kg / kgPerBox; }
 function fBox(kg, kgPerBox, dec=0){
   return toBoxes(kg, kgPerBox).toLocaleString('es-MX',{minimumFractionDigits:dec,maximumFractionDigits:dec});
@@ -2706,6 +2714,8 @@ function isBola(c){ const u=(c||'').toUpperCase(); return u.includes('ROUND') ||
 function isGH(c)  { return (c||'').toUpperCase().startsWith('GH '); }
 function isOF(c)  { return (c||'').toUpperCase().startsWith('OF '); }
 function isTomato(c){ const u=(c||'').toUpperCase(); return u.includes('TOMATO') || u.includes('TOMATE'); }
+// Remisión de acarreo con detalle de tomate (global; usado por báscula y rezaga)
+function isTomRem(r){ return (r.detalles||[]).some(d=>{ const c=(d.cultivo||'').toUpperCase(); return isRoma(c)||isBola(c)||isTomato(c); }); }
 function isLimon(c) { const u=normStr(c); return LIMON_CULTIVOS.some(k=>u.includes(normStr(k).replace('GH ','').replace('OF ',''))) || u.includes('LIMON') || u.includes('LEMON') || u.includes('LIMA'); }
 function isChile(c) { const u=normStr(c); return CHILE_CULTIVOS.some(k=>u.includes(normStr(k))) || u.includes('CHILE') || u.includes('PEPPER'); }
 
@@ -2773,9 +2783,7 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
   let empTotal=0, cjvTotal=0;
   let empRoma=0,empBola=0,cjvRoma=0,cjvBola=0;
   rawPalets.forEach(r=>{
-    // Balance de masas: agrupar por fecha de SALIDA DE GAS (gaseado). Si la salida
-    // de gas difiere de la fecha de empaque, los kilos cuentan en la fecha de gas.
-    const d=((r.gaseado||r.fecha_empaque)||'').split('T')[0];
+    const d=(r.fecha_empaque||'').split('T')[0];
     if(d<from||d>to) return;
     const c=(r.cultivo||'').toUpperCase();
     if(!isTomato(c)) return;
@@ -2901,9 +2909,7 @@ function renderBalance(){
   document.getElementById('bal-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
 
   // Datos: usar _resPalets/_resAcarreos si disponibles, sino rawPalets/rawAcarreos
-  // Balance de masas: empaque se agrupa por fecha de SALIDA DE GAS (gaseado),
-  // con fallback a fecha de empaque cuando no hay dato de gas.
-  const balPalets   = (_resPalets.length   ? _resPalets   : rawPalets).filter(p=>{ const d=((p.gaseado||p.fecha_empaque)||'').split('T')[0]; return d>=from&&d<=to; });
+  const balPalets   = (_resPalets.length   ? _resPalets   : rawPalets).filter(p=>{ const d=(p.fecha_empaque||'').split('T')[0]; return d>=from&&d<=to; });
   const balAcarreos = (_resAcarreos.length ? _resAcarreos : rawAcarreos).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
 
   // ── Cosecha por neto báscula ──
