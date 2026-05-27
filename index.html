@@ -1341,6 +1341,22 @@ const SB_H = {
    1) HEAD con limit=1&Prefer:count=exact para obtener el total sin bajar datos.
       Si CORS no expone content-range → fallback a sequential hasta página corta.
    2) Con total conocido: lanza TODAS las páginas en paralelo (lotes de 10). */
+// Trae una página con reintentos: los 5xx (timeout de statement en vistas
+// pesadas como vw_embarques) suelen ser transitorios → reintenta con backoff
+// antes de rendirse, para no descartar ~1000 filas en silencio.
+async function fetchPageJSON(url, headers){
+  for(let attempt = 0; attempt < 3; attempt++){
+    try {
+      const r = await fetch(url, { headers });
+      if(r.ok) return await r.json();
+      if(r.status < 500) return [];   // 4xx no es transitorio → no reintentar
+    } catch(_){ /* error de red → reintentar */ }
+    if(attempt < 2) await new Promise(res => setTimeout(res, 400 * (attempt + 1)));
+  }
+  console.warn('getAll: página falló tras 3 intentos →', url);
+  return [];
+}
+
 async function getAll(basePath, cfg){
   const PAGE  = 1000;
   const sep   = basePath.includes('?') ? '&' : '?';
@@ -1361,12 +1377,11 @@ async function getAll(basePath, cfg){
   if(total && total > 0){
     const offsets = [];
     for(let o = 0; o < total; o += PAGE) offsets.push(o);
-    const BATCH = 10;
+    const BATCH = 5;   // menos concurrencia = menos probabilidad de timeout en vistas pesadas
     const all   = [];
     for(let i = 0; i < offsets.length; i += BATCH){
       const chunk = offsets.slice(i, i + BATCH).map(o =>
-        fetch(base + sep + `limit=${PAGE}&offset=${o}`, { headers: _H })
-          .then(r => r.ok ? r.json() : [])
+        fetchPageJSON(base + sep + `limit=${PAGE}&offset=${o}`, _H)
       );
       (await Promise.all(chunk)).forEach(d => all.push(...d));
     }
@@ -1377,8 +1392,7 @@ async function getAll(basePath, cfg){
   const all = [];
   let offset = 0;
   while(true){
-    const r    = await fetch(base + sep + `limit=${PAGE}&offset=${offset}`, { headers: _H });
-    const rows = r.ok ? await r.json() : [];
+    const rows = await fetchPageJSON(base + sep + `limit=${PAGE}&offset=${offset}`, _H);
     all.push(...rows);
     if(rows.length < PAGE) break;
     offset += PAGE;
