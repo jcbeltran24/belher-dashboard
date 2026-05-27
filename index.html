@@ -2836,10 +2836,10 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
   const vCjv = variedad==='ROMA' ? cjvRoma : variedad==='BOLA' ? cjvBola : cjvTotal;
   const vRez = variedad ? 0 : rezTotal;  // rezaga no tiene split Roma/Bola
 
-  // ── Sobrepeso ────────────────────────────────────────────
+  // ── Remanente: tomate cosechado aún sin empacar = "En Piso (día anterior)" ──
   const spr=vCos-vEmp-vCjv-vRez;
   const sprAbs=Math.abs(spr);
-  const sprLabel=spr>=0?'Sobrepeso':'Déficit';
+  const sprLabel=spr>=0?'En Piso':'Déficit';
   const sprColor=spr>=0?'#0f766e':'#dc2626';
 
   const flows=[
@@ -2928,8 +2928,10 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
        </div>`
     : '';
   const sprNote = sprPct > 8
-    ? `<div style="font-size:.72rem;color:#0f766e;text-align:right;margin-top:2px;padding-right:4px">
-        Sobrepeso ${fN(sprPct,1)}% — revisar completitud de rezaga y detalles de acarreos
+    ? `<div style="font-size:.72rem;color:${spr>=0?'#0f766e':'#dc2626'};text-align:right;margin-top:2px;padding-right:4px">
+        ${spr>=0
+          ? 'En Piso (día anterior) '+fN(sprPct,1)+'% — tomate cosechado aún sin empacar (queda en piso/gas para el día siguiente)'
+          : 'Déficit '+fN(sprPct,1)+'% — se empacó más de lo cosechado en la ventana (inventario de días previos en piso / split estimado)'}
        </div>`
     : '';
   el.innerHTML = svg + skipNote + sprNote;
