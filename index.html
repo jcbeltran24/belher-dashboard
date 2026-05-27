@@ -510,6 +510,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
         <div class="mp-today-hint">Selecciona un mes para cargarlo completo</div>
       </div>
     </div>
+    <input type="date" class="f-select" id="f-exact-date" onchange="pickExactDate(this.value)" aria-label="Fecha exacta" title="Filtrar por una fecha exacta" style="color-scheme:dark;cursor:pointer;max-width:150px">
     <button class="cmp-btn" id="btn-cmp" onclick="toggleComparison()" aria-label="Comparar con ciclo anterior">
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
       <span id="cmp-lbl">vs anterior</span>
@@ -608,7 +609,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
         </div>
         <div class="ov-divider"></div>
         <div>
-          <div class="spark-lbl">Neto diario — t</div>
+          <div class="spark-lbl">Neto diario — cx</div>
           <div class="spark" id="rv-bas-spark"></div>
         </div>
       </div>
@@ -675,7 +676,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
         <div class="cmp-col act">
           <div class="cmp-lbl-head" id="res-lbl-act">Ciclo Actual</div>
           <div class="cmp-big cmp-act-val" id="res-neto-act"><span class="skel"></span></div>
-          <div class="cmp-small">toneladas neto báscula</div>
+          <div class="cmp-small">cajas equiv. neto báscula</div>
           <div style="margin-top:8px" class="cmp-lbl-head">% Primera empaque</div>
           <div class="cmp-big cmp-act-val" id="res-p1-act">—</div>
         </div>
@@ -683,7 +684,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
         <div class="cmp-col ant">
           <div class="cmp-lbl-head" id="res-lbl-ant">Ciclo Anterior</div>
           <div class="cmp-big cmp-ant-val" id="res-neto-ant"><span class="skel"></span></div>
-          <div class="cmp-small">toneladas neto báscula</div>
+          <div class="cmp-small">cajas equiv. neto báscula</div>
           <div style="margin-top:8px" class="cmp-lbl-head">% Primera empaque</div>
           <div class="cmp-big cmp-ant-val" id="res-p1-ant">—</div>
         </div>
@@ -710,7 +711,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
 
     <!-- Tendencia semanal combinada -->
     <div class="card card-pad" style="margin-bottom:10px">
-      <div class="card-title">Tendencia Semanal · Neto Báscula (toneladas)</div>
+      <div class="card-title">Tendencia Semanal · Neto Báscula (cajas)</div>
       <div style="position:relative;height:240px"><canvas id="chart-res-trend"></canvas></div>
     </div>
 
@@ -794,17 +795,17 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
     <div class="stat-strip">
       <div class="stat cg"><div class="stat-lbl">Neto Total</div><div class="stat-val" id="ps-neto"><span class="skel"></span></div><div class="stat-sub" id="ps-remisiones">— remisiones</div><div class="stat-delta" id="d-neto"></div></div>
 
-      <div class="stat cp"><div class="stat-lbl" title="Peso neto promedio por remisión de báscula en el período">Neto Prom/Rem.</div><div class="stat-val" id="ps-avg"><span class="skel"></span></div><div class="stat-sub">kg por remisión</div><div class="stat-delta" id="d-avg"></div></div>
+      <div class="stat cp"><div class="stat-lbl" title="Cajas equivalentes promedio por remisión de báscula en el período">Neto Prom/Rem.</div><div class="stat-val" id="ps-avg"><span class="skel"></span></div><div class="stat-sub">cx por remisión</div><div class="stat-delta" id="d-avg"></div></div>
       <div class="stat ca"><div class="stat-lbl" title="Kg rezaga tomate ÷ neto total báscula en el período">% Rezaga Tomate</div><div class="stat-val" id="ps-peak">—</div><div class="stat-sub" id="ps-peak-date">—</div></div>
     </div>
 
     <div class="g2" style="margin-bottom:10px">
       <div class="card card-pad">
-        <div class="card-title">Neto Diario · Toneladas</div>
+        <div class="card-title">Neto Diario · Cajas</div>
         <div class="chart-md"><canvas id="chart-pesos-dia"></canvas></div>
       </div>
       <div class="card card-pad">
-        <div class="card-title">Neto por Cultivo · kg</div>
+        <div class="card-title">Neto por Cultivo · cajas</div>
         <div id="cultivo-bars" style="display:flex;flex-direction:column;gap:10px;padding-top:4px"></div>
       </div>
     </div>
@@ -815,7 +816,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
         <table>
           <thead><tr>
             <th>Fecha</th><th>Cultivo</th><th>Caseta</th>
-            <th class="r">Bruto kg</th><th class="r">Tara kg</th><th class="r">Neto kg</th><th class="r">Neto t</th>
+            <th class="r">Neto (cajas)</th>
           </tr></thead>
           <tbody id="pesos-tbody"></tbody>
         </table>
@@ -824,8 +825,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
 
     <div class="sec">Rezaga · Báscula <span class="sec-source">vw_rezaga · Supabase</span></div>
     <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
-      <div class="stat cg"><div class="stat-lbl" title="Peso neto de rezaga registrada en báscula (vw_rezaga, Supabase)">Neto Rezaga</div><div class="stat-val" id="rez-neto"><span class="skel"></span></div><div class="stat-sub" id="rez-neto-sub">—</div></div>
-      <div class="stat cb"><div class="stat-lbl" title="Peso bruto de rezaga antes de descontar tara">Bruto Rezaga</div><div class="stat-val" id="rez-bruto"><span class="skel"></span></div><div class="stat-sub">kg brutos</div></div>
+      <div class="stat cg"><div class="stat-lbl" title="Rezaga neto ÷ neto total báscula tomate en el período">% Rezaga</div><div class="stat-val" id="rez-neto"><span class="skel"></span></div><div class="stat-sub" id="rez-neto-sub">sobre neto báscula</div></div>
       <div class="stat ca"><div class="stat-lbl" title="Número de remisiones de rezaga registradas en el período">Remisiones</div><div class="stat-val" id="rez-count"><span class="skel"></span></div><div class="stat-sub">rezaga báscula</div></div>
     </div>
     <div class="card">
@@ -833,9 +833,8 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
         <table>
           <thead><tr>
             <th>Fecha</th><th>Cultivo</th><th>Tolva</th><th>Chofer</th><th>Vehículo</th>
-            <th class="r">Bruto kg</th><th class="r">Tara kg</th><th class="r">Neto kg</th>
           </tr></thead>
-          <tbody id="rez-tbody"><tr><td colspan="8" class="empty">Cargando…</td></tr></tbody>
+          <tbody id="rez-tbody"><tr><td colspan="5" class="empty">Cargando…</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -883,7 +882,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
 
     <!-- Row 2: casetas -->
     <div class="card card-pad" style="margin-bottom:10px">
-      <div class="card-title">Top Casetas · kg Total</div>
+      <div class="card-title">Top Casetas · Cajas</div>
       <div id="tom-caseta-bars" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto"></div>
     </div>
 
@@ -895,7 +894,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
           <thead><tr>
             <th>Fecha</th><th>Sem</th><th>Lote</th><th>Caseta</th>
             <th>Cultivo</th><th>Color</th><th>Tipo</th>
-            <th class="r">Cantidad</th><th class="r">Kg Total</th>
+            <th class="r">Cantidad</th><th class="r">Cajas</th>
             <th class="r">Prom kg</th><th class="r">Dif. target</th>
           </tr></thead>
           <tbody id="tom-tbody"></tbody>
@@ -925,7 +924,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
     <div class="card">
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>Fecha</th><th>Sem</th><th>Lote</th><th>Caseta</th><th>Cultivo</th><th>Color</th><th class="r">Cantidad</th><th class="r">Kg</th><th class="r">Prom kg</th></tr></thead>
+          <thead><tr><th>Fecha</th><th>Sem</th><th>Lote</th><th>Caseta</th><th>Cultivo</th><th>Color</th><th class="r">Cantidad</th><th class="r">Cajas</th><th class="r">Prom kg</th></tr></thead>
           <tbody id="lim-tbody"></tbody>
         </table>
       </div>
@@ -964,11 +963,11 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
     </div>
     <div class="g2" style="margin-bottom:10px">
       <div class="card card-pad">
-        <div class="card-title">Producción Semanal · Toneladas</div>
+        <div class="card-title">Producción Semanal · Cajas</div>
         <div style="position:relative;height:220px"><canvas id="chart-chi-sem"></canvas></div>
       </div>
       <div class="card card-pad">
-        <div class="card-title">Por Variedad · kg</div>
+        <div class="card-title">Por Variedad · Cajas</div>
         <div id="chi-var-bars" style="display:flex;flex-direction:column;gap:9px"></div>
       </div>
     </div>
@@ -976,7 +975,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
     <div class="card">
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>Fecha</th><th>Sem</th><th>Lote</th><th>Caseta</th><th>Variedad</th><th>Color</th><th class="r">Cantidad</th><th class="r">Kg</th><th class="r">Prom kg</th></tr></thead>
+          <thead><tr><th>Fecha</th><th>Sem</th><th>Lote</th><th>Caseta</th><th>Variedad</th><th>Color</th><th class="r">Cantidad</th><th class="r">Cajas</th><th class="r">Prom kg</th></tr></thead>
           <tbody id="chi-tbody"></tbody>
         </table>
       </div>
@@ -1073,7 +1072,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
       <div class="stat cb"><div class="stat-lbl">Exportación</div><div class="stat-val" id="emb-exp"><span class="skel"></span></div><div class="stat-sub" id="emb-exp-sub">—</div></div>
       <div class="stat ca"><div class="stat-lbl">Nacional</div><div class="stat-val" id="emb-nac"><span class="skel"></span></div><div class="stat-sub" id="emb-nac-sub">—</div></div>
       <div class="stat cg"><div class="stat-lbl">Palets Embarcados</div><div class="stat-val" id="emb-palets"><span class="skel"></span></div><div class="stat-sub">total palets</div></div>
-      <div class="stat cp"><div class="stat-lbl">Kg Exportados</div><div class="stat-val" id="emb-kg"><span class="skel"></span></div><div class="stat-sub">peso bruto (cx)</div></div>
+      <div class="stat cp"><div class="stat-lbl">Cajas Exportadas</div><div class="stat-val" id="emb-kg"><span class="skel"></span></div><div class="stat-sub">cajas totales</div></div>
     </div>
 
     <div class="sec">Distribución Geográfica · Destinos</div>
@@ -1087,7 +1086,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
         <table>
           <thead><tr>
             <th>Fecha</th><th>Tipo</th><th>Distribuidor</th><th>Factura</th>
-            <th>Destino</th><th class="r">Palets</th><th class="r">Kg Totales</th>
+            <th>Destino</th><th class="r">Palets</th><th class="r">Cajas</th>
           </tr></thead>
           <tbody id="emb-tbody"><tr><td colspan="7" class="empty">Cargando…</td></tr></tbody>
         </table>
@@ -1528,6 +1527,7 @@ function setPeriod(p){
   const target = document.querySelector(`.p-btn[data-period="${p}"]`);
   if(target) target.classList.add('active');
   mpClearActive();
+  const _de = document.getElementById('f-exact-date'); if(_de) _de.value = '';
   pushUrlState();
   activeRange = range;
   if(store.loadedAt){
@@ -1708,9 +1708,9 @@ function renderResumen(){
   const avgRem  = rems ? netoKg/rems : 0;
   const fKg = v => v>=1e6 ? fN(v/1e6,2)+'M' : fK(Math.round(v));
 
-  document.getElementById('rv-neto').innerHTML = fKg(netoKg)+'<span style="font-size:.7rem;opacity:.6"> kg</span>';
+  document.getElementById('rv-neto').innerHTML = fKM(toBoxes(netoKg, KG_PER_BOX_TOMATE))+'<span style="font-size:.7rem;opacity:.6"> cx</span>';
   document.getElementById('rv-rems').textContent = fK(rems);
-  document.getElementById('rv-avg-rem').innerHTML = fK(Math.round(avgRem))+'<span style="font-size:var(--t-nano);opacity:.6"> kg</span>';
+  document.getElementById('rv-avg-rem').innerHTML = fN(toBoxes(avgRem, KG_PER_BOX_TOMATE),0)+'<span style="font-size:var(--t-nano);opacity:.6"> cx</span>';
 
   // Báscula daily sparkline (tomate)
   const basByDay={};
@@ -1803,8 +1803,8 @@ function renderResumen(){
   const prDias   = new Set(priorAcr.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
   const actDias  = new Set(tomAcarreos.map(r=>(r.fecha||'').split('T')[0]).filter(Boolean)).size;
 
-  document.getElementById('res-neto-act').textContent  = fKg(actNeto);
-  document.getElementById('res-neto-ant').textContent  = cmpReady ? fKg(prNeto) : '—';
+  document.getElementById('res-neto-act').innerHTML  = fKM(toBoxes(actNeto, KG_PER_BOX_TOMATE)) + ' cx';
+  document.getElementById('res-neto-ant').innerHTML  = cmpReady ? fKM(toBoxes(prNeto, KG_PER_BOX_TOMATE)) + ' cx' : '—';
   document.getElementById('res-p1-act').textContent    = fN(actPctP1,1) + '%';
   document.getElementById('res-p1-ant').textContent    = cmpReady ? fN(prPctP1,1) + '%' : '—';
   document.getElementById('res-cajas-act').innerHTML   = fKM(actCajas) + ' cx';
@@ -1846,11 +1846,11 @@ function renderResumen(){
       labels: wks.map(w=>`S${w}`),
       datasets:[
         { label: cycles.labelAct,
-          data: wks.map(w=>wActNeto[w]!=null?(wActNeto[w]/1000).toFixed(1):null),
+          data: wks.map(w=>wActNeto[w]!=null?+toBoxes(wActNeto[w], KG_PER_BOX_TOMATE).toFixed(0):null),
           borderColor:'#16a34a', backgroundColor: _resTrendType==='bar' ? 'rgba(22,163,74,.72)' : gradFn(22,163,74,.2,0),
           ...(_resTrendType==='line' ? { borderWidth:2.5, pointRadius:3, pointHoverRadius:6, fill:true, tension:.35, spanGaps:false } : { borderRadius:4 }) },
         { label: cycles.labelAnt,
-          data: wks.map(w=>wAntNeto[w]!=null?(wAntNeto[w]/1000).toFixed(1):null),
+          data: wks.map(w=>wAntNeto[w]!=null?+toBoxes(wAntNeto[w], KG_PER_BOX_TOMATE).toFixed(0):null),
           borderColor:'#d97706', backgroundColor: _resTrendType==='bar' ? 'rgba(217,119,6,.55)' : gradFn(217,119,6,.12,0),
           ...(_resTrendType==='line' ? { borderWidth:2, borderDash:[6,4], pointRadius:2, pointHoverRadius:5, fill:true, tension:.35, spanGaps:false } : { borderRadius:4 }) }
       ]
@@ -1867,12 +1867,12 @@ function renderResumen(){
               function wkDate(cf,n){ const d=new Date(cf+'T12:00:00'); d.setDate(d.getDate()+(n-1)*7); return d.toLocaleDateString('es-MX',{day:'numeric',month:'short'}); }
               return `S${w}  ·  Act: ${wkDate(cycles.actual.from,w)}  /  Ant: ${wkDate(cycles.anterior.from,w)}`;
             },
-            label:c=>` ${c.dataset.label}: ${c.parsed.y??'—'} t`
+            label:c=>` ${c.dataset.label}: ${c.parsed.y??'—'} cx`
           } }
       },
       scales:{
         x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10}}, border:{display:false} },
-        y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+'t'}, border:{display:false} }
+        y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+' cx'}, border:{display:false} }
       }
     }
   });
@@ -2094,7 +2094,7 @@ function renderCalidad(){
   document.getElementById('s-bultos').innerHTML =
     fKM(totalCajas) + '<span style="font-size:var(--t-nano);font-weight:500;color:var(--muted);margin-left:4px">cx</span>' + excludedNote;
   document.getElementById('s-palets').textContent =
-    calPalets.length.toLocaleString('es-MX') + ' registros · ' + fN(pesoTotalKg/1000) + ' t';
+    calPalets.length.toLocaleString('es-MX') + ' registros';
   const TARGET_PESO = 11.8;
   const pesoProm = bultos ? pesoTotal / bultos : null;
   const statEl   = document.getElementById('stat-peso-prom');
@@ -2216,7 +2216,7 @@ function renderCalidad(){
       responsive:true, maintainAspectRatio:false, cutout:'62%',
       plugins:{
         legend:{ position:'bottom', labels:{ font:{family:'IBM Plex Sans',size:10.5}, color:'#374151', boxWidth:12, padding:12 } },
-        tooltip:{ callbacks:{ label:c=>`${c.label.split(' — ')[0]}: ${fN(c.parsed/1000)} t (${totalEtqKg?fN(c.parsed/totalEtqKg*100):0}%)` } }
+        tooltip:{ callbacks:{ label:c=>`${c.label.split(' — ')[0]}: ${fN(toBoxes(c.parsed, KG_PER_BOX_TOMATE),0)} cx (${totalEtqKg?fN(c.parsed/totalEtqKg*100):0}%)` } }
       }
     }
   });
@@ -2414,7 +2414,7 @@ function renderCalidad(){
 /* ── RENDER: PESOS ──────────────────────────────────────── */
 function renderPesos(){
   if(!fAcarreos.length){
-    document.getElementById('pesos-tbody').innerHTML='<tr><td colspan="7" class="empty">Sin remisiones en el período — prueba un rango más amplio.</td></tr>';
+    document.getElementById('pesos-tbody').innerHTML='<tr><td colspan="4" class="empty">Sin remisiones en el período — prueba un rango más amplio.</td></tr>';
     return;
   }
 
@@ -2435,29 +2435,33 @@ function renderPesos(){
   });
 
   /* KPIs */
+  const rowBoxKg = r => kgPerBoxFor((r.cultivo||'').toUpperCase());
+  const rowCx    = r => toBoxes(r.neto, rowBoxKg(r));
   const totNeto  = rows.reduce((s,r)=>s+r.neto,0);
   const totBruto = rows.reduce((s,r)=>s+r.bruto,0);
   const totTara  = rows.reduce((s,r)=>s+r.tara,0);
+  const totCajas = rows.reduce((s,r)=>s+rowCx(r),0);
   const avgNeto  = rows.length ? totNeto/rows.length : 0;
+  const avgCajas = rows.length ? totCajas/rows.length : 0;
 
   /* By date */
   const byDate={};
-  rows.forEach(r=>{ byDate[r.fecha]=(byDate[r.fecha]||0)+r.neto; });
+  rows.forEach(r=>{ byDate[r.fecha]=(byDate[r.fecha]||0)+rowCx(r); });
   const dates=Object.keys(byDate).sort();
   const peakVal = Math.max(...Object.values(byDate));
   const peakDate = dates.find(d=>byDate[d]===peakVal)||'—';
 
-  const fKgStat = v => v>=1e6?fN(v/1e6,2)+'<span class="stat-unit">M kg</span>':fK(Math.round(v))+'<span class="stat-unit">kg</span>';
-  document.getElementById('ps-neto').innerHTML      = fKgStat(totNeto);
+  const fCxStat = v => fKM(v)+'<span class="stat-unit">cx</span>';
+  document.getElementById('ps-neto').innerHTML      = fCxStat(totCajas);
   document.getElementById('ps-remisiones').textContent = rows.length+' remisiones';
 
-  document.getElementById('ps-avg').innerHTML       = fK(Math.round(avgNeto))+'<span class="stat-unit">kg</span>';
+  document.getElementById('ps-avg').innerHTML       = fK(Math.round(avgCajas))+'<span class="stat-unit">cx</span>';
   // % Rezaga tomate en el período
   const from_p = activeRange?.from||isoLocal(new Date()), to_p = activeRange?.to||isoLocal(new Date());
   const rezKg = rawRezaga.filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from_p&&d<=to_p&&(r.grupo_cultivo||'').toUpperCase().includes('TOMATE'); }).reduce((s,r)=>s+(r.peso_neto||0),0);
   const rezPct = totNeto>0 ? rezKg/totNeto*100 : null;
   document.getElementById('ps-peak').innerHTML = rezPct!=null ? fN(rezPct,1)+'<span class="stat-unit">%</span>' : '—';
-  document.getElementById('ps-peak-date').textContent = rezPct!=null ? fK(Math.round(rezKg))+' kg rezaga' : 'carga rezaga primero';
+  document.getElementById('ps-peak-date').textContent = rezPct!=null ? 'sobre neto báscula' : 'carga rezaga primero';
   // Delta chips
   if(cmpAcrAnt.length){
     const pr    = priorEquivRange();
@@ -2478,20 +2482,21 @@ function renderPesos(){
       const shifted = new Date(d + 'T12:00:00');
       shifted.setFullYear(shifted.getFullYear() + 1);
       const ds = iso(shifted);
-      antDates[ds] = (antDates[ds]||0) + ((r.peso_bruto||0)-(r.tara||0));
+      const cul = (r.detalles && r.detalles[0] && r.detalles[0].cultivo) || 'TOMATE';
+      antDates[ds] = (antDates[ds]||0) + toBoxes((r.peso_bruto||0)-(r.tara||0), kgPerBoxFor(cul.toUpperCase()));
     });
   }
 
   const datasets = [{
     label: cycles.labelAct || 'Actual',
-    data: dates.map(d=>+(byDate[d]/1000).toFixed(2)),
+    data: dates.map(d=>Math.round(byDate[d])),
     backgroundColor:'rgba(22,163,74,.75)',
     borderColor:'#16a34a', borderWidth:1,
     borderRadius:4, borderSkipped:false
   }];
   if(cmpOn) datasets.push({
     label: cycles.labelAnt || 'Anterior',
-    data: dates.map(d => antDates[d] != null ? +(antDates[d]/1000).toFixed(2) : null),
+    data: dates.map(d => antDates[d] != null ? Math.round(antDates[d]) : null),
     type:'line',
     borderColor:'rgba(217,119,6,.8)', backgroundColor:'transparent',
     borderWidth:2, borderDash:[6,4],
@@ -2504,10 +2509,10 @@ function renderPesos(){
     data:{ labels: dates.map(fDate), datasets },
     options:{
       responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>` ${c.parsed.y} t` } } },
+      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>` ${c.parsed.y} cx` } } },
       scales:{
         x:{ grid:{display:false}, ticks:{color:'#9ca3af',font:{size:10},maxTicksLimit:10,maxRotation:0}, border:{display:false} },
-        y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+'t'}, border:{display:false} }
+        y:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{color:'#9ca3af',font:{size:10},callback:v=>v+' cx'}, border:{display:false} }
       }
     }
   });
@@ -2515,14 +2520,14 @@ function renderPesos(){
 
   /* By cultivo bars — agrupa por nombre normalizado (GH/OF → mismo bucket) */
   const byCult={};
-  rows.forEach(r=>{ const k=normCultivo(r.cultivo); byCult[k]=(byCult[k]||0)+r.neto; });
+  rows.forEach(r=>{ const k=normCultivo(r.cultivo); byCult[k]=(byCult[k]||0)+rowCx(r); });
   const cultSorted=Object.entries(byCult).sort((a,b)=>b[1]-a[1]);
   const maxC=cultSorted[0]?.[1]||1;
   document.getElementById('cultivo-bars').innerHTML = cultSorted.map(([k,v])=>`
     <div class="prog-row">
       <div class="prog-top">
         <span class="prog-name">${k}</span>
-        <span class="prog-qty" style="color:${normCultivoColor(k)}">${v>=1e6?fN(v/1e6,2)+' M kg':fK(Math.round(v))+' kg'}</span>
+        <span class="prog-qty" style="color:${normCultivoColor(k)}">${fKM(v)} cx</span>
       </div>
       <div class="prog-track"><div class="prog-fill" style="width:${(v/maxC*100).toFixed(1)}%;background:${normCultivoColor(k)}"></div></div>
     </div>`).join('');
@@ -2530,16 +2535,13 @@ function renderPesos(){
   /* Table */
   const allPRows = [...rows].sort((a,b)=>b.fecha.localeCompare(a.fecha)||b.neto-a.neto);
   const trows = allPRows.slice(0,200);
-  const pesCapNote = allPRows.length > 200 ? `<tr><td colspan="7" style="text-align:center;padding:8px;font-size:var(--t-nano);color:var(--muted);background:#fafafa">Mostrando 200 de ${allPRows.length.toLocaleString('es-MX')} registros</td></tr>` : '';
+  const pesCapNote = allPRows.length > 200 ? `<tr><td colspan="4" style="text-align:center;padding:8px;font-size:var(--t-nano);color:var(--muted);background:#fafafa">Mostrando 200 de ${allPRows.length.toLocaleString('es-MX')} registros</td></tr>` : '';
   document.getElementById('pesos-tbody').innerHTML = trows.map(r=>`<tr>
     <td>${fDate(r.fecha)}</td>
     <td style="font-weight:600">${cult(r.cultivo)}</td>
     <td style="color:var(--muted);font-size:.72rem">${r.caseta.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</td>
-    <td class="td-n">${fK(Math.round(r.bruto))}</td>
-    <td class="td-n" style="color:var(--muted)">${fK(Math.round(r.tara))}</td>
-    <td class="td-n" style="color:var(--green);font-weight:800">${fK(Math.round(r.neto))}</td>
-    <td class="td-n" style="color:var(--green2)">${fN(r.neto/1000)}</td>
-  </tr>`).join('') + pesCapNote || '<tr><td colspan="7" class="empty">Sin datos.</td></tr>';
+    <td class="td-n" style="color:var(--green);font-weight:800">${fN(rowCx(r),0)}</td>
+  </tr>`).join('') + pesCapNote || '<tr><td colspan="4" class="empty">Sin datos.</td></tr>';
 }
 
 /* ── LOAD ───────────────────────────────────────────────── */
@@ -2771,7 +2773,9 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
   let empTotal=0, cjvTotal=0;
   let empRoma=0,empBola=0,cjvRoma=0,cjvBola=0;
   rawPalets.forEach(r=>{
-    const d=(r.fecha_empaque||'').split('T')[0];
+    // Balance de masas: agrupar por fecha de SALIDA DE GAS (gaseado). Si la salida
+    // de gas difiere de la fecha de empaque, los kilos cuentan en la fecha de gas.
+    const d=((r.gaseado||r.fecha_empaque)||'').split('T')[0];
     if(d<from||d>to) return;
     const c=(r.cultivo||'').toUpperCase();
     if(!isTomato(c)) return;
@@ -2857,21 +2861,21 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
     const pctY   = tall ? mid+18 : mid2 ? mid+8 : mid+9;
     return `<rect x="${dstX}" y="${n.y}" width="${dstW}" height="${n.h}" rx="5" fill="${n.color}" opacity="0.93"/>
       <text x="${dstX+dstW/2}" y="${labelY}" text-anchor="middle" fill="white" font-size="${fs}" font-weight="700" font-family="IBM Plex Sans,-apple-system,sans-serif">${n.label}</text>
-      ${tall?`<text x="${dstX+dstW/2}" y="${kgY}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="12" font-weight="800" font-family="JetBrains Mono,monospace">${fN(n.kg/1000,1)}t</text>`:''}
+      ${tall?`<text x="${dstX+dstW/2}" y="${kgY}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="12" font-weight="800" font-family="JetBrains Mono,monospace">${fN(toBoxes(n.kg, KG_PER_BOX_TOMATE),0)} cx</text>`:''}
       <text x="${dstX+dstW/2}" y="${pctY}" text-anchor="middle" fill="rgba(255,255,255,${tall?.7:.85})" font-size="${small?9:10}" font-weight="${small?700:600}" font-family="IBM Plex Sans,-apple-system,sans-serif">${fN(pct,1)}%</text>`;
   }).join('');
 
   const srcColor = variedad==='ROMA' ? '#b91c1c' : variedad==='BOLA' ? '#0f766e' : '#15803d';
   const srcMid=srcY+srcH/2;
   const srcLabel = variedad==='ROMA' ? 'ROMA' : variedad==='BOLA' ? 'BOLA' : 'COSECHA';
-  const srcSub   = variedad ? '' : `<text x="${srcX+srcW/2}" y="${srcMid+13}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="IBM Plex Sans,-apple-system,sans-serif">R ${fN(cosRoma/1000,1)}t</text>
-    <text x="${srcX+srcW/2}" y="${srcMid+24}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="IBM Plex Sans,-apple-system,sans-serif">B ${fN(cosBola/1000,1)}t</text>`;
+  const srcSub   = variedad ? '' : `<text x="${srcX+srcW/2}" y="${srcMid+13}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="IBM Plex Sans,-apple-system,sans-serif">R ${fN(toBoxes(cosRoma, KG_PER_BOX_TOMATE),0)} cx</text>
+    <text x="${srcX+srcW/2}" y="${srcMid+24}" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="8" font-family="IBM Plex Sans,-apple-system,sans-serif">B ${fN(toBoxes(cosBola, KG_PER_BOX_TOMATE),0)} cx</text>`;
 
   const svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;max-width:${W}px">
     ${paths}
     <rect x="${srcX}" y="${srcY}" width="${srcW}" height="${srcH}" rx="8" fill="${srcColor}" opacity="0.95"/>
     <text x="${srcX+srcW/2}" y="${srcMid-18}" text-anchor="middle" fill="white" font-size="8" font-weight="800" font-family="IBM Plex Sans,-apple-system,sans-serif" letter-spacing="0.5">${srcLabel}</text>
-    <text x="${srcX+srcW/2}" y="${srcMid-2}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="13" font-weight="800" font-family="JetBrains Mono,monospace">${fN(vCos/1000,1)}t</text>
+    <text x="${srcX+srcW/2}" y="${srcMid-2}" text-anchor="middle" fill="rgba(255,255,255,.95)" font-size="13" font-weight="800" font-family="JetBrains Mono,monospace">${fN(toBoxes(vCos, KG_PER_BOX_TOMATE),0)} cx</text>
     ${srcSub}
     ${dstLabels}
   </svg>`;
@@ -2879,7 +2883,7 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
   const sprPct = vCos > 0 ? (Math.abs(spr)/vCos*100) : 0;
   const skipNote = skipCount > 0
     ? `<div style="font-size:.72rem;color:var(--muted);text-align:right;margin-top:4px;padding-right:4px">
-        ⚠ ${skipCount} acarreo${skipCount>1?'s':''} sin detalle excluido${skipCount>1?'s':''} (${fN(skipNeto/1000,1)} t neto)
+        ⚠ ${skipCount} acarreo${skipCount>1?'s':''} sin detalle excluido${skipCount>1?'s':''} (${fN(toBoxes(skipNeto, KG_PER_BOX_TOMATE),0)} cx neto)
        </div>`
     : '';
   const sprNote = sprPct > 8
@@ -2897,7 +2901,9 @@ function renderBalance(){
   document.getElementById('bal-rng').textContent = fDateFull(from) + ' – ' + fDateFull(to);
 
   // Datos: usar _resPalets/_resAcarreos si disponibles, sino rawPalets/rawAcarreos
-  const balPalets   = (_resPalets.length   ? _resPalets   : rawPalets).filter(p=>{ const d=(p.fecha_empaque||'').split('T')[0]; return d>=from&&d<=to; });
+  // Balance de masas: empaque se agrupa por fecha de SALIDA DE GAS (gaseado),
+  // con fallback a fecha de empaque cuando no hay dato de gas.
+  const balPalets   = (_resPalets.length   ? _resPalets   : rawPalets).filter(p=>{ const d=((p.gaseado||p.fecha_empaque)||'').split('T')[0]; return d>=from&&d<=to; });
   const balAcarreos = (_resAcarreos.length ? _resAcarreos : rawAcarreos).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from&&d<=to; });
 
   // ── Cosecha por neto báscula ──
@@ -2930,12 +2936,12 @@ function renderBalance(){
   const efic = cosTotal>0 ? (empTotal+cjvTotal)/cosTotal*100 : 0;
   const spr  = cosTotal-empTotal-cjvTotal-rezTotal;
 
-  // ── KPIs — cosecha en t (peso báscula), empaque en cajas ──
-  const Tk  = v => fN(v/1000,1)+'<span style="font-size:var(--t-nano);opacity:.55"> t</span>';
+  // ── KPIs — todo en cajas equivalentes ──
+  const Tk  = v => fKM(toBoxes(v, KG_PER_BOX_TOMATE))+'<span style="font-size:var(--t-nano);opacity:.55"> cx</span>';
   const Cx  = (kg, kpp) => fKM(toBoxes(kg,kpp))+'<span style="font-size:var(--t-nano);opacity:.55"> cx</span>';
   document.getElementById('bal-cosecha').innerHTML = Tk(cosTotal);
-  document.getElementById('bal-cos-roma').textContent = fN(cosRoma/1000,1)+'t';
-  document.getElementById('bal-cos-bola').textContent = fN(cosBola/1000,1)+'t';
+  document.getElementById('bal-cos-roma').textContent = fKM(toBoxes(cosRoma, KG_PER_BOX_TOMATE))+' cx';
+  document.getElementById('bal-cos-bola').textContent = fKM(toBoxes(cosBola, KG_PER_BOX_TOMATE))+' cx';
   document.getElementById('bal-empaque').innerHTML  = Cx(empTotal, KG_PER_BOX_TOMATE);
   document.getElementById('bal-emp-roma').textContent = fKM(toBoxes(empRoma,KG_PER_BOX_TOMATE))+' cx';
   document.getElementById('bal-emp-bola').textContent = fKM(toBoxes(empBola,KG_PER_BOX_TOMATE))+' cx';
@@ -3082,10 +3088,10 @@ function renderReporte(from, to){
   </td></tr>` : '';
 
   document.getElementById('rep-tbody').innerHTML = [
-    rowSec('Cosecha de Campo'),
+    rowSec('Cosecha de Campo (cajas equiv.)'),
     row('Total cosechado',
-      kg(cosecha.ROMA), kg(cosecha.BOLA),
-      kg(cosecha.ROMA + cosecha.BOLA), 'total'),
+      cx(cosecha.ROMA), cx(cosecha.BOLA),
+      cx(cosecha.ROMA + cosecha.BOLA), 'total'),
     divider(),
     rowSec('Empaque — Salida (cajas 25 lbs)'),
     row('1ra Calidad (sin gas)',  cx(emp.ROMA.P1), cx(emp.BOLA.P1), cx(emp.ROMA.P1+emp.BOLA.P1)),
@@ -3103,8 +3109,8 @@ function renderReporte(from, to){
       <td style="padding:5px 12px;text-align:right">${pctAprov(aprov.BOLA)}</td>
       <td style="padding:5px 12px;text-align:right">${pctAprov(aprovTotal)}</td></tr>`,
     excRow,
-    row('Merma (cosecha − salida)', kg(merma.ROMA),  kg(merma.BOLA),  kg(merma.ROMA+merma.BOLA)),
-    row('Merma Báscula (rezaga)', '—', '—', mBascula.TOTAL > 0 ? kg(mBascula.TOTAL) : '0 kg', 'muted'),
+    row('Merma (cosecha − salida)', cx(merma.ROMA),  cx(merma.BOLA),  cx(merma.ROMA+merma.BOLA)),
+    row('Merma Báscula (rezaga)', '—', '—', mBascula.TOTAL > 0 ? cx(mBascula.TOTAL) : '0 cx', 'muted'),
   ].join('');
 }
 
@@ -3223,19 +3229,19 @@ function renderTomate(from, to){
   const bolaPromG = bolaCant ? bolaKg / bolaCant : 0;
 
   document.getElementById('tom-total').innerHTML  = fKM(toBoxes(totalKg, KG_PER_BOX_TOMATE)) + '<span class="stat-unit">cx</span>';
-  document.getElementById('tom-total-sub').textContent = fN(totalKg/1000) + ' t · ' + rows.length + ' registros';
+  document.getElementById('tom-total-sub').textContent = rows.length + ' registros';
   document.getElementById('tom-roma').innerHTML   = fKM(toBoxes(romaKg, KG_PER_BOX_TOMATE)) + '<span class="stat-unit">cx</span>';
-  document.getElementById('tom-roma-pct').textContent  = totalKg ? fN(romaKg/totalKg*100) + '% · ' + fN(romaKg/1000) + ' t' : '—';
+  document.getElementById('tom-roma-pct').textContent  = totalKg ? fN(romaKg/totalKg*100) + '%' : '—';
   document.getElementById('tom-bola').innerHTML   = fKM(toBoxes(bolaKg, KG_PER_BOX_TOMATE)) + '<span class="stat-unit">cx</span>';
-  document.getElementById('tom-bola-pct').textContent  = totalKg ? fN(bolaKg/totalKg*100) + '% · ' + fN(bolaKg/1000) + ' t' : '—';
+  document.getElementById('tom-bola-pct').textContent  = totalKg ? fN(bolaKg/totalKg*100) + '%' : '—';
   document.getElementById('tom-dias').textContent = dias;
 
   const ghKg = rows.filter(r=>r.ambiente==='GH').reduce((s,r)=>s+r.kilos,0);
   const ofKg = rows.filter(r=>r.ambiente==='OF').reduce((s,r)=>s+r.kilos,0);
   document.getElementById('tom-gh').innerHTML = fKM(toBoxes(ghKg, KG_PER_BOX_TOMATE))+'<span class="stat-unit">cx</span>';
-  document.getElementById('tom-gh-pct').textContent = totalKg ? fN(ghKg/totalKg*100)+'% · '+fN(ghKg/1000)+' t' : '—';
+  document.getElementById('tom-gh-pct').textContent = totalKg ? fN(ghKg/totalKg*100)+'%' : '—';
   document.getElementById('tom-of').innerHTML = fKM(toBoxes(ofKg, KG_PER_BOX_TOMATE))+'<span class="stat-unit">cx</span>';
-  document.getElementById('tom-of-pct').textContent = totalKg ? fN(ofKg/totalKg*100)+'% · '+fN(ofKg/1000)+' t' : '—';
+  document.getElementById('tom-of-pct').textContent = totalKg ? fN(ofKg/totalKg*100)+'%' : '—';
 
 
   // ── Weekly stacked bar — cycle-relative weeks ──
@@ -3342,7 +3348,7 @@ function renderTomate(from, to){
       responsive:true, maintainAspectRatio:false, cutout:'58%',
       plugins:{
         legend:{ position:'right', labels:{ font:{family:'IBM Plex Sans',size:10}, color:'#374151', boxWidth:10, padding:8 } },
-        tooltip:{ callbacks:{ label:c=>` ${c.label}: ${fN(c.parsed/1000)} t (${fN(c.parsed/totalKg*100)}%)` } }
+        tooltip:{ callbacks:{ label:c=>` ${c.label}: ${fN(toBoxes(c.parsed, KG_PER_BOX_TOMATE),0)} cx (${fN(c.parsed/totalKg*100)}%)` } }
       }
     }
   });
@@ -3403,7 +3409,7 @@ function renderTomate(from, to){
       <td style="color:var(--muted)">${r.color}</td>
       <td style="color:var(--muted);font-size:.72rem">${r.tipo}</td>
       <td class="td-n">${fK(Math.round(r.cantidad))}</td>
-      <td class="td-n" style="font-weight:700">${fK(Math.round(r.kilos))}</td>
+      <td class="td-n" style="font-weight:700">${fN(toBoxes(r.kilos, KG_PER_BOX_TOMATE),0)}</td>
       <td class="td-n" style="color:var(--blue)">${fN(r.prom, 3)}</td>
       <td class="td-n" ${difCls}>${difTxt}</td>
     </tr>`;
@@ -3430,7 +3436,7 @@ function renderCropPanel({ rows, ids, from, to, chartSemId, casetaId, varId, tbo
   document.getElementById(ids.total).innerHTML =
     fKM(totalUnits) + '<span class="stat-unit">' + unitLabel + '</span>';
   document.getElementById(ids.totalSub).textContent =
-    fN(totalKg/1000) + ' t · ' + rows.length + ' registros';
+    rows.length + ' registros';
   document.getElementById(ids.dias).textContent = dias;
   if(ids.prom)  document.getElementById(ids.prom).innerHTML = fN(promG,3)+'<span class="stat-unit">kg</span>';
   if(ids.vars){
@@ -3472,7 +3478,6 @@ function renderCropPanel({ rows, ids, from, to, chartSemId, casetaId, varId, tbo
         <span class="prog-name" style="font-size:.73rem">${k.replace(/^CASETA\s+0*(\d+)\s+/i,'C-$1 ')}</span>
         <span class="prog-qty" style="color:${GCOLORS[i%GCOLORS.length]};font-size:.73rem">
           ${Math.round(toBoxes(kg,kgPerUnit)).toLocaleString('es-MX')} ${unitLabel}
-          <span style="opacity:.45;font-weight:400"> ${fN(kg/1000)} t</span>
         </span>
       </div>
       <div class="prog-track" style="height:5px">
@@ -3489,7 +3494,7 @@ function renderCropPanel({ rows, ids, from, to, chartSemId, casetaId, varId, tbo
     <td>${(()=>{ const gh=isGH(r.cultivo); const tag=gh?'GH':'OF'; const bg=gh?'rgba(22,163,74,.12)':'rgba(217,119,6,.15)'; const col=gh?'#15803d':'#92400e'; const name=r.cultivo.replace(/^(GH|OF)\s+/i,'').replace(/\s*TOMATOES?\s*/i,''); return `<span style="font-size:.62rem;font-weight:700;padding:1px 5px;border-radius:4px;background:${bg};color:${col};margin-right:4px">${tag}</span>${name}`; })()}</td>
     <td style="color:var(--muted)">${r.color}</td>
     <td class="td-n">${fK(Math.round(r.cantidad))}</td>
-    <td class="td-n" style="font-weight:700">${fK(Math.round(r.kilos))}</td>
+    <td class="td-n" style="font-weight:700">${fN(toBoxes(r.kilos, kgPerUnit),0)}</td>
     <td class="td-n" style="color:var(--blue)">${fN(r.prom,3)}</td>
   </tr>`).join('') || '<tr><td colspan="9" class="empty">Sin datos.</td></tr>';
 }
@@ -3530,7 +3535,7 @@ function renderLimonPalets(){
   const cajasRosario   = toBoxes((limPalets.filter(r=>(r.etiqueta||'').toUpperCase()==='ROSARIO'  ).reduce((s,r)=>s+(r.peso||0)*(r.bultos||0),0)), KG_PER_BOX_LIMON);
 
   document.getElementById('lim-emp-cajas').innerHTML     = fKM(totalCajas)+'<span class="stat-unit">cx</span>';
-  document.getElementById('lim-emp-sub').textContent     = limPalets.length+' registros · '+fN(totalKg/1000)+' t';
+  document.getElementById('lim-emp-sub').textContent     = limPalets.length+' registros';
   document.getElementById('lim-emp-limoneira').innerHTML = cajasLimoneira>0 ? fKM(cajasLimoneira)+'<span class="stat-unit">cx</span>' : '—';
   document.getElementById('lim-emp-rosario').innerHTML   = cajasRosario>0   ? fKM(cajasRosario)  +'<span class="stat-unit">cx</span>' : '—';
   document.getElementById('lim-emp-peso').innerHTML      = fN(pesoProm)+'<span class="stat-unit">kg</span>';
@@ -3889,22 +3894,24 @@ function renderRezaga(){
   const rows = rawRezaga;
   if(!rows.length){
     document.getElementById('rez-neto').textContent  = '—';
-    document.getElementById('rez-bruto').textContent = '—';
     document.getElementById('rez-count').textContent = '—';
     document.getElementById('rez-tbody').innerHTML   =
-      '<tr><td colspan="8" class="empty">Sin datos de rezaga para el período.</td></tr>';
+      '<tr><td colspan="5" class="empty">Sin datos de rezaga para el período.</td></tr>';
     return;
   }
-  const neto  = rows.reduce((s,r)=>s+(r.peso_neto||0), 0);
-  const bruto = rows.reduce((s,r)=>s+(r.peso_bruto||0), 0);
-  document.getElementById('rez-neto').innerHTML  = fKM(neto/1000) + '<span class="stat-unit"> t</span>';
-  document.getElementById('rez-neto-sub').textContent = fK(Math.round(neto)) + ' kg netos';
-  document.getElementById('rez-bruto').innerHTML = fKM(bruto/1000) + '<span class="stat-unit"> t</span>';
+  // Solo % rezaga (sobre neto báscula tomate del período). Sin kg.
+  const from_r = activeRange?.from || isoLocal(new Date());
+  const to_r   = activeRange?.to   || isoLocal(new Date());
+  const netoRez  = rows.reduce((s,r)=>s+(r.peso_neto||0), 0);
+  const netoBasc = (rawAcarreos||[]).filter(r=>{ const d=(r.fecha||'').split('T')[0]; return d>=from_r&&d<=to_r&&isTomRem(r); })
+    .reduce((s,r)=>s+((r.peso_bruto||0)-(r.tara||0)),0);
+  const rezPct = netoBasc>0 ? netoRez/netoBasc*100 : null;
+  document.getElementById('rez-neto').innerHTML  = rezPct!=null ? fN(rezPct,1)+'<span class="stat-unit">%</span>' : '—';
   document.getElementById('rez-count').textContent = rows.length.toLocaleString('es-MX');
 
   const display = rows.slice(0, 300);
   const capNote = rows.length > 300
-    ? `<tr><td colspan="8" style="text-align:center;padding:8px;font-size:var(--t-nano);color:var(--muted)">Mostrando 300 de ${rows.length.toLocaleString('es-MX')} registros</td></tr>`
+    ? `<tr><td colspan="5" style="text-align:center;padding:8px;font-size:var(--t-nano);color:var(--muted)">Mostrando 300 de ${rows.length.toLocaleString('es-MX')} registros</td></tr>`
     : '';
   document.getElementById('rez-tbody').innerHTML = display.map(r => `<tr>
     <td>${fDate((r.fecha||'').split('T')[0])}</td>
@@ -3912,9 +3919,6 @@ function renderRezaga(){
     <td style="color:var(--muted);font-size:.72rem">${r.tolva||'—'}</td>
     <td style="font-size:.72rem">${r.chofer||'—'}</td>
     <td style="font-size:.72rem;color:var(--muted)">${r.vehiculo||'—'}</td>
-    <td class="td-n">${fK(Math.round(r.peso_bruto||0))}</td>
-    <td class="td-n" style="color:var(--muted)">${fK(Math.round(r.tara||0))}</td>
-    <td class="td-n" style="color:var(--green);font-weight:800">${fK(Math.round(r.peso_neto||0))}</td>
   </tr>`).join('') + capNote;
 }
 
@@ -3952,8 +3956,8 @@ function renderEmbarques(from, to){
   const exp = rows.filter(r => r.tipo === 'Exportacion');
   const nac = rows.filter(r => r.tipo !== 'Exportacion');
   const totalPalets = rows.reduce((s,r)=>s+(r.detalle||[]).length, 0);
-  const totalKg     = rows.reduce((s,r)=>
-    s + (r.detalle||[]).reduce((ss,d)=>ss+(d.peso||0)*(d.bultos||0), 0), 0);
+  const totalCajas  = rows.reduce((s,r)=>
+    s + (r.detalle||[]).reduce((ss,d)=>ss+(d.bultos||0), 0), 0);
   const expPalets   = exp.reduce((s,r)=>s+(r.detalle||[]).length, 0);
 
   document.getElementById('emb-total').textContent = rows.length.toLocaleString('es-MX');
@@ -3966,7 +3970,7 @@ function renderEmbarques(from, to){
     nac.reduce((s,r)=>s+(r.detalle||[]).length,0) + ' palets';
   document.getElementById('emb-palets').textContent = totalPalets.toLocaleString('es-MX');
   document.getElementById('emb-kg').innerHTML =
-    fKM(totalKg/1000) + '<span class="stat-unit"> t</span>';
+    fKM(totalCajas) + '<span class="stat-unit"> cx</span>';
 
   const TIPO_BADGE = {
     'Exportacion': `<span style="display:inline-block;padding:1px 7px;border-radius:4px;font-size:.62rem;font-weight:800;letter-spacing:.4px;background:rgba(29,78,216,.12);color:#1d4ed8">EXP</span>`,
@@ -3978,7 +3982,7 @@ function renderEmbarques(from, to){
     : '';
   document.getElementById('emb-tbody').innerHTML = display.map(r => {
     const palets = (r.detalle||[]).length;
-    const kg     = (r.detalle||[]).reduce((s,d)=>s+(d.peso||0)*(d.bultos||0), 0);
+    const cajas  = (r.detalle||[]).reduce((s,d)=>s+(d.bultos||0), 0);
     const badge  = TIPO_BADGE[r.tipo] || r.tipo || '—';
     const dest   = (r.destino||'—').split(',')[0];
     return `<tr>
@@ -3988,7 +3992,7 @@ function renderEmbarques(from, to){
       <td style="color:var(--muted);font-size:.72rem">${r.factura||'—'}</td>
       <td style="font-size:.72rem;color:var(--muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${dest}</td>
       <td class="td-n">${palets}</td>
-      <td class="td-n" style="color:var(--green);font-weight:700">${fK(Math.round(kg))}</td>
+      <td class="td-n" style="color:var(--green);font-weight:700">${fK(Math.round(cajas))}</td>
     </tr>`;
   }).join('') + capNote;
 
@@ -4154,6 +4158,8 @@ function pushUrlState(){
   const params = new URLSearchParams(window.location.search);
   params.set('tab', tab);
   if(activePeriod) params.set('period', activePeriod);
+  if(activePeriod === 'exacto' && activeRange?.from) params.set('date', activeRange.from);
+  else params.delete('date');
   history.replaceState(null, '', '?' + params.toString());
 }
 
@@ -4228,8 +4234,9 @@ function pickMonth(year, month){
   const to = iso(lastDay <= today ? lastDay : today);
   mpSelY = year; mpSelM = month;
   activeRange = { from, to };
-  // clear period pills
+  // clear period pills + exact-date input
   document.querySelectorAll('.p-btn[data-period]').forEach(b => b.classList.remove('active'));
+  const _de = document.getElementById('f-exact-date'); if(_de) _de.value = '';
   // highlight mpicker button
   const btn = document.getElementById('mpicker-btn');
   btn.classList.add('mpactive');
@@ -4238,6 +4245,22 @@ function pickMonth(year, month){
   if(store.loadedAt){
     const rf = activeRange?.from || isoLocal(new Date()), rt = activeRange?.to || iso(new Date());
     applyRawData(store.palets, store.acarreos, rf, rt, 'Store');
+    if(!cmpReady) autoLoadCmp();
+  } else {
+    loadAll();
+  }
+}
+
+// Filtro por fecha exacta — filtra todo el dashboard a un solo día
+function pickExactDate(dateStr){
+  if(!dateStr) return;
+  activePeriod = 'exacto';
+  activeRange  = { from: dateStr, to: dateStr };
+  document.querySelectorAll('.p-btn[data-period]').forEach(b => b.classList.remove('active'));
+  mpClearActive();
+  pushUrlState();
+  if(store.loadedAt){
+    applyRawData(store.palets, store.acarreos, dateStr, dateStr, 'Fecha exacta');
     if(!cmpReady) autoLoadCmp();
   } else {
     loadAll();
@@ -4319,6 +4342,7 @@ if(_initP.get('frame') === '1') document.body.classList.add('frame');
 // Restore saved tab from URL (before rendering)
 const _savedTab    = _initP.get('tab');
 const _savedPeriod = _initP.get('period') || 'ciclo';
+const _savedDate   = _initP.get('date');
 
 if(_savedTab && _savedTab !== 'panel-resumen'){
   const savedBtn = document.querySelector(`.view-tab[data-panel="${_savedTab}"]`);
@@ -4329,7 +4353,12 @@ if(_savedTab && _savedTab !== 'panel-resumen'){
 }
 
 renderMPGrid();
-setPeriod(_savedPeriod); // → loadAll() on first boot; store-render on subsequent calls
+if(_savedPeriod === 'exacto' && _savedDate){
+  const _de = document.getElementById('f-exact-date'); if(_de) _de.value = _savedDate;
+  pickExactDate(_savedDate); // → loadAll() on first boot
+} else {
+  setPeriod(_savedPeriod); // → loadAll() on first boot; store-render on subsequent calls
+}
 </script>
 </body>
 </html>
