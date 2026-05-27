@@ -1103,6 +1103,13 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
       <span class="sec-source">báscula + palets + rezaga</span>
     </div>
 
+    <div style="margin:-4px 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <button id="bal-gas-toggle" onclick="toggleBalGas()" class="cmp-btn" style="font-size:var(--t-nano)">
+        <span id="bal-gas-lbl">Empaque: Todo</span>
+      </button>
+      <span style="font-size:var(--t-nano);color:var(--muted);opacity:.7">Alterna entre todo el empaque y solo palets gasificados</span>
+    </div>
+
     <!-- KPI strip -->
     <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px">
       <div class="stat cg">
@@ -1478,6 +1485,16 @@ let fPalets   = [];
 let fAcarreos = [];
 let activePeriod = 'ciclo';
 let activeRange  = periodRange('ciclo');
+let balGasOnly   = false;   // Balance de Masas: false = todo el empaque, true = solo gasificados
+
+function toggleBalGas(){
+  balGasOnly = !balGasOnly;
+  const lbl = document.getElementById('bal-gas-lbl');
+  if(lbl) lbl.textContent = balGasOnly ? 'Empaque: Solo gasificados' : 'Empaque: Todo';
+  const btn = document.getElementById('bal-gas-toggle');
+  if(btn) btn.classList.toggle('cmp-on', balGasOnly);
+  renderBalance();
+}
 
 function getDimFilters(){
   return {
@@ -2787,6 +2804,7 @@ function renderSankey(from, to, targetId='sankey-wrap', opts={}, variedad=null){
     if(d<from||d>to) return;
     const c=(r.cultivo||'').toUpperCase();
     if(!isTomato(c)) return;
+    if(balGasOnly && r.gaseado !== true) return;   // toggle "solo gasificados"
     const kg=(r.peso||0)*(r.bultos||0);
     if(r.estado==='CJV'){
       cjvTotal+=kg;
@@ -2931,6 +2949,7 @@ function renderBalance(){
   let empTotal=0,cjvTotal=0,empRoma=0,empBola=0,cjvRoma=0,cjvBola=0;
   balPalets.forEach(r=>{
     const c=(r.cultivo||'').toUpperCase(); if(!isTomato(c)) return;
+    if(balGasOnly && r.gaseado !== true) return;   // toggle "solo gasificados"
     const kg=(r.peso||0)*(r.bultos||0);
     if(r.estado==='CJV'){ cjvTotal+=kg; if(isRoma(c)) cjvRoma+=kg; else if(isBola(c)) cjvBola+=kg; }
     else { empTotal+=kg; if(isRoma(c)) empRoma+=kg; else if(isBola(c)) empBola+=kg; }
