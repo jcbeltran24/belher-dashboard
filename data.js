@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Miércoles 27 May 2026",
     semana: "WK 22",
-    actualizado: "27/05/2026 · 16:01"
+    actualizado: "27/05/2026 · 16:30"
   },
 
   alertas: [
@@ -725,14 +725,31 @@ window.BELHER = {
       auditor:   "Javier Martínez",
       alcance:   "Unidades de producción y empaque — todas las instalaciones",
       fechaAuditoria: "18-19/05/2026",
-      estado:    "Confirmada — preparación en curso",
-      nivel:     "warning",
-      ncTotal:   null,
-      ncMayor:   null,
-      ncMenor:   null,
-      notas:     "Confirmada el 17-Apr-2026 por Chrysthian Marisol Castro. Criterios: Buenas Prácticas de Manufactura y Agrícolas. Día 1: itinerario a definir in situ con auditor. Acción: revisar inventarios de materiales e insumos críticos y gestionar servicios pendientes con tiempo.",
-      observaciones: [],
-      fuente: "c.marisol@agbelher.com · 17-Abr-2026"
+      estado:    "Certificada",
+      nivel:     "success",
+      ncTotal:   8,
+      ncMayor:   0,
+      ncMenor:   8,
+      notas:     "Auditoría completada 27/05/2026. Resultado FAVORABLE: Empaque 94.3% (8 NC) · Álamo 96.2% (4 NC) · La 25 96.4% (4 NC). Belher permanece en lista de proveedores aprobados. Plazo acciones correctivas: 8 de junio 2026. Revisión final y confirmación de cierre pendiente.",
+      observaciones: [
+        {
+          numero: 1,
+          categoria: "administrativo",
+          descripcion: "Documentación de procedimientos de BPM",
+          deadline: "08/06/2026",
+          accion: "Completar documentación de 4 procedimientos críticos",
+          evidencia: "Pendiente"
+        },
+        {
+          numero: 2,
+          categoria: "empaque",
+          descripcion: "Control de calibración de equipos",
+          deadline: "08/06/2026",
+          accion: "Actualizar calibración en 2 balanzas Álamo",
+          evidencia: "Pendiente"
+        }
+      ],
+      fuente: "c.marisol@agbelher.com · 27-May-2026"
     }
   ],
 
@@ -848,227 +865,4 @@ window.BELHER = {
         confianza: 68,
         precio_actual:     { min: 36.00, max: 42.00 },
         precio_proyectado: { min: 32.00, max: 42.00 },
-        razonamiento: "Corbel #0039: Seedless 110s $42, 150s $36-40. Belher báscula 07/05 registra limón activo. Peru -30% ventana cierres WK20. Flush Colombia/Brasil esperado WK21 presiona fuerte. VENTANA FINAL HOY WK20.",
-        factores: ["Corbel #0039: Seedless 110s $42 máximo", "Belher báscula 07/05: limón precio viable", "Peru supply -30% cierra ventana WK20", "Flush Colombia/Brasil mayo-junio cierra oportunidad", "Sniim Veracruz $28 MXN/kg base"],
-        riesgo: "Flush primaveral podría presionar a $32-36 rápidamente WK21.",
-        accion: "EMBARCAR LIMÓN MÁXIMO HOY/MAÑANA WK20. Ventana se cierra inmediatamente. Decisión báscula 07/05 confirma oportunidad viable final temporada."
-      },
-      {
-        id: "bola-quality",
-        producto: "Tomate Bola · OUTBOUND RECUPERADO 06/05",
-        unidad: "calidad salida",
-        tendencia: "alcista",
-        confianza: 78,
-        precio_actual:     { min: 28.00, max: 32.00 },
-        precio_proyectado: { min: 26.00, max: 32.00 },
-        razonamiento: "POSITIVO: Outbound 06/05 Bola 86.29% primera (merma 3.05% OK) — recuperación desde 05/05 (79.74%, merma 4.20%). Deterioro inbound 04/05 (56%, merma 25%) fue localizado en lote/campo específico, NO en empaque. Patrón sostenido de mejora WK19.",
-        factores: ["Outbound 06/05: Bola 86.29% primera (OK)", "Outbound 05/05: Bola 79.74% (OK)", "Inbound 04/05 problema localizado — resuelto", "Roma outbound premium — calidad estate", "Monitoreo inbound continuo previene sorpresas"],
-        riesgo: "Si nuevo problema inbound WK20, Bola cargas afectadas. Monitoreo diario requerido.",
-        accion: "Continuar Bola embarques con confianza. Recuperación confirmada. Monitoreo inbound WK20 previene — problema anterior localizado y resuelto."
-      },
-      {
-        id: "chile-fresh",
-        producto: "Chile Jalapeño",
-        unidad: "carton FOB Texas",
-        tendencia: "bajista",
-        confianza: 65,
-        precio_actual:     { min: 33.00, max: 35.00 },
-        precio_proyectado: { min: 30.00, max: 35.00 },
-        razonamiento: "Mercado WK20: Chile Jalapeño $33-35 (Corbel #0039). Presión visible desde picos $54 WK19. Supply aumentando. Corrección hacia $30-33 esperada WK21.",
-        factores: ["Corbel #0039: Jalapeño $33-35 (presionado)", "Texas supply creciente", "Post-peak transición clara", "Demanda estable pero supply crece"],
-        riesgo: "Corrección a $28-30 si supply llega acelerado.",
-        accion: "Embarques Chile optimizados a precio corriente. Presión esperada — actuar esta semana."
-      }
-    ]
-  },
-
-  industria: [
-    { cat:"Calidad",   titulo:"OUTBOUND TOMATE EXCELENTE 06/05 — Bola 86.29%, Roma 79.60%, Chile 88.59%", impacto:"Positivo", fuente:"calidad@agbelher.com · 06-May-2026", resumen:"Outbound 06/05: Bola Calavo 86.29% primera (merma 3.05%), Roma Calavo 79.60% (merma 1.60%), Chile Anaheim 88.59% (merma 0.97%). Patrón de mejora sostenido. Cargas procesadas satisfactoriamente — problema inbound 04/05 localizado y resuelto." },
-    { cat:"Mercado",   titulo:"WK20: Vine-ripe $26 avg — caída desde $48 WK19. 4x4: $28-32, 6x6: $12-14", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026", resumen:"Corrección confirmada WK20. Vine-ripe $26 promedio (down $48 WK19). 4x4/4x5: $30-32 algunos $28. 5x5: $16-18, 6x6: $12-14. AgBelher promedio $22-23. Primera carga ADM en camino expecting $20s. Calidad se mantiene 2 semanas más." },
-    { cat:"Mercado",   titulo:"Romans harvest julio (no junio) — 20-Jun solo volumen limitado Charlie", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026", resumen:"Romans harvest inicia julio, no junio como se estimaba. Excepción: 20 junio volumen muy limitado para programa Charlie (extra large/jumbos 4x4/4x5). Esto retrasa revenue Romans temporada. $24-26 jumbos $20-22." },
-    { cat:"Competencia", titulo:"Canadá +300% producción GH NE — duty-free quitando share NY/Baltimore/Chicago", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026", resumen:"Producción canadiense creció 300% últimos 2 años en Northeast. Invernaderos high-tech, calidad excepcional, libre de aranceles, menos regulación que importaciones MX. Tomando market share en NY, Baltimore, Chicago. Florida también aumentó Roma. España importando Romans a NY." },
-    { cat:"Operativo", titulo:"Sorgo Trilla WK19 — Quevedo 1+Aguaruto completada 06/05, 292 ha acumuladas", impacto:"Medio", fuente:"basculabelher@gmail.com · AVANCE DE TRILLA 06/05/2026", resumen:"Jornada 06/05: Quevedo 1+Aguaruto completada (13 ha). Total acumulado: 292 ha en 21 jornadas. Sifón finalizados 02/05 — 15 ha total. Descanso obligatorio 01/May ejecutado. Temporada de trilla en su final — preparación para nuevas siembras GC 2026-2027." }
-  ],
-
-  cdc: {
-    semanaActual: "WK39",
-    fuente: "Aldo Jesús Ávila · capitalhumano@agbelher.com · 24-Mar-2026",
-    beltran: {
-      nombre: "Lo de Beltrán",
-      nota: "trabajadores = personas con Cve_empleado válido en el censo",
-      picoTemporada: { sem: "WK36", total: 1196, trabajadores: 715 },
-      historico: [
-        { sem:"WK19", total:1052, trabajadores:628, acomp:424, pct:59.7 },
-        { sem:"WK20", total:1057, trabajadores:610, acomp:447, pct:57.7 },
-        { sem:"WK21", total:1117, trabajadores:657, acomp:460, pct:58.8 },
-        { sem:"WK22", total:1140, trabajadores:668, acomp:472, pct:58.6 },
-        { sem:"WK23", total:1127, trabajadores:659, acomp:468, pct:58.5 },
-        { sem:"WK24", total:1120, trabajadores:657, acomp:463, pct:58.7 },
-        { sem:"WK25", total:1107, trabajadores:650, acomp:457, pct:58.7 },
-        { sem:"WK26", total:1137, trabajadores:660, acomp:477, pct:58.0 },
-        { sem:"WK27", total:1111, trabajadores:648, acomp:463, pct:58.3 },
-        { sem:"WK28", total:1095, trabajadores:641, acomp:454, pct:58.5 },
-        { sem:"WK29", total:1139, trabajadores:674, acomp:465, pct:59.2 },
-        { sem:"WK30", total:1120, trabajadores:662, acomp:458, pct:59.1 },
-        { sem:"WK31", total:1181, trabajadores:706, acomp:475, pct:59.8 },
-        { sem:"WK32", total:1169, trabajadores:696, acomp:473, pct:59.5 },
-        { sem:"WK33", total:1170, trabajadores:698, acomp:472, pct:59.7 },
-        { sem:"WK34", total:1168, trabajadores:689, acomp:479, pct:59.0 },
-        { sem:"WK35", total:1176, trabajadores:696, acomp:480, pct:59.2 },
-        { sem:"WK36", total:1196, trabajadores:715, acomp:481, pct:59.8 },
-        { sem:"WK37", total:1166, trabajadores:688, acomp:478, pct:59.0 },
-        { sem:"WK38", total:1181, trabajadores:693, acomp:488, pct:58.7 },
-        { sem:"WK39", total:1156, trabajadores:672, acomp:484, pct:58.1 }
-      ]
-    },
-    dorita: {
-      nombre: "Campo Dorita",
-      nota: "trabajadores = personas con Cve_empleado válido en el censo",
-      picoTemporada: { sem: "WK26", total: 253, trabajadores: 242 },
-      historico: [
-        { sem:"WK20", total:161,  trabajadores:148, acomp:13,  pct:91.9 },
-        { sem:"WK21", total:216,  trabajadores:203, acomp:13,  pct:94.0 },
-        { sem:"WK22", total:212,  trabajadores:199, acomp:13,  pct:93.9 },
-        { sem:"WK23", total:209,  trabajadores:198, acomp:11,  pct:94.7 },
-        { sem:"WK24", total:203,  trabajadores:192, acomp:11,  pct:94.6 },
-        { sem:"WK25", total:204,  trabajadores:193, acomp:11,  pct:94.6 },
-        { sem:"WK26", total:253,  trabajadores:242, acomp:11,  pct:95.7 },
-        { sem:"WK27", total:207,  trabajadores:196, acomp:11,  pct:94.7 },
-        { sem:"WK28", total:208,  trabajadores:197, acomp:11,  pct:94.7 },
-        { sem:"WK29", total:236,  trabajadores:222, acomp:14,  pct:94.1 },
-        { sem:"WK30", total:238,  trabajadores:222, acomp:16,  pct:93.3 },
-        { sem:"WK31", total:218,  trabajadores:203, acomp:15,  pct:93.1 },
-        { sem:"WK32", total:214,  trabajadores:200, acomp:14,  pct:93.5 },
-        { sem:"WK33", total:226,  trabajadores:210, acomp:16,  pct:92.9 },
-        { sem:"WK34", total:227,  trabajadores:207, acomp:20,  pct:91.2 },
-        { sem:"WK35", total:228,  trabajadores:208, acomp:20,  pct:91.2 },
-        { sem:"WK36", total:219,  trabajadores:199, acomp:20,  pct:90.9 },
-        { sem:"WK37", total:214,  trabajadores:194, acomp:20,  pct:90.7 },
-        { sem:"WK38", total:217,  trabajadores:195, acomp:22,  pct:89.9 },
-        { sem:"WK39", total:206,  trabajadores:187, acomp:19,  pct:90.8 }
-      ]
-    },
-    proyeccion: {
-      fuente: "Depto. Producción · Plan Inicial Temporada 2025–2026",
-      semanas: [
-        { sem:"WK19", beltran:1080, dorita:0,   total:1080 },
-        { sem:"WK20", beltran:1130, dorita:185,  total:1315 },
-        { sem:"WK21", beltran:1185, dorita:235,  total:1420 },
-        { sem:"WK22", beltran:1230, dorita:242,  total:1472 },
-        { sem:"WK23", beltran:1250, dorita:242,  total:1492 },
-        { sem:"WK24", beltran:1270, dorita:248,  total:1518 },
-        { sem:"WK25", beltran:1290, dorita:252,  total:1542 },
-        { sem:"WK26", beltran:1310, dorita:262,  total:1572 },
-        { sem:"WK27", beltran:1320, dorita:258,  total:1578 },
-        { sem:"WK28", beltran:1310, dorita:253,  total:1563 },
-        { sem:"WK29", beltran:1330, dorita:263,  total:1593 },
-        { sem:"WK30", beltran:1340, dorita:268,  total:1608 },
-        { sem:"WK31", beltran:1360, dorita:263,  total:1623 },
-        { sem:"WK32", beltran:1370, dorita:263,  total:1633 },
-        { sem:"WK33", beltran:1380, dorita:263,  total:1643 },
-        { sem:"WK34", beltran:1390, dorita:260,  total:1650 },
-        { sem:"WK35", beltran:1380, dorita:258,  total:1638 },
-        { sem:"WK36", beltran:1370, dorita:253,  total:1623 },
-        { sem:"WK37", beltran:1330, dorita:243,  total:1573 },
-        { sem:"WK38", beltran:1300, dorita:238,  total:1538 },
-        { sem:"WK39", beltran:1260, dorita:228,  total:1488 }
-      ]
-    }
-  },
-
-  calavoWeekly: {
-    semana:      "WK20",
-    fechas:      "12-17 May 2026",
-    fuente:      "Calavo Market Call · 13-May-2026",
-    actualizado: "17/05/2026",
-
-    acciones: [
-      {
-        simbolo: "CVGW", nombre: "Calavo Growers", mercado: "NASDAQ",
-        precio: 26.27, prevClose: 26.82, cambio: -0.55, cambioPct: -2.05,
-        h52: 28.98, l52: 18.40, volumen: null,
-        fuente: "Yahoo Finance · 26-May-2026"
-      },
-      {
-        simbolo: "AVO", nombre: "Mission Produce", mercado: "NASDAQ",
-        precio: 11.65, prevClose: 12.29, cambio: -0.64, cambioPct: -5.20,
-        h52: 15.53, l52: 10.00, volumen: null,
-        fuente: "Yahoo Finance · 26-May-2026"
-      }
-    ],
-
-    correos: [
-      {
-        fecha: "Viernes 15 May 2026", de: "Leima Leyva", cargo: "Finance Manager · Agrícola Belher/ADM",
-        asunto: "2026 03-05 Agricola Belher Settle WK19 7 Mayo 2026.xlsx",
-        tipo: "settlement", nivel: "success",
-        resumen: "Leima comparte liquidación WK19 recibida de Calavo (07-May-2026). Revenue estimado según Calavo: ~$2.506M a favor. Análisis y conciliación detallada mañana 08-May."
-      },
-      {
-        fecha: "Viernes 15 May 2026", de: "Leima Leyva", cargo: "Finance Manager · Agrícola Belher/ADM",
-        asunto: "Liquidación Calavo al 26 abril '26 — saldo a favor $1,206,806",
-        tipo: "settlement", nivel: "success",
-        resumen: "Leima comparte liquidación acumulada al 26-Abr. Revenue $17,746,742 · Aranceles $1,775,841 · Comisiones $1,916,508 · Venta neta $12,613,207 · P&P $4,466,620. Saldo S/Belher: $1,639,473. Conciliación S/Calavo: $1,206,806. Quedan cajas por facturar."
-      },
-      {
-        fecha: "Viernes 15 May 2026", de: "Irene Amezaga", cargo: "VP Sales · Tomatoes & Papaya · Calavo",
-        asunto: "Canceled: Weekly Tomato Meeting — sin Tomato Weekly Update WK18",
-        tipo: "fyi", nivel: "warning",
-        resumen: "Irene cancela reunión semanal Teams del 28/04. Sin adjunto Tomato Weekly Update WK17/18. 3 semanas sin reporte formal Calavo."
-      }
-    ],
-
-    alertas: [
-      { nivel: "success", texto: "SETTLEMENT WK19 (07-May): Calavo reporta ~$2.506M a favor. Conciliación detallada 08-May por Leima." },
-      { nivel: "warning", texto: "CVGW $28.03 (+4.56%) · AVO $12.20 (-1.29%) — repunte en Calavo. Monitoreo en Mission Produce." },
-      { nivel: "warning", texto: "Tomato Weekly Update WK20 pendiente — Irene sin envío. Monitoreo de reporte formal." }
-    ],
-
-    kpi: {
-      pallets: null, loads: 24, pkgs: 38067,
-      fobPromedio: 28.95, fobAnterior: 39.72, pkgsAnterior: 53976,
-      revenueWk: 1101951, revenueAnt: 2144379,
-      nota: "WK16 — Settle 15-Abr: $1,101,951 / 38,067 pkgs = $28.95/cj. WK19 settle (07-May): ~$2.506M según Calavo."
-    },
-
-    belher: {
-      rounds: { proyectado: null, actual: null, loads: null, pkgs: null, diffPct: null },
-      roma:   { proyectado: null, actual: null, loads: null, pkgs: null, diffPct: null },
-      total:  { proyectado: null, actual: null, loads: 24, pkgs: 38067 }
-    }
-  },
-
-  pronostico: {
-    generado: "17/05/2026",
-    semanas: [
-      {
-        semana: "WK20", fechas: "12–18 May",
-        productos: [
-          { producto:"Tomate Vine-ripe",  hectareas:22, estimadoCajas:4500, confianza:76, tendencia:"bajista" },
-          { producto:"Tomate Roma",       hectareas:18, estimadoCajas:3200, confianza:72, tendencia:"bajista" },
-          { producto:"Chile Jalapeño",    hectareas:8,  estimadoCajas:1400, confianza:70, tendencia:"bajista" },
-          { producto:"Limón Persa",       hectareas:7,  estimadoCajas:1200, confianza:68, tendencia:"lateral" }
-        ]
-      },
-      {
-        semana: "WK21", fechas: "19–25 May",
-        productos: [
-          { producto:"Tomate Vine-ripe",  hectareas:20, estimadoCajas:4000, confianza:72, tendencia:"bajista" },
-          { producto:"Tomate Roma",       hectareas:16, estimadoCajas:2800, confianza:68, tendencia:"bajista" },
-          { producto:"Chile Jalapeño",    hectareas:6,  estimadoCajas:1000, confianza:65, tendencia:"bajista" },
-          { producto:"Limón Persa",       hectareas:4,  estimadoCajas:700,  confianza:60, tendencia:"bajista" }
-        ]
-      }
-    ]
-  },
-
-  caades: {
-    fuente:       "CAADES/CIDH · mariajose@cidh.org.mx",
-    temporada:    "2025-2026",
-    ultimoReporte: null,
-    actualizado:  null,
-    inventario:   [],
-    pipeline:     [],
-    totalesTemporada: []
-  }
-};
+        razonamiento: "Corbel #0039: Seedless 110s $42, 150s $36-40. Belher báscula 07/05 registra limón activo. Peru -30
