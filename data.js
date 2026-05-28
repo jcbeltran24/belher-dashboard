@@ -1,17 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 27 May 2026",
+    fecha: "Jueves 28 May 2026",
     semana: "WK 22",
-    actualizado: "27/05/2026 · 16:30"
+    actualizado: "28/05/2026 · 10:16"
   },
 
   alertas: [
+    {"nivel":"success","texto":"📎 ADJUNTOS BELHER 28/05 — 5 archivos descargados a Drive (07:53): Acarreo Diario 27-05 (Chile y Limón), Diario de Báscula 27-05 (Chile y Limón), Listado Diario 27-05 (Chile), Listado Diario 27-05 (Limón Persa), Rezaga de Tomate 27-05. Carpeta: Belher Adjuntos."},
     {"nivel":"success","texto":"✅ AUDITORÍA BUYERS EDGE-CALAVO 27/05 — Resultado FAVORABLE: Empaque 94.3% (8 NC) · Álamo 96.2% (4 NC) · La 25 96.4% (4 NC). Belher permanece en lista de proveedores aprobados. Plazo acciones correctivas: 8 de junio 2026."},
     {"nivel":"success","texto":"🤝 CONTRATO BELTRAN-CALAVO 26/05 — JC envió versión final del contrato. Confirmación de recibido por Irene Amezaga (VP Sales, Calavo) y Armando Llanes (CFO, Don Memo). Contrato en proceso de cierre con Calavo, Antonio, JC y Armando."},
-    {"nivel":"success","texto":"📎 ADJUNTOS BELHER 27/05 — 5 archivos descargados a Drive (07:53): Rezaga de Tomate 26-05, Acarreo Diario Limón Persa 26-05, Diario de Báscula Limón Persa 26-05, Listado Diario Limón Persa 26-05, Plantilla de Calidad Outbound. Carpeta: Belher Adjuntos."},
+    {"nivel":"warning","texto":"⚖️ ACCIONES CORRECTIVAS AUDITORÍA SMETA — Resultado preliminar compartido por Marisol Castro. Incluye No conformidades, Observaciones, Buenas Prácticas y Datos Generales (doc Excel). Reunión con involucrados directos pendiente. Equipo: Carlos Castro, Juan Aviles, Samantha González y otros. Deadline acciones correctivas Buyers Edge-Calavo: 8 de junio 2026."},
     {"nivel":"info","texto":"🧾 FACTURA MATRAZ LAB 26/05 — CONTPAQ i emitió factura UUID: ae6be09e-e338-42e6-966d-5599f836078b. Disponible para descarga por 30 días en portal CFDI."},
     {"nivel":"success","texto":"📊 CALIDAD OUTBOUND TOMATE 23/05 — Bola Yameto: Primera 72.29% · Segunda 14.57% · Tercera 10.29% · Merma 2.86% · Peso promedio 31.62g. Reporte emitido por calidad@agbelher.com."},
-    {"nivel":"warning","texto":"⚖️ ACCIONES CORRECTIVAS AUDITORÍA — Deadline 8 de junio para enviar acciones correctivas a Buyers Edge-Calavo. Marisol Castro coordina reunión con involucrados directos. No conformidades documentadas en Excel + PDF adjunto."},
     {"nivel":"info","texto":"💰 LIQUIDACIÓN CALAVO al 16-May-26 — 962K cajas enviadas / 933K facturadas / 4K en piso / 11K por facturar / 14K rework. Saldo a favor Belher: USD 3,225K. Precio promedio mayo: USD 21.94. Ventas brutas: USD 21.1M | Aranceles: $2.19M | Comisiones: $2.27M | Venta neta: $15.09M."},
     {"nivel":"warning","texto":"🔍 CONCILIACIÓN CALAVO $2.3M — 4 puntos pendientes representan ~$453K. Armando urge contactar a Irene en conjunto la próxima semana (historial: semanas en resolver). Coordinación: Armando + Antonio + JC + Leima en Culiacán."},
     {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado en myaccount.google.com."},
@@ -592,6 +592,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 5 archivos (28-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-28"},
     {"hora":"10:53","asunto":"✅ Belher Adjuntos — 5 archivos (27-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-27"},
     {"hora":"16:49","asunto":"Auditoría de segunda parte (Buyers Edge-Calavo) — Resultado","de":"c.marisol@agbelher.com","leido":false,"fecha":"2026-05-26"},
     {"hora":"16:59","asunto":"REPORTE DE BASCULA 26/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-26"},
