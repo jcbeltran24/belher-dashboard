@@ -542,6 +542,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
   <button class="view-tab" data-panel="panel-tomate">Producción Tomate</button>
   <button class="view-tab" data-panel="panel-otros">Limón · Chile</button>
   <button class="view-tab" data-panel="panel-embarques">Embarques</button>
+  <button class="view-tab" data-panel="panel-mo">Mano de Obra</button>
   <button class="view-tab" data-panel="panel-balance">Balance de Masas</button>
 </div>
 
@@ -1095,6 +1096,78 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
 
   </div><!-- /panel-embarques -->
 
+  <!-- ══ PANEL: MANO DE OBRA · CAMPO ═══════════════════════ -->
+  <div class="panel" id="panel-mo">
+
+    <div class="sec">Mano de Obra · Campo
+      <span class="sec-tag" id="mo-range-lbl">—</span>
+      <span class="sec-source">vw_personas_activas_cdc · vw_empleados_laboraron_centro_costo</span>
+    </div>
+
+    <!-- KPI strip -->
+    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(155px,1fr))">
+      <div class="stat cg">
+        <div class="stat-lbl">Personas Activas <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">último día</span></div>
+        <div class="stat-val" id="mo-act"><span class="skel"></span></div>
+        <div class="stat-sub" id="mo-act-sub">—</div>
+      </div>
+      <div class="stat cb">
+        <div class="stat-lbl">Empleados Laboraron <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">último día</span></div>
+        <div class="stat-val" id="mo-emp"><span class="skel"></span></div>
+        <div class="stat-sub" id="mo-emp-sub">—</div>
+      </div>
+      <div class="stat cp">
+        <div class="stat-lbl">Costo Total <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">período</span></div>
+        <div class="stat-val" id="mo-costo"><span class="skel"></span></div>
+        <div class="stat-sub" id="mo-costo-sub">—</div>
+      </div>
+      <div class="stat ca">
+        <div class="stat-lbl">Costo / Persona <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">promedio</span></div>
+        <div class="stat-val" id="mo-cpp"><span class="skel"></span></div>
+        <div class="stat-sub">por empleado · día</div>
+      </div>
+    </div>
+
+    <!-- Daily trend chart -->
+    <div class="card card-pad" style="margin-bottom:10px">
+      <div class="card-title">Tendencia Diaria · Personas Activas vs Empleados Laboraron</div>
+      <div style="position:relative;height:240px"><canvas id="chart-mo-trend"></canvas></div>
+    </div>
+
+    <!-- Tables row -->
+    <div class="g2" style="margin-bottom:10px">
+      <div class="card">
+        <div class="card-title" style="padding:10px 12px 6px">Por Campo (CDC) · Personas Activas</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>Campo</th>
+              <th class="r">Último Día</th>
+              <th class="r">Prom. Período</th>
+              <th class="r">Máx.</th>
+            </tr></thead>
+            <tbody id="mo-cdc-tbody"><tr><td colspan="4" class="empty">Cargando…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="padding:10px 12px 6px">Por Centro de Costo · Nómina</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>Centro de Costo</th>
+              <th class="r">Empleados</th>
+              <th class="r">Costo Total</th>
+              <th class="r">Costo/Pers.</th>
+            </tr></thead>
+            <tbody id="mo-nom-tbody"><tr><td colspan="4" class="empty">Cargando…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /panel-mo -->
+
   <!-- ── BALANCE DE MASAS ───────────────────────────────── -->
   <div class="panel" id="panel-balance">
 
@@ -1334,6 +1407,14 @@ const SB_H = {
   'apikey': SB_API.key,
   'Authorization': 'Bearer ' + SB_API.key,
   'Accept-Profile': SB_API.profile,
+  'Accept': 'application/json'
+};
+
+/* ── SUPABASE ERP schema (vw_personas_activas_cdc, vw_empleados_laboraron_centro_costo) */
+const SB_ERP_H = {
+  'apikey': SB_API.key,
+  'Authorization': 'Bearer ' + SB_API.key,
+  'Accept-Profile': 'erp',
   'Accept': 'application/json'
 };
 
@@ -2595,6 +2676,7 @@ function applyRawData(palets, acarreos, from, to, source){
   if(activePanel === 'panel-inbound')  loadInbound();
   if(activePanel === 'panel-pesos')    { renderPesos(); loadRezaga(); }
   if(activePanel === 'panel-embarques') loadEmbarques();
+  if(activePanel === 'panel-mo')        loadManoObra();
 
   document.getElementById('ft-urls').textContent =
     `${from} — ${to}  ·  Empaque + Báscula`;
@@ -3981,6 +4063,138 @@ function renderRezaga(){
   </tr>`).join('') + capNote;
 }
 
+/* ── MANO DE OBRA · CAMPO ──────────────────────────────── */
+let rawCdc = [], rawNomina = [];
+
+async function loadManoObra(){
+  const from = activeRange?.from || isoLocal(new Date());
+  const to   = activeRange?.to   || isoLocal(new Date());
+  document.getElementById('ft-urls').textContent = `Supabase erp · CDC + Nómina · ${from} → ${to}`;
+  document.getElementById('mo-act').textContent   = '…';
+  document.getElementById('mo-emp').textContent   = '…';
+  document.getElementById('mo-costo').textContent = '…';
+  document.getElementById('mo-cpp').textContent   = '…';
+  const erpC = { url: SB_API.url, headers: SB_ERP_H };
+  try {
+    [rawCdc, rawNomina] = await Promise.all([
+      getAll(`/vw_personas_activas_cdc?select=*&fecha=gte.${from}&fecha=lte.${to}`, erpC).catch(()=>[]),
+      getAll(`/vw_empleados_laboraron_centro_costo?select=*&fecha=gte.${from}&fecha=lte.${to}`, erpC).catch(()=>[]),
+    ]);
+  } catch(_){
+    rawCdc = []; rawNomina = [];
+  }
+  renderManoObra(from, to);
+  document.getElementById('ft-updated').textContent =
+    'Actualizado: ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}) +
+    ' · ' + rawCdc.length + ' filas CDC · ' + rawNomina.length + ' filas nómina';
+}
+
+function renderManoObra(from, to){
+  document.getElementById('mo-range-lbl').textContent =
+    (from && to) ? (fDateFull(from) + ' – ' + fDateFull(to)) : '—';
+
+  const fMxn = n => typeof n === 'number'
+    ? n.toLocaleString('es-MX',{ style:'currency', currency:'MXN', maximumFractionDigits:0 })
+    : '—';
+
+  // ── Datos diarios (unión de fechas CDC + Nómina)
+  const days = Array.from(new Set([
+    ...rawCdc.map(r => (r.fecha||'').split('T')[0]),
+    ...rawNomina.map(r => (r.fecha||'').split('T')[0]),
+  ])).filter(Boolean).sort();
+
+  const cdcByDay = {};   // fecha → personas_activas total
+  const nomByDay = {};   // fecha → { emp, costo }
+  rawCdc.forEach(r => {
+    const d = (r.fecha||'').split('T')[0];
+    cdcByDay[d] = (cdcByDay[d]||0) + (r.personas_activas||0);
+  });
+  rawNomina.forEach(r => {
+    const d = (r.fecha||'').split('T')[0];
+    const x = nomByDay[d] || (nomByDay[d] = { emp:0, costo:0 });
+    x.emp   += r.empleados_laboraron || 0;
+    x.costo += r.total_costo || 0;
+  });
+
+  // ── KPIs
+  const lastCdcDay = Object.keys(cdcByDay).sort().pop();
+  const lastNomDay = Object.keys(nomByDay).sort().pop();
+  const actLast    = lastCdcDay ? cdcByDay[lastCdcDay] : 0;
+  const empLast    = lastNomDay ? nomByDay[lastNomDay].emp : 0;
+  const costoTotal = Object.values(nomByDay).reduce((s,x)=>s+x.costo,0);
+  const empTotal   = Object.values(nomByDay).reduce((s,x)=>s+x.emp,0);
+  const cpp        = empTotal > 0 ? costoTotal / empTotal : 0;
+
+  document.getElementById('mo-act').textContent   = fK(actLast);
+  document.getElementById('mo-act-sub').textContent = lastCdcDay ? fDate(lastCdcDay) : '—';
+  document.getElementById('mo-emp').textContent   = fK(empLast);
+  document.getElementById('mo-emp-sub').textContent = lastNomDay ? fDate(lastNomDay) : '—';
+  document.getElementById('mo-costo').textContent = fMxn(costoTotal);
+  document.getElementById('mo-costo-sub').textContent = days.length ? days.length + ' días' : '—';
+  document.getElementById('mo-cpp').textContent   = fMxn(cpp);
+
+  // ── Tabla CDC por campo
+  const cdcByCampo = {};  // campo → { last, sum, n, max, lastDay }
+  rawCdc.forEach(r => {
+    const c = r.campo || '—';
+    const d = (r.fecha||'').split('T')[0];
+    const v = r.personas_activas || 0;
+    const x = cdcByCampo[c] || (cdcByCampo[c] = { last:0, sum:0, n:0, max:0, lastDay:'' });
+    x.sum += v; x.n++;
+    if(v > x.max) x.max = v;
+    if(d >= x.lastDay){ x.lastDay = d; x.last = v; }
+  });
+  const cdcRows = Object.entries(cdcByCampo)
+    .sort((a,b) => b[1].last - a[1].last)
+    .map(([campo, x]) => `<tr>
+      <td style="font-weight:600">${campo}</td>
+      <td class="r">${fK(x.last)}</td>
+      <td class="r">${fN(x.sum / x.n, 0)}</td>
+      <td class="r" style="color:var(--muted)">${fK(x.max)}</td>
+    </tr>`).join('');
+  document.getElementById('mo-cdc-tbody').innerHTML =
+    cdcRows || `<tr><td colspan="4" class="empty">Sin datos en el período.</td></tr>`;
+
+  // ── Tabla Nómina por centro de costo (período total)
+  const nomByCC = {};   // cc → { emp, costo }
+  rawNomina.forEach(r => {
+    const cc = r.centro_costo || '—';
+    const x = nomByCC[cc] || (nomByCC[cc] = { emp:0, costo:0 });
+    x.emp   += r.empleados_laboraron || 0;
+    x.costo += r.total_costo || 0;
+  });
+  const nomRows = Object.entries(nomByCC)
+    .sort((a,b) => b[1].costo - a[1].costo)
+    .map(([cc, x]) => `<tr>
+      <td style="font-weight:600">${cc}</td>
+      <td class="r">${fK(x.emp)}</td>
+      <td class="r">${fMxn(x.costo)}</td>
+      <td class="r" style="color:var(--muted)">${fMxn(x.emp > 0 ? x.costo / x.emp : 0)}</td>
+    </tr>`).join('');
+  document.getElementById('mo-nom-tbody').innerHTML =
+    nomRows || `<tr><td colspan="4" class="empty">Sin datos en el período.</td></tr>`;
+
+  // ── Gráfica diaria
+  const labels = days.map(fDate);
+  const actData = days.map(d => cdcByDay[d] || 0);
+  const empData = days.map(d => (nomByDay[d]||{}).emp || 0);
+  mkChart('chart-mo-trend', {
+    type:'line',
+    data:{
+      labels,
+      datasets:[
+        { label:'Personas activas (CDC)', data:actData,
+          borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.10)',
+          tension:.3, fill:true, pointRadius:3, borderWidth:2 },
+        { label:'Empleados laboraron (nómina)', data:empData,
+          borderColor:'#0891b2', backgroundColor:'rgba(8,145,178,.10)',
+          tension:.3, fill:true, pointRadius:3, borderWidth:2 },
+      ]
+    },
+    options:{ ...CHART_DEFAULTS, maintainAspectRatio:false, responsive:true }
+  });
+}
+
 /* ── EMBARQUES ──────────────────────────────────────────── */
 async function loadEmbarques(){
   const from = activeRange?.from || isoLocal(new Date());
@@ -4192,6 +4406,7 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     if(btn.dataset.panel === 'panel-inbound')   loadInbound();
     if(btn.dataset.panel === 'panel-pesos')     { renderPesos(); loadRezaga(); }
     if(btn.dataset.panel === 'panel-embarques') loadEmbarques();
+    if(btn.dataset.panel === 'panel-mo')        loadManoObra();
     if(btn.dataset.panel === 'panel-balance')   { if(!_resCycleKey) loadResumen().then(()=>renderBalance()); else renderBalance(); }
   });
 });
