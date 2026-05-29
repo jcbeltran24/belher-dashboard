@@ -10,3 +10,7 @@ hoy_redesign.html
 
 # Respaldos y artefactos locales
 *.bak
+
+# Secretos locales — el password vive en Vercel como env var SETTLE_PASSWORD
+.settle-password
+.env*

@@ -4,6 +4,10 @@ update_prompt.md
 node_modules/
 scripts/node_modules/
 
+# Secretos — NUNCA commitear
+.settle-password
+.env*
+
 # Local Netlify folder
 .netlify
 .vercel

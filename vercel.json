@@ -6,12 +6,14 @@
     { "source": "/vw_palets",   "destination": "/api/vw_palets" },
     { "source": "/vw_acarreos", "destination": "/api/vw_acarreos" },
     { "source": "/usda",        "destination": "/api/usda" },
-    { "source": "/usda-fob",    "destination": "/api/tomato_fob" }
+    { "source": "/usda-fob",    "destination": "/api/tomato_fob" },
+    { "source": "/settle",      "destination": "/api/settle" }
   ],
   "functions": {
     "api/vw_palets.js":   { "maxDuration": 30 },
     "api/vw_acarreos.js": { "maxDuration": 30 },
     "api/usda.js":        { "maxDuration": 25 },
-    "api/tomato_fob.js":  { "maxDuration": 30 }
+    "api/tomato_fob.js":  { "maxDuration": 30 },
+    "api/settle.js":      { "maxDuration": 10 }
   }
 }

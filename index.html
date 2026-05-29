@@ -543,6 +543,7 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
   <button class="view-tab" data-panel="panel-otros">Limón · Chile</button>
   <button class="view-tab" data-panel="panel-embarques">Embarques</button>
   <button class="view-tab" data-panel="panel-mo">Mano de Obra</button>
+  <button class="view-tab" data-panel="panel-liq">Liquidación 🔒</button>
   <button class="view-tab" data-panel="panel-balance">Balance de Masas</button>
 </div>
 
@@ -1169,6 +1170,120 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
     </div>
 
   </div><!-- /panel-mo -->
+
+  <!-- ══ PANEL: LIQUIDACIÓN CALAVO (PROTEGIDO) ═══════════ -->
+  <div class="panel" id="panel-liq">
+
+    <!-- Password gate -->
+    <div id="liq-gate" class="card card-pad" style="max-width:520px;margin:24px auto;text-align:center">
+      <div style="font-size:32px;line-height:1;margin-bottom:8px">🔒</div>
+      <div class="card-title" style="justify-content:center">Liquidación Calavo · Protegido</div>
+      <div style="color:var(--muted);font-size:var(--t-sm);margin:6px 0 14px">
+        Información financiera sensible. Ingresa el password para desbloquear.<br>
+        <span style="opacity:.6;font-size:var(--t-nano)">Doble capa: API gate + AES-256-GCM client-side (PBKDF2 600k iters)</span>
+      </div>
+      <input type="password" id="liq-pw" placeholder="Password"
+             autocomplete="current-password"
+             style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.95rem;margin-bottom:10px;box-sizing:border-box">
+      <button id="liq-submit" onclick="liqUnlock()"
+              style="width:100%;padding:10px 14px;background:#162d1f;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600">
+        Desbloquear
+      </button>
+      <div id="liq-err" style="margin-top:10px;color:#dc2626;font-size:.78rem;min-height:1em"></div>
+    </div>
+
+    <!-- Content (oculto hasta unlock) -->
+    <div id="liq-content" style="display:none">
+      <div class="sec">Liquidación Calavo
+        <span class="sec-tag" id="liq-source">—</span>
+        <span class="sec-source">api/settle · encriptado</span>
+        <button onclick="liqLock()" style="margin-left:auto;background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;cursor:pointer;color:var(--muted);font-family:inherit;font-size:var(--t-nano)">🔒 Bloquear</button>
+      </div>
+
+      <!-- KPI strip -->
+      <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
+        <div class="stat cg">
+          <div class="stat-lbl">Total Cobrado <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">ciclo</span></div>
+          <div class="stat-val" id="liq-cobrado">—</div>
+          <div class="stat-sub" id="liq-cobrado-sub">—</div>
+        </div>
+        <div class="stat cb">
+          <div class="stat-lbl">Último Wire <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">recibido</span></div>
+          <div class="stat-val" id="liq-ultwire">—</div>
+          <div class="stat-sub" id="liq-ultwire-sub">—</div>
+        </div>
+        <div class="stat cp">
+          <div class="stat-lbl">Advances/Préstamos <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">total</span></div>
+          <div class="stat-val" id="liq-adv">—</div>
+          <div class="stat-sub" id="liq-adv-sub">—</div>
+        </div>
+        <div class="stat ca">
+          <div class="stat-lbl">Embarques Liquidados <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">facturados</span></div>
+          <div class="stat-val" id="liq-emb">—</div>
+          <div class="stat-sub" id="liq-emb-sub">—</div>
+        </div>
+      </div>
+
+      <!-- Payment timeline chart -->
+      <div class="card card-pad" style="margin-bottom:10px">
+        <div class="card-title">Pagos Semanales · Wire Date vs Monto USD</div>
+        <div style="position:relative;height:240px"><canvas id="chart-liq-pagos"></canvas></div>
+      </div>
+
+      <!-- Pagos table + Advances table -->
+      <div class="g2" style="margin-bottom:10px">
+        <div class="card">
+          <div class="card-title" style="padding:10px 12px 6px">Pagos Recibidos</div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr>
+                <th>Week</th>
+                <th>Wire Date</th>
+                <th class="r">Monto USD</th>
+                <th class="r">Units</th>
+                <th class="r">Containers</th>
+              </tr></thead>
+              <tbody id="liq-pagos-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="padding:10px 12px 6px">Advances & Resumen Beltran</div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr>
+                <th>Grupo</th>
+                <th>Descripción</th>
+                <th class="r">Monto</th>
+              </tr></thead>
+              <tbody id="liq-adv-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Embarque detail table -->
+      <div class="sec">Detalle por Embarque</div>
+      <div class="card">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>Calavo PO</th>
+              <th>Fecha</th>
+              <th>Grower Ref</th>
+              <th class="r">Units</th>
+              <th class="r">Revenue</th>
+              <th class="r">Calavo Comm</th>
+              <th class="r">Pick & Pack</th>
+              <th class="r">Neto</th>
+            </tr></thead>
+            <tbody id="liq-emb-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /panel-liq -->
 
   <!-- ── BALANCE DE MASAS ───────────────────────────────── -->
   <div class="panel" id="panel-balance">
@@ -4303,6 +4418,207 @@ function renderManoObra(from, to){
   });
 }
 
+/* ── LIQUIDACIÓN CALAVO (protegido) ─────────────────────── */
+let _liqData = null;
+
+function liqLock(){
+  _liqData = null;
+  document.getElementById('liq-content').style.display = 'none';
+  document.getElementById('liq-gate').style.display    = 'block';
+  document.getElementById('liq-pw').value = '';
+  document.getElementById('liq-err').textContent = '';
+  if(CH['chart-liq-pagos']) CH['chart-liq-pagos'].destroy();
+}
+
+function liqPanelInit(){
+  // Si ya está desbloqueado, no resetear
+  if(_liqData) return;
+  liqLock();
+  // Enter key submits
+  const inp = document.getElementById('liq-pw');
+  if(inp && !inp._wired){
+    inp._wired = true;
+    inp.addEventListener('keydown', e => { if(e.key === 'Enter') liqUnlock(); });
+    setTimeout(() => inp.focus(), 100);
+  }
+}
+
+async function liqUnlock(){
+  const pw  = document.getElementById('liq-pw').value;
+  const err = document.getElementById('liq-err');
+  const btn = document.getElementById('liq-submit');
+  err.textContent = '';
+  if(!pw){ err.textContent = 'Falta el password.'; return; }
+  btn.disabled = true; btn.textContent = 'Desbloqueando…';
+  try {
+    const res = await fetch('/api/settle', {
+      method: 'POST',
+      headers: { 'x-settle-password': pw, 'Content-Type': 'application/json' },
+      body: '{}'
+    });
+    if(res.status === 401){ throw new Error('Password incorrecto.'); }
+    if(res.status === 503){ throw new Error('Servidor sin SETTLE_PASSWORD configurado.'); }
+    if(!res.ok){ throw new Error('HTTP ' + res.status); }
+    const blob = await res.json();
+    const data = await liqDecrypt(blob, pw);
+    _liqData = data;
+    liqRender(data);
+    document.getElementById('liq-gate').style.display    = 'none';
+    document.getElementById('liq-content').style.display = '';
+    document.getElementById('liq-pw').value = '';
+  } catch(e){
+    err.textContent = e.message || String(e);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Desbloquear';
+  }
+}
+
+async function liqDecrypt(blob, password){
+  // PBKDF2-HMAC-SHA256, 600k iters, AES-256-GCM — debe coincidir con scripts/encrypt-settle.py
+  const enc = new TextEncoder();
+  const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  const salt = b64(blob.saltB64);
+  const iv   = b64(blob.ivB64);
+  const ct   = b64(blob.ctB64);
+  const baseKey = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey(
+    { name:'PBKDF2', salt, iterations: blob.iters || 600000, hash:'SHA-256' },
+    baseKey,
+    { name:'AES-GCM', length:256 },
+    false,
+    ['decrypt']
+  );
+  let plain;
+  try {
+    plain = await crypto.subtle.decrypt({ name:'AES-GCM', iv }, key, ct);
+  } catch(_){
+    throw new Error('Desencriptación falló (password incorrecto o blob corrupto).');
+  }
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+
+function liqRender(d){
+  const fUsd = n => typeof n === 'number'
+    ? n.toLocaleString('en-US',{ style:'currency', currency:'USD', maximumFractionDigits:0 })
+    : '—';
+
+  const payments = (d.overview_payments || []).filter(p => typeof p.payment_amount === 'number');
+  const advances = (d.beltran_summary   || []);
+  const embarques = (d.embarques        || []);
+
+  // ── KPIs
+  const totalCobrado = payments.reduce((s,p) => s + (p.payment_amount||0), 0);
+  const last = payments.length ? payments.reduce((a,b) => (a.wire_date||'') > (b.wire_date||'') ? a : b) : null;
+  const advTotal = advances
+    .filter(a => /advance|preseason|loan|adelant/i.test(a.group || a.description || ''))
+    .reduce((s,a) => s + (typeof a.amount === 'number' ? a.amount : 0), 0);
+  const embFact = embarques.filter(e => (e['Pckgs Invcd']||0) > 0).length;
+
+  document.getElementById('liq-cobrado').textContent = fUsd(totalCobrado);
+  document.getElementById('liq-cobrado-sub').textContent = `${payments.length} pagos`;
+  document.getElementById('liq-ultwire').textContent = last ? fUsd(last.payment_amount) : '—';
+  document.getElementById('liq-ultwire-sub').textContent =
+    last ? `${last.week} · ${last.wire_date || '—'}` : '—';
+  document.getElementById('liq-adv').textContent = fUsd(advTotal);
+  document.getElementById('liq-adv-sub').textContent =
+    `${advances.filter(a => /advance|preseason|loan|adelant/i.test(a.group||a.description||'')).length} líneas`;
+  document.getElementById('liq-emb').textContent = fK(embFact);
+  document.getElementById('liq-emb-sub').textContent = `de ${embarques.length} embarques`;
+
+  document.getElementById('liq-source').textContent =
+    (d.source_file || '—') + (d.generated_at ? '  ·  gen ' + d.generated_at.slice(0,10) : '');
+
+  // ── Tabla pagos
+  const pagosRows = [...payments]
+    .sort((a,b) => (a.wire_date||'').localeCompare(b.wire_date||''))
+    .map(p => `<tr>
+      <td style="font-weight:600">${p.week || '—'}</td>
+      <td style="font-size:.75rem;color:var(--muted)">${p.wire_date || '—'}</td>
+      <td class="r">${fUsd(p.payment_amount)}</td>
+      <td class="r">${fK(p.units_received || 0)}</td>
+      <td class="r" style="color:var(--muted)">${p.containers || '—'}</td>
+    </tr>`).join('');
+  document.getElementById('liq-pagos-tbody').innerHTML =
+    pagosRows || `<tr><td colspan="5" class="empty">Sin pagos.</td></tr>`;
+
+  // ── Tabla advances
+  const advRows = advances.map(a => `<tr>
+    <td style="font-size:.72rem;color:var(--muted)">${a.group || '—'}</td>
+    <td>${a.description || '—'}</td>
+    <td class="r">${typeof a.amount === 'number' ? fUsd(a.amount) : (a.amount || '—')}</td>
+  </tr>`).join('');
+  document.getElementById('liq-adv-tbody').innerHTML =
+    advRows || `<tr><td colspan="3" class="empty">Sin avances/resumen.</td></tr>`;
+
+  // ── Tabla embarques
+  const embRows = embarques.slice(0, 200).map(e => {
+    const rev = e['Total Revenue'] || 0;
+    const com = e['Calavo Comm']   || 0;
+    const pnp = e['Pick & Pack']   || 0;
+    const z   = e['Z-Code Expense']|| 0;
+    const neto = rev - com - pnp - z;
+    return `<tr>
+      <td style="font-weight:600">${e['Calavo PO'] || '—'}</td>
+      <td style="font-size:.72rem;color:var(--muted)">${(e['Date Rcvd']||'').slice(0,10) || '—'}</td>
+      <td style="font-size:.72rem">${(e['Grower Reference']||'').trim() || '—'}</td>
+      <td class="r">${fK(e['Units Recvd']||0)}</td>
+      <td class="r">${fUsd(rev)}</td>
+      <td class="r" style="color:#dc2626">${fUsd(com)}</td>
+      <td class="r" style="color:#dc2626">${fUsd(pnp)}</td>
+      <td class="r" style="font-weight:600">${fUsd(neto)}</td>
+    </tr>`;
+  }).join('') + (embarques.length > 200
+    ? `<tr><td colspan="8" class="empty">… ${embarques.length - 200} embarques adicionales (mostrando los primeros 200)</td></tr>`
+    : '');
+  document.getElementById('liq-emb-tbody').innerHTML =
+    embRows || `<tr><td colspan="8" class="empty">Sin embarques.</td></tr>`;
+
+  // ── Gráfica timeline de pagos (barras por wire date)
+  const sorted = [...payments].sort((a,b) => (a.wire_date||'').localeCompare(b.wire_date||''));
+  const labels = sorted.map(p => p.week || '');
+  const data   = sorted.map(p => p.payment_amount || 0);
+  mkChart('chart-liq-pagos', {
+    type:'bar',
+    data:{
+      labels,
+      datasets:[{
+        label:'Pago USD',
+        data,
+        backgroundColor:'#16a34a',
+        borderColor:'#16a34a',
+        borderRadius:3,
+      }]
+    },
+    options:{
+      ...CHART_DEFAULTS,
+      maintainAspectRatio:false,
+      responsive:true,
+      plugins:{
+        ...CHART_DEFAULTS.plugins,
+        legend:{ display:false },
+        tooltip:{
+          ...CHART_DEFAULTS.plugins.tooltip,
+          callbacks:{
+            label: ctx => {
+              const p = sorted[ctx.dataIndex];
+              return `${fUsd(p.payment_amount)}  ·  ${p.wire_date || ''}  ·  ${p.units_received||0} units`;
+            }
+          }
+        }
+      },
+      scales:{
+        ...CHART_DEFAULTS.scales,
+        y:{ ...CHART_DEFAULTS.scales.y,
+          beginAtZero:true,
+          ticks:{ ...CHART_DEFAULTS.scales.y.ticks,
+            callback: v => v >= 1000 ? '$' + (v/1000).toFixed(0) + 'k' : '$' + v
+          }
+        }
+      }
+    }
+  });
+}
+
 /* ── EMBARQUES ──────────────────────────────────────────── */
 async function loadEmbarques(){
   const from = activeRange?.from || isoLocal(new Date());
@@ -4515,6 +4831,7 @@ document.querySelectorAll('.view-tab').forEach(btn=>{
     if(btn.dataset.panel === 'panel-pesos')     { renderPesos(); loadRezaga(); }
     if(btn.dataset.panel === 'panel-embarques') loadEmbarques();
     if(btn.dataset.panel === 'panel-mo')        loadManoObra();
+    if(btn.dataset.panel === 'panel-liq')       liqPanelInit();
     if(btn.dataset.panel === 'panel-balance')   { if(!_resCycleKey) loadResumen().then(()=>renderBalance()); else renderBalance(); }
   });
 });
