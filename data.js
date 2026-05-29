@@ -1,12 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 28 May 2026",
+    fecha: "Viernes 29 May 2026",
     semana: "WK 22",
-    actualizado: "28/05/2026 · 10:16"
+    actualizado: "29/05/2026 · 08:58"
   },
 
   alertas: [
-    {"nivel":"success","texto":"📎 ADJUNTOS BELHER 28/05 — 5 archivos descargados a Drive (07:53): Acarreo Diario 27-05 (Chile y Limón), Diario de Báscula 27-05 (Chile y Limón), Listado Diario 27-05 (Chile), Listado Diario 27-05 (Limón Persa), Rezaga de Tomate 27-05. Carpeta: Belher Adjuntos."},
+    {"nivel":"success","texto":"📎 ADJUNTOS BELHER 29/05 — 4 archivos descargados a Drive (07:53): Settlement Calavo WK22 (28-May-2026), Acarreo Diario 28-05 (Limón Persa), Diario de Báscula 28-05 (Limón Persa), Listado Diario 28-05 (Limón Persa). Carpeta: Belher Adjuntos."},
     {"nivel":"success","texto":"✅ AUDITORÍA BUYERS EDGE-CALAVO 27/05 — Resultado FAVORABLE: Empaque 94.3% (8 NC) · Álamo 96.2% (4 NC) · La 25 96.4% (4 NC). Belher permanece en lista de proveedores aprobados. Plazo acciones correctivas: 8 de junio 2026."},
     {"nivel":"success","texto":"🤝 CONTRATO BELTRAN-CALAVO 26/05 — JC envió versión final del contrato. Confirmación de recibido por Irene Amezaga (VP Sales, Calavo) y Armando Llanes (CFO, Don Memo). Contrato en proceso de cierre con Calavo, Antonio, JC y Armando."},
     {"nivel":"warning","texto":"⚖️ ACCIONES CORRECTIVAS AUDITORÍA SMETA — Resultado preliminar compartido por Marisol Castro. Incluye No conformidades, Observaciones, Buenas Prácticas y Datos Generales (doc Excel). Reunión con involucrados directos pendiente. Equipo: Carlos Castro, Juan Aviles, Samantha González y otros. Deadline acciones correctivas Buyers Edge-Calavo: 8 de junio 2026."},
@@ -592,6 +592,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 4 archivos (29-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-29"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 5 archivos (28-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-28"},
     {"hora":"10:53","asunto":"✅ Belher Adjuntos — 5 archivos (27-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-27"},
     {"hora":"16:49","asunto":"Auditoría de segunda parte (Buyers Edge-Calavo) — Resultado","de":"c.marisol@agbelher.com","leido":false,"fecha":"2026-05-26"},
