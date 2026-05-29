@@ -4508,7 +4508,9 @@ function liqRender(d){
 
   // ── KPIs
   const totalCobrado = payments.reduce((s,p) => s + (p.payment_amount||0), 0);
-  const last = payments.length ? payments.reduce((a,b) => (a.wire_date||'') > (b.wire_date||'') ? a : b) : null;
+  const wd = p => String(p.wire_date || '');
+  const fmtDate = v => { const s = String(v || ''); return s ? s.slice(0,10) : '—'; };
+  const last = payments.length ? payments.reduce((a,b) => wd(a) > wd(b) ? a : b) : null;
   const advTotal = advances
     .filter(a => /advance|preseason|loan|adelant/i.test(a.group || a.description || ''))
     .reduce((s,a) => s + (typeof a.amount === 'number' ? a.amount : 0), 0);
@@ -4518,7 +4520,7 @@ function liqRender(d){
   document.getElementById('liq-cobrado-sub').textContent = `${payments.length} pagos`;
   document.getElementById('liq-ultwire').textContent = last ? fUsd(last.payment_amount) : '—';
   document.getElementById('liq-ultwire-sub').textContent =
-    last ? `${last.week} · ${last.wire_date || '—'}` : '—';
+    last ? `${last.week} · ${fmtDate(last.wire_date)}` : '—';
   document.getElementById('liq-adv').textContent = fUsd(advTotal);
   document.getElementById('liq-adv-sub').textContent =
     `${advances.filter(a => /advance|preseason|loan|adelant/i.test(a.group||a.description||'')).length} líneas`;
@@ -4530,10 +4532,10 @@ function liqRender(d){
 
   // ── Tabla pagos
   const pagosRows = [...payments]
-    .sort((a,b) => (a.wire_date||'').localeCompare(b.wire_date||''))
+    .sort((a,b) => wd(a).localeCompare(wd(b)))
     .map(p => `<tr>
       <td style="font-weight:600">${p.week || '—'}</td>
-      <td style="font-size:.75rem;color:var(--muted)">${p.wire_date || '—'}</td>
+      <td style="font-size:.75rem;color:var(--muted)">${fmtDate(p.wire_date)}</td>
       <td class="r">${fUsd(p.payment_amount)}</td>
       <td class="r">${fK(p.units_received || 0)}</td>
       <td class="r" style="color:var(--muted)">${p.containers || '—'}</td>
@@ -4559,8 +4561,8 @@ function liqRender(d){
     const neto = rev - com - pnp - z;
     return `<tr>
       <td style="font-weight:600">${e['Calavo PO'] || '—'}</td>
-      <td style="font-size:.72rem;color:var(--muted)">${(e['Date Rcvd']||'').slice(0,10) || '—'}</td>
-      <td style="font-size:.72rem">${(e['Grower Reference']||'').trim() || '—'}</td>
+      <td style="font-size:.72rem;color:var(--muted)">${fmtDate(e['Date Rcvd'])}</td>
+      <td style="font-size:.72rem">${String(e['Grower Reference']||'').trim() || '—'}</td>
       <td class="r">${fK(e['Units Recvd']||0)}</td>
       <td class="r">${fUsd(rev)}</td>
       <td class="r" style="color:#dc2626">${fUsd(com)}</td>
@@ -4574,7 +4576,7 @@ function liqRender(d){
     embRows || `<tr><td colspan="8" class="empty">Sin embarques.</td></tr>`;
 
   // ── Gráfica timeline de pagos (barras por wire date)
-  const sorted = [...payments].sort((a,b) => (a.wire_date||'').localeCompare(b.wire_date||''));
+  const sorted = [...payments].sort((a,b) => wd(a).localeCompare(wd(b)));
   const labels = sorted.map(p => p.week || '');
   const data   = sorted.map(p => p.payment_amount || 0);
   mkChart('chart-liq-pagos', {
@@ -4601,7 +4603,7 @@ function liqRender(d){
           callbacks:{
             label: ctx => {
               const p = sorted[ctx.dataIndex];
-              return `${fUsd(p.payment_amount)}  ·  ${p.wire_date || ''}  ·  ${p.units_received||0} units`;
+              return `${fUsd(p.payment_amount)}  ·  ${fmtDate(p.wire_date)}  ·  ${p.units_received||0} units`;
             }
           }
         }

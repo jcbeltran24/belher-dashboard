@@ -27,6 +27,7 @@ from pathlib import Path
 from datetime import datetime, date
 
 import openpyxl
+from openpyxl.utils.datetime import from_excel
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
@@ -44,6 +45,24 @@ def jsonable(v):
     return v
 
 
+def xl_date(v):
+    """Para columnas-fecha: convierte Excel serial floats a ISO string.
+       Strings/None se devuelven tal cual; datetimes pasan por jsonable."""
+    if v is None:
+        return None
+    if isinstance(v, (datetime, date)):
+        return jsonable(v)
+    if isinstance(v, (int, float)):
+        # Rango defensivo: serials Excel >= 1 (1900-01-01) y < 80000 (~2119)
+        if 1 <= float(v) < 80000:
+            try:
+                return from_excel(float(v)).isoformat()
+            except Exception:
+                return str(v)
+        return str(v)
+    return str(v)
+
+
 def read_overview_payments(ws):
     """Cols: Week, Received Week, Wire Date, Payment Amount, Units Received, Containers."""
     out = []
@@ -53,11 +72,11 @@ def read_overview_payments(ws):
             continue
         out.append({
             "week": str(week).strip(),
-            "received_week": jsonable(ws.cell(r, 2).value),
-            "wire_date": jsonable(ws.cell(r, 3).value),
+            "received_week": xl_date(ws.cell(r, 2).value),
+            "wire_date":     xl_date(ws.cell(r, 3).value),
             "payment_amount": ws.cell(r, 4).value,
             "units_received": ws.cell(r, 5).value,
-            "containers": ws.cell(r, 6).value,
+            "containers":     ws.cell(r, 6).value,
         })
     return out
 
@@ -98,7 +117,13 @@ def read_loan_amortization(ws):
         for i, h in enumerate(headers):
             if not h:
                 continue
-            row[h] = jsonable(ws.cell(r, i + 1).value)
+            val = ws.cell(r, i + 1).value
+            # Columnas-fecha: coercionar serials Excel a ISO strings
+            if "date" in h.lower() or h.lower().endswith(" rcvd"):
+                val = xl_date(val)
+            else:
+                val = jsonable(val)
+            row[h] = val
         out.append(row)
     return out
 
