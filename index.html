@@ -1105,33 +1105,35 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
     </div>
 
     <!-- KPI strip -->
-    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(155px,1fr))">
-      <div class="stat cg">
+    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(165px,1fr))">
+      <div class="stat cg" id="mo-cump-card">
+        <div class="stat-lbl">% Cumplimiento Presupuesto <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">semana actual</span></div>
+        <div class="stat-val" id="mo-cump"><span class="skel"></span></div>
+        <div class="stat-sub" id="mo-cump-sub">—</div>
+      </div>
+      <div class="stat cb">
         <div class="stat-lbl">Personas Activas <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">último día</span></div>
         <div class="stat-val" id="mo-act"><span class="skel"></span></div>
         <div class="stat-sub" id="mo-act-sub">—</div>
       </div>
-      <div class="stat cb">
-        <div class="stat-lbl">Empleados Laboraron <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">último día</span></div>
-        <div class="stat-val" id="mo-emp"><span class="skel"></span></div>
-        <div class="stat-sub" id="mo-emp-sub">—</div>
-      </div>
       <div class="stat cp">
+        <div class="stat-lbl">Presupuesto Plantilla <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">semana actual</span></div>
+        <div class="stat-val" id="mo-pres"><span class="skel"></span></div>
+        <div class="stat-sub" id="mo-pres-sub">—</div>
+      </div>
+      <div class="stat ca">
         <div class="stat-lbl">Costo Total <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">período</span></div>
         <div class="stat-val" id="mo-costo"><span class="skel"></span></div>
         <div class="stat-sub" id="mo-costo-sub">—</div>
       </div>
-      <div class="stat ca">
-        <div class="stat-lbl">Costo / Persona <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">promedio</span></div>
-        <div class="stat-val" id="mo-cpp"><span class="skel"></span></div>
-        <div class="stat-sub">por empleado · día</div>
-      </div>
     </div>
 
-    <!-- Daily trend chart -->
+    <!-- Weekly compliance bars -->
     <div class="card card-pad" style="margin-bottom:10px">
-      <div class="card-title">Tendencia Diaria · Personas Activas vs Empleados Laboraron</div>
-      <div style="position:relative;height:240px"><canvas id="chart-mo-trend"></canvas></div>
+      <div class="card-title">% Cumplimiento Semanal · Personas Activas vs Presupuesto
+        <span style="opacity:.55;font-weight:400;font-size:var(--t-nano);margin-left:8px">verde 95–105% · ámbar fuera de banda · gris sin presupuesto</span>
+      </div>
+      <div style="position:relative;height:260px"><canvas id="chart-mo-cump"></canvas></div>
     </div>
 
     <!-- Tables row -->
@@ -4064,16 +4066,46 @@ function renderRezaga(){
 }
 
 /* ── MANO DE OBRA · CAMPO ──────────────────────────────── */
+/* Presupuesto headcount por semana ISO — fuente:
+   "Programa de personal 2025-2026 JULIO-MARZO.xlsx" hoja
+   PROYECCIÓN PRODUCCIÓN 22-23, fila TOTAL (row 23).
+   Cubre 2025-W27 → 2026-W13. Semanas fuera de este rango: sin presupuesto. */
+const BUDGET_HC_BY_WEEK = {
+  '2025-W27':180,'2025-W28':180,'2025-W29':180,'2025-W30':180,
+  '2025-W31':190,'2025-W32':190,'2025-W33':190,'2025-W34':190,
+  '2025-W35':200,'2025-W36':190,'2025-W37':190,'2025-W38':334,
+  '2025-W39':321,'2025-W40':336,'2025-W41':429,'2025-W42':425,
+  '2025-W43':445,'2025-W44':465,'2025-W45':489,'2025-W46':489,
+  '2025-W47':487,'2025-W48':489,'2025-W49':489,'2025-W50':609,
+  '2025-W51':609,'2025-W52':613,
+  '2026-W01':706,'2026-W02':771,'2026-W03':791,'2026-W04':806,
+  '2026-W05':806,'2026-W06':806,'2026-W07':806,'2026-W08':806,
+  '2026-W09':806,'2026-W10':806,'2026-W11':806,'2026-W12':806,
+  '2026-W13':798
+};
+
+// ISO 8601 week key — "YYYY-Www" — para indexar BUDGET_HC_BY_WEEK
+function isoWeekKey(dateStr){
+  const d = new Date(dateStr + 'T12:00:00');
+  const target = new Date(d.valueOf());
+  const dayNr  = (d.getDay() + 6) % 7;          // 0=Lun .. 6=Dom
+  target.setDate(target.getDate() - dayNr + 3); // jueves de la semana
+  const firstThursday = new Date(target.getFullYear(), 0, 4);
+  const diff = target - firstThursday;
+  const week = 1 + Math.round(((diff / 86400000) - 3 + ((firstThursday.getDay() + 6) % 7)) / 7);
+  return `${target.getFullYear()}-W${String(week).padStart(2,'0')}`;
+}
+
 let rawCdc = [], rawNomina = [];
 
 async function loadManoObra(){
   const from = activeRange?.from || isoLocal(new Date());
   const to   = activeRange?.to   || isoLocal(new Date());
   document.getElementById('ft-urls').textContent = `Supabase erp · CDC + Nómina · ${from} → ${to}`;
+  document.getElementById('mo-cump').textContent  = '…';
   document.getElementById('mo-act').textContent   = '…';
-  document.getElementById('mo-emp').textContent   = '…';
+  document.getElementById('mo-pres').textContent  = '…';
   document.getElementById('mo-costo').textContent = '…';
-  document.getElementById('mo-cpp').textContent   = '…';
   const erpC = { url: SB_API.url, headers: SB_ERP_H };
   try {
     [rawCdc, rawNomina] = await Promise.all([
@@ -4097,12 +4129,7 @@ function renderManoObra(from, to){
     ? n.toLocaleString('es-MX',{ style:'currency', currency:'MXN', maximumFractionDigits:0 })
     : '—';
 
-  // ── Datos diarios (unión de fechas CDC + Nómina)
-  const days = Array.from(new Set([
-    ...rawCdc.map(r => (r.fecha||'').split('T')[0]),
-    ...rawNomina.map(r => (r.fecha||'').split('T')[0]),
-  ])).filter(Boolean).sort();
-
+  // ── Agregación diaria
   const cdcByDay = {};   // fecha → personas_activas total
   const nomByDay = {};   // fecha → { emp, costo }
   rawCdc.forEach(r => {
@@ -4116,22 +4143,75 @@ function renderManoObra(from, to){
     x.costo += r.total_costo || 0;
   });
 
-  // ── KPIs
+  // ── Agregación semanal (ISO week): promedio diario de personas activas vs presupuesto
+  const weekly = {};   // 'YYYY-Www' → { sum, n, days:[] }
+  Object.entries(cdcByDay).forEach(([d, v]) => {
+    const k = isoWeekKey(d);
+    const w = weekly[k] || (weekly[k] = { sum:0, n:0, days:[] });
+    w.sum += v; w.n++; w.days.push(d);
+  });
+  const weekKeys = Object.keys(weekly).sort();
+  const weeklyRows = weekKeys.map(k => {
+    const real  = weekly[k].n ? weekly[k].sum / weekly[k].n : 0;
+    const presu = BUDGET_HC_BY_WEEK[k] || null;
+    const cump  = presu ? (real / presu * 100) : null;
+    return { k, real, presu, cump };
+  });
+
+  // ── KPIs cabecera
   const lastCdcDay = Object.keys(cdcByDay).sort().pop();
-  const lastNomDay = Object.keys(nomByDay).sort().pop();
   const actLast    = lastCdcDay ? cdcByDay[lastCdcDay] : 0;
-  const empLast    = lastNomDay ? nomByDay[lastNomDay].emp : 0;
+  const lastWeek   = weeklyRows.length ? weeklyRows[weeklyRows.length-1] : null;
   const costoTotal = Object.values(nomByDay).reduce((s,x)=>s+x.costo,0);
-  const empTotal   = Object.values(nomByDay).reduce((s,x)=>s+x.emp,0);
-  const cpp        = empTotal > 0 ? costoTotal / empTotal : 0;
+
+  // Banda objetivo 95-105%; ámbar 85-95 ó 105-115; rojo fuera.
+  const bandColor = pct => {
+    if(pct == null) return '#9ca3af';
+    if(pct >= 95 && pct <= 105) return '#16a34a';
+    if(pct >= 85 && pct <= 115) return '#d97706';
+    return '#dc2626';
+  };
+  const bandLabel = pct => {
+    if(pct == null) return 'sin presupuesto';
+    if(pct >= 95 && pct <= 105) return 'en target';
+    if(pct > 105)  return 'sobre-plantilla';
+    return 'sub-plantilla';
+  };
+
+  // KPI cabecera: usar la semana más reciente CON presupuesto (si la actual ya está fuera del horizonte)
+  const lastBudgetWeek = [...weeklyRows].reverse().find(w => w.presu);
+  const headerWeek = lastBudgetWeek || lastWeek;
+  const outOfHorizon = lastWeek && !lastWeek.presu;
+
+  if(headerWeek && headerWeek.cump != null){
+    const c = headerWeek.cump;
+    const el = document.getElementById('mo-cump');
+    el.textContent = fN(c, 1) + '%';
+    el.style.color = bandColor(c);
+    const wkLbl = headerWeek.k.replace('-W',' W');
+    const tag = outOfHorizon ? ` (última con plan)` : '';
+    document.getElementById('mo-cump-sub').textContent =
+      `${wkLbl}${tag} · ${bandLabel(c)}`;
+  } else {
+    document.getElementById('mo-cump').textContent = '—';
+    document.getElementById('mo-cump-sub').textContent = 'sin presupuesto';
+  }
 
   document.getElementById('mo-act').textContent   = fK(actLast);
   document.getElementById('mo-act-sub').textContent = lastCdcDay ? fDate(lastCdcDay) : '—';
-  document.getElementById('mo-emp').textContent   = fK(empLast);
-  document.getElementById('mo-emp-sub').textContent = lastNomDay ? fDate(lastNomDay) : '—';
+
+  if(headerWeek && headerWeek.presu){
+    document.getElementById('mo-pres').textContent = fK(headerWeek.presu);
+    document.getElementById('mo-pres-sub').textContent =
+      `${headerWeek.k.replace('-W',' W')} · real ${fN(headerWeek.real, 0)}`;
+  } else {
+    document.getElementById('mo-pres').textContent = '—';
+    document.getElementById('mo-pres-sub').textContent = 'sin plan publicado';
+  }
+
   document.getElementById('mo-costo').textContent = fMxn(costoTotal);
-  document.getElementById('mo-costo-sub').textContent = days.length ? days.length + ' días' : '—';
-  document.getElementById('mo-cpp').textContent   = fMxn(cpp);
+  document.getElementById('mo-costo-sub').textContent =
+    Object.keys(nomByDay).length + ' días · nómina';
 
   // ── Tabla CDC por campo
   const cdcByCampo = {};  // campo → { last, sum, n, max, lastDay }
@@ -4174,24 +4254,52 @@ function renderManoObra(from, to){
   document.getElementById('mo-nom-tbody').innerHTML =
     nomRows || `<tr><td colspan="4" class="empty">Sin datos en el período.</td></tr>`;
 
-  // ── Gráfica diaria
-  const labels = days.map(fDate);
-  const actData = days.map(d => cdcByDay[d] || 0);
-  const empData = days.map(d => (nomByDay[d]||{}).emp || 0);
-  mkChart('chart-mo-trend', {
-    type:'line',
+  // ── Gráfica: barras de % cumplimiento semanal con colores por banda
+  const wkLabels = weeklyRows.map(w => w.k.replace('2025-','').replace('2026-',''));
+  const wkData   = weeklyRows.map(w => w.cump != null ? +w.cump.toFixed(1) : 0);
+  const wkColors = weeklyRows.map(w => bandColor(w.cump));
+  const wkMeta   = weeklyRows;
+  mkChart('chart-mo-cump', {
+    type:'bar',
     data:{
-      labels,
-      datasets:[
-        { label:'Personas activas (CDC)', data:actData,
-          borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.10)',
-          tension:.3, fill:true, pointRadius:3, borderWidth:2 },
-        { label:'Empleados laboraron (nómina)', data:empData,
-          borderColor:'#0891b2', backgroundColor:'rgba(8,145,178,.10)',
-          tension:.3, fill:true, pointRadius:3, borderWidth:2 },
-      ]
+      labels: wkLabels,
+      datasets:[{
+        label:'% Cumplimiento',
+        data: wkData,
+        backgroundColor: wkColors,
+        borderColor: wkColors,
+        borderWidth: 1,
+        borderRadius: 4,
+      }]
     },
-    options:{ ...CHART_DEFAULTS, maintainAspectRatio:false, responsive:true }
+    options:{
+      ...CHART_DEFAULTS,
+      maintainAspectRatio:false,
+      responsive:true,
+      plugins:{
+        ...CHART_DEFAULTS.plugins,
+        legend:{ display:false },
+        tooltip:{
+          ...CHART_DEFAULTS.plugins.tooltip,
+          callbacks:{
+            label: ctx => {
+              const m = wkMeta[ctx.dataIndex];
+              if(!m.presu) return `Real ${fN(m.real,0)} · sin presupuesto`;
+              return `Real ${fN(m.real,0)} / Plan ${fK(m.presu)}  ·  ${fN(m.cump,1)}% ${bandLabel(m.cump)}`;
+            }
+          }
+        },
+        annotation: undefined
+      },
+      scales:{
+        ...CHART_DEFAULTS.scales,
+        y:{ ...CHART_DEFAULTS.scales.y,
+          beginAtZero:true,
+          suggestedMax: 130,
+          ticks:{ ...CHART_DEFAULTS.scales.y.ticks, callback: v => v + '%' }
+        }
+      }
+    }
   });
 }
 
