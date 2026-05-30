@@ -1099,48 +1099,117 @@ button:focus-visible,.view-tab:focus-visible,.sub-tab:focus-visible,
 
   <!-- ══ PANEL: MANO DE OBRA · CAMPO ═══════════════════════ -->
   <div class="panel" id="panel-mo">
+    <style>
+      #panel-mo .mo-hero{ display:grid; grid-template-columns: 320px 1fr; gap:24px; align-items:center; padding:18px 20px }
+      @media (max-width: 720px){ #panel-mo .mo-hero{ grid-template-columns:1fr } }
+      #panel-mo .mo-ring-wrap{ position:relative; width:100%; aspect-ratio:1; max-height:240px; margin:0 auto }
+      #panel-mo .mo-ring-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none; text-align:center }
+      #panel-mo .mo-ring-pct{ font-size:36px; line-height:1; font-weight:800; letter-spacing:-.02em; font-feature-settings:"tnum" }
+      #panel-mo .mo-ring-label{ font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-top:4px; font-weight:600 }
+      #panel-mo .mo-ring-delta{ font-size:11px; margin-top:6px; padding:2px 8px; border-radius:99px; background:#f3f4f6; color:var(--muted); font-weight:600 }
+      #panel-mo .mo-ring-delta.up{ color:#dc2626; background:#fee2e2 }
+      #panel-mo .mo-ring-delta.dn{ color:#15803d; background:#dcfce7 }
+      #panel-mo .mo-stat-mini{ display:flex; flex-direction:column; padding:14px 16px; border-radius:10px; background:#f8faf8; border:1px solid #e4ece4 }
+      #panel-mo .mo-stat-mini .lbl{ font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600 }
+      #panel-mo .mo-stat-mini .val{ font-size:22px; font-weight:700; margin-top:4px; line-height:1.05; font-feature-settings:"tnum" }
+      #panel-mo .mo-stat-mini .sub{ font-size:10px; color:var(--muted); margin-top:4px }
+      #panel-mo .mo-stat-mini.cb{ border-left:3px solid #0891b2 }
+      #panel-mo .mo-stat-mini.cp{ border-left:3px solid #7c3aed }
+      #panel-mo .mo-stat-mini.ca{ border-left:3px solid #d97706 }
+      #panel-mo .hm-row{ display:grid; grid-template-columns: 84px repeat(7, minmax(28px,1fr)); gap:3px; margin-bottom:3px }
+      #panel-mo .hm-hdr{ font-size:10px; color:var(--muted); text-align:center; font-weight:600 }
+      #panel-mo .hm-lbl{ font-size:10px; color:var(--muted); padding:2px 6px; display:flex; align-items:center }
+      #panel-mo .hm-cell{ height:22px; border-radius:4px; font-size:9.5px; display:flex; align-items:center; justify-content:center; color:#1f2937; font-weight:600; cursor:default; transition:transform .12s }
+      #panel-mo .hm-cell:hover{ transform:scale(1.12); z-index:2; box-shadow:0 2px 8px rgba(0,0,0,.12) }
+      #panel-mo .hm-cell.empty{ background:#f3f4f6 }
+      #panel-mo .hm-legend{ display:flex; gap:8px; align-items:center; font-size:10px; color:var(--muted); margin-top:10px; justify-content:flex-end }
+      #panel-mo .hm-legend .grad{ width:120px; height:10px; border-radius:3px; background:linear-gradient(to right, #f0fdf4, #14532d) }
+      #panel-mo .spark-row{ display:grid; grid-template-columns: 130px 1fr 56px; gap:10px; align-items:center; padding:6px 8px; border-radius:6px }
+      #panel-mo .spark-row:hover{ background:#f8faf8 }
+      #panel-mo .spark-name{ font-weight:600; font-size:11px }
+      #panel-mo .spark-val{ color:var(--muted); text-align:right; font-size:11px; font-feature-settings:"tnum" }
+      #panel-mo .stacked-bar{ display:flex; height:48px; border-radius:8px; overflow:hidden; margin:10px 0 16px }
+      #panel-mo .stacked-seg{ display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px; font-weight:600; transition:filter .12s; cursor:default; min-width:0 }
+      #panel-mo .stacked-seg:hover{ filter:brightness(1.1) }
+      #panel-mo .stacked-legend{ display:flex; flex-wrap:wrap; gap:8px 14px; font-size:11px; max-height:140px; overflow-y:auto }
+      #panel-mo .stacked-legend-item{ display:flex; align-items:center; gap:6px }
+      #panel-mo .stacked-legend-swatch{ width:10px; height:10px; border-radius:2px; flex-shrink:0 }
+    </style>
 
     <div class="sec">Mano de Obra · Campo
       <span class="sec-tag" id="mo-range-lbl">—</span>
       <span class="sec-source">vw_personas_activas_cdc · vw_empleados_laboraron_centro_costo</span>
     </div>
 
-    <!-- KPI strip -->
-    <div class="stat-strip" style="grid-template-columns:repeat(auto-fit,minmax(165px,1fr))">
-      <div class="stat cg" id="mo-cump-card">
-        <div class="stat-lbl">% Cumplimiento Presupuesto <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">semana actual</span></div>
-        <div class="stat-val" id="mo-cump"><span class="skel"></span></div>
-        <div class="stat-sub" id="mo-cump-sub">—</div>
-      </div>
-      <div class="stat cb">
-        <div class="stat-lbl">Personas Activas <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">último día</span></div>
-        <div class="stat-val" id="mo-act"><span class="skel"></span></div>
-        <div class="stat-sub" id="mo-act-sub">—</div>
-      </div>
-      <div class="stat cp">
-        <div class="stat-lbl">Presupuesto Plantilla <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">semana actual</span></div>
-        <div class="stat-val" id="mo-pres"><span class="skel"></span></div>
-        <div class="stat-sub" id="mo-pres-sub">—</div>
-      </div>
-      <div class="stat ca">
-        <div class="stat-lbl">Costo Total <span style="opacity:.55;font-weight:400;font-size:var(--t-nano)">período</span></div>
-        <div class="stat-val" id="mo-costo"><span class="skel"></span></div>
-        <div class="stat-sub" id="mo-costo-sub">—</div>
+    <!-- HERO: Ring + KPIs -->
+    <div class="card" style="margin-bottom:10px">
+      <div class="mo-hero">
+        <div>
+          <div class="mo-ring-wrap">
+            <canvas id="chart-mo-ring"></canvas>
+            <div class="mo-ring-center">
+              <div class="mo-ring-pct" id="mo-ring-pct">—</div>
+              <div class="mo-ring-label" id="mo-ring-label">% Cumplimiento</div>
+              <div class="mo-ring-delta" id="mo-ring-delta">—</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+          <div class="mo-stat-mini cb">
+            <div class="lbl" id="mo-act-lbl">Personas activas</div>
+            <div class="val" id="mo-act">—</div>
+            <div class="sub" id="mo-act-sub">—</div>
+          </div>
+          <div class="mo-stat-mini cp">
+            <div class="lbl" id="mo-pres-lbl">Presupuesto plantilla</div>
+            <div class="val" id="mo-pres">—</div>
+            <div class="sub" id="mo-pres-sub">—</div>
+          </div>
+          <div class="mo-stat-mini ca">
+            <div class="lbl" id="mo-costo-lbl">Costo total</div>
+            <div class="val" id="mo-costo">—</div>
+            <div class="sub" id="mo-costo-sub">—</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Weekly compliance bars -->
+    <!-- Real vs Plan superpuesto -->
     <div class="card card-pad" style="margin-bottom:10px">
-      <div class="card-title">% Cumplimiento Semanal · Personas Activas vs Presupuesto
-        <span style="opacity:.55;font-weight:400;font-size:var(--t-nano);margin-left:8px">verde 95–105% · ámbar fuera de banda · gris sin presupuesto</span>
+      <div class="card-title">Plantilla Real vs Presupuesto · Semanal
+        <span style="opacity:.55;font-weight:400;font-size:var(--t-nano);margin-left:8px">área: presupuesto plan · línea: real CDC</span>
       </div>
-      <div style="position:relative;height:260px"><canvas id="chart-mo-cump"></canvas></div>
+      <div style="position:relative;height:260px"><canvas id="chart-mo-rvsp"></canvas></div>
     </div>
 
-    <!-- Tables row -->
+    <!-- Heatmap semana × día -->
+    <div class="card card-pad" style="margin-bottom:10px" id="mo-hm-card">
+      <div class="card-title">Heatmap Diario · Personas Activas
+        <span style="opacity:.55;font-weight:400;font-size:var(--t-nano);margin-left:8px">intensidad = headcount; gris = sin datos</span>
+      </div>
+      <div id="mo-heatmap" style="overflow-x:auto"></div>
+      <div class="hm-legend">
+        <span>0</span><div class="grad"></div><span id="mo-hm-max">max</span>
+      </div>
+    </div>
+
+    <!-- Mix CCs + Sparklines campos -->
+    <div class="g2" style="margin-bottom:10px">
+      <div class="card card-pad">
+        <div class="card-title">Mix de Costo por Centro de Costo · Período</div>
+        <div class="stacked-bar" id="mo-stacked"></div>
+        <div class="stacked-legend" id="mo-stacked-legend"></div>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title">Plantilla por Campo (CDC) · Trend Diaria</div>
+        <div id="mo-spark-grid" style="max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:2px"></div>
+      </div>
+    </div>
+
+    <!-- Tablas (detalle al final) -->
     <div class="g2" style="margin-bottom:10px">
       <div class="card">
-        <div class="card-title" style="padding:10px 12px 6px">Por Campo (CDC) · Personas Activas</div>
+        <div class="card-title" style="padding:10px 12px 6px">Por Campo (CDC) · Detalle</div>
         <div class="tbl-wrap">
           <table>
             <thead><tr>
@@ -4237,6 +4306,12 @@ async function loadManoObra(){
 }
 
 function renderManoObra(from, to){
+  const PERIOD_LBL = {
+    'hoy':'Hoy', 'ayer':'Ayer', 'semana':'Semana',
+    'mes':'Mes', 'ciclo':'Ciclo', 'exacto':'Fecha'
+  };
+  const periodLbl = PERIOD_LBL[activePeriod] || 'Período';
+
   document.getElementById('mo-range-lbl').textContent =
     (from && to) ? (fDateFull(from) + ' – ' + fDateFull(to)) : '—';
 
@@ -4244,12 +4319,29 @@ function renderManoObra(from, to){
     ? n.toLocaleString('es-MX',{ style:'currency', currency:'MXN', maximumFractionDigits:0 })
     : '—';
 
+  const bandColor = pct => {
+    if(pct == null) return '#9ca3af';
+    if(pct >= 95 && pct <= 105) return '#16a34a';
+    if(pct >= 85 && pct <= 115) return '#d97706';
+    return '#dc2626';
+  };
+  const bandLabel = pct => {
+    if(pct == null) return 'sin plan';
+    if(pct >= 95 && pct <= 105) return 'en target';
+    if(pct > 105)  return 'sobre-plantilla';
+    return 'sub-plantilla';
+  };
+
   // ── Agregación diaria
-  const cdcByDay = {};   // fecha → personas_activas total
-  const nomByDay = {};   // fecha → { emp, costo }
+  const cdcByDay = {};
+  const cdcByCampoDay = {};   // campo → fecha → personas
+  const nomByDay = {};
   rawCdc.forEach(r => {
     const d = (r.fecha||'').split('T')[0];
-    cdcByDay[d] = (cdcByDay[d]||0) + (r.personas_activas||0);
+    const v = r.personas_activas || 0;
+    const c = r.campo || '—';
+    cdcByDay[d] = (cdcByDay[d]||0) + v;
+    (cdcByCampoDay[c] = cdcByCampoDay[c] || {})[d] = (cdcByCampoDay[c][d]||0) + v;
   });
   rawNomina.forEach(r => {
     const d = (r.fecha||'').split('T')[0];
@@ -4258,81 +4350,269 @@ function renderManoObra(from, to){
     x.costo += r.total_costo || 0;
   });
 
-  // ── Agregación semanal (ISO week): promedio diario de personas activas vs presupuesto
-  const weekly = {};   // 'YYYY-Www' → { sum, n, days:[] }
-  Object.entries(cdcByDay).forEach(([d, v]) => {
-    const k = isoWeekKey(d);
-    const w = weekly[k] || (weekly[k] = { sum:0, n:0, days:[] });
-    w.sum += v; w.n++; w.days.push(d);
+  // ── Días del período
+  const periodDays = Object.keys(cdcByDay).filter(d => d >= from && d <= to).sort();
+  const nomDays    = Object.keys(nomByDay).filter(d => d >= from && d <= to);
+
+  // ── Reales (avg de personas activas del período)
+  const realSum = periodDays.reduce((s,d) => s + cdcByDay[d], 0);
+  const realAvg = periodDays.length ? realSum / periodDays.length : 0;
+  const realLast = periodDays.length ? cdcByDay[periodDays[periodDays.length-1]] : 0;
+
+  // ── Presupuesto (promedio ponderado por día)
+  const planValues = periodDays.map(d => BUDGET_HC_BY_WEEK[isoWeekKey(d)]).filter(v => v != null);
+  const planAvg = planValues.length ? planValues.reduce((s,x)=>s+x,0) / planValues.length : null;
+
+  // ── Cumplimiento del período
+  const cump = (realAvg && planAvg) ? realAvg / planAvg * 100 : null;
+
+  // ── Costo del período + costo/persona
+  const costoPeriodo = nomDays.reduce((s,d) => s + nomByDay[d].costo, 0);
+  const empSum       = nomDays.reduce((s,d) => s + nomByDay[d].emp, 0);
+  const cpp = empSum > 0 ? costoPeriodo / empSum : 0;
+
+  // ── Ring chart (donut)
+  const ringPct = cump != null ? Math.min(150, cump) : 0;
+  const ringColor = bandColor(cump);
+  mkChart('chart-mo-ring', {
+    type:'doughnut',
+    data:{
+      labels:['cumplido','restante'],
+      datasets:[{
+        data:[ringPct, Math.max(0, 100-ringPct)],
+        backgroundColor:[ringColor, '#f1f5f4'],
+        borderWidth:0,
+        cutout:'78%',
+      }]
+    },
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      animation:{ duration:700, easing:'easeOutQuart' },
+      plugins:{ legend:{display:false}, tooltip:{enabled:false} }
+    }
   });
-  const weekKeys = Object.keys(weekly).sort();
-  const weeklyRows = weekKeys.map(k => {
-    const real  = weekly[k].n ? weekly[k].sum / weekly[k].n : 0;
-    const presu = BUDGET_HC_BY_WEEK[k] || null;
-    const cump  = presu ? (real / presu * 100) : null;
-    return { k, real, presu, cump };
-  });
+  const ringEl = document.getElementById('mo-ring-pct');
+  ringEl.textContent = cump != null ? fN(cump,1) + '%' : '—';
+  ringEl.style.color = ringColor;
+  document.getElementById('mo-ring-label').textContent = `% Cumplimiento · ${periodLbl}`;
+  const deltaEl = document.getElementById('mo-ring-delta');
+  deltaEl.textContent = cump != null ? bandLabel(cump) : 'sin plan en período';
+  deltaEl.className = 'mo-ring-delta ' + (cump != null
+    ? (cump>105 ? 'up' : (cump<95 ? 'dn' : ''))
+    : '');
 
-  // ── KPIs cabecera
-  const lastCdcDay = Object.keys(cdcByDay).sort().pop();
-  const actLast    = lastCdcDay ? cdcByDay[lastCdcDay] : 0;
-  const lastWeek   = weeklyRows.length ? weeklyRows[weeklyRows.length-1] : null;
-  const costoTotal = Object.values(nomByDay).reduce((s,x)=>s+x.costo,0);
-
-  // Banda objetivo 95-105%; ámbar 85-95 ó 105-115; rojo fuera.
-  const bandColor = pct => {
-    if(pct == null) return '#9ca3af';
-    if(pct >= 95 && pct <= 105) return '#16a34a';
-    if(pct >= 85 && pct <= 115) return '#d97706';
-    return '#dc2626';
-  };
-  const bandLabel = pct => {
-    if(pct == null) return 'sin presupuesto';
-    if(pct >= 95 && pct <= 105) return 'en target';
-    if(pct > 105)  return 'sobre-plantilla';
-    return 'sub-plantilla';
-  };
-
-  // KPI cabecera: usar la semana más reciente CON presupuesto (si la actual ya está fuera del horizonte)
-  const lastBudgetWeek = [...weeklyRows].reverse().find(w => w.presu);
-  const headerWeek = lastBudgetWeek || lastWeek;
-  const outOfHorizon = lastWeek && !lastWeek.presu;
-
-  if(headerWeek && headerWeek.cump != null){
-    const c = headerWeek.cump;
-    const el = document.getElementById('mo-cump');
-    el.textContent = fN(c, 1) + '%';
-    el.style.color = bandColor(c);
-    const wkLbl = headerWeek.k.replace('-W',' W');
-    const tag = outOfHorizon ? ` (última con plan)` : '';
-    document.getElementById('mo-cump-sub').textContent =
-      `${wkLbl}${tag} · ${bandLabel(c)}`;
+  // ── KPIs secundarios (period-aware)
+  document.getElementById('mo-act-lbl').textContent = `Personas activas · ${periodLbl}`;
+  if(periodDays.length <= 1){
+    document.getElementById('mo-act').textContent = fK(realLast);
+    document.getElementById('mo-act-sub').textContent = periodDays.length ? fDate(periodDays[0]) : 'sin datos';
   } else {
-    document.getElementById('mo-cump').textContent = '—';
-    document.getElementById('mo-cump-sub').textContent = 'sin presupuesto';
+    document.getElementById('mo-act').textContent = fN(realAvg, 0);
+    document.getElementById('mo-act-sub').textContent = `prom · ${periodDays.length} días`;
   }
 
-  document.getElementById('mo-act').textContent   = fK(actLast);
-  document.getElementById('mo-act-sub').textContent = lastCdcDay ? fDate(lastCdcDay) : '—';
-
-  if(headerWeek && headerWeek.presu){
-    document.getElementById('mo-pres').textContent = fK(headerWeek.presu);
+  document.getElementById('mo-pres-lbl').textContent = `Presupuesto plantilla · ${periodLbl}`;
+  if(planAvg != null){
+    document.getElementById('mo-pres').textContent = fN(planAvg, 0);
     document.getElementById('mo-pres-sub').textContent =
-      `${headerWeek.k.replace('-W',' W')} · real ${fN(headerWeek.real, 0)}`;
+      planValues.length === periodDays.length
+        ? `prom semanal`
+        : `${planValues.length}/${periodDays.length} días con plan`;
   } else {
     document.getElementById('mo-pres').textContent = '—';
-    document.getElementById('mo-pres-sub').textContent = 'sin plan publicado';
+    document.getElementById('mo-pres-sub').textContent = 'sin plan en período';
   }
 
-  document.getElementById('mo-costo').textContent = fMxn(costoTotal);
-  document.getElementById('mo-costo-sub').textContent =
-    Object.keys(nomByDay).length + ' días · nómina';
+  document.getElementById('mo-costo-lbl').textContent = `Costo total · ${periodLbl}`;
+  document.getElementById('mo-costo').textContent = fMxn(costoPeriodo);
+  document.getElementById('mo-costo-sub').textContent = nomDays.length
+    ? `${nomDays.length} días · ${fMxn(cpp)} pers/día`
+    : 'sin nómina en período';
 
-  // ── Tabla CDC por campo
-  const cdcByCampo = {};  // campo → { last, sum, n, max, lastDay }
+  // ── Real vs Plan semanal (período)
+  const weeksInPeriod = [...new Set(periodDays.map(isoWeekKey))].sort();
+  const rvspLabels = weeksInPeriod.map(k => k.replace('2025-W','25·W').replace('2026-W','26·W'));
+  const rvspPlan   = weeksInPeriod.map(k => BUDGET_HC_BY_WEEK[k] || null);
+  const rvspReal   = weeksInPeriod.map(k => {
+    const ds = periodDays.filter(d => isoWeekKey(d) === k);
+    return ds.length ? ds.reduce((s,d) => s + cdcByDay[d], 0) / ds.length : 0;
+  });
+  mkChart('chart-mo-rvsp', {
+    data:{
+      labels: rvspLabels,
+      datasets:[
+        { type:'bar', label:'Presupuesto plan',
+          data: rvspPlan,
+          backgroundColor:'rgba(124,58,237,.18)',
+          borderColor:'rgba(124,58,237,.45)',
+          borderWidth:1, borderRadius:3, order:2 },
+        { type:'line', label:'Real CDC',
+          data: rvspReal,
+          borderColor:'#16a34a',
+          backgroundColor:'rgba(22,163,74,.10)',
+          tension:.25, fill:false,
+          pointRadius:4, pointHoverRadius:6,
+          pointBackgroundColor:'#16a34a',
+          borderWidth:2.5, order:1 }
+      ]
+    },
+    options:{
+      ...CHART_DEFAULTS, maintainAspectRatio:false, responsive:true,
+      plugins:{ ...CHART_DEFAULTS.plugins,
+        legend:{ display:true, position:'bottom',
+          labels:{ font:{family:'IBM Plex Sans',size:10.5}, color:'#374151',
+                   boxWidth:10, padding:10, usePointStyle:true, pointStyleWidth:8 } },
+        tooltip:{ ...CHART_DEFAULTS.plugins.tooltip,
+          callbacks:{
+            label: ctx => {
+              const v = ctx.parsed.y;
+              return `${ctx.dataset.label}: ${v != null ? fN(v,0) : '—'} personas`;
+            }
+          }
+        }
+      },
+      scales:{ ...CHART_DEFAULTS.scales,
+        y:{ ...CHART_DEFAULTS.scales.y, beginAtZero:true,
+          ticks:{ ...CHART_DEFAULTS.scales.y.ticks, callback: v => fK(v) } }
+      }
+    }
+  });
+
+  // ── Heatmap semana × día (Lun-Dom)
+  const hm = document.getElementById('mo-heatmap');
+  if(periodDays.length <= 1){
+    hm.innerHTML = `<div style="padding:24px;color:var(--muted);font-size:12px;text-align:center">El heatmap requiere un período de varios días (cambia a Semana/Mes/Ciclo).</div>`;
+    document.getElementById('mo-hm-max').textContent = '—';
+  } else {
+    const maxV = Math.max(...periodDays.map(d => cdcByDay[d]), 1);
+    const hmColor = t => {
+      if(!t) return '#f3f4f6';
+      const r = Math.round(240 - (240-20)*t);
+      const g = Math.round(253 - (253-83)*t);
+      const b = Math.round(244 - (244-45)*t);
+      return `rgb(${r},${g},${b})`;
+    };
+    const matrix = {};   // wk → [v0..v6]
+    periodDays.forEach(d => {
+      const wk = isoWeekKey(d);
+      const dt = new Date(d + 'T12:00:00');
+      const dayNr = (dt.getDay() + 6) % 7;
+      if(!matrix[wk]) matrix[wk] = [null,null,null,null,null,null,null];
+      matrix[wk][dayNr] = cdcByDay[d];
+    });
+    const sortedWeeks = Object.keys(matrix).sort();
+    let html = `<div class="hm-row hm-hdr">
+      <div class="hm-lbl"></div>
+      <div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+    </div>`;
+    sortedWeeks.forEach(wk => {
+      const row = matrix[wk];
+      html += `<div class="hm-row"><div class="hm-lbl">${wk.replace('2025-W','25·W').replace('2026-W','26·W')}</div>`;
+      for(let i=0; i<7; i++){
+        const v = row[i];
+        if(v == null){
+          html += `<div class="hm-cell empty" title="sin datos"></div>`;
+        } else {
+          const t = v / maxV;
+          const fg = t > 0.55 ? '#fff' : '#1f2937';
+          html += `<div class="hm-cell" style="background:${hmColor(t)};color:${fg}" title="${fK(v)} personas">${fK(v)}</div>`;
+        }
+      }
+      html += `</div>`;
+    });
+    hm.innerHTML = html;
+    document.getElementById('mo-hm-max').textContent = fK(maxV);
+  }
+
+  // ── Stacked CC bar + tabla nómina
+  const CC_COLORS = [
+    '#16a34a','#0891b2','#7c3aed','#d97706','#dc2626',
+    '#65a30d','#0284c7','#9333ea','#b45309','#be123c',
+    '#15803d','#0e7490','#86198f','#a16207','#9f1239'
+  ];
+  const nomByCC = {};
+  rawNomina.forEach(r => {
+    const d = (r.fecha||'').split('T')[0];
+    if(d < from || d > to) return;
+    const cc = r.centro_costo || '—';
+    const x = nomByCC[cc] || (nomByCC[cc] = { emp:0, costo:0 });
+    x.emp   += r.empleados_laboraron || 0;
+    x.costo += r.total_costo || 0;
+  });
+  const ccEntries = Object.entries(nomByCC).sort((a,b) => b[1].costo - a[1].costo);
+  const ccTotal = ccEntries.reduce((s,[,v]) => s + v.costo, 0);
+  const stackedEl = document.getElementById('mo-stacked');
+  const legendEl  = document.getElementById('mo-stacked-legend');
+  if(!ccEntries.length || ccTotal === 0){
+    stackedEl.innerHTML = `<div style="margin:auto;color:var(--muted);font-size:12px;padding:14px">Sin nómina en el período.</div>`;
+    legendEl.innerHTML = '';
+  } else {
+    stackedEl.innerHTML = ccEntries.map(([cc, v], i) => {
+      const pct = v.costo / ccTotal * 100;
+      const color = CC_COLORS[i % CC_COLORS.length];
+      const showLabel = pct >= 7;
+      return `<div class="stacked-seg" style="flex:0 0 ${pct.toFixed(2)}%;background:${color}"
+                   title="${cc}: ${fMxn(v.costo)} (${pct.toFixed(1)}%)">${
+                     showLabel ? cc.slice(0,12) : ''
+                   }</div>`;
+    }).join('');
+    legendEl.innerHTML = ccEntries.map(([cc, v], i) => {
+      const pct = v.costo / ccTotal * 100;
+      const color = CC_COLORS[i % CC_COLORS.length];
+      return `<div class="stacked-legend-item">
+        <span class="stacked-legend-swatch" style="background:${color}"></span>
+        <span><b>${cc}</b> · ${fMxn(v.costo)} <span style="color:var(--muted)">(${pct.toFixed(1)}%)</span></span>
+      </div>`;
+    }).join('');
+  }
+
+  // ── Sparklines por campo CDC
+  const sparkSVG = (values, color) => {
+    if(!values.length) return '';
+    const W = 200, H = 28;
+    const max = Math.max(...values, 1);
+    const dx = values.length > 1 ? W / (values.length - 1) : 0;
+    const pts = values.map((v,i) => {
+      const x = i * dx;
+      const y = H - (v / max) * H + 1;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+    const areaPts = `0,${H} ${pts} ${W},${H}`;
+    return `<svg width="100%" height="${H}" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="display:block">
+      <polygon points="${areaPts}" fill="${color}" opacity=".12"/>
+      <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5"/>
+    </svg>`;
+  };
+  const sparkGrid = document.getElementById('mo-spark-grid');
+  const campos = Object.keys(cdcByCampoDay).sort((a,b) => {
+    const lastA = Math.max(0, ...Object.values(cdcByCampoDay[a]));
+    const lastB = Math.max(0, ...Object.values(cdcByCampoDay[b]));
+    return lastB - lastA;
+  });
+  if(!campos.length){
+    sparkGrid.innerHTML = `<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">Sin datos CDC.</div>`;
+  } else {
+    sparkGrid.innerHTML = campos.map((c, i) => {
+      const dayMap = cdcByCampoDay[c];
+      const days = Object.keys(dayMap).filter(d => d >= from && d <= to).sort();
+      if(!days.length) return '';
+      const values = days.map(d => dayMap[d]);
+      const last = values[values.length-1];
+      const color = CC_COLORS[i % CC_COLORS.length];
+      return `<div class="spark-row">
+        <div class="spark-name">${c}</div>
+        <div>${sparkSVG(values, color)}</div>
+        <div class="spark-val">${fK(last)}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // ── Tabla CDC por campo (detalle)
+  const cdcByCampo = {};
   rawCdc.forEach(r => {
     const c = r.campo || '—';
     const d = (r.fecha||'').split('T')[0];
+    if(d < from || d > to) return;
     const v = r.personas_activas || 0;
     const x = cdcByCampo[c] || (cdcByCampo[c] = { last:0, sum:0, n:0, max:0, lastDay:'' });
     x.sum += v; x.n++;
@@ -4350,72 +4630,15 @@ function renderManoObra(from, to){
   document.getElementById('mo-cdc-tbody').innerHTML =
     cdcRows || `<tr><td colspan="4" class="empty">Sin datos en el período.</td></tr>`;
 
-  // ── Tabla Nómina por centro de costo (período total)
-  const nomByCC = {};   // cc → { emp, costo }
-  rawNomina.forEach(r => {
-    const cc = r.centro_costo || '—';
-    const x = nomByCC[cc] || (nomByCC[cc] = { emp:0, costo:0 });
-    x.emp   += r.empleados_laboraron || 0;
-    x.costo += r.total_costo || 0;
-  });
-  const nomRows = Object.entries(nomByCC)
-    .sort((a,b) => b[1].costo - a[1].costo)
-    .map(([cc, x]) => `<tr>
-      <td style="font-weight:600">${cc}</td>
-      <td class="r">${fK(x.emp)}</td>
-      <td class="r">${fMxn(x.costo)}</td>
-      <td class="r" style="color:var(--muted)">${fMxn(x.emp > 0 ? x.costo / x.emp : 0)}</td>
-    </tr>`).join('');
+  // ── Tabla Nómina por CC
+  const nomRows = ccEntries.map(([cc, x]) => `<tr>
+    <td style="font-weight:600">${cc}</td>
+    <td class="r">${fK(x.emp)}</td>
+    <td class="r">${fMxn(x.costo)}</td>
+    <td class="r" style="color:var(--muted)">${fMxn(x.emp > 0 ? x.costo / x.emp : 0)}</td>
+  </tr>`).join('');
   document.getElementById('mo-nom-tbody').innerHTML =
     nomRows || `<tr><td colspan="4" class="empty">Sin datos en el período.</td></tr>`;
-
-  // ── Gráfica: barras de % cumplimiento semanal con colores por banda
-  const wkLabels = weeklyRows.map(w => w.k.replace('2025-','').replace('2026-',''));
-  const wkData   = weeklyRows.map(w => w.cump != null ? +w.cump.toFixed(1) : 0);
-  const wkColors = weeklyRows.map(w => bandColor(w.cump));
-  const wkMeta   = weeklyRows;
-  mkChart('chart-mo-cump', {
-    type:'bar',
-    data:{
-      labels: wkLabels,
-      datasets:[{
-        label:'% Cumplimiento',
-        data: wkData,
-        backgroundColor: wkColors,
-        borderColor: wkColors,
-        borderWidth: 1,
-        borderRadius: 4,
-      }]
-    },
-    options:{
-      ...CHART_DEFAULTS,
-      maintainAspectRatio:false,
-      responsive:true,
-      plugins:{
-        ...CHART_DEFAULTS.plugins,
-        legend:{ display:false },
-        tooltip:{
-          ...CHART_DEFAULTS.plugins.tooltip,
-          callbacks:{
-            label: ctx => {
-              const m = wkMeta[ctx.dataIndex];
-              if(!m.presu) return `Real ${fN(m.real,0)} · sin presupuesto`;
-              return `Real ${fN(m.real,0)} / Plan ${fK(m.presu)}  ·  ${fN(m.cump,1)}% ${bandLabel(m.cump)}`;
-            }
-          }
-        },
-        annotation: undefined
-      },
-      scales:{
-        ...CHART_DEFAULTS.scales,
-        y:{ ...CHART_DEFAULTS.scales.y,
-          beginAtZero:true,
-          suggestedMax: 130,
-          ticks:{ ...CHART_DEFAULTS.scales.y.ticks, callback: v => v + '%' }
-        }
-      }
-    }
-  });
 }
 
 /* ── LIQUIDACIÓN CALAVO (protegido) ─────────────────────── */
