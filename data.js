@@ -1,19 +1,21 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 29 May 2026",
+    fecha: "Sábado 30 May 2026",
     semana: "WK 22",
-    actualizado: "29/05/2026 · 13:15"
+    actualizado: "30/05/2026 · 13:55"
   },
 
   alertas: [
+    {"nivel":"success","texto":"🚢 REPORTES EMBARQUE 29/05 — Belher emitió reportes generales de CHILE y LIMÓN PERSA. Documentación de embarque activa. Fuente: embarquesbelher@agbelher.com (17:22–17:23 hrs)."},
+    {"nivel":"info","texto":"💰 LIQUIDACIÓN CALAVO al 24-May-26 — 963K cajas enviadas / 945K facturadas / 1K por facturar / 3K en piso / 14K rework. Ventas brutas: $21.24M | Aranceles: $2.19M | Comisiones: $2.29M | Expenses: $1.58M | Venta neta: $15.18M. Pick & Pack: $4.82M. Avance liquidación GC 2025-26: $1.4M. Fuente: Leima (leima@agbelher.com)."},
+    {"nivel":"info","texto":"📋 MINUTA JDC #4 — 28/05/2026 — Cuarta reunión de la Junta de Consejo (JDC) de ABSA celebrada en Navolato, Sinaloa. Minuta distribuida por Armando C. Llanes (CFO, Grupo Belo del Pacífico/HMX). Pendiente revisión de acuerdos."},
     {"nivel":"success","texto":"📎 ADJUNTOS BELHER 29/05 — 4 archivos descargados a Drive (07:53): Settlement Calavo WK22 (28-May-2026), Acarreo Diario 28-05 (Limón Persa), Diario de Báscula 28-05 (Limón Persa), Listado Diario 28-05 (Limón Persa). Carpeta: Belher Adjuntos."},
     {"nivel":"success","texto":"✅ AUDITORÍA BUYERS EDGE-CALAVO 27/05 — Resultado FAVORABLE: Empaque 94.3% (8 NC) · Álamo 96.2% (4 NC) · La 25 96.4% (4 NC). Belher permanece en lista de proveedores aprobados. Plazo acciones correctivas: 8 de junio 2026."},
     {"nivel":"success","texto":"🤝 CONTRATO BELTRAN-CALAVO 26/05 — JC envió versión final del contrato. Confirmación de recibido por Irene Amezaga (VP Sales, Calavo) y Armando Llanes (CFO, Don Memo). Contrato en proceso de cierre con Calavo, Antonio, JC y Armando."},
     {"nivel":"warning","texto":"⚖️ ACCIONES CORRECTIVAS AUDITORÍA SMETA — Resultado preliminar compartido por Marisol Castro. Incluye No conformidades, Observaciones, Buenas Prácticas y Datos Generales (doc Excel). Reunión con involucrados directos pendiente. Equipo: Carlos Castro, Juan Aviles, Samantha González y otros. Deadline acciones correctivas Buyers Edge-Calavo: 8 de junio 2026."},
+    {"nivel":"warning","texto":"🔍 CONCILIACIÓN CALAVO $2.3M — 4 puntos pendientes representan ~$453K. Armando urge contactar a Irene en conjunto la próxima semana (historial: semanas en resolver). Coordinación: Armando + Antonio + JC + Leima en Culiacán."},
     {"nivel":"info","texto":"🧾 FACTURA MATRAZ LAB 26/05 — CONTPAQ i emitió factura UUID: ae6be09e-e338-42e6-966d-5599f836078b. Disponible para descarga por 30 días en portal CFDI."},
     {"nivel":"success","texto":"📊 CALIDAD OUTBOUND TOMATE 23/05 — Bola Yameto: Primera 72.29% · Segunda 14.57% · Tercera 10.29% · Merma 2.86% · Peso promedio 31.62g. Reporte emitido por calidad@agbelher.com."},
-    {"nivel":"info","texto":"💰 LIQUIDACIÓN CALAVO al 16-May-26 — 962K cajas enviadas / 933K facturadas / 4K en piso / 11K por facturar / 14K rework. Saldo a favor Belher: USD 3,225K. Precio promedio mayo: USD 21.94. Ventas brutas: USD 21.1M | Aranceles: $2.19M | Comisiones: $2.27M | Venta neta: $15.09M."},
-    {"nivel":"warning","texto":"🔍 CONCILIACIÓN CALAVO $2.3M — 4 puntos pendientes representan ~$453K. Armando urge contactar a Irene en conjunto la próxima semana (historial: semanas en resolver). Coordinación: Armando + Antonio + JC + Leima en Culiacán."},
     {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado en myaccount.google.com."},
     {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets."},
     {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
@@ -592,6 +594,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"17:23","asunto":"29-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-29"},
+    {"hora":"17:22","asunto":"29-05-2026 REPORTES GENERALES LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-29"},
+    {"hora":"00:15","asunto":"Liquidacion Calavo al 24 de Mayo GC 2025-2026","de":"leima@agbelher.com","leido":false,"fecha":"2026-05-29"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 4 archivos (29-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-29"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 5 archivos (28-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-28"},
     {"hora":"10:53","asunto":"✅ Belher Adjuntos — 5 archivos (27-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-27"},
