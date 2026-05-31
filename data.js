@@ -1,11 +1,13 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 30 May 2026",
+    fecha: "Domingo 31 May 2026",
     semana: "WK 22",
-    actualizado: "30/05/2026 · 13:55"
+    actualizado: "31/05/2026 · 14:00"
   },
 
   alertas: [
+    {"nivel":"info","texto":"📊 COMPARATIVO SUELDOS ABSA vs MERCADO — 30/05 — JC Beltrán distribuyó archivo Excel con análisis comparativo de sueldos ABSA vs mercado laboral. Armando Llanes (CFO, Don Memo) confirmó recibido. Pendiente retroalimentación del equipo."},
+    {"nivel":"info","texto":"🔔 WEBINAR COMERCIO EXTERIOR 04/06 — Secretaría de Economía de Sinaloa invita a capacitación virtual gratuita: 'Información Comercial y Certificación de Productos conforme a las NOM'. Jueves 4 de junio 2026, 10:00 hrs. Registro: Zoom. En colaboración con NYCE, S.C."},
     {"nivel":"success","texto":"🚢 REPORTES EMBARQUE 29/05 — Belher emitió reportes generales de CHILE y LIMÓN PERSA. Documentación de embarque activa. Fuente: embarquesbelher@agbelher.com (17:22–17:23 hrs)."},
     {"nivel":"info","texto":"💰 LIQUIDACIÓN CALAVO al 24-May-26 — 963K cajas enviadas / 945K facturadas / 1K por facturar / 3K en piso / 14K rework. Ventas brutas: $21.24M | Aranceles: $2.19M | Comisiones: $2.29M | Expenses: $1.58M | Venta neta: $15.18M. Pick & Pack: $4.82M. Avance liquidación GC 2025-26: $1.4M. Fuente: Leima (leima@agbelher.com)."},
     {"nivel":"info","texto":"📋 MINUTA JDC #4 — 28/05/2026 — Cuarta reunión de la Junta de Consejo (JDC) de ABSA celebrada en Navolato, Sinaloa. Minuta distribuida por Armando C. Llanes (CFO, Grupo Belo del Pacífico/HMX). Pendiente revisión de acuerdos."},
@@ -594,6 +596,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"14:15","asunto":"ABSA Comparativo Sueldos vs Mercado","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-30"},
+    {"hora":"16:11","asunto":"🔔 WEBINAR - NOM: Información Comercial y Certificación de Productos","de":"edwin.delgado@sinaloa.gob.mx","leido":false,"fecha":"2026-05-30"},
     {"hora":"17:23","asunto":"29-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-29"},
     {"hora":"17:22","asunto":"29-05-2026 REPORTES GENERALES LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-29"},
     {"hora":"00:15","asunto":"Liquidacion Calavo al 24 de Mayo GC 2025-2026","de":"leima@agbelher.com","leido":false,"fecha":"2026-05-29"},
