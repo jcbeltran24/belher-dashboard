@@ -1,11 +1,13 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 31 May 2026",
-    semana: "WK 22",
-    actualizado: "31/05/2026 · 14:00"
+    fecha: "Lunes 01 Jun 2026",
+    semana: "WK 23",
+    actualizado: "01/06/2026 · 17:55"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"💰 RESUMEN FINANCIERO 2026 — Semillas Latinoamericanas ABC (Corbel Seeds): Recursos disponibles $106,878 USD (remanente 2025 $6,878 + aport. familia Cortés $50K + familia Beltrán $50K). Gastos ene–may: $77,723 USD (fijos $59,722 | variables $18,001). Saldo en caja al cierre de mayo: $29,154 USD. Fuente: Raymundo Elizalde (ray@agbelher.com) · 01/06/2026."},
+    {"nivel":"info","texto":"🌱 CORBEL SEEDS DAILY REPORT #0061 — 01/06/2026 — USDA: Abasto mexicano activo por Nogales y Texas (tomate, pepino, chile bell, jalapeño, habanero, limón). Cotizaciones tomate Nogales: steady-to-lower por tamaño. Texas: actividad firme en chile bell y hot peppers de invernadero. Brasil: señales en cítricos — greening y menor cosecha presionan proyecciones de OJ. Fuente: ray@agbelher.com."},
     {"nivel":"info","texto":"📊 COMPARATIVO SUELDOS ABSA vs MERCADO — 30/05 — JC Beltrán distribuyó archivo Excel con análisis comparativo de sueldos ABSA vs mercado laboral. Armando Llanes (CFO, Don Memo) confirmó recibido. Pendiente retroalimentación del equipo."},
     {"nivel":"info","texto":"🔔 WEBINAR COMERCIO EXTERIOR 04/06 — Secretaría de Economía de Sinaloa invita a capacitación virtual gratuita: 'Información Comercial y Certificación de Productos conforme a las NOM'. Jueves 4 de junio 2026, 10:00 hrs. Registro: Zoom. En colaboración con NYCE, S.C."},
     {"nivel":"success","texto":"🚢 REPORTES EMBARQUE 29/05 — Belher emitió reportes generales de CHILE y LIMÓN PERSA. Documentación de embarque activa. Fuente: embarquesbelher@agbelher.com (17:22–17:23 hrs)."},
@@ -596,6 +598,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"17:50","asunto":"Resumen financiero 2026 — Semillas Latinoamericanas ABC","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-01"},
+    {"hora":"17:31","asunto":"Corbel Seeds Daily Report #0061 — Jun 1, 2026","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-01"},
     {"hora":"14:15","asunto":"ABSA Comparativo Sueldos vs Mercado","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-30"},
     {"hora":"16:11","asunto":"🔔 WEBINAR - NOM: Información Comercial y Certificación de Productos","de":"edwin.delgado@sinaloa.gob.mx","leido":false,"fecha":"2026-05-30"},
     {"hora":"17:23","asunto":"29-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-29"},
