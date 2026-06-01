@@ -4251,9 +4251,9 @@ function renderRezaga(){
 
 /* ── MANO DE OBRA · CAMPO ──────────────────────────────── */
 /* Presupuesto headcount por semana ISO — fuente:
-   "Programa de personal 2025-2026 JULIO-MARZO.xlsx" hoja
+   "Programa de personal 2025-2026 Actualizado.xlsx" hoja
    PROYECCIÓN PRODUCCIÓN 22-23, fila TOTAL (row 23).
-   Cubre 2025-W27 → 2026-W13. Semanas fuera de este rango: sin presupuesto. */
+   Cubre ciclo completo 2025-W27 → 2026-W26 (52 semanas, jul 2025 → jun 2026). */
 const BUDGET_HC_BY_WEEK = {
   '2025-W27':180,'2025-W28':180,'2025-W29':180,'2025-W30':180,
   '2025-W31':190,'2025-W32':190,'2025-W33':190,'2025-W34':190,
@@ -4265,7 +4265,11 @@ const BUDGET_HC_BY_WEEK = {
   '2026-W01':706,'2026-W02':771,'2026-W03':791,'2026-W04':806,
   '2026-W05':806,'2026-W06':806,'2026-W07':806,'2026-W08':806,
   '2026-W09':806,'2026-W10':806,'2026-W11':806,'2026-W12':806,
-  '2026-W13':798
+  '2026-W13':798,'2026-W14':798,'2026-W15':798,'2026-W16':798,
+  '2026-W17':798,'2026-W18':798,'2026-W19':798,
+  '2026-W20':436,'2026-W21':436,'2026-W22':436,
+  '2026-W23':264,'2026-W24':264,
+  '2026-W25':175,'2026-W26':175
 };
 
 // ISO 8601 week key — "YYYY-Www" — para indexar BUDGET_HC_BY_WEEK
