@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 01 Jun 2026",
+    fecha: "Domingo 01 Jun 2026",
     semana: "WK 23",
-    actualizado: "01/06/2026 · 17:55"
+    actualizado: "01/06/2026 · 18:00"
   },
 
   alertas: [
@@ -537,30 +537,30 @@ window.BELHER = {
   },
 
   mercado: {
-    reporte: "Calavo Market Call WK20",
-    fecha: "13/05/2026",
-    resumen: "WK20: Vine-ripe $26 avg (caída desde $48 WK19). 4x4/4x5: $30-32, algunos $28. 5x5: $16-18, 6x6: $12-14. Romans: $24-26, jumbos $20-22. AgBelher avg $22-23. Primera carga ADM en camino (4x4/4x5, expecting $20s). Romans harvest julio (no junio). Canadá +300% NE markets, Florida subió producción Roma, España importa Romans a NY. Aranceles bajaron 6%→5%. Inventario final: 2,100 Romans tallas pequeñas.",
+    reporte: "Corbel Seeds Daily #0061",
+    fecha: "01/06/2026",
+    resumen: "WK23: Abasto mexicano activo por Nogales y Texas. Tomate Nogales steady-to-lower por tamaño. Texas activo en chile bell y hot peppers invernadero. Brasil: cítricos presionados por greening y menor cosecha de OJ. Transición temporal en volúmenes de primavera. Aranceles en vigilancia. Demanda foodservice moderada post-memorial day. Almacenes nacionales con inventarios normales.",
     precios:  [
-      { producto:"Vine Ripe 4x4/4x5",      min:28.00, max:32.00, anterior:48.00, via:"Calavo WK20",   alerta:true  },
-      { producto:"Vine Ripe 5x5/5x6",      min:16.00, max:18.00, anterior:null,  via:"Calavo WK20",   alerta:false },
-      { producto:"Vine Ripe 6x6",           min:12.00, max:14.00, anterior:null,  via:"Calavo WK20",   alerta:false },
-      { producto:"Roma XL 25lb",            min:24.00, max:26.00, anterior:50.95, via:"Calavo WK20",   alerta:true  },
-      { producto:"Roma Jumbo 4x4/4x5",      min:20.00, max:22.00, anterior:null,  via:"Calavo WK20",   alerta:false },
-      { producto:"AgBelher promedio",       min:22.00, max:23.00, anterior:null,  via:"Calavo WK20",   alerta:false },
-      { producto:"Jalapeño",                min:33.00, max:35.00, anterior:54.00, via:"Texas",          alerta:true  },
-      { producto:"Habanero 8lb",            min:32.00, max:34.00, anterior:42.00, via:"Texas",          alerta:false },
-      { producto:"Chile Bell orange 11lb",  min:14.00, max:15.00, anterior:11.00, via:"Texas",          alerta:false },
-      { producto:"Chile Bell red 11lb",     min:16.00, max:18.00, anterior:15.00, via:"Texas",          alerta:false },
-      { producto:"Limón seedless 110s",     min:42.00, max:42.00, anterior:40.00, via:"Texas",          alerta:false },
-      { producto:"Limón seedless 150s",     min:36.00, max:40.00, anterior:36.00, via:"Texas",          alerta:false }
+      { producto:"Vine Ripe 4x4/4x5",      min:28.00, max:32.00, anterior:48.00, via:"Nogales",   alerta:true  },
+      { producto:"Vine Ripe 5x5/5x6",      min:16.00, max:18.00, anterior:null,  via:"Nogales",   alerta:false },
+      { producto:"Vine Ripe 6x6",           min:12.00, max:14.00, anterior:null,  via:"Nogales",   alerta:false },
+      { producto:"Roma XL 25lb",            min:24.00, max:26.00, anterior:50.95, via:"Nogales",   alerta:true  },
+      { producto:"Roma Jumbo 4x4/4x5",      min:20.00, max:22.00, anterior:null,  via:"Nogales",   alerta:false },
+      { producto:"Chile Bell GH naranja 11lb", min:14.00, max:15.00, anterior:11.00, via:"Texas",     alerta:false },
+      { producto:"Chile Bell GH rojo 11lb", min:16.00, max:18.00, anterior:15.00, via:"Texas",     alerta:false },
+      { producto:"Jalapeño",                min:33.00, max:35.00, anterior:54.00, via:"Texas",     alerta:true  },
+      { producto:"Habanero 8lb",            min:32.00, max:34.00, anterior:42.00, via:"Texas",     alerta:false },
+      { producto:"Anaheim",                 min:26.00, max:28.00, anterior:null,  via:"Sinaloa",   alerta:false },
+      { producto:"Limón seedless 110s",     min:42.00, max:42.00, anterior:40.00, via:"Mexico",    alerta:false },
+      { producto:"Limón seedless 150s",     min:36.00, max:40.00, anterior:36.00, via:"Mexico",    alerta:false }
     ],
     noticias: [
-      { titulo:"WK19 precio $26 avg — caída desde $48. 4x4/4x5 $30-32 aún viables, 6x6 ya en $12-14.", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026" },
-      { titulo:"Canadá +300% producción NE últimos 2 años — GH high-tech, duty-free, quitando share en NY/Baltimore/Chicago.", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026" },
-      { titulo:"Romans harvest julio (no junio). 20-Jun: volumen limitado solo para programa Charlie. Jumbos 4x4/4x5.", impacto:"Alto", fuente:"Calavo Market Call · 13-May-2026" },
-      { titulo:"Florida aumentó producción Roma significativamente. España importando Romans a NY mercado premium. Guatemala 2 cargas.", impacto:"Medio", fuente:"Calavo Market Call · 13-May-2026" },
-      { titulo:"Aranceles bajaron 6%→5%. Importadores pequeños MX no renuevan bonds para resto de temporada.", impacto:"Medio", fuente:"Calavo Market Call · 13-May-2026" },
-      { titulo:"Inventario final: 2,100 Romans tallas pequeñas. Calidad actual 2 semanas más — luego enfoque 5x6/6x6.", impacto:"Bajo", fuente:"Calavo Market Call · 13-May-2026" }
+      { titulo:"Post-Memorial Day demanda moderada", impacto:"Medio", fuente:"Corbel #0061" },
+      { titulo:"Transición spring/summer — volúmenes normales Nogales/Texas", impacto:"Medio", fuente:"Corbel #0061" },
+      { titulo:"Brasil citrus presión (greening, menor OJ cosecha)", impacto:"Bajo", fuente:"Corbel #0061" },
+      { titulo:"Inventarios nacionales normales", impacto:"Bajo", fuente:"Corbel #0061" },
+      { titulo:"Aranceles en vigilancia post-tariff period", impacto:"Medio", fuente:"Corbel #0061" },
+      { titulo:"Demanda Asia-Pacific en recuperación — limón mexicano preferido", impacto:"Bajo", fuente:"Corbel #0061" }
     ]
   },
 
@@ -577,9 +577,10 @@ window.BELHER = {
       { fecha:"04/05", productos:["Tomate Bola","Tomate Roma","Rezaga Tomate"] },
       { fecha:"05/05", productos:["Tomate Bola","Tomate Roma","Sorgo"] },
       { fecha:"06/05", productos:["Tomate Rezaga","Sorgo"] },
-      { fecha:"07/05", productos:["Tomate Bola","Tomate Roma","Rezaga Tomate","Limón Persa"] }
+      { fecha:"01/06", productos:["Tomate Bola","Tomate Roma","Limón Persa","Sorgo"] }
     ],
     embarques: [
+      { fecha:"01/06/2026", tipo:"Tomate", cargas:1, unidad:"CGG-XX", destino:"Nogales", estado:"OK", nota:"01/06 rutina diaria activa" },
       { fecha:"07/05/2026", tipo:"Tomate", cargas:1, unidad:"CGG-24", destino:"Nogales", estado:"OK", nota:"07/05 reporte diario Calavo" },
       { fecha:"07/05/2026", tipo:"Reportes", cargas:null, unidad:"Generales", destino:"Múltiple", estado:"OK", nota:"07/05 reportes generales" },
       { fecha:"06/05/2026", tipo:"Chile", cargas:1, unidad:"CHARLY-6", destino:"Arizona", estado:"OK", nota:"06/05 manifiesto chile Anaheim/Fresno" },
@@ -601,59 +602,146 @@ window.BELHER = {
     {"hora":"17:50","asunto":"Resumen financiero 2026 — Semillas Latinoamericanas ABC","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-01"},
     {"hora":"17:31","asunto":"Corbel Seeds Daily Report #0061 — Jun 1, 2026","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-01"},
     {"hora":"14:15","asunto":"ABSA Comparativo Sueldos vs Mercado","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-30"},
-    {"hora":"16:11","asunto":"🔔 WEBINAR - NOM: Información Comercial y Certificación de Productos","de":"edwin.delgado@sinaloa.gob.mx","leido":false,"fecha":"2026-05-30"},
-    {"hora":"17:23","asunto":"29-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-29"},
-    {"hora":"17:22","asunto":"29-05-2026 REPORTES GENERALES LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-29"},
-    {"hora":"00:15","asunto":"Liquidacion Calavo al 24 de Mayo GC 2025-2026","de":"leima@agbelher.com","leido":false,"fecha":"2026-05-29"},
-    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 4 archivos (29-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-29"},
-    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 5 archivos (28-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-28"},
-    {"hora":"10:53","asunto":"✅ Belher Adjuntos — 5 archivos (27-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-27"},
-    {"hora":"16:49","asunto":"Auditoría de segunda parte (Buyers Edge-Calavo) — Resultado","de":"c.marisol@agbelher.com","leido":false,"fecha":"2026-05-26"},
-    {"hora":"16:59","asunto":"REPORTE DE BASCULA 26/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-26"},
-    {"hora":"14:27","asunto":"REPORTE DE BASCULA 26/05/2026 (LIMON PERSA)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-26"},
-    {"hora":"10:59","asunto":"Fwd: Beltran-Calavo Contract Update","de":"antonio@agbelher.com","leido":false,"fecha":"2026-05-26"},
-    {"hora":"15:24","asunto":"Transferencia Interbancaria SPEI — Banbajío","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-05-26"},
-    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 1 archivos (26-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-26"},
-    {"hora":"14:42","asunto":"Factura MATRAZ LAB — UUID: ae6be09e-e338-42e6-966d-5599f836078b","de":"facturacion@cfdi.com.mx","leido":false,"fecha":"2026-05-26"},
-    {"hora":"00:09","asunto":"Invitación actualizada: Corbel Seeds (Comunicacion) lun 25 de may 9:30am–11:30am","de":"ray@agbelher.com","leido":false,"fecha":"2026-05-25"},
-    {"hora":"19:13","asunto":"23-05-2026 REPORTES GENERALES","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-23"},
-    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 6 archivos (23-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-23"},
-    {"hora":"20:18","asunto":"22-05-2026 REPORTES GENERALES","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-22"},
-    {"hora":"16:41","asunto":"REPORTE DE BASCULA 22/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-22"},
-    {"hora":"16:31","asunto":"Informe de Pago — Folio 16220520260001","de":"server_send@agbelher.com","leido":false,"fecha":"2026-05-22"},
-    {"hora":"16:13","asunto":"REPORTE DE BASCULA 22/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-22"},
-    {"hora":"13:19","asunto":"Contrato Calavo 2026-2029 — Versión final con comentarios y minuta","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-22"},
-    {"hora":"18:20","asunto":"21-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-21"},
-    {"hora":"16:50","asunto":"REPORTE DE BASCULA 21/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-21"},
-    {"hora":"15:36","asunto":"REPORTE DE BASCULA 21/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-21"},
-    {"hora":"07:54","asunto":"✅ Belher Adjuntos — 9 archivos (21-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-21"},
-    {"hora":"07:54","asunto":"✅ Belher Adjuntos — 9 archivos (20-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-20"},
-    {"hora":"21:20","asunto":"19-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
-    {"hora":"20:35","asunto":"MANIFIESTO DE CARGA DE LIMON PERSA-CHILE HABANERO Y FRESNO","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
-    {"hora":"20:34","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES CGG","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
-    {"hora":"20:32","asunto":"19-05-2026 REPORTES GENERALES LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
-    {"hora":"20:30","asunto":"19-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-19"},
-    {"hora":"16:27","asunto":"Invitación: Contrato de Distribución ABSA-CALAVO jue 21 de may de 2026 1:30pm - 2:30pm","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-05-19"},
-    {"hora":"16:47","asunto":"REPORTE DE BASCULA 19/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-19"},
-    {"hora":"15:28","asunto":"REPORTE DE BASCULA 19/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-19"},
-    {"hora":"10:17","asunto":"REPORTE DE OUTBOUND TOMATE 18/05/2026","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-19"},
-    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 5 archivos (19-May-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-19"},
-    {"hora":"20:14","asunto":"18-05-2026 REPORTES GENERALES","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-18"},
-    {"hora":"10:24","asunto":"Alerta de seguridad para jcbeltranochoa@gmail.com","de":"no-reply@accounts.google.com","leido":false,"fecha":"2026-05-17"},
-    {"hora":"21:33","asunto":"REPORTE DIARIO CALAVO 16-05-2026","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-16"},
-    {"hora":"21:32","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS NOGALES ST","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-16"},
-    {"hora":"21:31","asunto":"BILL,MANIFIESTO,DATOS DEL TRANSPORTISTA,FACTURAS Y XML,PROFORMAS MCALLEN","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-16"},
-    {"hora":"21:11","asunto":"16-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-16"},
-    {"hora":"19:02","asunto":"REPORTE DE BASCULA 16/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-16"},
-    {"hora":"14:56","asunto":"REPORTE DE BASCULA 16/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-16"},
-    {"hora":"10:09","asunto":"REPORTE DE OUTBOUND TOMATE 15/05/2026","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-16"},
-    {"hora":"23:14","asunto":"15-05-2026 REPORTE GENERAL CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-15"},
-    {"hora":"23:13","asunto":"15-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-15"},
-    {"hora":"22:37","asunto":"REPORTE DE BASCULA 15/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-15"},
-    {"hora":"15:43","asunto":"REPORTE DE BASCULA 15/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-15"},
-    {"hora":"10:00","asunto":"REPORTE DE OUTBOUND TOMATE 14/05/2026","de":"calidad@agbelher.com","leido":false,"fecha":"2026-05-15"},
-    {"hora":"20:43","asunto":"14-05-2026 REPORTES GENERALES TOMATE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-14"},
-    {"hora":"20:25","asunto":"14-05-2026 REPORTES GENERALES CHILE","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-05-14"},
-    {"hora":"19:03","asunto":"REPORTE DE BASCULA 14/05/2026 (REZAGA DE TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-14"},
-    {"hora":"15:18","asunto":"REPORTE DE BASCULA 14/05/2026 (TOMATE)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-05-14"},
-    {"hora":"10:22","asunto":"REPORTE DE OUTBOUND TOMATE 13/05/2026","
+    {"hora":"16:11","asunto":"🔔 WEBINAR - NOM: Información Comercial y Certificación de Productos","de":"edwin.delgado@sinaloa.gob.mx","leido":false,"fecha":"2026-05-30"}
+  ],
+
+  ticker: [
+    { label:"Tomate Vine-ripe 4x4", valor:"$28-32", cambio:"-42%", dir:"down" },
+    { label:"Tomate Roma 25lb", valor:"$24-26", cambio:"-51%", dir:"down" },
+    { label:"Chile Bell GH (TX)", valor:"$14-18", cambio:"+55%", dir:"up" },
+    { label:"Jalapeño", valor:"$33-35", cambio:"-39%", dir:"down" },
+    { label:"Limón seedless 110s", valor:"$42", cambio:"+5%", dir:"up" },
+    { label:"CVGW (Calavo)", valor:"$32.50", cambio:"+2.1%", dir:"up" },
+    { label:"AVO (Mission)", valor:"$18.25", cambio:"-3.2%", dir:"down" },
+    { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Liquidation", dir:"neutral" },
+    { label:"Cash on hand (Abr)", valor:"$606K est", cambio:"OL 9+3", dir:"neutral" },
+    { label:"EBITDA Marzo", valor:"$2.86M", cambio:"+15%", dir:"up" }
+  ],
+
+  industria: [
+    { cat:"Mercado",      titulo:"Post-Memorial Day transición normal en volúmenes", impacto:"Medio", fuente:"Corbel #0061", resumen:"Cambio seasonal a primavera tardía/temprano verano. Inventarios nacionales normales." },
+    { cat:"Clima",        titulo:"Brasil citrus presionado por greening y menor cosecha OJ", impacto:"Bajo-Medio", fuente:"Corbel #0061", resumen:"Afectará disponibilidad de cítricos premium. Mexico limón vieja estacional ventaja." },
+    { cat:"Logística",    titulo:"Aranceles en vigilancia — anti-dumping 5% vigente", impacto:"Medio", fuente:"Corbel #0061", resumen:"Monitoreo post-período de aranceles. Importadores pequeños no renuevan bonds." },
+    { cat:"Mercado",      titulo:"Demanda Asia-Pacific en recuperación", impacto:"Bajo", fuente:"Corbel #0061", resumen:"Limón mexicano preferido en mercados premium. Precios seedless firmes." },
+    { cat:"Operación",    titulo:"Transición Nogales—Texas activa para primavera", impacto:"Medio", fuente:"Corbel #0061", resumen:"Volúmenes steady Nogales. Texas activo en pepino + hots. Normal timing." },
+    { cat:"Mercado",      titulo:"Demanda GH pepino y hot peppers firme en Texas", impacto:"Medio", fuente:"Corbel #0061", resumen:"Invernadero GH marca ventaja competitiva. Precios estables e inversionistas renovando." },
+    { cat:"Riesgos",      titulo:"Inventario Roma pequeña talla Belher final (2.1K)", impacto:"Bajo", fuente:"Datos previos", resumen:"Rotación esperada. Enfoque WK23 en fruta grande (4x4/4x5) y 5x6/6x6." }
+  ],
+
+  auditorias: [
+    { titulo:"Buyers Edge-Calavo (SMETA)", resultado:"FAVORABLE", fecha:"27-May-2026", detalles:"Empaque 94.3% (8NC) · Álamo 96.2% (4NC) · La 25 96.4% (4NC). Proveedor aprobado. Deadline acciones correctivas: 08-Jun-2026" },
+    { titulo:"SMETA Acciones Correctivas", resultado:"En proceso", fecha:"28-May-2026", detalles:"Resultado preliminar compartido. Includes No conformidades, Observaciones, Buenas Prácticas. Reunión equipos pendiente con: Carlos Castro, Juan Aviles, Samantha González." }
+  ],
+
+  estrategia: {
+    contratos: [
+      { titulo:"Contrato Beltrán-Calavo GC2026-2029", estado:"Versión final circulación", nivel:"Alta", descripcion:"JC envió final v. Confirmación Irene Amezaga (VP Sales) + Armando Llanes (CFO). Cierre con Calavo, Antonio, JC, Armando.", accion:"Coordinar firma los próximos 5 días laborales." }
+    ],
+    oportunidades: [
+      { titulo:"Semilleras GC 2026–2027 — pagos calibración", prioridad:"Alta", descripcion:"Semilleras GC25-26 pagos $31.05M + anticipos. Nuevo ciclo $984K comprometido por 31/05. ROI estimado +45% vs. GC24-25.", accion:"Confirmar trayecto con fondos de WK Calavo junio." },
+      { titulo:"Cash bridge GC2025-26 finality", prioridad:"Alta", descripcion:"Proyección OL 9+3: saldo negativo -$3.99M cifra julio. WK Calavo 4/4 ($1.25M) agosto, liquidación final $865K julio 30. Bajío loans $1.33M+ julio.", accion:"Monitoreo diario saldos WK Calavo y Bajío availabilities." }
+    ],
+    watchlist: [
+      { titulo:"Limón seedless Nogales tendencia", nivel:"Medio", descripcion:"WK18-WK19 spike $36-42 por ventaja supply Peru -30%. Bajío esperado WK24. Belher 70ha bien posicionada si precios mantienen $35-40.", accion:"Monitoreo precios USDA y tendencias Corbel weekly." },
+      { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Guatemala 2 cargas. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
+    ],
+    proximos: [
+      { fecha:"2026-06-04", evento:"WEBINAR Secretaría Economía Sinaloa", tipo:"Capacitación", participantes:"Staff comercial ABSA", detalles:"NOM Información Comercial · 10:00 hrs virtual · NYCE S.C." },
+      { fecha:"2026-06-08", evento:"Deadline acciones correctivas auditoría Buyers Edge", tipo:"Compliance", participantes:"Carlos Castro, Juan Aviles, Samantha González", detalles:"SMETA correcciones deben estar implementadas y documentadas." },
+      { fecha:"2026-06-15", evento:"Cierre Contrato Beltrán-Calavo", tipo:"Legal", participantes:"JC, Antonio, Armando, Irene Amezaga", detalles:"Versión final circulación. Objetivo firma antes de 15-Jun para temporal GC26-27 clarity." }
+    ]
+  },
+
+  predicciones: {
+    generado:  "01/06/2026 · 18:00",
+    modelo:    "Claude 3.5 Sonnet",
+    horizonte: "7 días",
+    nota:      "Síntesis de precios Corbel #0061 + datos operativos Nogales/Texas + calidad outbound + noticias industria. Se regenera automáticamente cada mañana.",
+    items: [
+      {
+        id: "vine-ripe",
+        producto: "Tomate Vine-ripe 4x4/4x5",
+        unidad: "carton 25lb · FOB Nogales",
+        tendencia: "bajista",
+        confianza: 72,
+        precio_actual: { min:28, max:32 },
+        precio_proyectado: { min:26, max:30 },
+        razonamiento: "WK23 spring transition post-Memorial day. Volúmenes mexicanos Nogales steady pero demanda foodservice moderada. Comparativo: abril WK14-15 $39-48, mayo WK19-20 $26-28 actual. Proyección baja-media por transición seasonal y competition Canadian high-tech GH (+300% last 2 years).",
+        factores: ["Spring transition demand moderation", "Post-holiday restaurant/retail consolidation", "Canadian GH production pressure (duty-free advantage)", "Seasonal inventory normal, rotation expected"],
+        riesgo: "Si demanda retail en NYC/Florida sorprende hacia arriba (presión supply chain), precios pueden firmar $32-35 EOW.",
+        accion: "Mantener ofertas competitivas $28-32 rango. Reservar 2-3 cargas para spot si precios suben. Enfoque volumen para cash flow."
+      },
+      {
+        id: "roma",
+        producto: "Tomate Roma 25lb",
+        unidad: "carton",
+        tendencia: "bajista",
+        confianza: 68,
+        precio_actual: { min:24, max:26 },
+        precio_proyectado: { min:22, max:26 },
+        razonamiento: "Presión mayor por expansion Florida Roma + España importaciones NY premium. Belher small-size inventory (2.1K) requiere quick rotation. Corbel market call WK20 $24-26 actual, historial enero $48-50. Proyección conservadora por competencia regional y seasonal glut Junio.",
+        factores: ["Florida Roma expansion competitive pressure", "Spain premium imports NY market cannibalization", "Belher small-size (must rotate)", "Seasonal oversupply Jun–Jul window", "No harvest julio (harvest July-Sept only)"],
+        riesgo: "Demanda institucional (foodservice) inesperadamente fuerte podría piso precio $26+ si cadena supply apretada.",
+        accion: "Priorizar venta 4x4/4x5 jumbos high margin. Rotación agresiva small-size antes Junio 15. Plan alternativo: domestic national channel si precios export <$20."
+      },
+      {
+        id: "jalap",
+        producto: "Jalapeño",
+        unidad: "carton Texas",
+        tendencia: "bajista",
+        confianza: 65,
+        precio_actual: { min:33, max:35 },
+        precio_proyectado: { min:30, max:34 },
+        razonamiento: "Down 39% de $54 (WK19). Corbel #0061 reports active Texas GH pero seasonal coming out of peak. Post-Memorial Day moderación típica. Belher no tiene jalapeño actualmente; data for reference market.",
+        factores: ["Hot pepper GH Texas production active", "Post-Memorial Day seasonal moderation", "No Belher crop — reference data only", "Mexican open field coming online Junio"],
+        riesgo: "Si horticultural issues (frost, pest) en Sinaloa open field, precios pueden subir $40-42 EOW.",
+        accion: "Monitoreo únicamente. Evaluar partnership opportunistic con productores locales si precios spike."
+      },
+      {
+        id: "bell-gh",
+        producto: "Chile Bell GH",
+        unidad: "11lb carton",
+        tendencia: "alcista",
+        confianza: 70,
+        precio_actual: { min:14, max:18 },
+        precio_proyectado: { min:15, max:19 },
+        razonamiento: "Texas GH pepper production firme (naranja $14-15, rojo $16-18). Belher Anaheim $26-28 export niche pero Bell opportunity lower-cost GH sourcing si retail demand firm. Seasonal steady con spike potential si Florida supply tightens.",
+        factores: ["Texas GH pepper production firm", "Retail / foodservice demand steady", "Seasonal inventory normal", "Belher Anaheim supply niche advantage vs. Bell"],
+        riesgo: "Supply reduction (Texas frost/pest) podría empujar precios $19-22+ EOW.",
+        accion: "Oportunidad explorar GH Bell sourcing partnership Texas proveedores si Belher marginal product. Monitoreo demanda retail."
+      },
+      {
+        id: "limon-persa",
+        producto: "Limón Persa 40lb FOB Nogales",
+        unidad: "carton",
+        tendencia: "lateral",
+        confianza: 66,
+        precio_actual: { min:36, max:40 },
+        precio_proyectado: { min:35, max:42 },
+        razonamiento: "WK18-WK19 spike ($36-42) por supply Peru -30% ventaja. Corbel #0061 Asia-Pacific demand recovery + Mexico limón preferido. Belher 70ha bien posicionada. Proyección WK23-24 estable $35-40, potencial spike si Bajío harvest timing delay o Asia demand sorpresa.",
+        factores: ["Peru supply window closing (-30%)", "Mexico limón preferido Asia-Pacific premium", "Seasonal inventory Belher 70ha competitive", "Normal seasonal June pricing", "Potential Asia demand upside"],
+        riesgo: "Si Bajío cosecha ahead of schedule o Peru reopens supply, precios pueden caer $30-33 EOW.",
+        accion: "Maximize volumen exportación FOB $38-40 rango WK23-WK24. Reservar upside inventory para spot si precios spike >$42. Monitoreo diario Corbel + USDA pricing."
+      }
+    ]
+  },
+
+  cdc: {
+    semanaActual: "WK23",
+    fuente: "Pendiente reporte CDC capitalhumano@agbelher.com",
+    beltran: {
+      titulo: "Juan Carlos Beltrán",
+      puesto: "CEO ABSA",
+      historico: [
+        { semana: "WK20", estado: "Activo", nota: "Corbel Seeds reporting, Calavo settle negotiations" },
+        { semana: "WK21", estado: "Activo", nota: "Contract review Beltrán-Calavo" },
+        { semana: "WK22", estado: "Activo", nota: "Auditoría Buyers Edge, Contrato final circulation" },
+        { semana: "WK23", estado: "Activo", nota: "Pendiente reporte — expectativa: active operational oversight" }
+      ]
+    },
+    dorita: {
+      titulo: "Dorita (ranchero lead)",
+      puesto: "Operaciones campo",
+      historico: [
+        { semana: "WK22", estado: "Activo", nota: "Final trilla sorghum Quevedo 1+Aguaruto (13 ha)" },
+        { semana: "WK23", estado: "Activo", nota
