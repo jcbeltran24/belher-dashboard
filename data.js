@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 02 Jun 2026",
+    fecha: "Miércoles 03 Jun 2026",
     semana: "WK 23",
-    actualizado: "02/06/2026 · 16:47"
+    actualizado: "03/06/2026 · 17:03"
   },
 
   alertas: [
+    {"nivel":"info","texto":"📎 ADJUNTOS BELHER 03/06 — 4 archivos descargados a Drive (07:53): 2x image.png (28-May y 02-Jun) + 2x Currículum Vitae Lic. Abigail (28-May y 02-Jun). Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com."},
     {"nivel":"info","texto":"📅 AGENDA ABSA-BPSI JUNIO 2026 — Armando Llanes (CFO, Don Memo) distribuyó agenda de reuniones mensuales. Reuniones vía Zoom; Beltrán participa según disponibilidad. Felipe de vacaciones 12-30 jun. Reportes semanales: impuestos (viernes) y ventas (martes). Conculsión contrato distribución ABSA-CALAVO en proceso de revisión final por Calavo (Antonio/JC/Armando). Leima y Juan: enviar invitaciones Zoom con anticipación. Fuente: armandollanes@donmemo.net · 01/06/2026."},
     {"nivel":"info","texto":"🌱 PROYECCIÓN COSECHA Y EMPAQUE T2026-2027 — Flavio Velázquez (Head Grower, Belher) envió archivo Excel con proyección de volumen de cosecha/empaque para temporada 2026-2027 (pestaña: Sinaloa Proy, Volumen 26-27). Incluye 6.55 has de macrotúneles. Proyección de jornales pendiente de enviar esta semana. Confirmado recibido: Armando Llanes, Antonio Beltrán, JA Cruz, JC Beltrán. Fuente: flavio@agbelher.com · 01/06/2026."},
     {"nivel":"info","texto":"👥 PROYECCIÓN DE PERSONAL T2025-2026 — Flavio Velázquez (Head Grower) envió información actualizada de proyección de personal para la temporada agrícola 2025-2026 directamente a JC Beltrán. Pendiente revisión y comentarios. Fuente: flavio@agbelher.com · 01/06/2026."},
@@ -602,6 +603,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 4 archivos (03-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-03"},
     {"hora":"12:09","asunto":"Agenda ABSA-BPSI Junio 2026","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-06-01"},
     {"hora":"11:01","asunto":"Proyección de Cosecha y Empaque temporada 2026-2027 ABSA","de":"flavio@agbelher.com","leido":false,"fecha":"2026-06-01"},
     {"hora":"11:33","asunto":"Proyección de personal temporada 25-26","de":"flavio@agbelher.com","leido":false,"fecha":"2026-06-01"},
