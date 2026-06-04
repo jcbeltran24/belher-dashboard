@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 03 Jun 2026",
+    fecha: "Jueves 04 Jun 2026",
     semana: "WK 23",
-    actualizado: "03/06/2026 · 17:03"
+    actualizado: "04/06/2026 · 15:31"
   },
 
   alertas: [
+    {"nivel":"info","texto":"📎 ADJUNTOS BELHER 04/06 — 1 archivo descargado a Drive (07:53): image.png (03-Jun-2026 | Otros). Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com."},
     {"nivel":"info","texto":"📎 ADJUNTOS BELHER 03/06 — 4 archivos descargados a Drive (07:53): 2x image.png (28-May y 02-Jun) + 2x Currículum Vitae Lic. Abigail (28-May y 02-Jun). Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com."},
     {"nivel":"info","texto":"📅 AGENDA ABSA-BPSI JUNIO 2026 — Armando Llanes (CFO, Don Memo) distribuyó agenda de reuniones mensuales. Reuniones vía Zoom; Beltrán participa según disponibilidad. Felipe de vacaciones 12-30 jun. Reportes semanales: impuestos (viernes) y ventas (martes). Conculsión contrato distribución ABSA-CALAVO en proceso de revisión final por Calavo (Antonio/JC/Armando). Leima y Juan: enviar invitaciones Zoom con anticipación. Fuente: armandollanes@donmemo.net · 01/06/2026."},
     {"nivel":"info","texto":"🌱 PROYECCIÓN COSECHA Y EMPAQUE T2026-2027 — Flavio Velázquez (Head Grower, Belher) envió archivo Excel con proyección de volumen de cosecha/empaque para temporada 2026-2027 (pestaña: Sinaloa Proy, Volumen 26-27). Incluye 6.55 has de macrotúneles. Proyección de jornales pendiente de enviar esta semana. Confirmado recibido: Armando Llanes, Antonio Beltrán, JA Cruz, JC Beltrán. Fuente: flavio@agbelher.com · 01/06/2026."},
@@ -13,7 +14,6 @@ window.BELHER = {
     {"nivel":"warning","texto":"💰 RESUMEN FINANCIERO 2026 — Semillas Latinoamericanas ABC (Corbel Seeds): Recursos disponibles $106,878 USD (remanente 2025 $6,878 + aport. familia Cortés $50K + familia Beltrán $50K). Gastos ene–may: $77,723 USD (fijos $59,722 | variables $18,001). Saldo en caja al cierre de mayo: $29,154 USD. Fuente: Raymundo Elizalde (ray@agbelher.com) · 01/06/2026."},
     {"nivel":"info","texto":"🌱 CORBEL SEEDS DAILY REPORT #0061 — 01/06/2026 — USDA: Abasto mexicano activo por Nogales y Texas (tomate, pepino, chile bell, jalapeño, habanero, limón). Cotizaciones tomate Nogales: steady-to-lower por tamaño. Texas: actividad firme en chile bell y hot peppers de invernadero. Brasil: señales en cítricos — greening y menor cosecha presionan proyecciones de OJ. Fuente: ray@agbelher.com."},
     {"nivel":"info","texto":"📊 COMPARATIVO SUELDOS ABSA vs MERCADO — 30/05 — JC Beltrán distribuyó archivo Excel con análisis comparativo de sueldos ABSA vs mercado laboral. Armando Llanes (CFO, Don Memo) confirmó recibido. Pendiente retroalimentación del equipo."},
-    {"nivel":"info","texto":"🔔 WEBINAR COMERCIO EXTERIOR 04/06 — Secretaría de Economía de Sinaloa invita a capacitación virtual gratuita: 'Información Comercial y Certificación de Productos conforme a las NOM'. Jueves 4 de junio 2026, 10:00 hrs. Registro: Zoom. En colaboración con NYCE, S.C."},
     {"nivel":"success","texto":"🚢 REPORTES EMBARQUE 29/05 — Belher emitió reportes generales de CHILE y LIMÓN PERSA. Documentación de embarque activa. Fuente: embarquesbelher@agbelher.com (17:22–17:23 hrs)."},
     {"nivel":"info","texto":"💰 LIQUIDACIÓN CALAVO al 24-May-26 — 963K cajas enviadas / 945K facturadas / 1K por facturar / 3K en piso / 14K rework. Ventas brutas: $21.24M | Aranceles: $2.19M | Comisiones: $2.29M | Expenses: $1.58M | Venta neta: $15.18M. Pick & Pack: $4.82M. Avance liquidación GC 2025-26: $1.4M. Fuente: Leima (leima@agbelher.com)."},
     {"nivel":"info","texto":"📋 MINUTA JDC #4 — 28/05/2026 — Cuarta reunión de la Junta de Consejo (JDC) de ABSA celebrada en Navolato, Sinaloa. Minuta distribuida por Armando C. Llanes (CFO, Grupo Belo del Pacífico/HMX). Pendiente revisión de acuerdos."},
@@ -26,8 +26,7 @@ window.BELHER = {
     {"nivel":"success","texto":"📊 CALIDAD OUTBOUND TOMATE 23/05 — Bola Yameto: Primera 72.29% · Segunda 14.57% · Tercera 10.29% · Merma 2.86% · Peso promedio 31.62g. Reporte emitido por calidad@agbelher.com."},
     {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado en myaccount.google.com."},
     {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets."},
-    {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."},
-    {"nivel":"warning","texto":"CONTRIBUCIONES POR PAGAR — IMSS-INFONAVIT + SAT: MXP 25.4M / ~$1.4M USD. IMSS-INFONAVIT MXP 21.5M vencido. Requiere atención urgente."}
+    {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."}
   ],
 
   ebitda: {
@@ -603,6 +602,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 1 archivo (04-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-04"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 4 archivos (03-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-03"},
     {"hora":"12:09","asunto":"Agenda ABSA-BPSI Junio 2026","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-06-01"},
     {"hora":"11:01","asunto":"Proyección de Cosecha y Empaque temporada 2026-2027 ABSA","de":"flavio@agbelher.com","leido":false,"fecha":"2026-06-01"},
