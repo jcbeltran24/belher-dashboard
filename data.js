@@ -1,14 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 04 Jun 2026",
+    fecha: "Viernes 05 Jun 2026",
     semana: "WK 23",
-    actualizado: "04/06/2026 · 15:31"
+    actualizado: "05/06/2026 · 15:19"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"🌱 SOLICITUD DE SEMILLA — TRIALS A GRAN ESCALA (04/06) — Raymundo Elizalde (Corbel Seeds/Belher) solicitó a Jim Augustine semilla de 5 variedades de tomate bola indeterminado (H5995–H6000): 90,000 semillas c/u para Agrícola Belher, Agrícola Chaparral y otros productores. Jim respondió: 3 híbridos tienen semilla limitada; buscará el email previo de Antonio para coordinar. Pendiente seguimiento. Fuente: ray@agbelher.com · 04/06/2026."},
+    {"nivel":"info","texto":"📋 MINUTA REUNIÓN DE TRABAJO (04/06) — Participantes: Hernán Cortés, Antonio Beltrán, Martín Cortés, Juan Carlos Beltrán, Raymundo Elizalde (Zoom, 10:00 AM Culiacán). Temas: (1) Visita San Isidro Jalisco — mejoras en chile bell; 2 variedades seleccionadas; reunión con Dr. Frantz James sobre genética de habaneros. (2) Análisis de precios de semillas de variedades comerciales de tomate bola indeterminado. Fuente: ray@agbelher.com · 04/06/2026."},
+    {"nivel":"info","texto":"📰 HORTIDAILY 05/06 — Acreage de tomate mexicano cae 9% tras aranceles antidumping. Impacto directo en volúmenes de exportación México–EE.UU. Fuente: HortiDaily.com · 05/06/2026."},
     {"nivel":"info","texto":"📎 ADJUNTOS BELHER 04/06 — 1 archivo descargado a Drive (07:53): image.png (03-Jun-2026 | Otros). Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com."},
     {"nivel":"info","texto":"📎 ADJUNTOS BELHER 03/06 — 4 archivos descargados a Drive (07:53): 2x image.png (28-May y 02-Jun) + 2x Currículum Vitae Lic. Abigail (28-May y 02-Jun). Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com."},
-    {"nivel":"info","texto":"📅 AGENDA ABSA-BPSI JUNIO 2026 — Armando Llanes (CFO, Don Memo) distribuyó agenda de reuniones mensuales. Reuniones vía Zoom; Beltrán participa según disponibilidad. Felipe de vacaciones 12-30 jun. Reportes semanales: impuestos (viernes) y ventas (martes). Conculsión contrato distribución ABSA-CALAVO en proceso de revisión final por Calavo (Antonio/JC/Armando). Leima y Juan: enviar invitaciones Zoom con anticipación. Fuente: armandollanes@donmemo.net · 01/06/2026."},
+    {"nivel":"info","texto":"📅 AGENDA ABSA-BPSI JUNIO 2026 — Armando Llanes (CFO, Don Memo) distribuyó agenda de reuniones mensuales. Reuniones vía Zoom; Beltrán participa según disponibilidad. Felipe de vacaciones 12-30 jun. Reportes semanales: impuestos (viernes) y ventas (martes). Conclusión contrato distribución ABSA-CALAVO en proceso de revisión final por Calavo (Antonio/JC/Armando). Leima y Juan: enviar invitaciones Zoom con anticipación. Fuente: armandollanes@donmemo.net · 01/06/2026."},
     {"nivel":"info","texto":"🌱 PROYECCIÓN COSECHA Y EMPAQUE T2026-2027 — Flavio Velázquez (Head Grower, Belher) envió archivo Excel con proyección de volumen de cosecha/empaque para temporada 2026-2027 (pestaña: Sinaloa Proy, Volumen 26-27). Incluye 6.55 has de macrotúneles. Proyección de jornales pendiente de enviar esta semana. Confirmado recibido: Armando Llanes, Antonio Beltrán, JA Cruz, JC Beltrán. Fuente: flavio@agbelher.com · 01/06/2026."},
     {"nivel":"info","texto":"👥 PROYECCIÓN DE PERSONAL T2025-2026 — Flavio Velázquez (Head Grower) envió información actualizada de proyección de personal para la temporada agrícola 2025-2026 directamente a JC Beltrán. Pendiente revisión y comentarios. Fuente: flavio@agbelher.com · 01/06/2026."},
     {"nivel":"warning","texto":"💰 RESUMEN FINANCIERO 2026 — Semillas Latinoamericanas ABC (Corbel Seeds): Recursos disponibles $106,878 USD (remanente 2025 $6,878 + aport. familia Cortés $50K + familia Beltrán $50K). Gastos ene–may: $77,723 USD (fijos $59,722 | variables $18,001). Saldo en caja al cierre de mayo: $29,154 USD. Fuente: Raymundo Elizalde (ray@agbelher.com) · 01/06/2026."},
@@ -602,6 +605,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"19:50","asunto":"Seed Request for Large Trials","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-04"},
+    {"hora":"19:33","asunto":"Minuta de Reunión de Trabajo","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-04"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 1 archivo (04-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-04"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 4 archivos (03-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-03"},
     {"hora":"12:09","asunto":"Agenda ABSA-BPSI Junio 2026","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-06-01"},
