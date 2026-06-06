@@ -1,11 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 05 Jun 2026",
+    fecha: "Sábado 06 Jun 2026",
     semana: "WK 23",
-    actualizado: "05/06/2026 · 15:19"
+    actualizado: "06/06/2026 · 13:59"
   },
 
   alertas: [
+    {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANA 23 (05/06) — Agrícola Belher Fijos (RFC: ABE180411CB8) emitió CFDI de recibo electrónico de nómina para BELTRAN OCHOA JUAN CARLOS. Periodo 23 Semanal: 27/05/2026 al 02/06/2026. UUID: 793DEF63-3331-4470-AB5B-50FDC63766C7. Fuente: anajar@agbelher.com · 05/06/2026."},
+    {"nivel":"info","texto":"💳 TRANSFERENCIA SPEI BANBAJIO (05/06) — Se registró instrucción de depósito interbancario SPEI a cuenta de Juan Carlos Beltrán Ochoa en Banbajío. Hora: 16:57. Fuente: Banbajioinforma@bb.com.mx · 05/06/2026."},
+    {"nivel":"info","texto":"🌎 NEWSLETTER COMERCIO EXTERIOR SINALOA (05/06) — Dirección de Comercio Exterior (Astrid Garibay, Sec. de Economía) distribuyó boletín semanal con noticias relevantes del sector exportador y certificaciones disponibles para empresas. PDF adjunto. Fuente: astrid.garibay@sinaloa.gob.mx · 05/06/2026."},
     {"nivel":"warning","texto":"🌱 SOLICITUD DE SEMILLA — TRIALS A GRAN ESCALA (04/06) — Raymundo Elizalde (Corbel Seeds/Belher) solicitó a Jim Augustine semilla de 5 variedades de tomate bola indeterminado (H5995–H6000): 90,000 semillas c/u para Agrícola Belher, Agrícola Chaparral y otros productores. Jim respondió: 3 híbridos tienen semilla limitada; buscará el email previo de Antonio para coordinar. Pendiente seguimiento. Fuente: ray@agbelher.com · 04/06/2026."},
     {"nivel":"info","texto":"📋 MINUTA REUNIÓN DE TRABAJO (04/06) — Participantes: Hernán Cortés, Antonio Beltrán, Martín Cortés, Juan Carlos Beltrán, Raymundo Elizalde (Zoom, 10:00 AM Culiacán). Temas: (1) Visita San Isidro Jalisco — mejoras en chile bell; 2 variedades seleccionadas; reunión con Dr. Frantz James sobre genética de habaneros. (2) Análisis de precios de semillas de variedades comerciales de tomate bola indeterminado. Fuente: ray@agbelher.com · 04/06/2026."},
     {"nivel":"info","texto":"📰 HORTIDAILY 05/06 — Acreage de tomate mexicano cae 9% tras aranceles antidumping. Impacto directo en volúmenes de exportación México–EE.UU. Fuente: HortiDaily.com · 05/06/2026."},
@@ -26,10 +29,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"⚖️ ACCIONES CORRECTIVAS AUDITORÍA SMETA — Resultado preliminar compartido por Marisol Castro. Incluye No conformidades, Observaciones, Buenas Prácticas y Datos Generales (doc Excel). Reunión con involucrados directos pendiente. Equipo: Carlos Castro, Juan Aviles, Samantha González y otros. Deadline acciones correctivas Buyers Edge-Calavo: 8 de junio 2026."},
     {"nivel":"warning","texto":"🔍 CONCILIACIÓN CALAVO $2.3M — 4 puntos pendientes representan ~$453K. Armando urge contactar a Irene en conjunto la próxima semana (historial: semanas en resolver). Coordinación: Armando + Antonio + JC + Leima en Culiacán."},
     {"nivel":"info","texto":"🧾 FACTURA MATRAZ LAB 26/05 — CONTPAQ i emitió factura UUID: ae6be09e-e338-42e6-966d-5599f836078b. Disponible para descarga por 30 días en portal CFDI."},
-    {"nivel":"success","texto":"📊 CALIDAD OUTBOUND TOMATE 23/05 — Bola Yameto: Primera 72.29% · Segunda 14.57% · Tercera 10.29% · Merma 2.86% · Peso promedio 31.62g. Reporte emitido por calidad@agbelher.com."},
-    {"nivel":"warning","texto":"🔐 ALERTA SEGURIDAD GOOGLE 17/05 — Nuevo inicio de sesión detectado en jcbeltranochoa@gmail.com (cuenta de recuperación: juancarlos@agbelher.com). Verificar si fue acceso autorizado en myaccount.google.com."},
-    {"nivel":"warning","texto":"WK20 CORRECCIÓN CONFIRMADA — Vine-ripe $26 avg (down desde $48 WK19). 4x4/4x5: $30-32, 5x5: $16-18, 6x6: $12-14. Romans: $24-26. AgBelher avg $22-23. Canadá +300% NE markets."},
-    {"nivel":"info","texto":"SETTLE WK19 CALAVO — Leima confirmó USD 2,506 a favor según Calavo. Análisis y conciliación en proceso. Armando Llanes (CPA) notificado."}
+    {"nivel":"success","texto":"📊 CALIDAD OUTBOUND TOMATE 23/05 — Bola Yameto: Primera 72.29% · Segunda 14.57% · Tercera 10.29% · Merma 2.86% · Peso promedio 31.62g. Reporte emitido por calidad@agbelher.com."}
   ],
 
   ebitda: {
@@ -605,6 +605,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:31","asunto":"CFDI de recibo electrónico WK23 — BELTRAN OCHOA JUAN CARLOS","de":"anajar@agbelher.com","leido":false,"fecha":"2026-06-05"},
+    {"hora":"16:57","asunto":"Transferencia Interbancaria SPEI","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-06-05"},
+    {"hora":"15:50","asunto":"🌎 Newsletter Comercio Exterior — 05 de Junio de 2026","de":"astrid.garibay@sinaloa.gob.mx","leido":false,"fecha":"2026-06-05"},
     {"hora":"19:50","asunto":"Seed Request for Large Trials","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-04"},
     {"hora":"19:33","asunto":"Minuta de Reunión de Trabajo","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-04"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 1 archivo (04-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-04"},
