@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 06 Jun 2026",
+    fecha: "Domingo 07 Jun 2026",
     semana: "WK 23",
-    actualizado: "06/06/2026 · 13:59"
+    actualizado: "07/06/2026 · 14:08"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"📅 JUNTA AGRICOMPRA-BELHER — INVITACIÓN (06/06) — David Gaxiola (Grupo Chaparral, dgaxiola@grupochaparral.com) envió invitación de calendario a juancarlos@agbelher.com para junta el martes 16 de junio de 2026, 3pm–5pm (Hora del Pacífico México–Mazatlán). Google Meet: meet.google.com/wxe-hasq-xgr | Tel MX: +52 55 8421 0898 PIN: 1218305971378. Pendiente confirmar asistencia."},
     {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANA 23 (05/06) — Agrícola Belher Fijos (RFC: ABE180411CB8) emitió CFDI de recibo electrónico de nómina para BELTRAN OCHOA JUAN CARLOS. Periodo 23 Semanal: 27/05/2026 al 02/06/2026. UUID: 793DEF63-3331-4470-AB5B-50FDC63766C7. Fuente: anajar@agbelher.com · 05/06/2026."},
     {"nivel":"info","texto":"💳 TRANSFERENCIA SPEI BANBAJIO (05/06) — Se registró instrucción de depósito interbancario SPEI a cuenta de Juan Carlos Beltrán Ochoa en Banbajío. Hora: 16:57. Fuente: Banbajioinforma@bb.com.mx · 05/06/2026."},
     {"nivel":"info","texto":"🌎 NEWSLETTER COMERCIO EXTERIOR SINALOA (05/06) — Dirección de Comercio Exterior (Astrid Garibay, Sec. de Economía) distribuyó boletín semanal con noticias relevantes del sector exportador y certificaciones disponibles para empresas. PDF adjunto. Fuente: astrid.garibay@sinaloa.gob.mx · 05/06/2026."},
@@ -26,10 +27,7 @@ window.BELHER = {
     {"nivel":"success","texto":"📎 ADJUNTOS BELHER 29/05 — 4 archivos descargados a Drive (07:53): Settlement Calavo WK22 (28-May-2026), Acarreo Diario 28-05 (Limón Persa), Diario de Báscula 28-05 (Limón Persa), Listado Diario 28-05 (Limón Persa). Carpeta: Belher Adjuntos."},
     {"nivel":"success","texto":"✅ AUDITORÍA BUYERS EDGE-CALAVO 27/05 — Resultado FAVORABLE: Empaque 94.3% (8 NC) · Álamo 96.2% (4 NC) · La 25 96.4% (4 NC). Belher permanece en lista de proveedores aprobados. Plazo acciones correctivas: 8 de junio 2026."},
     {"nivel":"success","texto":"🤝 CONTRATO BELTRAN-CALAVO 26/05 — JC envió versión final del contrato. Confirmación de recibido por Irene Amezaga (VP Sales, Calavo) y Armando Llanes (CFO, Don Memo). Contrato en proceso de cierre con Calavo, Antonio, JC y Armando."},
-    {"nivel":"warning","texto":"⚖️ ACCIONES CORRECTIVAS AUDITORÍA SMETA — Resultado preliminar compartido por Marisol Castro. Incluye No conformidades, Observaciones, Buenas Prácticas y Datos Generales (doc Excel). Reunión con involucrados directos pendiente. Equipo: Carlos Castro, Juan Aviles, Samantha González y otros. Deadline acciones correctivas Buyers Edge-Calavo: 8 de junio 2026."},
-    {"nivel":"warning","texto":"🔍 CONCILIACIÓN CALAVO $2.3M — 4 puntos pendientes representan ~$453K. Armando urge contactar a Irene en conjunto la próxima semana (historial: semanas en resolver). Coordinación: Armando + Antonio + JC + Leima en Culiacán."},
-    {"nivel":"info","texto":"🧾 FACTURA MATRAZ LAB 26/05 — CONTPAQ i emitió factura UUID: ae6be09e-e338-42e6-966d-5599f836078b. Disponible para descarga por 30 días en portal CFDI."},
-    {"nivel":"success","texto":"📊 CALIDAD OUTBOUND TOMATE 23/05 — Bola Yameto: Primera 72.29% · Segunda 14.57% · Tercera 10.29% · Merma 2.86% · Peso promedio 31.62g. Reporte emitido por calidad@agbelher.com."}
+    {"nivel":"warning","texto":"⚖️ ACCIONES CORRECTIVAS AUDITORÍA SMETA — Resultado preliminar compartido por Marisol Castro. Incluye No conformidades, Observaciones, Buenas Prácticas y Datos Generales (doc Excel). Reunión con involucrados directos pendiente. Equipo: Carlos Castro, Juan Aviles, Samantha González y otros. Deadline acciones correctivas Buyers Edge-Calavo: 8 de junio 2026."}
   ],
 
   ebitda: {
@@ -605,6 +603,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"18:24","asunto":"Invitación: Junta Agricompra - Belher mar 16 jun 2026 3pm–5pm","de":"dgaxiola@grupochaparral.com","leido":false,"fecha":"2026-06-06"},
     {"hora":"16:31","asunto":"CFDI de recibo electrónico WK23 — BELTRAN OCHOA JUAN CARLOS","de":"anajar@agbelher.com","leido":false,"fecha":"2026-06-05"},
     {"hora":"16:57","asunto":"Transferencia Interbancaria SPEI","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-06-05"},
     {"hora":"15:50","asunto":"🌎 Newsletter Comercio Exterior — 05 de Junio de 2026","de":"astrid.garibay@sinaloa.gob.mx","leido":false,"fecha":"2026-06-05"},
