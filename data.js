@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 07 Jun 2026",
+    fecha: "Lunes 08 Jun 2026",
     semana: "WK 23",
-    actualizado: "07/06/2026 · 14:08"
+    actualizado: "08/06/2026 · 10:07"
   },
 
   alertas: [
+    {"nivel":"info","texto":"📰 HORTIDAILY 08/06 — Newsletter: \"Los agricultores han aprendido a optimizar la producción, pero casi nadie ha resuelto el lado comercial.\" Señales de mercado hortícola y tendencias comerciales para exportadores mexicanos. Fuente: HortiDaily.es · 08/06/2026."},
     {"nivel":"warning","texto":"📅 JUNTA AGRICOMPRA-BELHER — INVITACIÓN (06/06) — David Gaxiola (Grupo Chaparral, dgaxiola@grupochaparral.com) envió invitación de calendario a juancarlos@agbelher.com para junta el martes 16 de junio de 2026, 3pm–5pm (Hora del Pacífico México–Mazatlán). Google Meet: meet.google.com/wxe-hasq-xgr | Tel MX: +52 55 8421 0898 PIN: 1218305971378. Pendiente confirmar asistencia."},
     {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANA 23 (05/06) — Agrícola Belher Fijos (RFC: ABE180411CB8) emitió CFDI de recibo electrónico de nómina para BELTRAN OCHOA JUAN CARLOS. Periodo 23 Semanal: 27/05/2026 al 02/06/2026. UUID: 793DEF63-3331-4470-AB5B-50FDC63766C7. Fuente: anajar@agbelher.com · 05/06/2026."},
     {"nivel":"info","texto":"💳 TRANSFERENCIA SPEI BANBAJIO (05/06) — Se registró instrucción de depósito interbancario SPEI a cuenta de Juan Carlos Beltrán Ochoa en Banbajío. Hora: 16:57. Fuente: Banbajioinforma@bb.com.mx · 05/06/2026."},
@@ -26,8 +27,7 @@ window.BELHER = {
     {"nivel":"info","texto":"📋 MINUTA JDC #4 — 28/05/2026 — Cuarta reunión de la Junta de Consejo (JDC) de ABSA celebrada en Navolato, Sinaloa. Minuta distribuida por Armando C. Llanes (CFO, Grupo Belo del Pacífico/HMX). Pendiente revisión de acuerdos."},
     {"nivel":"success","texto":"📎 ADJUNTOS BELHER 29/05 — 4 archivos descargados a Drive (07:53): Settlement Calavo WK22 (28-May-2026), Acarreo Diario 28-05 (Limón Persa), Diario de Báscula 28-05 (Limón Persa), Listado Diario 28-05 (Limón Persa). Carpeta: Belher Adjuntos."},
     {"nivel":"success","texto":"✅ AUDITORÍA BUYERS EDGE-CALAVO 27/05 — Resultado FAVORABLE: Empaque 94.3% (8 NC) · Álamo 96.2% (4 NC) · La 25 96.4% (4 NC). Belher permanece en lista de proveedores aprobados. Plazo acciones correctivas: 8 de junio 2026."},
-    {"nivel":"success","texto":"🤝 CONTRATO BELTRAN-CALAVO 26/05 — JC envió versión final del contrato. Confirmación de recibido por Irene Amezaga (VP Sales, Calavo) y Armando Llanes (CFO, Don Memo). Contrato en proceso de cierre con Calavo, Antonio, JC y Armando."},
-    {"nivel":"warning","texto":"⚖️ ACCIONES CORRECTIVAS AUDITORÍA SMETA — Resultado preliminar compartido por Marisol Castro. Incluye No conformidades, Observaciones, Buenas Prácticas y Datos Generales (doc Excel). Reunión con involucrados directos pendiente. Equipo: Carlos Castro, Juan Aviles, Samantha González y otros. Deadline acciones correctivas Buyers Edge-Calavo: 8 de junio 2026."}
+    {"nivel":"success","texto":"🤝 CONTRATO BELTRAN-CALAVO 26/05 — JC envió versión final del contrato. Confirmación de recibido por Irene Amezaga (VP Sales, Calavo) y Armando Llanes (CFO, Don Memo). Contrato en proceso de cierre con Calavo, Antonio, JC y Armando."}
   ],
 
   ebitda: {
@@ -603,6 +603,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:03","asunto":"HortiDaily Newsletter | lunes, 8 de junio de 2026","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-08"},
     {"hora":"18:24","asunto":"Invitación: Junta Agricompra - Belher mar 16 jun 2026 3pm–5pm","de":"dgaxiola@grupochaparral.com","leido":false,"fecha":"2026-06-06"},
     {"hora":"16:31","asunto":"CFDI de recibo electrónico WK23 — BELTRAN OCHOA JUAN CARLOS","de":"anajar@agbelher.com","leido":false,"fecha":"2026-06-05"},
     {"hora":"16:57","asunto":"Transferencia Interbancaria SPEI","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-06-05"},
