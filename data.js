@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Lunes 08 Jun 2026",
     semana: "WK24",
-    actualizado: "08/06/2026 · 11:15"
+    actualizado: "08/06/2026 · 06:30"
   },
 
   alertas: [
@@ -683,10 +683,10 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "08/06/2026 · 11:15",
-    modelo:    "Claude claude-sonnet-4-6",
+    generado:  "08/06/2026 · 06:30",
+    modelo:    "Claude claude-haiku-4-5",
     horizonte: "7 días",
-    nota:      "Síntesis de precios USDA vía Corbel #0065 (05-Jun) + datos operativos Nogales/Texas + calidad outbound + noticias industria. Caída severa de precios WK24 confirmada. Se regenera cada mañana.",
+    nota:      "Síntesis de precios USDA vía Corbel #0065 (05-Jun) + datos operativos Nogales/Texas + calidad outbound + noticias industria. Caída severa de precios WK24 confirmada. Datos preservados del día anterior — se regenera cuando hay nuevo reporte Corbel.",
     items: [
       {
         id: "vine-ripe",
@@ -710,7 +710,7 @@ window.BELHER = {
         precio_actual: { min:11.95, max:12.95 },
         precio_proyectado: { min:10.00, max:13.00 },
         razonamiento: "Roma XL Nogales $11.95-12.95 (Corbel #0065 · USDA Jun 4), down -51% vs WK23 $24-26. Presión de Florida expansion y seasonal glut junio. Roma large $10.95-11.95. Mercado en mínimo de temporada.",
-        factores: ["Seasonal glut junio — Roma Florida expansion", "Supply excess Nogales vs demanda moderada", "Precio por debajo de costo variable en algunos casos", "Belher inventario final small size difícil vender"],
+        factores: ["Seasonal glut junio — Roma Florida expansion", "Supply excess Nogales vs demanda moderada", "Precio por debajo de costo variable en algunos casos", "Belher final inventory 2.1K (small talla) difícil vender"],
         riesgo: "Caída adicional a $9-10 si demanda foodservice se contrae.",
         accion: "Rotación agresiva. Considerar canal doméstico si precio export <$10. Priorizar eliminar inventario antes de WK25."
       },
@@ -774,4 +774,18 @@ window.BELHER = {
       puesto: "Operaciones campo",
       historico: [
         { semana: "WK22", estado: "Activo", nota: "Final trilla sorghum Quevedo 1+Aguaruto (13 ha)" },
-        { semana: "WK23", estado: "Activo", nota
+        { semana: "WK23", estado: "Activo", nota: "Continuación trilla — pendiente reporte actualizado" }
+      ]
+    }
+  },
+
+  caades: {
+    fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
+    temporada:     "2025-2026",
+    ultimoReporte: "Reporte # 65: 05-Jun-2026",
+    actualizado:   "05/06/2026",
+    inventario:    [],
+    pipeline:      [],
+    totalesTemporada: []
+  }
+};
