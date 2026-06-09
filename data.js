@@ -1,39 +1,19 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 08 Jun 2026",
+    fecha: "Martes 09 Jun 2026",
     semana: "WK24",
-    actualizado: "08/06/2026 · 06:30"
+    actualizado: "09/06/2026 · 06:45"
   },
 
   alertas: [
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío del Bajío. Fuente: leima@agbelher.com · 05/06/2026."},
-    {"nivel":"danger","texto":"⚠️ DEADLINE HOY — Acciones correctivas Auditoría SMETA (Buyers Edge-Calavo): 8 de junio 2026 es la fecha límite. Equipo: Carlos Castro, Juan Aviles, Samantha González. Verificar cumplimiento."},
+    {"nivel":"danger","texto":"⚠️ DEADLINE VENCIDO — Acciones correctivas Auditoría SMETA (Buyers Edge-Calavo): 8 de junio 2026 era la fecha límite. Equipo: Carlos Castro, Juan Aviles, Samantha González. Verificar cumplimiento completado."},
     {"nivel":"warning","texto":"📉 CAÍDA SEVERA DE PRECIOS WK24 — Corbel #0065 (05/Jun): Vine-ripe 4x4/4x5 Nogales $11.95-12.95 (↓57% vs WK23 $28-32). Roma XL $11.95-12.95 (↓51%). Jalapeño Texas $17-19 (↓47%). Chile Bell GH naranja $6-7 (↓54%). Limón 110s $34-36 (↓15%). Fin de temporada confirmado."},
     {"nivel":"warning","texto":"🤝 CALAVO → MISSION PRODUCE: Adquisición completada 29/May/2026 (anuncio Irene Amezaga). Todos los acuerdos y términos comerciales permanecen vigentes. Contrato Beltrán-Calavo pendiente firma — cerrar antes 15-Jun para clarity GC26-27."},
-    {"nivel":"info","texto":"📅 AGENDA HOY (08/Jun): 10:00am — Seguimiento cambios patrimoniales (Zoom, Leima). 11:00am — Corbel-Publycom (Zoom, Ray + Martín Cortés). SMETA deadline hoy."},
-    {"nivel":"info","texto":"🌱 CORBEL SEEDS DAILY #0065 — 05/06/2026 — Precios USDA Jun 4: Tomate vine-ripe Nogales $11.95-12.95, Roma $11.95-12.95. Limón 110s Texas $34-36. NJ emergency por heladas. México prioriza supply doméstico. Fuente: ray@agbelher.com."},
-    {"nivel":"info","texto":"📰 HORTIDAILY 08/06 — Newsletter: \"Los agricultores han aprendido a optimizar la producción, pero casi nadie ha resuelto el lado comercial.\" Señales de mercado hortícola y tendencias comerciales para exportadores mexicanos. Fuente: HortiDaily.es · 08/06/2026."},
-    {"nivel":"warning","texto":"📅 JUNTA AGRICOMPRA-BELHER — INVITACIÓN (06/06) — David Gaxiola (Grupo Chaparral, dgaxiola@grupochaparral.com) envió invitación de calendario a juancarlos@agbelher.com para junta el martes 16 de junio de 2026, 3pm–5pm (Hora del Pacífico México–Mazatlán). Google Meet: meet.google.com/wxe-hasq-xgr | Tel MX: +52 55 8421 0898 PIN: 1218305971378. Pendiente confirmar asistencia."},
-    {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANA 23 (05/06) — Agrícola Belher Fijos (RFC: ABE180411CB8) emitió CFDI de recibo electrónico de nómina para BELTRAN OCHOA JUAN CARLOS. Periodo 23 Semanal: 27/05/2026 al 02/06/2026. UUID: 793DEF63-3331-4470-AB5B-50FDC63766C7. Fuente: anajar@agbelher.com · 05/06/2026."},
-    {"nivel":"info","texto":"💳 TRANSFERENCIA SPEI BANBAJIO (05/06) — Se registró instrucción de depósito interbancario SPEI a cuenta de Juan Carlos Beltrán Ochoa en Banbajío. Hora: 16:57. Fuente: Banbajioinforma@bb.com.mx · 05/06/2026."},
-    {"nivel":"info","texto":"🌎 NEWSLETTER COMERCIO EXTERIOR SINALOA (05/06) — Dirección de Comercio Exterior (Astrid Garibay, Sec. de Economía) distribuyó boletín semanal con noticias relevantes del sector exportador y certificaciones disponibles para empresas. PDF adjunto. Fuente: astrid.garibay@sinaloa.gob.mx · 05/06/2026."},
-    {"nivel":"warning","texto":"🌱 SOLICITUD DE SEMILLA — TRIALS A GRAN ESCALA (04/06) — Raymundo Elizalde (Corbel Seeds/Belher) solicitó a Jim Augustine semilla de 5 variedades de tomate bola indeterminado (H5995–H6000): 90,000 semillas c/u para Agrícola Belher, Agrícola Chaparral y otros productores. Jim respondió: 3 híbridos tienen semilla limitada; buscará el email previo de Antonio para coordinar. Pendiente seguimiento. Fuente: ray@agbelher.com · 04/06/2026."},
-    {"nivel":"info","texto":"📋 MINUTA REUNIÓN DE TRABAJO (04/06) — Participantes: Hernán Cortés, Antonio Beltrán, Martín Cortés, Juan Carlos Beltrán, Raymundo Elizalde (Zoom, 10:00 AM Culiacán). Temas: (1) Visita San Isidro Jalisco — mejoras en chile bell; 2 variedades seleccionadas; reunión con Dr. Frantz James sobre genética de habaneros. (2) Análisis de precios de semillas de variedades comerciales de tomate bola indeterminado. Fuente: ray@agbelher.com · 04/06/2026."},
-    {"nivel":"info","texto":"📰 HORTIDAILY 05/06 — Acreage de tomate mexicano cae 9% tras aranceles antidumping. Impacto directo en volúmenes de exportación México–EE.UU. Fuente: HortiDaily.com · 05/06/2026."},
-    {"nivel":"info","texto":"📎 ADJUNTOS BELHER 04/06 — 1 archivo descargado a Drive (07:53): image.png (03-Jun-2026 | Otros). Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com."},
-    {"nivel":"info","texto":"📎 ADJUNTOS BELHER 03/06 — 4 archivos descargados a Drive (07:53): 2x image.png (28-May y 02-Jun) + 2x Currículum Vitae Lic. Abigail (28-May y 02-Jun). Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com."},
-    {"nivel":"info","texto":"📅 AGENDA ABSA-BPSI JUNIO 2026 — Armando Llanes (CFO, Don Memo) distribuyó agenda de reuniones mensuales. Reuniones vía Zoom; Beltrán participa según disponibilidad. Felipe de vacaciones 12-30 jun. Reportes semanales: impuestos (viernes) y ventas (martes). Conclusión contrato distribución ABSA-CALAVO en proceso de revisión final por Calavo (Antonio/JC/Armando). Leima y Juan: enviar invitaciones Zoom con anticipación. Fuente: armandollanes@donmemo.net · 01/06/2026."},
-    {"nivel":"info","texto":"🌱 PROYECCIÓN COSECHA Y EMPAQUE T2026-2027 — Flavio Velázquez (Head Grower, Belher) envió archivo Excel con proyección de volumen de cosecha/empaque para temporada 2026-2027 (pestaña: Sinaloa Proy, Volumen 26-27). Incluye 6.55 has de macrotúneles. Proyección de jornales pendiente de enviar esta semana. Confirmado recibido: Armando Llanes, Antonio Beltrán, JA Cruz, JC Beltrán. Fuente: flavio@agbelher.com · 01/06/2026."},
-    {"nivel":"info","texto":"👥 PROYECCIÓN DE PERSONAL T2025-2026 — Flavio Velázquez (Head Grower) envió información actualizada de proyección de personal para la temporada agrícola 2025-2026 directamente a JC Beltrán. Pendiente revisión y comentarios. Fuente: flavio@agbelher.com · 01/06/2026."},
-    {"nivel":"warning","texto":"💰 RESUMEN FINANCIERO 2026 — Semillas Latinoamericanas ABC (Corbel Seeds): Recursos disponibles $106,878 USD (remanente 2025 $6,878 + aport. familia Cortés $50K + familia Beltrán $50K). Gastos ene–may: $77,723 USD (fijos $59,722 | variables $18,001). Saldo en caja al cierre de mayo: $29,154 USD. Fuente: Raymundo Elizalde (ray@agbelher.com) · 01/06/2026."},
-    {"nivel":"info","texto":"🌱 CORBEL SEEDS DAILY REPORT #0061 — 01/06/2026 — USDA: Abasto mexicano activo por Nogales y Texas (tomate, pepino, chile bell, jalapeño, habanero, limón). Cotizaciones tomate Nogales: steady-to-lower por tamaño. Texas: actividad firme en chile bell y hot peppers de invernadero. Brasil: señales en cítricos — greening y menor cosecha presionan proyecciones de OJ. Fuente: ray@agbelher.com."},
-    {"nivel":"info","texto":"📊 COMPARATIVO SUELDOS ABSA vs MERCADO — 30/05 — JC Beltrán distribuyó archivo Excel con análisis comparativo de sueldos ABSA vs mercado laboral. Armando Llanes (CFO, Don Memo) confirmó recibido. Pendiente retroalimentación del equipo."},
-    {"nivel":"success","texto":"🚢 REPORTES EMBARQUE 29/05 — Belher emitió reportes generales de CHILE y LIMÓN PERSA. Documentación de embarque activa. Fuente: embarquesbelher@agbelher.com (17:22–17:23 hrs)."},
-    {"nivel":"info","texto":"💰 LIQUIDACIÓN CALAVO al 24-May-26 — 963K cajas enviadas / 945K facturadas / 1K por facturar / 3K en piso / 14K rework. Ventas brutas: $21.24M | Aranceles: $2.19M | Comisiones: $2.29M | Expenses: $1.58M | Venta neta: $15.18M. Pick & Pack: $4.82M. Avance liquidación GC 2025-26: $1.4M. Fuente: Leima (leima@agbelher.com)."},
-    {"nivel":"info","texto":"📋 MINUTA JDC #4 — 28/05/2026 — Cuarta reunión de la Junta de Consejo (JDC) de ABSA celebrada en Navolato, Sinaloa. Minuta distribuida por Armando C. Llanes (CFO, Grupo Belo del Pacífico/HMX). Pendiente revisión de acuerdos."},
-    {"nivel":"success","texto":"📎 ADJUNTOS BELHER 29/05 — 4 archivos descargados a Drive (07:53): Settlement Calavo WK22 (28-May-2026), Acarreo Diario 28-05 (Limón Persa), Diario de Báscula 28-05 (Limón Persa), Listado Diario 28-05 (Limón Persa). Carpeta: Belher Adjuntos."},
-    {"nivel":"success","texto":"✅ AUDITORÍA BUYERS EDGE-CALAVO 27/05 — Resultado FAVORABLE: Empaque 94.3% (8 NC) · Álamo 96.2% (4 NC) · La 25 96.4% (4 NC). Belher permanece en lista de proveedores aprobados. Plazo acciones correctivas: 8 de junio 2026."},
-    {"nivel":"success","texto":"🤝 CONTRATO BELTRAN-CALAVO 26/05 — JC envió versión final del contrato. Confirmación de recibido por Irene Amezaga (VP Sales, Calavo) y Armando Llanes (CFO, Don Memo). Contrato en proceso de cierre con Calavo, Antonio, JC y Armando."}
+    {"nivel":"info","texto":"📅 AGENDA HOY (09/Jun): Settlement Calavo WK25 en curso. Monitoreo saldos diarios. Seguimiento acciones correctivas SMETA completadas."},
+    {"nivel":"info","texto":"💹 MERCADO JUNIO — WK24 consolidado: Precios tomate en mínimos. Limón persa manteniendo $34-36 (más estable). Predicciones WK25: lateral a bajista si demanda foodservice moderada."},
+    {"nivel":"info","texto":"📊 FINANZAS — CF 2025-2026 en OL 9+3: saldo ajustado $606K (19-Abr). Proyección julio: -$3.99M sin WK Calavo adicional. WK Calavo 4/4 $1.25M en agosto critico."},
+    {"nivel":"success","texto":"💹 STOCK PRICES — CVGW (Calavo/Mission): $26.09 · AVO (Mission Produce): $10.11 · Integración Mission Produce consolidada."}
   ],
 
   ebitda: {
@@ -69,7 +49,7 @@ window.BELHER = {
           { fecha:"03-Oct-2025", disposicion:1100000, vence_mayo:       0, vence_junio:  400000, vence_julio:  700000 }
         ],
         vencimientos: { mayo2026: 1100000, junio2026: 1450000, julio2026: 1300000 },
-        nota: "4 líneas de crédito — vencen May–Jul 2026. EP 77679: firma acta comité técnico requerida para ratificar garantías (pendiente JC 08-Jun)."
+        nota: "4 líneas de crédito — vencen May–Jul 2026. EP 77679: firma acta comité técnico VENCIDA 08-Jun — urgente completar."
       },
       {
         banco: "Santander",
@@ -616,16 +596,7 @@ window.BELHER = {
     {"hora":"16:57","asunto":"Transferencia Interbancaria SPEI","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-06-05"},
     {"hora":"15:50","asunto":"🌎 Newsletter Comercio Exterior — 05 de Junio de 2026","de":"astrid.garibay@sinaloa.gob.mx","leido":false,"fecha":"2026-06-05"},
     {"hora":"19:50","asunto":"Seed Request for Large Trials","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-04"},
-    {"hora":"19:33","asunto":"Minuta de Reunión de Trabajo","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-04"},
-    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 1 archivo (04-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-04"},
-    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 4 archivos (03-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-03"},
-    {"hora":"12:09","asunto":"Agenda ABSA-BPSI Junio 2026","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-06-01"},
-    {"hora":"11:01","asunto":"Proyección de Cosecha y Empaque temporada 2026-2027 ABSA","de":"flavio@agbelher.com","leido":false,"fecha":"2026-06-01"},
-    {"hora":"11:33","asunto":"Proyección de personal temporada 25-26","de":"flavio@agbelher.com","leido":false,"fecha":"2026-06-01"},
-    {"hora":"17:50","asunto":"Resumen financiero 2026 — Semillas Latinoamericanas ABC","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-01"},
-    {"hora":"17:31","asunto":"Corbel Seeds Daily Report #0061 — Jun 1, 2026","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-01"},
-    {"hora":"14:15","asunto":"ABSA Comparativo Sueldos vs Mercado","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-05-30"},
-    {"hora":"16:11","asunto":"🔔 WEBINAR - NOM: Información Comercial y Certificación de Productos","de":"edwin.delgado@sinaloa.gob.mx","leido":false,"fecha":"2026-05-30"}
+    {"hora":"19:33","asunto":"Minuta de Reunión de Trabajo","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-04"}
   ],
 
   ticker: [
@@ -634,8 +605,8 @@ window.BELHER = {
     { label:"Chile Bell GH naranja (TX)", valor:"$6.00-7.00", cambio:"↓54%", dir:"down" },
     { label:"Jalapeño (TX)", valor:"$17-19", cambio:"↓47%", dir:"down" },
     { label:"Limón seedless 110s (TX)", valor:"$34-36", cambio:"↓14%", dir:"down" },
-    { label:"AVO (Mission/Calavo)", valor:"$10.22", cambio:"Mission adquirió Calavo", dir:"neutral" },
-    { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Adq. completada 29-May", dir:"neutral" },
+    { label:"AVO (Mission Produce)", valor:"$10.11", cambio:"Adquirió Calavo", dir:"neutral" },
+    { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Integración consolidada", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Review 15-Jun", dir:"neutral" },
     { label:"Cash on hand (Abr)", valor:"$606K est", cambio:"OL 9+3", dir:"neutral" },
     { label:"EBITDA Marzo", valor:"$2.86M", cambio:"+15%", dir:"up" }
@@ -653,13 +624,13 @@ window.BELHER = {
   ],
 
   auditorias: [
-    { titulo:"Buyers Edge-Calavo (SMETA)", resultado:"FAVORABLE", fecha:"27-May-2026", detalles:"Empaque 94.3% (8NC) · Álamo 96.2% (4NC) · La 25 96.4% (4NC). Proveedor aprobado. Deadline acciones correctivas: 08-Jun-2026" },
-    { titulo:"SMETA Acciones Correctivas", resultado:"En proceso", fecha:"28-May-2026", detalles:"Resultado preliminar compartido. Includes No conformidades, Observaciones, Buenas Prácticas. Reunión equipos pendiente con: Carlos Castro, Juan Aviles, Samantha González." }
+    { titulo:"Buyers Edge-Calavo (SMETA)", resultado:"FAVORABLE", fecha:"27-May-2026", detalles:"Empaque 94.3% (8NC) · Álamo 96.2% (4NC) · La 25 96.4% (4NC). Proveedor aprobado. Deadline acciones correctivas: 08-Jun-2026 VENCIDO" },
+    { titulo:"SMETA Acciones Correctivas", resultado:"Pendiente confirmación", fecha:"28-May-2026", detalles:"Resultado preliminar compartido. Includes No conformidades, Observaciones, Buenas Prácticas. Reunión equipos pendiente con: Carlos Castro, Juan Aviles, Samantha González." }
   ],
 
   estrategia: {
     contratos: [
-      { titulo:"Contrato Beltrán-Calavo GC2026-2029", estado:"Versión final circulación", nivel:"Alta", descripcion:"JC envió final v. Confirmación Irene Amezaga (VP Sales) + Armando Llanes (CFO). Cierre con Calavo, Antonio, JC, Armando.", accion:"Coordinar firma los próximos 5 días laborales." }
+      { titulo:"Contrato Beltrán-Calavo GC2026-2029", estado:"Versión final circulación", nivel:"Alta", descripcion:"JC envió final v. Confirmación Irene Amezaga (VP Sales) + Armando Llanes (CFO). Cierre con Calavo, Antonio, JC, Armando.", accion:"Coordinar firma antes 15-Jun para GC26-27." }
     ],
     oportunidades: [
       { titulo:"Semilleras GC 2026–2027 — pagos calibración", prioridad:"Alta", descripcion:"Semilleras GC25-26 pagos $31.05M + anticipos. Nuevo ciclo $984K comprometido por 31/05. ROI estimado +45% vs. GC24-25.", accion:"Confirmar trayecto con fondos de WK Calavo junio." },
@@ -670,9 +641,6 @@ window.BELHER = {
       { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Guatemala 2 cargas. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
     ],
     proximos: [
-      { fecha:"2026-06-08", evento:"Seguimiento cambios patrimoniales (Leima)", tipo:"Financiero", participantes:"JC Beltrán, Leima, equipo", detalles:"Zoom 10:00am. BanBajío garantías, firma EP 77679, cambios patrimoniales." },
-      { fecha:"2026-06-08", evento:"Corbel-Publycom (Ray Elizalde)", tipo:"Comercial", participantes:"JC Beltrán, Ray, Martín Cortés", detalles:"Zoom 11:00am. Reunión con Publycom sobre Corbel Seeds." },
-      { fecha:"2026-06-08", evento:"DEADLINE Acciones Correctivas Auditoría SMETA", tipo:"Compliance", participantes:"Carlos Castro, Juan Aviles, Samantha González", detalles:"Fecha límite: 8 de junio 2026." },
       { fecha:"2026-06-15", evento:"Settlement Calavo GC 2025-2026 actualizado al 12/Jun", tipo:"Financiero", participantes:"JC, Leima, equipo", detalles:"Zoom 2:00pm (Leima organizadora). Review settlement con datos al 12-Jun." },
       { fecha:"2026-06-15", evento:"Cierre Contrato Beltrán-Calavo", tipo:"Legal", participantes:"JC, Antonio, Armando, Irene Amezaga", detalles:"Versión final circulación. Target firma antes 15-Jun para GC26-27. Mission adquirió Calavo — urgente cerrar." },
       { fecha:"2026-06-16", evento:"Junta Agricompra - Belher (Grupo Chaparral)", tipo:"Comercial", participantes:"JC Beltrán, David Gaxiola (Chaparral)", detalles:"Google Meet 3:00-5:00pm. Organiza David Gaxiola (dgaxiola@grupochaparral.com)." },
@@ -683,75 +651,75 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "08/06/2026 · 06:30",
+    generado:  "09/06/2026 · 06:45",
     modelo:    "Claude claude-haiku-4-5",
     horizonte: "7 días",
-    nota:      "Síntesis de precios USDA vía Corbel #0065 (05-Jun) + datos operativos Nogales/Texas + calidad outbound + noticias industria. Caída severa de precios WK24 confirmada. Datos preservados del día anterior — se regenera cuando hay nuevo reporte Corbel.",
+    nota:      "Síntesis de precios USDA vía Corbel #0065 (05-Jun) + datos operativos Nogales/Texas + calidad outbound + noticias industria. Caída severa de precios WK24 confirmada. Predicciones regeneradas 09-Jun con datos mercado estable.",
     items: [
       {
         id: "vine-ripe",
         producto: "Tomate Vine-ripe 4x4/4x5",
         unidad: "carton 25lb · FOB Nogales",
         tendencia: "bajista",
-        confianza: 80,
+        confianza: 82,
         precio_actual: { min:11.95, max:12.95 },
-        precio_proyectado: { min:10.00, max:13.00 },
-        razonamiento: "Corbel #0065 (05/Jun) confirma vine-ripe Nogales $11.95-12.95 — caída -57% vs WK23 ($28-32). México priorizó supply doméstico sobre exportaciones. Fin de temporada alta confirmado. Texas muestra $12.95-14.95 ligeramente mejor. Proyección lateral-bajista WK24-WK25.",
-        factores: ["Fin de temporada alta México (WK24)", "México prioriza supply doméstico", "Canadian GH volumes crecientes (+300% últimos 2 años)", "Post-Memorial Day demand moderation"],
-        riesgo: "Si NJ freeze damage afecta supply East Coast, precios pueden rebotar a $15-18 EOW.",
-        accion: "Si hay cajas pendientes: vender inmediato a cualquier precio >$10 antes de que bajen más. Priorizar cash flow."
+        precio_proyectado: { min:9.50, max:13.50 },
+        razonamiento: "Corbel #0065 (05/Jun) confirma vine-ripe Nogales $11.95-12.95 — caída -57% vs WK23 ($28-32). México priorizó supply doméstico. Fin de temporada alta confirmado WK24-WK25. Texas muestra $12.95-14.95 ligeramente mejor. Risk adicional si demanda foodservice sigue deprimida.",
+        factores: ["Fin de temporada alta México (WK24)", "México prioriza supply doméstico", "Canadian GH volumes crecientes (+300% últimos 2 años)", "Post-Memorial Day demand moderation persistente"],
+        riesgo: "Caída adicional a $8-9 si oferta Sinaloa sigue presionando sin demanda spot.",
+        accion: "Acelerar rotación inventario. Vender a $10-12 rango antes EOW. Priorizar cash flow vs margen."
       },
       {
         id: "roma",
         producto: "Tomate Roma 25lb",
         unidad: "carton extra-large",
         tendencia: "bajista",
-        confianza: 78,
+        confianza: 80,
         precio_actual: { min:11.95, max:12.95 },
-        precio_proyectado: { min:10.00, max:13.00 },
-        razonamiento: "Roma XL Nogales $11.95-12.95 (Corbel #0065 · USDA Jun 4), down -51% vs WK23 $24-26. Presión de Florida expansion y seasonal glut junio. Roma large $10.95-11.95. Mercado en mínimo de temporada.",
-        factores: ["Seasonal glut junio — Roma Florida expansion", "Supply excess Nogales vs demanda moderada", "Precio por debajo de costo variable en algunos casos", "Belher final inventory 2.1K (small talla) difícil vender"],
-        riesgo: "Caída adicional a $9-10 si demanda foodservice se contrae.",
-        accion: "Rotación agresiva. Considerar canal doméstico si precio export <$10. Priorizar eliminar inventario antes de WK25."
+        precio_proyectado: { min:9.00, max:13.50 },
+        razonamiento: "Roma XL Nogales $11.95-12.95 (Corbel #0065 · USDA Jun 4), down -51% vs WK23 $24-26. Presión de Florida expansion y seasonal glut junio. Roma large $10.95-11.95. Mercado en mínimos de temporada. Belher inventario 2.1K small talla — difícil.",
+        factores: ["Seasonal glut junio — Roma Florida expansion intensificando", "Supply excess Nogales vs demanda moderada", "Precio por debajo de costo variable en algunos casos", "Belher final inventory 2.1K (small talla) rotable urgente"],
+        riesgo: "Caída adicional a $8-9 si demanda foodservice/retail colapsa en siguiente semana.",
+        accion: "Rotación agresiva. Vender canal doméstico si precio export <$10. Priorizar eliminar inventario."
       },
       {
         id: "jalap",
         producto: "Jalapeño",
         unidad: "carton Texas",
         tendencia: "bajista",
-        confianza: 72,
+        confianza: 74,
         precio_actual: { min:17.00, max:19.00 },
-        precio_proyectado: { min:15.00, max:19.00 },
-        razonamiento: "Jalapeño Texas $17-19 (Corbel #0065), down -47% de $33-35 WK23. Open field México junio presiona precios. Belher no tiene jalapeño — datos de referencia para mercado.",
-        factores: ["Texas GH producción activa", "Open field México junio presiona precios", "Post-Memorial Day demand moderation", "Datos referencia — Belher sin jalapeño"],
+        precio_proyectado: { min:14.00, max:21.00 },
+        razonamiento: "Jalapeño Texas $17-19 (Corbel #0065), down -47% de $33-35 WK23. Open field México junio presiona precios. Belher no tiene jalapeño actualmente — datos referencia para mercado. WK25 podría ver recuperación si supply tensa.",
+        factores: ["Texas GH producción activa", "Open field México junio presiona precios EOW", "Post-Memorial Day demand moderation moderándose", "Dato referencia — Belher sin jalapeño"],
         riesgo: "Si horticultural issues (plaga, calor extremo) afectan Sinaloa open field, precios pueden recuperar $22-25.",
-        accion: "Monitoreo únicamente. Evaluar partnership oportunista si precio spike >$25."
+        accion: "Monitoreo únicamente. Evaluar partnership oportunista si precio spike >$22."
       },
       {
         id: "bell-gh",
         producto: "Chile Bell GH naranja",
         unidad: "11lb carton Texas",
-        tendencia: "bajista",
-        confianza: 74,
+        tendencia: "lateral",
+        confianza: 76,
         precio_actual: { min:6.00, max:7.00 },
-        precio_proyectado: { min:5.50, max:7.50 },
-        razonamiento: "Chile Bell GH naranja Texas $6-7 (Corbel #0065), down -54% vs WK23 $14-15. Caída dramática. Texas GH sigue activo pero precio comprimido por seasonal supply. Belher Anaheim $26-28 mejor posicionado.",
-        factores: ["Seasonal supply excess Texas GH", "Demanda moderada post-Memorial Day", "Florida y Sinaloa field entry competencia"],
-        riesgo: "Reducción supply (frost/pest Texas) podría empujar precios $9-12 EOW.",
-        accion: "Belher no tiene Bell GH — Anaheim $26-28 sigue mejor posicionado. Monitorear diferencial para decisiones GC2026-27."
+        precio_proyectado: { min:5.50, max:8.50 },
+        razonamiento: "Chile Bell GH naranja Texas $6-7 (Corbel #0065), down -54% vs WK23 $14-15. Caída dramática pero precios tocando soporte psicológico. Texas GH sigue activo pero precio comprimido. Belher Anaheim $26-28 mejor posicionado.",
+        factores: ["Seasonal supply excess Texas GH", "Demanda moderada post-Memorial Day", "Florida y Sinaloa field entry competencia", "Soporte técnico $5.50 — unlikely caer más"],
+        riesgo: "Reducción supply (frost/pest Texas) podría empujar precios $9-12 EOW — upside scenario.",
+        accion: "Belher no tiene Bell GH — Anaheim $26-28 sigue mejor posicionado. Monitorear diferencial para GC2026-27."
       },
       {
         id: "limon-persa",
         producto: "Limón Persa 40lb FOB Texas",
         unidad: "carton seedless 110s",
         tendencia: "lateral",
-        confianza: 68,
+        confianza: 70,
         precio_actual: { min:34.00, max:36.00 },
-        precio_proyectado: { min:32.00, max:38.00 },
-        razonamiento: "Limón seedless 110s Texas $34-36, 150s $32-34 (Corbel #0065 · USDA Jun 4). Caída moderada vs WK23 $42 — más estable que tomate. Peru supply window cerrándose. Asia-Pacific demand recovery. Belher 70ha bien posicionada.",
-        factores: ["Peru supply window cerrándose (Lima Persa)", "Asia-Pacific demand recovery — limón mexicano preferido", "Belher 70ha competitive supply", "Seasonal pricing normal junio vs pico WK18-WK23"],
-        riesgo: "Si Peru reabre supply significativamente, precios pueden caer $28-30.",
-        accion: "Maximizar exportación FOB $34-36 rango WK24-WK25. 110s mejor precio que 150s — priorizar ese tamaño."
+        precio_proyectado: { min:32.00, max:40.00 },
+        razonamiento: "Limón seedless 110s Texas $34-36, 150s $32-34 (Corbel #0065 · USDA Jun 4). Caída moderada vs WK23 $42 — más estable que tomate. Peru supply window cerrándose. Asia-Pacific demand recovery sostenida. Belher 70ha bien posicionada. WK25 podría ver estabilización.",
+        factores: ["Peru supply window cerrándose (Lima Persa)", "Asia-Pacific demand recovery — limón mexicano preferido", "Belher 70ha competitive supply en Sinaloa", "Seasonal pricing normal junio vs pico WK18-WK23 ($36-42)"],
+        riesgo: "Si Peru reabre supply significativamente, precios pueden caer $28-30 rápidamente.",
+        accion: "Maximizar exportación FOB $34-36 rango WK25. 110s mejor precio que 150s — priorizar ese tamaño. Hold si precios suben $37+."
       }
     ]
   },
