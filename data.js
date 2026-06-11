@@ -1,19 +1,19 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 10 Jun 2026",
+    fecha: "Jueves 11 Jun 2026",
     semana: "WK24",
-    actualizado: "10/06/2026 · 15:53"
+    actualizado: "11/06/2026 · 16:14"
   },
 
   alertas: [
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
-    {"nivel":"danger","texto":"⚠️ CALAVO → MISSION PRODUCE: Contrato Beltrán-Calavo pendiente firma — cerrar ANTES del 15-Jun para clarity GC26-27. Adquisición completada 29/May/2026. Todos los términos comerciales vigentes."},
+    {"nivel":"danger","texto":"⚠️ CALAVO → MISSION PRODUCE: Contrato Beltrán-Calavo pendiente firma — cerrar ANTES del 15-Jun para clarity GC26-27. Adquisición completada 29/May/2026. Todos los términos comerciales vigentes. ⏳ 4 días restantes."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — Primera Revisión Administrativa 2026: Notificación recibida de Lic. Mario Haroldo Robles (CIDH, marioh@cidh.org.mx) · 09/Jun/2026. Seguimiento legal requerido. Verificar posición de Belher ante proceso."},
     {"nivel":"warning","texto":"📉 CAÍDA SEVERA DE PRECIOS WK24 — Corbel #0065 (05/Jun): Vine-ripe 4x4/4x5 Nogales $11.95-12.95 (↓57% vs WK23 $28-32). Roma XL $11.95-12.95 (↓51%). Jalapeño Texas $17-19 (↓47%). Chile Bell GH naranja $6-7 (↓54%). Limón 110s $34-36 (↓15%). Fin de temporada confirmado."},
-    {"nivel":"info","texto":"📅 AGENDA HOY (10/Jun): Seguimiento firma Contrato Calavo (deadline 15-Jun). Revisión Dumping Tomate con CIDH. Settlement WK25 en curso. Junta Agricompra-Belher mar 16 jun 3-5pm."},
+    {"nivel":"info","texto":"📅 AGENDA HOY (11/Jun): Seguimiento firma Contrato Calavo (deadline 15-Jun, 4 días). Revisión Dumping Tomate con CIDH. Settlement WK25 en curso. Junta Agricompra-Belher mar 16 jun 3-5pm."},
+    {"nivel":"info","texto":"🚚 CIL CAPITAL (11/Jun): Raymondville Plaza Groundbreaking en South Texas — nuevo desarrollo comercial con 6 unidades retail. CIL participó en SelectUSA 2026 Investment Summit como Texas Team. Relevante para logística fronteriza Sinaloa-Texas."},
     {"nivel":"info","texto":"📊 ADM — Financials Mayo recibidos (09/Jun): Felipe Calderón / CRyAsociados envió PDF y Excel ADM May 28th Financials. Pendiente revisión y aprobación del equipo."},
     {"nivel":"info","texto":"💹 MERCADO JUNIO — WK24 consolidado: Precios tomate en mínimos de temporada. Limón persa manteniendo $34-36 (más estable). Predicciones WK25: lateral a bajista si demanda foodservice moderada."},
-    {"nivel":"info","texto":"📊 FINANZAS — CF 2025-2026 en OL 9+3: saldo ajustado $606K (19-Abr). Proyección julio: -$3.99M sin WK Calavo adicional. WK Calavo 4/4 $1.25M en agosto crítico."},
     {"nivel":"success","texto":"💹 STOCK PRICES — CVGW (Calavo/Mission): $26.09 · AVO (Mission Produce): $10.11 · Integración Mission Produce consolidada."}
   ],
 
@@ -588,6 +588,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:53","asunto":"✅ Belher Adjuntos — 1 archivos (11-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-11"},
+    {"hora":"09:48","asunto":"HortiDaily Newsletter | jueves, 11 de junio de 2026","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-11"},
+    {"hora":"16:06","asunto":"CIL Newsletter 🚚","de":"newsletter@cil.mx","leido":false,"fecha":"2026-06-11"},
     {"hora":"15:00","asunto":"🌱🎧 Voces de la Industria | Episodio 5","de":"hello@veggiesfrommexico.com","leido":false,"fecha":"2026-06-10"},
     {"hora":"16:39","asunto":"eNoticias AgroSintesis","de":"info@agrosintesis.com","leido":false,"fecha":"2026-06-10"},
     {"hora":"15:40","asunto":"HortiDaily Newsletter | miércoles, 10 de junio de 2026","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-10"},
