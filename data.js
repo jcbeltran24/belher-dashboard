@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 10 Jun 2026",
+    fecha: "Jueves 12 Jun 2026",
     semana: "WK24",
-    actualizado: "10/06/2026 · 15:53"
+    actualizado: "12/06/2026 · 07:30"
   },
 
   alertas: [
@@ -10,7 +10,7 @@ window.BELHER = {
     {"nivel":"danger","texto":"⚠️ CALAVO → MISSION PRODUCE: Contrato Beltrán-Calavo pendiente firma — cerrar ANTES del 15-Jun para clarity GC26-27. Adquisición completada 29/May/2026. Todos los términos comerciales vigentes."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — Primera Revisión Administrativa 2026: Notificación recibida de Lic. Mario Haroldo Robles (CIDH, marioh@cidh.org.mx) · 09/Jun/2026. Seguimiento legal requerido. Verificar posición de Belher ante proceso."},
     {"nivel":"warning","texto":"📉 CAÍDA SEVERA DE PRECIOS WK24 — Corbel #0065 (05/Jun): Vine-ripe 4x4/4x5 Nogales $11.95-12.95 (↓57% vs WK23 $28-32). Roma XL $11.95-12.95 (↓51%). Jalapeño Texas $17-19 (↓47%). Chile Bell GH naranja $6-7 (↓54%). Limón 110s $34-36 (↓15%). Fin de temporada confirmado."},
-    {"nivel":"info","texto":"📅 AGENDA HOY (10/Jun): Seguimiento firma Contrato Calavo (deadline 15-Jun). Revisión Dumping Tomate con CIDH. Settlement WK25 en curso. Junta Agricompra-Belher mar 16 jun 3-5pm."},
+    {"nivel":"info","texto":"📅 AGENDA HOY (12/Jun): Seguimiento firma Contrato Calavo (deadline 15-Jun). Revisión Dumping Tomate con CIDH. Settlement WK25 en curso. Junta Agricompra-Belher mar 16 jun 3-5pm."},
     {"nivel":"info","texto":"📊 ADM — Financials Mayo recibidos (09/Jun): Felipe Calderón / CRyAsociados envió PDF y Excel ADM May 28th Financials. Pendiente revisión y aprobación del equipo."},
     {"nivel":"info","texto":"💹 MERCADO JUNIO — WK24 consolidado: Precios tomate en mínimos de temporada. Limón persa manteniendo $34-36 (más estable). Predicciones WK25: lateral a bajista si demanda foodservice moderada."},
     {"nivel":"info","texto":"📊 FINANZAS — CF 2025-2026 en OL 9+3: saldo ajustado $606K (19-Abr). Proyección julio: -$3.99M sin WK Calavo adicional. WK Calavo 4/4 $1.25M en agosto crítico."},
