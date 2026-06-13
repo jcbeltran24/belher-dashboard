@@ -1,19 +1,19 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 12 Jun 2026",
+    fecha: "Sábado 13 Jun 2026",
     semana: "WK24",
-    actualizado: "12/06/2026 · 08:30"
+    actualizado: "13/06/2026 · 14:15"
   },
 
   alertas: [
+    {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Contrato Beltrán-Calavo/Mission Produce: DEADLINE HOY 15-Jun. Adquisición Calavo→Mission completada 29/May/2026. Todos los términos vigentes. Firmar antes del lunes para clarity GC26-27. Fuente: correo ABSA 09/Jun/2026."},
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
-    {"nivel":"danger","texto":"⚠️ CALAVO → MISSION PRODUCE: Contrato Beltrán-Calavo pendiente firma — cerrar ANTES del 15-Jun para clarity GC26-27. Adquisición completada 29/May/2026. Todos los términos comerciales vigentes. ⏳ 3 días restantes."},
+    {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — Primera Revisión Administrativa 2026: Notificación recibida de Lic. Mario Haroldo Robles (CIDH, marioh@cidh.org.mx) · 09/Jun/2026. Seguimiento legal requerido. Verificar posición de Belher ante proceso."},
-    {"nivel":"warning","texto":"📉 CAÍDA SEVERA DE PRECIOS WK24 — Corbel #0065 (05/Jun): Vine-ripe 4x4/4x5 Nogales $11.95-12.95 (↓57% vs WK23 $28-32). Roma XL $11.95-12.95 (↓51%). Jalapeño Texas $17-19 (↓47%). Chile Bell GH naranja $6-7 (↓54%). Limón 110s $34-36 (↓15%). Fin de temporada confirmado."},
-    {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido hoy 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
-    {"nivel":"info","texto":"📅 AGENDA HOY (12/Jun): Deadline firma Contrato Calavo en 3 días (15-Jun). Revisión Dumping Tomate con CIDH. Junta Agricompra-Belher mar 16 jun 3-5pm. Settlement WK25 en curso."},
+    {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
+    {"nivel":"info","texto":"📅 AGENDA — Junta Agricompra-Belher: martes 16 Jun · 3:00–5:00 pm (GMT-7) · Google Meet confirmado. Videoconferencia actualizada 12/Jun/2026."},
+    {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 12/Jun/2026 16:14 hrs. CFDI Semana 24/2026 emitido por Agrícola Belher Fijos (RFC: ABE180411CB8)."},
     {"nivel":"info","texto":"📊 ADM — Financials Mayo recibidos (09/Jun): Felipe Calderón / CRyAsociados envió PDF y Excel ADM May 28th Financials. Pendiente revisión y aprobación del equipo."},
-    {"nivel":"info","texto":"💹 MERCADO JUNIO — WK24 consolidado: Precios tomate en mínimos de temporada. Limón persa manteniendo $34-36 (más estable). Predicciones WK25: lateral a bajista si demanda foodservice moderada."},
     {"nivel":"success","texto":"💹 STOCK PRICES — CVGW (Calavo/Mission): $26.09 · AVO (Mission Produce): $10.11 · Integración Mission Produce consolidada."}
   ],
 
@@ -588,6 +588,11 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"19:19","asunto":"Corbel Seeds Daily Report #0070 — Supply-Pressure WK25","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-12"},
+    {"hora":"20:26","asunto":"Videoconferencia actualizada: Junta Agricompra - Belher · mar 16 jun 3-5pm","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-12"},
+    {"hora":"16:14","asunto":"Transferencia Interbancaria SPEI — BanBajío 12-Jun-2026","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-06-12"},
+    {"hora":"16:01","asunto":"CFDI Recibo Electrónico — Agrícola Belher Fijos · Semana 24/2026","de":"anajar@agbelher.com","leido":false,"fecha":"2026-06-12"},
+    {"hora":"17:22","asunto":"Proveedor — Servicio Cercas Humaya","de":"cercashumaya@gmail.com","leido":false,"fecha":"2026-06-12"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 3 archivos (12-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-12"},
     {"hora":"14:59","asunto":"HortiDaily Newsletter | Friday, June 12, 2026","de":"mail@hortidaily.com","leido":false,"fecha":"2026-06-12"},
     {"hora":"15:40","asunto":"HortiDaily Newsletter | viernes, 12 de junio de 2026","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-12"},
