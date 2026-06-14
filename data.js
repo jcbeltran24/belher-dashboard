@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 12 Jun 2026",
+    fecha: "Sábado 14 Jun 2026",
     semana: "WK24",
-    actualizado: "12/06/2026 · 08:15"
+    actualizado: "14/06/2026 · 06:30"
   },
 
   alertas: [
@@ -10,7 +10,7 @@ window.BELHER = {
     {"nivel":"danger","texto":"⚠️ CALAVO → MISSION PRODUCE: Contrato Beltrán-Calavo pendiente firma — cerrar ANTES del 15-Jun para clarity GC26-27. Adquisición completada 29/May/2026. Todos los términos comerciales vigentes."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — Primera Revisión Administrativa 2026: Notificación recibida de Lic. Mario Haroldo Robles (CIDH, marioh@cidh.org.mx) · 09/Jun/2026. Seguimiento legal requerido. Verificar posición de Belher ante proceso."},
     {"nivel":"warning","texto":"📉 CAÍDA SEVERA DE PRECIOS WK24 — Corbel #0065 (05/Jun): Vine-ripe 4x4/4x5 Nogales $11.95-12.95 (↓57% vs WK23 $28-32). Roma XL $11.95-12.95 (↓51%). Jalapeño Texas $17-19 (↓47%). Chile Bell GH naranja $6-7 (↓54%). Limón 110s $34-36 (↓15%). Fin de temporada confirmado."},
-    {"nivel":"info","texto":"📅 AGENDA HOY (12/Jun): Seguimiento firma Contrato Calavo (deadline 15-Jun). Revisión Dumping Tomate con CIDH. Settlement WK25 en curso. Junta Agricompra-Belher mar 16 jun 3-5pm."},
+    {"nivel":"info","texto":"📅 AGENDA HOY (14/Jun): Settlement Calavo review 15-Jun. Firma Contrato Calavo deadline. Junta Agricompra-Belher mar 16 jun 3-5pm. Cash position monitoring — OL 9+3 proyección crítica."},
     {"nivel":"info","texto":"📊 ADM — Financials Mayo recibidos (09/Jun): Felipe Calderón / CRyAsociados envió PDF y Excel ADM May 28th Financials. Pendiente revisión y aprobación del equipo."},
     {"nivel":"info","texto":"💹 MERCADO JUNIO — WK24 consolidado: Precios tomate en mínimos de temporada. Limón persa manteniendo $34-36 (más estable). Predicciones WK25: lateral a bajista si demanda foodservice moderada."},
     {"nivel":"info","texto":"📊 FINANZAS — CF 2025-2026 en OL 9+3: saldo ajustado $606K (19-Abr). Proyección julio: -$3.99M sin WK Calavo adicional. WK Calavo 4/4 $1.25M en agosto crítico."},
@@ -650,7 +650,7 @@ window.BELHER = {
       { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Guatemala 2 cargas. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
     ],
     proximos: [
-      { fecha:"2026-06-15", evento:"Settlement Calavo GC 2025-2026 actualizado al 12/Jun", tipo:"Financiero", participantes:"JC, Leima, equipo", detalles:"Zoom 2:00pm (Leima organizadora). Review settlement con datos al 12-Jun." },
+      { fecha:"2026-06-15", evento:"Settlement Calavo GC 2025-2026 actualizado al 14/Jun", tipo:"Financiero", participantes:"JC, Leima, equipo", detalles:"Zoom 2:00pm (Leima organizadora). Review settlement con datos al 14-Jun." },
       { fecha:"2026-06-15", evento:"Cierre Contrato Beltrán-Calavo", tipo:"Legal", participantes:"JC, Antonio, Armando, Irene Amezaga", detalles:"Versión final circulación. Target firma antes 15-Jun para GC26-27. Mission adquirió Calavo — urgente cerrar." },
       { fecha:"2026-06-16", evento:"Junta Agricompra - Belher (Grupo Chaparral)", tipo:"Comercial", participantes:"JC Beltrán, David Gaxiola (Chaparral)", detalles:"Google Meet 3:00-5:00pm. Organiza David Gaxiola (dgaxiola@grupochaparral.com)." },
       { fecha:"2026-06-18", evento:"BPSI F/S Mayo 2026 y Forecast Q2 2026", tipo:"Financiero", participantes:"JC, Leima, equipo BPSI", detalles:"Zoom 11:00am-11:45am (Leima organizadora)." },
