@@ -1,12 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 13 Jun 2026",
+    fecha: "Domingo 14 Jun 2026",
     semana: "WK24",
-    actualizado: "13/06/2026 · 14:15"
+    actualizado: "14/06/2026 · 08:19"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Contrato Beltrán-Calavo/Mission Produce: DEADLINE HOY 15-Jun. Adquisición Calavo→Mission completada 29/May/2026. Todos los términos vigentes. Firmar antes del lunes para clarity GC26-27. Fuente: correo ABSA 09/Jun/2026."},
+    {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Contrato Beltrán-Calavo/Mission Produce: DEADLINE MAÑANA 15-Jun. Adquisición Calavo→Mission completada 29/May/2026. Todos los términos vigentes. Firmar antes del lunes para clarity GC26-27. Fuente: correo ABSA 09/Jun/2026."},
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — Primera Revisión Administrativa 2026: Notificación recibida de Lic. Mario Haroldo Robles (CIDH, marioh@cidh.org.mx) · 09/Jun/2026. Seguimiento legal requerido. Verificar posición de Belher ante proceso."},
