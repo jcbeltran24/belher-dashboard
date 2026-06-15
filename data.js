@@ -1,17 +1,17 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 14 Jun 2026",
-    semana: "WK24",
-    actualizado: "14/06/2026 · 08:19"
+    fecha: "Lunes 15 Jun 2026",
+    semana: "WK25",
+    actualizado: "15/06/2026 · 17:23"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Contrato Beltrán-Calavo/Mission Produce: DEADLINE MAÑANA 15-Jun. Adquisición Calavo→Mission completada 29/May/2026. Todos los términos vigentes. Firmar antes del lunes para clarity GC26-27. Fuente: correo ABSA 09/Jun/2026."},
+    {"nivel":"danger","texto":"🔐 SEGURIDAD GODADDY — Se eliminó la verificación en 2 pasos (2FA) de la cuenta GoDaddy (Case #01589861 · 15-Jun-2026 14:27 UTC). Si no fue acción tuya, contacta soporte inmediatamente. GoDaddy recomienda re-habilitar 2FA y agregar método de respaldo."},
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — Primera Revisión Administrativa 2026: Notificación recibida de Lic. Mario Haroldo Robles (CIDH, marioh@cidh.org.mx) · 09/Jun/2026. Seguimiento legal requerido. Verificar posición de Belher ante proceso."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
-    {"nivel":"info","texto":"📅 AGENDA — Junta Agricompra-Belher: martes 16 Jun · 3:00–5:00 pm (GMT-7) · Google Meet confirmado. Videoconferencia actualizada 12/Jun/2026."},
+    {"nivel":"info","texto":"📅 AGENDA — Junta Agricompra-Belher: MAÑANA martes 16 Jun · 3:00–5:00 pm (GMT-7) · Google Meet confirmado."},
     {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 12/Jun/2026 16:14 hrs. CFDI Semana 24/2026 emitido por Agrícola Belher Fijos (RFC: ABE180411CB8)."},
     {"nivel":"info","texto":"📊 ADM — Financials Mayo recibidos (09/Jun): Felipe Calderón / CRyAsociados envió PDF y Excel ADM May 28th Financials. Pendiente revisión y aprobación del equipo."},
     {"nivel":"success","texto":"💹 STOCK PRICES — CVGW (Calavo/Mission): $26.09 · AVO (Mission Produce): $10.11 · Integración Mission Produce consolidada."}
@@ -588,6 +588,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:58","asunto":"Weekly Kickoff | Mon, June 8th - Sun, June 14th | Read AI","de":"executiveassistant@e.read.ai","leido":false,"fecha":"2026-06-15"},
+    {"hora":"14:27","asunto":"Case # 01589861 | Account Recovery — GoDaddy 2FA removido","de":"support@care.godaddy","leido":false,"fecha":"2026-06-15"},
     {"hora":"19:19","asunto":"Corbel Seeds Daily Report #0070 — Supply-Pressure WK25","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-12"},
     {"hora":"20:26","asunto":"Videoconferencia actualizada: Junta Agricompra - Belher · mar 16 jun 3-5pm","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-12"},
     {"hora":"16:14","asunto":"Transferencia Interbancaria SPEI — BanBajío 12-Jun-2026","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-06-12"},
