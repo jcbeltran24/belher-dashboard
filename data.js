@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 15 Jun 2026",
+    fecha: "Martes 16 Jun 2026",
     semana: "WK25",
-    actualizado: "15/06/2026 · 17:23"
+    actualizado: "16/06/2026 · 17:09"
   },
 
   alertas: [
@@ -11,7 +11,9 @@ window.BELHER = {
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — Primera Revisión Administrativa 2026: Notificación recibida de Lic. Mario Haroldo Robles (CIDH, marioh@cidh.org.mx) · 09/Jun/2026. Seguimiento legal requerido. Verificar posición de Belher ante proceso."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
-    {"nivel":"info","texto":"📅 AGENDA — Junta Agricompra-Belher: MAÑANA martes 16 Jun · 3:00–5:00 pm (GMT-7) · Google Meet confirmado."},
+    {"nivel":"info","texto":"📅 HOY — Junta Agricompra-Belher: Hoy martes 16 Jun · 3:00–5:00 pm (GMT-7) · Google Meet confirmado."},
+    {"nivel":"info","texto":"🐀 WEBINAR BELHER — Capacitación gratuita: Plan de Manejo Integrado de Roedores · Mié 18 Jun · 10:00 hrs CDMX · Zoom. Organiza: Chrysthian Marisol (Gerente Innovación). Registro: https://lnkd.in/esT7_drz"},
+    {"nivel":"info","texto":"⚖️ AHIFORES WEBINAR JUN — Sesión sobre Ley Silla, reducción de horas laborales y certificado de agro-exportación. Para socios AMHPAC/AHIFORES. Registro: Zoom (reenviado por c.marisol@agbelher.com · 16/Jun)."},
     {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 12/Jun/2026 16:14 hrs. CFDI Semana 24/2026 emitido por Agrícola Belher Fijos (RFC: ABE180411CB8)."},
     {"nivel":"info","texto":"📊 ADM — Financials Mayo recibidos (09/Jun): Felipe Calderón / CRyAsociados envió PDF y Excel ADM May 28th Financials. Pendiente revisión y aprobación del equipo."},
     {"nivel":"success","texto":"💹 STOCK PRICES — CVGW (Calavo/Mission): $26.09 · AVO (Mission Produce): $10.11 · Integración Mission Produce consolidada."}
@@ -588,6 +590,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"18:55","asunto":"eNoticias HortiCultivos — Jun 16","de":"info@horticultivos.com","leido":false,"fecha":"2026-06-16"},
+    {"hora":"09:24","asunto":"CAPACITACIÓN SIN COSTO: Plan de Manejo Integrado de Roedores","de":"c.marisol@agbelher.com","leido":false,"fecha":"2026-06-16"},
+    {"hora":"09:04","asunto":"Fwd: AHIFORES | Sesión informativa junio","de":"c.marisol@agbelher.com","leido":false,"fecha":"2026-06-16"},
     {"hora":"16:58","asunto":"Weekly Kickoff | Mon, June 8th - Sun, June 14th | Read AI","de":"executiveassistant@e.read.ai","leido":false,"fecha":"2026-06-15"},
     {"hora":"14:27","asunto":"Case # 01589861 | Account Recovery — GoDaddy 2FA removido","de":"support@care.godaddy","leido":false,"fecha":"2026-06-15"},
     {"hora":"19:19","asunto":"Corbel Seeds Daily Report #0070 — Supply-Pressure WK25","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-12"},
