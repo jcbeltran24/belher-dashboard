@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 16 Jun 2026",
+    fecha: "Miércoles 17 Jun 2026",
     semana: "WK25",
-    actualizado: "16/06/2026 · 17:09"
+    actualizado: "17/06/2026 · 15:52"
   },
 
   alertas: [
@@ -11,7 +11,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — Primera Revisión Administrativa 2026: Notificación recibida de Lic. Mario Haroldo Robles (CIDH, marioh@cidh.org.mx) · 09/Jun/2026. Seguimiento legal requerido. Verificar posición de Belher ante proceso."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
-    {"nivel":"info","texto":"📅 HOY — Junta Agricompra-Belher: Hoy martes 16 Jun · 3:00–5:00 pm (GMT-7) · Google Meet confirmado."},
+    {"nivel":"info","texto":"📅 FORO MAR DE CORTÉS SUMMIT 2026 — Invitación recibida (17/Jun). Evento: 10-12 Nov 2026 · Hotel Hacienda del Mar Los Cabos, BCS. Registro disponible en https://fmdc-summit.com · usuario: juancarlos@agbelher.com. Pendiente confirmar asistencia."},
     {"nivel":"info","texto":"🐀 WEBINAR BELHER — Capacitación gratuita: Plan de Manejo Integrado de Roedores · Mié 18 Jun · 10:00 hrs CDMX · Zoom. Organiza: Chrysthian Marisol (Gerente Innovación). Registro: https://lnkd.in/esT7_drz"},
     {"nivel":"info","texto":"⚖️ AHIFORES WEBINAR JUN — Sesión sobre Ley Silla, reducción de horas laborales y certificado de agro-exportación. Para socios AMHPAC/AHIFORES. Registro: Zoom (reenviado por c.marisol@agbelher.com · 16/Jun)."},
     {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 12/Jun/2026 16:14 hrs. CFDI Semana 24/2026 emitido por Agrícola Belher Fijos (RFC: ABE180411CB8)."},
@@ -590,6 +590,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"08:49","asunto":"FORO MAR DE CORTES Summit 2026 – Plataforma de Registro","de":"summit.fmdc@gmail.com","leido":false,"fecha":"2026-06-17"},
+    {"hora":"09:27","asunto":"HortiDaily Newsletter | miércoles, 17 de junio de 2026","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-17"},
     {"hora":"18:55","asunto":"eNoticias HortiCultivos — Jun 16","de":"info@horticultivos.com","leido":false,"fecha":"2026-06-16"},
     {"hora":"09:24","asunto":"CAPACITACIÓN SIN COSTO: Plan de Manejo Integrado de Roedores","de":"c.marisol@agbelher.com","leido":false,"fecha":"2026-06-16"},
     {"hora":"09:04","asunto":"Fwd: AHIFORES | Sesión informativa junio","de":"c.marisol@agbelher.com","leido":false,"fecha":"2026-06-16"},
