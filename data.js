@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 19 Jun 2026",
+    fecha: "Viernes 20 Jun 2026",
     semana: "WK25",
-    actualizado: "19/06/2026 · 08:00"
+    actualizado: "20/06/2026 · 07:30"
   },
 
   alertas: [
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
     {"nivel":"danger","texto":"⚠️ SETTLEMENT CALAVO 15-JUN — Review actualizado al 14/Jun. Saldo Belher $1.64M (WK19). Quedan cajas por liquidar. Llamada Zoom 2:00pm (Leima). Fuente: leima@agbelher.com."},
-    {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — Primera Revisión Administrativa 2026: Notificación recibida de Lic. Mario Haroldo Robles (CIDH, marioh@cidh.org.mx) · 09/Jun/2026. Seguimiento legal requerido. Verificar posición de Belher ante proceso."},
-    {"nivel":"warning","texto":"📉 CAÍDA SEVERA DE PRECIOS WK24 → WK25 — Corbel #0065 (05/Jun): Vine-ripe 4x4/4x5 Nogales $11.95-12.95 (↓57% vs WK23 $28-32). Roma XL $11.95-12.95 (↓51%). Jalapeño Texas $17-19 (↓47%). Chile Bell GH naranja $6-7 (↓54%). Limón 110s $34-36 (↓15%). Fin de temporada confirmado."},
-    {"nivel":"info","texto":"📅 PRÓXIMOS EVENTOS: Settlement Calavo 15-Jun (Zoom). Cierre Contrato Beltrán-Calavo deadline. Junta Agricompra-Belher 16-Jun 3-5pm (Google Meet). BPSI F/S Mayo 18-Jun 11am."}
+    {"nivel":"warning","texto":"📅 HOY (20-JUN): Settlement Calavo review Zoom y seguimiento Contrato Beltrán-Calavo ciclo 2026-2029. Cierre legal pendiente. Fuente: estrategia.proximos."},
+    {"nivel":"warning","texto":"📉 PRECIOS DEPRIMIDOS WK25 — Corbel #0065 (05/Jun): Vine-ripe Nogales $11.95-12.95 (↓57% vs WK23). Roma $10.95-12.95 (↓51%). Jalapeño $17-19 (↓47%). Fin de temporada confirmado — rotación de inventario crítica."},
+    {"nivel":"info","texto":"📊 PRÓXIMAS SEMANAS: Settlement Calavo 15-Jun (Zoom). Junta Agricompra-Belher 16-Jun 3-5pm. BPSI F/S 18-Jun. Mayo F/S 22-Jun. Limón 70ha en mejor posicionamiento relativo — monitoreo USDA FOB Nogales."}
   ],
 
   ebitda: {
@@ -643,11 +643,10 @@ window.BELHER = {
     ],
     watchlist: [
       { titulo:"Limón seedless Nogales tendencia", nivel:"Medio", descripcion:"WK18-WK19 spike $36-42 por ventaja supply Peru -30%. Bajío esperado WK24. Belher 70ha bien posicionada si precios mantienen $35-40.", accion:"Monitoreo precios USDA y tendencias Corbel weekly." },
-      { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Guatemala 2 cargas. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
+      { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
     ],
     proximos: [
-      { fecha:"2026-06-15", evento:"Settlement Calavo GC 2025-2026 actualizado al 14/Jun", tipo:"Financiero", participantes:"JC, Leima, equipo", detalles:"Zoom 2:00pm (Leima organizadora). Review settlement con datos al 14-Jun." },
-      { fecha:"2026-06-15", evento:"Cierre Contrato Beltrán-Calavo", tipo:"Legal", participantes:"JC, Antonio, Armando, Irene Amezaga", detalles:"Versión final circulación. Target firma antes 15-Jun para GC26-27. Mission adquirió Calavo — urgente cerrar." },
+      { fecha:"2026-06-20", evento:"Settlement Calavo GC 2025-2026 y Contrato Beltrán-Calavo (Zoom 2:00pm)", tipo:"Financiero + Legal", participantes:"JC, Leima, Irene Amezaga, Antonio, Armando", detalles:"Hoy: Review settlement al 14-Jun + cierre final v3 contrato ciclo 2026-2029." },
       { fecha:"2026-06-16", evento:"Junta Agricompra - Belher (Grupo Chaparral)", tipo:"Comercial", participantes:"JC Beltrán, David Gaxiola (Chaparral)", detalles:"Google Meet 3:00-5:00pm. Organiza David Gaxiola (dgaxiola@grupochaparral.com)." },
       { fecha:"2026-06-18", evento:"BPSI F/S Mayo 2026 y Forecast Q2 2026", tipo:"Financiero", participantes:"JC, Leima, equipo BPSI", detalles:"Zoom 11:00am-11:45am (Leima organizadora)." },
       { fecha:"2026-06-22", evento:"Mayo '26 F/S Tomates/Limones/Granos", tipo:"Financiero", participantes:"JC, jacruz, equipo", detalles:"Zoom 10:00am-11:00am (jacruz organizador)." },
@@ -656,75 +655,75 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "16/06/2026 · 07:15",
+    generado:  "20/06/2026 · 07:30",
     modelo:    "Claude claude-haiku-4-5",
     horizonte: "7 días",
-    nota:      "Síntesis de precios USDA vía Corbel #0065 (05-Jun) + datos operativos Nogales/Texas + calidad outbound + noticias industria. Caída severa de precios WK24 confirmada. Entrado WK25: precios sigen presionados por fin de temporada. Predicciones regeneradas 16-Jun.",
+    nota:      "Síntesis de precios Corbel #0065 (05-Jun) + datos operativos + calidad outbound + noticias industria. Fin de temporada tomate confirmado WK24-25. Limón estable mejor que tomate. Tomate: rotación urgente. Limón: mantener postura $34-36.",
     items: [
       {
         id: "vine-ripe",
         producto: "Tomate Vine-ripe 4x4/4x5",
         unidad: "carton 25lb · FOB Nogales",
         tendencia: "bajista",
-        confianza: 85,
+        confianza: 88,
         precio_actual: { min:11.95, max:12.95 },
-        precio_proyectado: { min:8.50, max:13.00 },
-        razonamiento: "Corbel #0065 (05/Jun) confirma vine-ripe Nogales $11.95-12.95 — caída -57% vs WK23 ($28-32). WK25 entra con demanda severamente deprimida post-Memorial Day. México prioriza supply doméstico. Texas ligeramente mejor $12.95-14.95. Riesgo adicional sin nueva demanda spot.",
-        factores: ["Fin temporada alta México (WK25)", "Demanda post-holiday comprimida", "Canadian GH volumes crecientes", "Open field Sinaloa presionando precios", "Inventario terminal Belher estimado bajo"],
-        riesgo: "Caída adicional a $8-9 si oferta Sinaloa continúa sin demanda spot identificada.",
-        accion: "Acelerar liquidación inventario. Vender rango $10-12 para cash flow. Reducir proyecciones próximas semanas."
+        precio_proyectado: { min:8.00, max:13.50 },
+        razonamiento: "Corbel #0065 (05/Jun): Nogales $11.95-12.95 (-57% vs WK23 $28-32). WK25 (hoy) entra con oferta mexicana masiva, demanda post-holiday deprimida. México prioriza supply doméstico. Presión adicional por California GH volumes. Soporte débil — caída adicional a $8-9 posible si oferta sin demanda.",
+        factores: ["Fin temporada alta (WK25)", "Oferta México masiva junio", "Demanda post-Memorial Day comprimida", "CA GH volumes activos", "Riesgo: dumping supply doméstico mex"],
+        riesgo: "Caída severa a $8.00-9.00 si oferta México se acelera sin demanda spot.",
+        accion: "URGENTE: Rotación inmediata inventario en rango $10-12. Accelerar venta nacional canal 4x4 si export débil. Reducir proyecciones próximas 3 semanas."
       },
       {
         id: "roma",
         producto: "Tomate Roma 25lb",
         unidad: "carton XL/Large",
         tendencia: "bajista",
-        confianza: 82,
+        confianza: 85,
         precio_actual: { min:10.95, max:12.95 },
-        precio_proyectado: { min:8.50, max:12.50 },
-        razonamiento: "Roma Nogales $10.95-12.95 (Corbel #0065), down -51% vs WK23 $24-26. WK25 continuará presión por glut estacional junio. Florida expansion y Guatemala competencia. Belher inventario final 2.1K (small talla) difícil rotación.",
-        factores: ["Seasonal glut junio (supply excess)", "Florida expansion intensificando", "Precio por debajo costo variable en casos", "Belher inventario 2.1K urgent rotación"],
-        riesgo: "Caída adicional a $7.50-8.50 si demanda foodservice/retail colapsa siguiente semana.",
-        accion: "Rotación agresiva hacia canal nacional. Vender $9-10 si export débil. Liquidar antes fin semana."
+        precio_proyectado: { min:7.50, max:12.00 },
+        razonamiento: "Roma Nogales $10.95-12.95 (Corbel -51% vs WK23). Glut estacional junio. Florida expansion y Guatemala competencia. Belher inventario 2.1K (small talla) difícil rotación — costo variable por debajo en algunos casos. WK25 presión alta.",
+        factores: ["Seasonal glut junio (peak supply)", "Florida expansion intensificando", "Guatemala 2 cargas spot", "Belher 2.1K small talla rotación lenta"],
+        riesgo: "Caída a $7.50-8.50 si demanda foodservice colapsa próxima semana.",
+        accion: "Rotar hacia canal nacional inmediatamente. Vender $9-10 rango si export débil. Liquidar antes 22-Jun (antes F/S Mayo)."
       },
       {
         id: "jalap",
         producto: "Jalapeño",
         unidad: "carton Texas",
         tendencia: "lateral",
-        confianza: 71,
+        confianza: 74,
         precio_actual: { min:17.00, max:19.00 },
-        precio_proyectado: { min:15.00, max:21.00 },
-        razonamiento: "Jalapeño Texas $17-19 (Corbel #0065), down -47% vs WK23. Open field México junio presiona. Texas GH activo pero margen comprimido. WK25 sin nueva señal — precios pueden stabilize si demanda minimally recovers.",
-        factores: ["Texas GH producción", "Open field México junio presión", "Post-holiday demand moderation moderándose", "Soporte potencial $16-17"],
-        riesgo: "Si horticultural issues (Sinaloa pest/heat), precios recovery $22-25 posible.",
-        accion: "Monitoreo. Belher sin jalapeño — evaluar partnership si spike."
+        precio_proyectado: { min:15.50, max:21.00 },
+        razonamiento: "Jalapeño Texas $17-19 (Corbel -47% vs WK23 $33). Open field México junio presiona. Texas GH activo pero margen comprimido. Soporte psicológico $15.50. Belher sin jalapeño actualmente — evaluar reentry si spike recovery $20-22.",
+        factores: ["Texas GH producción", "Open field México junio", "Soporte $15.50 técnico", "Recovery potential $20-25 si pest Mexico"],
+        riesgo: "Recovery a $20-25 si problemas horticultural Sinaloa elevan precios.",
+        accion: "Monitoreo. Evaluar partnership si precios spike $22+. Sin presión de rotación propia."
       },
       {
         id: "bell-gh",
         producto: "Chile Bell GH naranja",
         unidad: "11lb carton Texas",
         tendencia: "lateral",
-        confianza: 73,
+        confianza: 76,
         precio_actual: { min:6.00, max:7.00 },
         precio_proyectado: { min:5.50, max:8.50 },
-        razonamiento: "Chile Bell naranja Texas $6-7, down -54% vs WK23. Soporte psicológico a $5.50. Texas GH sigue activo. Belher Anaheim $26-28 mejor posicionado por varietal diferencial.",
-        factores: ["Seasonal supply excess Texas GH", "Post-holiday demand deprimida", "Soporte técnico $5.50 fuerte", "Belher Anaheim premium positioning"],
-        riesgo: "Reducción supply (frost/pest Texas) podría empujar upside $9-12 — low probability.",
-        accion: "Belher foco en Anaheim $26-28. Monitor Bell GH para GC2026-27 posible entry."
+        razonamiento: "Chile Bell naranja Texas $6-7 (Corbel -54% vs WK23). Seasonal excess Texas GH. Soporte psicológico $5.50. Belher Anaheim $26-28 (premium varietal). Precios laterales WK25-WK26 probables.",
+        factores: ["Texas GH seasonal excess", "Soporte $5.50 fuerte", "Belher Anaheim premium positioning", "Demanda deprimida post-holiday"],
+        riesgo: "Frost/pest Texas podría empujar upside $9-12 (low probability).",
+        accion: "Belher foco en Anaheim premium. Monitor Bell para GC2026-27 posible entry si precios <$5.50 sostenido."
       },
       {
         id: "limon-persa",
         producto: "Limón Persa 40lb FOB Texas",
         unidad: "carton seedless 110s",
         tendencia: "lateral",
-        confianza: 68,
+        confianza: 72,
         precio_actual: { min:34.00, max:36.00 },
-        precio_proyectado: { min:32.00, max:39.00 },
-        razonamiento: "Limón 110s Texas $34-36, 150s $32-34 (Corbel #0065). Más estable que tomate (-15% vs -57% vine-ripe). Peru supply window cerrándose rapidamente. Asia-Pacific demand recovery sostenida. Belher 70ha bien positioned. WK25 could stabilize $34-38 rango.",
-        factores: ["Peru supply window cerrando rapido", "Asia-Pacific demand recovery", "Belher 70ha competitive", "Seasonal pricing normal junio", "110s premium over 150s sostenido"],
-        riesgo: "Si Peru reabre supply significativamente, precios caída $28-30 rapid.",
-        accion: "Maximizar FOB $34-36 rango WK25-WK26. Priorizar 110s. Hold si precios >$37."
+        precio_proyectado: { min:32.00, max:38.00 },
+        razonamiento: "Limón 110s Texas $34-36 (Corbel -15% vs WK23 — mejor que tomate). Peru supply window cerrando rápidamente — ventana 2-3 semanas. Asia-Pacific demand recovery sostenida. Belher 70ha competitiva. 110s premium over 150s sostenido ($2-3/carton). WK25 rango stable $34-38.",
+        factores: ["Peru supply window cerrando (2-3 sem)", "Asia-Pacific demand recovery", "Belher 70ha competitive", "110s premium sostenido", "Seasonal pricing normal junio"],
+        riesgo: "Si Peru reabre supply significativamente, caída rápida $28-30.",
+        accion: "Maximizar FOB $34-36 rango WK25-WK26. Priorizar venta 110s. HOLD si precios >$37 — evaluación venta a 150s. Belher 70ha = asset estratégico WK25-WK28."
       }
     ]
   },
