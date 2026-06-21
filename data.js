@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 20 Jun 2026",
+    fecha: "Domingo 21 Jun 2026",
     semana: "WK25",
-    actualizado: "20/06/2026 · 14:19"
+    actualizado: "21/06/2026 · 14:25"
   },
 
   alertas: [
@@ -11,6 +11,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — Primera Revisión Administrativa 2026: Notificación recibida de Lic. Mario Haroldo Robles (CIDH, marioh@cidh.org.mx) · 09/Jun/2026. Seguimiento legal requerido. Verificar posición de Belher ante proceso."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
+    {"nivel":"info","texto":"🍋 BÁSCULA LIMÓN PERSA (20-Jun-2026) — Reporte de báscula del día 20/06/2026 recibido. Operaciones de limón persa en curso. Fuente: basculabelher@gmail.com · 13:40 hrs."},
     {"nivel":"info","texto":"🍋 EMBARQUES LIMÓN PERSA (19-Jun-2026 noche) — 3 cargas despachadas: Caja JL-34 (Full, 22 parrillas, Placa 31V56M · Chofer: Alan Eden Quevedo Iribe), Caja JL-42 (Placa 82UP25) y Caja JL-81 (Sencillo, 24 parrillas, Placa 12UP15 · Chofer: Gabino Terrazas Salomón). Reportes generales de limón persa adjuntos en Drive. Fuente: embarquesbelher@agbelher.com · 20:59–21:03 hrs."},
     {"nivel":"info","texto":"📅 FORO MAR DE CORTÉS SUMMIT 2026 — Invitación recibida (17/Jun). Evento: 10-12 Nov 2026 · Hotel Hacienda del Mar Los Cabos, BCS. Registro disponible en https://fmdc-summit.com · usuario: juancarlos@agbelher.com. Pendiente confirmar asistencia."},
     {"nivel":"info","texto":"⚖️ AHIFORES WEBINAR JUN — Sesión sobre Ley Silla, reducción de horas laborales y certificado de agro-exportación. Para socios AMHPAC/AHIFORES. Registro: Zoom (reenviado por c.marisol@agbelher.com · 16/Jun)."},
@@ -590,6 +591,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"13:40","asunto":"REPORTE DE BASCULA 20/06/2026 (LIMON PERSA)","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-06-20"},
     {"hora":"21:03","asunto":"19-06-2026 REPORTES GENERALES DE LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-06-19"},
     {"hora":"20:59","asunto":"MANIFIESTOS DE CARGA DE LIMON PERSA — 3 cargas (JL-34, JL-42, JL-81)","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-06-19"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 3 archivos (19-Jun-2026 07:53)","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-19"},
