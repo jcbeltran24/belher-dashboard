@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 20 Jun 2026",
+    fecha: "Domingo 21 Jun 2026",
     semana: "WK25",
-    actualizado: "20/06/2026 · 07:30"
+    actualizado: "21/06/2026 · 09:15"
   },
 
   alertas: [
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
     {"nivel":"danger","texto":"⚠️ SETTLEMENT CALAVO 15-JUN — Review actualizado al 14/Jun. Saldo Belher $1.64M (WK19). Quedan cajas por liquidar. Llamada Zoom 2:00pm (Leima). Fuente: leima@agbelher.com."},
-    {"nivel":"warning","texto":"📅 HOY (20-JUN): Settlement Calavo review Zoom y seguimiento Contrato Beltrán-Calavo ciclo 2026-2029. Cierre legal pendiente. Fuente: estrategia.proximos."},
+    {"nivel":"warning","texto":"📅 PRÓXIMO: Settlement Calavo review y seguimiento Contrato Beltrán-Calavo ciclo 2026-2029. Cierre legal pendiente. Fuente: estrategia.proximos."},
     {"nivel":"warning","texto":"📉 PRECIOS DEPRIMIDOS WK25 — Corbel #0065 (05/Jun): Vine-ripe Nogales $11.95-12.95 (↓57% vs WK23). Roma $10.95-12.95 (↓51%). Jalapeño $17-19 (↓47%). Fin de temporada confirmado — rotación de inventario crítica."},
-    {"nivel":"info","texto":"📊 PRÓXIMAS SEMANAS: Settlement Calavo 15-Jun (Zoom). Junta Agricompra-Belher 16-Jun 3-5pm. BPSI F/S 18-Jun. Mayo F/S 22-Jun. Limón 70ha en mejor posicionamiento relativo — monitoreo USDA FOB Nogales."}
+    {"nivel":"info","texto":"📊 PRÓXIMAS SEMANAS: Junta Agricompra-Belher 16-Jun 3-5pm. BPSI F/S 18-Jun. Mayo F/S 22-Jun. Limón 70ha en mejor posicionamiento relativo — monitoreo USDA FOB Nogales."}
   ],
 
   ebitda: {
@@ -646,16 +646,15 @@ window.BELHER = {
       { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
     ],
     proximos: [
-      { fecha:"2026-06-20", evento:"Settlement Calavo GC 2025-2026 y Contrato Beltrán-Calavo (Zoom 2:00pm)", tipo:"Financiero + Legal", participantes:"JC, Leima, Irene Amezaga, Antonio, Armando", detalles:"Hoy: Review settlement al 14-Jun + cierre final v3 contrato ciclo 2026-2029." },
-      { fecha:"2026-06-16", evento:"Junta Agricompra - Belher (Grupo Chaparral)", tipo:"Comercial", participantes:"JC Beltrán, David Gaxiola (Chaparral)", detalles:"Google Meet 3:00-5:00pm. Organiza David Gaxiola (dgaxiola@grupochaparral.com)." },
-      { fecha:"2026-06-18", evento:"BPSI F/S Mayo 2026 y Forecast Q2 2026", tipo:"Financiero", participantes:"JC, Leima, equipo BPSI", detalles:"Zoom 11:00am-11:45am (Leima organizadora)." },
       { fecha:"2026-06-22", evento:"Mayo '26 F/S Tomates/Limones/Granos", tipo:"Financiero", participantes:"JC, jacruz, equipo", detalles:"Zoom 10:00am-11:00am (jacruz organizador)." },
-      { fecha:"2026-06-22", evento:"Revisión final OL 11+1 P&L y Cash Flow", tipo:"Financiero", participantes:"Antonio, JC, Flavio, Leima, Juan, Armando", detalles:"Zoom 11:00am-12:00pm (jacruz organizador)." }
+      { fecha:"2026-06-22", evento:"Revisión final OL 11+1 P&L y Cash Flow", tipo:"Financiero", participantes:"Antonio, JC, Flavio, Leima, Juan, Armando", detalles:"Zoom 11:00am-12:00pm (jacruz organizador)." },
+      { fecha:"2026-06-18", evento:"BPSI F/S Mayo 2026 y Forecast Q2 2026", tipo:"Financiero", participantes:"JC, Leima, equipo BPSI", detalles:"Zoom 11:00am-11:45am (Leima organizadora)." },
+      { fecha:"2026-06-16", evento:"Junta Agricompra - Belher (Grupo Chaparral)", tipo:"Comercial", participantes:"JC Beltrán, David Gaxiola (Chaparral)", detalles:"Google Meet 3:00-5:00pm. Organiza David Gaxiola (dgaxiola@grupochaparral.com)." }
     ]
   },
 
   predicciones: {
-    generado:  "20/06/2026 · 07:30",
+    generado:  "21/06/2026 · 09:15",
     modelo:    "Claude claude-haiku-4-5",
     horizonte: "7 días",
     nota:      "Síntesis de precios Corbel #0065 (05-Jun) + datos operativos + calidad outbound + noticias industria. Fin de temporada tomate confirmado WK24-25. Limón estable mejor que tomate. Tomate: rotación urgente. Limón: mantener postura $34-36.",
