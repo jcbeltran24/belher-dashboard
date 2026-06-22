@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 21 Jun 2026",
-    semana: "WK25",
-    actualizado: "21/06/2026 · 09:15"
+    fecha: "Lunes 22 Jun 2026",
+    semana: "WK26",
+    actualizado: "22/06/2026 · 08:30"
   },
 
   alertas: [
@@ -610,8 +610,8 @@ window.BELHER = {
     { label:"Chile Bell GH naranja (TX)", valor:"$6.00-7.00", cambio:"↓54%", dir:"down" },
     { label:"Jalapeño (TX)", valor:"$17-19", cambio:"↓47%", dir:"down" },
     { label:"Limón seedless 110s (TX)", valor:"$34-36", cambio:"↓14%", dir:"down" },
-    { label:"AVO (Mission Produce)", valor:"$10.11", cambio:"Adquirió Calavo", dir:"neutral" },
-    { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Integración consolidada", dir:"neutral" },
+    { label:"AVO (Mission Produce)", valor:"$11.49", cambio:"+$0.36 (+3.23%)", dir:"up" },
+    { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"—", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Review 15-Jun", dir:"neutral" },
     { label:"Cash on hand (Abr)", valor:"$606K est", cambio:"OL 9+3", dir:"neutral" },
     { label:"EBITDA Marzo", valor:"$2.86M", cambio:"+15%", dir:"up" }
