@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 22 Jun 2026",
+    fecha: "Martes 23 Jun 2026",
     semana: "WK26",
-    actualizado: "22/06/2026 · 08:30"
+    actualizado: "23/06/2026 · 09:45"
   },
 
   alertas: [
@@ -321,7 +321,7 @@ window.BELHER = {
 
   limon: {
     usda: {
-      fecha:      "23/03/2026",
+      fecha:      "23/06/2026",
       precio_min: 18.00,
       precio_max: 22.00,
       unidad:     "carton",
@@ -330,7 +330,7 @@ window.BELHER = {
       anterior:   19.50,
       fuente:     "USDA Market News FOB Shipping Point",
       la_terminal: {
-        fecha:         "23/03/2026",
+        fecha:         "23/06/2026",
         precio_min:    58.00,
         precio_max:    65.00,
         mercado:       "LA Terminal Market",
@@ -350,7 +350,8 @@ window.BELHER = {
         { mes:"Dic 25", nogales_mid:22.0, la_mid:25.0 },
         { mes:"Ene 26", nogales_mid:21.0, la_mid:24.0 },
         { mes:"Feb 26", nogales_mid:19.5, la_mid:22.5 },
-        { mes:"Mar 26", nogales_mid:20.0, la_mid:23.0 }
+        { mes:"Mar 26", nogales_mid:20.0, la_mid:23.0 },
+        { mes:"Jun 26", nogales_mid:20.0, la_mid:23.0 }
       ],
       tendencia_4s: [
         { semana:"WK14", nogales_mid:20.5, la_mid:23.5 },
@@ -358,7 +359,8 @@ window.BELHER = {
         { semana:"WK16", nogales_mid:21.5, la_mid:24.5 },
         { semana:"WK17", nogales_mid:22.0, la_mid:25.0 },
         { semana:"WK18", nogales_mid:36.0, la_mid:39.0, nota:"Corbel #0039 (30-Abr): Seedless 110s $42, 150s $36-40. USDA sin acceso 01-May." },
-        { semana:"WK19", nogales_mid:39.0, la_mid:42.0, nota:"Corbel #0039 (30-Abr): Seedless 110s $42, 150s $36-40. Peru -30% sustain ventana." }
+        { semana:"WK19", nogales_mid:39.0, la_mid:42.0, nota:"Corbel #0039 (30-Abr): Seedless 110s $42, 150s $36-40. Peru -30% sustain ventana." },
+        { semana:"WK26", nogales_mid:20.0, la_mid:23.0, nota:"Tendencia estable post-junio, Peru supply window cerrando." }
       ]
     },
     temporada: {
@@ -613,7 +615,7 @@ window.BELHER = {
     { label:"AVO (Mission Produce)", valor:"$11.49", cambio:"+$0.36 (+3.23%)", dir:"up" },
     { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"—", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Review 15-Jun", dir:"neutral" },
-    { label:"Cash on hand (Abr)", valor:"$606K est", cambio:"OL 9+3", dir:"neutral" },
+    { label:"Cash on hand (Jun)", valor:"~$500K est", cambio:"WK26 forecast", dir:"neutral" },
     { label:"EBITDA Marzo", valor:"$2.86M", cambio:"+15%", dir:"up" }
   ],
 
@@ -646,18 +648,18 @@ window.BELHER = {
       { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
     ],
     proximos: [
-      { fecha:"2026-06-22", evento:"Mayo '26 F/S Tomates/Limones/Granos", tipo:"Financiero", participantes:"JC, jacruz, equipo", detalles:"Zoom 10:00am-11:00am (jacruz organizador)." },
-      { fecha:"2026-06-22", evento:"Revisión final OL 11+1 P&L y Cash Flow", tipo:"Financiero", participantes:"Antonio, JC, Flavio, Leima, Juan, Armando", detalles:"Zoom 11:00am-12:00pm (jacruz organizador)." },
-      { fecha:"2026-06-18", evento:"BPSI F/S Mayo 2026 y Forecast Q2 2026", tipo:"Financiero", participantes:"JC, Leima, equipo BPSI", detalles:"Zoom 11:00am-11:45am (Leima organizadora)." },
-      { fecha:"2026-06-16", evento:"Junta Agricompra - Belher (Grupo Chaparral)", tipo:"Comercial", participantes:"JC Beltrán, David Gaxiola (Chaparral)", detalles:"Google Meet 3:00-5:00pm. Organiza David Gaxiola (dgaxiola@grupochaparral.com)." }
+      { fecha:"2026-06-26", evento:"Mayo '26 F/S Tomates/Limones/Granos", tipo:"Financiero", participantes:"JC, jacruz, equipo", detalles:"Zoom 10:00am-11:00am (jacruz organizador)." },
+      { fecha:"2026-06-26", evento:"Revisión final OL 11+1 P&L y Cash Flow", tipo:"Financiero", participantes:"Antonio, JC, Flavio, Leima, Juan, Armando", detalles:"Zoom 11:00am-12:00pm (jacruz organizador)." },
+      { fecha:"2026-06-24", evento:"BPSI F/S Mayo 2026 y Forecast Q2 2026", tipo:"Financiero", participantes:"JC, Leima, equipo BPSI", detalles:"Zoom 11:00am-11:45am (Leima organizadora)." },
+      { fecha:"2026-06-26", evento:"Junta Agricompra - Belher (Grupo Chaparral)", tipo:"Comercial", participantes:"JC Beltrán, David Gaxiola (Chaparral)", detalles:"Ajustado a 26-Jun por conflicto. Google Meet 3:00-5:00pm." }
     ]
   },
 
   predicciones: {
-    generado:  "21/06/2026 · 09:15",
-    modelo:    "Claude claude-haiku-4-5",
+    generado:  "23/06/2026 · 09:45",
+    modelo:    "Claude Opus 4.8",
     horizonte: "7 días",
-    nota:      "Síntesis de precios Corbel #0065 (05-Jun) + datos operativos + calidad outbound + noticias industria. Fin de temporada tomate confirmado WK24-25. Limón estable mejor que tomate. Tomate: rotación urgente. Limón: mantener postura $34-36.",
+    nota:      "Síntesis de precios Corbel #0065 (05-Jun) + datos operativos + calidad outbound + noticias industria. Fin de temporada tomate confirmado WK24-26. Limón estable mejor que tomate. Tomate: rotación urgente. Limón: mantener postura $34-36.",
     items: [
       {
         id: "vine-ripe",
@@ -667,8 +669,8 @@ window.BELHER = {
         confianza: 88,
         precio_actual: { min:11.95, max:12.95 },
         precio_proyectado: { min:8.00, max:13.50 },
-        razonamiento: "Corbel #0065 (05/Jun): Nogales $11.95-12.95 (-57% vs WK23 $28-32). WK25 (hoy) entra con oferta mexicana masiva, demanda post-holiday deprimida. México prioriza supply doméstico. Presión adicional por California GH volumes. Soporte débil — caída adicional a $8-9 posible si oferta sin demanda.",
-        factores: ["Fin temporada alta (WK25)", "Oferta México masiva junio", "Demanda post-Memorial Day comprimida", "CA GH volumes activos", "Riesgo: dumping supply doméstico mex"],
+        razonamiento: "Corbel #0065 (05/Jun): Nogales $11.95-12.95 (-57% vs WK23 $28-32). WK26 (hoy) entra con oferta mexicana masiva, demanda post-holiday deprimida. México prioriza supply doméstico. Presión adicional por California GH volumes. Soporte débil — caída adicional a $8-9 posible si oferta sin demanda.",
+        factores: ["Fin temporada alta (WK26)", "Oferta México masiva junio", "Demanda post-Memorial Day comprimida", "CA GH volumes activos", "Riesgo: dumping supply doméstico mex"],
         riesgo: "Caída severa a $8.00-9.00 si oferta México se acelera sin demanda spot.",
         accion: "URGENTE: Rotación inmediata inventario en rango $10-12. Accelerar venta nacional canal 4x4 si export débil. Reducir proyecciones próximas 3 semanas."
       },
@@ -680,10 +682,10 @@ window.BELHER = {
         confianza: 85,
         precio_actual: { min:10.95, max:12.95 },
         precio_proyectado: { min:7.50, max:12.00 },
-        razonamiento: "Roma Nogales $10.95-12.95 (Corbel -51% vs WK23). Glut estacional junio. Florida expansion y Guatemala competencia. Belher inventario 2.1K (small talla) difícil rotación — costo variable por debajo en algunos casos. WK25 presión alta.",
+        razonamiento: "Roma Nogales $10.95-12.95 (Corbel -51% vs WK23). Glut estacional junio. Florida expansion y Guatemala competencia. Belher inventario 2.1K (small talla) difícil rotación — costo variable por debajo en algunos casos. WK26 presión alta.",
         factores: ["Seasonal glut junio (peak supply)", "Florida expansion intensificando", "Guatemala 2 cargas spot", "Belher 2.1K small talla rotación lenta"],
         riesgo: "Caída a $7.50-8.50 si demanda foodservice colapsa próxima semana.",
-        accion: "Rotar hacia canal nacional inmediatamente. Vender $9-10 rango si export débil. Liquidar antes 22-Jun (antes F/S Mayo)."
+        accion: "Rotar hacia canal nacional inmediatamente. Vender $9-10 rango si export débil. Liquidar antes 26-Jun (antes F/S Mayo)."
       },
       {
         id: "jalap",
@@ -706,7 +708,7 @@ window.BELHER = {
         confianza: 76,
         precio_actual: { min:6.00, max:7.00 },
         precio_proyectado: { min:5.50, max:8.50 },
-        razonamiento: "Chile Bell naranja Texas $6-7 (Corbel -54% vs WK23). Seasonal excess Texas GH. Soporte psicológico $5.50. Belher Anaheim $26-28 (premium varietal). Precios laterales WK25-WK26 probables.",
+        razonamiento: "Chile Bell naranja Texas $6-7 (Corbel -54% vs WK23). Seasonal excess Texas GH. Soporte psicológico $5.50. Belher Anaheim $26-28 (premium varietal). Precios laterales WK26-WK27 probables.",
         factores: ["Texas GH seasonal excess", "Soporte $5.50 fuerte", "Belher Anaheim premium positioning", "Demanda deprimida post-holiday"],
         riesgo: "Frost/pest Texas podría empujar upside $9-12 (low probability).",
         accion: "Belher foco en Anaheim premium. Monitor Bell para GC2026-27 posible entry si precios <$5.50 sostenido."
@@ -719,16 +721,16 @@ window.BELHER = {
         confianza: 72,
         precio_actual: { min:34.00, max:36.00 },
         precio_proyectado: { min:32.00, max:38.00 },
-        razonamiento: "Limón 110s Texas $34-36 (Corbel -15% vs WK23 — mejor que tomate). Peru supply window cerrando rápidamente — ventana 2-3 semanas. Asia-Pacific demand recovery sostenida. Belher 70ha competitiva. 110s premium over 150s sostenido ($2-3/carton). WK25 rango stable $34-38.",
+        razonamiento: "Limón 110s Texas $34-36 (Corbel -15% vs WK23 — mejor que tomate). Peru supply window cerrando rápidamente — ventana 2-3 semanas. Asia-Pacific demand recovery sostenida. Belher 70ha competitiva. 110s premium over 150s sostenido ($2-3/carton). WK26 rango stable $34-38.",
         factores: ["Peru supply window cerrando (2-3 sem)", "Asia-Pacific demand recovery", "Belher 70ha competitive", "110s premium sostenido", "Seasonal pricing normal junio"],
         riesgo: "Si Peru reabre supply significativamente, caída rápida $28-30.",
-        accion: "Maximizar FOB $34-36 rango WK25-WK26. Priorizar venta 110s. HOLD si precios >$37 — evaluación venta a 150s. Belher 70ha = asset estratégico WK25-WK28."
+        accion: "Maximizar FOB $34-36 rango WK26-WK27. Priorizar venta 110s. HOLD si precios >$37 — evaluación venta a 150s. Belher 70ha = asset estratégico WK26-WK28."
       }
     ]
   },
 
   cdc: {
-    semanaActual: "WK25",
+    semanaActual: "WK26",
     fuente: "Pendiente reporte CDC capitalhumano@agbelher.com",
     beltran: {
       titulo: "Juan Carlos Beltrán",
@@ -754,7 +756,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "05/06/2026",
+    actualizado:   "23/06/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
