@@ -1,20 +1,22 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 23 Jun 2026",
+    fecha: "Miércoles 24 Jun 2026",
     semana: "WK26",
-    actualizado: "23/06/2026 · 15:15"
+    actualizado: "24/06/2026 · 14:46"
   },
 
   alertas: [
     {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — ACCIÓN REQUERIDA ANTES 31-JUL: Reunión con Capital Trade y abogado Jeff Winton define que USDOC convocará partes el 1º de Julio para la Revisión Administrativa 2026 (cálculo nuevo margen de dumping / ajuste de arancel). Deadline: presentar solicitud de revisión de margen propio antes del 31 de Julio. Fuente: jacruz@agbelher.com · 22/Jun/2026 09:15."},
     {"nivel":"danger","texto":"🔐 SEGURIDAD GODADDY — Se eliminó la verificación en 2 pasos (2FA) de la cuenta GoDaddy (Case #01589861 · 15-Jun-2026 14:27 UTC). Si no fue acción tuya, contacta soporte inmediatamente. GoDaddy recomienda re-habilitar 2FA y agregar método de respaldo."},
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
-    {"nivel":"warning","texto":"📊 ESTADOS FINANCIEROS MAYO 2026 — Adjuntos recibidos hoy 23-Jun: BPSI Mayo 2026.xlsx y ABSA MAYO 2026.xlsx disponibles en Drive (carpeta Belher Adjuntos). Pendiente revisión P&L y Cash Flow cierre mayo. Fuente: juancarlos@agbelher.com · 23/Jun/2026 07:53."},
+    {"nivel":"warning","texto":"📉 OL 11+1 ABSA GC'25-26 — EBITDA $2,526,573 USD, pérdida de ($157k) vs Budget $2.7M USD. Caída de 995k cajas en exportación (−52% vs Budget), representa −$6,555k ingresos (compensado parcialmente por mejora de precio +$8.60/caja). Reducción en costos producción $1,320k y distribución $4,396k. Sin cambios OL 11+1 vs 10+2. Fuente: jacruz@agbelher.com · 23/Jun/2026 09:48."},
+    {"nivel":"warning","texto":"📊 ESTADOS FINANCIEROS MAYO 2026 — Adjuntos recibidos 23-Jun: BPSI Mayo 2026.xlsx y ABSA MAYO 2026.xlsx disponibles en Drive (carpeta Belher Adjuntos). Pendiente revisión P&L y Cash Flow cierre mayo. Fuente: juancarlos@agbelher.com · 23/Jun/2026 07:53."},
+    {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla (versión español e inglés para Jim). Documento comercial y análisis técnico de variedades indeterminadas para mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026 22:59–23:01."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
-    {"nivel":"info","texto":"🍋 BÁSCULA LIMÓN PERSA (22-Jun-2026) — Reportes diarios recibidos: Acarreo Diario, Diario de Báscula y Listado Diario del 22/06/2026. Operaciones activas de limón persa. Fuente: juancarlos@agbelher.com · 23/Jun/2026 07:53."},
+    {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 23-Jun — Exportación 80%, Nacional 20%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol (en rangos menores). Sin merma. Fuente: calidad@agbelher.com · 23/Jun/2026 12:33."},
+    {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 23-Jun — Reportes y manifiestos de 2 cargas recibidos. Chofer: Alberto Sicairos Jiménez · Cel: 667 321 4297 · Caja 1: CGG-155 (Full, 20 parrillas). Fuente: embarquesbelher@agbelher.com · 23/Jun/2026 20:05–20:09."},
     {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 22/Jun/2026 10:46 hrs. Fuente: Banbajioinforma@bb.com.mx."},
-    {"nivel":"info","texto":"🍋 EMBARQUES LIMÓN PERSA (19-Jun-2026 noche) — 3 cargas despachadas: Caja JL-34 (Full, 22 parrillas, Placa 31V56M · Chofer: Alan Eden Quevedo Iribe), Caja JL-42 (Placa 82UP25) y Caja JL-81 (Sencillo, 24 parrillas, Placa 12UP15 · Chofer: Gabino Terrazas Salomón). Fuente: embarquesbelher@agbelher.com · 20:59–21:03 hrs."},
     {"nivel":"info","texto":"📅 FORO MAR DE CORTÉS SUMMIT 2026 — Invitación recibida (17/Jun). Evento: 10-12 Nov 2026 · Hotel Hacienda del Mar Los Cabos, BCS. Registro disponible en https://fmdc-summit.com. Pendiente confirmar asistencia."},
     {"nivel":"info","texto":"⚖️ AHIFORES WEBINAR JUN — Sesión sobre Ley Silla, reducción de horas laborales y certificado de agro-exportación. Para socios AMHPAC/AHIFORES. Registro: Zoom (reenviado por c.marisol@agbelher.com · 16/Jun)."},
     {"nivel":"info","texto":"📊 ADM — Financials Mayo recibidos (09/Jun): Felipe Calderón / CRyAsociados envió PDF y Excel ADM May 28th Financials. Pendiente revisión y aprobación del equipo."},
@@ -592,6 +594,12 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"20:09","asunto":"23-06-2026 REPORTES GENERALES DE LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-06-23"},
+    {"hora":"20:05","asunto":"MANIFIESTOS DE CARGA DE LIMON PERSA — 2 cargas (CGG-155, Chofer: Alberto Sicairos)","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-06-23"},
+    {"hora":"23:01","asunto":"Propuesta tomate bola indeterminado — análisis precio semilla (ES)","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-23"},
+    {"hora":"22:59","asunto":"Round Tomato Seed Price Analysis — indeterminate round tomato MX market","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-23"},
+    {"hora":"12:33","asunto":"REPORTE DE OUTBOUND DE LIMON PERSA DEL 23/06/2026","de":"calidad@agbelher.com","leido":false,"fecha":"2026-06-23"},
+    {"hora":"09:48","asunto":"OL 11+1 — ABSA GC'25-26: EBITDA $2.5M, pérdida ($157k) vs Budget $2.7M","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-06-23"},
     {"hora":"07:53","asunto":"✅ Belher Adjuntos — 6 archivos (23-Jun-2026 07:53): BPSI Mayo, ABSA Mayo, Báscula Limón Persa 22-Jun","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-06-23"},
     {"hora":"15:42","asunto":"HortiDaily Newsletter | martes, 23 de junio de 2026 — Sensores, IA y robots en invernaderos de berries","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-23"},
     {"hora":"16:26","asunto":"Invitación actualizada: revisión final con Beltran — OL 11+1 P&L y Cash Flow (lun 22-Jun 1pm GMT-7)","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-06-22"},
