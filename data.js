@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 24 Jun 2026",
+    fecha: "Jueves 25 Jun 2026",
     semana: "WK26",
-    actualizado: "24/06/2026 · 14:46"
+    actualizado: "25/06/2026 · 14:45"
   },
 
   alertas: [
@@ -14,6 +14,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla (versión español e inglés para Jim). Documento comercial y análisis técnico de variedades indeterminadas para mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026 22:59–23:01."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
+    {"nivel":"info","texto":"🌿 HORTIDAILY 25-Jun — Nueva alternativa ecológica y sin resistencias para control de insectos en horticultura (ES). Mercados internacionales: desafíos climáticos extremos superados con innovación en campo (EN). Fuente: hortidaily.es / hortidaily.com · 25/Jun/2026."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 23-Jun — Exportación 80%, Nacional 20%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol (en rangos menores). Sin merma. Fuente: calidad@agbelher.com · 23/Jun/2026 12:33."},
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 23-Jun — Reportes y manifiestos de 2 cargas recibidos. Chofer: Alberto Sicairos Jiménez · Cel: 667 321 4297 · Caja 1: CGG-155 (Full, 20 parrillas). Fuente: embarquesbelher@agbelher.com · 23/Jun/2026 20:05–20:09."},
     {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 22/Jun/2026 10:46 hrs. Fuente: Banbajioinforma@bb.com.mx."},
@@ -594,6 +595,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"15:26","asunto":"HortiDaily Newsletter | jueves, 25 de junio de 2026 — Nueva alternativa ecológica control de insectos","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-25"},
+    {"hora":"14:02","asunto":"HortiDaily Newsletter | Thursday, June 25, 2026 — Weather challenges & market outlook","de":"mail@hortidaily.com","leido":false,"fecha":"2026-06-25"},
     {"hora":"20:09","asunto":"23-06-2026 REPORTES GENERALES DE LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-06-23"},
     {"hora":"20:05","asunto":"MANIFIESTOS DE CARGA DE LIMON PERSA — 2 cargas (CGG-155, Chofer: Alberto Sicairos)","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-06-23"},
     {"hora":"23:01","asunto":"Propuesta tomate bola indeterminado — análisis precio semilla (ES)","de":"ray@agbelher.com","leido":false,"fecha":"2026-06-23"},
