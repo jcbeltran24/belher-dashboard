@@ -1,19 +1,21 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 25 Jun 2026",
+    fecha: "Viernes 26 Jun 2026",
     semana: "WK26",
-    actualizado: "25/06/2026 · 14:45"
+    actualizado: "26/06/2026 · 14:38"
   },
 
   alertas: [
     {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — ACCIÓN REQUERIDA ANTES 31-JUL: Reunión con Capital Trade y abogado Jeff Winton define que USDOC convocará partes el 1º de Julio para la Revisión Administrativa 2026 (cálculo nuevo margen de dumping / ajuste de arancel). Deadline: presentar solicitud de revisión de margen propio antes del 31 de Julio. Fuente: jacruz@agbelher.com · 22/Jun/2026 09:15."},
     {"nivel":"danger","texto":"🔐 SEGURIDAD GODADDY — Se eliminó la verificación en 2 pasos (2FA) de la cuenta GoDaddy (Case #01589861 · 15-Jun-2026 14:27 UTC). Si no fue acción tuya, contacta soporte inmediatamente. GoDaddy recomienda re-habilitar 2FA y agregar método de respaldo."},
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
+    {"nivel":"warning","texto":"📊 OL FY 7+5 & GC 4+8 26-27 — Mariela García (Contraloría / Agrícola Don Memo) compartió el Outlook FY 7+5 y GC 4+8 ciclo 2026-27. EBITDA GC 4+8: $1,063,299 USD. Pendiente revisión y comentarios. Fuente: mariela@donmemo.net · 25/Jun/2026 18:05."},
     {"nivel":"warning","texto":"📉 OL 11+1 ABSA GC'25-26 — EBITDA $2,526,573 USD, pérdida de ($157k) vs Budget $2.7M USD. Caída de 995k cajas en exportación (−52% vs Budget), representa −$6,555k ingresos (compensado parcialmente por mejora de precio +$8.60/caja). Reducción en costos producción $1,320k y distribución $4,396k. Sin cambios OL 11+1 vs 10+2. Fuente: jacruz@agbelher.com · 23/Jun/2026 09:48."},
     {"nivel":"warning","texto":"📊 ESTADOS FINANCIEROS MAYO 2026 — Adjuntos recibidos 23-Jun: BPSI Mayo 2026.xlsx y ABSA MAYO 2026.xlsx disponibles en Drive (carpeta Belher Adjuntos). Pendiente revisión P&L y Cash Flow cierre mayo. Fuente: juancarlos@agbelher.com · 23/Jun/2026 07:53."},
     {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla (versión español e inglés para Jim). Documento comercial y análisis técnico de variedades indeterminadas para mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026 22:59–23:01."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
+    {"nivel":"info","texto":"🌿 HORTIDAILY 26-Jun — La producción orgánica de pimiento morrón en México comienza a ponerse en marcha. Señal positiva para diversificación de cultivos orgánicos en Sinaloa. Fuente: hortidaily.es · 26/Jun/2026."},
     {"nivel":"info","texto":"🌿 HORTIDAILY 25-Jun — Nueva alternativa ecológica y sin resistencias para control de insectos en horticultura (ES). Mercados internacionales: desafíos climáticos extremos superados con innovación en campo (EN). Fuente: hortidaily.es / hortidaily.com · 25/Jun/2026."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 23-Jun — Exportación 80%, Nacional 20%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol (en rangos menores). Sin merma. Fuente: calidad@agbelher.com · 23/Jun/2026 12:33."},
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 23-Jun — Reportes y manifiestos de 2 cargas recibidos. Chofer: Alberto Sicairos Jiménez · Cel: 667 321 4297 · Caja 1: CGG-155 (Full, 20 parrillas). Fuente: embarquesbelher@agbelher.com · 23/Jun/2026 20:05–20:09."},
@@ -595,6 +597,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"18:05","asunto":"OL FY 7+5 & GC 4+8 26-27 — EBITDA GC 4+8: $1,063,299 USD","de":"mariela@donmemo.net","leido":false,"fecha":"2026-06-25"},
+    {"hora":"16:16","asunto":"HortiDaily Newsletter | viernes, 26 de junio de 2026 — Producción orgánica pimiento morrón en México","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-26"},
     {"hora":"15:26","asunto":"HortiDaily Newsletter | jueves, 25 de junio de 2026 — Nueva alternativa ecológica control de insectos","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-25"},
     {"hora":"14:02","asunto":"HortiDaily Newsletter | Thursday, June 25, 2026 — Weather challenges & market outlook","de":"mail@hortidaily.com","leido":false,"fecha":"2026-06-25"},
     {"hora":"20:09","asunto":"23-06-2026 REPORTES GENERALES DE LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-06-23"},
