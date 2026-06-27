@@ -1,20 +1,25 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 26 Jun 2026",
+    fecha: "Sábado 27 Jun 2026",
     semana: "WK26",
-    actualizado: "26/06/2026 · 14:38"
+    actualizado: "27/06/2026 · 07:57"
   },
 
   alertas: [
     {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — ACCIÓN REQUERIDA ANTES 31-JUL: Reunión con Capital Trade y abogado Jeff Winton define que USDOC convocará partes el 1º de Julio para la Revisión Administrativa 2026 (cálculo nuevo margen de dumping / ajuste de arancel). Deadline: presentar solicitud de revisión de margen propio antes del 31 de Julio. Fuente: jacruz@agbelher.com · 22/Jun/2026 09:15."},
     {"nivel":"danger","texto":"🔐 SEGURIDAD GODADDY — Se eliminó la verificación en 2 pasos (2FA) de la cuenta GoDaddy (Case #01589861 · 15-Jun-2026 14:27 UTC). Si no fue acción tuya, contacta soporte inmediatamente. GoDaddy recomienda re-habilitar 2FA y agregar método de respaldo."},
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
+    {"nivel":"warning","texto":"📅 AGENDA ABSA-BPSI JULIO 2026 — Armando Llanes estará en Culiacán del 19-26 Jul. Reuniones vía Zoom y en persona según acordado con Antonio. Beltran participará según disponibilidad. Pendiente: Antonio enviar estados bancarios UBS de Almera Holdings 2025 a Armando y Juan. Fuente: armandollanes@donmemo.net · 26/Jun/2026 11:58."},
+    {"nivel":"warning","texto":"📊 FORECAST & SALES JUNE '26 — Juan Antonio Cruz convocó reunión F/S (Tomates/Limones/Granos) para el mié 22 Jul 2026 · 10am–11am (GMT-7). Invitación recibida 27-Jun. Fuente: jacruz@agbelher.com."},
     {"nivel":"warning","texto":"📊 OL FY 7+5 & GC 4+8 26-27 — Mariela García (Contraloría / Agrícola Don Memo) compartió el Outlook FY 7+5 y GC 4+8 ciclo 2026-27. EBITDA GC 4+8: $1,063,299 USD. Pendiente revisión y comentarios. Fuente: mariela@donmemo.net · 25/Jun/2026 18:05."},
     {"nivel":"warning","texto":"📉 OL 11+1 ABSA GC'25-26 — EBITDA $2,526,573 USD, pérdida de ($157k) vs Budget $2.7M USD. Caída de 995k cajas en exportación (−52% vs Budget), representa −$6,555k ingresos (compensado parcialmente por mejora de precio +$8.60/caja). Reducción en costos producción $1,320k y distribución $4,396k. Sin cambios OL 11+1 vs 10+2. Fuente: jacruz@agbelher.com · 23/Jun/2026 09:48."},
     {"nivel":"warning","texto":"📊 ESTADOS FINANCIEROS MAYO 2026 — Adjuntos recibidos 23-Jun: BPSI Mayo 2026.xlsx y ABSA MAYO 2026.xlsx disponibles en Drive (carpeta Belher Adjuntos). Pendiente revisión P&L y Cash Flow cierre mayo. Fuente: juancarlos@agbelher.com · 23/Jun/2026 07:53."},
     {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla (versión español e inglés para Jim). Documento comercial y análisis técnico de variedades indeterminadas para mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026 22:59–23:01."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
+    {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 26-Jun — Exportación 84%, Nacional 16%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol, oleocelosis (rangos menores ≤8%). Sin merma. Fuente: calidad@agbelher.com · 26/Jun/2026 12:17."},
+    {"nivel":"info","texto":"🍋 EMBARQUES LIMÓN PERSA 26-Jun — 2 cargas enviadas. Chofer: Pedro Javier Gastelum Escalante · Cel: 667 796 1810 · Caja 1: CGG-26 (18 parrillas) · Placa: 445WB3 · Caja 2: CGG-154 (13 parrillas) · Placa: 39UP8S. Fuente: embarquesbelher@agbelher.com · 26/Jun/2026 19:12."},
+    {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 26/Jun/2026 16:18 hrs. Fuente: Banbajioinforma@bb.com.mx."},
     {"nivel":"info","texto":"🌿 HORTIDAILY 26-Jun — La producción orgánica de pimiento morrón en México comienza a ponerse en marcha. Señal positiva para diversificación de cultivos orgánicos en Sinaloa. Fuente: hortidaily.es · 26/Jun/2026."},
     {"nivel":"info","texto":"🌿 HORTIDAILY 25-Jun — Nueva alternativa ecológica y sin resistencias para control de insectos en horticultura (ES). Mercados internacionales: desafíos climáticos extremos superados con innovación en campo (EN). Fuente: hortidaily.es / hortidaily.com · 25/Jun/2026."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 23-Jun — Exportación 80%, Nacional 20%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol (en rangos menores). Sin merma. Fuente: calidad@agbelher.com · 23/Jun/2026 12:33."},
@@ -597,6 +602,13 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"11:58","asunto":"Agenda ABSA-BPSI Julio 2026 — Reuniones zoom y en persona (Armando en Culiacán 19-26 Jul)","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-06-26"},
+    {"hora":"12:17","asunto":"REPORTE DE OUTBOUND DE LIMON PERSA DEL 26/06/2026 — Export 84%, Nacional 16%","de":"calidad@agbelher.com","leido":false,"fecha":"2026-06-26"},
+    {"hora":"16:18","asunto":"Transferencia Interbancaria SPEI — BanBajío · 26-Jun-2026","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-06-26"},
+    {"hora":"19:12","asunto":"MANIFIESTOS DE CARGA DE LIMON PERSA — 2 cargas (CGG-26, CGG-154 · Chofer: Pedro Gastelum)","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-06-26"},
+    {"hora":"19:22","asunto":"26-06-2026 REPORTES GENERALES DE LIMON","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-06-26"},
+    {"hora":"01:37","asunto":"Invitación: June '26 F/S (Tomates/Limones/Granos) — mié 22 Jul 2026 10am (Juan Antonio Cruz)","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-06-27"},
+    {"hora":"05:12","asunto":"New trade confirmation — MyMerrill","de":"my_merrill@ml.com","leido":false,"fecha":"2026-06-27"},
     {"hora":"18:05","asunto":"OL FY 7+5 & GC 4+8 26-27 — EBITDA GC 4+8: $1,063,299 USD","de":"mariela@donmemo.net","leido":false,"fecha":"2026-06-25"},
     {"hora":"16:16","asunto":"HortiDaily Newsletter | viernes, 26 de junio de 2026 — Producción orgánica pimiento morrón en México","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-26"},
     {"hora":"15:26","asunto":"HortiDaily Newsletter | jueves, 25 de junio de 2026 — Nueva alternativa ecológica control de insectos","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-25"},
