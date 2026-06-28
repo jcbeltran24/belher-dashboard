@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 27 Jun 2026",
+    fecha: "Domingo 28 Jun 2026",
     semana: "WK26",
-    actualizado: "27/06/2026 · 12:36"
+    actualizado: "28/06/2026 · 09:15"
   },
 
   alertas: [
@@ -612,8 +612,8 @@ window.BELHER = {
     { label:"Chile Bell GH naranja (TX)", valor:"$6.00-7.00", cambio:"↓54%", dir:"down" },
     { label:"Jalapeño (TX)", valor:"$17-19", cambio:"↓47%", dir:"down" },
     { label:"Limón seedless 110s (TX)", valor:"$34-36", cambio:"↓14%", dir:"down" },
-    { label:"AVO (Mission Produce)", valor:"$11.49", cambio:"+$0.36 (+3.23%)", dir:"up" },
-    { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"—", dir:"neutral" },
+    { label:"AVO (Mission Produce)", valor:"$12.26", cambio:"+$0.77 (+6.7%)", dir:"up" },
+    { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Plano", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Review 15-Jun", dir:"neutral" },
     { label:"Cash on hand (Jun)", valor:"~$500K est", cambio:"WK26 forecast", dir:"neutral" },
     { label:"EBITDA Marzo", valor:"$2.86M", cambio:"+15%", dir:"up" }
@@ -656,7 +656,7 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "23/06/2026 · 09:45",
+    generado:  "28/06/2026 · 09:15",
     modelo:    "Claude Opus 4.8",
     horizonte: "7 días",
     nota:      "Síntesis de precios Corbel #0065 (05-Jun) + datos operativos + calidad outbound + noticias industria. Fin de temporada tomate confirmado WK24-26. Limón estable mejor que tomate. Tomate: rotación urgente. Limón: mantener postura $34-36.",
@@ -756,7 +756,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "27/06/2026",
+    actualizado:   "28/06/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
