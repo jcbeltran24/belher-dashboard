@@ -1,14 +1,15 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 28 Jun 2026",
+    fecha: "Lunes 29 Jun 2026",
     semana: "WK26",
-    actualizado: "28/06/2026 · 14:03"
+    actualizado: "29/06/2026 · 15:59"
   },
 
   alertas: [
     {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — ACCIÓN REQUERIDA ANTES 31-JUL: Reunión con Capital Trade y abogado Jeff Winton define que USDOC convocará partes el 1º de Julio para la Revisión Administrativa 2026 (cálculo nuevo margen de dumping / ajuste de arancel). Deadline: presentar solicitud de revisión de margen propio antes del 31 de Julio. Fuente: jacruz@agbelher.com · 22/Jun/2026 09:15."},
     {"nivel":"danger","texto":"🔐 SEGURIDAD GODADDY — Se eliminó la verificación en 2 pasos (2FA) de la cuenta GoDaddy (Case #01589861 · 15-Jun-2026 14:27 UTC). Si no fue acción tuya, contacta soporte inmediatamente. GoDaddy recomienda re-habilitar 2FA y agregar método de respaldo."},
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
+    {"nivel":"warning","texto":"📅 JUNTA DE CONSEJO ABSA · JULIO 2026 — Armando Llanes confirma fecha: viernes 24 de julio a las 3:00 pm en casa de la Sra. Hildelisa. Armando prepara el material a cubrir. Fuente: armandollanes@donmemo.net · 28/Jun/2026 19:02."},
     {"nivel":"warning","texto":"📅 AGENDA ABSA-BPSI JULIO 2026 — Armando Llanes estará en Culiacán del 19-26 Jul. Reuniones vía Zoom y en persona según acordado con Antonio. Beltran participará según disponibilidad. Pendiente: Antonio enviar estados bancarios UBS de Almera Holdings 2025 a Armando y Juan. Fuente: armandollanes@donmemo.net · 26/Jun/2026 11:58."},
     {"nivel":"warning","texto":"📊 FORECAST & SALES JUNE '26 — Juan Antonio Cruz convocó reunión F/S (Tomates/Limones/Granos) para el mié 22 Jul 2026 · 10am–11am (GMT-7). Invitación recibida 27-Jun. Fuente: jacruz@agbelher.com."},
     {"nivel":"warning","texto":"📊 OL FY 7+5 & GC 4+8 26-27 — Mariela García (Contraloría / Agrícola Don Memo) compartió el Outlook FY 7+5 y GC 4+8 ciclo 2026-27. EBITDA GC 4+8: $1,063,299 USD. Pendiente revisión y comentarios. Fuente: mariela@donmemo.net · 25/Jun/2026 18:05."},
@@ -17,6 +18,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla (versión español e inglés para Jim). Documento comercial y análisis técnico de variedades indeterminadas para mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026 22:59–23:01."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
+    {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANAL — Recibo electrónico emitido por AGRÍCOLA BELHER FIJOS (RFC: ABE180411CB8) · Empleado: 000009 - BELTRAN OCHOA JUAN CARLOS · Periodo 26 Semanal (17/06/2026 al 23/06/2026) · UUID: 841F6C5A-1D0E-412C-8A7B-2B5993032C53. Fuente: anajar@agbelher.com · 29/Jun/2026 08:49."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 26-Jun — Exportación 84%, Nacional 16%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol, oleocelosis (rangos menores ≤8%). Sin merma. Fuente: calidad@agbelher.com · 26/Jun/2026 12:17."},
     {"nivel":"info","texto":"🍋 EMBARQUES LIMÓN PERSA 26-Jun — 2 cargas enviadas. Chofer: Pedro Javier Gastelum Escalante · Cel: 667 796 1810 · Caja 1: CGG-26 (18 parrillas) · Placa: 445WB3 · Caja 2: CGG-154 (13 parrillas) · Placa: 39UP8S. Fuente: embarquesbelher@agbelher.com · 26/Jun/2026 19:12."},
     {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 26/Jun/2026 16:18 hrs. Fuente: Banbajioinforma@bb.com.mx."},
@@ -26,9 +28,7 @@ window.BELHER = {
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 23-Jun — Reportes y manifiestos de 2 cargas recibidos. Chofer: Alberto Sicairos Jiménez · Cel: 667 321 4297 · Caja 1: CGG-155 (Full, 20 parrillas). Fuente: embarquesbelher@agbelher.com · 23/Jun/2026 20:05–20:09."},
     {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 22/Jun/2026 10:46 hrs. Fuente: Banbajioinforma@bb.com.mx."},
     {"nivel":"info","texto":"📅 FORO MAR DE CORTÉS SUMMIT 2026 — Invitación recibida (17/Jun). Evento: 10-12 Nov 2026 · Hotel Hacienda del Mar Los Cabos, BCS. Registro disponible en https://fmdc-summit.com. Pendiente confirmar asistencia."},
-    {"nivel":"info","texto":"⚖️ AHIFORES WEBINAR JUN — Sesión sobre Ley Silla, reducción de horas laborales y certificado de agro-exportación. Para socios AMHPAC/AHIFORES. Registro: Zoom (reenviado por c.marisol@agbelher.com · 16/Jun)."},
-    {"nivel":"info","texto":"📊 ADM — Financials Mayo recibidos (09/Jun): Felipe Calderón / CRyAsociados envió PDF y Excel ADM May 28th Financials. Pendiente revisión y aprobación del equipo."},
-    {"nivel":"success","texto":"💹 STOCK PRICES — CVGW (Calavo/Mission): $26.09 · AVO (Mission Produce): $10.11 · Integración Mission Produce consolidada."}
+    {"nivel":"info","texto":"⚖️ AHIFORES WEBINAR JUN — Sesión sobre Ley Silla, reducción de horas laborales y certificado de agro-exportación. Para socios AMHPAC/AHIFORES. Registro: Zoom (reenviado por c.marisol@agbelher.com · 16/Jun)."}
   ],
 
   ebitda: {
@@ -602,6 +602,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"08:49","asunto":"CFDI Nómina Semanal — Periodo 26 (17/06–23/06/2026) · BELTRAN OCHOA JUAN CARLOS · ABE180411CB8","de":"anajar@agbelher.com","leido":false,"fecha":"2026-06-29"},
+    {"hora":"19:02","asunto":"ABSA — Reunión Junta de Consejo Julio 2026 · Viernes 24 Jul · 3:00 pm · Casa Sra. Hildelisa","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-06-28"},
     {"hora":"11:58","asunto":"Agenda ABSA-BPSI Julio 2026 — Reuniones zoom y en persona (Armando en Culiacán 19-26 Jul)","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-06-26"},
     {"hora":"12:17","asunto":"REPORTE DE OUTBOUND DE LIMON PERSA DEL 26/06/2026 — Export 84%, Nacional 16%","de":"calidad@agbelher.com","leido":false,"fecha":"2026-06-26"},
     {"hora":"16:18","asunto":"Transferencia Interbancaria SPEI — BanBajío · 26-Jun-2026","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-06-26"},
