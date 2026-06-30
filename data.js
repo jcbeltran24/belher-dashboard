@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 29 Jun 2026",
+    fecha: "Martes 30 Jun 2026",
     semana: "WK27",
-    actualizado: "29/06/2026 · 11:48"
+    actualizado: "30/06/2026 · 07:30"
   },
 
   alertas: [
@@ -756,7 +756,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "28/06/2026",
+    actualizado:   "30/06/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
