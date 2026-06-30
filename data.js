@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 29 Jun 2026",
-    semana: "WK26",
-    actualizado: "29/06/2026 · 15:59"
+    fecha: "Martes 30 Jun 2026",
+    semana: "WK27",
+    actualizado: "30/06/2026 · 16:33"
   },
 
   alertas: [
@@ -18,17 +18,14 @@ window.BELHER = {
     {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla (versión español e inglés para Jim). Documento comercial y análisis técnico de variedades indeterminadas para mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026 22:59–23:01."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
+    {"nivel":"info","texto":"🌿 HORTIDAILY 30-Jun — \"El productor necesita herramientas capaces de sostener la rentabilidad cuando el clima deja de comportarse de manera previsible\" (ES). Producción de vegetales de hoja en climas tropicales: desafíos de campo (EN). Fuente: hortidaily.es / hortidaily.com · 30/Jun/2026."},
     {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANAL — Recibo electrónico emitido por AGRÍCOLA BELHER FIJOS (RFC: ABE180411CB8) · Empleado: 000009 - BELTRAN OCHOA JUAN CARLOS · Periodo 26 Semanal (17/06/2026 al 23/06/2026) · UUID: 841F6C5A-1D0E-412C-8A7B-2B5993032C53. Fuente: anajar@agbelher.com · 29/Jun/2026 08:49."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 26-Jun — Exportación 84%, Nacional 16%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol, oleocelosis (rangos menores ≤8%). Sin merma. Fuente: calidad@agbelher.com · 26/Jun/2026 12:17."},
     {"nivel":"info","texto":"🍋 EMBARQUES LIMÓN PERSA 26-Jun — 2 cargas enviadas. Chofer: Pedro Javier Gastelum Escalante · Cel: 667 796 1810 · Caja 1: CGG-26 (18 parrillas) · Placa: 445WB3 · Caja 2: CGG-154 (13 parrillas) · Placa: 39UP8S. Fuente: embarquesbelher@agbelher.com · 26/Jun/2026 19:12."},
     {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 26/Jun/2026 16:18 hrs. Fuente: Banbajioinforma@bb.com.mx."},
-    {"nivel":"info","texto":"🌿 HORTIDAILY 26-Jun — La producción orgánica de pimiento morrón en México comienza a ponerse en marcha. Señal positiva para diversificación de cultivos orgánicos en Sinaloa. Fuente: hortidaily.es · 26/Jun/2026."},
-    {"nivel":"info","texto":"🌿 HORTIDAILY 25-Jun — Nueva alternativa ecológica y sin resistencias para control de insectos en horticultura (ES). Mercados internacionales: desafíos climáticos extremos superados con innovación en campo (EN). Fuente: hortidaily.es / hortidaily.com · 25/Jun/2026."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 23-Jun — Exportación 80%, Nacional 20%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol (en rangos menores). Sin merma. Fuente: calidad@agbelher.com · 23/Jun/2026 12:33."},
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 23-Jun — Reportes y manifiestos de 2 cargas recibidos. Chofer: Alberto Sicairos Jiménez · Cel: 667 321 4297 · Caja 1: CGG-155 (Full, 20 parrillas). Fuente: embarquesbelher@agbelher.com · 23/Jun/2026 20:05–20:09."},
-    {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 22/Jun/2026 10:46 hrs. Fuente: Banbajioinforma@bb.com.mx."},
-    {"nivel":"info","texto":"📅 FORO MAR DE CORTÉS SUMMIT 2026 — Invitación recibida (17/Jun). Evento: 10-12 Nov 2026 · Hotel Hacienda del Mar Los Cabos, BCS. Registro disponible en https://fmdc-summit.com. Pendiente confirmar asistencia."},
-    {"nivel":"info","texto":"⚖️ AHIFORES WEBINAR JUN — Sesión sobre Ley Silla, reducción de horas laborales y certificado de agro-exportación. Para socios AMHPAC/AHIFORES. Registro: Zoom (reenviado por c.marisol@agbelher.com · 16/Jun)."}
+    {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 22/Jun/2026 10:46 hrs. Fuente: Banbajioinforma@bb.com.mx."}
   ],
 
   ebitda: {
@@ -602,6 +599,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:04","asunto":"HortiDaily Newsletter | martes, 30 de junio de 2026 — Rentabilidad y clima en producción hortícola","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-30"},
+    {"hora":"14:35","asunto":"HortiDaily Newsletter | Tuesday, June 30, 2026 — Leafy vegetables in tropical climates","de":"mail@hortidaily.com","leido":false,"fecha":"2026-06-30"},
     {"hora":"08:49","asunto":"CFDI Nómina Semanal — Periodo 26 (17/06–23/06/2026) · BELTRAN OCHOA JUAN CARLOS · ABE180411CB8","de":"anajar@agbelher.com","leido":false,"fecha":"2026-06-29"},
     {"hora":"19:02","asunto":"ABSA — Reunión Junta de Consejo Julio 2026 · Viernes 24 Jul · 3:00 pm · Casa Sra. Hildelisa","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-06-28"},
     {"hora":"11:58","asunto":"Agenda ABSA-BPSI Julio 2026 — Reuniones zoom y en persona (Armando en Culiacán 19-26 Jul)","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-06-26"},
