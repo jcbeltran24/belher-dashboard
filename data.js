@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 30 Jun 2026",
+    fecha: "Miércoles 01 Jul 2026",
     semana: "WK27",
-    actualizado: "30/06/2026 · 16:33"
+    actualizado: "01/07/2026 · 14:50"
   },
 
   alertas: [
@@ -18,7 +18,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla (versión español e inglés para Jim). Documento comercial y análisis técnico de variedades indeterminadas para mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026 22:59–23:01."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
-    {"nivel":"info","texto":"🌿 HORTIDAILY 30-Jun — \"El productor necesita herramientas capaces de sostener la rentabilidad cuando el clima deja de comportarse de manera previsible\" (ES). Producción de vegetales de hoja en climas tropicales: desafíos de campo (EN). Fuente: hortidaily.es / hortidaily.com · 30/Jun/2026."},
+    {"nivel":"info","texto":"🌿 HORTIDAILY 01-Jul — (EN) US: El 17% de arancel antidumping sobre tomate mexicano se mantiene tras revisión USITC. Señal de presión comercial persistente para exportadores de tomate de Sinaloa. (ES) El cultivo hidropónico en fibra de coco avanza en fresa de Huelva ante límites de cultivo en suelo. Fuente: hortidaily.com / hortidaily.es · 01/Jul/2026."},
     {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANAL — Recibo electrónico emitido por AGRÍCOLA BELHER FIJOS (RFC: ABE180411CB8) · Empleado: 000009 - BELTRAN OCHOA JUAN CARLOS · Periodo 26 Semanal (17/06/2026 al 23/06/2026) · UUID: 841F6C5A-1D0E-412C-8A7B-2B5993032C53. Fuente: anajar@agbelher.com · 29/Jun/2026 08:49."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 26-Jun — Exportación 84%, Nacional 16%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol, oleocelosis (rangos menores ≤8%). Sin merma. Fuente: calidad@agbelher.com · 26/Jun/2026 12:17."},
     {"nivel":"info","texto":"🍋 EMBARQUES LIMÓN PERSA 26-Jun — 2 cargas enviadas. Chofer: Pedro Javier Gastelum Escalante · Cel: 667 796 1810 · Caja 1: CGG-26 (18 parrillas) · Placa: 445WB3 · Caja 2: CGG-154 (13 parrillas) · Placa: 39UP8S. Fuente: embarquesbelher@agbelher.com · 26/Jun/2026 19:12."},
@@ -599,6 +599,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:03","asunto":"HortiDaily Newsletter | miércoles, 1 de julio de 2026 — Cultivo hidropónico en fibra de coco para fresa de Huelva","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-01"},
+    {"hora":"15:17","asunto":"HortiDaily Newsletter | Wednesday, July 1, 2026 — US: 17% duty on Mexican tomatoes remains after USITC review","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-01"},
     {"hora":"16:04","asunto":"HortiDaily Newsletter | martes, 30 de junio de 2026 — Rentabilidad y clima en producción hortícola","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-30"},
     {"hora":"14:35","asunto":"HortiDaily Newsletter | Tuesday, June 30, 2026 — Leafy vegetables in tropical climates","de":"mail@hortidaily.com","leido":false,"fecha":"2026-06-30"},
     {"hora":"08:49","asunto":"CFDI Nómina Semanal — Periodo 26 (17/06–23/06/2026) · BELTRAN OCHOA JUAN CARLOS · ABE180411CB8","de":"anajar@agbelher.com","leido":false,"fecha":"2026-06-29"},
