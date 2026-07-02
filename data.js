@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 01 Jul 2026",
+    fecha: "Jueves 02 Jul 2026",
     semana: "WK27",
-    actualizado: "01/07/2026 · 14:50"
+    actualizado: "02/07/2026 · 14:19"
   },
 
   alertas: [
+    {"nivel":"danger","texto":"🔐 LOGIN SOSPECHOSO GOOGLE WORKSPACE — Google detectó intento de acceso inusual en capitalhumano@agbelher.com · IP: 2806:370:2579:4865:a821:bcff:febb:19ba · Fecha: 02/Jul/2026 13:23 UTC. Verificar si fue acción autorizada. Revisar Alert Center de Google Workspace y forzar cambio de contraseña si es necesario. Fuente: google-workspace-alerts@google.com · 02/Jul/2026 06:54."},
     {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — ACCIÓN REQUERIDA ANTES 31-JUL: Reunión con Capital Trade y abogado Jeff Winton define que USDOC convocará partes el 1º de Julio para la Revisión Administrativa 2026 (cálculo nuevo margen de dumping / ajuste de arancel). Deadline: presentar solicitud de revisión de margen propio antes del 31 de Julio. Fuente: jacruz@agbelher.com · 22/Jun/2026 09:15."},
     {"nivel":"danger","texto":"🔐 SEGURIDAD GODADDY — Se eliminó la verificación en 2 pasos (2FA) de la cuenta GoDaddy (Case #01589861 · 15-Jun-2026 14:27 UTC). Si no fue acción tuya, contacta soporte inmediatamente. GoDaddy recomienda re-habilitar 2FA y agregar método de respaldo."},
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
@@ -18,6 +19,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla (versión español e inglés para Jim). Documento comercial y análisis técnico de variedades indeterminadas para mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026 22:59–23:01."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
+    {"nivel":"info","texto":"🌿 HORTIDAILY 02-Jul — (EN) Gestión de nutrientes del futuro: elementos individuales en lugar de EC como parámetro de control. (ES) Esasem refuerza presencia directa en España con apuesta varietal en tomate, pimiento, portainjertos y sandía. Fuente: hortidaily.com / hortidaily.es · 02/Jul/2026."},
     {"nivel":"info","texto":"🌿 HORTIDAILY 01-Jul — (EN) US: El 17% de arancel antidumping sobre tomate mexicano se mantiene tras revisión USITC. Señal de presión comercial persistente para exportadores de tomate de Sinaloa. (ES) El cultivo hidropónico en fibra de coco avanza en fresa de Huelva ante límites de cultivo en suelo. Fuente: hortidaily.com / hortidaily.es · 01/Jul/2026."},
     {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANAL — Recibo electrónico emitido por AGRÍCOLA BELHER FIJOS (RFC: ABE180411CB8) · Empleado: 000009 - BELTRAN OCHOA JUAN CARLOS · Periodo 26 Semanal (17/06/2026 al 23/06/2026) · UUID: 841F6C5A-1D0E-412C-8A7B-2B5993032C53. Fuente: anajar@agbelher.com · 29/Jun/2026 08:49."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 26-Jun — Exportación 84%, Nacional 16%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol, oleocelosis (rangos menores ≤8%). Sin merma. Fuente: calidad@agbelher.com · 26/Jun/2026 12:17."},
@@ -599,6 +601,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"15:50","asunto":"HortiDaily Newsletter | jueves, 2 de julio de 2026 — Esasem refuerza presencia en España con tomate, pimiento, portainjertos y sandía","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-02"},
+    {"hora":"14:53","asunto":"HortiDaily Newsletter | Thursday, July 2, 2026 — Nutrient management of the future: Elements instead of EC","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-02"},
+    {"hora":"06:54","asunto":"⚠️ Alert: Suspicious login — capitalhumano@agbelher.com (IP: 2806:370:...) · 02-Jul-2026 13:23 UTC","de":"google-workspace-alerts-noreply@google.com","leido":false,"fecha":"2026-07-02"},
     {"hora":"16:03","asunto":"HortiDaily Newsletter | miércoles, 1 de julio de 2026 — Cultivo hidropónico en fibra de coco para fresa de Huelva","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-01"},
     {"hora":"15:17","asunto":"HortiDaily Newsletter | Wednesday, July 1, 2026 — US: 17% duty on Mexican tomatoes remains after USITC review","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-01"},
     {"hora":"16:04","asunto":"HortiDaily Newsletter | martes, 30 de junio de 2026 — Rentabilidad y clima en producción hortícola","de":"mail@hortidaily.es","leido":false,"fecha":"2026-06-30"},
