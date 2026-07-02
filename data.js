@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 01 Jul 2026",
-    semana: "WK26",
-    actualizado: "01/07/2026 · 07:35"
+    fecha: "Jueves 02 Jul 2026",
+    semana: "WK27",
+    actualizado: "02/07/2026 · 07:45"
   },
 
   alertas: [
@@ -612,7 +612,7 @@ window.BELHER = {
     { label:"Chile Bell GH naranja (TX)", valor:"$6.00-7.00", cambio:"↓54%", dir:"down" },
     { label:"Jalapeño (TX)", valor:"$17-19", cambio:"↓47%", dir:"down" },
     { label:"Limón seedless 110s (TX)", valor:"$34-36", cambio:"↓14%", dir:"down" },
-    { label:"AVO (Mission Produce)", valor:"$12.26", cambio:"+$0.77 (+6.7%)", dir:"up" },
+    { label:"AVO (Mission Produce)", valor:"$12.64", cambio:"+$0.79 (+6.7%)", dir:"up" },
     { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Plano", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Review 15-Jun", dir:"neutral" },
     { label:"Cash on hand (Jun)", valor:"~$500K est", cambio:"WK26 forecast", dir:"neutral" },
