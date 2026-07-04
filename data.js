@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 03 Jul 2026",
+    fecha: "Sábado 04 Jul 2026",
     semana: "WK27",
-    actualizado: "03/07/2026 · 14:23"
+    actualizado: "04/07/2026 · 13:48"
   },
 
   alertas: [
+    {"nivel":"info","texto":"📅 PRESENTACIÓN NUEVO GERENTE CH — Juan Antonio Cruz convoca reunión Zoom: martes 7 de julio de 2026 · 10am–11am (GMT-7). Meeting ID: 84994380215 · contraseña: 824390. Link: us06web.zoom.us/j/84994380215. Fuente: jacruz@agbelher.com · 03/Jul/2026."},
     {"nivel":"warning","texto":"🌍 CORBEL #0085 · 03-Jul — Presión continua sobre tomate fresco mexicano por marco antidumping EE.UU.: impacto en planeación de producción, márgenes y sustitución de cultivos. Limoneros de Veracruz abren canal de exportación a Rusia, señal de diversificación de salidas más allá de Norteamérica. Aguacate Hass global bajo presión de precios por mayor oferta de México, Perú, Colombia, Marruecos, Kenia, Sudáfrica y Chile. Fuente: ray@agbelher.com · 03/Jul/2026."},
     {"nivel":"warning","texto":"💰 SLA — RESUMEN PRESUPUESTAL CIERRE JUNIO 2026: Semillas Latinoamericanas ABC reporta recursos totales de $106,878 USD (remanente 2025: $6,878 + aportación Cortés $50k + aportación Beltrán $50k). Gastos acumulados ene-jun: $97,467 USD (fijos $71,633 + variables $25,834). Sin inversiones en activos ni ingresos por ventas aún. Primera venta proyectada: diciembre 2026. Armando Llanes confirma recepción y pide actualización si hay cambios en esa fecha. Fuente: ray@agbelher.com / armandollanes@donmemo.net · 02/Jul/2026."},
     {"nivel":"danger","texto":"🔐 LOGIN SOSPECHOSO GOOGLE WORKSPACE — Google detectó intento de acceso inusual en capitalhumano@agbelher.com · IP: 2806:370:2579:4865:a821:bcff:febb:19ba · Fecha: 02/Jul/2026 13:23 UTC. Verificar si fue acción autorizada. Revisar Alert Center de Google Workspace y forzar cambio de contraseña si es necesario. Fuente: google-workspace-alerts@google.com · 02/Jul/2026 06:54."},
@@ -24,12 +25,10 @@ window.BELHER = {
     {"nivel":"info","texto":"🌿 HORTIDAILY 03-Jul — (EN) Avocado Hass global supply cycle: lower prices linked to increased plantings across multiple origins. Persian lime from Veracruz diversifying to Russia. US antidumping on tomato reshaping crop planning in Sinaloa. Fuente: hortidaily.com · 03/Jul/2026."},
     {"nivel":"info","texto":"🌿 HORTIDAILY 02-Jul — (EN) Gestión de nutrientes del futuro: elementos individuales en lugar de EC como parámetro de control. (ES) Esasem refuerza presencia directa en España con apuesta varietal en tomate, pimiento, portainjertos y sandía. Fuente: hortidaily.com / hortidaily.es · 02/Jul/2026."},
     {"nivel":"info","texto":"🌿 HORTIDAILY 01-Jul — (EN) US: El 17% de arancel antidumping sobre tomate mexicano se mantiene tras revisión USITC. Señal de presión comercial persistente para exportadores de tomate de Sinaloa. (ES) El cultivo hidropónico en fibra de coco avanza en fresa de Huelva ante límites de cultivo en suelo. Fuente: hortidaily.com / hortidaily.es · 01/Jul/2026."},
+    {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANAL Periodo 27 — Recibo electrónico emitido por AGRÍCOLA BELHER FIJOS (RFC: ABE180411CB8) · Empleado: 000009 - BELTRAN OCHOA JUAN CARLOS · Periodo 27 Semanal (24/06/2026 al 30/06/2026) · UUID: EFDA50AB-3FFC-4701-B7D8-3B4ABD56FB82. Fuente: anajar@agbelher.com · 03/Jul/2026 16:22."},
     {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANAL — Recibo electrónico emitido por AGRÍCOLA BELHER FIJOS (RFC: ABE180411CB8) · Empleado: 000009 - BELTRAN OCHOA JUAN CARLOS · Periodo 26 Semanal (17/06/2026 al 23/06/2026) · UUID: 841F6C5A-1D0E-412C-8A7B-2B5993032C53. Fuente: anajar@agbelher.com · 29/Jun/2026 08:49."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 26-Jun — Exportación 84%, Nacional 16%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol, oleocelosis (rangos menores ≤8%). Sin merma. Fuente: calidad@agbelher.com · 26/Jun/2026 12:17."},
-    {"nivel":"info","texto":"🍋 EMBARQUES LIMÓN PERSA 26-Jun — 2 cargas enviadas. Chofer: Pedro Javier Gastelum Escalante · Cel: 667 796 1810 · Caja 1: CGG-26 (18 parrillas) · Placa: 445WB3 · Caja 2: CGG-154 (13 parrillas) · Placa: 39UP8S. Fuente: embarquesbelher@agbelher.com · 26/Jun/2026 19:12."},
-    {"nivel":"info","texto":"💳 SPEI RECIBIDO — Transferencia interbancaria registrada en cuenta BanBajío · 26/Jun/2026 16:18 hrs. Fuente: Banbajioinforma@bb.com.mx."},
-    {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 23-Jun — Exportación 80%, Nacional 20%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol (en rangos menores). Sin merma. Fuente: calidad@agbelher.com · 23/Jun/2026 12:33."},
-    {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 23-Jun — Reportes y manifiestos de 2 cargas recibidos. Chofer: Alberto Sicairos Jiménez · Cel: 667 321 4297 · Caja 1: CGG-155 (Full, 20 parrillas). Fuente: embarquesbelher@agbelher.com · 23/Jun/2026 23:05–20:09."}
+    {"nivel":"info","texto":"🍋 EMBARQUES LIMÓN PERSA 26-Jun — 2 cargas enviadas. Chofer: Pedro Javier Gastelum Escalante · Cel: 667 796 1810 · Caja 1: CGG-26 (18 parrillas) · Placa: 445WB3 · Caja 2: CGG-154 (13 parrillas) · Placa: 39UP8S. Fuente: embarquesbelher@agbelher.com · 26/Jun/2026 19:12."}
   ],
 
   ebitda: {
@@ -603,6 +602,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:43","asunto":"Invitación: Presentación nuevo gerente de CH — mar 7 Jul 2026 · 10am–11am (GMT-7) · Zoom ID: 84994380215","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-07-04"},
+    {"hora":"16:22","asunto":"CFDI Nómina Semanal — Periodo 27 (24/06–30/06/2026) · BELTRAN OCHOA JUAN CARLOS · ABE180411CB8","de":"anajar@agbelher.com","leido":false,"fecha":"2026-07-04"},
     {"hora":"07:03","asunto":"Corbel Seeds Daily Report #0085 — Tomate antidumping EE.UU., nuevo canal limón Veracruz→Rusia, presión precio aguacate Hass global","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-03"},
     {"hora":"14:48","asunto":"HortiDaily Newsletter | Friday, July 3, 2026 — Avocado Hass global supply cycle & Persian lime diversification to Russia","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-03"},
     {"hora":"15:50","asunto":"HortiDaily Newsletter | jueves, 2 de julio de 2026 — Esasem refuerza presencia en España con tomate, pimiento, portainjertos y sandía","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-02"},
