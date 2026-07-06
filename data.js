@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 05 Jul 2026",
+    fecha: "Lunes 06 Jul 2026",
     semana: "WK27",
-    actualizado: "05/07/2026 · 13:55"
+    actualizado: "06/07/2026 · 15:48"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"🌍 CORBEL #0086 · 06-Jul — Mercados EE.UU. estables en cruce de tomate, pepino, chile bell, jalapeño, serrano y tomatillo por Otay Mesa y Texas. Aguacate Hass con precios a la baja: oferta México + California mantiene presión. Brasil emerge como origen de Hass pese a precios globales bajos por expansión de área plantada. Antidumping 17% sobre tomate mexicano sigue condicionando precios, riesgo comercial y negociaciones con compradores. Fuente: ray@agbelher.com · 06/Jul/2026."},
     {"nivel":"info","texto":"📅 PRESENTACIÓN NUEVO GERENTE CH — Juan Antonio Cruz convoca reunión Zoom: martes 7 de julio de 2026 · 10am–11am (GMT-7). Meeting ID: 84994380215 · contraseña: 824390. Link: us06web.zoom.us/j/84994380215. Fuente: jacruz@agbelher.com · 03/Jul/2026."},
     {"nivel":"warning","texto":"🌍 CORBEL #0085 · 03-Jul — Presión continua sobre tomate fresco mexicano por marco antidumping EE.UU.: impacto en planeación de producción, márgenes y sustitución de cultivos. Limoneros de Veracruz abren canal de exportación a Rusia, señal de diversificación de salidas más allá de Norteamérica. Aguacate Hass global bajo presión de precios por mayor oferta de México, Perú, Colombia, Marruecos, Kenia, Sudáfrica y Chile. Fuente: ray@agbelher.com · 03/Jul/2026."},
     {"nivel":"warning","texto":"💰 SLA — RESUMEN PRESUPUESTAL CIERRE JUNIO 2026: Semillas Latinoamericanas ABC reporta recursos totales de $106,878 USD (remanente 2025: $6,878 + aportación Cortés $50k + aportación Beltrán $50k). Gastos acumulados ene-jun: $97,467 USD (fijos $71,633 + variables $25,834). Sin inversiones en activos ni ingresos por ventas aún. Primera venta proyectada: diciembre 2026. Armando Llanes confirma recepción y pide actualización si hay cambios en esa fecha. Fuente: ray@agbelher.com / armandollanes@donmemo.net · 02/Jul/2026."},
@@ -22,13 +23,12 @@ window.BELHER = {
     {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla (versión español e inglés para Jim). Documento comercial y análisis técnico de variedades indeterminadas para mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026 22:59–23:01."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
+    {"nivel":"info","texto":"🌿 HORTIDAILY 06-Jul — (EN) Forecast-driven lighting and energy management as next phase of greenhouse LED control. Microorganism safety evaluation for new agricultural formulations before field use. Fuente: hortidaily.com / hortidaily.es · 06/Jul/2026."},
     {"nivel":"info","texto":"🌿 HORTIDAILY 03-Jul — (EN) Avocado Hass global supply cycle: lower prices linked to increased plantings across multiple origins. Persian lime from Veracruz diversifying to Russia. US antidumping on tomato reshaping crop planning in Sinaloa. Fuente: hortidaily.com · 03/Jul/2026."},
     {"nivel":"info","texto":"🌿 HORTIDAILY 02-Jul — (EN) Gestión de nutrientes del futuro: elementos individuales en lugar de EC como parámetro de control. (ES) Esasem refuerza presencia directa en España con apuesta varietal en tomate, pimiento, portainjertos y sandía. Fuente: hortidaily.com / hortidaily.es · 02/Jul/2026."},
     {"nivel":"info","texto":"🌿 HORTIDAILY 01-Jul — (EN) US: El 17% de arancel antidumping sobre tomate mexicano se mantiene tras revisión USITC. Señal de presión comercial persistente para exportadores de tomate de Sinaloa. (ES) El cultivo hidropónico en fibra de coco avanza en fresa de Huelva ante límites de cultivo en suelo. Fuente: hortidaily.com / hortidaily.es · 01/Jul/2026."},
     {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANAL Periodo 27 — Recibo electrónico emitido por AGRÍCOLA BELHER FIJOS (RFC: ABE180411CB8) · Empleado: 000009 - BELTRAN OCHOA JUAN CARLOS · Periodo 27 Semanal (24/06/2026 al 30/06/2026) · UUID: EFDA50AB-3FFC-4701-B7D8-3B4ABD56FB82. Fuente: anajar@agbelher.com · 03/Jul/2026 16:22."},
-    {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANAL — Recibo electrónico emitido por AGRÍCOLA BELHER FIJOS (RFC: ABE180411CB8) · Empleado: 000009 - BELTRAN OCHOA JUAN CARLOS · Periodo 26 Semanal (17/06/2026 al 23/06/2026) · UUID: 841F6C5A-1D0E-412C-8A7B-2B5993032C53. Fuente: anajar@agbelher.com · 29/Jun/2026 08:49."},
-    {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 26-Jun — Exportación 84%, Nacional 16%. Prom. peso/caja: 40.2–40.5 lbs. Calibres activos: 250, 230, 200, 175, 150. Defectos principales: trips, wood pocket, daño de sol, oleocelosis (rangos menores ≤8%). Sin merma. Fuente: calidad@agbelher.com · 26/Jun/2026 12:17."},
-    {"nivel":"info","texto":"🍋 EMBARQUES LIMÓN PERSA 26-Jun — 2 cargas enviadas. Chofer: Pedro Javier Gastelum Escalante · Cel: 667 796 1810 · Caja 1: CGG-26 (18 parrillas) · Placa: 445WB3 · Caja 2: CGG-154 (13 parrillas) · Placa: 39UP8S. Fuente: embarquesbelher@agbelher.com · 26/Jun/2026 19:12."}
+    {"nivel":"info","texto":"🧾 CFDI NÓMINA SEMANAL — Recibo electrónico emitido por AGRÍCOLA BELHER FIJOS (RFC: ABE180411CB8) · Empleado: 000009 - BELTRAN OCHOA JUAN CARLOS · Periodo 26 Semanal (17/06/2026 al 23/06/2026) · UUID: 841F6C5A-1D0E-412C-8A7B-2B5993032C53. Fuente: anajar@agbelher.com · 29/Jun/2026 08:49."}
   ],
 
   ebitda: {
@@ -602,6 +602,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:01","asunto":"HortiDaily Newsletter | lunes, 6 de julio de 2026 — Seguridad microorganismos en nuevas formulaciones agrícolas","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-06"},
+    {"hora":"14:46","asunto":"HortiDaily Newsletter | Monday, July 6, 2026 — Forecast-driven lighting & energy management for greenhouse LED","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-06"},
+    {"hora":"10:04","asunto":"Corbel Seeds Daily Report #0086 — Tomate/pepino/chile estables en Otay Mesa y Texas; aguacate Hass a la baja; Brasil emerge como origen Hass","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-06"},
     {"hora":"16:43","asunto":"Invitación: Presentación nuevo gerente de CH — mar 7 Jul 2026 · 10am–11am (GMT-7) · Zoom ID: 84994380215","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-07-04"},
     {"hora":"16:22","asunto":"CFDI Nómina Semanal — Periodo 27 (24/06–30/06/2026) · BELTRAN OCHOA JUAN CARLOS · ABE180411CB8","de":"anajar@agbelher.com","leido":false,"fecha":"2026-07-04"},
     {"hora":"07:03","asunto":"Corbel Seeds Daily Report #0085 — Tomate antidumping EE.UU., nuevo canal limón Veracruz→Rusia, presión precio aguacate Hass global","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-03"},
