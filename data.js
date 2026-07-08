@@ -1,16 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 02 Jul 2026",
-    semana: "WK27",
-    actualizado: "02/07/2026 · 08:15"
+    fecha: "Miércoles 08 Jul 2026",
+    semana: "WK28",
+    actualizado: "08/07/2026 · 09:15"
   },
 
   alertas: [
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
-    {"nivel":"danger","texto":"⚠️ SETTLEMENT CALAVO 15-JUN — Review actualizado al 14/Jun. Saldo Belher $1.64M (WK19). Quedan cajas por liquidar. Llamada Zoom 2:00pm (Leima). Fuente: leima@agbelher.com."},
     {"nivel":"warning","texto":"📅 PRÓXIMO: Settlement Calavo review y seguimiento Contrato Beltrán-Calavo ciclo 2026-2029. Cierre legal pendiente. Fuente: estrategia.proximos."},
-    {"nivel":"warning","texto":"📉 PRECIOS DEPRIMIDOS WK25 — Corbel #0065 (05/Jun): Vine-ripe Nogales $11.95-12.95 (↓57% vs WK23). Roma $10.95-12.95 (↓51%). Jalapeño $17-19 (↓47%). Fin de temporada confirmado — rotación de inventario crítica."},
-    {"nivel":"info","texto":"📊 PRÓXIMAS SEMANAS: Junta Agricompra-Belher 16-Jun 3-5pm. BPSI F/S 18-Jun. Mayo F/S 22-Jun. Limón 70ha en mejor posicionamiento relativo — monitoreo USDA FOB Nogales."}
+    {"nivel":"info","texto":"📊 WK28 (08-Jul): Operaciones en curso. Monitoreo de calidad outbound, embarques, y tendencias de precios. Fin de temporada tomate verificado. Limón posicionamiento relativo fuerte. Preparación para F/S Mayo y revisión juntas Agricompra + BPSI."}
   ],
 
   ebitda: {
