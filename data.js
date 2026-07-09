@@ -1,11 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 08 Jul 2026",
-    semana: "WK27",
-    actualizado: "08/07/2026 · 14:30"
+    fecha: "Jueves 09 Jul 2026",
+    semana: "WK28",
+    actualizado: "09/07/2026 · 10:25"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"🌍 CORBEL #0089 · 09-Jul — Señal principal: presión de precios y riesgo político continúan en comercio hortícola México-EE.UU. USDA 8-Jul: tomate vine-ripe por Otay Mesa ligeramente a la baja; pepino y chiles con demanda firme por Texas y California. La revisión del USMCA sigue siendo la variable estratégica más crítica para exportadores mexicanos de tomate, aguacate y cítricos (dependencia de acceso tariff-free). Brasil: presión de costos y energía en sistemas de producción protegida en invierno. Fuente: ray@agbelher.com · 09/Jul/2026."},
+    {"nivel":"info","texto":"🏭 NUEVA BODEGA REFRIGERADA HIDALGO TX — Vista Logistics Group LLC presenta oferta de nodo logístico integral en frontera sur de Texas: Cold Storage & Cross-Docking, Punto de Inspección USDA para carnes de exportación, Customs Brokers USA/MEX. Solución de cadena de frío lista para operar con estándares de inocuidad. Evaluar como opción complementaria para embarques desde Sinaloa. Fuente: trafico2@vistalogistics.net · 09/Jul/2026."},
+    {"nivel":"warning","texto":"💰 COSTO DE PRODUCCIÓN ROMA 12 LBS (ADM/Don Memo) — Mariela García (Contraloría, Agrícola Don Memo) reenvió análisis de costos de producción de Roma 12 Libras a Juan Carlos y Antonio Beltrán. Reenviado por Gerardo Mendoza el 08-Jul. Documento disponible en Drive. Pendiente revisión y comentarios. Fuente: gerardo.mendoza@donmemo.net / mariela@donmemo.net · 08/Jul/2026."},
     {"nivel":"warning","texto":"🌍 CORBEL #0088 · 08-Jul — Señal principal: presión comercial sobre tomate mexicano continúa por revisión USMCA. USDA 7-Jul: tomates México por Otay Mesa y Texas operando estables; tomate Roma Otay Mesa ligeramente a la baja (oferta disponible, demanda selectiva). Culiacán reporta truenos ligeros y lluvia — factor estacional a monitorear por calidad, logística y enfermedades de campo. Fuente: ray@agbelher.com · 08/Jul/2026."},
     {"nivel":"warning","texto":"🌱 SEED REQUEST Z-027 — Raymundo Elizalde confirma a Jim Augustine (BHN Seed) disponibilidad de semilla para trials: H5995 (5,000 sem), H5998 (5,000 sem), H5999 (3,000 sem). Agrícola Belher + Agrícola Chaparral interesados en trial semi-comercial 1 ha, con prioridad H5998 y H5999 por mayor calibre de fruto. Ajuste de tamaño de trial según semilla disponible. Fuente: ray@agbelher.com · 07/Jul/2026."},
     {"nivel":"warning","texto":"🌍 CORBEL #0087 · 07-Jul — La señal más relevante para la horticultura mexicana sigue siendo la exposición al mercado norteamericano. La revisión del USMCA genera incertidumbre para el comercio de frutas y verduras. El arancel del 17% de EE.UU. sobre tomate fresco mexicano continúa condicionando precios, márgenes de negociación y posición competitiva de exportadores de agricultura protegida. USDA muestra movimiento activo de origen México por Otay Mesa y Texas: pepino, tomate, tomate roma, tomate uva, jalapeño, poblano, serrano, tomatillo, limón y otras hortalizas. Sin señales de alto impacto desde Brasil en las últimas 24h. Fuente: ray@agbelher.com · 07/Jul/2026."},
@@ -26,9 +29,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla (versión español e inglés para Jim). Documento comercial y análisis técnico de variedades indeterminadas para mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026 22:59–23:01."},
     {"nivel":"warning","texto":"📉 SUPPLY-PRESSURE WK25 — Corbel #0070 (12/Jun): Mercados cruce México-EE.UU. en fase de presión de oferta. Pepinos, tomates y chiles con precios bajos/estables en Nogales y Otay Mesa. Aguacate mexicano por Texas con disponibilidad ligera en tallas selectas. Señal: compresión de márgenes en punto de embarque y demanda retail más sensible al precio."},
     {"nivel":"warning","texto":"📋 PROGRAMA PLANTEO 2026-2027: Archivo recibido 12-Jun (Programa de planteo 2026-2027 110626 b.xlsx). Pendiente revisión y aprobación de superficies y variedades para ciclo siguiente."},
-    {"nivel":"info","texto":"🌿 HORTIDAILY 08-Jul — (EN) Technology, data & risk management drive hydroponic pepper production at South African farm. (ES) Análisis de históricos para detectar comportamientos no visibles en la rutina diaria. Fuente: hortidaily.com / hortidaily.es · 08/Jul/2026."},
-    {"nivel":"info","texto":"🌿 HORTIDAILY 07-Jul — (EN) Picking tomatoes on a rollercoaster and Belgian success on the football field — highlights of the day in horticulture. (ES) Ensayan modelo superintensivo de higuera bajo malla y sin suelo para ampliar calendario mediterráneo de brevas e higos. Fuente: hortidaily.com / hortidaily.es · 07/Jul/2026."},
-    {"nivel":"info","texto":"🌿 HORTIDAILY 03-Jul — (EN) Avocado Hass global supply cycle: lower prices linked to increased plantings across multiple origins. Persian lime from Veracruz diversifying to Russia. US antidumping on tomato reshaping crop planning in Sinaloa. Fuente: hortidaily.com · 03/Jul/2026."}
+    {"nivel":"info","texto":"🌿 HORTIDAILY 09-Jul — Nueva herramienta biológica registrada en España para proteger tomate, pimiento y berenjena frente a Fusarium. Fuente: hortidaily.es · 09/Jul/2026."}
   ],
 
   ebitda: {
@@ -602,6 +603,10 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:00","asunto":"HortiDaily Newsletter | jueves, 9 de julio de 2026 — Nueva herramienta biológica vs. Fusarium en tomate, pimiento y berenjena (España)","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-09"},
+    {"hora":"10:03","asunto":"Corbel Seeds Daily Report #0089 — Vine-ripe Otay Mesa baja; pepino/chile firmes Texas/CA; USMCA sigue como variable crítica","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-09"},
+    {"hora":"09:05","asunto":"NUEVA BODEGA REFRIGERADA EN HIDALGO TEXAS — Vista Logistics Group: Cold Storage, USDA Inspection, Customs Brokers USA/MEX","de":"trafico2@vistalogistics.net","leido":false,"fecha":"2026-07-09"},
+    {"hora":"15:13","asunto":"RV: Costo de Producción Roma 12 Libras — Análisis de costos ADM/Don Memo (Gerardo Mendoza reenvía a JC Beltrán)","de":"gerardo.mendoza@donmemo.net","leido":false,"fecha":"2026-07-08"},
     {"hora":"16:20","asunto":"HortiDaily Newsletter | miércoles, 8 de julio de 2026 — Análisis de históricos detecta comportamientos clave en rutina diaria","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-08"},
     {"hora":"14:31","asunto":"HortiDaily Newsletter | Wednesday, July 8, 2026 — Technology, data & risk mgmt drive hydroponic pepper production in South Africa","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-08"},
     {"hora":"09:02","asunto":"Corbel Seeds Daily Report #0088 — Tomate Otay Mesa/Texas steady; Roma ligeramente abajo; tormenta Culiacán — riesgo calidad y campo","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-08"},
