@@ -1,14 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 08 Jul 2026",
+    fecha: "Viernes 10 Jul 2026",
     semana: "WK28",
-    actualizado: "08/07/2026 · 09:15"
+    actualizado: "10/07/2026 · 06:30"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026."},
-    {"nivel":"warning","texto":"📅 PRÓXIMO: Settlement Calavo review y seguimiento Contrato Beltrán-Calavo ciclo 2026-2029. Cierre legal pendiente. Fuente: estrategia.proximos."},
-    {"nivel":"info","texto":"📊 WK28 (08-Jul): Operaciones en curso. Monitoreo de calidad outbound, embarques, y tendencias de precios. Fin de temporada tomate verificado. Limón posicionamiento relativo fuerte. Preparación para F/S Mayo y revisión juntas Agricompra + BPSI."}
+    {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026. VENCIDO."},
+    {"nivel":"warning","texto":"📊 WK28 (10-Jul): Fin de temporada tomate. Limón posicionamiento relativo fuerte ($34-36 FOB Texas). AVO (Mission Produce) subió +8.5% a $13.55. Monitoreo de embarques y calidad outbound en proceso."},
+    {"nivel":"info","texto":"📈 Limón Persa: rango estable $34-36 WK28-WK29. Supply window Peru cerrando. Belher 70ha competitive positioning. Monitoreo USDA pricing pending."}
   ],
 
   ebitda: {
@@ -610,8 +610,8 @@ window.BELHER = {
     { label:"Chile Bell GH naranja (TX)", valor:"$6.00-7.00", cambio:"↓54%", dir:"down" },
     { label:"Jalapeño (TX)", valor:"$17-19", cambio:"↓47%", dir:"down" },
     { label:"Limón seedless 110s (TX)", valor:"$34-36", cambio:"↓14%", dir:"down" },
-    { label:"AVO (Mission Produce)", valor:"$12.64", cambio:"+$0.79 (+6.7%)", dir:"up" },
-    { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Plano", dir:"neutral" },
+    { label:"AVO (Mission Produce)", valor:"$13.55", cambio:"+$1.06 (+8.5%)", dir:"up" },
+    { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Sin cambio", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Review 15-Jun", dir:"neutral" },
     { label:"Cash on hand (Jun)", valor:"~$500K est", cambio:"WK26 forecast", dir:"neutral" },
     { label:"EBITDA Marzo", valor:"$2.86M", cambio:"+15%", dir:"up" }
@@ -646,10 +646,7 @@ window.BELHER = {
       { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
     ],
     proximos: [
-      { fecha:"2026-06-26", evento:"Mayo '26 F/S Tomates/Limones/Granos", tipo:"Financiero", participantes:"JC, jacruz, equipo", detalles:"Zoom 10:00am-11:00am (jacruz organizador)." },
-      { fecha:"2026-06-26", evento:"Revisión final OL 11+1 P&L y Cash Flow", tipo:"Financiero", participantes:"Antonio, JC, Flavio, Leima, Juan, Armando", detalles:"Zoom 11:00am-12:00pm (jacruz organizador)." },
-      { fecha:"2026-06-24", evento:"BPSI F/S Mayo 2026 y Forecast Q2 2026", tipo:"Financiero", participantes:"JC, Leima, equipo BPSI", detalles:"Zoom 11:00am-11:45am (Leima organizadora)." },
-      { fecha:"2026-06-26", evento:"Junta Agricompra - Belher (Grupo Chaparral)", tipo:"Comercial", participantes:"JC Beltrán, David Gaxiola (Chaparral)", detalles:"Ajustado a 26-Jun por conflicto. Google Meet 3:00-5:00pm." }
+      { fecha:"2026-07-14", evento:"Juntas pendientes y revisiones operacionales WK29", tipo:"Operación", participantes:"Equipo Belher", detalles:"Monitoreo contínuo de precios, calidad y embarques. Sin eventos confirmados WK28-WK29 aún." }
     ]
   },
 
