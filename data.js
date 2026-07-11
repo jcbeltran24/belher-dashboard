@@ -1,13 +1,13 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 10 Jul 2026",
+    fecha: "Sábado 11 Jul 2026",
     semana: "WK28",
-    actualizado: "10/07/2026 · 06:30"
+    actualizado: "11/07/2026 · 09:15"
   },
 
   alertas: [
     {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/06/2026. VENCIDO."},
-    {"nivel":"warning","texto":"📊 WK28 (10-Jul): Fin de temporada tomate. Limón posicionamiento relativo fuerte ($34-36 FOB Texas). AVO (Mission Produce) subió +8.5% a $13.55. Monitoreo de embarques y calidad outbound en proceso."},
+    {"nivel":"warning","texto":"📊 WK28 (11-Jul): Fin de temporada tomate. Limón posicionamiento relativo fuerte ($34-36 FOB Texas). AVO (Mission Produce) subió +6.73% a $13.33. Monitoreo de embarques y calidad outbound en proceso."},
     {"nivel":"info","texto":"📈 Limón Persa: rango estable $34-36 WK28-WK29. Supply window Peru cerrando. Belher 70ha competitive positioning. Monitoreo USDA pricing pending."}
   ],
 
@@ -610,7 +610,7 @@ window.BELHER = {
     { label:"Chile Bell GH naranja (TX)", valor:"$6.00-7.00", cambio:"↓54%", dir:"down" },
     { label:"Jalapeño (TX)", valor:"$17-19", cambio:"↓47%", dir:"down" },
     { label:"Limón seedless 110s (TX)", valor:"$34-36", cambio:"↓14%", dir:"down" },
-    { label:"AVO (Mission Produce)", valor:"$13.55", cambio:"+$1.06 (+8.5%)", dir:"up" },
+    { label:"AVO (Mission Produce)", valor:"$13.33", cambio:"+$1.06 (+6.73%)", dir:"up" },
     { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Sin cambio", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Review 15-Jun", dir:"neutral" },
     { label:"Cash on hand (Jun)", valor:"~$500K est", cambio:"WK26 forecast", dir:"neutral" },
@@ -725,7 +725,7 @@ window.BELHER = {
   },
 
   cdc: {
-    semanaActual: "WK26",
+    semanaActual: "WK28",
     fuente: "Pendiente reporte CDC capitalhumano@agbelher.com",
     beltran: {
       titulo: "Juan Carlos Beltrán",
@@ -751,7 +751,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "30/06/2026",
+    actualizado:   "11/07/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
