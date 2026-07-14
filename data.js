@@ -1,13 +1,13 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 13 Jul 2026",
+    fecha: "Martes 14 Jul 2026",
     semana: "WK29",
-    actualizado: "13/07/2026 · 17:38"
+    actualizado: "14/07/2026 · 08:00"
   },
 
   alertas: [
-    {"nivel":"info","texto":"📅 SEMANA WK29: Fin de temporada tomate confirmado (último reporte Corbel #0065: 05-Jun). Limón seedless posicionamiento fuerte $34-36 FOB Texas. AVO (Mission Produce) últimas cotizaciones: $13.33. Monitoreo contínuo embarques y calidad outbound."},
-    {"nivel":"info","texto":"📊 Domingo 13-Jul: Sin reportes operacionales nuevos (día de descanso). Fin de ciclo tomate en curso. Limón 70ha Belher en posicionamiento de cosecha tardía WK29-WK30."},
+    {"nivel":"info","texto":"📅 SEMANA WK29: Fin de temporada tomate confirmado (último reporte Corbel #0065: 05-Jun). Limón seedless posicionamiento fuerte $34-36 FOB Texas. AVO (Mission Produce) últimas cotizaciones: $13.36. Monitoreo contínuo embarques y calidad outbound."},
+    {"nivel":"info","texto":"📊 Martes 14-Jul: Sin nuevos reportes operacionales desde fin de temporada tomate (05-Jun). Limón 70ha Belher en posicionamiento de cosecha tardía WK29-WK30. Sorgo trilla completada."},
     {"nivel":"success","texto":"✅ Limón Seedless 110s: rango sostenido $34-36 WK28-WK29 (Peru supply window cerrando). Supply competitiva Belher 70ha. Belher bien posicionada para capturar premium pricing."}
   ],
 
@@ -610,10 +610,10 @@ window.BELHER = {
     { label:"Chile Bell GH naranja (TX)", valor:"$6.00-7.00", cambio:"↓54%", dir:"down" },
     { label:"Jalapeño (TX)", valor:"$17-19", cambio:"↓47%", dir:"down" },
     { label:"Limón seedless 110s (TX)", valor:"$34-36", cambio:"↓14%", dir:"down" },
-    { label:"AVO (Mission Produce)", valor:"$13.33", cambio:"+$1.06 (+6.73%)", dir:"up" },
+    { label:"AVO (Mission Produce)", valor:"$13.36", cambio:"+$0.13 (+0.98%)", dir:"up" },
     { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Sin cambio", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Review 15-Jun", dir:"neutral" },
-    { label:"Cash on hand (Jun)", valor:"~$500K est", cambio:"WK26 forecast", dir:"neutral" },
+    { label:"Cash on hand (Jul)", valor:"~$500K est", cambio:"WK29 forecast", dir:"neutral" },
     { label:"EBITDA Marzo", valor:"$2.86M", cambio:"+15%", dir:"up" }
   ],
 
@@ -646,15 +646,16 @@ window.BELHER = {
       { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
     ],
     proximos: [
-      { fecha:"2026-07-20", evento:"Monitoreo contínuo de precios limón y calidad outbound", tipo:"Operación", participantes:"Equipo Belher", detalles:"WK29-WK30: cosecha tardía limón 70ha. Seguimiento embarques y posicionamiento pricing $34-36." }
+      { fecha:"2026-07-20", evento:"Monitoreo contínuo de precios limón y calidad outbound", tipo:"Operación", participantes:"Equipo Belher", detalles:"WK29-WK30: cosecha tardía limón 70ha. Seguimiento embarques y posicionamiento pricing $34-36." },
+      { fecha:"2026-07-24", evento:"Revisión Contrato GC2026-2029 — cierre esperado", tipo:"Legal", participantes:"JC, Irene Amezaga, Armando Llanes", detalles:"Firma contrato Beltrán-Calavo para ciclo 2026-2027. Confirmación con Mission Produce post-integración Calavo." }
     ]
   },
 
   predicciones: {
-    generado:  "13/07/2026 · 17:38",
+    generado:  "14/07/2026 · 08:00",
     modelo:    "Claude Haiku 4.5",
     horizonte: "7 días",
-    nota:      "Síntesis de precios Corbel #0065 (05-Jun) + datos operativos + calidad outbound + noticias industria. Fin de temporada tomate confirmado WK24-26. Limón estable mejor que tomate. Tomate: rotación urgente. Limón: mantener postura $34-36. Domingo sin nuevas fuentes operacionales.",
+    nota:      "Síntesis de precios Corbel #0065 (05-Jun) + datos operativos + calidad outbound + noticias industria. Fin de temporada tomate confirmado WK24-26. Limón estable mejor que tomate. Tomate: rotación urgente. Limón: mantener postura $34-36. Martes sin nuevas fuentes operacionales desde 05-Jun.",
     items: [
       {
         id: "vine-ripe",
@@ -751,7 +752,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "13/07/2026",
+    actualizado:   "14/07/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
