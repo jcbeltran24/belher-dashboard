@@ -1,13 +1,13 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 12 Jul 2026",
+    fecha: "Domingo 13 Jul 2026",
     semana: "WK29",
-    actualizado: "12/07/2026 · 08:00"
+    actualizado: "13/07/2026 · 17:38"
   },
 
   alertas: [
     {"nivel":"info","texto":"📅 SEMANA WK29: Fin de temporada tomate confirmado (último reporte Corbel #0065: 05-Jun). Limón seedless posicionamiento fuerte $34-36 FOB Texas. AVO (Mission Produce) últimas cotizaciones: $13.33. Monitoreo contínuo embarques y calidad outbound."},
-    {"nivel":"info","texto":"📊 Domingo 12-Jul: Sin reportes operacionales nuevos (día de descanso). Fin de ciclo tomate en curso. Limón 70ha Belher en posicionamiento de cosecha tardía WK29-WK30."},
+    {"nivel":"info","texto":"📊 Domingo 13-Jul: Sin reportes operacionales nuevos (día de descanso). Fin de ciclo tomate en curso. Limón 70ha Belher en posicionamiento de cosecha tardía WK29-WK30."},
     {"nivel":"success","texto":"✅ Limón Seedless 110s: rango sostenido $34-36 WK28-WK29 (Peru supply window cerrando). Supply competitiva Belher 70ha. Belher bien posicionada para capturar premium pricing."}
   ],
 
@@ -651,10 +651,10 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "12/07/2026 · 08:00",
+    generado:  "13/07/2026 · 17:38",
     modelo:    "Claude Haiku 4.5",
     horizonte: "7 días",
-    nota:      "Síntesis de precios Corbel #0065 (05-Jun) + datos operativos + calidad outbound + noticias industria. Fin de temporada tomate confirmado WK24-26. Limón estable mejor que tomate. Tomate: rotación urgente. Limón: mantener postura $34-36. Weekend update sin nuevas fuentes.",
+    nota:      "Síntesis de precios Corbel #0065 (05-Jun) + datos operativos + calidad outbound + noticias industria. Fin de temporada tomate confirmado WK24-26. Limón estable mejor que tomate. Tomate: rotación urgente. Limón: mantener postura $34-36. Domingo sin nuevas fuentes operacionales.",
     items: [
       {
         id: "vine-ripe",
@@ -751,7 +751,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "12/07/2026",
+    actualizado:   "13/07/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
