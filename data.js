@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 13 Jul 2026",
+    fecha: "Martes 14 Jul 2026",
     semana: "WK28",
-    actualizado: "13/07/2026 · 07:49"
+    actualizado: "14/07/2026 · 13:59"
   },
 
   alertas: [
+    {"nivel":"info","texto":"📊 CF CONSOLIDADO ADM GC 2026-2027 OL 4+8 (Act. junio 2026) — Leima Leyva compartió flujo de caja consolidado ADM GC actualizado a junio 2026. Incluye: (1) Export Revenue: summary mensual de ventas de exportación y costos de distribución para estimar abono a deuda Calavo al cierre del ciclo; (2) Consolidated CF 2026-2027: detalla todos los ingresos/salidas incluyendo cuentas por pagar e impuestos pendientes del ciclo anterior. Saldo mínimo inicial: USD 42k. Fuente: leima@agbelher.com · 14/Jul/2026."},
     {"nivel":"warning","texto":"🌍 CORBEL #0091 · 13-Jul — Mercados fronterizos inician semana con precios de tomate generalmente estables y condiciones más firmes en pepino y chile bell. Tomate vine-ripe (Texas): US$13.95–15.95/caja (2 capas, tallas 4x4 y 4x5). Roma extra-large: US$12.95/caja (25 lb). Riesgos clave: clima de verano, presión fitosanitaria y logística fronteriza. Brasil: invierno encarece producción protegida (calefacción y energía). Fuente: ray@agbelher.com · 13/Jul/2026."},
     {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — ACCIÓN REQUERIDA ANTES 31-JUL: Reunión con Capital Trade y abogado Jeff Winton define que USDOC convocará partes el 1º de Julio para la Revisión Administrativa 2026 (cálculo nuevo margen de dumping / ajuste de arancel). Deadline: presentar solicitud de revisión de margen propio antes del 31 de Julio. Fuente: jacruz@agbelher.com · 22/Jun/2026 09:15."},
     {"nivel":"warning","texto":"📅 JUNTA DE CONSEJO ABSA · JULIO 2026 — Armando Llanes confirma fecha: viernes 24 de julio a las 3:00 pm en casa de la Sra. Hildelisa. Armando prepara el material a cubrir. Fuente: armandollanes@donmemo.net · 28/Jun/2026 19:02."},
@@ -595,6 +596,11 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"04:25","asunto":"CF consolidado ADM GC 2026-2027 OL 4+8 Act. junio 2026 — Flujo de caja consolidado actualizado: Export Revenue + Consolidated CF; saldo inicial USD 42k; estimación abono deuda Calavo al cierre","de":"leima@agbelher.com","leido":false,"fecha":"2026-07-14"},
+    {"hora":"15:34","asunto":"HortiDaily Newsletter | martes, 14 de julio de 2026 — 'Al Thrips parvispinus no se le gana en abril, sino en agosto': campaña limpia desde el minuto uno","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-14"},
+    {"hora":"15:05","asunto":"HortiDaily Newsletter | Tuesday, July 14, 2026 — Hydroponic greenhouse grower reflects on crop management in Southwestern Ontario","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-14"},
+    {"hora":"09:30","asunto":"Extend Your ASIA FRUIT LOGISTICA Experience — Oferta para ampliar experiencia en ASIA FRUIT LOGISTICA 2026","de":"info@gp-events.com","leido":false,"fecha":"2026-07-14"},
+    {"hora":"08:01","asunto":"The Morning · GBM — Todo lo que debes saber para comenzar tu día","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-07-14"},
     {"hora":"15:38","asunto":"HortiDaily Newsletter | lunes, 13 de julio de 2026 — Olas de calor ponen a prueba producción de berries en Mediterráneo y norte de África","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-13"},
     {"hora":"14:51","asunto":"HortiDaily Newsletter | Monday, July 13, 2026 — New Dutch greenhouse project in Saudi Arabia: 'Confidence is high'","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-13"},
     {"hora":"07:02","asunto":"Corbel Seeds Daily Report #0091 — Tomate vine-ripe Texas $13.95–15.95/caja; Roma $12.95; mercados estables; riesgo clima verano y fitosanitario","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-13"},
