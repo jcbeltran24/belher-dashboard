@@ -1,13 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 14 Jul 2026",
-    semana: "WK28",
-    actualizado: "14/07/2026 · 13:59"
+    fecha: "Miércoles 15 Jul 2026",
+    semana: "WK29",
+    actualizado: "15/07/2026 · 07:57"
   },
 
   alertas: [
     {"nivel":"info","texto":"📊 CF CONSOLIDADO ADM GC 2026-2027 OL 4+8 (Act. junio 2026) — Leima Leyva compartió flujo de caja consolidado ADM GC actualizado a junio 2026. Incluye: (1) Export Revenue: summary mensual de ventas de exportación y costos de distribución para estimar abono a deuda Calavo al cierre del ciclo; (2) Consolidated CF 2026-2027: detalla todos los ingresos/salidas incluyendo cuentas por pagar e impuestos pendientes del ciclo anterior. Saldo mínimo inicial: USD 42k. Fuente: leima@agbelher.com · 14/Jul/2026."},
-    {"nivel":"warning","texto":"🌍 CORBEL #0091 · 13-Jul — Mercados fronterizos inician semana con precios de tomate generalmente estables y condiciones más firmes en pepino y chile bell. Tomate vine-ripe (Texas): US$13.95–15.95/caja (2 capas, tallas 4x4 y 4x5). Roma extra-large: US$12.95/caja (25 lb). Riesgos clave: clima de verano, presión fitosanitaria y logística fronteriza. Brasil: invierno encarece producción protegida (calefacción y energía). Fuente: ray@agbelher.com · 13/Jul/2026."},
+    {"nivel":"info","texto":"📂 ADM FINANCIALS JUNIO 2026 — Felipe Calderón (CRY Asociados) compartió ADM June Financials en PDF y Excel: P&L Growing Cycle 26-27, P&L Fiscal Year 25-26, P&L June 2026 y Balance Sheet al 30-Jun-2026. Adjuntos descargados en Belher Drive (10 archivos · 14-Jul-2026). Pendiente revisión y análisis. Fuente: fcalderon@cryasociados.com · 13/Jul/2026."},
+    {"nivel":"warning","texto":"🌍 CORBEL #0092 · 14-Jul — Mercados fronterizos con tomate generalmente estable, pepino más firme en Texas y Roma ligeramente más alto por Otay Mesa. Chile bell invernadero MX diferenciado por color: rojo mantiene premio sobre naranja y amarillo. Sin nuevas medidas fitosanitarias MX identificadas. Brasil: invierno encarece producción protegida (calefacción, plástico, energía). Fuente: ray@agbelher.com · 14/Jul/2026."},
     {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — ACCIÓN REQUERIDA ANTES 31-JUL: Reunión con Capital Trade y abogado Jeff Winton define que USDOC convocará partes el 1º de Julio para la Revisión Administrativa 2026 (cálculo nuevo margen de dumping / ajuste de arancel). Deadline: presentar solicitud de revisión de margen propio antes del 31 de Julio. Fuente: jacruz@agbelher.com · 22/Jun/2026 09:15."},
     {"nivel":"warning","texto":"📅 JUNTA DE CONSEJO ABSA · JULIO 2026 — Armando Llanes confirma fecha: viernes 24 de julio a las 3:00 pm en casa de la Sra. Hildelisa. Armando prepara el material a cubrir. Fuente: armandollanes@donmemo.net · 28/Jun/2026 19:02."},
     {"nivel":"warning","texto":"📅 AGENDA ABSA-BPSI JULIO 2026 — Armando Llanes estará en Culiacán del 19-26 Jul. Reuniones vía Zoom y en persona según acordado con Antonio. Pendiente: Antonio enviar estados bancarios UBS de Almera Holdings 2025 a Armando y Juan. Fuente: armandollanes@donmemo.net · 26/Jun/2026 11:58."},
@@ -596,6 +597,11 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:01","asunto":"Corbel Seeds Daily Report #0092 — Tomate estable en frontera; pepino firme Texas; Roma más alto Otay Mesa; chile bell MX: rojo con premio sobre naranja/amarillo; sin alertas fitosanitarias nuevas MX","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-14"},
+    {"hora":"10:54","asunto":"✅ Belher Adjuntos — 10 archivos (14-Jul-2026) — CF OL 4+8 GC 2026-2027, ADM June Financials, ADM P&L GC 26-27, P&L FY 25-26, P&L Jun 2026, Balance Sheet 30-Jun-2026 descargados en Drive","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-07-14"},
+    {"hora":"14:00","asunto":"Transferencia Interbancaria SPEI BanBajío — Depósito registrado el 14-Jul-2026 a cuenta de Juan Carlos Beltrán Ochoa","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-07-14"},
+    {"hora":"17:52","asunto":"🔔 WEBINAR — Oportunidades de Exportación a Bolivia: Ventajas Competitivas e Incentivos Fiscales · Sec. Economía Sinaloa","de":"comercioexterior@sinaloa.gob.mx","leido":false,"fecha":"2026-07-14"},
+    {"hora":"15:46","asunto":"HortiDaily Newsletter | miércoles, 15 de julio de 2026 — El multitúnel se impondrá en Almería, aunque más despacio de lo esperado","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-15"},
     {"hora":"04:25","asunto":"CF consolidado ADM GC 2026-2027 OL 4+8 Act. junio 2026 — Flujo de caja consolidado actualizado: Export Revenue + Consolidated CF; saldo inicial USD 42k; estimación abono deuda Calavo al cierre","de":"leima@agbelher.com","leido":false,"fecha":"2026-07-14"},
     {"hora":"15:34","asunto":"HortiDaily Newsletter | martes, 14 de julio de 2026 — 'Al Thrips parvispinus no se le gana en abril, sino en agosto': campaña limpia desde el minuto uno","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-14"},
     {"hora":"15:05","asunto":"HortiDaily Newsletter | Tuesday, July 14, 2026 — Hydroponic greenhouse grower reflects on crop management in Southwestern Ontario","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-14"},
