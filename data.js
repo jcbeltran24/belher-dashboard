@@ -1,14 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 15 Jul 2026",
+    fecha: "Jueves 16 Jul 2026",
     semana: "WK29",
-    actualizado: "15/07/2026 · 07:57"
+    actualizado: "16/07/2026 · 07:08"
   },
 
   alertas: [
+    {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES 15-JUL · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago más urgente: periodo 4-2026 $2.4k + convenios vencidos $1.6k = MXP $4M total inmediato. Riesgo: facultades coactivas IMSS o SAT (embargo/cobranza). Fuente: jacruz@agbelher.com · 15/Jul/2026."},
+    {"nivel":"warning","texto":"🌍 CORBEL #0094 · 16-Jul — Sonora representa ~60% de producción de espárrago de México; Caborca es el principal hub de exportación. Importancia estratégica de riego por goteo, fertirrigación, monitoreo de humedad, mano de obra, cadena de frío y cumplimiento fitosanitario. Brasil: sin desarrollos críticos en 24h. Señales globales mixtas: baja en precio de sandía EUA podría aumentar presión competitiva. Fuente: ray@agbelher.com · 16/Jul/2026."},
+    {"nivel":"info","texto":"📊 CF SEMANAL ADM act. 12-Jul (+6 semanas proyectadas) — Leima Leyva compartió con Irene Amezaga (Calavo) el CF semanal ADM, mostrando la última semana actualizada más seis semanas de proyección de ingresos y pagos planeados. Complementa el CF consolidado enviado el 14-Jul. Fuente: leima@agbelher.com · 15/Jul/2026."},
     {"nivel":"info","texto":"📊 CF CONSOLIDADO ADM GC 2026-2027 OL 4+8 (Act. junio 2026) — Leima Leyva compartió flujo de caja consolidado ADM GC actualizado a junio 2026. Incluye: (1) Export Revenue: summary mensual de ventas de exportación y costos de distribución para estimar abono a deuda Calavo al cierre del ciclo; (2) Consolidated CF 2026-2027: detalla todos los ingresos/salidas incluyendo cuentas por pagar e impuestos pendientes del ciclo anterior. Saldo mínimo inicial: USD 42k. Fuente: leima@agbelher.com · 14/Jul/2026."},
     {"nivel":"info","texto":"📂 ADM FINANCIALS JUNIO 2026 — Felipe Calderón (CRY Asociados) compartió ADM June Financials en PDF y Excel: P&L Growing Cycle 26-27, P&L Fiscal Year 25-26, P&L June 2026 y Balance Sheet al 30-Jun-2026. Adjuntos descargados en Belher Drive (10 archivos · 14-Jul-2026). Pendiente revisión y análisis. Fuente: fcalderon@cryasociados.com · 13/Jul/2026."},
-    {"nivel":"warning","texto":"🌍 CORBEL #0092 · 14-Jul — Mercados fronterizos con tomate generalmente estable, pepino más firme en Texas y Roma ligeramente más alto por Otay Mesa. Chile bell invernadero MX diferenciado por color: rojo mantiene premio sobre naranja y amarillo. Sin nuevas medidas fitosanitarias MX identificadas. Brasil: invierno encarece producción protegida (calefacción, plástico, energía). Fuente: ray@agbelher.com · 14/Jul/2026."},
     {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — ACCIÓN REQUERIDA ANTES 31-JUL: Reunión con Capital Trade y abogado Jeff Winton define que USDOC convocará partes el 1º de Julio para la Revisión Administrativa 2026 (cálculo nuevo margen de dumping / ajuste de arancel). Deadline: presentar solicitud de revisión de margen propio antes del 31 de Julio. Fuente: jacruz@agbelher.com · 22/Jun/2026 09:15."},
     {"nivel":"warning","texto":"📅 JUNTA DE CONSEJO ABSA · JULIO 2026 — Armando Llanes confirma fecha: viernes 24 de julio a las 3:00 pm en casa de la Sra. Hildelisa. Armando prepara el material a cubrir. Fuente: armandollanes@donmemo.net · 28/Jun/2026 19:02."},
     {"nivel":"warning","texto":"📅 AGENDA ABSA-BPSI JULIO 2026 — Armando Llanes estará en Culiacán del 19-26 Jul. Reuniones vía Zoom y en persona según acordado con Antonio. Pendiente: Antonio enviar estados bancarios UBS de Almera Holdings 2025 a Armando y Juan. Fuente: armandollanes@donmemo.net · 26/Jun/2026 11:58."},
@@ -597,6 +599,10 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:04","asunto":"Corbel Seeds Daily Report #0094 — Sonora: espárrago estratégico para EUA (60% prod. MX, hub Caborca); riego por goteo y cadena fría clave. Brasil: sin novedades 24h. Sandía EUA a la baja: presión competitiva mixta","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-16"},
+    {"hora":"23:56","asunto":"CF semanal ADM act. 12 julio + 6 semanas proyectadas — Enviado a Irene Amezaga (Calavo); muestra última semana real + 6 semanas de proyección de ingresos y pagos planeados","de":"leima@agbelher.com","leido":false,"fecha":"2026-07-15"},
+    {"hora":"13:30","asunto":"CONTRIBUCIONES AL 15 DE JULIO 2026 — Total MXP $21M/$1.2M USD: IMSS-INFONAVIT $18.6M (vencido $4.9M urgente) + SAT $2.5M/$145k USD (ene-mar 2026 vencidos). Riesgo facultades coactivas.","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-07-15"},
+    {"hora":"15:35","asunto":"HortiDaily Newsletter | jueves, 16 de julio de 2026 — Cultivo de arándano hidropónico en fibra de coco: del suelo al control total del entorno radicular","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-16"},
     {"hora":"07:01","asunto":"Corbel Seeds Daily Report #0092 — Tomate estable en frontera; pepino firme Texas; Roma más alto Otay Mesa; chile bell MX: rojo con premio sobre naranja/amarillo; sin alertas fitosanitarias nuevas MX","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-14"},
     {"hora":"10:54","asunto":"✅ Belher Adjuntos — 10 archivos (14-Jul-2026) — CF OL 4+8 GC 2026-2027, ADM June Financials, ADM P&L GC 26-27, P&L FY 25-26, P&L Jun 2026, Balance Sheet 30-Jun-2026 descargados en Drive","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-07-14"},
     {"hora":"14:00","asunto":"Transferencia Interbancaria SPEI BanBajío — Depósito registrado el 14-Jul-2026 a cuenta de Juan Carlos Beltrán Ochoa","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-07-14"},
