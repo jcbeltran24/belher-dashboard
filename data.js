@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 17 Jul 2026",
+    fecha: "Sábado 18 Jul 2026",
     semana: "WK29",
-    actualizado: "17/07/2026 · 13:52"
+    actualizado: "18/07/2026 · 13:36"
   },
 
   alertas: [
@@ -12,6 +12,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"📅 AGENDA ABSA-BPSI JULIO — Armando Llanes en Culiacán del 19-26 Jul. Reuniones Zoom y en persona. Pendiente: Antonio enviar estados bancarios UBS de Almera Holdings 2025 a Armando y Juan. Fuente: armandollanes@donmemo.net · 26/Jun/2026."},
     {"nivel":"warning","texto":"📊 F/S BPSI JUNIO 2026 — Leima Leyva compartió EF Blondie Producciones al 30-Jun-2026. Junio: ingresos MXP $126K, utilidad $22K. Saldo bancos al cierre: MXP $117K (cubre gastos julio). Pendiente renovación FIEL. Sin reunión mensual (Leima y Armando ya revisaron). Fuente: leima@agbelher.com · 16/Jul/2026."},
     {"nivel":"warning","texto":"📊 SETTELEMENT CALAVO al 15-Jul-2026 GC 2025-2026 — Leima comparte liquidación Calavo recibida el 15-Jul. Prácticamente todo facturado; solo 80 cajas pendientes de las 963K totales del ciclo. Fuente: leima@agbelher.com · 16/Jul/2026."},
+    {"nivel":"info","texto":"🥒 MERCADO HORTALIZAS · Corbel Seeds #0095 (17-Jul) — Pepino MX firme en cruces EUA (suministros ajustados = precios al alza). Tomate estable-a-débil por mayor disponibilidad de California. Mayor apalancamiento comercial en pepino y chile bell seleccionados. Fuente: ray@agbelher.com · 17/Jul/2026."},
     {"nivel":"warning","texto":"🌱 PROPUESTA PRECIOS SEMILLA BHN SEED (Corbel) — Raymundo Elizalde envió propuesta comercial de portafolio BHN Seed para comercialización en México vía Corbel Seeds: análisis de mercado, estructura de precios, márgenes y condiciones de alianza. Martín Cortés (Katana): sin observaciones. Raymundo reenvió versión corregida + presentación en inglés para revisión con Jim (BHN). Pendiente comentarios de Juan Carlos y Antonio Beltrán. Fuente: ray@agbelher.com · 16/Jul/2026."},
     {"nivel":"info","texto":"👤 AUSENCIAS VACACIONES (20-Jul al 4-Ago) — Chrysthian Marisol Castro Sandoval (Gerente Innovación y Mejora Continua) ausente. Cubre: Flor Mejía (Eleven Rivers, proveedores, documentos, planta agua, inducción, auditorías) y Dulce Félix (seguridad temporada baja, Protección Civil, salud). Fuente: c.marisol@agbelher.com · 16/Jul/2026."},
     {"nivel":"warning","texto":"🦠 ALERTA SANITARIA — Cyclospora source identified (HortiDaily EN · 17-Jul). Revisar cadenas de suministro de hortalizas frescas de exportación; posible impacto en inspecciones FDA. Fuente: mail@hortidaily.com · 17/Jul/2026."},
@@ -26,10 +27,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"💰 COSTO DE PRODUCCIÓN ROMA 12 LBS (ADM/Don Memo) — Mariela García reenvió análisis de costos Roma 12 Libras a Juan Carlos y Antonio Beltrán. Disponible en Drive. Pendiente revisión. Fuente: gerardo.mendoza@donmemo.net · 08/Jul/2026."},
     {"nivel":"warning","texto":"💰 SLA — RESUMEN PRESUPUESTAL CIERRE JUNIO 2026: Recursos totales $106,878 USD. Gastos acumulados ene-jun: $97,467 USD. Primera venta proyectada: diciembre 2026. Fuente: ray@agbelher.com · 02/Jul/2026."},
     {"nivel":"danger","texto":"🔐 LOGIN SOSPECHOSO GOOGLE WORKSPACE — Acceso inusual detectado en capitalhumano@agbelher.com · IP: 2806:370:2579:4865 · 02-Jul-2026 13:23 UTC. Verificar en Alert Center y cambiar contraseña si no fue acción autorizada. Fuente: google-workspace-alerts@google.com."},
-    {"nivel":"danger","texto":"🔐 SEGURIDAD GODADDY — Se eliminó 2FA de cuenta GoDaddy (Case #01589861 · 15-Jun-2026). Si no fue acción autorizada, contactar soporte inmediatamente."},
-    {"nivel":"danger","texto":"🔴 FIRMA URGENTE — Acta Comité Técnico BanBajío (EP 77679): Leima solicita firma digital + paquetería a ocurre desde Culiacán. Costo notarial $3,500+IVA. Necesario para ratificar garantías con BanBajío. Fuente: leima@agbelher.com · 05/Jun/2026."},
-    {"nivel":"warning","texto":"📊 ESTADOS FINANCIEROS MAYO 2026 — BPSI Mayo 2026.xlsx y ABSA MAYO 2026.xlsx disponibles en Drive. Pendiente revisión P&L y Cash Flow cierre mayo. Fuente: juancarlos@agbelher.com · 23/Jun/2026."},
-    {"nivel":"warning","texto":"🍅 PROPUESTA TOMATE BOLA INDETERMINADO — Raymundo Elizalde envió análisis de precio de semilla para variedades indeterminadas mercado mexicano. Pendiente revisión y decisión. Fuente: ray@agbelher.com · 23/Jun/2026."}
+    {"nivel":"danger","texto":"🔐 SEGURIDAD GODADDY — Se eliminó 2FA de cuenta GoDaddy (Case #01589861 · 15-Jun-2026). Si no fue acción autorizada, contactar soporte inmediatamente."}
   ],
 
   ebitda: {
@@ -603,6 +601,12 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"13:49","asunto":"🌎 Comercio Exterior Sinaloa · Newsletter 17-Jul-2026 — Noticias relevantes de comercio exterior y oportunidades de exportación para empresas sinaloenses","de":"astrid.garibay@sinaloa.gob.mx","leido":false,"fecha":"2026-07-17"},
+    {"hora":"15:53","asunto":"Transferencia Interbancaria SPEI BanBajío — Depósito registrado el 17-Jul-2026 a cuenta de Juan Carlos Beltrán Ochoa","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-07-17"},
+    {"hora":"15:40","asunto":"HortiDaily ES · 17-Jul — Estrés hídrico >40°C: regar más no siempre protege; recomendaciones agronómicas para calor extremo","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-17"},
+    {"hora":"14:59","asunto":"CFDI Recibo Electrónico — Periodo 29 Semanal 2026 · AGRICOLA BELHER FIJOS (RFC: ABE180411CB8)","de":"anajar@agbelher.com","leido":false,"fecha":"2026-07-17"},
+    {"hora":"10:53","asunto":"✅ Belher Adjuntos — 2 archivos (17-Jul-2026) — EF BPSI Junio 2026.xlsx + Ventas Calavo GC 2025-2026 al 15-Jul descargados en Drive","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-07-17"},
+    {"hora":"07:14","asunto":"Corbel Seeds Daily Report #0095 · 17-Jul — MX: pepino firme en frontera EUA (suministros ajustados), tomate más débil (CA disponibilidad aumenta); mayor apalancamiento en pepino y chile bell","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-17"},
     {"hora":"15:40","asunto":"HortiDaily ES · 17-Jul — Estrés hídrico con >40°C: regar más no siempre protege al cultivo; recomendaciones agronómicas para temporada de calor extremo","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-17"},
     {"hora":"15:09","asunto":"HortiDaily EN · 17-Jul — Cyclospora source identified: alerta sanitaria activa; seguimiento recomendado para exportaciones de hortalizas frescas","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-17"},
     {"hora":"07:04","asunto":"Corbel Seeds Daily Report #0094 — Sonora: espárrago estratégico para EUA (60% prod. MX, hub Caborca); riego por goteo y cadena fría clave. Brasil: sin novedades 24h. Sandía EUA a la baja: presión competitiva mixta","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-16"},
