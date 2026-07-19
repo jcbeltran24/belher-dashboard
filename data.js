@@ -1,13 +1,13 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 16 Jul 2026",
-    semana: "WK27",
-    actualizado: "16/07/2026 · 06:00"
+    fecha: "Sábado 18 Jul 2026",
+    semana: "WK29",
+    actualizado: "18/07/2026 · 06:00"
   },
 
   alertas: [
-    {"nivel":"info","texto":"📅 SEMANA WK27: Off-season monitoreo. Limón seedless 70ha Belher en posicionamiento WK27-WK30 (cosecha tardía). Última operación tomate WK24 (05-Jun). Sin nuevos reportes operacionales desde fin de temporada."},
-    {"nivel":"info","texto":"📊 Jueves 16-Jul: Monitoreo contínuo de mercado limón y calidad outbound. Limón Seedless 110s rango esperado $34-36 WK27-WK28 (Peru supply window cerrando). Belher bien posicionada para capturar premium pricing."},
+    {"nivel":"info","texto":"📅 SEMANA WK29: Off-season monitoreo. Limón seedless 70ha Belher en posicionamiento WK27-WK30 (cosecha tardía). Última operación tomate WK24 (05-Jun). Sin nuevos reportes operacionales desde fin de temporada."},
+    {"nivel":"info","texto":"📊 Sábado 18-Jul: Monitoreo contínuo de mercado limón y calidad outbound. Limón Seedless 110s rango esperado $34-36 WK27-WK28 (Peru supply window cerrando). Belher bien posicionada para capturar premium pricing."},
     {"nivel":"success","texto":"✅ Limón Seedless 110s: rango sostenido $34-36 WK26-WK27 (Peru supply window cerrando). Supply competitiva Belher 70ha. Belher bien posicionada para capturar premium pricing."}
   ],
 
@@ -610,7 +610,7 @@ window.BELHER = {
     { label:"Chile Bell GH naranja (TX)", valor:"$6.00-7.00", cambio:"↓54%", dir:"down" },
     { label:"Jalapeño (TX)", valor:"$17-19", cambio:"↓47%", dir:"down" },
     { label:"Limón seedless 110s (TX)", valor:"$34-36", cambio:"↓14%", dir:"down" },
-    { label:"AVO (Mission Produce)", valor:"$13.70", cambio:"+$0.35 (+2.6%)", dir:"up" },
+    { label:"AVO (Mission Produce)", valor:"$13.59", cambio:"+$0.32 (+2.4%)", dir:"up" },
     { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Sin cambio", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Review 15-Jun", dir:"neutral" },
     { label:"Cash on hand (Jul)", valor:"~$500K est", cambio:"WK29 forecast", dir:"neutral" },
@@ -652,10 +652,10 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "16/07/2026 · 06:00",
+    generado:  "18/07/2026 · 06:00",
     modelo:    "Claude Haiku 4.5",
     horizonte: "7 días",
-    nota:      "Síntesis off-season: tomate temporada cerrada WK24 (05-Jun). Limón 70ha Belher en cosecha tardía WK27-WK30. Monitoreo precios Limón Seedless $34-36 (Peru supply window cerrando). Última operación tomate 01-Jun. Sin nuevos reportes operacionales desde fin de temporada — datos preservados del último reporte 15-Jul.",
+    nota:      "Síntesis off-season: tomate temporada cerrada WK24 (05-Jun). Limón 70ha Belher en cosecha tardía WK27-WK30. Monitoreo precios Limón Seedless $34-36 (Peru supply window cerrando). Última operación tomate 01-Jun. Sin nuevos reportes operacionales desde fin de temporada — datos preservados del último reporte 16-Jul.",
     items: [
       {
         id: "vine-ripe",
@@ -725,7 +725,7 @@ window.BELHER = {
   },
 
   cdc: {
-    semanaActual: "WK27",
+    semanaActual: "WK29",
     fuente: "Pendiente reporte CDC capitalhumano@agbelher.com",
     beltran: {
       titulo: "Juan Carlos Beltrán",
@@ -751,7 +751,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "16/07/2026",
+    actualizado:   "18/07/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
