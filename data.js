@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 19 Jul 2026",
+    fecha: "Lunes 20 Jul 2026",
     semana: "WK29",
-    actualizado: "19/07/2026 · 13:38"
+    actualizado: "20/07/2026 · 14:22"
   },
 
   alertas: [
@@ -601,6 +601,10 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:00","asunto":"HortiDaily ES · 20-Jul — Newsletter lunes: novedades horticultura y mercados internacionales","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-20"},
+    {"hora":"14:36","asunto":"HortiDaily EN · 20-Jul — Swedish grower 10-ha expansion; industry news Monday edition","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-20"},
+    {"hora":"08:15","asunto":"GBM · The Morning · 20-Jul — Resumen mercados financieros para comenzar el día","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-07-20"},
+    {"hora":"20:45","asunto":"Bank of America — Estado de cuenta disponible · ADV PLUS BANKING 3358","de":"onlinebanking@ealerts.bankofamerica.com","leido":false,"fecha":"2026-07-19"},
     {"hora":"13:49","asunto":"🌎 Comercio Exterior Sinaloa · Newsletter 17-Jul-2026 — Noticias relevantes de comercio exterior y oportunidades de exportación para empresas sinaloenses","de":"astrid.garibay@sinaloa.gob.mx","leido":false,"fecha":"2026-07-17"},
     {"hora":"15:53","asunto":"Transferencia Interbancaria SPEI BanBajío — Depósito registrado el 17-Jul-2026 a cuenta de Juan Carlos Beltrán Ochoa","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-07-17"},
     {"hora":"15:40","asunto":"HortiDaily ES · 17-Jul — Estrés hídrico >40°C: regar más no siempre protege; recomendaciones agronómicas para calor extremo","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-17"},
