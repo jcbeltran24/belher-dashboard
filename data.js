@@ -1,14 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 18 Jul 2026",
-    semana: "WK29",
-    actualizado: "18/07/2026 · 06:00"
+    fecha: "Lunes 20 Jul 2026",
+    semana: "WK30",
+    actualizado: "20/07/2026 · 09:20"
   },
 
   alertas: [
-    {"nivel":"info","texto":"📅 SEMANA WK29: Off-season monitoreo. Limón seedless 70ha Belher en posicionamiento WK27-WK30 (cosecha tardía). Última operación tomate WK24 (05-Jun). Sin nuevos reportes operacionales desde fin de temporada."},
-    {"nivel":"info","texto":"📊 Sábado 18-Jul: Monitoreo contínuo de mercado limón y calidad outbound. Limón Seedless 110s rango esperado $34-36 WK27-WK28 (Peru supply window cerrando). Belher bien posicionada para capturar premium pricing."},
-    {"nivel":"success","texto":"✅ Limón Seedless 110s: rango sostenido $34-36 WK26-WK27 (Peru supply window cerrando). Supply competitiva Belher 70ha. Belher bien posicionada para capturar premium pricing."}
+    {"nivel":"info","texto":"📅 SEMANA WK30: Off-season monitoreo. Limón seedless 70ha Belher en cosecha tardía WK27-WK31 (pico supply mayo, ventana Peru cerrando). Última operación tomate WK24 (05-Jun). Temporada GC 2025–2026 prácticamente cerrada operacionalmente."},
+    {"nivel":"success","texto":"✅ Limón Seedless 110s: rango sostenido $34-36 (estimado WK27-WK30, Peru supply window cerrando). 70ha Belher bien posicionada para capturar premium pricing en ventana estratégica."},
+    {"nivel":"info","texto":"📊 WK30: Transición a GC 2026–2027. Semilleras comprometidas ($984K GC25-26). WK Calavo GC26-27 estructura 4/4 pagos a partir agosto. Cash flow forecast: monitor diario saldos y availabilities Bajío."},
+    {"nivel":"info","texto":"🔔 Contrato GC2026-2029: Beltrán-Calavo en finales. Cierre esperado antes 24-Jul. Mission Produce integración Calavo completada 29-May — acuerdos vigentes."},
+    {"nivel":"info","texto":"📋 Auditorías completadas: SMETA Buyers Edge (27-May-2026) FAVORABLE. Empaque 94.3%, Álamo 96.2%, La 25 96.4%. Acciones correctivas deadline 08-Jun VENCIDO — pendiente confirmación."}
   ],
 
   ebitda: {
@@ -613,7 +615,7 @@ window.BELHER = {
     { label:"AVO (Mission Produce)", valor:"$13.59", cambio:"+$0.32 (+2.4%)", dir:"up" },
     { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Sin cambio", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Review 15-Jun", dir:"neutral" },
-    { label:"Cash on hand (Jul)", valor:"~$500K est", cambio:"WK29 forecast", dir:"neutral" },
+    { label:"Cash on hand (Jul)", valor:"~$500K est", cambio:"WK30 forecast", dir:"neutral" },
     { label:"EBITDA Marzo", valor:"$2.86M", cambio:"+15%", dir:"up" }
   ],
 
@@ -646,16 +648,16 @@ window.BELHER = {
       { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
     ],
     proximos: [
-      { fecha:"2026-07-20", evento:"Monitoreo contínuo de precios limón y calidad outbound", tipo:"Operación", participantes:"Equipo Belher", detalles:"WK27-WK30: cosecha tardía limón 70ha. Seguimiento embarques y posicionamiento pricing $34-36." },
+      { fecha:"2026-07-20", evento:"Monitoreo contínuo de precios limón y calidad outbound", tipo:"Operación", participantes:"Equipo Belher", detalles:"WK27-WK31: cosecha tardía limón 70ha. Seguimiento embarques y posicionamiento pricing $34-36." },
       { fecha:"2026-07-24", evento:"Revisión Contrato GC2026-2029 — cierre esperado", tipo:"Legal", participantes:"JC, Irene Amezaga, Armando Llanes", detalles:"Firma contrato Beltrán-Calavo para ciclo 2026-2027. Confirmación con Mission Produce post-integración Calavo." }
     ]
   },
 
   predicciones: {
-    generado:  "18/07/2026 · 06:00",
+    generado:  "20/07/2026 · 09:20",
     modelo:    "Claude Haiku 4.5",
     horizonte: "7 días",
-    nota:      "Síntesis off-season: tomate temporada cerrada WK24 (05-Jun). Limón 70ha Belher en cosecha tardía WK27-WK30. Monitoreo precios Limón Seedless $34-36 (Peru supply window cerrando). Última operación tomate 01-Jun. Sin nuevos reportes operacionales desde fin de temporada — datos preservados del último reporte 16-Jul.",
+    nota:      "Síntesis off-season (WK30): tomate temporada cerrada WK24 (05-Jun). Limón 70ha Belher en cosecha tardía WK27-WK31. Monitoreo precios Limón Seedless $34-36 (Peru supply window cerrando). Última operación tomate 01-Jun. Sin nuevos reportes operacionales desde fin de temporada — datos preservados del último reporte Corbel 05-Jun-2026.",
     items: [
       {
         id: "vine-ripe",
@@ -665,10 +667,10 @@ window.BELHER = {
         confianza: 88,
         precio_actual: { min:11.95, max:12.95 },
         precio_proyectado: { min:8.00, max:13.50 },
-        razonamiento: "Corbel #0065 (05/Jun): Nogales $11.95-12.95 (-57% vs WK23 $28-32). WK27 entra con oferta mexicana masiva, demanda post-holiday deprimida. México prioriza supply doméstico. Presión adicional por California GH volumes. Soporte débil — caída adicional a $8-9 posible si oferta sin demanda. Temporada cerrada para Belher.",
-        factores: ["Fin temporada alta (WK24)", "Oferta México masiva junio", "Demanda post-holiday comprimida", "CA GH volumes activos", "Belher operación cerrada"],
+        razonamiento: "Corbel #0065 (05/Jun): Nogales $11.95-12.95 (-57% vs WK23 $28-32). WK30 entra con oferta mexicana masiva, demanda post-holiday deprimida. México prioriza supply doméstico. Presión adicional por California GH volumes. Soporte débil — caída adicional a $8-9 posible si oferta sin demanda. Temporada cerrada para Belher desde 01-Jun.",
+        factores: ["Fin temporada alta (WK24)", "Oferta México masiva junio-julio", "Demanda post-holiday comprimida", "CA GH volumes activos", "Belher operación cerrada"],
         riesgo: "Irrelevante para Belher — temporada cerrada desde 01-Jun.",
-        accion: "INFORMACIÓN HISTÓRICA: No aplica. Belher en cosecha tardía limón."
+        accion: "INFORMACIÓN HISTÓRICA: No aplica. Belher en cosecha tardía limón WK27-WK31."
       },
       {
         id: "roma",
@@ -678,8 +680,8 @@ window.BELHER = {
         confianza: 85,
         precio_actual: { min:10.95, max:12.95 },
         precio_proyectado: { min:7.50, max:12.00 },
-        razonamiento: "Roma Nogales $10.95-12.95 (Corbel -51% vs WK23). Glut estacional junio. Florida expansion y Guatemala competencia. Belher inventario de temporada liquidado en Mayo. WK27 presión alta en mercado mexicano general pero no aplica a Belher.",
-        factores: ["Seasonal glut junio (peak supply)", "Florida expansion intensificando", "Guatemala competencia", "Belher: operación cerrada"],
+        razonamiento: "Roma Nogales $10.95-12.95 (Corbel -51% vs WK23). Glut estacional junio-julio. Florida expansion y Guatemala competencia. Belher inventario de temporada liquidado en Mayo. WK30 presión alta en mercado mexicano general pero no aplica a Belher operativamente.",
+        factores: ["Seasonal glut junio-julio (peak supply)", "Florida expansion intensificando", "Guatemala competencia", "Belher: operación cerrada"],
         riesgo: "Irrelevante para Belher — temporada cerrada.",
         accion: "INFORMACIÓN HISTÓRICA: No aplica."
       },
@@ -691,8 +693,8 @@ window.BELHER = {
         confianza: 74,
         precio_actual: { min:17.00, max:19.00 },
         precio_proyectado: { min:15.50, max:21.00 },
-        razonamiento: "Jalapeño Texas $17-19 (Corbel -47% vs WK23). Open field México junio presiona. Texas GH activo pero margen comprimido. Belher: no tiene jalapeño en operación actual. Mercado en lateral con soporte técnico $15.50.",
-        factores: ["Texas GH producción", "Open field México junio", "Soporte $15.50", "Belher: no aplica"],
+        razonamiento: "Jalapeño Texas $17-19 (Corbel -47% vs WK23). Open field México junio-julio presiona. Texas GH activo pero margen comprimido. Belher: no tiene jalapeño en operación actual. Mercado en lateral con soporte técnico $15.50.",
+        factores: ["Texas GH producción", "Open field México junio-julio", "Soporte $15.50", "Belher: no aplica"],
         riesgo: "No aplica a Belher.",
         accion: "INFORMACIÓN HISTÓRICA: Monitoreo para GC2026-27 potencial entry."
       },
@@ -704,7 +706,7 @@ window.BELHER = {
         confianza: 76,
         precio_actual: { min:6.00, max:7.00 },
         precio_proyectado: { min:5.50, max:8.50 },
-        razonamiento: "Chile Bell naranja Texas $6-7 (Corbel -54% vs WK23). Seasonal excess Texas GH. Belher Anaheim $26-28 (premium varietal posicionamiento fino). Mercado lateral probable WK27-WK30.",
+        razonamiento: "Chile Bell naranja Texas $6-7 (Corbel -54% vs WK23). Seasonal excess Texas GH junio-julio. Belher Anaheim $26-28 (premium varietal posicionamiento fino). Mercado lateral probable WK27-WK31.",
         factores: ["Texas GH seasonal excess", "Soporte $5.50", "Belher Anaheim premium", "Demanda deprimida"],
         riesgo: "Belher: mínimo — Anaheim posiciona premium.",
         accion: "Belher foco Anaheim. Monitor Bell para GC2026-27 entrada."
@@ -717,15 +719,16 @@ window.BELHER = {
         confianza: 72,
         precio_actual: { min:34.00, max:36.00 },
         precio_proyectado: { min:32.00, max:38.00 },
-        razonamiento: "Limón 110s Texas $34-36 (Corbel -15% vs WK23 — mejor que tomate). Peru supply window cerrando rápidamente — ventana 2-3 semanas. Asia-Pacific demand recovery sostenida. Belher 70ha competitiva. 110s premium over 150s sostenido. WK27 rango estable $34-38. BELHER EN COSECHA TARDÍA WK27-WK30.",
-        factores: ["Peru supply window cerrando (2-3 sem)", "Asia-Pacific demand recovery", "Belher 70ha competitive", "110s premium sostenido", "Seasonal pricing normal junio-julio"],
-        riesgo: "Si Peru reabre supply significativamente, caída rápida $28-30. Riesgo BAJO WK27-WK28.",
-        accion: "MAXIMIZAR FOB $34-36 rango WK27-WK30. Priorizar venta 110s. HOLD si >$37 — evaluación venta 150s. Belher 70ha = activo estratégico WK27-WK31. Monitoreo diario USDA Nogales y Corbel." }
+        razonamiento: "Limón 110s Texas $34-36 (Corbel 05-Jun: -15% vs WK23 anterior). Peru supply window cerrando rápidamente — ventana 2-3 semanas (estimado WK27-WK30). Asia-Pacific demand recovery sostenida. Belher 70ha competitiva. 110s premium over 150s sostenido en $2-4/carton. WK30 rango estable $34-38. BELHER EN COSECHA TARDÍA WK27-WK31.",
+        factores: ["Peru supply window cerrando (2-3 semanas)", "Asia-Pacific demand recovery", "Belher 70ha competitive supply", "110s premium sostenido $34-36", "Seasonal pricing normal julio"],
+        riesgo: "Si Peru reabre supply significativamente, caída rápida $28-30. Riesgo BAJO WK27-WK28 pero AUMENTA WK31+.",
+        accion: "MAXIMIZAR FOB $34-36 rango WK27-WK30. Priorizar venta 110s premium. HOLD si >$37. Belher 70ha = activo estratégico WK27-WK31. Monitoreo diario USDA Nogales y Corbel. Preparar entrada GC2026-27 con mejor posicionamiento precio."
+      }
     ]
   },
 
   cdc: {
-    semanaActual: "WK29",
+    semanaActual: "WK30",
     fuente: "Pendiente reporte CDC capitalhumano@agbelher.com",
     beltran: {
       titulo: "Juan Carlos Beltrán",
@@ -751,7 +754,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "18/07/2026",
+    actualizado:   "20/07/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
