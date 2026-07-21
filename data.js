@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 20 Jul 2026",
+    fecha: "Martes 21 Jul 2026",
     semana: "WK30",
-    actualizado: "20/07/2026 · 09:20"
+    actualizado: "21/07/2026 · 06:15"
   },
 
   alertas: [
@@ -648,13 +648,13 @@ window.BELHER = {
       { titulo:"Roma mercado saturación (Florida expansion)", nivel:"Medio", descripcion:"Florida ha aumentado producción Roma significativamente. España importa Romans a NY premium. Belher final inventory 2.1K (small talla) rotable.", accion:"Enfoque ventas 4x4/4x5 jumbos. Ajustar proyecciones WK24-WK25 Roma volúmenes." }
     ],
     proximos: [
-      { fecha:"2026-07-20", evento:"Monitoreo contínuo de precios limón y calidad outbound", tipo:"Operación", participantes:"Equipo Belher", detalles:"WK27-WK31: cosecha tardía limón 70ha. Seguimiento embarques y posicionamiento pricing $34-36." },
+      { fecha:"2026-07-21", evento:"Monitoreo contínuo de precios limón y calidad outbound", tipo:"Operación", participantes:"Equipo Belher", detalles:"WK27-WK31: cosecha tardía limón 70ha. Seguimiento embarques y posicionamiento pricing $34-36." },
       { fecha:"2026-07-24", evento:"Revisión Contrato GC2026-2029 — cierre esperado", tipo:"Legal", participantes:"JC, Irene Amezaga, Armando Llanes", detalles:"Firma contrato Beltrán-Calavo para ciclo 2026-2027. Confirmación con Mission Produce post-integración Calavo." }
     ]
   },
 
   predicciones: {
-    generado:  "20/07/2026 · 09:20",
+    generado:  "21/07/2026 · 06:15",
     modelo:    "Claude Haiku 4.5",
     horizonte: "7 días",
     nota:      "Síntesis off-season (WK30): tomate temporada cerrada WK24 (05-Jun). Limón 70ha Belher en cosecha tardía WK27-WK31. Monitoreo precios Limón Seedless $34-36 (Peru supply window cerrando). Última operación tomate 01-Jun. Sin nuevos reportes operacionales desde fin de temporada — datos preservados del último reporte Corbel 05-Jun-2026.",
@@ -754,7 +754,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "20/07/2026",
+    actualizado:   "21/07/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
