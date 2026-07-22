@@ -1,19 +1,20 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 21 Jul 2026",
+    fecha: "Miércoles 22 Jul 2026",
     semana: "WK29",
-    actualizado: "21/07/2026 · 14:08"
+    actualizado: "22/07/2026 · 07:10"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES 15-JUL · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago más urgente: periodo 4-2026 $2.4k + convenios vencidos $1.6k = MXP $4M total inmediato. Riesgo: facultades coactivas IMSS o SAT (embargo/cobranza). Fuente: jacruz@agbelher.com · 15/Jul/2026."},
-    {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — DEADLINE 31-JUL: USDOC convoca partes el 1° de Julio para Revisión Administrativa 2026. Presentar solicitud de revisión de margen propio ANTES del 31 de Julio. Reunión con Capital Trade y Jeff Winton ya efectuada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
+    {"nivel":"warning","texto":"⚖️ DUMPING TOMATE — DEADLINE 31-JUL URGENTE: USDOC convoca partes el 1° de Julio para Revisión Administrativa 2026. Presentar solicitud de revisión de margen propio ANTES del 31 de Julio. Quedan 9 días. Reunión con Capital Trade y Jeff Winton ya efectuada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
     {"nivel":"warning","texto":"📅 JUNTA DE CONSEJO ABSA · VIERNES 24-JUL — Fecha confirmada: 24 de julio, 3:00 pm, casa de la Sra. Hildelisa. Armando Llanes prepara material. NOTA: Armando Llanes declinó invitación (20-Jul). Verificar asistencia y quórum. Fuente: armandollanes@donmemo.net · 20/Jul/2026."},
+    {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES 15-JUL · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago más urgente: periodo 4-2026 $2.4k + convenios vencidos $1.6k = MXP $4M total inmediato. Riesgo: facultades coactivas IMSS o SAT (embargo/cobranza). Fuente: jacruz@agbelher.com · 15/Jul/2026."},
+    {"nivel":"info","texto":"🥒 MERCADO HORTALIZAS MX · Corbel Seeds #0098 (22-Jul) — Sector hortícola exportador entra el día con precios estables en cruces EUA: pepino, tomate, chile bell, jalapeño, habanero y Roma. Mayor énfasis en certificación GLOBALG.A.P., seguridad laboral, responsabilidad social y verificación de riesgo — incrementa valor comercial de sistemas auditables para exportadores MX. Fuente: ray@agbelher.com · 22/Jul/2026."},
+    {"nivel":"info","texto":"⚖️ BÁSCULA BELHER · Reporte Limón Persa 21-Jul-2026 — Se recibió reporte de báscula de limón persa correspondiente al 21 de julio (adjunto en correo). Revisar volúmenes y calidades del día. Fuente: basculabelher@gmail.com · 21/Jul/2026."},
     {"nivel":"warning","texto":"📅 AGENDA ABSA-BPSI JULIO — Armando Llanes en Culiacán del 19-26 Jul. Reuniones Zoom y en persona. Pendiente: Antonio enviar estados bancarios UBS de Almera Holdings 2025 a Armando y Juan. Fuente: armandollanes@donmemo.net · 26/Jun/2026."},
     {"nivel":"warning","texto":"📊 F/S BPSI JUNIO 2026 — Leima Leyva compartió EF Blondie Producciones al 30-Jun-2026. Junio: ingresos MXP $126K, utilidad $22K. Saldo bancos al cierre: MXP $117K (cubre gastos julio). Pendiente renovación FIEL. Sin reunión mensual (Leima y Armando ya revisaron). Fuente: leima@agbelher.com · 16/Jul/2026."},
     {"nivel":"warning","texto":"📊 SETTELEMENT CALAVO al 15-Jul-2026 GC 2025-2026 — Leima comparte liquidación Calavo recibida el 15-Jul. Prácticamente todo facturado; solo 80 cajas pendientes de las 963K totales del ciclo. Fuente: leima@agbelher.com · 16/Jul/2026."},
     {"nivel":"info","texto":"🌐 USMCA RONDA 3 · REVISIÓN EN CURSO (Corbel #0097 · 21-Jul) — Tercera ronda de revisión USMCA en marcha. Agenda incluye facilitación aduanal y cumplimiento ambiental en producción de aguacate. Trazabilidad y verificación de origen legal en aumento para exportadores MX. Sin disrupción específica reportada en últimas 24h. Fuente: ray@agbelher.com · 21/Jul/2026."},
-    {"nivel":"info","texto":"🥒 MERCADO HORTALIZAS · Corbel Seeds #0095 (17-Jul) — Pepino MX firme en cruces EUA (suministros ajustados = precios al alza). Tomate estable-a-débil por mayor disponibilidad de California. Mayor apalancamiento comercial en pepino y chile bell seleccionados. Fuente: ray@agbelher.com · 17/Jul/2026."},
     {"nivel":"warning","texto":"🌱 PROPUESTA PRECIOS SEMILLA BHN SEED (Corbel) — Raymundo Elizalde envió propuesta comercial de portafolio BHN Seed para comercialización en México vía Corbel Seeds: análisis de mercado, estructura de precios, márgenes y condiciones de alianza. Martín Cortés (Katana): sin observaciones. Raymundo reenvió versión corregida + presentación en inglés para revisión con Jim (BHN). Pendiente comentarios de Juan Carlos y Antonio Beltrán. Fuente: ray@agbelher.com · 16/Jul/2026."},
     {"nivel":"info","texto":"👤 AUSENCIAS VACACIONES (20-Jul al 4-Ago) — Chrysthian Marisol Castro Sandoval (Gerente Innovación y Mejora Continua) ausente. Cubre: Flor Mejía (Eleven Rivers, proveedores, documentos, planta agua, inducción, auditorías) y Dulce Félix (seguridad temporada baja, Protección Civil, salud). Fuente: c.marisol@agbelher.com · 16/Jul/2026."},
     {"nivel":"warning","texto":"🦠 ALERTA SANITARIA — Cyclospora source identified (HortiDaily EN · 17-Jul). Revisar cadenas de suministro de hortalizas frescas de exportación; posible impacto en inspecciones FDA. Fuente: mail@hortidaily.com · 17/Jul/2026."},
@@ -26,8 +27,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"📊 OL FY 7+5 & GC 4+8 26-27 — Mariela García (Don Memo) compartió Outlook FY 7+5 y GC 4+8 ciclo 2026-27. EBITDA GC 4+8: $1,063,299 USD. Pendiente revisión. Fuente: mariela@donmemo.net · 25/Jun/2026."},
     {"nivel":"warning","texto":"📉 OL 11+1 ABSA GC'25-26 — EBITDA $2,526,573 USD, pérdida ($157k) vs Budget $2.7M. Caída 995k cajas exportación (−52% vs Budget = −$6,555k ingresos). Reducción costos producción $1,320k y distribución $4,396k. Fuente: jacruz@agbelher.com · 23/Jun/2026."},
     {"nivel":"warning","texto":"💰 COSTO DE PRODUCCIÓN ROMA 12 LBS (ADM/Don Memo) — Mariela García reenvió análisis de costos Roma 12 Libras a Juan Carlos y Antonio Beltrán. Disponible en Drive. Pendiente revisión. Fuente: gerardo.mendoza@donmemo.net · 08/Jul/2026."},
-    {"nivel":"warning","texto":"💰 SLA — RESUMEN PRESUPUESTAL CIERRE JUNIO 2026: Recursos totales $106,878 USD. Gastos acumulados ene-jun: $97,467 USD. Primera venta proyectada: diciembre 2026. Fuente: ray@agbelher.com · 02/Jul/2026."},
-    {"nivel":"danger","texto":"🔐 LOGIN SOSPECHOSO GOOGLE WORKSPACE — Acceso inusual detectado en capitalhumano@agbelher.com · IP: 2806:370:2579:4865 · 02-Jul-2026 13:23 UTC. Verificar en Alert Center y cambiar contraseña si no fue acción autorizada. Fuente: google-workspace-alerts@google.com."}
+    {"nivel":"warning","texto":"💰 SLA — RESUMEN PRESUPUESTAL CIERRE JUNIO 2026: Recursos totales $106,878 USD. Gastos acumulados ene-jun: $97,467 USD. Primera venta proyectada: diciembre 2026. Fuente: ray@agbelher.com · 02/Jul/2026."}
   ],
 
   ebitda: {
@@ -601,6 +601,14 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"15:20","asunto":"HortiDaily ES · 22-Jul — Sustrato nuevo cada campaña elimina variable crítica frente a virus rugoso; novedades horticultura","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-22"},
+    {"hora":"14:43","asunto":"HortiDaily EN · 22-Jul — 70 ha berry growing Italy; industry news Wednesday edition","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-22"},
+    {"hora":"10:23","asunto":"Van der Valk Horti Systems · ValkPoly+ — Entrevista Pharis Rico: mejoras inmediatas en calidad de cultivos y control climático invernadero","de":"newsletter@valkhortisystems.nl","leido":false,"fecha":"2026-07-22"},
+    {"hora":"08:42","asunto":"GBM · The Morning · 22-Jul — Resumen mercados financieros para comenzar el día","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-07-22"},
+    {"hora":"08:04","asunto":"Asia Fruit Logistica · Big names to speak at Asiafruit Knowledge Centre — Speakers: Sunkist, Driscoll's, Dole China","de":"info@gp-events.com","leido":false,"fecha":"2026-07-22"},
+    {"hora":"07:03","asunto":"Corbel Seeds Daily Report #0098 · 22-Jul — Hortalizas MX: precios estables en cruce EUA; mayor énfasis GLOBALG.A.P. y auditorías para exportadores","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-22"},
+    {"hora":"13:14","asunto":"REPORTE DE BÁSCULA 21/07/2026 (LIMÓN PERSA) — Reportes de limón persa del día 21-Jul-2026 adjuntos","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-07-21"},
+    {"hora":"11:49","asunto":"ICAPSA - Agrícola Belher — Presentación de productos, propuesta de colaboración (Carlos Calderón, Gerente Zona Norte, Los Mochis)","de":"carloscalderon@icapsa.com.mx","leido":false,"fecha":"2026-07-21"},
     {"hora":"15:56","asunto":"HortiDaily ES · 21-Jul — Newsletter martes: novedades horticultura y mercados internacionales","de":"mail@hortidaily.es","leido":false,"fecha":"2026-07-21"},
     {"hora":"14:45","asunto":"HortiDaily EN · 21-Jul — Tropical greenhouse strategies; industry news Tuesday edition","de":"mail@hortidaily.com","leido":false,"fecha":"2026-07-21"},
     {"hora":"08:09","asunto":"GBM · The Morning · 21-Jul — Resumen mercados financieros para comenzar el día","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-07-21"},
