@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 21 Jul 2026",
+    fecha: "Lunes 21 Jul 2026",
     semana: "WK30",
-    actualizado: "21/07/2026 · 06:15"
+    actualizado: "21/07/2026 · 11:47"
   },
 
   alertas: [
