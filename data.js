@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 23 Jul 2026",
+    fecha: "Jueves 24 Jul 2026",
     semana: "WK30",
-    actualizado: "23/07/2026 · 08:30"
+    actualizado: "24/07/2026 · 07:45"
   },
 
   alertas: [
@@ -656,7 +656,7 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "23/07/2026 · 08:30",
+    generado:  "24/07/2026 · 07:45",
     modelo:    "Claude Haiku 4.5",
     horizonte: "7 días",
     nota:      "Off-season WK30: tomate temporada cerrada WK24 (05-Jun). Limón 70ha Belher en cosecha tardía WK27-WK31 iniciando próximas semanas. Monitoreo precios Limón Seedless $34-36 (Peru supply window cerrando rápidamente). Sin nuevos reportes operacionales ni Corbel Seeds desde 05-Jun. Datos preservados del último reporte; tendencias infieren desde USDA histórico y supply dynamics peru.",
@@ -730,7 +730,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "23/07/2026",
+    actualizado:   "24/07/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
