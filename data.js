@@ -1,12 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 24 Jul 2026",
+    fecha: "Viernes 25 Jul 2026",
     semana: "WK30",
-    actualizado: "24/07/2026 · 07:45"
+    actualizado: "25/07/2026 · 08:15"
   },
 
   alertas: [
-    {"nivel":"info","texto":"📅 SEMANA WK30: Off-season monitoreo continuo. Limón seedless 70ha Belher en cosecha tardía WK27-WK31 (pico supply mayo, ventana Peru cerrando). Última operación tomate WK24 (05-Jun). Temporada GC 2025–2026 prácticamente cerrada operacionalmente."},
+    {"nivel":"info","texto":"📅 SEMANA WK30 (25-Jul-2026): Off-season monitoreo. Limón seedless 70ha Belher en cosecha tardía WK27-WK31 — ventana estratégica cerrando. Última operación tomate WK24 (05-Jun). GC 2025–2026 cerrada operacionalmente. Prep GC 2026–2027: semilleras pagadas $984K, WK Calavo estructura 4/4 agosto."},
     {"nivel":"success","texto":"✅ Limón Seedless 110s: rango sostenido $34-36 (WK27-WK30 peru supply ventana). 70ha Belher bien posicionada para capturar premium pricing en ventana estratégica final."},
     {"nivel":"info","texto":"📊 WK30: Transición a GC 2026–2027 avanzando. Semilleras $984K GC26-27 pagadas. WK Calavo estructura 4/4 pagos iniciando agosto. Cash flow forecast: monitoreo diario saldos y availabilities Bajío."},
     {"nivel":"info","texto":"🔔 Contrato GC2026-2029: Beltrán-Calavo finales. Cierre esperado antes 24-Jul — Mission Produce integración Calavo completada 29-May, acuerdos vigentes."},
