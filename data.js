@@ -1,14 +1,20 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 25 Jul 2026",
+    fecha: "Domingo 26 Jul 2026",
     semana: "WK30",
-    actualizado: "25/07/2026 · 13:49"
+    actualizado: "26/07/2026 · 07:42"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — DEADLINE 31-JUL CRÍTICO: USDOC convoca partes para Revisión Administrativa 2026. Presentar solicitud de revisión de margen propio ANTES del 31 de Julio. Quedan 6 días. Reunión con Capital Trade y Jeff Winton ya efectuada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
+    {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — DEADLINE 31-JUL CRÍTICO: USDOC convoca partes para Revisión Administrativa 2026. Presentar solicitud de revisión de margen propio ANTES del 31 de Julio. Quedan 5 días. Reunión con Capital Trade y Jeff Winton ya efectuada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
     {"nivel":"warning","texto":"📅 JUNTA ABSA · VIERNES 31-JUL 12pm–1pm (Zoom) — Juan Antonio Cruz convoca junta el viernes 31 de julio, 12:00–13:00 h (GMT-7). Confirmar asistencia. Fuente: jacruz@agbelher.com · 23/Jul/2026."},
     {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago urgente: MXP $4M inmediato. Riesgo: embargo/cobranza IMSS o SAT. Fuente: jacruz@agbelher.com · 15/Jul/2026."},
+    {"nivel":"info","texto":"📋 MINUTA JDC 24-Jul-2026 (ABSA) — Armando Llanes (CFO, Grupo Belo del Pacífico/HMX) distribuyó minuta y Matriz de Decisiones aprobada en la JDC del 24-Jul. Próxima reunión JDC a coordinar en Culiacán, septiembre 2026. Fuente: armandollanes@donmemo.net · 25/Jul/2026."},
+    {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 25-Jul — Embarques Belher adjunta reportes generales de embarque y empaque de limón persa del 25/07/2026. Fuente: embarquesbelher@agbelher.com · 25/Jul/2026."},
+    {"nivel":"info","texto":"🚚 MANIFIESTO, FACTURA Y XML LIMÓN PERSA 25-Jul — Documentos de embarque emitidos. Chofer: Misael Vázquez Carlón (cel: 6675 83 03 95). Fuente: embarquesbelher@agbelher.com · 25/Jul/2026."},
+    {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 25-Jul — Export 85% / Nacional 15% / Merma 0%. Calibres 250-150. Peso/caja: 40.2–40.5 lbs. Defectos principales: wood pocket y trips en calibres 250-230. Fuente: calidad@agbelher.com · 25/Jul/2026."},
+    {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 24-Jul (Don Memo → Calavo) — Roma Calavo: Primera 97.07% / Segunda 2.05% / Tercera 0.73% / Merma 0.14% / Peso prom. 27.54 lbs. Fuente: calidad@agbelher.com · 25/Jul/2026."},
+    {"nivel":"info","texto":"🌱 ANÁLISIS AGRONÓMICO LIMÓN PERSA · Muestreo 21-Jul-2026 — Consultores Agronómicos entregaron reportes de Nutrición Foliar y Fertilidad de Suelo del Lote Viudas (Sectores 1–5). Fuente: conagrosc@gmail.com · 25/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN 24-Jul — Embarques Belher adjunta reportes generales de empaque de limón del 24/07/2026. Fuente: embarquesbelher@agbelher.com · 24/Jul/2026."},
     {"nivel":"info","texto":"⚖️ BÁSCULA BELHER · Reporte Limón Persa 24-Jul-2026 — Reporte de báscula de limón persa recibido; se reenvió corrección por error en captura inicial (datos correctos en segundo envío). Fuente: basculabelher@gmail.com · 24/Jul/2026."},
     {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 23-Jul (Don Memo → Calavo) — Roma Calavo: Primera 97.36% / Segunda 1.62% / Tercera 0.69% / Merma 0.33% / Peso prom. 27.19 lbs. Fuente: calidad@agbelher.com · 24/Jul/2026."},
@@ -26,8 +32,7 @@ window.BELHER = {
     {"nivel":"info","texto":"📊 CF CONSOLIDADO ADM GC 2026-2027 OL 4+8 (Act. junio 2026) — Flujo de caja consolidado: Export Revenue + Consolidated CF; saldo mínimo inicial USD 42k. Fuente: leima@agbelher.com · 14/Jul/2026."},
     {"nivel":"info","texto":"📂 ADM FINANCIALS JUNIO 2026 — Felipe Calderón (CRY Asociados) compartió P&L GC 26-27, P&L FY 25-26, P&L Jun 2026 y Balance Sheet 30-Jun-2026. Fuente: fcalderon@cryasociados.com · 13/Jul/2026."},
     {"nivel":"info","texto":"🏭 NUEVA BODEGA REFRIGERADA HIDALGO TX — Vista Logistics Group LLC: Cold Storage & Cross-Docking, Punto de Inspección USDA. Evaluar como nodo logístico para embarques Sinaloa. Fuente: trafico2@vistalogistics.net · 09/Jul/2026."},
-    {"nivel":"warning","texto":"🌱 SEED REQUEST Z-027 — Raymundo Elizalde confirma disponibilidad a Jim Augustine (BHN): H5995, H5998, H5999. Trial semi-comercial 1 ha con Agrícola Belher + Chaparral. Fuente: ray@agbelher.com · 07/Jul/2026."},
-    {"nivel":"warning","texto":"📊 OL FY 7+5 & GC 4+8 26-27 — Mariela García (Don Memo) compartió Outlook FY 7+5 y GC 4+8 ciclo 2026-27. EBITDA GC 4+8: $1,063,299 USD. Fuente: mariela@donmemo.net · 25/Jun/2026."}
+    {"nivel":"warning","texto":"🌱 SEED REQUEST Z-027 — Raymundo Elizalde confirma disponibilidad a Jim Augustine (BHN): H5995, H5998, H5999. Trial semi-comercial 1 ha con Agrícola Belher + Chaparral. Fuente: ray@agbelher.com · 07/Jul/2026."}
   ],
 
   ebitda: {
@@ -601,6 +606,12 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"22:21","asunto":"25-07-2026 REPORTES GENERALES LIMÓN PERSA — Reportes generales de embarque y empaque adjuntos","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-07-25"},
+    {"hora":"20:22","asunto":"MANIFIESTO, FACTURA Y XML LIMÓN PERSA 25-Jul — Chofer: Misael Vázquez Carlón; documentos de carga adjuntos","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-07-25"},
+    {"hora":"13:27","asunto":"ABSA Minutes JDC July 24th 2026 — Minuta JDC 24-Jul y Matriz de Decisiones aprobada; próxima JDC en Culiacán sep-2026","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-07-25"},
+    {"hora":"10:59","asunto":"REPORTES DE RESULTADOS LIMÓN PERSA · Muestreo 21-Jul-2026 — Nutrición Foliar y Fertilidad de Suelo, Lote Viudas, Sectores 1-5","de":"conagrosc@gmail.com","leido":false,"fecha":"2026-07-25"},
+    {"hora":"10:51","asunto":"REPORTE DE OUTBOUND DE LIMÓN PERSA DEL 25/07/2026 — Export 85% / Nacional 15% / Merma 0%; Calibres 250-150","de":"calidad@agbelher.com","leido":false,"fecha":"2026-07-25"},
+    {"hora":"08:25","asunto":"REPORTE DE OUTBOUND TOMATE 24/07/2026 — Roma Calavo: 1a 97.07% / Merma 0.14% / Peso prom. 27.54 lbs","de":"calidad@agbelher.com","leido":false,"fecha":"2026-07-25"},
     {"hora":"17:56","asunto":"24-07-2026 REPORTES GENERALES LIMÓN — Reportes generales de empaque de limón adjuntos","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-07-24"},
     {"hora":"15:54","asunto":"CFDI Recibo Electrónico · Período 30 Semanal 2026 — RFC: ABE180411CB8 · Agrícola Belher Fijos","de":"anajar@agbelher.com","leido":false,"fecha":"2026-07-24"},
     {"hora":"15:22","asunto":"REPORTE DE BÁSCULA 24/07/2026 (LIMÓN PERSA) — Reenvío corrección; datos de cosecha correctamente capturados","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-07-24"},
