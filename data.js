@@ -1,14 +1,15 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 26 Jul 2026",
+    fecha: "Lunes 27 Jul 2026",
     semana: "WK30",
-    actualizado: "26/07/2026 · 07:42"
+    actualizado: "27/07/2026 · 14:50"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — DEADLINE 31-JUL CRÍTICO: USDOC convoca partes para Revisión Administrativa 2026. Presentar solicitud de revisión de margen propio ANTES del 31 de Julio. Quedan 5 días. Reunión con Capital Trade y Jeff Winton ya efectuada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
+    {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — DEADLINE 31-JUL CRÍTICO: USDOC convoca partes para Revisión Administrativa 2026. Presentar solicitud de revisión de margen propio ANTES del 31 de Julio. Quedan 4 días. Reunión con Capital Trade y Jeff Winton ya efectuada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
     {"nivel":"warning","texto":"📅 JUNTA ABSA · VIERNES 31-JUL 12pm–1pm (Zoom) — Juan Antonio Cruz convoca junta el viernes 31 de julio, 12:00–13:00 h (GMT-7). Confirmar asistencia. Fuente: jacruz@agbelher.com · 23/Jul/2026."},
     {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago urgente: MXP $4M inmediato. Riesgo: embargo/cobranza IMSS o SAT. Fuente: jacruz@agbelher.com · 15/Jul/2026."},
+    {"nivel":"info","texto":"🌱 MERCADO HORTALIZAS MX · Corbel Seeds #0101 (27-Jul) — Mercados norteamericanos continúan recibiendo oferta mexicana vía Texas y Sur de California. Pepino y chile bell estables. Jalapeño y serrano ligeramente a la baja. Tomate estable. Aguacate mexicano por Texas activo aunque con operación lenta. Señal para exportadores: mercado con disponibilidad adecuada, precios disciplinados y sensibilidad a calidad, calibre y logística fronteriza. Fuente: ray@agbelher.com · 27/Jul/2026."},
     {"nivel":"info","texto":"📋 MINUTA JDC 24-Jul-2026 (ABSA) — Armando Llanes (CFO, Grupo Belo del Pacífico/HMX) distribuyó minuta y Matriz de Decisiones aprobada en la JDC del 24-Jul. Próxima reunión JDC a coordinar en Culiacán, septiembre 2026. Fuente: armandollanes@donmemo.net · 25/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 25-Jul — Embarques Belher adjunta reportes generales de embarque y empaque de limón persa del 25/07/2026. Fuente: embarquesbelher@agbelher.com · 25/Jul/2026."},
     {"nivel":"info","texto":"🚚 MANIFIESTO, FACTURA Y XML LIMÓN PERSA 25-Jul — Documentos de embarque emitidos. Chofer: Misael Vázquez Carlón (cel: 6675 83 03 95). Fuente: embarquesbelher@agbelher.com · 25/Jul/2026."},
@@ -26,13 +27,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"📊 SETTELEMENT CALAVO al 15-Jul-2026 GC 2025-2026 — Liquidación Calavo recibida el 15-Jul. Prácticamente todo facturado; solo 80 cajas pendientes de las 963K totales del ciclo. Fuente: leima@agbelher.com · 16/Jul/2026."},
     {"nivel":"info","texto":"🌐 USMCA RONDA 3 · REVISIÓN EN CURSO (Corbel #0097 · 21-Jul) — Tercera ronda de revisión USMCA en marcha. Agenda incluye facilitación aduanal y cumplimiento ambiental en producción de aguacate. Fuente: ray@agbelher.com · 21/Jul/2026."},
     {"nivel":"warning","texto":"🌱 PROPUESTA PRECIOS SEMILLA BHN SEED (Corbel) — Raymundo Elizalde envió propuesta comercial de portafolio BHN Seed para México. Pendiente comentarios de Juan Carlos y Antonio Beltrán. Fuente: ray@agbelher.com · 16/Jul/2026."},
-    {"nivel":"info","texto":"👤 AUSENCIAS VACACIONES (20-Jul al 4-Ago) — Chrysthian Marisol Castro Sandoval ausente. Cubre: Flor Mejía y Dulce Félix. Fuente: c.marisol@agbelher.com · 16/Jul/2026."},
-    {"nivel":"warning","texto":"🦠 ALERTA SANITARIA · Cyclospora — Fuente identificada (HortiDaily EN · 17-Jul). Revisar cadenas de suministro de hortalizas frescas; posible impacto en inspecciones FDA. Fuente: mail@hortidaily.com · 17/Jul/2026."},
-    {"nivel":"info","texto":"📊 CF SEMANAL ADM act. 12-Jul (+6 semanas proyectadas) — CF semanal ADM compartido con Irene Amezaga (Calavo): última semana real + seis semanas de proyección. Fuente: leima@agbelher.com · 15/Jul/2026."},
-    {"nivel":"info","texto":"📊 CF CONSOLIDADO ADM GC 2026-2027 OL 4+8 (Act. junio 2026) — Flujo de caja consolidado: Export Revenue + Consolidated CF; saldo mínimo inicial USD 42k. Fuente: leima@agbelher.com · 14/Jul/2026."},
-    {"nivel":"info","texto":"📂 ADM FINANCIALS JUNIO 2026 — Felipe Calderón (CRY Asociados) compartió P&L GC 26-27, P&L FY 25-26, P&L Jun 2026 y Balance Sheet 30-Jun-2026. Fuente: fcalderon@cryasociados.com · 13/Jul/2026."},
-    {"nivel":"info","texto":"🏭 NUEVA BODEGA REFRIGERADA HIDALGO TX — Vista Logistics Group LLC: Cold Storage & Cross-Docking, Punto de Inspección USDA. Evaluar como nodo logístico para embarques Sinaloa. Fuente: trafico2@vistalogistics.net · 09/Jul/2026."},
-    {"nivel":"warning","texto":"🌱 SEED REQUEST Z-027 — Raymundo Elizalde confirma disponibilidad a Jim Augustine (BHN): H5995, H5998, H5999. Trial semi-comercial 1 ha con Agrícola Belher + Chaparral. Fuente: ray@agbelher.com · 07/Jul/2026."}
+    {"nivel":"info","texto":"👤 AUSENCIAS VACACIONES (20-Jul al 4-Ago) — Chrysthian Marisol Castro Sandoval ausente. Cubre: Flor Mejía y Dulce Félix. Fuente: c.marisol@agbelher.com · 16/Jul/2026."}
   ],
 
   ebitda: {
@@ -606,6 +601,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:27","asunto":"Corbel Seeds Daily Report #0101 (27-Jul) — Mercados norteamericanos con oferta MX estable; pepino y bell pepper firmes; jalapeño/serrano a la baja; tomate estable; aguacate activo con operación lenta","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-27"},
     {"hora":"22:21","asunto":"25-07-2026 REPORTES GENERALES LIMÓN PERSA — Reportes generales de embarque y empaque adjuntos","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-07-25"},
     {"hora":"20:22","asunto":"MANIFIESTO, FACTURA Y XML LIMÓN PERSA 25-Jul — Chofer: Misael Vázquez Carlón; documentos de carga adjuntos","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-07-25"},
     {"hora":"13:27","asunto":"ABSA Minutes JDC July 24th 2026 — Minuta JDC 24-Jul y Matriz de Decisiones aprobada; próxima JDC en Culiacán sep-2026","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-07-25"},
