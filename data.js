@@ -1,14 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 26 Jul 2026",
-    semana: "WK30",
-    actualizado: "26/07/2026 · 08:13"
+    fecha: "Lunes 27 Jul 2026",
+    semana: "WK31",
+    actualizado: "27/07/2026 · 08:19"
   },
 
   alertas: [
-    {"nivel":"info","texto":"📅 SEMANA WK30 (25-Jul-2026): Off-season monitoreo. Limón seedless 70ha Belher en cosecha tardía WK27-WK31 — ventana estratégica cerrando. Última operación tomate WK24 (05-Jun). GC 2025–2026 cerrada operacionalmente. Prep GC 2026–2027: semilleras pagadas $984K, WK Calavo estructura 4/4 agosto."},
+    {"nivel":"info","texto":"📅 SEMANA WK31 (28-Jul-2026): Off-season monitoreo. Limón seedless 70ha Belher en cosecha tardía WK27-WK31 — ventana estratégica cerrando. Última operación tomate WK24 (05-Jun). GC 2025–2026 cerrada operacionalmente. Prep GC 2026–2027: semilleras pagadas $984K, WK Calavo estructura 4/4 agosto."},
     {"nivel":"success","texto":"✅ Limón Seedless 110s: rango sostenido $34-36 (WK27-WK30 peru supply ventana). 70ha Belher bien posicionada para capturar premium pricing en ventana estratégica final."},
-    {"nivel":"info","texto":"📊 WK30: Transición a GC 2026–2027 avanzando. Semilleras $984K GC26-27 pagadas. WK Calavo estructura 4/4 pagos iniciando agosto. Cash flow forecast: monitoreo diario saldos y availabilities Bajío."},
+    {"nivel":"info","texto":"📊 WK31: Transición a GC 2026–2027 avanzando. Semilleras $984K GC26-27 pagadas. WK Calavo estructura 4/4 pagos iniciando agosto. Cash flow forecast: monitoreo diario saldos y availabilities Bajío."},
     {"nivel":"info","texto":"🔔 Contrato GC2026-2029: Beltrán-Calavo finales. Cierre esperado antes 24-Jul — Mission Produce integración Calavo completada 29-May, acuerdos vigentes."},
     {"nivel":"info","texto":"📋 Auditorías SMETA completadas: Buyers Edge (27-May-2026) FAVORABLE. Empaque 94.3%, Álamo 96.2%, La 25 96.4%. Off-season monitoring. Próxima actividad WK32+."}
   ],
@@ -656,10 +656,10 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "26/07/2026 · 08:13",
+    generado:  "27/07/2026 · 08:19",
     modelo:    "Claude Haiku 4.5",
     horizonte: "7 días",
-    nota:      "Off-season WK30 (cierre domingo): tomate temporada cerrada WK24 (05-Jun). Limón 70ha Belher en cosecha tardía WK27-WK31 iniciando próximas semanas. Monitoreo precios Limón Seedless $34-36 (Peru supply window cerrando rápidamente). Sin nuevos reportes operacionales ni Corbel Seeds desde 05-Jun. Datos preservados del último reporte; tendencias infieren desde USDA histórico y supply dynamics peru. Próxima semana: WK31 iniciando lunes 28-Jul.",
+    nota:      "Off-season WK31 (inicio lunes 28-Jul): tomate temporada cerrada WK24 (05-Jun). Limón 70ha Belher en cosecha tardía WK27-WK31 iniciando próximas semanas. Monitoreo precios Limón Seedless $34-36 (Peru supply window cerrando rápidamente). Sin nuevos reportes operacionales ni Corbel Seeds desde 05-Jun. Datos preservados del último reporte; tendencias infieren desde USDA histórico y supply dynamics peru. Próximas actualizaciones esperadas post-limón harvest WK31.",
     items: [
       {
         id: "limon-persa",
@@ -669,7 +669,7 @@ window.BELHER = {
         confianza: 68,
         precio_actual: { min:34.00, max:36.00 },
         precio_proyectado: { min:33.00, max:37.50 },
-        razonamiento: "Limón 110s $34-36 (Corbel 05-Jun: -15% vs WK23 anterior). Peru supply window cerrando rápidamente — ventana 2-3 semanas (estimado WK27-WK30). Asia-Pacific demand recovery sostenida. 110s premium over 150s sostenido $2-4/carton. WK30 rango estable. Belher 70ha ENTRA COSECHA TARDÍA WK27-WK31 en posición estratégica óptima.",
+        razonamiento: "Limón 110s $34-36 (Corbel 05-Jun: -15% vs WK23 anterior). Peru supply window cerrando rápidamente — ventana 2-3 semanas (estimado WK27-WK30). Asia-Pacific demand recovery sostenida. 110s premium over 150s sostenido $2-4/carton. WK30-WK31 rango estable. Belher 70ha ENTRA COSECHA TARDÍA WK27-WK31 en posición estratégica óptima.",
         factores: ["Peru supply window cerrando (WK30-WK31)", "Asia-Pacific demand recovery", "Belher 70ha competitive supply timing WK27-31", "110s premium sostenido $34-36", "Seasonal pricing julio normal"],
         riesgo: "Si Peru reabre supply masivamente post-WK31, caída rápida $28-30. Riesgo BAJO WK27-WK28, AUMENTA WK31. Monitoreo diario Corbel crítico.",
         accion: "🎯 MAXIMIZAR FOB $34-36 rango WK27-WK30. Priorizar venta 110s premium. HOLD si >$37. Monitoreo diario USDA Nogales y Corbel. Belher 70ha = activo estratégico crítico próximas 7-14 días. Coordinar embarques con picos de demanda Asia-Pacific."
@@ -704,7 +704,7 @@ window.BELHER = {
   },
 
   cdc: {
-    semanaActual: "WK30",
+    semanaActual: "WK31",
     fuente: "Pendiente reporte CDC capitalhumano@agbelher.com",
     beltran: {
       titulo: "Juan Carlos Beltrán",
@@ -730,7 +730,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "26/07/2026",
+    actualizado:   "27/07/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
