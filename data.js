@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 27 Jul 2026",
+    fecha: "Lunes 28 Jul 2026",
     semana: "WK31",
-    actualizado: "27/07/2026 · 09:30"
+    actualizado: "28/07/2026 · 06:00"
   },
 
   alertas: [
@@ -613,10 +613,10 @@ window.BELHER = {
     { label:"Chile Bell GH naranja (TX)", valor:"$6.00-7.00", cambio:"↓54%", dir:"down" },
     { label:"Jalapeño (TX)", valor:"$17-19", cambio:"↓47%", dir:"down" },
     { label:"Limón seedless 110s (TX)", valor:"$34-36", cambio:"Estable WK30", dir:"neutral" },
-    { label:"AVO (Mission Produce)", valor:"$12.41", cambio:"Last quote May 22", dir:"neutral" },
-    { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Sin cambio", dir:"neutral" },
+    { label:"AVO (Mission Produce)", valor:"$12.70", cambio:"Last update Jul 28", dir:"neutral" },
+    { label:"CVGW (Calavo→Mission)", valor:"$26.09", cambio:"Jul 28 close", dir:"neutral" },
     { label:"Avance Calavo GC25-26", valor:"$1.64M", cambio:"Saldo liquidado", dir:"neutral" },
-    { label:"Cash on hand (WK30)", valor:"Forecast negativo", cambio:"WK Calavo Aug", dir:"neutral" },
+    { label:"Cash on hand (WK31)", valor:"Forecast negativo", cambio:"WK Calavo Aug", dir:"neutral" },
     { label:"EBITDA Marzo", valor:"$2.86M", cambio:"Off-season", dir:"neutral" }
   ],
 
@@ -656,7 +656,7 @@ window.BELHER = {
   },
 
   predicciones: {
-    generado:  "27/07/2026 · 09:30",
+    generado:  "28/07/2026 · 06:00",
     modelo:    "Claude Haiku 4.5",
     horizonte: "7 días",
     nota:      "Off-season WK31 (inicio lunes 28-Jul): tomate temporada cerrada WK24 (05-Jun). Limón 70ha Belher en cosecha tardía WK27-WK31 iniciando próximas semanas. Monitoreo precios Limón Seedless $34-36 (Peru supply window cerrando rápidamente). Sin nuevos reportes operacionales ni Corbel Seeds desde 05-Jun. Datos preservados del último reporte; tendencias infieren desde USDA histórico y supply dynamics peru. Próximas actualizaciones esperadas post-limón harvest WK31.",
@@ -730,7 +730,7 @@ window.BELHER = {
     fuente:        "CAADES/CIDH · mariajose@cidh.org.mx",
     temporada:     "2025-2026",
     ultimoReporte: "Reporte # 65: 05-Jun-2026",
-    actualizado:   "27/07/2026",
+    actualizado:   "28/07/2026",
     inventario:    [],
     pipeline:      [],
     totalesTemporada: []
