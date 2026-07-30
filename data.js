@@ -1,15 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 29 Jul 2026",
+    fecha: "Jueves 30 Jul 2026",
     semana: "WK31",
-    actualizado: "29/07/2026 · 14:23"
+    actualizado: "30/07/2026 · 14:20"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — DEADLINE 31-JUL CRÍTICO: USDOC convoca partes para Revisión Administrativa 2026. Presentar solicitud de revisión de margen propio ANTES del 31 de Julio. Quedan 2 días. Reunión con Capital Trade y Jeff Winton ya efectuada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
+    {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — DEADLINE 31-JUL CRÍTICO: USDOC convoca partes para Revisión Administrativa 2026. Presentar solicitud de revisión de margen propio ANTES del 31 de Julio. Quedan 1 día. Reunión con Capital Trade y Jeff Winton ya efectuada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
     {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago urgente: MXP $4M inmediato. Riesgo: embargo/cobranza IMSS o SAT. Fuente: jacruz@agbelher.com · 15/Jul/2026."},
     {"nivel":"warning","texto":"🦠 ALERTA FOOD SAFETY · CYCLOSPORA / LECHUGA MX (Corbel #0102 · 28-Jul) — FDA amplía investigación de brote de Cyclospora vinculado epidemiológicamente a lechuga iceberg del centro de México. La revisión se extiende a hierbas frescas y otros exportables; presión máxima en trazabilidad, verificación de calidad de agua, registros sanitarios y sistemas de respuesta rápida para cadenas exportadoras mexicanas. Revisar y reforzar protocolos Belher. Fuente: ray@agbelher.com · 28/Jul/2026."},
     {"nivel":"warning","texto":"📅 JUNTA ABSA · VIERNES 31-JUL 12pm–1pm (Zoom) — Juan Antonio Cruz convoca junta el viernes 31 de julio, 12:00–13:00 h (GMT-7). Confirmar asistencia. Fuente: jacruz@agbelher.com · 23/Jul/2026."},
+    {"nivel":"info","texto":"🎓 CURSO INOCUIDAD · Microbiología Avanzada para Asesores — AMF Consultoría y Capacitación. Dates: 13-15 Ago 2026 vía Zoom. Instructor: D.C. Karla G. Domínguez González. Inversión: $3,100 MXN IVA inc. Contexto: relevante dado brote activo Cyclospora. Fuente: jenriquez.amfcyc@gmail.com · 29/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 28-Jul — Embarques Belher adjunta reportes generales de embarque y empaque de limón persa del 28/07/2026. Fuente: embarquesbelher@agbelher.com · 28/Jul/2026."},
     {"nivel":"info","texto":"🚚 MANIFIESTO, FACTURA Y XML LIMÓN PERSA 28-Jul — Documentos de embarque emitidos. Chofer: Jose Luis Ramirez (cel: 6677 36 36 36). Fuente: embarquesbelher@agbelher.com · 28/Jul/2026."},
     {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 27-Jul (Don Memo → Calavo + Don Memo) — Roma Calavo: 1a 96.80% / 2a 2.38% / 3a 0.56% / Merma 0.26% / Peso prom. 26.57 lbs. Roma Don Memo: 1a 94.49% / 2a 2.55% / 3a 1.15% / Merma 1.81% / Peso prom. 27.22 lbs. Fuente: calidad@agbelher.com · 27/Jul/2026."},
@@ -26,9 +27,7 @@ window.BELHER = {
     {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 23-Jul (Don Memo → Calavo) — Roma Calavo: Primera 97.36% / Segunda 1.62% / Tercera 0.69% / Merma 0.33% / Peso prom. 27.19 lbs. Fuente: calidad@agbelher.com · 24/Jul/2026."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 23-Jul — Export 77% / Nacional 23% / Merma 0%. Calibres 250-150. Principal defecto: trips en todos los calibres. Peso/caja: 40.2–40.5 lbs. Fuente: calidad@agbelher.com · 23/Jul/2026."},
     {"nivel":"info","texto":"🚚 EMBARQUE LIMÓN 23-Jul — Manifiestos, factura y XML emitidos. Chofer: Alan Eden Quevedo Iribe. Reportes generales de limón persa adjuntos. Fuente: embarquesbelher@agbelher.com · 23/Jul/2026."},
-    {"nivel":"info","texto":"🥒 MERCADO HORTALIZAS MX · Corbel Seeds #0099 (23-Jul) — Pepino mexicano ancla mercado norteamericano en cruces EUA. Precios estables. Mayor énfasis en certificación GLOBALG.A.P. y trazabilidad. Fuente: ray@agbelher.com · 23/Jul/2026."},
-    {"nivel":"warning","texto":"📅 AGENDA ABSA-BPSI JULIO — Armando Llanes en Culiacán del 19-26 Jul. Reuniones Zoom y en persona. Pendiente: Antonio enviar estados bancarios UBS de Almera Holdings 2025 a Armando y Juan. Fuente: armandollanes@donmemo.net · 26/Jun/2026."},
-    {"nivel":"warning","texto":"📊 F/S BPSI JUNIO 2026 — Leima Leyva compartió EF Blondie Producciones al 30-Jun-2026. Junio: ingresos MXP $126K, utilidad $22K. Saldo bancos: MXP $117K (cubre gastos julio). Pendiente renovación FIEL. Fuente: leima@agbelher.com · 16/Jul/2026."}
+    {"nivel":"info","texto":"🥒 MERCADO HORTALIZAS MX · Corbel Seeds #0099 (23-Jul) — Pepino mexicano ancla mercado norteamericano en cruces EUA. Precios estables. Mayor énfasis en certificación GLOBALG.A.P. y trazabilidad. Fuente: ray@agbelher.com · 23/Jul/2026."}
   ],
 
   ebitda: {
@@ -602,6 +601,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:03","asunto":"FRESHTech Reveals First Speaker Line-up — Speakers confirmados para Hong Kong Sep-2026: Agrosustain, Maersk Container, Netafim, Ryp Labs, entre otros; tecnología para produce fresco","de":"info@gp-events.com","leido":false,"fecha":"2026-07-30"},
+    {"hora":"19:03","asunto":"Curso Microbiología Avanzada para Asesores de Inocuidad — 13-15 Ago 2026 vía Zoom · Dra. Karla G. Domínguez · $3,100 IVA inc. · AMF Consultoría y Capacitación","de":"jenriquez.amfcyc@gmail.com","leido":false,"fecha":"2026-07-29"},
     {"hora":"21:27","asunto":"28-07-2026 REPORTES GENERALES LIMÓN PERSA — Reportes generales de embarque y empaque de limón persa adjuntos","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-07-28"},
     {"hora":"21:22","asunto":"MANIFIESTO, FACTURA Y XML LIMÓN PERSA 28-Jul — Chofer: Jose Luis Ramirez (cel: 6677 36 36 36); documentos de carga adjuntos","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-07-28"},
     {"hora":"07:01","asunto":"Corbel Seeds Daily Report #0102 (28-Jul) — Brote Cyclospora en lechuga MX amplía escrutinio FDA a hortalizas frescas; presión máxima en trazabilidad y sistemas de respuesta rápida para exportadores","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-28"},
