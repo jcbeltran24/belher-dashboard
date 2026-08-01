@@ -1,19 +1,21 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 31 Jul 2026",
-    semana: "WK31",
-    actualizado: "31/07/2026 · 07:23"
+    fecha: "Sábado 01 Ago 2026",
+    semana: "WK32",
+    actualizado: "01/08/2026 · 13:42"
   },
 
   alertas: [
-    {"nivel":"danger","texto":"⚖️ DUMPING TOMATE — DEADLINE HOY 31-JUL · ACCIÓN REQUERIDA AHORA: USDOC convoca partes para Revisión Administrativa 2026. Presentar solicitud de revisión de margen propio ANTES del 31 de Julio (HOY). Reunión con Capital Trade y Jeff Winton ya efectuada. Coordinar con abogados de inmediato. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
+    {"nivel":"warning","texto":"⚖️ DUMPING TOMATE · REVISIÓN ADMON 2026 — Deadline USDOC para solicitar revisión de margen propio era el 31-Jul (ya vencido). Verificar con Capital Trade y Jeff Winton el estatus de la solicitud presentada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
     {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago urgente: MXP $4M inmediato. Riesgo: embargo/cobranza IMSS o SAT. Fuente: jacruz@agbelher.com · 15/Jul/2026."},
-    {"nivel":"warning","texto":"📅 JUNTA ABSA · HOY VIERNES 31-JUL 12pm–1pm (Zoom) — Juan Antonio Cruz convoca junta hoy viernes 31 de julio, 12:00–13:00 h (GMT-7). Confirmar asistencia. Fuente: jacruz@agbelher.com · 23/Jul/2026."},
-    {"nivel":"warning","texto":"🍅 EMPAQUE ROMA TOV 1.5 lb · Pendiente aprobación Calavo — JC envió diseños co-branding Calavo+Belher (master case + individual boxes) a Irene para revisión. Llamada de seguimiento programada hoy 31-Jul. Producción pendiente: 2,000 masters / 16,000 cajas. Fuente: juancarlos@agbelher.com · 30/Jul/2026."},
+    {"nivel":"warning","texto":"📅 REUNIÓN ZOOM · JUE 6-AGO 10am–11am (GMT-7) — Leima Leyva convoca: CF Belher GC 2026-2027 actualizado a julio + forecast a dic '26. Zoom ID: 891 7213 3437 · Código: 6q6fNw. Fuente: leima@agbelher.com · 31/Jul/2026."},
+    {"nivel":"warning","texto":"⚖️ CONCILIACIÓN LIQUIDACIÓN BELHER/CALAVO · SEGUIMIENTO — Leima sigue con Irene Amezaga (Calavo) el acuerdo de comisión: 22% temporal → ajuste real 12% al cierre ciclo. Pendiente respuesta de Irene. Reunión de seguimiento programada: mar 4-Ago 10am–11am (GMT-7) vía Zoom. Fuente: leima@agbelher.com · 31/Jul/2026."},
+    {"nivel":"warning","texto":"🍅 EMPAQUE ROMA TOV 1.5 lb · Pendiente aprobación Calavo — JC envió diseños co-branding Calavo+Belher (master case + individual boxes) a Irene para revisión. Producción pendiente: 2,000 masters / 16,000 cajas. Fuente: juancarlos@agbelher.com · 30/Jul/2026."},
     {"nivel":"warning","texto":"🦠 ALERTA FOOD SAFETY · CYCLOSPORA / LECHUGA MX (Corbel #0102 · 28-Jul) — FDA amplía investigación de brote de Cyclospora vinculado epidemiológicamente a lechuga iceberg del centro de México. La revisión se extiende a hierbas frescas y otros exportables; presión máxima en trazabilidad, verificación de calidad de agua, registros sanitarios y sistemas de respuesta rápida para cadenas exportadoras mexicanas. Revisar y reforzar protocolos Belher. Fuente: ray@agbelher.com · 28/Jul/2026."},
     {"nivel":"info","texto":"🌱 MERCADO HORTALIZAS MX · Corbel Seeds #0105 (31-Jul) — USDA shipping-point data: tomate redondo y Roma estables; bell pepper refuerza ligeramente; pepino se suaviza; limón estable. Brasil expande acreage de aguacate → mayor competencia para exportadores MX en mercados EUA/Europa; presión en diferenciación por calidad, timing, trazabilidad y logística. Perú supera 50% del abasto global en varios productos. Fuente: ray@agbelher.com · 31/Jul/2026."},
     {"nivel":"info","texto":"📋 MAESTRAS AGRICOLA DON MEMO (#45310) — David Arturo Valenzuela (CECSO) envió maestras para revisión. Pendiente respuesta. Fuente: davalenzuela@cecso.com.mx · 30/Jul/2026."},
     {"nivel":"info","texto":"🎓 CURSO INOCUIDAD · Microbiología Avanzada para Asesores — AMF Consultoría y Capacitación. Dates: 13-15 Ago 2026 vía Zoom. Instructor: D.C. Karla G. Domínguez González. Inversión: $3,100 MXN IVA inc. Contexto: relevante dado brote activo Cyclospora. Fuente: jenriquez.amfcyc@gmail.com · 29/Jul/2026."},
+    {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 31-Jul — Báscula Belher emitió reporte de limón persa del 31/07/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 31/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 28-Jul — Embarques Belher adjunta reportes generales de embarque y empaque de limón persa del 28/07/2026. Fuente: embarquesbelher@agbelher.com · 28/Jul/2026."},
     {"nivel":"info","texto":"🚚 MANIFIESTO, FACTURA Y XML LIMÓN PERSA 28-Jul — Documentos de embarque emitidos. Chofer: Jose Luis Ramirez (cel: 6677 36 36 36). Fuente: embarquesbelher@agbelher.com · 28/Jul/2026."},
     {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 27-Jul (Don Memo → Calavo + Don Memo) — Roma Calavo: 1a 96.80% / 2a 2.38% / 3a 0.56% / Merma 0.26% / Peso prom. 26.57 lbs. Roma Don Memo: 1a 94.49% / 2a 2.55% / 3a 1.15% / Merma 1.81% / Peso prom. 27.22 lbs. Fuente: calidad@agbelher.com · 27/Jul/2026."},
@@ -26,10 +28,7 @@ window.BELHER = {
     {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 24-Jul (Don Memo → Calavo) — Roma Calavo: Primera 97.07% / Segunda 2.05% / Tercera 0.73% / Merma 0.14% / Peso prom. 27.54 lbs. Fuente: calidad@agbelher.com · 25/Jul/2026."},
     {"nivel":"info","texto":"🌱 ANÁLISIS AGRONÓMICO LIMÓN PERSA · Muestreo 21-Jul-2026 — Consultores Agronómicos entregaron reportes de Nutrición Foliar y Fertilidad de Suelo del Lote Viudas (Sectores 1–5). Fuente: conagrosc@gmail.com · 25/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN 24-Jul — Embarques Belher adjunta reportes generales de empaque de limón del 24/07/2026. Fuente: embarquesbelher@agbelher.com · 24/Jul/2026."},
-    {"nivel":"info","texto":"⚖️ BÁSCULA BELHER · Reporte Limón Persa 24-Jul-2026 — Reporte de báscula de limón persa recibido; se reenvió corrección por error en captura inicial (datos correctos en segundo envío). Fuente: basculabelher@gmail.com · 24/Jul/2026."},
-    {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 23-Jul (Don Memo → Calavo) — Roma Calavo: Primera 97.36% / Segunda 1.62% / Tercera 0.69% / Merma 0.33% / Peso prom. 27.19 lbs. Fuente: calidad@agbelher.com · 24/Jul/2026."},
-    {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 23-Jul — Export 77% / Nacional 23% / Merma 0%. Calibres 250-150. Principal defecto: trips en todos los calibres. Peso/caja: 40.2–40.5 lbs. Fuente: calidad@agbelher.com · 23/Jul/2026."},
-    {"nivel":"info","texto":"🚚 EMBARQUE LIMÓN 23-Jul — Manifiestos, factura y XML emitidos. Chofer: Alan Eden Quevedo Iribe. Reportes generales de limón persa adjuntos. Fuente: embarquesbelher@agbelher.com · 23/Jul/2026."}
+    {"nivel":"info","texto":"⚖️ BÁSCULA BELHER · Reporte Limón Persa 24-Jul-2026 — Reporte de báscula de limón persa recibido; se reenvió corrección por error en captura inicial (datos correctos en segundo envío). Fuente: basculabelher@gmail.com · 24/Jul/2026."}
   ],
 
   ebitda: {
@@ -603,6 +602,11 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"20:34","asunto":"CF Belher GC 2026-2027 actualizado a julio y forecast a dic '26 — Reunión Zoom jue 6-Ago 10am–11am (GMT-7) con Leima Leyva. ID: 891 7213 3437","de":"leima@agbelher.com","leido":false,"fecha":"2026-07-31"},
+    {"hora":"19:56","asunto":"Seguimiento conciliación liquidación Belher GC 2025-2026 — Leima sigue con Irene Amezaga (Calavo) acuerdo comisión 22%→12%; reunión Zoom mar 4-Ago 10am (GMT-7)","de":"leima@agbelher.com","leido":false,"fecha":"2026-07-31"},
+    {"hora":"16:07","asunto":"CFDI recibo electrónico · Agrícola Belher Fijos — Periodo 31 Semanal 2026","de":"anajar@agbelher.com","leido":false,"fecha":"2026-07-31"},
+    {"hora":"14:10","asunto":"Brief Digital actualizado — Corbel Seeds: enfoque confianza técnica, validación local, comunicación reforzada","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-31"},
+    {"hora":"13:34","asunto":"REPORTE DE BASCULA 31/07/2026 (LIMON PERSA) — Reportes de báscula adjuntos","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-07-31"},
     {"hora":"07:07","asunto":"Corbel Seeds Daily Report #0105 (31-Jul) — Tomate/Roma MX estables; bell pepper refuerza; pepino baja; limón estable; Brasil expande aguacate → mayor competencia global","de":"ray@agbelher.com","leido":false,"fecha":"2026-07-31"},
     {"hora":"19:14","asunto":"1.5 lb Roma TOV — Master & Box Designs for Your Review — Diseños empaque co-branding Calavo+Belher enviados a Irene; call de seguimiento hoy 31-Jul; producción: 2,000 masters / 16,000 cajas","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-07-30"},
     {"hora":"16:40","asunto":"45310 AGRICOLA DON MEMO — Maestras enviadas para revisión por David Arturo Valenzuela (CECSO)","de":"davalenzuela@cecso.com.mx","leido":false,"fecha":"2026-07-30"},
