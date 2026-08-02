@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 01 Ago 2026",
+    fecha: "Domingo 02 Ago 2026",
     semana: "WK32",
-    actualizado: "01/08/2026 · 13:42"
+    actualizado: "02/08/2026 · 13:42"
   },
 
   alertas: [
@@ -12,6 +12,8 @@ window.BELHER = {
     {"nivel":"warning","texto":"⚖️ CONCILIACIÓN LIQUIDACIÓN BELHER/CALAVO · SEGUIMIENTO — Leima sigue con Irene Amezaga (Calavo) el acuerdo de comisión: 22% temporal → ajuste real 12% al cierre ciclo. Pendiente respuesta de Irene. Reunión de seguimiento programada: mar 4-Ago 10am–11am (GMT-7) vía Zoom. Fuente: leima@agbelher.com · 31/Jul/2026."},
     {"nivel":"warning","texto":"🍅 EMPAQUE ROMA TOV 1.5 lb · Pendiente aprobación Calavo — JC envió diseños co-branding Calavo+Belher (master case + individual boxes) a Irene para revisión. Producción pendiente: 2,000 masters / 16,000 cajas. Fuente: juancarlos@agbelher.com · 30/Jul/2026."},
     {"nivel":"warning","texto":"🦠 ALERTA FOOD SAFETY · CYCLOSPORA / LECHUGA MX (Corbel #0102 · 28-Jul) — FDA amplía investigación de brote de Cyclospora vinculado epidemiológicamente a lechuga iceberg del centro de México. La revisión se extiende a hierbas frescas y otros exportables; presión máxima en trazabilidad, verificación de calidad de agua, registros sanitarios y sistemas de respuesta rápida para cadenas exportadoras mexicanas. Revisar y reforzar protocolos Belher. Fuente: ray@agbelher.com · 28/Jul/2026."},
+    {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 01-Ago — Báscula Belher emitió reporte de limón persa del 01/08/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 01/Ago/2026."},
+    {"nivel":"info","texto":"📁 BELHER ADJUNTOS 01-Ago (4 archivos) — Descargados a Drive: ACARREO DIARIO 31-07-2026, DIARIO DE BASCULA 31-07-2026, LISTADO DIARIO 31-07-2026 (todos LIMON PERSA) + image.png. Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 01/Ago/2026."},
     {"nivel":"info","texto":"🌱 MERCADO HORTALIZAS MX · Corbel Seeds #0105 (31-Jul) — USDA shipping-point data: tomate redondo y Roma estables; bell pepper refuerza ligeramente; pepino se suaviza; limón estable. Brasil expande acreage de aguacate → mayor competencia para exportadores MX en mercados EUA/Europa; presión en diferenciación por calidad, timing, trazabilidad y logística. Perú supera 50% del abasto global en varios productos. Fuente: ray@agbelher.com · 31/Jul/2026."},
     {"nivel":"info","texto":"📋 MAESTRAS AGRICOLA DON MEMO (#45310) — David Arturo Valenzuela (CECSO) envió maestras para revisión. Pendiente respuesta. Fuente: davalenzuela@cecso.com.mx · 30/Jul/2026."},
     {"nivel":"info","texto":"🎓 CURSO INOCUIDAD · Microbiología Avanzada para Asesores — AMF Consultoría y Capacitación. Dates: 13-15 Ago 2026 vía Zoom. Instructor: D.C. Karla G. Domínguez González. Inversión: $3,100 MXN IVA inc. Contexto: relevante dado brote activo Cyclospora. Fuente: jenriquez.amfcyc@gmail.com · 29/Jul/2026."},
@@ -26,9 +28,7 @@ window.BELHER = {
     {"nivel":"info","texto":"🚚 MANIFIESTO, FACTURA Y XML LIMÓN PERSA 25-Jul — Documentos de embarque emitidos. Chofer: Misael Vázquez Carlón (cel: 6675 83 03 95). Fuente: embarquesbelher@agbelher.com · 25/Jul/2026."},
     {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 25-Jul — Export 85% / Nacional 15% / Merma 0%. Calibres 250-150. Peso/caja: 40.2–40.5 lbs. Defectos principales: wood pocket y trips en calibres 250-230. Fuente: calidad@agbelher.com · 25/Jul/2026."},
     {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 24-Jul (Don Memo → Calavo) — Roma Calavo: Primera 97.07% / Segunda 2.05% / Tercera 0.73% / Merma 0.14% / Peso prom. 27.54 lbs. Fuente: calidad@agbelher.com · 25/Jul/2026."},
-    {"nivel":"info","texto":"🌱 ANÁLISIS AGRONÓMICO LIMÓN PERSA · Muestreo 21-Jul-2026 — Consultores Agronómicos entregaron reportes de Nutrición Foliar y Fertilidad de Suelo del Lote Viudas (Sectores 1–5). Fuente: conagrosc@gmail.com · 25/Jul/2026."},
-    {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN 24-Jul — Embarques Belher adjunta reportes generales de empaque de limón del 24/07/2026. Fuente: embarquesbelher@agbelher.com · 24/Jul/2026."},
-    {"nivel":"info","texto":"⚖️ BÁSCULA BELHER · Reporte Limón Persa 24-Jul-2026 — Reporte de báscula de limón persa recibido; se reenvió corrección por error en captura inicial (datos correctos en segundo envío). Fuente: basculabelher@gmail.com · 24/Jul/2026."}
+    {"nivel":"info","texto":"🌱 ANÁLISIS AGRONÓMICO LIMÓN PERSA · Muestreo 21-Jul-2026 — Consultores Agronómicos entregaron reportes de Nutrición Foliar y Fertilidad de Suelo del Lote Viudas (Sectores 1–5). Fuente: conagrosc@gmail.com · 25/Jul/2026."}
   ],
 
   ebitda: {
@@ -602,6 +602,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"22:03","asunto":"REPORTE DE BASCULA 01/08/2026 (LIMON PERSA) — Reportes de báscula limón persa adjuntos","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-08-01"},
+    {"hora":"21:53","asunto":"✅ Belher Adjuntos — 4 archivos (01-Aug-2026 07:53): Acarreo, Diario y Listado Báscula 31-Jul + image.png","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-08-01"},
     {"hora":"20:34","asunto":"CF Belher GC 2026-2027 actualizado a julio y forecast a dic '26 — Reunión Zoom jue 6-Ago 10am–11am (GMT-7) con Leima Leyva. ID: 891 7213 3437","de":"leima@agbelher.com","leido":false,"fecha":"2026-07-31"},
     {"hora":"19:56","asunto":"Seguimiento conciliación liquidación Belher GC 2025-2026 — Leima sigue con Irene Amezaga (Calavo) acuerdo comisión 22%→12%; reunión Zoom mar 4-Ago 10am (GMT-7)","de":"leima@agbelher.com","leido":false,"fecha":"2026-07-31"},
     {"hora":"16:07","asunto":"CFDI recibo electrónico · Agrícola Belher Fijos — Periodo 31 Semanal 2026","de":"anajar@agbelher.com","leido":false,"fecha":"2026-07-31"},
