@@ -224,6 +224,29 @@ async function callClaude(claude, params) {
   }
 }
 
+// ─── Prompt caching ───────────────────────────────────────────────────────────
+// The loop below re-sends EVERYTHING on every iteration: system + tools + the whole
+// transcript, which grows with each Gmail body arriving as a tool_result. Uncached,
+// that is billed at full price up to 20 times per run — it was ~95% of the whole
+// Anthropic account's spend (2.06M input tokens in July 2026, ~$8.90, while the
+// store chatbot on the same account spent $0.25 and ran dry).
+//
+// Two breakpoints: a fixed one on the system block — which caches the tools+system
+// prefix, since tools are cached ahead of system — and this ROLLING one at the end
+// of the latest turn, so already-seen transcript is re-read at 1/10 the price. The
+// previous mark is cleared because the API allows only 4 and the prefix stays cached
+// either way. Note Haiku needs a ≥2048-token prefix to cache at all (Sonnet ≥1024);
+// below that the mark is ignored, never an error.
+function cacheBreakpoint(messages) {
+  for (const m of messages) {
+    if (Array.isArray(m.content)) for (const b of m.content) delete b.cache_control;
+  }
+  const last = messages[messages.length - 1];
+  if (last && Array.isArray(last.content) && last.content.length) {
+    last.content[last.content.length - 1].cache_control = { type: 'ephemeral' };
+  }
+}
+
 // ─── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
   console.log('🚀 Belher Dashboard Agent (Task 1 — data.js update)');
@@ -244,13 +267,17 @@ async function main() {
     { role: 'user', content: 'Ejecuta Task 1: actualiza data.js con los emails de las últimas 24h y haz commit/push a main.' }
   ];
 
+  // Cached once per run: this block plus the tools that precede it in the prefix.
+  const systemBlocks = [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }];
+
   let iter = 0;
   while (iter++ < 20) {
     console.log(`\n── iter ${iter} ──`);
+    cacheBreakpoint(messages);
     const resp = await callClaude(claude, {
       model: 'claude-sonnet-4-6',
       max_tokens: 4000,
-      system: systemPrompt,
+      system: systemBlocks,
       messages,
       tools: TOOLS
     });

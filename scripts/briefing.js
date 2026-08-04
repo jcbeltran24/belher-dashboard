@@ -185,6 +185,22 @@ async function callClaude(claude, params) {
   }
 }
 
+// ─── Prompt caching ───────────────────────────────────────────────────────────
+// Same fix as scripts/agent.js: this loop re-sends system + tools + the full
+// transcript on every iteration, uncached, up to 10 times per run. See the longer
+// note there. Haiku only caches a prefix of ≥2048 tokens (Sonnet ≥1024), so on a
+// short run the mark is simply ignored — never an error — and the saving shows up
+// on the long runs, which are exactly the expensive ones.
+function cacheBreakpoint(messages) {
+  for (const m of messages) {
+    if (Array.isArray(m.content)) for (const b of m.content) delete b.cache_control;
+  }
+  const last = messages[messages.length - 1];
+  if (last && Array.isArray(last.content) && last.content.length) {
+    last.content[last.content.length - 1].cache_control = { type: 'ephemeral' };
+  }
+}
+
 // ─── Main agent loop ──────────────────────────────────────────────────────────
 async function main() {
   console.log('☀️ Belher Morning Briefing Agent (Task 2 — Notion)');
@@ -232,14 +248,18 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 2 (Morning Briefing en Notion):
     { role: 'user', content: `Ejecuta Task 2: genera el morning briefing para ${titleDate} en Notion.` }
   ];
 
+  // Cached once per run: this block plus the tools that precede it in the prefix.
+  const systemBlocks = [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }];
+
   let iter = 0;
   while (iter++ < 10) {
     console.log(`\n── iter ${iter} ──`);
 
+    cacheBreakpoint(messages);
     const resp = await callClaude(claude, {
       model: 'claude-haiku-4-5',
       max_tokens: 4000,
-      system: systemPrompt,
+      system: systemBlocks,
       messages,
       tools: TOOLS
     });
