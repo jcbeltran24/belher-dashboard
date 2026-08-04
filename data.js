@@ -1,16 +1,21 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 02 Ago 2026",
+    fecha: "Lunes 03 Ago 2026",
     semana: "WK32",
-    actualizado: "02/08/2026 · 13:42"
+    actualizado: "03/08/2026 · 18:56"
   },
 
   alertas: [
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE · REVISIÓN ADMON 2026 — Deadline USDOC para solicitar revisión de margen propio era el 31-Jul (ya vencido). Verificar con Capital Trade y Jeff Winton el estatus de la solicitud presentada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
     {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago urgente: MXP $4M inmediato. Riesgo: embargo/cobranza IMSS o SAT. Fuente: jacruz@agbelher.com · 15/Jul/2026."},
     {"nivel":"warning","texto":"📅 REUNIÓN ZOOM · JUE 6-AGO 10am–11am (GMT-7) — Leima Leyva convoca: CF Belher GC 2026-2027 actualizado a julio + forecast a dic '26. Zoom ID: 891 7213 3437 · Código: 6q6fNw. Fuente: leima@agbelher.com · 31/Jul/2026."},
+    {"nivel":"warning","texto":"📅 WEEKLY TOMATO UPDATE & SALES MEETING · Calavo — Irene Amezaga (Calavo) convoca reunión semanal de tomate + ventas. Enlace Microsoft Teams compartido. Fuente: Irene.Amezaga@calavo.com · 03/Ago/2026."},
     {"nivel":"warning","texto":"⚖️ CONCILIACIÓN LIQUIDACIÓN BELHER/CALAVO · SEGUIMIENTO — Leima sigue con Irene Amezaga (Calavo) el acuerdo de comisión: 22% temporal → ajuste real 12% al cierre ciclo. Pendiente respuesta de Irene. Reunión de seguimiento programada: mar 4-Ago 10am–11am (GMT-7) vía Zoom. Fuente: leima@agbelher.com · 31/Jul/2026."},
     {"nivel":"warning","texto":"🍅 EMPAQUE ROMA TOV 1.5 lb · Pendiente aprobación Calavo — JC envió diseños co-branding Calavo+Belher (master case + individual boxes) a Irene para revisión. Producción pendiente: 2,000 masters / 16,000 cajas. Fuente: juancarlos@agbelher.com · 30/Jul/2026."},
+    {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0106 (03-Ago) — Aguacateros del Estado de México esperan autorización final USDA para ~5,000 acres y 2 empacadoras (diversificaría base exportadora MX más allá de Michoacán/Jalisco). USDA AMS Texas-crossing: vegetales MX y limones estables. Brasil: pronóstico tomate industrial ~1.35M MT, todas las plantas operando. Fuente: ray@agbelher.com · 03/Ago/2026."},
+    {"nivel":"info","texto":"⚖️ BOLETÍN REVISIÓN ADMINISTRATIVA USDOC — Lic. Mario Haroldo Robles (CIDH) envía boletín por instrucciones del Ing. Arturo Paredes. Fuente: marioh@cidh.org.mx · 03/Ago/2026."},
+    {"nivel":"warning","texto":"🍅 EMPAQUE FOX PACKAGING · Revisar arte antes de inicio de temporada Fall — Fox Packaging solicita revisión de artwork antes del arranque de packing de otoño. SB 343 + nueva línea de partes. Fuente: info@foxbag.com · 03/Ago/2026."},
+    {"nivel":"info","texto":"🌱 PRESUPUESTO 2026 CORBEL SEEDS / SEMILLAS LATINOAMERICANAS ABC — Raymundo Elizalde comparte con el Consejo el presupuesto estimado de ingresos y gastos FY2026 en USD. Corbel Seeds en etapa pre-revenue. Fuente: ray@agbelher.com · 03/Ago/2026."},
     {"nivel":"warning","texto":"🦠 ALERTA FOOD SAFETY · CYCLOSPORA / LECHUGA MX (Corbel #0102 · 28-Jul) — FDA amplía investigación de brote de Cyclospora vinculado epidemiológicamente a lechuga iceberg del centro de México. La revisión se extiende a hierbas frescas y otros exportables; presión máxima en trazabilidad, verificación de calidad de agua, registros sanitarios y sistemas de respuesta rápida para cadenas exportadoras mexicanas. Revisar y reforzar protocolos Belher. Fuente: ray@agbelher.com · 28/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 01-Ago — Báscula Belher emitió reporte de limón persa del 01/08/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 01/Ago/2026."},
     {"nivel":"info","texto":"📁 BELHER ADJUNTOS 01-Ago (4 archivos) — Descargados a Drive: ACARREO DIARIO 31-07-2026, DIARIO DE BASCULA 31-07-2026, LISTADO DIARIO 31-07-2026 (todos LIMON PERSA) + image.png. Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 01/Ago/2026."},
@@ -26,9 +31,7 @@ window.BELHER = {
     {"nivel":"info","texto":"📋 MINUTA JDC 24-Jul-2026 (ABSA) — Armando Llanes (CFO, Grupo Belo del Pacífico/HMX) distribuyó minuta y Matriz de Decisiones aprobada en la JDC del 24-Jul. Próxima reunión JDC a coordinar en Culiacán, septiembre 2026. Fuente: armandollanes@donmemo.net · 25/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 25-Jul — Embarques Belher adjunta reportes generales de embarque y empaque de limón persa del 25/07/2026. Fuente: embarquesbelher@agbelher.com · 25/Jul/2026."},
     {"nivel":"info","texto":"🚚 MANIFIESTO, FACTURA Y XML LIMÓN PERSA 25-Jul — Documentos de embarque emitidos. Chofer: Misael Vázquez Carlón (cel: 6675 83 03 95). Fuente: embarquesbelher@agbelher.com · 25/Jul/2026."},
-    {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 25-Jul — Export 85% / Nacional 15% / Merma 0%. Calibres 250-150. Peso/caja: 40.2–40.5 lbs. Defectos principales: wood pocket y trips en calibres 250-230. Fuente: calidad@agbelher.com · 25/Jul/2026."},
-    {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 24-Jul (Don Memo → Calavo) — Roma Calavo: Primera 97.07% / Segunda 2.05% / Tercera 0.73% / Merma 0.14% / Peso prom. 27.54 lbs. Fuente: calidad@agbelher.com · 25/Jul/2026."},
-    {"nivel":"info","texto":"🌱 ANÁLISIS AGRONÓMICO LIMÓN PERSA · Muestreo 21-Jul-2026 — Consultores Agronómicos entregaron reportes de Nutrición Foliar y Fertilidad de Suelo del Lote Viudas (Sectores 1–5). Fuente: conagrosc@gmail.com · 25/Jul/2026."}
+    {"nivel":"info","texto":"🍋 OUTBOUND LIMÓN PERSA 25-Jul — Export 85% / Nacional 15% / Merma 0%. Calibres 250-150. Peso/caja: 40.2–40.5 lbs. Defectos principales: wood pocket y trips en calibres 250-230. Fuente: calidad@agbelher.com · 25/Jul/2026."}
   ],
 
   ebitda: {
@@ -602,6 +605,13 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"19:22","asunto":"Weekly Tomato Update & Sales Meeting — Irene Amezaga (Calavo) convoca reunión semanal de tomate + ventas vía Microsoft Teams","de":"Irene.Amezaga@calavo.com","leido":false,"fecha":"2026-08-03"},
+    {"hora":"18:45","asunto":"2026 Budget for Corbel Seeds in USD — Presupuesto FY2026 Semillas Latinoamericanas ABC / Corbel Seeds (etapa pre-revenue) compartido con Consejo","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-03"},
+    {"hora":"17:55","asunto":"The Recap · GBM — Resumen de movimientos del mercado (lunes 03-Ago-2026)","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-08-03"},
+    {"hora":"12:38","asunto":"REPORTE DE BASCULA 03/08/2026 (LIMON PERSA) — Reportes de báscula limón persa adjuntos","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-08-03"},
+    {"hora":"12:18","asunto":"Boletín Revisión Administrativa USDOC · Solicitudes — Enviado por Lic. Mario Haroldo Robles (CIDH) por instrucciones del Ing. Arturo Paredes","de":"marioh@cidh.org.mx","leido":false,"fecha":"2026-08-03"},
+    {"hora":"11:19","asunto":"Check Your Artwork Before Fall Packing Starts — Fox Packaging: revisión de arte + nueva línea SB 343 antes de temporada otoño","de":"info@foxbag.com","leido":false,"fecha":"2026-08-03"},
+    {"hora":"09:08","asunto":"Corbel Seeds Daily Report #0106 (03-Ago) — Estado de México aguacateros esperan auth USDA ~5,000 acres; USDA AMS Texas-crossing estable; Brasil tomate industrial 1.35M MT","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-03"},
     {"hora":"22:03","asunto":"REPORTE DE BASCULA 01/08/2026 (LIMON PERSA) — Reportes de báscula limón persa adjuntos","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-08-01"},
     {"hora":"21:53","asunto":"✅ Belher Adjuntos — 4 archivos (01-Aug-2026 07:53): Acarreo, Diario y Listado Báscula 31-Jul + image.png","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-08-01"},
     {"hora":"20:34","asunto":"CF Belher GC 2026-2027 actualizado a julio y forecast a dic '26 — Reunión Zoom jue 6-Ago 10am–11am (GMT-7) con Leima Leyva. ID: 891 7213 3437","de":"leima@agbelher.com","leido":false,"fecha":"2026-07-31"},
