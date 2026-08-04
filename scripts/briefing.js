@@ -201,6 +201,29 @@ function cacheBreakpoint(messages) {
   }
 }
 
+// ─── Token accounting ─────────────────────────────────────────────────────────
+// Same as scripts/agent.js: makes the CI log answer "is the cache hitting?" without
+// opening the Anthropic console. A cache write costs 1.25× a normal input token, a
+// cache read 0.1×.
+const tally = { fresh: 0, cacheWrite: 0, cacheRead: 0, out: 0 };
+
+function trackUsage(usage) {
+  const u = usage || {};
+  tally.fresh      += u.input_tokens || 0;
+  tally.cacheWrite += u.cache_creation_input_tokens || 0;
+  tally.cacheRead  += u.cache_read_input_tokens || 0;
+  tally.out        += u.output_tokens || 0;
+  console.log(`  tokens: in=${u.input_tokens || 0} cache_w=${u.cache_creation_input_tokens || 0} cache_r=${u.cache_read_input_tokens || 0} out=${u.output_tokens || 0}`);
+}
+
+function printTally(label) {
+  const billed   = tally.fresh + tally.cacheWrite * 1.25 + tally.cacheRead * 0.1;
+  const uncached = tally.fresh + tally.cacheWrite + tally.cacheRead;
+  const saved    = uncached ? Math.round((1 - billed / uncached) * 100) : 0;
+  console.log(`\n📊 ${label}: input ${uncached} (${tally.fresh} fresh · ${tally.cacheWrite} cache-write · ${tally.cacheRead} cache-read) · output ${tally.out}`);
+  console.log(`   billed as ${Math.round(billed)} input tokens vs ${uncached} uncached → ${saved}% cheaper`);
+}
+
 // ─── Main agent loop ──────────────────────────────────────────────────────────
 async function main() {
   console.log('☀️ Belher Morning Briefing Agent (Task 2 — Notion)');
@@ -265,6 +288,7 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 2 (Morning Briefing en Notion):
     });
 
     console.log(`stop_reason: ${resp.stop_reason}`);
+    trackUsage(resp.usage);
     messages.push({ role: 'assistant', content: resp.content });
 
     if (resp.stop_reason === 'end_turn') {
@@ -291,6 +315,8 @@ EJECUCIÓN AUTOMÁTICA — SOLO TASK 2 (Morning Briefing en Notion):
       messages.push({ role: 'user', content: results });
     }
   }
+
+  printTally('Task 2 (briefing.js)');
 }
 
 main().catch(err => { console.error('Fatal:', err); process.exit(1); });
