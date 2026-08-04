@@ -2,7 +2,7 @@ window.BELHER = {
   meta: {
     fecha: "Martes 04 Ago 2026",
     semana: "WK32",
-    actualizado: "04/08/2026 · 02:06"
+    actualizado: "04/08/2026 · 09:30"
   },
 
   alertas: [
@@ -13,6 +13,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"📅 WEEKLY TOMATO UPDATE & SALES MEETING · Calavo — Irene Amezaga (Calavo) convoca reunión semanal de tomate + ventas. Enlace Microsoft Teams compartido. Fuente: Irene.Amezaga@calavo.com · 03/Ago/2026."},
     {"nivel":"warning","texto":"⚖️ CONCILIACIÓN LIQUIDACIÓN BELHER/CALAVO · SEGUIMIENTO — Leima sigue con Irene Amezaga (Calavo) el acuerdo de comisión: 22% temporal → ajuste real 12% al cierre ciclo. Pendiente respuesta de Irene. Reunión de seguimiento programada: mar 4-Ago 10am–11am (GMT-7) vía Zoom. Fuente: leima@agbelher.com · 31/Jul/2026."},
     {"nivel":"warning","texto":"🍅 EMPAQUE ROMA TOV 1.5 lb · Pendiente aprobación Calavo — JC envió diseños co-branding Calavo+Belher (master case + individual boxes) a Irene para revisión. Producción pendiente: 2,000 masters / 16,000 cajas. Fuente: juancarlos@agbelher.com · 30/Jul/2026."},
+    {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0107 (04-Ago) — USDA AMS: tomate más suave en cruces Texas, hot-pepper estable, limón grande MX ligeramente a la baja. México y Colombia bien posicionados para abastecer aguacate a EUA en ventana crítica oct–dic 2026. EUA: demanda de genética vegetal eficiente + adopción disciplinada de IA en operaciones de tomate. Fuente: ray@agbelher.com · 04/Ago/2026."},
     {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0106 (03-Ago) — Aguacateros del Estado de México esperan autorización final USDA para ~5,000 acres y 2 empacadoras (diversificaría base exportadora MX más allá de Michoacán/Jalisco). USDA AMS Texas-crossing: vegetales MX y limones estables. Brasil: pronóstico tomate industrial ~1.35M MT, todas las plantas operando. Fuente: ray@agbelher.com · 03/Ago/2026."},
     {"nivel":"info","texto":"⚖️ BOLETÍN REVISIÓN ADMINISTRATIVA USDOC — Lic. Mario Haroldo Robles (CIDH) envía boletín por instrucciones del Ing. Arturo Paredes. Fuente: marioh@cidh.org.mx · 03/Ago/2026."},
     {"nivel":"warning","texto":"🍅 EMPAQUE FOX PACKAGING · Revisar arte antes de inicio de temporada Fall — Fox Packaging solicita revisión de artwork antes del arranque de packing de otoño. SB 343 + nueva línea de partes. Fuente: info@foxbag.com · 03/Ago/2026."},
@@ -21,14 +22,12 @@ window.BELHER = {
     {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 03-Ago — Báscula Belher emitió reporte de limón persa del 03/08/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 03/Ago/2026."},
     {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 01-Ago — Báscula Belher emitió reporte de limón persa del 01/08/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 01/Ago/2026."},
     {"nivel":"info","texto":"📁 BELHER ADJUNTOS 01-Ago (4 archivos) — Descargados a Drive: ACARREO DIARIO 31-07-2026, DIARIO DE BASCULA 31-07-2026, LISTADO DIARIO 31-07-2026 (todos LIMON PERSA) + image.png. Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 01/Ago/2026."},
-    {"nivel":"info","texto":"🌱 MERCADO HORTALIZAS MX · Corbel Seeds #0105 (31-Jul) — USDA shipping-point data: tomate redondo y Roma estables; bell pepper refuerza ligeramente; pepino se suaviza; limón estable. Brasil expande acreage de aguacate → mayor competencia para exportadores MX en mercados EUA/Europa; presión en diferenciación por calidad, timing, trazabilidad y logística. Perú supera 50% del abasto global en varios productos. Fuente: ray@agbelher.com · 31/Jul/2026."},
+    {"nivel":"info","texto":"🌱 MERCADO HORTALIZAS MX · Corbel Seeds #0105 (31-Jul) — USDA shipping-point data: tomate redondo y Roma estables; bell pepper refuerza ligeramente; pepino se suaviza; limón estable. Brasil expande acreage de aguacate → mayor competencia para exportadores MX en mercados EUA/Europa. Perú supera 50% del abasto global en varios productos. Fuente: ray@agbelher.com · 31/Jul/2026."},
     {"nivel":"info","texto":"📋 MAESTRAS AGRICOLA DON MEMO (#45310) — David Arturo Valenzuela (CECSO) envió maestras para revisión. Pendiente respuesta. Fuente: davalenzuela@cecso.com.mx · 30/Jul/2026."},
     {"nivel":"info","texto":"🎓 CURSO INOCUIDAD · Microbiología Avanzada para Asesores — AMF Consultoría y Capacitación. Dates: 13-15 Ago 2026 vía Zoom. Instructor: D.C. Karla G. Domínguez González. Inversión: $3,100 MXN IVA inc. Contexto: relevante dado brote activo Cyclospora. Fuente: jenriquez.amfcyc@gmail.com · 29/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 31-Jul — Báscula Belher emitió reporte de limón persa del 31/07/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 31/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 28-Jul — Embarques Belher adjunta reportes generales de embarque y empaque de limón persa del 28/07/2026. Fuente: embarquesbelher@agbelher.com · 28/Jul/2026."},
-    {"nivel":"info","texto":"🚚 MANIFIESTO, FACTURA Y XML LIMÓN PERSA 28-Jul — Documentos de embarque emitidos. Chofer: Jose Luis Ramirez (cel: 6677 36 36 36). Fuente: embarquesbelher@agbelher.com · 28/Jul/2026."},
-    {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 27-Jul (Don Memo → Calavo + Don Memo) — Roma Calavo: 1a 96.80% / 2a 2.38% / 3a 0.56% / Merma 0.26% / Peso prom. 26.57 lbs. Roma Don Memo: 1a 94.49% / 2a 2.55% / 3a 1.15% / Merma 1.81% / Peso prom. 27.22 lbs. Fuente: calidad@agbelher.com · 27/Jul/2026."},
-    {"nivel":"info","texto":"🍅 OUTBOUND TOMATE 25-Jul (Don Memo → Calavo) — Roma Calavo: Primera 97.18% / Segunda 1.91% / Tercera 0.71% / Merma 0.20% / Peso prom. 27.01 lbs. Fuente: calidad@agbelher.com · 27/Jul/2026."}
+    {"nivel":"info","texto":"🚚 MANIFIESTO, FACTURA Y XML LIMÓN PERSA 28-Jul — Documentos de embarque emitidos. Chofer: Jose Luis Ramirez (cel: 6677 36 36 36). Fuente: embarquesbelher@agbelher.com · 28/Jul/2026."}
   ],
 
   ebitda: {
@@ -602,6 +601,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"09:11","asunto":"Corbel Seeds Daily Report #0107 (04-Ago) — Tomate suave en Texas-crossings; hot-pepper estable; limón grande MX ligeramente a la baja; MX+Colombia posicionados para aguacate oct–dic","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-04"},
+    {"hora":"08:06","asunto":"The Morning · GBM — Resumen de apertura de mercados martes 04-Ago-2026","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-08-04"},
     {"hora":"22:19","asunto":"Aceptado: Reunión CORBEL - Sitio Web y Redes · mié 5-Ago 3pm–4pm (GMT-7) — Raymundo Elizalde acepta invitación de JC","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-03"},
     {"hora":"19:22","asunto":"Weekly Tomato Update & Sales Meeting — Irene Amezaga (Calavo) convoca reunión semanal de tomate + ventas vía Microsoft Teams","de":"Irene.Amezaga@calavo.com","leido":false,"fecha":"2026-08-03"},
     {"hora":"18:45","asunto":"2026 Budget for Corbel Seeds in USD — Presupuesto FY2026 Semillas Latinoamericanas ABC / Corbel Seeds (etapa pre-revenue) compartido con Consejo","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-03"},
