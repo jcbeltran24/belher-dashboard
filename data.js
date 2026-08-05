@@ -1,24 +1,28 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 04 Ago 2026",
+    fecha: "Miércoles 05 Ago 2026",
     semana: "WK32",
-    actualizado: "04/08/2026 · 09:30"
+    actualizado: "05/08/2026 · 09:30"
   },
 
   alertas: [
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE · REVISIÓN ADMON 2026 — Deadline USDOC para solicitar revisión de margen propio era el 31-Jul (ya vencido). Verificar con Capital Trade y Jeff Winton el estatus de la solicitud presentada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
     {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago urgente: MXP $4M inmediato. Riesgo: embargo/cobranza IMSS o SAT. Fuente: jacruz@agbelher.com · 15/Jul/2026."},
+    {"nivel":"warning","texto":"⚖️ ARANCEL BELHER/CALAVO · GUARDAR DOCUMENTOS — Armando Llanes (CPA, San Antonio TX) solicita mantener copia física de la cadena de acuerdo de pago de arancel en la caja fuerte de Belher. Leima Leyva confirmó. Fuente: armandollanes@donmemo.net · 04/Ago/2026."},
     {"nivel":"warning","texto":"📅 REUNIÓN CORBEL · Sitio Web y Redes — mié 5-Ago 3pm–4pm (GMT-7). Raymundo Elizalde confirmó asistencia. Fuente: ray@agbelher.com · 03/Ago/2026."},
     {"nivel":"warning","texto":"📅 REUNIÓN ZOOM · JUE 6-AGO 10am–11am (GMT-7) — Leima Leyva convoca: CF Belher GC 2026-2027 actualizado a julio + forecast a dic '26. Zoom ID: 891 7213 3437 · Código: 6q6fNw. Fuente: leima@agbelher.com · 31/Jul/2026."},
     {"nivel":"warning","texto":"📅 WEEKLY TOMATO UPDATE & SALES MEETING · Calavo — Irene Amezaga (Calavo) convoca reunión semanal de tomate + ventas. Enlace Microsoft Teams compartido. Fuente: Irene.Amezaga@calavo.com · 03/Ago/2026."},
     {"nivel":"warning","texto":"⚖️ CONCILIACIÓN LIQUIDACIÓN BELHER/CALAVO · SEGUIMIENTO — Leima sigue con Irene Amezaga (Calavo) el acuerdo de comisión: 22% temporal → ajuste real 12% al cierre ciclo. Pendiente respuesta de Irene. Reunión de seguimiento programada: mar 4-Ago 10am–11am (GMT-7) vía Zoom. Fuente: leima@agbelher.com · 31/Jul/2026."},
     {"nivel":"warning","texto":"🍅 EMPAQUE ROMA TOV 1.5 lb · Pendiente aprobación Calavo — JC envió diseños co-branding Calavo+Belher (master case + individual boxes) a Irene para revisión. Producción pendiente: 2,000 masters / 16,000 cajas. Fuente: juancarlos@agbelher.com · 30/Jul/2026."},
+    {"nivel":"warning","texto":"👤 AUSENCIA · Juan Antonio Cruz (jacruz@agbelher.com) — De vacaciones del 03 al 21 de Agosto. Regresa el 24-Ago. Disponible si se requiere antes. Fuente: jacruz@agbelher.com · 04/Ago/2026."},
+    {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0108 (05-Ago) — USDA AMS: pepino MX y tomate vine-ripe más firmes en Otay Mesa; habanero y jalapeño ganan en Texas-crossings; Hass pequeño MX sube — favorece exportadores MX pero señala disponibilidad ajustada para compradores EUA. Perú se beneficia de Hass pequeño MX caro. Fuente: ray@agbelher.com · 05/Ago/2026."},
     {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0107 (04-Ago) — USDA AMS: tomate más suave en cruces Texas, hot-pepper estable, limón grande MX ligeramente a la baja. México y Colombia bien posicionados para abastecer aguacate a EUA en ventana crítica oct–dic 2026. EUA: demanda de genética vegetal eficiente + adopción disciplinada de IA en operaciones de tomate. Fuente: ray@agbelher.com · 04/Ago/2026."},
     {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0106 (03-Ago) — Aguacateros del Estado de México esperan autorización final USDA para ~5,000 acres y 2 empacadoras (diversificaría base exportadora MX más allá de Michoacán/Jalisco). USDA AMS Texas-crossing: vegetales MX y limones estables. Brasil: pronóstico tomate industrial ~1.35M MT, todas las plantas operando. Fuente: ray@agbelher.com · 03/Ago/2026."},
     {"nivel":"info","texto":"⚖️ BOLETÍN REVISIÓN ADMINISTRATIVA USDOC — Lic. Mario Haroldo Robles (CIDH) envía boletín por instrucciones del Ing. Arturo Paredes. Fuente: marioh@cidh.org.mx · 03/Ago/2026."},
     {"nivel":"warning","texto":"🍅 EMPAQUE FOX PACKAGING · Revisar arte antes de inicio de temporada Fall — Fox Packaging solicita revisión de artwork antes del arranque de packing de otoño. SB 343 + nueva línea de partes. Fuente: info@foxbag.com · 03/Ago/2026."},
     {"nivel":"info","texto":"🌱 PRESUPUESTO 2026 CORBEL SEEDS / SEMILLAS LATINOAMERICANAS ABC — Raymundo Elizalde comparte con el Consejo el presupuesto estimado FY2026 en USD. Pre-revenue. Ingresos: $106,878 USD (remanente 2025: $6,878 + $50,000 por familia). Gastos estimados: $114,273 USD → déficit proyectado: $7,395 USD antes de ajustes. Fuente: ray@agbelher.com · 03/Ago/2026."},
     {"nivel":"warning","texto":"🦠 ALERTA FOOD SAFETY · CYCLOSPORA / LECHUGA MX (Corbel #0102 · 28-Jul) — FDA amplía investigación de brote de Cyclospora vinculado epidemiológicamente a lechuga iceberg del centro de México. La revisión se extiende a hierbas frescas y otros exportables; presión máxima en trazabilidad, verificación de calidad de agua, registros sanitarios y sistemas de respuesta rápida para cadenas exportadoras mexicanas. Revisar y reforzar protocolos Belher. Fuente: ray@agbelher.com · 28/Jul/2026."},
+    {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 04-Ago — Báscula Belher emitió reporte de limón persa del 04/08/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 04/Ago/2026."},
     {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 03-Ago — Báscula Belher emitió reporte de limón persa del 03/08/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 03/Ago/2026."},
     {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 01-Ago — Báscula Belher emitió reporte de limón persa del 01/08/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 01/Ago/2026."},
     {"nivel":"info","texto":"📁 BELHER ADJUNTOS 01-Ago (4 archivos) — Descargados a Drive: ACARREO DIARIO 31-07-2026, DIARIO DE BASCULA 31-07-2026, LISTADO DIARIO 31-07-2026 (todos LIMON PERSA) + image.png. Carpeta: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 01/Ago/2026."},
@@ -26,8 +30,7 @@ window.BELHER = {
     {"nivel":"info","texto":"📋 MAESTRAS AGRICOLA DON MEMO (#45310) — David Arturo Valenzuela (CECSO) envió maestras para revisión. Pendiente respuesta. Fuente: davalenzuela@cecso.com.mx · 30/Jul/2026."},
     {"nivel":"info","texto":"🎓 CURSO INOCUIDAD · Microbiología Avanzada para Asesores — AMF Consultoría y Capacitación. Dates: 13-15 Ago 2026 vía Zoom. Instructor: D.C. Karla G. Domínguez González. Inversión: $3,100 MXN IVA inc. Contexto: relevante dado brote activo Cyclospora. Fuente: jenriquez.amfcyc@gmail.com · 29/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 31-Jul — Báscula Belher emitió reporte de limón persa del 31/07/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 31/Jul/2026."},
-    {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 28-Jul — Embarques Belher adjunta reportes generales de embarque y empaque de limón persa del 28/07/2026. Fuente: embarquesbelher@agbelher.com · 28/Jul/2026."},
-    {"nivel":"info","texto":"🚚 MANIFIESTO, FACTURA Y XML LIMÓN PERSA 28-Jul — Documentos de embarque emitidos. Chofer: Jose Luis Ramirez (cel: 6677 36 36 36). Fuente: embarquesbelher@agbelher.com · 28/Jul/2026."}
+    {"nivel":"info","texto":"🍋 REPORTES GENERALES LIMÓN PERSA 28-Jul — Embarques Belher adjunta reportes generales de embarque y empaque de limón persa del 28/07/2026. Fuente: embarquesbelher@agbelher.com · 28/Jul/2026."}
   ],
 
   ebitda: {
@@ -601,6 +604,15 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:18","asunto":"04-08-2026 REPORTES GENERALES LIMÓN PERSA — Embarques Belher adjunta reportes generales de embarque y empaque de limón persa 04-Ago","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-08-04"},
+    {"hora":"16:12","asunto":"MANIFIESTOS Y FACTURAS DE CARGAS DE LIMÓN — Manifiesto, facturas y XML de cargas limón persa; Chofer: Jorge Bramona 6721 13 40 73","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-08-04"},
+    {"hora":"15:11","asunto":"REPORTE DE OUTBOUND LIMÓN PERSA 04/08/2026 — 73% exportación, 27% nacional; calibres 250/230/200/175/150; defectos: trips, wood pocket, oleocelosis","de":"calidad@agbelher.com","leido":false,"fecha":"2026-08-04"},
+    {"hora":"22:06","asunto":"RV: Consumos de gasolina — Leima comparte consumos de gasolina vehículos casa Sra. Hildelisa (ADM)","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-04"},
+    {"hora":"15:31","asunto":"Re: Resumen de acuerdo de pago de arancel — Armando Llanes (CPA) pide guardar copia de cadena en caja fuerte Belher","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-08-04"},
+    {"hora":"17:31","asunto":"RV: Resumen de acuerdo de pago de arancel — Leima reenvía respuesta de Irene (acuerdo arancel Calavo/Belher)","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-04"},
+    {"hora":"11:07","asunto":"Vacaciones — Juan Antonio Cruz (jacruz) informa ausencia del 03-21 Ago; regresa 24-Ago","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-08-04"},
+    {"hora":"13:48","asunto":"REPORTE DE BASCULA 04/08/2026 (LIMÓN PERSA) — Reportes de báscula limón persa adjuntos","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-08-04"},
+    {"hora":"09:10","asunto":"Corbel Seeds Daily Report #0108 (05-Ago) — USDA AMS: pepino y tomate vine-ripe MX más firmes en Otay Mesa; habanero y jalapeño ganan en Texas; Hass pequeño MX sube","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-05"},
     {"hora":"09:11","asunto":"Corbel Seeds Daily Report #0107 (04-Ago) — Tomate suave en Texas-crossings; hot-pepper estable; limón grande MX ligeramente a la baja; MX+Colombia posicionados para aguacate oct–dic","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-04"},
     {"hora":"08:06","asunto":"The Morning · GBM — Resumen de apertura de mercados martes 04-Ago-2026","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-08-04"},
     {"hora":"22:19","asunto":"Aceptado: Reunión CORBEL - Sitio Web y Redes · mié 5-Ago 3pm–4pm (GMT-7) — Raymundo Elizalde acepta invitación de JC","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-03"},
