@@ -1,18 +1,18 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 06 Ago 2026",
+    fecha: "Viernes 07 Ago 2026",
     semana: "WK32",
-    actualizado: "06/08/2026 · 07:26"
+    actualizado: "07/08/2026 · 13:17"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"📅 REUNIÓN ZOOM HOY · VIE 7-AGO 12pm–1pm (GMT-7) — Leima Leyva convoca: CONCLUIR REVISIÓN CF ABSA. Zoom ID: 880 8602 0930 · Código: 223270. Nota: hubo falla de internet en la agrícola el jue 6-Ago; reunión no se completó. Fuente: leima@agbelher.com · 06/Ago/2026."},
     {"nivel":"danger","texto":"🚨 SALMONELLA · JALAPEÑOS SINALOA — Corbel #0109 (06-Ago): jalapeños de Sinaloa vinculados a brote de Salmonella activo en 27 estados EUA. Revisión urgente de protocolos de inocuidad, trazabilidad y certificaciones de exportación. Riesgo directo para embarques Belher. Fuente: ray@agbelher.com · 06/Ago/2026."},
     {"nivel":"danger","texto":"🥑 SUSPENSIÓN INSPECCIONES AGUACATE · MICHOACÁN — Corbel #0109 (06-Ago): USDA suspendió inspecciones de aguacate en Michoacán por alerta de seguridad. Corto plazo: posible oportunidad para Jalisco/Perú. Revisar impacto en cadena de abasto y posición competitiva Belher. Fuente: ray@agbelher.com · 06/Ago/2026."},
     {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago urgente: MXP $4M inmediato. Riesgo: embargo/cobranza IMSS o SAT. Fuente: jacruz@agbelher.com · 15/Jul/2026."},
     {"nivel":"warning","texto":"🦠 CYCLOSPORA · LECHUGA MX — Corbel #0109 (06-Ago): investigación FDA se expande a 15 estados EUA. Presión máxima en trazabilidad y certificaciones para exportadores mexicanos de vegetales frescos. Fuente: ray@agbelher.com · 06/Ago/2026."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE · REVISIÓN ADMON 2026 — Deadline USDOC para solicitar revisión de margen propio era el 31-Jul (ya vencido). Verificar con Capital Trade y Jeff Winton el estatus de la solicitud presentada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
     {"nivel":"warning","texto":"⚖️ ARANCEL BELHER/CALAVO · GUARDAR DOCUMENTOS — Armando Llanes (CPA, San Antonio TX) solicita mantener copia física de la cadena de acuerdo de pago de arancel en la caja fuerte de Belher. Leima Leyva confirmó. Fuente: armandollanes@donmemo.net · 04/Ago/2026."},
-    {"nivel":"warning","texto":"📅 REUNIÓN ZOOM · JUE 6-AGO 10am–11am (GMT-7) — Leima Leyva convoca: CF Belher GC 2026-2027 actualizado a julio + forecast a dic '26. Zoom ID: 891 7213 3437 · Código: 6q6fNw. Fuente: leima@agbelher.com · 31/Jul/2026."},
     {"nivel":"warning","texto":"📅 WEEKLY TOMATO UPDATE & SALES MEETING · Calavo — Irene Amezaga (Calavo) convoca reunión semanal de tomate + ventas. Enlace Microsoft Teams compartido. Fuente: Irene.Amezaga@calavo.com · 03/Ago/2026."},
     {"nivel":"warning","texto":"⚖️ CONCILIACIÓN LIQUIDACIÓN BELHER/CALAVO · SEGUIMIENTO — Leima sigue con Irene Amezaga (Calavo) el acuerdo de comisión: 22% temporal → ajuste real 12% al cierre ciclo. Pendiente respuesta de Irene. Reunión de seguimiento programada: mar 4-Ago 10am–11am (GMT-7) vía Zoom. Fuente: leima@agbelher.com · 31/Jul/2026."},
     {"nivel":"warning","texto":"🍅 EMPAQUE ROMA TOV 1.5 lb · Pendiente aprobación Calavo — JC envió diseños co-branding Calavo+Belher (master case + individual boxes) a Irene para revisión. Producción pendiente: 2,000 masters / 16,000 cajas. Fuente: juancarlos@agbelher.com · 30/Jul/2026."},
@@ -26,9 +26,7 @@ window.BELHER = {
     {"nivel":"info","texto":"🌱 PRESUPUESTO 2026 CORBEL SEEDS — Raymundo Elizalde comparte presupuesto FY2026 con el Consejo. Ingresos: $106,878 USD; Gastos: $114,273 USD → déficit proyectado: $7,395 USD antes de ajustes. Fuente: ray@agbelher.com · 03/Ago/2026."},
     {"nivel":"warning","texto":"🦠 ALERTA FOOD SAFETY · CYCLOSPORA / LECHUGA MX (Corbel #0102 · 28-Jul) — FDA amplía investigación de brote de Cyclospora vinculado epidemiológicamente a lechuga iceberg del centro de México. Revisar y reforzar protocolos Belher. Fuente: ray@agbelher.com · 28/Jul/2026."},
     {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 04-Ago — Báscula Belher emitió reporte de limón persa del 04/08/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 04/Ago/2026."},
-    {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 03-Ago — Báscula Belher emitió reporte de limón persa del 03/08/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 03/Ago/2026."},
-    {"nivel":"info","texto":"📁 BELHER ADJUNTOS 05-Ago (5 archivos) — Descargados a Drive: ACARREO DIARIO 04-08-2026 (LIMÓN PERSA) + consumo combustible PABA 01-05-26 al 04-08-26 y otros. Fuente: juancarlos@agbelher.com · 05/Ago/2026."},
-    {"nivel":"info","texto":"🌱 MERCADO HORTALIZAS MX · Corbel Seeds #0105 (31-Jul) — USDA shipping-point data: tomate redondo y Roma estables; bell pepper refuerza ligeramente; pepino se suaviza; limón estable. Brasil expande acreage de aguacate → mayor competencia para exportadores MX. Fuente: ray@agbelher.com · 31/Jul/2026."}
+    {"nivel":"info","texto":"🍋 REPORTE BÁSCULA LIMÓN PERSA 03-Ago — Báscula Belher emitió reporte de limón persa del 03/08/2026 con datos adjuntos de embarque. Fuente: basculabelher@gmail.com · 03/Ago/2026."}
   ],
 
   ebitda: {
@@ -602,6 +600,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"04:34","asunto":"Invitación: Concluir revisión de CF ABSA · Vie 7-Ago 12pm–1pm (GMT-7) — Zoom ID: 880 8602 0930 · Código: 223270. Nota: reunión no pudo concluir el jue 6-Ago por falla de internet en la agrícola (Armando Llanes)","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-07"},
     {"hora":"07:05","asunto":"Corbel Seeds Daily Report #0109 (06-Ago) — 🚨 Jalapeños Sinaloa: Salmonella 27 estados EUA; aguacate Michoacán: inspecciones USDA suspendidas; Cyclospora lechuga FDA en 15 estados","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-06"},
     {"hora":"07:04","asunto":"ASIA FRUIT LOGISTICA · Sundowner, Study Tours & More — Evento 2-Sep; Sundowner Party gratis Day 1; tours de estudio disponibles","de":"info@gp-events.com","leido":false,"fecha":"2026-08-06"},
     {"hora":"23:41","asunto":"RV: Ticket de consumos Ligare Juan Carlos Beltrán — Leima comparte relación de consumo de combustible vehículos casa (ADM/personal)","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-05"},
