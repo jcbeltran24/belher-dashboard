@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 07 Ago 2026",
+    fecha: "Sábado 08 Ago 2026",
     semana: "WK32",
-    actualizado: "07/08/2026 · 13:17"
+    actualizado: "08/08/2026 · 13:01"
   },
 
   alertas: [
@@ -600,6 +600,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:40","asunto":"MANIFIESTO FACTURA Y XML DE LIMON — Documentos de carga limón persa. Chofer: Jaime Beltrán · 6671 76 46 59","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-08-07"},
+    {"hora":"16:15","asunto":"07-08-2026 REPORTES GENERALES LIMON — Reportes generales de embarque y empaque de limón persa 07-Ago","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-08-07"},
+    {"hora":"16:03","asunto":"CFDI Recibo Electrónico · AGRICOLA BELHER FIJOS · RFC: ABE180411CB8 — Periodo 32 Semanal 2026","de":"anajar@agbelher.com","leido":false,"fecha":"2026-08-07"},
     {"hora":"04:34","asunto":"Invitación: Concluir revisión de CF ABSA · Vie 7-Ago 12pm–1pm (GMT-7) — Zoom ID: 880 8602 0930 · Código: 223270. Nota: reunión no pudo concluir el jue 6-Ago por falla de internet en la agrícola (Armando Llanes)","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-07"},
     {"hora":"07:05","asunto":"Corbel Seeds Daily Report #0109 (06-Ago) — 🚨 Jalapeños Sinaloa: Salmonella 27 estados EUA; aguacate Michoacán: inspecciones USDA suspendidas; Cyclospora lechuga FDA en 15 estados","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-06"},
     {"hora":"07:04","asunto":"ASIA FRUIT LOGISTICA · Sundowner, Study Tours & More — Evento 2-Sep; Sundowner Party gratis Day 1; tours de estudio disponibles","de":"info@gp-events.com","leido":false,"fecha":"2026-08-06"},
