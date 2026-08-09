@@ -1,11 +1,13 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 08 Ago 2026",
+    fecha: "Domingo 09 Ago 2026",
     semana: "WK32",
-    actualizado: "08/08/2026 · 13:01"
+    actualizado: "09/08/2026 · 13:04"
   },
 
   alertas: [
+    {"nivel":"success","texto":"✅ LIBERACIÓN FDA · CAJA CGG-145 — Shannon Brokerage (Nogales, AZ) confirma: carga de limón persa caja #CGG-145 fue liberada por FDA el 09-Ago. Puede proceder sin problema a destino final. Chofer: Jaime Beltrán · 6671 76 46 59. Fuente: logistics@shannonbrokerage.com · 09/Ago/2026."},
+    {"nivel":"info","texto":"📦 WEBINAR INOCUIDAD ALIMENTARIA · MAR 11-AGO 12pm — Secretaría de Economía Sinaloa convoca webinar gratuito: 'Inocuidad Alimentaria: Prevención y Mejores Prácticas en la Cadena de Suministro'. Relevante ante alertas activas de Salmonella/Cyclospora. Registro: https://tinyurl.com/InocuidadAlimentariaPrevencion. Fuente: edwin.delgado@sinaloa.gob.mx · 09/Ago/2026."},
     {"nivel":"warning","texto":"📅 REUNIÓN ZOOM HOY · VIE 7-AGO 12pm–1pm (GMT-7) — Leima Leyva convoca: CONCLUIR REVISIÓN CF ABSA. Zoom ID: 880 8602 0930 · Código: 223270. Nota: hubo falla de internet en la agrícola el jue 6-Ago; reunión no se completó. Fuente: leima@agbelher.com · 06/Ago/2026."},
     {"nivel":"danger","texto":"🚨 SALMONELLA · JALAPEÑOS SINALOA — Corbel #0109 (06-Ago): jalapeños de Sinaloa vinculados a brote de Salmonella activo en 27 estados EUA. Revisión urgente de protocolos de inocuidad, trazabilidad y certificaciones de exportación. Riesgo directo para embarques Belher. Fuente: ray@agbelher.com · 06/Ago/2026."},
     {"nivel":"danger","texto":"🥑 SUSPENSIÓN INSPECCIONES AGUACATE · MICHOACÁN — Corbel #0109 (06-Ago): USDA suspendió inspecciones de aguacate en Michoacán por alerta de seguridad. Corto plazo: posible oportunidad para Jalisco/Perú. Revisar impacto en cadena de abasto y posición competitiva Belher. Fuente: ray@agbelher.com · 06/Ago/2026."},
@@ -600,6 +602,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"17:26","asunto":"✅ LIBERACIÓN FDA · Caja CGG-145 limón persa — Shannon Brokerage confirma: caja CGG-145 liberada por FDA, puede ir sin problema a destino final. Chofer: Jaime Beltrán","de":"logistics@shannonbrokerage.com","leido":false,"fecha":"2026-08-09"},
+    {"hora":"16:23","asunto":"📦 Webinar Inocuidad Alimentaria · Mar 11-Ago 12pm (Sinaloa) — Gobierno de Sinaloa / Sec. Economía: 'Prevención y Mejores Prácticas en la Cadena de Suministro'. Registro: https://tinyurl.com/InocuidadAlimentariaPrevencion","de":"edwin.delgado@sinaloa.gob.mx","leido":false,"fecha":"2026-08-09"},
     {"hora":"16:40","asunto":"MANIFIESTO FACTURA Y XML DE LIMON — Documentos de carga limón persa. Chofer: Jaime Beltrán · 6671 76 46 59","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-08-07"},
     {"hora":"16:15","asunto":"07-08-2026 REPORTES GENERALES LIMON — Reportes generales de embarque y empaque de limón persa 07-Ago","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-08-07"},
     {"hora":"16:03","asunto":"CFDI Recibo Electrónico · AGRICOLA BELHER FIJOS · RFC: ABE180411CB8 — Periodo 32 Semanal 2026","de":"anajar@agbelher.com","leido":false,"fecha":"2026-08-07"},
