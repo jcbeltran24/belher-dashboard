@@ -1,16 +1,16 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 11 Ago 2026",
+    fecha: "Miércoles 12 Ago 2026",
     semana: "WK33",
-    actualizado: "11/08/2026 · 13:19"
+    actualizado: "12/08/2026 · 13:23"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"📅 REVISIÓN IMPACTO SALARIAL · VIE 14-AGO 10am–11am (GMT-7) — Juan Antonio Cruz actualiza horario de la reunión. Zoom: 840 2024 0260 · Clave: 380173. Participan JC Beltrán, Antonio y equipo. Fuente: jacruz@agbelher.com · 11/Ago/2026."},
     {"nivel":"info","texto":"🏢 ORGANIGRAMA + KPIs · INICIO HOY MAR 11-AGO — JC Beltrán convoca: Capital Humano inicia hoy entrevistas para actualizar organigrama y descripciones de puesto. Objetivo: desarrollar KPIs por área y evaluación de desempeño trimestral. Contacto: Lic. Avigail Galaviz. Fuente: juancarlos@agbelher.com · 10/Ago/2026."},
     {"nivel":"warning","texto":"💰 CF BELHER · PENDIENTES CRÍTICOS — Armando Llanes (CFO): dos pendientes al cierre de reunión del vie-08-Ago → (1) acuerdo Antonio con Zazutea (monto y fechas); (2) reducciones Flavio en modelo 'Visión'. Actualizar CF y reenviar una vez que Antonio confirme. Fuente: armandollanes@donmemo.net · 10/Ago/2026."},
     {"nivel":"info","texto":"📋 BOLETÍN PRECIOS MÍNIMOS TOMATE · CIDH — Ing. Arturo Paredes (CIDH): boletín sobre precios mínimos de tomate y mecanismo de denuncia anónima y confidencial para quienes vendan por debajo del mínimo. Fuente: marioh@cidh.org.mx · 10/Ago/2026."},
     {"nivel":"success","texto":"✅ LIBERACIÓN FDA · CAJA CGG-145 — Shannon Brokerage (Nogales, AZ) confirma: carga de limón persa caja #CGG-145 fue liberada por FDA el 09-Ago. Puede proceder sin problema a destino final. Chofer: Jaime Beltrán · 6671 76 46 59. Fuente: logistics@shannonbrokerage.com · 09/Ago/2026."},
-    {"nivel":"info","texto":"📦 WEBINAR INOCUIDAD ALIMENTARIA · HOY MAR 11-AGO 12pm — Secretaría de Economía Sinaloa convoca webinar gratuito: 'Inocuidad Alimentaria: Prevención y Mejores Prácticas en la Cadena de Suministro'. Relevante ante alertas activas de Salmonella/Cyclospora. Registro: https://tinyurl.com/InocuidadAlimentariaPrevencion. Fuente: edwin.delgado@sinaloa.gob.mx · 09/Ago/2026."},
     {"nivel":"danger","texto":"🚨 SALMONELLA · JALAPEÑOS SINALOA — Corbel #0109 (06-Ago): jalapeños de Sinaloa vinculados a brote de Salmonella activo en 27 estados EUA. Revisión urgente de protocolos de inocuidad, trazabilidad y certificaciones de exportación. Riesgo directo para embarques Belher. Fuente: ray@agbelher.com · 06/Ago/2026."},
     {"nivel":"danger","texto":"🥑 SUSPENSIÓN INSPECCIONES AGUACATE · MICHOACÁN — Corbel #0109 (06-Ago): USDA suspendió inspecciones de aguacate en Michoacán por alerta de seguridad. Corto plazo: posible oportunidad para Jalisco/Perú. Revisar impacto en cadena de abasto y posición competitiva Belher. Fuente: ray@agbelher.com · 06/Ago/2026."},
     {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago urgente: MXP $4M inmediato. Riesgo: embargo/cobranza IMSS o SAT. Fuente: jacruz@agbelher.com · 15/Jul/2026."},
@@ -26,9 +26,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0107 (04-Ago) — USDA AMS: tomate más suave en cruces Texas, hot-pepper estable, limón grande MX ligeramente a la baja. México y Colombia bien posicionados para abastecer aguacate a EUA en ventana crítica oct–dic 2026. Fuente: ray@agbelher.com · 04/Ago/2026."},
     {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0106 (03-Ago) — Aguacateros del Estado de México esperan autorización final USDA para ~5,000 acres y 2 empacadoras. USDA AMS Texas-crossing: vegetales MX y limones estables. Brasil: pronóstico tomate industrial ~1.35M MT. Fuente: ray@agbelher.com · 03/Ago/2026."},
     {"nivel":"info","texto":"⚖️ BOLETÍN REVISIÓN ADMINISTRATIVA USDOC — Lic. Mario Haroldo Robles (CIDH) envía boletín por instrucciones del Ing. Arturo Paredes. Fuente: marioh@cidh.org.mx · 03/Ago/2026."},
-    {"nivel":"warning","texto":"🍅 EMPAQUE FOX PACKAGING · Revisar arte antes de inicio de temporada Fall — Fox Packaging solicita revisión de artwork antes del arranque de packing de otoño. SB 343 + nueva línea de partes. Fuente: info@foxbag.com · 03/Ago/2026."},
-    {"nivel":"info","texto":"🌱 PRESUPUESTO 2026 CORBEL SEEDS — Raymundo Elizalde comparte presupuesto FY2026 con el Consejo. Ingresos: $106,878 USD; Gastos: $114,273 USD → déficit proyectado: $7,395 USD antes de ajustes. Fuente: ray@agbelher.com · 03/Ago/2026."},
-    {"nivel":"warning","texto":"🦠 ALERTA FOOD SAFETY · CYCLOSPORA / LECHUGA MX (Corbel #0102 · 28-Jul) — FDA amplía investigación de brote de Cyclospora vinculado epidemiológicamente a lechuga iceberg del centro de México. Revisar y reforzar protocolos Belher. Fuente: ray@agbelher.com · 28/Jul/2026."}
+    {"nivel":"warning","texto":"🍅 EMPAQUE FOX PACKAGING · Revisar arte antes de inicio de temporada Fall — Fox Packaging solicita revisión de artwork antes del arranque de packing de otoño. SB 343 + nueva línea de partes. Fuente: info@foxbag.com · 03/Ago/2026."}
   ],
 
   ebitda: {
@@ -602,6 +600,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"16:53","asunto":"📅 Revisión Impacto Salarial · Vie 14-Ago 10am–11am (actualizado) — Juan Antonio Cruz (jacruz@agbelher.com) actualiza horario. Zoom: 840 2024 0260 · Clave: 380173. Host: jacruz@agbelher.com","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-08-12"},
     {"hora":"16:07","asunto":"💰 CF Belher · Revisado — Leima comparte Cash Flow actualizado (viernes). Armando Llanes (CFO): pendientes → acuerdo Zazutea (monto+fechas) + reducciones Flavio en modelo 'Visión'. Actualizar CF y reenviar cuando Antonio confirme.","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-10"},
     {"hora":"14:19","asunto":"🏢 Organigrama y Descripciones de Puesto · Inicio Mañana — JC convoca: a partir del Mar 11-Ago, Capital Humano realizará entrevistas para actualizar organigrama, descripciones de puesto y desarrollar KPIs por área + evaluación de desempeño trimestral. Contacto: Lic. Avigail Galaviz.","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-08-10"},
     {"hora":"11:12","asunto":"📋 Boletín Precios Mínimos y Mecanismo de Denuncia (CIDH) — Ing. Arturo Paredes (CIDH): boletín sobre precios mínimos de tomate. Si alguien vende por debajo del precio mínimo, denunciar de forma anónima y confidencial. Vía: marioh@cidh.org.mx","de":"marioh@cidh.org.mx","leido":false,"fecha":"2026-08-10"},
