@@ -1,11 +1,14 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 13 Ago 2026",
+    fecha: "Viernes 14 Ago 2026",
     semana: "WK33",
-    actualizado: "13/08/2026 · 13:25"
+    actualizado: "14/08/2026 · 13:19"
   },
 
   alertas: [
+    {"nivel":"info","texto":"📊 ADM · FINANCIEROS JULIO 2026 — Felipe Calderón (CRY Asociados, Guadalajara) envía estados financieros de ADM correspondientes a julio 2026. Destinatarios: James Snyder, Antonio Carranza, Jordan W. (Calavo) + CC Antonio Beltrán y Armando Llanes. Revisar y dar seguimiento. Fuente: fcalderon@cryasociados.com · 13/Ago/2026."},
+    {"nivel":"info","texto":"🌱 CORBEL SEEDS · Reporte #0114 (13-Ago) — 🥒 Pepino MX fortaleciendo en cruces Texas. 🍅 Tomates, chiles, limones y aguacate Hass MX en niveles estables. 🥑 Precio aguacate estable apoya comercio normalizado con EUA. Invernaderos en Europa (tomate) y Polonia ganan posición → benchmark relevante para productores MX de alto valor. Fuente: ray@agbelher.com · 13/Ago/2026."},
+    {"nivel":"info","texto":"🌱 REPORTE AGRONÓMICO · Muestreo 12/Ago/2026 — Consultores Agronómicos S.C. (Los Mochis, Sinaloa) envía reportes de resultados de muestreo de campo. Solicitan confirmar recibido. Fuente: conagrosc@gmail.com · 13/Ago/2026."},
     {"nivel":"info","texto":"🍅 TOMATO MARKET UPDATE · WK32 (Calavo) — Irene Amezaga (Calavo): volumen semanal enviado 17.9K Cartons/Equivalentes. Precio promedio FOB: $11.77 todas las variedades. Romas 25lb: $10.40 FOB · Rounds 22lb: $13.59 FOB. Rounds con mejor desempeño que Romas; campo de verano comenzando a rotar. Fuente: Irene.Amezaga@calavo.com · 13/Ago/2026."},
     {"nivel":"info","texto":"📊 F/S BLONDIE PRODUCCIONES (BPSI) · JULIO 2026 — Leima Leyva comparte Estados Financieros de Blondie Producciones al 31-Jul-2026. Junta de revisión programada hoy jue 13-Ago 10am hora Culiacán. Participan: JC Beltrán, Armando Llanes (CFO), Hildelisa Beltrán. Fuente: leima@agbelher.com · 12/Ago/2026."},
     {"nivel":"info","texto":"🌱 CORBEL SEEDS · Reporte #0113 (12-Ago) — 🟢 Michoacán: embarques de aguacate REANUDADOS, flujo principal de importación EUA restaurado. Cyclospora: Michigan certifica lechuga local → preocupación se reenfoca en cadena de suministro del centro de México; trazabilidad y pruebas siguen siendo críticas. Perú: reabre posición exportadora. Brasil: invernaderos adoptando mallas climáticas ante temperaturas extremas. Fuente: ray@agbelher.com · 12/Ago/2026."},
@@ -26,10 +29,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"👤 AUSENCIA · Juan Antonio Cruz (jacruz@agbelher.com) — De vacaciones del 03 al 21 de Agosto. Regresa el 24-Ago. Disponible si se requiere antes. Fuente: jacruz@agbelher.com · 04/Ago/2026."},
     {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0109 (06-Ago) — Jalapeños Sinaloa: brote Salmonella 27 estados EUA. Aguacate Michoacán: inspecciones USDA suspendidas por alerta de seguridad. Cyclospora lechuga MX: investigación FDA en 15 estados. Perú gana posición en aguacate por vacío de Michoacán. Fuente: ray@agbelher.com · 06/Ago/2026."},
     {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0108 (05-Ago) — USDA AMS: pepino MX y tomate vine-ripe más firmes en Otay Mesa; habanero y jalapeño ganan en Texas-crossings; Hass pequeño MX sube. Fuente: ray@agbelher.com · 05/Ago/2026."},
-    {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0107 (04-Ago) — USDA AMS: tomate más suave en cruces Texas, hot-pepper estable, limón grande MX ligeramente a la baja. México y Colombia bien posicionados para abastecer aguacate a EUA oct–dic 2026. Fuente: ray@agbelher.com · 04/Ago/2026."},
-    {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0106 (03-Ago) — Aguacateros Estado de México esperan autorización USDA para ~5,000 acres y 2 empacadoras. USDA AMS Texas-crossing: vegetales MX y limones estables. Fuente: ray@agbelher.com · 03/Ago/2026."},
-    {"nivel":"info","texto":"⚖️ BOLETÍN REVISIÓN ADMINISTRATIVA USDOC — Lic. Mario Haroldo Robles (CIDH). Fuente: marioh@cidh.org.mx · 03/Ago/2026."},
-    {"nivel":"warning","texto":"🍅 EMPAQUE FOX PACKAGING · Revisar arte antes de inicio de temporada Fall — Fox Packaging solicita revisión de artwork antes del arranque de packing de otoño. SB 343 + nueva línea de partes. Fuente: info@foxbag.com · 03/Ago/2026."}
+    {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0107 (04-Ago) — USDA AMS: tomate más suave en cruces Texas, hot-pepper estable, limón grande MX ligeramente a la baja. México y Colombia bien posicionados para abastecer aguacate a EUA oct–dic 2026. Fuente: ray@agbelher.com · 04/Ago/2026."}
   ],
 
   ebitda: {
@@ -603,6 +603,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"18:43","asunto":"📊 ADM · Financieros Julio 2026 — Felipe Calderón (CRY Asociados) envía estados financieros ADM de julio. Destinatarios: James Snyder, Antonio Carranza, Jordan W. (Calavo) + CC Antonio Beltrán, Armando Llanes.","de":"fcalderon@cryasociados.com","leido":false,"fecha":"2026-08-13"},
+    {"hora":"11:53","asunto":"🌱 Reporte de Resultados Agronómicos · Muestreo 12/Ago/2026 — Consultores Agronómicos S.C. (Los Mochis, Sinaloa) envía reportes de muestreo de campo. Solicitan confirmar recibido.","de":"conagrosc@gmail.com","leido":false,"fecha":"2026-08-13"},
+    {"hora":"07:03","asunto":"🌱 Corbel Seeds Daily Report #0114 (13-Ago) — 🥒 Pepino MX fortalece en Texas crossings. 🍅🌶️🍋🥑 Tomates, chiles, limones y aguacate Hass MX estables. Invernaderos EU/Polonia: benchmark para productores MX.","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-13"},
     {"hora":"01:58","asunto":"🍅 Tomato Weekly Market Update WK32 (Calavo) — Vol: 17.9K C/E · FOB avg $11.77 · Romas 25lb $10.40 · Rounds 22lb $13.59. Rounds superan Romas; campo de verano rotando.","de":"Irene.Amezaga@calavo.com","leido":false,"fecha":"2026-08-13"},
     {"hora":"22:33","asunto":"📊 F/S Blondie Producciones (BPSI) · Julio 2026 — Leima comparte EF al 31-Jul. Junta revisión: jue 13-Ago 10am Culiacán. Participan: JC, Armando Llanes, Hildelisa Beltrán.","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-12"},
     {"hora":"20:27","asunto":"✅ Accepted: ADM / BELHER — Irene Amezaga (Calavo) acepta invitación de reunión ADM/Belher.","de":"Irene.Amezaga@calavo.com","leido":false,"fecha":"2026-08-12"},
