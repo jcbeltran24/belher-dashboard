@@ -1,18 +1,22 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 14 Ago 2026",
+    fecha: "Sábado 15 Ago 2026",
     semana: "WK33",
-    actualizado: "14/08/2026 · 13:19"
+    actualizado: "15/08/2026 · 12:49"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"💰 PAGOS CAPITAL DE TRABAJO · CALAVO — Leima Leyva envió a Irene Amezaga (Calavo) proyección de pagos del ciclo 2026-2027 con histórico de dos temporadas. Armando Llanes (CFO) sugiere que Antonio le llame a su celular para asegurar que el depósito llegue entre lunes y miércoles de la próxima semana (18-20 Ago). Fuente: leima@agbelher.com / armandollanes@donmemo.net · 14/Ago/2026."},
+    {"nivel":"warning","texto":"📅 REVISIÓN IMPACTO SALARIAL · MAR 18-AGO 11am–12pm (GMT-7) — ACTUALIZADO: Juan Antonio Cruz cambia hora y descripción de la reunión. Zoom: 840 2024 0260 · Clave: 380173. Host: jacruz@agbelher.com. Fuente: jacruz@agbelher.com · 14/Ago/2026."},
+    {"nivel":"info","texto":"🏛️ WEBINAR FDA · Cumplimiento para Productos Alimenticios — Edwin Delgado (Sinaloa Gobierno) convoca webinar gratuito: miércoles 19-Ago-2026 · 12:00 pm Sinaloa. Registro: https://tinyurl.com/CumplimientoFDAalimentos. Relevante para exportaciones de alimentos frescos Belher. Fuente: edwin.delgado@sinaloa.gob.mx · 14/Ago/2026."},
+    {"nivel":"info","texto":"🏦 TRANSFERENCIA SPEI · Banbajío — Se registró instrucción de depósito SPEI a cuenta de Juan Carlos Beltrán Ochoa. Fecha de operación: 14-Ago-2026. Fuente: Banbajioinforma@bb.com.mx · 14/Ago/2026."},
     {"nivel":"info","texto":"📊 ADM · FINANCIEROS JULIO 2026 — Felipe Calderón (CRY Asociados, Guadalajara) envía estados financieros de ADM correspondientes a julio 2026. Destinatarios: James Snyder, Antonio Carranza, Jordan W. (Calavo) + CC Antonio Beltrán y Armando Llanes. Revisar y dar seguimiento. Fuente: fcalderon@cryasociados.com · 13/Ago/2026."},
     {"nivel":"info","texto":"🌱 CORBEL SEEDS · Reporte #0114 (13-Ago) — 🥒 Pepino MX fortaleciendo en cruces Texas. 🍅 Tomates, chiles, limones y aguacate Hass MX en niveles estables. 🥑 Precio aguacate estable apoya comercio normalizado con EUA. Invernaderos en Europa (tomate) y Polonia ganan posición → benchmark relevante para productores MX de alto valor. Fuente: ray@agbelher.com · 13/Ago/2026."},
     {"nivel":"info","texto":"🌱 REPORTE AGRONÓMICO · Muestreo 12/Ago/2026 — Consultores Agronómicos S.C. (Los Mochis, Sinaloa) envía reportes de resultados de muestreo de campo. Solicitan confirmar recibido. Fuente: conagrosc@gmail.com · 13/Ago/2026."},
     {"nivel":"info","texto":"🍅 TOMATO MARKET UPDATE · WK32 (Calavo) — Irene Amezaga (Calavo): volumen semanal enviado 17.9K Cartons/Equivalentes. Precio promedio FOB: $11.77 todas las variedades. Romas 25lb: $10.40 FOB · Rounds 22lb: $13.59 FOB. Rounds con mejor desempeño que Romas; campo de verano comenzando a rotar. Fuente: Irene.Amezaga@calavo.com · 13/Ago/2026."},
-    {"nivel":"info","texto":"📊 F/S BLONDIE PRODUCCIONES (BPSI) · JULIO 2026 — Leima Leyva comparte Estados Financieros de Blondie Producciones al 31-Jul-2026. Junta de revisión programada hoy jue 13-Ago 10am hora Culiacán. Participan: JC Beltrán, Armando Llanes (CFO), Hildelisa Beltrán. Fuente: leima@agbelher.com · 12/Ago/2026."},
+    {"nivel":"info","texto":"📊 F/S BLONDIE PRODUCCIONES (BPSI) · JULIO 2026 — Leima Leyva comparte Estados Financieros de Blondie Producciones al 31-Jul-2026. Junta de revisión programada jue 13-Ago 10am hora Culiacán. Participan: JC Beltrán, Armando Llanes (CFO), Hildelisa Beltrán. Fuente: leima@agbelher.com · 12/Ago/2026."},
     {"nivel":"info","texto":"🌱 CORBEL SEEDS · Reporte #0113 (12-Ago) — 🟢 Michoacán: embarques de aguacate REANUDADOS, flujo principal de importación EUA restaurado. Cyclospora: Michigan certifica lechuga local → preocupación se reenfoca en cadena de suministro del centro de México; trazabilidad y pruebas siguen siendo críticas. Perú: reabre posición exportadora. Brasil: invernaderos adoptando mallas climáticas ante temperaturas extremas. Fuente: ray@agbelher.com · 12/Ago/2026."},
-    {"nivel":"warning","texto":"📅 REVISIÓN IMPACTO SALARIAL · VIE 14-AGO 10am–11am (GMT-7) — Juan Antonio Cruz actualiza horario de la reunión. Zoom: 840 2024 0260 · Clave: 380173. Participan JC Beltrán, Antonio y equipo. Fuente: jacruz@agbelher.com · 11/Ago/2026."},
+    {"nivel":"warning","texto":"📅 REVISIÓN IMPACTO SALARIAL · VIE 14-AGO (PASADO) — Juan Antonio Cruz había convocado reunión original. Reunión reprogramada para MAR 18-AGO 11am. Fuente: jacruz@agbelher.com · 11/Ago/2026."},
     {"nivel":"info","texto":"🏢 ORGANIGRAMA + KPIs · INICIO MAR 11-AGO — JC Beltrán convoca: Capital Humano inicia entrevistas para actualizar organigrama y descripciones de puesto. Objetivo: desarrollar KPIs por área y evaluación de desempeño trimestral. Contacto: Lic. Avigail Galaviz. Fuente: juancarlos@agbelher.com · 10/Ago/2026."},
     {"nivel":"warning","texto":"💰 CF BELHER · PENDIENTES CRÍTICOS — Armando Llanes (CFO): dos pendientes al cierre de reunión del vie-08-Ago → (1) acuerdo Antonio con Zazutea (monto y fechas); (2) reducciones Flavio en modelo 'Visión'. Actualizar CF y reenviar una vez que Antonio confirme. Fuente: armandollanes@donmemo.net · 10/Ago/2026."},
     {"nivel":"info","texto":"📋 BOLETÍN PRECIOS MÍNIMOS TOMATE · CIDH — Ing. Arturo Paredes (CIDH): boletín sobre precios mínimos de tomate y mecanismo de denuncia anónima y confidencial para quienes vendan por debajo del mínimo. Fuente: marioh@cidh.org.mx · 10/Ago/2026."},
@@ -26,10 +30,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"📅 WEEKLY TOMATO UPDATE & SALES MEETING · Calavo — Irene Amezaga (Calavo) convoca reunión semanal de tomate + ventas. Enlace Microsoft Teams compartido. Fuente: Irene.Amezaga@calavo.com · 03/Ago/2026."},
     {"nivel":"warning","texto":"⚖️ CONCILIACIÓN LIQUIDACIÓN BELHER/CALAVO · SEGUIMIENTO — Leima sigue con Irene Amezaga (Calavo) el acuerdo de comisión: 22% temporal → ajuste real 12% al cierre ciclo. Pendiente respuesta de Irene. Fuente: leima@agbelher.com · 31/Jul/2026."},
     {"nivel":"warning","texto":"🍅 EMPAQUE ROMA TOV 1.5 lb · Pendiente aprobación Calavo — JC envió diseños co-branding Calavo+Belher (master case + individual boxes) a Irene para revisión. Producción pendiente: 2,000 masters / 16,000 cajas. Fuente: juancarlos@agbelher.com · 30/Jul/2026."},
-    {"nivel":"warning","texto":"👤 AUSENCIA · Juan Antonio Cruz (jacruz@agbelher.com) — De vacaciones del 03 al 21 de Agosto. Regresa el 24-Ago. Disponible si se requiere antes. Fuente: jacruz@agbelher.com · 04/Ago/2026."},
-    {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0109 (06-Ago) — Jalapeños Sinaloa: brote Salmonella 27 estados EUA. Aguacate Michoacán: inspecciones USDA suspendidas por alerta de seguridad. Cyclospora lechuga MX: investigación FDA en 15 estados. Perú gana posición en aguacate por vacío de Michoacán. Fuente: ray@agbelher.com · 06/Ago/2026."},
-    {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0108 (05-Ago) — USDA AMS: pepino MX y tomate vine-ripe más firmes en Otay Mesa; habanero y jalapeño ganan en Texas-crossings; Hass pequeño MX sube. Fuente: ray@agbelher.com · 05/Ago/2026."},
-    {"nivel":"warning","texto":"🌱 CORBEL SEEDS · Reporte #0107 (04-Ago) — USDA AMS: tomate más suave en cruces Texas, hot-pepper estable, limón grande MX ligeramente a la baja. México y Colombia bien posicionados para abastecer aguacate a EUA oct–dic 2026. Fuente: ray@agbelher.com · 04/Ago/2026."}
+    {"nivel":"warning","texto":"👤 AUSENCIA · Juan Antonio Cruz (jacruz@agbelher.com) — De vacaciones del 03 al 21 de Agosto. Regresa el 24-Ago. Disponible si se requiere antes. Fuente: jacruz@agbelher.com · 04/Ago/2026."}
   ],
 
   ebitda: {
@@ -603,6 +604,10 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"18:42","asunto":"💰 Pagos Capital de Trabajo · Calavo — Leima envía a Irene (Calavo) proyección de pagos ciclo 2026-2027 con histórico 2 temporadas. Armando Llanes: Antonio debe llamar a Irene para asegurar depósito lunes-miércoles 18-20 Ago.","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-14"},
+    {"hora":"17:14","asunto":"🏦 Transferencia SPEI · Banbajío — Depósito registrado a cuenta de Juan Carlos Beltrán Ochoa. Fecha operación: 14-Ago-2026.","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-08-14"},
+    {"hora":"16:17","asunto":"📅 ACTUALIZADO · Revisión Impacto Salarial → MAR 18-Ago 11am–12pm (GMT-7) — Juan Antonio Cruz cambia hora y descripción. Zoom: 840 2024 0260 · Clave: 380173.","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-08-14"},
+    {"hora":"09:28","asunto":"🏛️ Webinar Gratuito · Cumplimiento FDA para Productos Alimenticios — Mié 19-Ago 12:00pm Sinaloa. Registro: tinyurl.com/CumplimientoFDAalimentos. Convoca: Sinaloa Gobierno.","de":"edwin.delgado@sinaloa.gob.mx","leido":false,"fecha":"2026-08-14"},
     {"hora":"18:43","asunto":"📊 ADM · Financieros Julio 2026 — Felipe Calderón (CRY Asociados) envía estados financieros ADM de julio. Destinatarios: James Snyder, Antonio Carranza, Jordan W. (Calavo) + CC Antonio Beltrán, Armando Llanes.","de":"fcalderon@cryasociados.com","leido":false,"fecha":"2026-08-13"},
     {"hora":"11:53","asunto":"🌱 Reporte de Resultados Agronómicos · Muestreo 12/Ago/2026 — Consultores Agronómicos S.C. (Los Mochis, Sinaloa) envía reportes de muestreo de campo. Solicitan confirmar recibido.","de":"conagrosc@gmail.com","leido":false,"fecha":"2026-08-13"},
     {"hora":"07:03","asunto":"🌱 Corbel Seeds Daily Report #0114 (13-Ago) — 🥒 Pepino MX fortalece en Texas crossings. 🍅🌶️🍋🥑 Tomates, chiles, limones y aguacate Hass MX estables. Invernaderos EU/Polonia: benchmark para productores MX.","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-13"},
