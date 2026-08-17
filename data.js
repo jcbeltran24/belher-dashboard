@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 16 Ago 2026",
+    fecha: "Lunes 17 Ago 2026",
     semana: "WK33",
-    actualizado: "16/08/2026 · 12:51"
+    actualizado: "17/08/2026 · 12:55"
   },
 
   alertas: [
@@ -604,6 +604,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"14:37","asunto":"🌱 HortiDaily Newsletter · Lun 17-Ago-2026 — 'Steering the crops starts before the growing season.' Noticias hortícolas internacionales del día.","de":"mail@hortidaily.com","leido":false,"fecha":"2026-08-17"},
     {"hora":"18:42","asunto":"💰 Pagos Capital de Trabajo · Calavo — Leima envía a Irene (Calavo) proyección de pagos ciclo 2026-2027 con histórico 2 temporadas. Armando Llanes: Antonio debe llamar a Irene para asegurar depósito lunes-miércoles 18-20 Ago.","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-14"},
     {"hora":"17:14","asunto":"🏦 Transferencia SPEI · Banbajío — Depósito registrado a cuenta de Juan Carlos Beltrán Ochoa. Fecha operación: 14-Ago-2026.","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-08-14"},
     {"hora":"16:17","asunto":"📅 ACTUALIZADO · Revisión Impacto Salarial → MAR 18-Ago 11am–12pm (GMT-7) — Juan Antonio Cruz cambia hora y descripción. Zoom: 840 2024 0260 · Clave: 380173.","de":"jacruz@agbelher.com","leido":false,"fecha":"2026-08-14"},
