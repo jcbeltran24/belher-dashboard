@@ -1,11 +1,15 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 17 Ago 2026",
-    semana: "WK33",
-    actualizado: "17/08/2026 · 12:55"
+    fecha: "Martes 18 Ago 2026",
+    semana: "WK34",
+    actualizado: "18/08/2026 · 12:57"
   },
 
   alertas: [
+    {"nivel":"danger","texto":"🔴 ACUÍFEROS SAN QUINTÍN · CRISIS AGUA — Corbel #0116 (17-Ago): sobreexplotación crónica y salinización de acuíferos en San Quintín amenazan la confiabilidad de la producción y exportación de tomate a EUA. Desalinización, capacidad eléctrica e infraestructura hídrica son restricciones estratégicas. Monitorear impacto en cadena Belher. Fuente: ray@agbelher.com · 17/Ago/2026."},
+    {"nivel":"warning","texto":"🥑 AGUACATE MICHOACÁN · RIESGOS PERSISTENTES — Corbel #0116 (17-Ago): operaciones reanudadas a plena velocidad, pero riesgos de seguridad e inspección siguen embebidos en la cadena de exportación. Mantener protocolos y documentación actualizados. Fuente: ray@agbelher.com · 17/Ago/2026."},
+    {"nivel":"info","texto":"📋 PRECIOS MÍNIMOS TOMATE · CIDH — Lic. Mario Robles (CIDH) envía por instrucciones del Ing. Arturo Paredes boletín sobre precios mínimos de exportación para tomate. JC está fuera de oficina hasta sep-8; verificar que área comercial reciba y aplique. Fuente: marioh@cidh.org.mx · 17/Ago/2026."},
+    {"nivel":"info","texto":"🏢 JC BELTRÁN · FUERA DE OFICINA HASTA SEP 8 — Respuesta automática activa. Si urgente: llamar o WhatsApp. Fuente: juancarlos@agbelher.com · 17/Ago/2026."},
     {"nivel":"warning","texto":"💰 PAGOS CAPITAL DE TRABAJO · CALAVO — Leima Leyva envió a Irene Amezaga (Calavo) proyección de pagos del ciclo 2026-2027 con histórico de dos temporadas. Armando Llanes (CFO) sugiere que Antonio le llame a su celular para asegurar que el depósito llegue entre lunes y miércoles de la próxima semana (18-20 Ago). Fuente: leima@agbelher.com / armandollanes@donmemo.net · 14/Ago/2026."},
     {"nivel":"warning","texto":"📅 REVISIÓN IMPACTO SALARIAL · MAR 18-AGO 11am–12pm (GMT-7) — ACTUALIZADO: Juan Antonio Cruz cambia hora y descripción de la reunión. Zoom: 840 2024 0260 · Clave: 380173. Host: jacruz@agbelher.com. Fuente: jacruz@agbelher.com · 14/Ago/2026."},
     {"nivel":"info","texto":"🏛️ WEBINAR FDA · Cumplimiento para Productos Alimenticios — Edwin Delgado (Sinaloa Gobierno) convoca webinar gratuito: miércoles 19-Ago-2026 · 12:00 pm Sinaloa. Registro: https://tinyurl.com/CumplimientoFDAalimentos. Relevante para exportaciones de alimentos frescos Belher. Fuente: edwin.delgado@sinaloa.gob.mx · 14/Ago/2026."},
@@ -26,11 +30,7 @@ window.BELHER = {
     {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago urgente: MXP $4M inmediato. Riesgo: embargo/cobranza IMSS o SAT. Fuente: jacruz@agbelher.com · 15/Jul/2026."},
     {"nivel":"warning","texto":"🦠 CYCLOSPORA · LECHUGA MX — Corbel #0113 (12-Ago): Michigan certifica lechuga local, foco se restringe a cadena centro-México. Trazabilidad y pruebas siguen siendo críticas para exportadores MX de vegetales frescos. Fuente: ray@agbelher.com · 12/Ago/2026."},
     {"nivel":"warning","texto":"⚖️ DUMPING TOMATE · REVISIÓN ADMON 2026 — Deadline USDOC para solicitar revisión de margen propio era el 31-Jul (ya vencido). Verificar con Capital Trade y Jeff Winton el estatus de la solicitud presentada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
-    {"nivel":"warning","texto":"⚖️ ARANCEL BELHER/CALAVO · GUARDAR DOCUMENTOS — Armando Llanes (CPA, San Antonio TX) solicita mantener copia física de la cadena de acuerdo de pago de arancel en la caja fuerte de Belher. Leima Leyva confirmó. Fuente: armandollanes@donmemo.net · 04/Ago/2026."},
-    {"nivel":"warning","texto":"📅 WEEKLY TOMATO UPDATE & SALES MEETING · Calavo — Irene Amezaga (Calavo) convoca reunión semanal de tomate + ventas. Enlace Microsoft Teams compartido. Fuente: Irene.Amezaga@calavo.com · 03/Ago/2026."},
-    {"nivel":"warning","texto":"⚖️ CONCILIACIÓN LIQUIDACIÓN BELHER/CALAVO · SEGUIMIENTO — Leima sigue con Irene Amezaga (Calavo) el acuerdo de comisión: 22% temporal → ajuste real 12% al cierre ciclo. Pendiente respuesta de Irene. Fuente: leima@agbelher.com · 31/Jul/2026."},
-    {"nivel":"warning","texto":"🍅 EMPAQUE ROMA TOV 1.5 lb · Pendiente aprobación Calavo — JC envió diseños co-branding Calavo+Belher (master case + individual boxes) a Irene para revisión. Producción pendiente: 2,000 masters / 16,000 cajas. Fuente: juancarlos@agbelher.com · 30/Jul/2026."},
-    {"nivel":"warning","texto":"👤 AUSENCIA · Juan Antonio Cruz (jacruz@agbelher.com) — De vacaciones del 03 al 21 de Agosto. Regresa el 24-Ago. Disponible si se requiere antes. Fuente: jacruz@agbelher.com · 04/Ago/2026."}
+    {"nivel":"warning","texto":"⚖️ ARANCEL BELHER/CALAVO · GUARDAR DOCUMENTOS — Armando Llanes (CPA, San Antonio TX) solicita mantener copia física de la cadena de acuerdo de pago de arancel en la caja fuerte de Belher. Leima Leyva confirmó. Fuente: armandollanes@donmemo.net · 04/Ago/2026."}
   ],
 
   ebitda: {
@@ -604,6 +604,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"11:53","asunto":"📋 Precios Mínimos Tomate · CIDH — Lic. Mario Robles (CIDH) envía por instrucciones del Ing. Arturo Paredes boletín sobre precios mínimos de exportación para tomate. Revisar boletín adjunto.","de":"marioh@cidh.org.mx","leido":false,"fecha":"2026-08-17"},
+    {"hora":"07:11","asunto":"🌱 Corbel Seeds Daily Report #0116 (17-Ago) — 🔴 San Quintín: sobreexplotación crónica de acuíferos e intrusión salina amenazan producción/exportación de tomate. 🥑 Aguacate Michoacán a plena velocidad pero riesgos de seguridad e inspección persisten en cadena de exportación.","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-17"},
     {"hora":"14:37","asunto":"🌱 HortiDaily Newsletter · Lun 17-Ago-2026 — 'Steering the crops starts before the growing season.' Noticias hortícolas internacionales del día.","de":"mail@hortidaily.com","leido":false,"fecha":"2026-08-17"},
     {"hora":"18:42","asunto":"💰 Pagos Capital de Trabajo · Calavo — Leima envía a Irene (Calavo) proyección de pagos ciclo 2026-2027 con histórico 2 temporadas. Armando Llanes: Antonio debe llamar a Irene para asegurar depósito lunes-miércoles 18-20 Ago.","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-14"},
     {"hora":"17:14","asunto":"🏦 Transferencia SPEI · Banbajío — Depósito registrado a cuenta de Juan Carlos Beltrán Ochoa. Fecha operación: 14-Ago-2026.","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-08-14"},
