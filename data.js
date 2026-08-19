@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 18 Ago 2026",
+    fecha: "Miércoles 19 Ago 2026",
     semana: "WK34",
-    actualizado: "18/08/2026 · 12:57"
+    actualizado: "19/08/2026 · 13:00"
   },
 
   alertas: [
+    {"nivel":"danger","texto":"💳 BURÓ DE CRÉDITO · PAGOS VENCIDOS — Claina Payan (Reg. Pacífico / Banbajío) reporta a Leima Leyva dos créditos con pagos vencidos en buró especial: (1) Banamex: saldo vencido $52,319 MXN — pago pendiente; (2) American Express: comprobante existe, pendiente de aplicación. Acción urgente requerida por JC o área financiera. Fuente: leima@agbelher.com → cpayan@bb.com.mx · 18/Ago/2026."},
     {"nivel":"danger","texto":"🔴 ACUÍFEROS SAN QUINTÍN · CRISIS AGUA — Corbel #0116 (17-Ago): sobreexplotación crónica y salinización de acuíferos en San Quintín amenazan la confiabilidad de la producción y exportación de tomate a EUA. Desalinización, capacidad eléctrica e infraestructura hídrica son restricciones estratégicas. Monitorear impacto en cadena Belher. Fuente: ray@agbelher.com · 17/Ago/2026."},
     {"nivel":"warning","texto":"🥑 AGUACATE MICHOACÁN · RIESGOS PERSISTENTES — Corbel #0116 (17-Ago): operaciones reanudadas a plena velocidad, pero riesgos de seguridad e inspección siguen embebidos en la cadena de exportación. Mantener protocolos y documentación actualizados. Fuente: ray@agbelher.com · 17/Ago/2026."},
     {"nivel":"info","texto":"📋 PRECIOS MÍNIMOS TOMATE · CIDH — Lic. Mario Robles (CIDH) envía por instrucciones del Ing. Arturo Paredes boletín sobre precios mínimos de exportación para tomate. JC está fuera de oficina hasta sep-8; verificar que área comercial reciba y aplique. Fuente: marioh@cidh.org.mx · 17/Ago/2026."},
@@ -26,11 +27,7 @@ window.BELHER = {
     {"nivel":"info","texto":"📋 BOLETÍN PRECIOS MÍNIMOS TOMATE · CIDH — Ing. Arturo Paredes (CIDH): boletín sobre precios mínimos de tomate y mecanismo de denuncia anónima y confidencial para quienes vendan por debajo del mínimo. Fuente: marioh@cidh.org.mx · 10/Ago/2026."},
     {"nivel":"success","texto":"✅ LIBERACIÓN FDA · CAJA CGG-145 — Shannon Brokerage (Nogales, AZ) confirma: carga de limón persa caja #CGG-145 fue liberada por FDA el 09-Ago. Puede proceder sin problema a destino final. Chofer: Jaime Beltrán · 6671 76 46 59. Fuente: logistics@shannonbrokerage.com · 09/Ago/2026."},
     {"nivel":"danger","texto":"🚨 SALMONELLA · JALAPEÑOS SINALOA — Corbel #0109 (06-Ago): jalapeños de Sinaloa vinculados a brote de Salmonella activo en 27 estados EUA. Revisión urgente de protocolos de inocuidad, trazabilidad y certificaciones de exportación. Riesgo directo para embarques Belher. Fuente: ray@agbelher.com · 06/Ago/2026."},
-    {"nivel":"success","texto":"🥑 AGUACATE MICHOACÁN · INSPECCIONES REANUDADAS — Corbel #0113 (12-Ago): embarques de aguacate Michoacán reanudados, flujo principal de importación EUA restaurado. Monitorear continuidad. Fuente: ray@agbelher.com · 12/Ago/2026."},
-    {"nivel":"danger","texto":"🔴 CONTRIBUCIONES FISCALES · FOCO ROJO — Total adeudado IMSS-INFONAVIT + SAT: MXP $21M / $1.2M USD. IMSS-INFONAVIT: MXP $18.6M (vencido convenios $1.6M + cuotas normales $3.3M; no vencido $14M). SAT: MXP $2.5M / $145k USD (meses ene-feb-mar 2026 vencidos). Pago urgente: MXP $4M inmediato. Riesgo: embargo/cobranza IMSS o SAT. Fuente: jacruz@agbelher.com · 15/Jul/2026."},
-    {"nivel":"warning","texto":"🦠 CYCLOSPORA · LECHUGA MX — Corbel #0113 (12-Ago): Michigan certifica lechuga local, foco se restringe a cadena centro-México. Trazabilidad y pruebas siguen siendo críticas para exportadores MX de vegetales frescos. Fuente: ray@agbelher.com · 12/Ago/2026."},
-    {"nivel":"warning","texto":"⚖️ DUMPING TOMATE · REVISIÓN ADMON 2026 — Deadline USDOC para solicitar revisión de margen propio era el 31-Jul (ya vencido). Verificar con Capital Trade y Jeff Winton el estatus de la solicitud presentada. Fuente: jacruz@agbelher.com · 22/Jun/2026."},
-    {"nivel":"warning","texto":"⚖️ ARANCEL BELHER/CALAVO · GUARDAR DOCUMENTOS — Armando Llanes (CPA, San Antonio TX) solicita mantener copia física de la cadena de acuerdo de pago de arancel en la caja fuerte de Belher. Leima Leyva confirmó. Fuente: armandollanes@donmemo.net · 04/Ago/2026."}
+    {"nivel":"success","texto":"🥑 AGUACATE MICHOACÁN · INSPECCIONES REANUDADAS — Corbel #0113 (12-Ago): embarques de aguacate Michoacán reanudados, flujo principal de importación EUA restaurado. Monitorear continuidad. Fuente: ray@agbelher.com · 12/Ago/2026."}
   ],
 
   ebitda: {
@@ -604,6 +601,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"18:58","asunto":"💳 Pago Vencido · Buró Crédito Especial — Leima reenvía reporte de Claina Payan (Banbajío): dos créditos vencidos en buró. Banamex: $52,319 MXN pendiente. AmEx: comprobante existe, pago por aplicar. Acción urgente requerida.","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-18"},
+    {"hora":"15:57","asunto":"🌱 HortiDaily Newsletter · Mar 18-Ago-2026 — 'Thrips parvispinus' cambia reglas del manejo de trips en pimiento. Noticias hortícolas internacionales del día.","de":"mail@hortidaily.es","leido":false,"fecha":"2026-08-18"},
     {"hora":"11:53","asunto":"📋 Precios Mínimos Tomate · CIDH — Lic. Mario Robles (CIDH) envía por instrucciones del Ing. Arturo Paredes boletín sobre precios mínimos de exportación para tomate. Revisar boletín adjunto.","de":"marioh@cidh.org.mx","leido":false,"fecha":"2026-08-17"},
     {"hora":"07:11","asunto":"🌱 Corbel Seeds Daily Report #0116 (17-Ago) — 🔴 San Quintín: sobreexplotación crónica de acuíferos e intrusión salina amenazan producción/exportación de tomate. 🥑 Aguacate Michoacán a plena velocidad pero riesgos de seguridad e inspección persisten en cadena de exportación.","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-17"},
     {"hora":"14:37","asunto":"🌱 HortiDaily Newsletter · Lun 17-Ago-2026 — 'Steering the crops starts before the growing season.' Noticias hortícolas internacionales del día.","de":"mail@hortidaily.com","leido":false,"fecha":"2026-08-17"},
