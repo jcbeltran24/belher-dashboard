@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 19 Ago 2026",
+    fecha: "Jueves 20 Ago 2026",
     semana: "WK34",
-    actualizado: "19/08/2026 · 13:00"
+    actualizado: "20/08/2026 · 13:00"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"🏦 BANK OF AMERICA · DESTINATARIO DE TRANSFERENCIA — Alerta en dos pasos: (1) 01:26am: fallo al agregar destinatario 'JUAN BELTRAN OCHOA' (nombre incompleto). (2) 01:29am: destinatario 'JUAN CARLOS BELTRAN OCHOA' agregado exitosamente. Verificar que la instrucción de transferencia sea legítima — confirmar siempre por teléfono o en persona antes de ejecutar. Fuente: BofA Alerts · 20/Ago/2026."},
     {"nivel":"danger","texto":"💳 BURÓ DE CRÉDITO · PAGOS VENCIDOS — Claina Payan (Reg. Pacífico / Banbajío) reporta a Leima Leyva dos créditos con pagos vencidos en buró especial: (1) Banamex: saldo vencido $52,319 MXN — pago pendiente; (2) American Express: comprobante existe, pendiente de aplicación. Acción urgente requerida por JC o área financiera. Fuente: leima@agbelher.com → cpayan@bb.com.mx · 18/Ago/2026."},
     {"nivel":"danger","texto":"🔴 ACUÍFEROS SAN QUINTÍN · CRISIS AGUA — Corbel #0116 (17-Ago): sobreexplotación crónica y salinización de acuíferos en San Quintín amenazan la confiabilidad de la producción y exportación de tomate a EUA. Desalinización, capacidad eléctrica e infraestructura hídrica son restricciones estratégicas. Monitorear impacto en cadena Belher. Fuente: ray@agbelher.com · 17/Ago/2026."},
     {"nivel":"warning","texto":"🥑 AGUACATE MICHOACÁN · RIESGOS PERSISTENTES — Corbel #0116 (17-Ago): operaciones reanudadas a plena velocidad, pero riesgos de seguridad e inspección siguen embebidos en la cadena de exportación. Mantener protocolos y documentación actualizados. Fuente: ray@agbelher.com · 17/Ago/2026."},
@@ -26,8 +27,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"💰 CF BELHER · PENDIENTES CRÍTICOS — Armando Llanes (CFO): dos pendientes al cierre de reunión del vie-08-Ago → (1) acuerdo Antonio con Zazutea (monto y fechas); (2) reducciones Flavio en modelo 'Visión'. Actualizar CF y reenviar una vez que Antonio confirme. Fuente: armandollanes@donmemo.net · 10/Ago/2026."},
     {"nivel":"info","texto":"📋 BOLETÍN PRECIOS MÍNIMOS TOMATE · CIDH — Ing. Arturo Paredes (CIDH): boletín sobre precios mínimos de tomate y mecanismo de denuncia anónima y confidencial para quienes vendan por debajo del mínimo. Fuente: marioh@cidh.org.mx · 10/Ago/2026."},
     {"nivel":"success","texto":"✅ LIBERACIÓN FDA · CAJA CGG-145 — Shannon Brokerage (Nogales, AZ) confirma: carga de limón persa caja #CGG-145 fue liberada por FDA el 09-Ago. Puede proceder sin problema a destino final. Chofer: Jaime Beltrán · 6671 76 46 59. Fuente: logistics@shannonbrokerage.com · 09/Ago/2026."},
-    {"nivel":"danger","texto":"🚨 SALMONELLA · JALAPEÑOS SINALOA — Corbel #0109 (06-Ago): jalapeños de Sinaloa vinculados a brote de Salmonella activo en 27 estados EUA. Revisión urgente de protocolos de inocuidad, trazabilidad y certificaciones de exportación. Riesgo directo para embarques Belher. Fuente: ray@agbelher.com · 06/Ago/2026."},
-    {"nivel":"success","texto":"🥑 AGUACATE MICHOACÁN · INSPECCIONES REANUDADAS — Corbel #0113 (12-Ago): embarques de aguacate Michoacán reanudados, flujo principal de importación EUA restaurado. Monitorear continuidad. Fuente: ray@agbelher.com · 12/Ago/2026."}
+    {"nivel":"danger","texto":"🚨 SALMONELLA · JALAPEÑOS SINALOA — Corbel #0109 (06-Ago): jalapeños de Sinaloa vinculados a brote de Salmonella activo en 27 estados EUA. Revisión urgente de protocolos de inocuidad, trazabilidad y certificaciones de exportación. Riesgo directo para embarques Belher. Fuente: ray@agbelher.com · 06/Ago/2026."}
   ],
 
   ebitda: {
@@ -601,6 +601,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"14:21","asunto":"🌱 HortiDaily Newsletter · Jue 20-Ago-2026 — Precision, consistency and crop-specific management en operación de propagación de 27 acres. Noticias hortícolas internacionales del día.","de":"mail@hortidaily.com","leido":false,"fecha":"2026-08-20"},
+    {"hora":"01:29","asunto":"🏦 Bank of America · Destinatario de transferencia AGREGADO — 'JUAN CARLOS BELTRAN OCHOA' añadido como destinatario. Verificar que instrucción sea legítima antes de ejecutar cualquier transferencia.","de":"onlinebanking@ealerts.bankofamerica.com","leido":false,"fecha":"2026-08-20"},
+    {"hora":"01:26","asunto":"⚠️ Bank of America · FALLO al agregar destinatario — 'JUAN BELTRAN OCHOA' no pudo ser añadido (nombre incompleto/datos incorrectos). Intento previo al registro exitoso. Verificar legitimidad de la instrucción.","de":"onlinebanking@ealerts.bankofamerica.com","leido":false,"fecha":"2026-08-20"},
     {"hora":"18:58","asunto":"💳 Pago Vencido · Buró Crédito Especial — Leima reenvía reporte de Claina Payan (Banbajío): dos créditos vencidos en buró. Banamex: $52,319 MXN pendiente. AmEx: comprobante existe, pago por aplicar. Acción urgente requerida.","de":"leima@agbelher.com","leido":false,"fecha":"2026-08-18"},
     {"hora":"15:57","asunto":"🌱 HortiDaily Newsletter · Mar 18-Ago-2026 — 'Thrips parvispinus' cambia reglas del manejo de trips en pimiento. Noticias hortícolas internacionales del día.","de":"mail@hortidaily.es","leido":false,"fecha":"2026-08-18"},
     {"hora":"11:53","asunto":"📋 Precios Mínimos Tomate · CIDH — Lic. Mario Robles (CIDH) envía por instrucciones del Ing. Arturo Paredes boletín sobre precios mínimos de exportación para tomate. Revisar boletín adjunto.","de":"marioh@cidh.org.mx","leido":false,"fecha":"2026-08-17"},
