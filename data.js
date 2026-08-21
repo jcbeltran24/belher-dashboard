@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Jueves 20 Ago 2026",
+    fecha: "Viernes 21 Ago 2026",
     semana: "WK34",
-    actualizado: "20/08/2026 · 13:00"
+    actualizado: "21/08/2026 · 12:59"
   },
 
   alertas: [
+    {"nivel":"danger","texto":"🍅 CORBEL #0119 · RUSIA DETECTA ToBRFV y Tuta absoluta — (20-Ago) Nuevas detecciones rusas de virus ToBRFV y polilla Tuta absoluta en tomates importados de México refuerzan la urgencia de genética resistente, controles fitosanitarios verificados y trazabilidad completa para exportadores mexicanos. Riesgo de restricciones comerciales si no se garantizan controles. Fuente: ray@agbelher.com · 20/Ago/2026."},
     {"nivel":"warning","texto":"🏦 BANK OF AMERICA · DESTINATARIO DE TRANSFERENCIA — Alerta en dos pasos: (1) 01:26am: fallo al agregar destinatario 'JUAN BELTRAN OCHOA' (nombre incompleto). (2) 01:29am: destinatario 'JUAN CARLOS BELTRAN OCHOA' agregado exitosamente. Verificar que la instrucción de transferencia sea legítima — confirmar siempre por teléfono o en persona antes de ejecutar. Fuente: BofA Alerts · 20/Ago/2026."},
     {"nivel":"danger","texto":"💳 BURÓ DE CRÉDITO · PAGOS VENCIDOS — Claina Payan (Reg. Pacífico / Banbajío) reporta a Leima Leyva dos créditos con pagos vencidos en buró especial: (1) Banamex: saldo vencido $52,319 MXN — pago pendiente; (2) American Express: comprobante existe, pendiente de aplicación. Acción urgente requerida por JC o área financiera. Fuente: leima@agbelher.com → cpayan@bb.com.mx · 18/Ago/2026."},
     {"nivel":"danger","texto":"🔴 ACUÍFEROS SAN QUINTÍN · CRISIS AGUA — Corbel #0116 (17-Ago): sobreexplotación crónica y salinización de acuíferos en San Quintín amenazan la confiabilidad de la producción y exportación de tomate a EUA. Desalinización, capacidad eléctrica e infraestructura hídrica son restricciones estratégicas. Monitorear impacto en cadena Belher. Fuente: ray@agbelher.com · 17/Ago/2026."},
@@ -22,12 +23,9 @@ window.BELHER = {
     {"nivel":"info","texto":"🍅 TOMATO MARKET UPDATE · WK32 (Calavo) — Irene Amezaga (Calavo): volumen semanal enviado 17.9K Cartons/Equivalentes. Precio promedio FOB: $11.77 todas las variedades. Romas 25lb: $10.40 FOB · Rounds 22lb: $13.59 FOB. Rounds con mejor desempeño que Romas; campo de verano comenzando a rotar. Fuente: Irene.Amezaga@calavo.com · 13/Ago/2026."},
     {"nivel":"info","texto":"📊 F/S BLONDIE PRODUCCIONES (BPSI) · JULIO 2026 — Leima Leyva comparte Estados Financieros de Blondie Producciones al 31-Jul-2026. Junta de revisión programada jue 13-Ago 10am hora Culiacán. Participan: JC Beltrán, Armando Llanes (CFO), Hildelisa Beltrán. Fuente: leima@agbelher.com · 12/Ago/2026."},
     {"nivel":"info","texto":"🌱 CORBEL SEEDS · Reporte #0113 (12-Ago) — 🟢 Michoacán: embarques de aguacate REANUDADOS, flujo principal de importación EUA restaurado. Cyclospora: Michigan certifica lechuga local → preocupación se reenfoca en cadena de suministro del centro de México; trazabilidad y pruebas siguen siendo críticas. Perú: reabre posición exportadora. Brasil: invernaderos adoptando mallas climáticas ante temperaturas extremas. Fuente: ray@agbelher.com · 12/Ago/2026."},
-    {"nivel":"warning","texto":"📅 REVISIÓN IMPACTO SALARIAL · VIE 14-AGO (PASADO) — Juan Antonio Cruz había convocado reunión original. Reunión reprogramada para MAR 18-AGO 11am. Fuente: jacruz@agbelher.com · 11/Ago/2026."},
-    {"nivel":"info","texto":"🏢 ORGANIGRAMA + KPIs · INICIO MAR 11-AGO — JC Beltrán convoca: Capital Humano inicia entrevistas para actualizar organigrama y descripciones de puesto. Objetivo: desarrollar KPIs por área y evaluación de desempeño trimestral. Contacto: Lic. Avigail Galaviz. Fuente: juancarlos@agbelher.com · 10/Ago/2026."},
     {"nivel":"warning","texto":"💰 CF BELHER · PENDIENTES CRÍTICOS — Armando Llanes (CFO): dos pendientes al cierre de reunión del vie-08-Ago → (1) acuerdo Antonio con Zazutea (monto y fechas); (2) reducciones Flavio en modelo 'Visión'. Actualizar CF y reenviar una vez que Antonio confirme. Fuente: armandollanes@donmemo.net · 10/Ago/2026."},
     {"nivel":"info","texto":"📋 BOLETÍN PRECIOS MÍNIMOS TOMATE · CIDH — Ing. Arturo Paredes (CIDH): boletín sobre precios mínimos de tomate y mecanismo de denuncia anónima y confidencial para quienes vendan por debajo del mínimo. Fuente: marioh@cidh.org.mx · 10/Ago/2026."},
-    {"nivel":"success","texto":"✅ LIBERACIÓN FDA · CAJA CGG-145 — Shannon Brokerage (Nogales, AZ) confirma: carga de limón persa caja #CGG-145 fue liberada por FDA el 09-Ago. Puede proceder sin problema a destino final. Chofer: Jaime Beltrán · 6671 76 46 59. Fuente: logistics@shannonbrokerage.com · 09/Ago/2026."},
-    {"nivel":"danger","texto":"🚨 SALMONELLA · JALAPEÑOS SINALOA — Corbel #0109 (06-Ago): jalapeños de Sinaloa vinculados a brote de Salmonella activo en 27 estados EUA. Revisión urgente de protocolos de inocuidad, trazabilidad y certificaciones de exportación. Riesgo directo para embarques Belher. Fuente: ray@agbelher.com · 06/Ago/2026."}
+    {"nivel":"success","texto":"✅ LIBERACIÓN FDA · CAJA CGG-145 — Shannon Brokerage (Nogales, AZ) confirma: carga de limón persa caja #CGG-145 fue liberada por FDA el 09-Ago. Puede proceder sin problema a destino final. Chofer: Jaime Beltrán · 6671 76 46 59. Fuente: logistics@shannonbrokerage.com · 09/Ago/2026."}
   ],
 
   ebitda: {
@@ -601,6 +599,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"08:08","asunto":"📰 GBM The Morning · Vie 21-Ago-2026 — Todo lo que debes saber para comenzar tu día. Resumen de mercados financieros.","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-08-21"},
+    {"hora":"07:01","asunto":"🌱 Corbel Seeds Daily Report #0119 (20-Ago) — 🍅 Rusia detecta ToBRFV y Tuta absoluta en tomates importados de México: urgente genética resistente, controles fitosanitarios y trazabilidad. Asia expande sector semillas; Arabia Saudita invierte en horticultura protegida → oportunidades para productores MX.","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-20"},
     {"hora":"14:21","asunto":"🌱 HortiDaily Newsletter · Jue 20-Ago-2026 — Precision, consistency and crop-specific management en operación de propagación de 27 acres. Noticias hortícolas internacionales del día.","de":"mail@hortidaily.com","leido":false,"fecha":"2026-08-20"},
     {"hora":"01:29","asunto":"🏦 Bank of America · Destinatario de transferencia AGREGADO — 'JUAN CARLOS BELTRAN OCHOA' añadido como destinatario. Verificar que instrucción sea legítima antes de ejecutar cualquier transferencia.","de":"onlinebanking@ealerts.bankofamerica.com","leido":false,"fecha":"2026-08-20"},
     {"hora":"01:26","asunto":"⚠️ Bank of America · FALLO al agregar destinatario — 'JUAN BELTRAN OCHOA' no pudo ser añadido (nombre incompleto/datos incorrectos). Intento previo al registro exitoso. Verificar legitimidad de la instrucción.","de":"onlinebanking@ealerts.bankofamerica.com","leido":false,"fecha":"2026-08-20"},
