@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 21 Ago 2026",
+    fecha: "Sábado 22 Ago 2026",
     semana: "WK34",
-    actualizado: "21/08/2026 · 12:59"
+    actualizado: "22/08/2026 · 12:51"
   },
 
   alertas: [
+    {"nivel":"danger","texto":"🍅 CORBEL #0120 · ARANCEL ANTIDUMPING TOMATE MX + ALERTA JALAPEÑOS — (21-Ago) EUA mantiene aranceles antidumping sobre tomate mexicano fresco, presionando márgenes exportadores. Además, investigación Salmonella en jalapeños de Sinaloa amplía riesgos de retiro de mercado, trazabilidad y acceso a canales foodservice/retail. Acción urgente: verificar protocolos de trazabilidad y certificaciones. Fuente: ray@agbelher.com · 21/Ago/2026."},
     {"nivel":"danger","texto":"🍅 CORBEL #0119 · RUSIA DETECTA ToBRFV y Tuta absoluta — (20-Ago) Nuevas detecciones rusas de virus ToBRFV y polilla Tuta absoluta en tomates importados de México refuerzan la urgencia de genética resistente, controles fitosanitarios verificados y trazabilidad completa para exportadores mexicanos. Riesgo de restricciones comerciales si no se garantizan controles. Fuente: ray@agbelher.com · 20/Ago/2026."},
     {"nivel":"warning","texto":"🏦 BANK OF AMERICA · DESTINATARIO DE TRANSFERENCIA — Alerta en dos pasos: (1) 01:26am: fallo al agregar destinatario 'JUAN BELTRAN OCHOA' (nombre incompleto). (2) 01:29am: destinatario 'JUAN CARLOS BELTRAN OCHOA' agregado exitosamente. Verificar que la instrucción de transferencia sea legítima — confirmar siempre por teléfono o en persona antes de ejecutar. Fuente: BofA Alerts · 20/Ago/2026."},
     {"nivel":"danger","texto":"💳 BURÓ DE CRÉDITO · PAGOS VENCIDOS — Claina Payan (Reg. Pacífico / Banbajío) reporta a Leima Leyva dos créditos con pagos vencidos en buró especial: (1) Banamex: saldo vencido $52,319 MXN — pago pendiente; (2) American Express: comprobante existe, pendiente de aplicación. Acción urgente requerida por JC o área financiera. Fuente: leima@agbelher.com → cpayan@bb.com.mx · 18/Ago/2026."},
@@ -16,7 +17,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"💰 PAGOS CAPITAL DE TRABAJO · CALAVO — Leima Leyva envió a Irene Amezaga (Calavo) proyección de pagos del ciclo 2026-2027 con histórico de dos temporadas. Armando Llanes (CFO) sugiere que Antonio le llame a su celular para asegurar que el depósito llegue entre lunes y miércoles de la próxima semana (18-20 Ago). Fuente: leima@agbelher.com / armandollanes@donmemo.net · 14/Ago/2026."},
     {"nivel":"warning","texto":"📅 REVISIÓN IMPACTO SALARIAL · MAR 18-AGO 11am–12pm (GMT-7) — ACTUALIZADO: Juan Antonio Cruz cambia hora y descripción de la reunión. Zoom: 840 2024 0260 · Clave: 380173. Host: jacruz@agbelher.com. Fuente: jacruz@agbelher.com · 14/Ago/2026."},
     {"nivel":"info","texto":"🏛️ WEBINAR FDA · Cumplimiento para Productos Alimenticios — Edwin Delgado (Sinaloa Gobierno) convoca webinar gratuito: miércoles 19-Ago-2026 · 12:00 pm Sinaloa. Registro: https://tinyurl.com/CumplimientoFDAalimentos. Relevante para exportaciones de alimentos frescos Belher. Fuente: edwin.delgado@sinaloa.gob.mx · 14/Ago/2026."},
-    {"nivel":"info","texto":"🏦 TRANSFERENCIA SPEI · Banbajío — Se registró instrucción de depósito SPEI a cuenta de Juan Carlos Beltrán Ochoa. Fecha de operación: 14-Ago-2026. Fuente: Banbajioinforma@bb.com.mx · 14/Ago/2026."},
+    {"nivel":"info","texto":"🏦 TRANSFERENCIA SPEI · Banbajío — Se registró instrucción de depósito SPEI a cuenta de Juan Carlos Beltrán Ochoa. Fecha de operación: 21-Ago-2026. Fuente: Banbajioinforma@bb.com.mx · 21/Ago/2026."},
     {"nivel":"info","texto":"📊 ADM · FINANCIEROS JULIO 2026 — Felipe Calderón (CRY Asociados, Guadalajara) envía estados financieros de ADM correspondientes a julio 2026. Destinatarios: James Snyder, Antonio Carranza, Jordan W. (Calavo) + CC Antonio Beltrán y Armando Llanes. Revisar y dar seguimiento. Fuente: fcalderon@cryasociados.com · 13/Ago/2026."},
     {"nivel":"info","texto":"🌱 CORBEL SEEDS · Reporte #0114 (13-Ago) — 🥒 Pepino MX fortaleciendo en cruces Texas. 🍅 Tomates, chiles, limones y aguacate Hass MX en niveles estables. 🥑 Precio aguacate estable apoya comercio normalizado con EUA. Invernaderos en Europa (tomate) y Polonia ganan posición → benchmark relevante para productores MX de alto valor. Fuente: ray@agbelher.com · 13/Ago/2026."},
     {"nivel":"info","texto":"🌱 REPORTE AGRONÓMICO · Muestreo 12/Ago/2026 — Consultores Agronómicos S.C. (Los Mochis, Sinaloa) envía reportes de resultados de muestreo de campo. Solicitan confirmar recibido. Fuente: conagrosc@gmail.com · 13/Ago/2026."},
@@ -599,6 +600,13 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"17:02","asunto":"📈 GBM The Recap · Vie 21-Ago-2026 — Resumen simplificado de movimientos del mercado financiero al cierre del día.","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-08-21"},
+    {"hora":"16:06","asunto":"🏦 Transferencia Interbancaria SPEI · Banbajío — Depósito SPEI registrado en cuenta de Juan Carlos Beltrán Ochoa. Fecha de operación: 21-Ago-2026 · 16:06 hrs CST.","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-08-21"},
+    {"hora":"15:19","asunto":"📋 CFDI Nómina Periodo 34 · AGRICOLA BELHER FIJOS — Recibo electrónico de nómina semanal (12/08–18/08/2026) emitido para 000009 - BELTRAN OCHOA JUAN CARLOS. UUID: 6E596ADD-2597-47EC-824B-422E2CCD18FA.","de":"anajar@agbelher.com","leido":false,"fecha":"2026-08-21"},
+    {"hora":"14:53","asunto":"🌎 Newsletter Comercio Exterior · Sinaloa Gobierno — Edición 21-Ago-2026 de la Dirección de Comercio Exterior: noticias relevantes de comercio internacional para exportadores sinaloenses.","de":"astrid.garibay@sinaloa.gob.mx","leido":false,"fecha":"2026-08-21"},
+    {"hora":"19:37","asunto":"📰 eNoticias HortiCultivos · Vie 21-Ago-2026 — Noticias, artículos, eventos y videos del sector hortícola mexicano e internacional.","de":"info@horticultivos.com","leido":false,"fecha":"2026-08-21"},
+    {"hora":"07:04","asunto":"🌱 Corbel Seeds Daily Report #0120 (21-Ago) — 🍅 EUA mantiene aranceles antidumping sobre tomate MX: presión en márgenes exportadores. 🌶️ Investigación Salmonella en jalapeños Sinaloa: riesgo de retiro de mercado, trazabilidad y acceso a foodservice/retail. 🇧🇷 Brasil: tomate Bahía recupera rendimiento (600–650 cajas/1,000 plantas).","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-21"},
+    {"hora":"08:08","asunto":"📰 GBM The Morning · Vie 21-Ago-2026 — Todo lo que debes saber para comenzar tu día. Resumen de mercados financieros.","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-08-21"},
     {"hora":"08:08","asunto":"📰 GBM The Morning · Vie 21-Ago-2026 — Todo lo que debes saber para comenzar tu día. Resumen de mercados financieros.","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-08-21"},
     {"hora":"07:01","asunto":"🌱 Corbel Seeds Daily Report #0119 (20-Ago) — 🍅 Rusia detecta ToBRFV y Tuta absoluta en tomates importados de México: urgente genética resistente, controles fitosanitarios y trazabilidad. Asia expande sector semillas; Arabia Saudita invierte en horticultura protegida → oportunidades para productores MX.","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-20"},
     {"hora":"14:21","asunto":"🌱 HortiDaily Newsletter · Jue 20-Ago-2026 — Precision, consistency and crop-specific management en operación de propagación de 27 acres. Noticias hortícolas internacionales del día.","de":"mail@hortidaily.com","leido":false,"fecha":"2026-08-20"},
