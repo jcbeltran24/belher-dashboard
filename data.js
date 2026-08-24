@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 23 Ago 2026",
-    semana: "WK34",
-    actualizado: "23/08/2026 · 12:52"
+    fecha: "Lunes 24 Ago 2026",
+    semana: "WK35",
+    actualizado: "24/08/2026 · 13:02"
   },
 
   alertas: [
+    {"nivel":"info","texto":"🌏 ASIA FRUIT LOGISTICA · FRESHTech 2–4 Sep 2026 — Debut de FRESHTech en ASIA FRUIT LOGISTICA 2026: 6 temas tecnológicos clave, 20+ expertos y 10 nominados al Premio FRESHTech Innovation Award (ganadores: 3-Sep). Oportunidad de benchmarking tecnológico para la cadena de frescos Belher. Fuente: info@gp-events.com · 24/Ago/2026."},
     {"nivel":"danger","texto":"🍅 CORBEL #0120 · ARANCEL ANTIDUMPING TOMATE MX + ALERTA JALAPEÑOS — (21-Ago) EUA mantiene aranceles antidumping sobre tomate mexicano fresco, presionando márgenes exportadores. Además, investigación Salmonella en jalapeños de Sinaloa amplía riesgos de retiro de mercado, trazabilidad y acceso a canales foodservice/retail. Acción urgente: verificar protocolos de trazabilidad y certificaciones. Fuente: ray@agbelher.com · 21/Ago/2026."},
     {"nivel":"danger","texto":"🍅 CORBEL #0119 · RUSIA DETECTA ToBRFV y Tuta absoluta — (20-Ago) Nuevas detecciones rusas de virus ToBRFV y polilla Tuta absoluta en tomates importados de México refuerzan la urgencia de genética resistente, controles fitosanitarios verificados y trazabilidad completa para exportadores mexicanos. Riesgo de restricciones comerciales si no se garantizan controles. Fuente: ray@agbelher.com · 20/Ago/2026."},
     {"nivel":"warning","texto":"🏦 BANK OF AMERICA · DESTINATARIO DE TRANSFERENCIA — Alerta en dos pasos: (1) 01:26am: fallo al agregar destinatario 'JUAN BELTRAN OCHOA' (nombre incompleto). (2) 01:29am: destinatario 'JUAN CARLOS BELTRAN OCHOA' agregado exitosamente. Verificar que la instrucción de transferencia sea legítima — confirmar siempre por teléfono o en persona antes de ejecutar. Fuente: BofA Alerts · 20/Ago/2026."},
@@ -600,6 +601,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"14:49","asunto":"🌱 HortiDaily Newsletter · Lun 24-Ago-2026 — Managing greenhouse light without repeated coating applications. Noticias hortícolas internacionales del día.","de":"mail@hortidaily.com","leido":false,"fecha":"2026-08-24"},
+    {"hora":"02:02","asunto":"🌏 Asia Fruit Logistica · FRESHTech Programme Unveiled — FRESHTech debuta el 2–4 Sep en ASIA FRUIT LOGISTICA 2026: 6 temas tecnológicos, 20+ expertos y Premio FRESHTech Innovation Award (ganadores anunciados en vivo el 3-Sep). Relevante para posicionamiento tech en cadena de valor de frescos.","de":"info@gp-events.com","leido":false,"fecha":"2026-08-24"},
     {"hora":"17:02","asunto":"📈 GBM The Recap · Vie 21-Ago-2026 — Resumen simplificado de movimientos del mercado financiero al cierre del día.","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-08-21"},
     {"hora":"16:06","asunto":"🏦 Transferencia Interbancaria SPEI · Banbajío — Depósito SPEI registrado en cuenta de Juan Carlos Beltrán Ochoa. Fecha de operación: 21-Ago-2026 · 16:06 hrs CST.","de":"Banbajioinforma@bb.com.mx","leido":false,"fecha":"2026-08-21"},
     {"hora":"15:19","asunto":"📋 CFDI Nómina Periodo 34 · AGRICOLA BELHER FIJOS — Recibo electrónico de nómina semanal (12/08–18/08/2026) emitido para 000009 - BELTRAN OCHOA JUAN CARLOS. UUID: 6E596ADD-2597-47EC-824B-422E2CCD18FA.","de":"anajar@agbelher.com","leido":false,"fecha":"2026-08-21"},
