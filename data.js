@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Lunes 24 Ago 2026",
+    fecha: "Martes 25 Ago 2026",
     semana: "WK35",
-    actualizado: "24/08/2026 · 13:02"
+    actualizado: "25/08/2026 · 12:58"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"📊 ABSA GC'26-'27 BUDGET MODEL FINAL · FX 17.50 — Armando Llanes (CFO Grupo Belo del Pacífico/HMX) envía modelo definitivo de Presupuesto Visión 2027 con el cambio solicitado por Antonio: distribución 50%/50% (vs. 60%/40% anterior). IMPACTO: EBITDA cae ~$800L respecto a versión previa. Instrucción: usar ESTE archivo como modelo final, aplicar tasa FX 2027 = $17.50 MXN/USD y desechar versión anterior. Confirmado por Juan Antonio Cruz y Leima Leyva. Fuente: armandollanes@donmemo.net · 24/Ago/2026."},
     {"nivel":"info","texto":"🌏 ASIA FRUIT LOGISTICA · FRESHTech 2–4 Sep 2026 — Debut de FRESHTech en ASIA FRUIT LOGISTICA 2026: 6 temas tecnológicos clave, 20+ expertos y 10 nominados al Premio FRESHTech Innovation Award (ganadores: 3-Sep). Oportunidad de benchmarking tecnológico para la cadena de frescos Belher. Fuente: info@gp-events.com · 24/Ago/2026."},
     {"nivel":"danger","texto":"🍅 CORBEL #0120 · ARANCEL ANTIDUMPING TOMATE MX + ALERTA JALAPEÑOS — (21-Ago) EUA mantiene aranceles antidumping sobre tomate mexicano fresco, presionando márgenes exportadores. Además, investigación Salmonella en jalapeños de Sinaloa amplía riesgos de retiro de mercado, trazabilidad y acceso a canales foodservice/retail. Acción urgente: verificar protocolos de trazabilidad y certificaciones. Fuente: ray@agbelher.com · 21/Ago/2026."},
     {"nivel":"danger","texto":"🍅 CORBEL #0119 · RUSIA DETECTA ToBRFV y Tuta absoluta — (20-Ago) Nuevas detecciones rusas de virus ToBRFV y polilla Tuta absoluta en tomates importados de México refuerzan la urgencia de genética resistente, controles fitosanitarios verificados y trazabilidad completa para exportadores mexicanos. Riesgo de restricciones comerciales si no se garantizan controles. Fuente: ray@agbelher.com · 20/Ago/2026."},
@@ -26,8 +27,7 @@ window.BELHER = {
     {"nivel":"info","texto":"📊 F/S BLONDIE PRODUCCIONES (BPSI) · JULIO 2026 — Leima Leyva comparte Estados Financieros de Blondie Producciones al 31-Jul-2026. Junta de revisión programada jue 13-Ago 10am hora Culiacán. Participan: JC Beltrán, Armando Llanes (CFO), Hildelisa Beltrán. Fuente: leima@agbelher.com · 12/Ago/2026."},
     {"nivel":"info","texto":"🌱 CORBEL SEEDS · Reporte #0113 (12-Ago) — 🟢 Michoacán: embarques de aguacate REANUDADOS, flujo principal de importación EUA restaurado. Cyclospora: Michigan certifica lechuga local → preocupación se reenfoca en cadena de suministro del centro de México; trazabilidad y pruebas siguen siendo críticas. Perú: reabre posición exportadora. Brasil: invernaderos adoptando mallas climáticas ante temperaturas extremas. Fuente: ray@agbelher.com · 12/Ago/2026."},
     {"nivel":"warning","texto":"💰 CF BELHER · PENDIENTES CRÍTICOS — Armando Llanes (CFO): dos pendientes al cierre de reunión del vie-08-Ago → (1) acuerdo Antonio con Zazutea (monto y fechas); (2) reducciones Flavio en modelo 'Visión'. Actualizar CF y reenviar una vez que Antonio confirme. Fuente: armandollanes@donmemo.net · 10/Ago/2026."},
-    {"nivel":"info","texto":"📋 BOLETÍN PRECIOS MÍNIMOS TOMATE · CIDH — Ing. Arturo Paredes (CIDH): boletín sobre precios mínimos de tomate y mecanismo de denuncia anónima y confidencial para quienes vendan por debajo del mínimo. Fuente: marioh@cidh.org.mx · 10/Ago/2026."},
-    {"nivel":"success","texto":"✅ LIBERACIÓN FDA · CAJA CGG-145 — Shannon Brokerage (Nogales, AZ) confirma: carga de limón persa caja #CGG-145 fue liberada por FDA el 09-Ago. Puede proceder sin problema a destino final. Chofer: Jaime Beltrán · 6671 76 46 59. Fuente: logistics@shannonbrokerage.com · 09/Ago/2026."}
+    {"nivel":"info","texto":"📋 BOLETÍN PRECIOS MÍNIMOS TOMATE · CIDH — Ing. Arturo Paredes (CIDH): boletín sobre precios mínimos de tomate y mecanismo de denuncia anónima y confidencial para quienes vendan por debajo del mínimo. Fuente: marioh@cidh.org.mx · 10/Ago/2026."}
   ],
 
   ebitda: {
@@ -601,6 +601,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"13:11","asunto":"📊 ABSA GC'26-'27 Budget Model FINAL · Ajuste 50/50 · FX 17.50 — Armando Llanes (CFO Grupo Belo) envía modelo definitivo de Presupuesto Visión 2027 con distribución 50%/50% solicitada por Antonio. EBITDA cae ~$800L vs. versión 60/40. Usar este archivo como final; tasa FX 2027 = $17.50. Confirmado por jacruz@agbelher.com y leima@agbelher.com.","de":"armandollanes@donmemo.net","leido":false,"fecha":"2026-08-24"},
+    {"hora":"09:22","asunto":"🚛 WEBINAR GRATUITO · Cuadernos ATA en Comercio Exterior — Secretaría de Economía Sinaloa invita a webinar gratuito el vie 28-Ago-2026 · 10:00am (Sinaloa). Registro: https://tinyurl.com/HerramientasCOMEXTCuadernosATA. Relevante para operaciones de exportación Belher.","de":"comercioexterior@sinaloa.gob.mx","leido":false,"fecha":"2026-08-24"},
     {"hora":"14:49","asunto":"🌱 HortiDaily Newsletter · Lun 24-Ago-2026 — Managing greenhouse light without repeated coating applications. Noticias hortícolas internacionales del día.","de":"mail@hortidaily.com","leido":false,"fecha":"2026-08-24"},
     {"hora":"02:02","asunto":"🌏 Asia Fruit Logistica · FRESHTech Programme Unveiled — FRESHTech debuta el 2–4 Sep en ASIA FRUIT LOGISTICA 2026: 6 temas tecnológicos, 20+ expertos y Premio FRESHTech Innovation Award (ganadores anunciados en vivo el 3-Sep). Relevante para posicionamiento tech en cadena de valor de frescos.","de":"info@gp-events.com","leido":false,"fecha":"2026-08-24"},
     {"hora":"17:02","asunto":"📈 GBM The Recap · Vie 21-Ago-2026 — Resumen simplificado de movimientos del mercado financiero al cierre del día.","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-08-21"},
