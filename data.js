@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Sábado 29 Ago 2026",
+    fecha: "Domingo 30 Ago 2026",
     semana: "WK35",
-    actualizado: "29/08/2026 · 16:35"
+    actualizado: "30/08/2026 · 16:30"
   },
 
   alertas: [
+    {"nivel":"info","texto":"🌱 YAMATO ROOTSTOCK · SOLICITUD 2,000 SEMILLAS (Temporada 2026–2027) — Raymundo Elizalde (ray@agbelher.com) escribe a Akira solicitando ~2,000 semillas Yamato para nueva serie de evaluaciones. Destacan vigor fuerte y capacidad de mantener desarrollo vegetativo balanceado en tomate. Nota: se observaron síntomas tipo Fusarium en pocas plantas injertadas sobre Yamato en ciclo anterior; pendiente de seguimiento agronómico. JC en OOO hasta Sep-8. Fuente: ray@agbelher.com · 29/Ago/2026."},
     {"nivel":"info","texto":"🍋 REPORTE AGRONÓMICO · LIMÓN PERSA · Muestreo 25-Ago-2026 — Consultores Agronómicos S.C. entrega resultados de análisis de Nutrición Foliar y Fertilidad de Suelo del Lote Viudas, Sectores 1 a 5, con fecha de muestreo 25/Ago/2026. Solicitan confirmación de recibido. Fuente: conagrosc@gmail.com · 28/Ago/2026."},
     {"nivel":"warning","texto":"🏛️ SATES · ACTUALIZACIÓN DATOS CONTRIBUYENTES · ABE180411CB8 — El Servicio de Administración Tributaria del Estado de Sinaloa (Sheila Yamel Rubio / Dirección de Orientación a Contribuyentes) solicita actualización de datos de domicilio fiscal para RFC ABE180411CB8, conforme al Art. 62 Fracc. II del Código Fiscal de Sinaloa. Atender con área fiscal/contable. Fuente: sheila.yamel@sinaloa.gob.mx · 28/Ago/2026."},
     {"nivel":"danger","texto":"🍅 TOMATO MARKET UPDATE · WK34 (Calavo/Mission) — Precios Rounds disparados: $18.95–$20.95 FOB (Nogales y Texas) ante reducción de volumen de campo de verano. Romas: Jumbo/XL $16.95 · Large $14.95 · Medium $12.95 FOB. WK33 (ADM): 13,570 C/E embarcados · precio combinado $13.80 (Romas $13.13 / Rounds $16.70). WK34 ADM: 147 pallets / 11,360 pkgs (24 pallets Rounds + 123 pallets Romas). Proyección Sep: 30% open market; Oct: 40% open market. Incremento de consultas de contrato Belher 2027 con clientes solicitando precio delivered. Fuente: Irene.Amezaga@calavo.com / brooke.becker@missionproduce.com · 27/Ago/2026."},
@@ -600,6 +601,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"21:16","asunto":"🌱 YAMATO ROOTSTOCK · Solicitud ~2,000 semillas para temporada 2026–2027 — Raymundo Elizalde escribe a Akira pidiendo semillas para nueva serie de evaluaciones. Destacan vigor Yamato y desarrollo vegetativo balanceado en tomate. Nota: síntomas tipo Fusarium observados en pocas plantas injertadas en ciclo anterior; pendiente seguimiento agronómico.","de":"ray@agbelher.com","leido":false,"fecha":"2026-08-29"},
+    {"hora":"21:16","asunto":"🏢 OUT OF OFFICE (auto-reply) · Re: Yamato Rootstock — JC Beltrán fuera hasta Sep 8. Regresa martes 8-Sep. Urgente: llamar o WhatsApp.","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-08-29"},
     {"hora":"17:08","asunto":"📈 GBM The Recap · Vie 28-Ago-2026 — Resumen simplificado de movimientos del mercado financiero al cierre del día.","de":"no-reply@email.gbm.com","leido":false,"fecha":"2026-08-28"},
     {"hora":"12:58","asunto":"🏛️ SATES · CAMPAÑA ACTUALIZACIÓN DATOS CONTRIBUYENTES · ABE180411CB8 — Sheila Yamel Rubio (Dirección de Orientación a Contribuyentes / SAT Sinaloa) solicita actualización de datos de domicilio fiscal al contribuyente. RFC: ABE180411CB8. Originalmente enviado a miguel@agbelher.com; re-enviado hoy. Requiere atención del área fiscal.","de":"sheila.yamel@sinaloa.gob.mx","leido":false,"fecha":"2026-08-28"},
     {"hora":"11:17","asunto":"🍋 REPORTE AGRONÓMICO · LIMÓN PERSA · Muestreo 25/Ago/2026 — Consultores Agronómicos S.C. (Los Mochis) entrega resultados de análisis de Nutrición Foliar y Fertilidad de Suelo del Lote Viudas, Sectores 1–5. Solicitan confirmación de recibido.","de":"conagrosc@gmail.com","leido":false,"fecha":"2026-08-28"},
