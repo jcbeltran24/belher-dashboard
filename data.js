@@ -1,12 +1,13 @@
 window.BELHER = {
   meta: {
-    fecha: "Martes 01 Sep 2026",
+    fecha: "Miércoles 02 Sep 2026",
     semana: "WK36",
-    actualizado: "01/09/2026 · 16:26"
+    actualizado: "02/09/2026 · 16:23"
   },
 
   alertas: [
-    {"nivel":"info","texto":"🍋 BASCULA BELHER · ADJUNTOS DESCARGADOS · 01-Sep-2026 — Dashboard auto-descargó 3 archivos de reportes operativos del 31/08/2026 (Limón Persa): (1) Acarreo Diario, (2) Diario de Báscula, (3) Listado Diario. Archivos disponibles en carpeta Drive: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 01/Sep/2026."},
+    {"nivel":"info","texto":"🌱 CORBEL #0128 · MERCADOS ESTABLES · USDA 1-Sep-2026 — Tomate, pepino, chile, limón y lima de México reportan precios estables en puntos de entrada EUA según cotizaciones USDA del 1-Sep. Alzas notables en habanero y jalapeño respecto al reporte anterior. Escasez de hortalizas en mercados europeos y diversificación de sourcing refuerzan posición estratégica de México como proveedor confiable. Fuente: ray@agbelher.com · 02/Sep/2026."},
+    {"nivel":"info","texto":"🍋 BASCULA BELHER · ADJUNTOS DESCARGADOS · 02-Sep-2026 — Dashboard auto-descargó 3 archivos de reportes operativos del 01/09/2026 (Limón Persa): (1) Acarreo Diario, (2) Diario de Báscula, (3) Listado Diario. Archivos disponibles en carpeta Drive: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 02/Sep/2026."},
     {"nivel":"info","texto":"🍅 STRATEGIC MEETING · MISSION PRODUCE (Sep 22) CONFIRMADO — Antonio Beltrán confirma reunión con John Michael Pawlowski (Presidente & CEO, Mission Produce) para revisar plan estratégico del negocio de tomate. Llegan el 21-Sep, disponibles cualquier hora la mañana del 22-Sep. Pendiente: confirmar hora exacta. Fuente: antonio@agbelher.com / jpawlowski@missionproduce.com · 31/Ago/2026."},
     {"nivel":"info","texto":"🌱 YAMATO ROOTSTOCK · SOLICITUD 2,000 SEMILLAS (Temporada 2026–2027) — Raymundo Elizalde (ray@agbelher.com) escribe a Akira solicitando ~2,000 semillas Yamato para nueva serie de evaluaciones. Destacan vigor fuerte y capacidad de mantener desarrollo vegetativo balanceado en tomate. Nota: se observaron síntomas tipo Fusarium en pocas plantas injertadas sobre Yamato en ciclo anterior; pendiente de seguimiento agronómico. JC en OOO hasta Sep-8. Fuente: ray@agbelher.com · 29/Ago/2026."},
     {"nivel":"info","texto":"🍋 REPORTE AGRONÓMICO · LIMÓN PERSA · Muestreo 25-Ago-2026 — Consultores Agronómicos S.C. entrega resultados de análisis de Nutrición Foliar y Fertilidad de Suelo del Lote Viudas, Sectores 1 a 5, con fecha de muestreo 25/Ago/2026. Solicitan confirmación de recibido. Fuente: conagrosc@gmail.com · 28/Ago/2026."},
@@ -599,6 +600,9 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:07","asunto":"🌱 CORBEL #0128 · MERCADOS ESTABLES · USDA 1-Sep — Tomate, pepino, chile, limón y lima de México estables en puntos de entrada EUA. Alzas notables en habanero y jalapeño. Escasez de hortalizas en Europa refuerza posición estratégica de México como proveedor confiable norteamericano.","de":"ray@agbelher.com","leido":false,"fecha":"2026-09-02"},
+    {"hora":"07:53","asunto":"✅ BASCULA BELHER · 3 ADJUNTOS DESCARGADOS (01-Sep-2026) — Acarreo Diario, Diario de Báscula y Listado Diario del 01/09/2026 (Limón Persa) guardados en Drive: Belher Adjuntos.","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-09-02"},
+    {"hora":"14:17","asunto":"🍋 REPORTE DE BÁSCULA · LIMÓN PERSA · 01/09/2026 — Báscula Belher envía reportes del día 01-Sep-2026. Adjuntos incluidos.","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-09-01"},
     {"hora":"07:53","asunto":"✅ BASCULA BELHER · 3 ADJUNTOS DESCARGADOS (31-Ago-2026) — Acarreo Diario, Diario de Báscula y Listado Diario del 31/08/2026 (Limón Persa) guardados en Drive: Belher Adjuntos.","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-09-01"},
     {"hora":"14:06","asunto":"🍅 STRATEGIC MEETING CONFIRMADO · Mission Produce · Sep 22 — Antonio Beltrán y John Pawlowski (CEO Mission Produce) acuerdan reunión para revisar plan estratégico de tomate. Llegan el 21-Sep; disponibles mañana del 22-Sep. Pendiente: confirmar hora exacta.","de":"antonio@agbelher.com","leido":false,"fecha":"2026-08-31"},
     {"hora":"15:22","asunto":"🍋 REPORTE DE BÁSCULA · LIMÓN PERSA · 31/08/2026 — Báscula Belher envía reportes del día. Adjuntos incluidos.","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-08-31"},
