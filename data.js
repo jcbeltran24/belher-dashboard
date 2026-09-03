@@ -1,11 +1,13 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 02 Sep 2026",
+    fecha: "Jueves 03 Sep 2026",
     semana: "WK36",
-    actualizado: "02/09/2026 · 16:23"
+    actualizado: "03/09/2026 · 16:14"
   },
 
   alertas: [
+    {"nivel":"warning","texto":"👤 JEAN MARIE FOISSAC · AVISO DE SALIDA · Agrícola Don Memo (ene-2027) — Jean Marie Foissac (jmarie@agbelher.com) notifica a Antonio y Juan Carlos que su colaboración con Agrícola Don Memo concluirá el 31 de enero de 2027. Solicita organizar transición ordenada y puntualidad en pago de salario (única fuente de ingreso). JC en OOO hasta Sep-8; Antonio debe tomar acción. Fuente: jmarie@agbelher.com · 03/Sep/2026."},
+    {"nivel":"info","texto":"🍋 BASCULA BELHER · ADJUNTOS DESCARGADOS · 03-Sep-2026 — Dashboard auto-descargó 3 archivos de reportes operativos del 02/09/2026 (Limón Persa): (1) Acarreo Diario, (2) Diario de Báscula, (3) Listado Diario. Archivos disponibles en carpeta Drive: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 03/Sep/2026."},
     {"nivel":"info","texto":"🌱 CORBEL #0128 · MERCADOS ESTABLES · USDA 1-Sep-2026 — Tomate, pepino, chile, limón y lima de México reportan precios estables en puntos de entrada EUA según cotizaciones USDA del 1-Sep. Alzas notables en habanero y jalapeño respecto al reporte anterior. Escasez de hortalizas en mercados europeos y diversificación de sourcing refuerzan posición estratégica de México como proveedor confiable. Fuente: ray@agbelher.com · 02/Sep/2026."},
     {"nivel":"info","texto":"🍋 BASCULA BELHER · ADJUNTOS DESCARGADOS · 02-Sep-2026 — Dashboard auto-descargó 3 archivos de reportes operativos del 01/09/2026 (Limón Persa): (1) Acarreo Diario, (2) Diario de Báscula, (3) Listado Diario. Archivos disponibles en carpeta Drive: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 02/Sep/2026."},
     {"nivel":"info","texto":"🍅 STRATEGIC MEETING · MISSION PRODUCE (Sep 22) CONFIRMADO — Antonio Beltrán confirma reunión con John Michael Pawlowski (Presidente & CEO, Mission Produce) para revisar plan estratégico del negocio de tomate. Llegan el 21-Sep, disponibles cualquier hora la mañana del 22-Sep. Pendiente: confirmar hora exacta. Fuente: antonio@agbelher.com / jpawlowski@missionproduce.com · 31/Ago/2026."},
@@ -600,6 +602,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"08:05","asunto":"👤 JEAN MARIE FOISSAC · AVISO DE SALIDA · Agrícola Don Memo (ene-2027) — Informa a Antonio y JC que su colaboración concluye el 31-ene-2027. Pide transición ordenada y puntualidad salarial. JC en OOO — Antonio debe atender.","de":"jmarie@agbelher.com","leido":false,"fecha":"2026-09-03"},
+    {"hora":"07:54","asunto":"✅ BASCULA BELHER · 3 ADJUNTOS DESCARGADOS (02-Sep-2026) — Acarreo Diario, Diario de Báscula y Listado Diario del 02/09/2026 (Limón Persa) guardados en Drive: Belher Adjuntos.","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-09-03"},
     {"hora":"07:07","asunto":"🌱 CORBEL #0128 · MERCADOS ESTABLES · USDA 1-Sep — Tomate, pepino, chile, limón y lima de México estables en puntos de entrada EUA. Alzas notables en habanero y jalapeño. Escasez de hortalizas en Europa refuerza posición estratégica de México como proveedor confiable norteamericano.","de":"ray@agbelher.com","leido":false,"fecha":"2026-09-02"},
     {"hora":"07:53","asunto":"✅ BASCULA BELHER · 3 ADJUNTOS DESCARGADOS (01-Sep-2026) — Acarreo Diario, Diario de Báscula y Listado Diario del 01/09/2026 (Limón Persa) guardados en Drive: Belher Adjuntos.","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-09-02"},
     {"hora":"14:17","asunto":"🍋 REPORTE DE BÁSCULA · LIMÓN PERSA · 01/09/2026 — Báscula Belher envía reportes del día 01-Sep-2026. Adjuntos incluidos.","de":"basculabelher@gmail.com","leido":false,"fecha":"2026-09-01"},
