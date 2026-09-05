@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 04 Sep 2026",
+    fecha: "Sábado 05 Sep 2026",
     semana: "WK36",
-    actualizado: "04/09/2026 · 16:09"
+    actualizado: "05/09/2026 · 14:58"
   },
 
   alertas: [
+    {"nivel":"info","texto":"🍋 BASCULA BELHER · 3 ADJUNTOS DESCARGADOS · 05-Sep-2026 — Dashboard auto-descargó 3 archivos de reportes operativos del 04/09/2026 (Limón Persa): (1) Acarreo Diario, (2) Diario de Báscula, (3) Listado Diario. Carpeta Drive: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 05/Sep/2026."},
     {"nivel":"warning","texto":"📊 OL FY 9+3 & GC 6+6 26-27 · EBITDA $39,411 USD — Mariela García (Contraloría Agrícola Don Memo) envía el Outlooks revisado. Variación vs OL 5+7: -$486K USD. Causa: caída de $1,168,760 USD en ventas por 46K cajas que quedaron en piso Calavo al cierre de julio y fueron vendidas en agosto. El impacto se redujo por ahorros en capitalización de producto terminado. JC en OOO hasta Sep-8; revisar al regresar. Fuente: mariela@donmemo.net · 04/Sep/2026."},
     {"nivel":"info","texto":"🍋 BASCULA BELHER · 4 ADJUNTOS DESCARGADOS · 04-Sep-2026 — Dashboard auto-descargó 4 archivos de reportes operativos del 03/09/2026 (Limón Persa): (1) Acarreo Diario, (2) Diario de Báscula, (3) Listado Diario, (4) image.png. Carpeta Drive: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 04/Sep/2026."},
     {"nivel":"info","texto":"🌱 CORBEL #0130 · MERCADOS ESTABLES · USDA 3-Sep-2026 — Tomate redondo, Roma, chile bell, habanero, jalapeño, limón, lima sin semilla y aguacate de México reportan precios estables en puntos de entrada EUA según USDA AMS del 3-Sep. Pepino mediano sube ligeramente. Compradores europeos de aguacate identifican a México para llenar huecos de oferta ante cierre de temporada Perú y Sudáfrica. Fuente: ray@agbelher.com · 04/Sep/2026."},
@@ -600,6 +601,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:53","asunto":"✅ BASCULA BELHER · 3 ADJUNTOS DESCARGADOS (04-Sep-2026) — Acarreo Diario, Diario de Báscula y Listado Diario del 04/09/2026 (Limón Persa). Guardados en Drive: Belher Adjuntos.","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-09-05"},
     {"hora":"07:53","asunto":"✅ BASCULA BELHER · 4 ADJUNTOS DESCARGADOS (03-Sep-2026) — Acarreo Diario, Diario de Báscula, Listado Diario del 03/09/2026 (Limón Persa) + imagen. Guardados en Drive: Belher Adjuntos.","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-09-04"},
     {"hora":"07:03","asunto":"🌱 CORBEL #0130 · MERCADOS ESTABLES · USDA 3-Sep — Tomate redondo, Roma, chile bell, habanero, jalapeño, limón, lima sin semilla y aguacate de México estables en puntos de entrada EUA. Pepino mediano sube ligeramente. Compradores europeos de aguacate identifican a México para llenar huecos de oferta ante cierre de temporada Perú y Sudáfrica.","de":"ray@agbelher.com","leido":false,"fecha":"2026-09-04"},
     {"hora":"07:41","asunto":"📊 OL FY 9+3 & GC 6+6 26-27 COM 22% · EBITDA $39,411 USD — Mariela García (Contraloría Don Memo) envía OL revisado. Variación vs OL 5+7: -$486K USD. Causa principal: caída de $1.17M USD en ventas por 46K cajas en piso Calavo al cierre de julio (vendidas en agosto). Impacto mitigado por ahorros en capitalización de producto terminado.","de":"mariela@donmemo.net","leido":false,"fecha":"2026-09-04"},
