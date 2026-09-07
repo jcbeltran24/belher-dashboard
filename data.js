@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Domingo 06 Sep 2026",
-    semana: "WK36",
-    actualizado: "06/09/2026 · 15:18"
+    fecha: "Lunes 07 Sep 2026",
+    semana: "WK37",
+    actualizado: "07/09/2026 · 17:38"
   },
 
   alertas: [
+    {"nivel":"info","texto":"🌱 CORBEL #0131 · USDA LABOR DAY · MERCADOS EN PAUSA · 7-Sep-2026 — Con mercados EUA cerrados por Labor Day (Sep 4), los precios USDA AMS del 4-Sep siguen como referencia vigente en frontera: tomate redondo, Roma, pepino, chile bell, habanero y jalapeño de México mayormente estables. Destaca: Tahiti lime de Brasil sube 226.4% jun-ago por escasez de oferta fuera de temporada; exportaciones MX de limón y lima ene-jul caen 1.7% en volumen pero suben 3.1% en valor. Perú expande posición aguacate — presión sobre programas citrícolas mexicanos en competencia. Fuente: ray@agbelher.com · 07/Sep/2026."},
     {"nivel":"info","texto":"🌶️ JALAPEÑO YIELD REFERENCE · CORBEL / RAY ELIZALDE (05-Sep-2026) — Raymundo Elizalde comparte con Jim referencia técnica de rendimiento de jalapeño: campo abierto MX = 0.7–1.2 kg/planta; sistemas intensivos (riego, nutrición, híbridos productivos, cosechas múltiples) = 1.3–1.6 kg/planta. Rendimiento final depende de región, densidad, mercado destino y método de cosecha. Fuente: ray@agbelher.com · 05/Sep/2026."},
     {"nivel":"info","texto":"🍋 BASCULA BELHER · 3 ADJUNTOS DESCARGADOS · 05-Sep-2026 — Dashboard auto-descargó 3 archivos de reportes operativos del 04/09/2026 (Limón Persa): (1) Acarreo Diario, (2) Diario de Báscula, (3) Listado Diario. Carpeta Drive: Belher Adjuntos. Fuente: juancarlos@agbelher.com · 05/Sep/2026."},
     {"nivel":"warning","texto":"📊 OL FY 9+3 & GC 6+6 26-27 · EBITDA $39,411 USD — Mariela García (Contraloría Agrícola Don Memo) envía el Outlooks revisado. Variación vs OL 5+7: -$486K USD. Causa: caída de $1,168,760 USD en ventas por 46K cajas que quedaron en piso Calavo al cierre de julio y fueron vendidas en agosto. El impacto se redujo por ahorros en capitalización de producto terminado. JC en OOO hasta Sep-8; revisar al regresar. Fuente: mariela@donmemo.net · 04/Sep/2026."},
@@ -26,8 +27,7 @@ window.BELHER = {
     {"nivel":"warning","texto":"🏦 BANK OF AMERICA · DESTINATARIO DE TRANSFERENCIA — Alerta en dos pasos: (1) 01:26am: fallo al agregar destinatario 'JUAN BELTRAN OCHOA' (nombre incompleto). (2) 01:29am: destinatario 'JUAN CARLOS BELTRAN OCHOA' agregado exitosamente. Verificar que la instrucción de transferencia sea legítima — confirmar siempre por teléfono o en persona antes de ejecutar. Fuente: BofA Alerts · 20/Ago/2026."},
     {"nivel":"danger","texto":"💳 BURÓ DE CRÉDITO · PAGOS VENCIDOS — Claina Payan (Reg. Pacífico / Banbajío) reporta a Leima Leyva dos créditos con pagos vencidos en buró especial: (1) Banamex: saldo vencido $52,319 MXN — pago pendiente; (2) American Express: comprobante existe, pendiente de aplicación. Acción urgente requerida por JC o área financiera. Fuente: leima@agbelher.com → cpayan@bb.com.mx · 18/Ago/2026."},
     {"nivel":"danger","texto":"🔴 ACUÍFEROS SAN QUINTÍN · CRISIS AGUA — Corbel #0116 (17-Ago): sobreexplotación crónica y salinización de acuíferos en San Quintín amenazan la confiabilidad de la producción y exportación de tomate a EUA. Desalinización, capacidad eléctrica e infraestructura hídrica son restricciones estratégicas. Monitorear impacto en cadena Belher. Fuente: ray@agbelher.com · 17/Ago/2026."},
-    {"nivel":"warning","texto":"🥑 AGUACATE MICHOACÁN · RIESGOS PERSISTENTES — Corbel #0116 (17-Ago): operaciones reanudadas a plena velocidad, pero riesgos de seguridad e inspección siguen embebidos en la cadena de exportación. Mantener protocolos y documentación actualizados. Fuente: ray@agbelher.com · 17/Ago/2026."},
-    {"nivel":"info","texto":"📋 PRECIOS MÍNIMOS TOMATE · CIDH — Lic. Mario Robles (CIDH) envía por instrucciones del Ing. Arturo Paredes boletín sobre precios mínimos de exportación para tomate. JC está fuera de oficina hasta sep-8; verificar que área comercial reciba y aplique. Fuente: marioh@cidh.org.mx · 17/Ago/2026."}
+    {"nivel":"warning","texto":"🥑 AGUACATE MICHOACÁN · RIESGOS PERSISTENTES — Corbel #0116 (17-Ago): operaciones reanudadas a plena velocidad, pero riesgos de seguridad e inspección siguen embebidos en la cadena de exportación. Mantener protocolos y documentación actualizados. Fuente: ray@agbelher.com · 17/Ago/2026."}
   ],
 
   ebitda: {
@@ -601,6 +601,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"10:13","asunto":"🌱 CORBEL #0131 · USDA LABOR DAY · Limón Brazil +226% · Perú expande aguacate — USDA AMS del 4-Sep (Labor Day) sigue como benchmark frontera: productos MX estables. Tahiti lime Brasil sube 226.4% jun-ago; exportaciones MX limón/lima caen en volumen pero suben en valor. Perú amplía posición en aguacate presionando programas citrícolas MX. Nota: modelo de leasing para automatización de invernaderos como alternativa de capital de trabajo.","de":"ray@agbelher.com","leido":false,"fecha":"2026-09-07"},
     {"hora":"13:25","asunto":"🌶️ JALAPEÑO YIELD REFERENCE · Ray a Jim — Raymundo Elizalde comparte referencia técnica de rendimiento de jalapeño por planta (MX y EUA): 0.7–1.2 kg/planta campo abierto; 1.3–1.6 kg/planta en sistemas intensivos. Variables clave: región, densidad, mercado destino y método de cosecha. Contexto: evaluación de potencial jalapeño Belher.","de":"ray@agbelher.com","leido":false,"fecha":"2026-09-05"},
     {"hora":"07:53","asunto":"✅ BASCULA BELHER · 3 ADJUNTOS DESCARGADOS (04-Sep-2026) — Acarreo Diario, Diario de Báscula y Listado Diario del 04/09/2026 (Limón Persa). Guardados en Drive: Belher Adjuntos.","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-09-05"},
     {"hora":"07:53","asunto":"✅ BASCULA BELHER · 4 ADJUNTOS DESCARGADOS (03-Sep-2026) — Acarreo Diario, Diario de Báscula, Listado Diario del 03/09/2026 (Limón Persa) + imagen. Guardados en Drive: Belher Adjuntos.","de":"juancarlos@agbelher.com","leido":false,"fecha":"2026-09-04"},
