@@ -1,11 +1,12 @@
 window.BELHER = {
   meta: {
-    fecha: "Miércoles 09 Sep 2026",
+    fecha: "Viernes 11 Sep 2026",
     semana: "WK37",
-    actualizado: "09/09/2026 · 11:23"
+    actualizado: "11/09/2026 · 10:16"
   },
 
   alertas: [
+    {"nivel":"info","texto":"🌱 CORBEL #0135 · CANADÁ REDUCE COMPRAS A EUA · OPORTUNIDAD MX · 11-Sep-2026 — Menor apetito canadiense por producto de EUA puede crear oportunidades incrementales de sourcing para vegetales mexicanos; se requiere coordinación comercial por cambios en flujos de transporte y preferencias de retailers. En frontera EUA: tomate redondo y Roma más firmes; pepino baja. Brasil incorpora nuevos controles de clima para propagación de tomate y sistemas estandarizados de calefacción en invernaderos norteamericanos (mayor densidad, menor pérdida en injerto, eficiencia energética). Perú: mercado europeo de aguacate se prepara para nueva temporada. Fuente: ray@agbelher.com · 11/Sep/2026."},
     {"nivel":"info","texto":"🌱 CORBEL #0133 · TOMATE MX FIRME · AGUACATE BAJO PRESIÓN · 9-Sep-2026 — Calor y lluvia han ajustado disponibilidad de tomate en México, sosteniendo precios fuertes en Norteamérica hacia octubre. Rendimientos más altos de aguacate mexicano elevan volúmenes de distribución en EUA mientras presionan valores por unidad. Perú y Sudáfrica sin desarrollos relevantes en el período. Fuente: ray@agbelher.com · 09/Sep/2026."},
     {"nivel":"warning","texto":"📦 PROYECCIÓN GC 26-27 · 149.21 HAS · ROMA + BOLA — Flavio Velázquez (Head Grower, Agrícola Belher) envía presupuesto de producción 2026-2027 con últimos ajustes: 149.21 has totales (97.15 has Roma + 52.06 has Bola). Volúmenes de cajas actualizados en archivo 'Programa de Planteo 080926' hoja Sinaloa Proy. Volumen 26-27. Pendiente: revisión y validación por JC. Fuente: flavio@agbelher.com · 08/Sep/2026."},
     {"nivel":"info","texto":"🍋 REPORTE EMBARQUES · LIMÓN PERSA · 7-Sep-2026 — EMBARQUES BELHER envía reportes generales de embarque y empaque de limón persa correspondientes al 07/09/2026. Adjuntos incluidos. Fuente: embarquesbelher@agbelher.com · 07/Sep/2026."},
@@ -26,8 +27,7 @@ window.BELHER = {
     {"nivel":"danger","texto":"🍅 CORBEL #0120 · ARANCEL ANTIDUMPING TOMATE MX + ALERTA JALAPEÑOS — (21-Ago) EUA mantiene aranceles antidumping sobre tomate mexicano fresco, presionando márgenes exportadores. Investigación Salmonella en jalapeños de Sinaloa amplía riesgos de retiro de mercado, trazabilidad y acceso a canales foodservice/retail. Acción urgente: verificar protocolos de trazabilidad y certificaciones. Fuente: ray@agbelher.com · 21/Ago/2026."},
     {"nivel":"danger","texto":"🍅 CORBEL #0119 · RUSIA DETECTA ToBRFV y Tuta absoluta — (20-Ago) Nuevas detecciones rusas de virus ToBRFV y polilla Tuta absoluta en tomates importados de México refuerzan la urgencia de genética resistente, controles fitosanitarios verificados y trazabilidad completa. Riesgo de restricciones comerciales. Fuente: ray@agbelher.com · 20/Ago/2026."},
     {"nivel":"warning","texto":"🏦 BANK OF AMERICA · DESTINATARIO DE TRANSFERENCIA — Alerta: destinatario 'JUAN CARLOS BELTRAN OCHOA' agregado exitosamente (01:29am). Verificar que la instrucción de transferencia sea legítima — confirmar siempre por teléfono o en persona antes de ejecutar. Fuente: BofA Alerts · 20/Ago/2026."},
-    {"nivel":"danger","texto":"💳 BURÓ DE CRÉDITO · PAGOS VENCIDOS — Claina Payan (Reg. Pacífico / Banbajío) reporta dos créditos con pagos vencidos: (1) Banamex: saldo vencido $52,319 MXN; (2) American Express: comprobante existe, pendiente de aplicación. Acción urgente requerida por JC o área financiera. Fuente: leima@agbelher.com → cpayan@bb.com.mx · 18/Ago/2026."},
-    {"nivel":"danger","texto":"🔴 ACUÍFEROS SAN QUINTÍN · CRISIS AGUA — Corbel #0116 (17-Ago): sobreexplotación crónica y salinización de acuíferos en San Quintín amenazan confiabilidad de producción y exportación de tomate a EUA. Monitorear impacto en cadena Belher. Fuente: ray@agbelher.com · 17/Ago/2026."}
+    {"nivel":"danger","texto":"💳 BURÓ DE CRÉDITO · PAGOS VENCIDOS — Claina Payan (Reg. Pacífico / Banbajío) reporta dos créditos con pagos vencidos: (1) Banamex: saldo vencido $52,319 MXN; (2) American Express: comprobante existe, pendiente de aplicación. Acción urgente requerida por JC o área financiera. Fuente: leima@agbelher.com → cpayan@bb.com.mx · 18/Ago/2026."}
   ],
 
   ebitda: {
@@ -601,6 +601,7 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"07:06","asunto":"🌱 CORBEL #0135 · CANADÁ REDUCE COMPRAS A EUA · OPP MX · TOMATE FIRME · PEPINO BAJA — Menor apetito canadiense por producto de EUA abre oportunidades incrementales para vegetales MX. Frontera EUA: tomate redondo y Roma más firmes; pepino baja. Brasil: nuevos controles de clima para propagación de tomate y calefacción estandarizada en invernaderos (mayor densidad, menor pérdida injerto). Perú: mercado europeo de aguacate se prepara para nueva temporada.","de":"ray@agbelher.com","leido":false,"fecha":"2026-09-11"},
     {"hora":"09:08","asunto":"🌱 CORBEL #0133 · TOMATE MX FIRME HACIA OCT · AGUACATE MX PRESIONA PRECIOS — Calor y lluvia ajustan disponibilidad de tomate en México, sosteniendo precios fuertes hacia octubre. Mayor rendimiento de aguacate MX eleva volumen en EUA pero presiona valores por unidad. Perú y Sudáfrica sin desarrollos verificados en el período.","de":"ray@agbelher.com","leido":false,"fecha":"2026-09-09"},
     {"hora":"23:31","asunto":"📦 PROYECCIÓN GC 26-27 · 149.21 HAS (97.15 Roma + 52.06 Bola) — Flavio Velázquez envía presupuesto de producción 2026-2027 con últimos ajustes. Programa de planteo actualizado en hoja Sinaloa Proy. Volumen 26-27. Pendiente revisión JC.","de":"flavio@agbelher.com","leido":false,"fecha":"2026-09-08"},
     {"hora":"17:12","asunto":"🍋 REPORTES GENERALES EMBARQUE · LIMÓN PERSA · 07-Sep-2026 — EMBARQUES BELHER envía reportes generales de embarque y empaque de limón persa del día. Adjuntos incluidos.","de":"embarquesbelher@agbelher.com","leido":false,"fecha":"2026-09-07"},
