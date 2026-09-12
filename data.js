@@ -1,8 +1,8 @@
 window.BELHER = {
   meta: {
-    fecha: "Viernes 11 Sep 2026",
+    fecha: "Sábado 12 Sep 2026",
     semana: "WK37",
-    actualizado: "11/09/2026 · 10:16"
+    actualizado: "12/09/2026 · 15:23"
   },
 
   alertas: [
@@ -601,6 +601,8 @@ window.BELHER = {
   },
 
   correos: [
+    {"hora":"12:19","asunto":"🌎 NEWSLETTER COMERCIO EXTERIOR · SINALOA · 11-Sep-2026 — Dirección de Comercio Exterior del Gobierno de Sinaloa comparte boletín semanal con noticias relevantes del sector exportador y certificaciones disponibles para empresas exportadoras. Adjunto PDF con edición completa.","de":"astrid.garibay@sinaloa.gob.mx","leido":false,"fecha":"2026-09-11"},
+    {"hora":"15:28","asunto":"📄 CFDI RECIBO ELECTRÓNICO · PERIODO 37 SEMANAL 2026 (02-Sep al 08-Sep) — Agrícola Belher Fijos (RFC: ABE180411CB8) emite CFDI de recibo electrónico para BELTRAN OCHOA JUAN CARLOS. Periodo: semana 37 del 02/09/2026 al 08/09/2026. UUID: B5DFC743-57FF-43B8-85F8-1E36DCBFE299. Adjunto incluido.","de":"anajar@agbelher.com","leido":false,"fecha":"2026-09-11"},
     {"hora":"07:06","asunto":"🌱 CORBEL #0135 · CANADÁ REDUCE COMPRAS A EUA · OPP MX · TOMATE FIRME · PEPINO BAJA — Menor apetito canadiense por producto de EUA abre oportunidades incrementales para vegetales MX. Frontera EUA: tomate redondo y Roma más firmes; pepino baja. Brasil: nuevos controles de clima para propagación de tomate y calefacción estandarizada en invernaderos (mayor densidad, menor pérdida injerto). Perú: mercado europeo de aguacate se prepara para nueva temporada.","de":"ray@agbelher.com","leido":false,"fecha":"2026-09-11"},
     {"hora":"09:08","asunto":"🌱 CORBEL #0133 · TOMATE MX FIRME HACIA OCT · AGUACATE MX PRESIONA PRECIOS — Calor y lluvia ajustan disponibilidad de tomate en México, sosteniendo precios fuertes hacia octubre. Mayor rendimiento de aguacate MX eleva volumen en EUA pero presiona valores por unidad. Perú y Sudáfrica sin desarrollos verificados en el período.","de":"ray@agbelher.com","leido":false,"fecha":"2026-09-09"},
     {"hora":"23:31","asunto":"📦 PROYECCIÓN GC 26-27 · 149.21 HAS (97.15 Roma + 52.06 Bola) — Flavio Velázquez envía presupuesto de producción 2026-2027 con últimos ajustes. Programa de planteo actualizado en hoja Sinaloa Proy. Volumen 26-27. Pendiente revisión JC.","de":"flavio@agbelher.com","leido":false,"fecha":"2026-09-08"},
